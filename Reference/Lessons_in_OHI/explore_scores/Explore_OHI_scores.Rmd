@@ -14,7 +14,7 @@ library(ggplot2)
 ## OH NO!
 While you are working at your computer at NCEAS, you receive a frantic call from someone working on an OHI project:
 
-THEY NEED HELP!
+THEY NEED HELP! (actually this kind of happens often!)
 
 It is clearly going to be up to you to save the day!!
 
@@ -30,7 +30,7 @@ Good luck!
 
 ### Getting the data
 
-*Goal* Read the latest OHI global data into the R working space (call the data object "scores"). These are the scores that were calculated for the 2023 assessment. This is the final output after running the scripts in ohi-global. Poke around at the data to get a feel for what is there.
+*Goal* Read the latest OHI global data into the R working space (call the data object "scores"). These are the scores that were calculated for the 2024 assessment. This is the final output after running the scripts in ohi-global. Poke around at the data to get a feel for what is there.
 
 *Hint* Here is a link to the data: 
 https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/scores.csv
@@ -69,7 +69,7 @@ Can you make this data more human readable by including the full goal name (vs. 
 
 *Question * When I look at the number of goals, N=19 show up....I thought there were supposed to be 10 goals!!! Can you explain what all these are? Also, why do some of the goal abbreviations have 2 letters and others 3 letters?  
 
-*Hint 1* Review the methods doc here: https://raw.githack.com/OHI-Science/ohi-global/published/documents/methods/Supplement.html
+*Hint 1* Review the methods here: https://ohi-science.org/ohi-methods/
 
 *Answer* Write your answer here!
 
@@ -82,7 +82,9 @@ Can you make this data more human readable by including the full goal name (vs. 
 
 ### Dimension explore
 
-*Question* There are 6 dimensions reported in this dataset (future, pressures, resilience, score, status, and trend).  When I look at the number of records in each of these categories, I notice that there are more "score" values reported than "status" values (see working space below). Given that scores are calculated using status, it seems like these should have the same number of records. Can you figure out what is going on here. Is something going wrong?
+*Question* There are 6 dimensions reported in this dataset (future, pressures, resilience, score, status, and trend). What are all these things?
+
+*Question* When I look at the number of records in each of these categories, I notice that there are more "score" values reported than "status" values (see working space below). Given that scores are calculated using status, it seems like these should have the same number of records. Can you figure out what is going on here. Is something going wrong?
 
 *Answer* Write your answer here!
 
@@ -101,9 +103,9 @@ Can you make this data more human readable by including the full goal name (vs. 
 
 ### Missing data
 
-*Question* Figure out which goals/subgoals have the most NA values for scores in 2021.  Which ones have the least? Can you discern any reason why some goals have lots of missing values and others do not?
+*Question* Figure out which goals/subgoals have the most NA values for scores in 2024.  Which ones have the least? Can you discern any reason why some goals have lots of missing values and others do not?
 
-*Hint* Include only dimension = score, and year = 2023, and cut region_id = 0.
+*Hint* Include only dimension = score, and year = 2024, and cut region_id = 0.
 
 *Answer* Write your answer here!
 
@@ -152,7 +154,7 @@ year       |  Scenario year               | 2012 to 2022
 
 ### Plot
 
-*Project* Create a scatterplot that compares 2012 and 2023 *scores* for each region for the artisanal opportunities goal. Based on this, do scores for the artisanal opportunities goal appear to have increased or decreased over time? 
+*Project* Create a scatterplot that compares 2012 and 2024 *scores* for each region for the artisanal opportunities goal. Based on this, do scores for the artisanal opportunities goal appear to have increased or decreased over time? 
 
 Why might this be? How could you begin to figure this out?
 
@@ -175,3 +177,59 @@ Create a plot that shows the distribution (e.g., histogram or barplot or ??) of 
 
 
 ```
+
+
+I just got this email from Ben a couple days ago. There is a reasonable explanation why we see this (the data aren't wrong). Can you think of any possible explanations?
+
+I understand now that there are 10 goals weighted equally: 1) Artisanal opportunities, 2) Biodiversity, 3) Carbon storage, 4) Clean Water 5) Coastal protection, 6) Food provision, 7) Livelihoods & economies, 8) Natural products, 9) Sense of place, 10) Tourism & recreation, all the others being “subgoals” that should not be considered.
+
+However, if I take the average of the 10 for 2024 (in the new table below), I get to 67.4 instead of the 68.8 of the index. What am I getting wrong?
+
+Also, when will the 2025 version of the index be published (free from the impacts of Covid)?
+
+Once again, thank you very much for your patience and help.
+
+Kind Regards,
+
+ 
+
+Andrea
+
+ 
+
+#
+
+Artisanal opportunities 76.9
+
+Biodiversity 76.1
+
+Carbon storage 81.1
+
+Clean water 71.4
+
+Coastal protection 83.0
+
+Food provision 50.1
+
+Livelihoods & economies 80.8
+
+Natural products 74.4
+
+Sense of place 62.4
+
+Tourism & recreation 18.4
+ 
+    Economies [subgoal] 86.3
+    Livelihoods [subgoal] 75.3
+    Species condition (subgoal) 77.2
+    Habitat (subgoal) 74.9
+    Iconic species (subgoal) 62.8
+    Fisheries (subgoal) 54.9
+    Lasting special places (subgoal) 62.0
+    Mariculture (subgoal) 6.9
+
+ 
+
+ 
+
+ 
