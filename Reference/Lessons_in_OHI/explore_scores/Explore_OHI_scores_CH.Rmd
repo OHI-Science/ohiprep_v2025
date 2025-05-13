@@ -61,7 +61,7 @@ Can you make this data more human readable by including the full goal name (vs. 
 
 *Answer* Write your answer here! 
 
-- Region 213.
+- Region 213, Antarctica
 
 ```{r, include=FALSE}
 ## Working space
@@ -83,7 +83,7 @@ length(unique(regions$rgn_id)) #221
 na_score <- joined_df %>%
   group_by(region_id) %>%
   summarise(score = mean(score, na.rm = TRUE)) %>%
-  filter(is.na(score)) #213
+  filter(is.na(score)) #213, Antarctica
 
 usa_region <- regions %>%
   filter(rgn_name == "United States") #163
@@ -132,11 +132,9 @@ setdiff(unique(joined_df$goal), unique(goal_names$abbreviation))
 ## Working space
 unique(scores$dimension)
 table(scores$dimension)
-# 
+
 table(scores$goal)
 table(scores$goal, scores$dimension)
-
-
 ```
 
 
@@ -148,10 +146,19 @@ table(scores$goal, scores$dimension)
 
 *Answer* Write your answer here!
 
+- most NA values: TR (Tourism and Recreation)
+- least NA values: SPP (Species Condition - Biodiversity (BD))
+- data availability(?) not yet released
+
 ```{r, include=FALSE}
 ## Working space
-
-
+joined_df %>%
+  filter(year == 2024) %>%
+  filter(dimension == "score") %>%
+  filter(region_id != 0) %>%
+  group_by(goal) %>%
+  summarise(na_values = sum(is.na(score), na.rm = TRUE)) %>%
+  arrange(desc(na_values))
 ```
 
 
@@ -163,10 +170,20 @@ table(scores$goal, scores$dimension)
 
 *Answer* Write your answer here!
 
+- the average (future + status /2)
+
 ```{r, include=FALSE}
 ## Working space
+palau <- joined_df %>%
+  filter(region_id == 8) %>% # Palau
+  filter(dimension %in% c("future", "status", "score")) %>%
+  filter(goal == "AO")
 
-
+# Check
+palau %>%
+  pivot_wider(names_from = "dimension", values_from = "score") %>%
+  select(year, future, status, score) %>%
+  mutate(avg = ((future+status)/2))
 ```
 
 
