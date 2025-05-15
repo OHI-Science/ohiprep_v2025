@@ -193,13 +193,13 @@ palau %>%
 
 Write it in the following table.  NOTE: Knit the document to see if the table is formatting correctly (but don't bother if you do not know how to knit a document or if you are running into errors!).
 
-Variable   | Description                  | Values
----------- | ---------------------------- | ------------------------------
-goal       |                              |
-dimension  |                              | 
-region_id  |                              | 
-score      |                              |          
-year       |  Scenario year               | 2012 to 2022
+Variable   | Description               | Values
+---------- | ------------------------- | ------------------------------
+goal       | OHI Goals and Subgoals    | 2 character abbreviation (Goals), 3 character abbreviation (Subgoals)
+dimension  | Status                    | "future", "pressures", "resilience", "score", "status", "trend"
+region_id  | Region                    | 1 to 220
+score      | Calculated score          | 0 to 100       
+year       | Scenario year             | 2012 to 2022
 
 
 ```{r, include=FALSE}
@@ -216,22 +216,39 @@ Why might this be? How could you begin to figure this out?
 
 *Answer* Write your answer here!
 
+*unsure*
+
 ```{r, include=FALSE}
 ## Working space
-
-
-
+joined_df %>%
+  filter(goal == "AO") %>%
+  filter(year %in% c(2012, 2024)) %>%
+  filter(!is.na(score)) %>%
+  filter(dimension == "score") %>%
+  pivot_wider(names_from = year, values_from = score) %>%
+  mutate(diff = `2024` - `2012`) %>%
+  ggplot(aes(region_id, diff)) +
+  geom_point(aes(color = diff < 0), size = 3) +
+  scale_color_manual(values = c("FALSE" = "blue", "TRUE" = "red"), labels = c("Increase", "Decrease")) +
+  labs(x = "Region",
+       y = "Magnitude",
+       color = "Change") +
+  theme_minimal()
 ```
-
 
 Create a plot that shows the distribution (e.g., histogram or barplot or ??) of *Index* scores of all countries.
 
 ```{r across year plot}
 
 ## Code to create a plot showing distribution of country Index scores
-
-
-
+joined_df %>%
+  filter(goal == "Index") %>%
+ggplot(aes(score)) +
+  geom_histogram() +
+  labs(x = "Score",
+       y = "Count",
+       title = "Index Scores") +
+  theme_minimal()
 ```
 
 
@@ -285,7 +302,20 @@ Tourism & recreation 18.4
     Mariculture (subgoal) 6.9
 
  
+```{r}
+mean_score_df <- joined_df %>% 
+  filter(goal %in% goal_names$abbreviation) %>%
+  filter(year == 2024) %>%
+  filter(dimension == "score")
+  #filter(region_id != 0) #?
 
- 
+# mean_index_df <- joined_df %>% 
+#   filter(goal %in% goal_names$abbreviation) %>%
+#   filter(year == 2024) %>%
+#   filter(dimension == "index")
+
+mean(mean_df$score, na.rm = TRUE)
+
+```
 
  
