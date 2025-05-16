@@ -45,6 +45,10 @@ https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/scores.csv
 ```{r, include=FALSE}
 ## Working space
 scores <- read_csv('https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/scores.csv', show_col_types = FALSE)
+
+head(scores)
+summary(scores)
+table(scores$goal)
 ```
 
 ### Region explore
@@ -148,7 +152,7 @@ table(scores$goal, scores$dimension)
 
 - most NA values: TR (Tourism and Recreation)
 - least NA values: SPP (Species Condition - Biodiversity (BD))
-- data availability(?) not yet released
+- data availability(?) not yet released, spatial data is always filled in
 
 ```{r, include=FALSE}
 ## Working space
@@ -195,7 +199,7 @@ Write it in the following table.  NOTE: Knit the document to see if the table is
 
 Variable   | Description               | Values
 ---------- | ------------------------- | ------------------------------
-goal       | OHI Goals and Subgoals    | 2 character abbreviation (Goals), 3 character abbreviation (Subgoals)
+goal       | benefit category          | 2 character abbreviation (Goals), 3 character abbreviation (Subgoals)
 dimension  | Status                    | "future", "pressures", "resilience", "score", "status", "trend"
 region_id  | Region                    | 1 to 220
 score      | Calculated score          | 0 to 100       
@@ -302,11 +306,14 @@ Tourism & recreation 18.4
     Mariculture (subgoal) 6.9
 
  
+Global scores: average each index goal
+
 ```{r}
 mean_score_df <- joined_df %>% 
   filter(goal %in% goal_names$abbreviation) %>%
   filter(year == 2024) %>%
-  filter(dimension == "score")
+  filter(dimension == "index") %>%
+  filter(!is.na(score))
   #filter(region_id != 0) #?
 
 # mean_index_df <- joined_df %>% 
