@@ -1,0 +1,284 @@
+---
+title: "Learning about OHI scores"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+## loading packages.. you might need to install them first
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+
+## OH NO!
+While you are working at your computer at NCEAS, you receive a frantic call from someone working on an OHI project:
+
+THEY NEED HELP! (actually this kind of happens often!)
+
+It is clearly going to be up to you to save the day!!
+
+## You've got this!
+
+Please help them answer the following questions.  You will work from this document, using the code chunks as a work space to work explore the data. Do NOT bother keeping the code chunks neat and organized.   
+
+You can ask us any questions along the way (slack or issues)!
+
+Good luck!
+
+## Questions
+
+### Getting the data
+
+*Goal* Read the latest OHI global data into the R working space (call the data object "scores"). These are the scores that were calculated for the 2024 assessment. This is the final output after running the scripts in ohi-global. Poke around at the data to get a feel for what is there.
+
+*Hint* Here is a link to the data: 
+https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/scores.csv
+
+
+```{r, include=FALSE}
+## Working space
+data <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/scores.csv")
+
+table(data$dimension)
+```
+
+### Region explore
+
+*Question* Why are there N=222 regions (see code below)...aren't there supposed to be 220? 
+
+**Region 0 is the global score, eez weighted average of all the countries. Region 213 is antarctica, all NAs.**
+If you want the global scores for each goal, look at region id = 0. 
+
+Can you make this data more human readable by including the full goal name (vs. the 2 letter abbreviation) and the country name.
+
+*Hint 1* Here is a link to the official region list (the rgn_id column in this file matches the region_id column in the scores data): https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/spatial/regions_list.csv
+
+*Hint 2* Here is a table that includes goal names: https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/metadata_documentation/ohi_model/tables/ten_goals.csv
+
+*Hint 3* Which region has all NA values for scores?
+
+*Answer* **Antarctica**
+
+```{r, include=FALSE}
+## Working space
+goal_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/refs/heads/draft/metadata_documentation/ohi_model/tables/ten_goals.csv")
+
+region_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/refs/heads/draft/eez/spatial/regions_list.csv")
+
+
+## Write code to save the new version of the data frame.
+ohi_clean_names <- data %>% 
+  left_join(region_names, by = join_by(region_id == rgn_id)) %>% 
+  left_join(goal_names, by = join_by(goal == Abbreviation)) %>% 
+  rename(country = admin_country_name) 
+
+# Which country has all NAs?
+ohi_clean_names %>% 
+  group_by(country) %>% 
+  summarize(missing_country = all(is.na(score))) %>% 
+  filter(missing_country)
+
+# What's the region ID for US?
+ohi_clean_names %>% 
+  filter(rgn_name == "United States")
+```
+
+*Question* Which region id corresponds to the United States?
+**163**
+
+
+### Goal explore
+
+*Question * When I look at the number of goals, N=19 show up....I thought there were supposed to be 10 goals!!! Can you explain what all these are? Also, why do some of the goal abbreviations have 2 letters and others 3 letters?  
+
+*Hint 1* Review the methods here: https://ohi-science.org/ohi-methods/
+
+*Answer* **This includes goals and subgoals, the goals have 2 letters and the subgoals have 3 letters.** 
+
+```{r, include=FALSE}
+## Working space
+
+
+```
+
+
+### Dimension explore
+
+*Question* There are 6 dimensions reported in this dataset (future, pressures, resilience, score, status, and trend). What are all these things?
+
+score: average of future and status.
+future: comprised of pressures, resilience, and trend
+
+
+*Question* When I look at the number of records in each of these categories, I notice that there are more "score" values reported than "status" values (see working space below). Given that scores are calculated using status, it seems like these should have the same number of records. Can you figure out what is going on here. Is something going wrong?
+
+*Answer* **We don't calculate an average status for index, only score and future!**
+
+```{r, include=FALSE}
+## Working space
+
+unique(data$dimension)
+# More score values that status values
+table(data$dimension)
+
+table(data$goal)
+
+# Index has future, score, but not status. No pressures, resileince, trend, because those don't average out. 
+table(data$goal, data$dimension)
+
+```
+
+
+### Missing data
+
+*Question* Figure out which goals/subgoals have the most NA values for scores in 2024.  Which ones have the least? Can you discern any reason why some goals have lots of missing values and others do not?
+
+*Hint* Include only dimension = score, and year = 2024, and cut region_id = 0.
+
+*Answer* Write your answer here!
+
+```{r, include=FALSE}
+## Working space
+# Most NAs
+ohi_clean_names %>% 
+  filter(year == 2024) %>% 
+  group_by(Goal) %>% 
+  summarise(na_count = sum(is.na(score))) %>% 
+  arrange(desc(na_count))
+
+# Least NAs
+ohi_clean_names %>% 
+  filter(year == 2024) %>% 
+  group_by(Goal) %>% 
+  summarise(na_count = sum(is.na(score))) %>% 
+  arrange((na_count))
+
+```
+
+
+### Scores
+
+*Question* If we have a goal with a future status of 80 and status of 90...what is the score?  
+
+*Hint* Isolate the future, status, and score values for one region and one goal and see if you can identify a pattern.
+
+*Answer* **85**
+
+```{r, include=FALSE}
+## Working space
+filter(data, region_id == 163)
+
+```
+
+
+### Metadata
+
+*Project* Based on your data exploration and other resources, provide some metadata that describes each variable.  Write it so it would be useful to you in the future as you are looking through these data.
+
+Write it in the following table.  NOTE: Knit the document to see if the table is formatting correctly (but don't bother if you do not know how to knit a document or if you are running into errors!).
+
+Variable   | Description                  | Values
+---------- | ---------------------------- | ------------------------------
+goal       |                              |
+dimension  |                              | 
+region_id  |                              | 
+score      |                              |          
+year       |  Scenario year               | 2012 to 2022
+
+
+```{r, include=FALSE}
+## Working space
+
+```
+
+
+### Plot
+
+*Project* Create a scatterplot that compares 2012 and 2024 *scores* for each region for the artisanal opportunities goal. Based on this, do scores for the artisanal opportunities goal appear to have increased or decreased over time? 
+
+Why might this be? How could you begin to figure this out?
+
+*Answer* Plot the difference between the two years, above 
+Plot scores 2012 on x, 2024 y, see what values fall above or below the line. 
+
+```{r, include=FALSE}
+## Working space
+
+
+
+```
+
+
+Create a plot that shows the distribution (e.g., histogram or barplot or ??) of *Index* scores of all countries.
+
+```{r across year plot}
+
+## Code to create a plot showing distribution of country Index scores
+avg_score %>% 
+  filter(goal == "Index") %>% 
+  ggplot(aes(x = avg_score)) +
+  geom_histogram(fill = "cornflowerblue") +
+  labs(title = "Distribution of Index Scores Across all Countries",
+       x = "Score",
+       y = "Count") +
+  theme_minimal()
+
+
+```
+The way you actually calculate the global scores, you could get the average for the goal scores, or take the index scores and average those. EEZ weighted averages. bigger EEZ, more impact on scores. The way we do it, we calculate each countries index score, THEN we average those. Rather than average the global goal scores to get the index scores. This leads to slightly different answers. Would be the same if every country had a score for every goal, but some have NAs. i.e. uninhabitated island, toursim and recreation NA. Just an unbalanced design. 
+
+I just got this email from Ben a couple days ago. There is a reasonable explanation why we see this (the data aren't wrong). Can you think of any possible explanations?
+
+I understand now that there are 10 goals weighted equally: 1) Artisanal opportunities, 2) Biodiversity, 3) Carbon storage, 4) Clean Water 5) Coastal protection, 6) Food provision, 7) Livelihoods & economies, 8) Natural products, 9) Sense of place, 10) Tourism & recreation, all the others being “subgoals” that should not be considered.
+
+However, if I take the average of the 10 for 2024 (in the new table below), I get to 67.4 instead of the 68.8 of the index. What am I getting wrong?
+
+Also, when will the 2025 version of the index be published (free from the impacts of Covid)?
+
+Once again, thank you very much for your patience and help.
+
+Kind Regards,
+
+ 
+
+Andrea
+
+ 
+
+#
+
+Artisanal opportunities 76.9
+
+Biodiversity 76.1
+
+Carbon storage 81.1
+
+Clean water 71.4
+
+Coastal protection 83.0
+
+Food provision 50.1
+
+Livelihoods & economies 80.8
+
+Natural products 74.4
+
+Sense of place 62.4
+
+Tourism & recreation 18.4
+ 
+    Economies [subgoal] 86.3
+    Livelihoods [subgoal] 75.3
+    Species condition (subgoal) 77.2
+    Habitat (subgoal) 74.9
+    Iconic species (subgoal) 62.8
+    Fisheries (subgoal) 54.9
+    Lasting special places (subgoal) 62.0
+    Mariculture (subgoal) 6.9
+
+ 
+
+ 
+
+ 
