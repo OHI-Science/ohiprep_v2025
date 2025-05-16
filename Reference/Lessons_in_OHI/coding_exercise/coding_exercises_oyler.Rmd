@@ -1,0 +1,216 @@
+---
+title: "Coding Exercise for NCEAS Data Science Job Application"
+author: "Haylee Oyler"
+output: html_document
+---
+
+## Instructions
+
+You will have 24 hours to complete this activity. You will work directly
+in this Rmarkdown document to:
+
+-   write code to wrangle, analyze, and visualize the data\
+-   answer questions and provide additional insights/thoughts
+-   document workflow
+
+Note: If you are unfamiliar with Rmarkdown, that is no problem; just add
+your code to the gray code chunks and treat it like any .R file. Text
+can be added to the white parts of the document.
+
+Once you have finished, please add your last name to the file name
+(e.g., NAME_coding_exercise.Rmd) and send to: Ben Halpern and Melanie
+Frazier
+([halpern\@nceas.ucsb.edu](mailto:halpern@nceas.ucsb.edu){.email} and
+[frazier\@nceas.ucsb.edu](mailto:frazier@nceas.ucsb.edu){.email}). You
+can also provide a knitted html version of this file as well, but this
+is not necessary.
+
+You will be evaluated on: coding ability, documentation of code, and
+communication of results.
+
+Please contact Melanie
+([frazier\@nceas.ucsb.edu](mailto:frazier@nceas.ucsb.edu){.email}) if
+you have any questions about this exercise.
+
+## Packages
+
+Add packages you will use to the following code chunk. We start by
+loading the `readr` package, which we will use to read in dataset.
+
+```{r setup}
+
+## loading packages
+library(readr)
+library(tidyverse)
+
+```
+
+## Data
+
+You will be working with a dataset describing global Ocean Health Index
+scores for:
+
+-   10 goals and 1 "Index" score for each country. Goals describe
+    specific benefits we receive from the ocean (e.g., food provision
+    and tourism and recreation) and the Index score is the overall score
+    for the country calculated by averaging the 10 goal scores.
+-   220 countries/regions (we use these terms interchangably)
+-   7 years
+
+We will read in the data from GitHub.com, and do some preliminary
+exploration:
+
+```{r data}
+
+## read in OHI data:
+ohi_data <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohiprep_v2019/gh-pages/Reference/Lessons_in_OHI/coding_exercise/scores.csv")
+
+
+## do an initial exploration of the data (i.e., what functions do you use to familiarize yourself with a dataset):
+head(ohi_data)
+str(ohi_data)
+summary(ohi_data)
+
+
+```
+
+What information did you learn about the data from your explorations?
+
+`ohi_data` has 17017 observations of 4 variables. The variables include: 
+
+- `year`: a numeric value representing the year the data isassociated with 
+- `goal`: a character string of the abbreviated goal name 
+- `region_id`: a numeric value that represents which region the score is associated with 
+- `score`: a numeric value that gives the actual OHI score for that region, goal, and year
+
+## Task 1
+
+Please help make these data more human readable by including the full goal name (vs. the 2 letter abbreviation) and the country name.
+
+Here is a table that includes goal names:
+<https://github.com/OHI-Science/ohi-global/blob/draft/metadata_documentation/ohi_model/tables/ten_goals.csv>
+
+Here is a table with the region names:
+<https://github.com/OHI-Science/ohi-global/blob/draft/eez/spatial/regions_list.csv>
+(the rgn_id column in this file matches the region_id column in the
+ohi_data)
+
+```{r human readable}
+
+## Write code needed to update the ohi_data to include the full goal name and the country name.
+goal_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/refs/heads/draft/metadata_documentation/ohi_model/tables/ten_goals.csv")
+
+region_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/refs/heads/draft/eez/spatial/regions_list.csv")
+
+
+## Write code to save the new version of the data frame.
+ohi_clean_names <- ohi_data %>% 
+  left_join(region_names, by = join_by(region_id == rgn_id)) %>% 
+  left_join(goal_names, by = join_by(goal == Abbreviation)) %>% 
+  rename(country = admin_country_name) 
+  # select(year, country, Goal, score)
+
+```
+
+## Task 2
+
+The above description of the data claims there are 220 countries with
+Ocean Health Index scores; however, a quick examination of these data
+reveals there are 221 countries in the data:
+
+```{r countrycount}
+
+length(unique(ohi_data$region_id))
+
+```
+
+One of the countries has no data. Figure out which one.
+
+```{r regions}
+
+## Write code to identify the country with no data.
+ohi_clean_names %>% 
+  group_by(country) %>% 
+  summarize(missing_country = all(is.na(score))) %>% 
+  filter(missing_country)
+```
+
+## Task 3
+
+Create a plot showing all 10 goal scores and the "Index" score for the
+United States of America from 2012 to 2017.
+
+```{r US}
+
+## Code to create plot of USA of 10 goal and Index scores across years
+us_data <- ohi_clean_names %>% 
+  filter(country == "United States", 
+         year %in% 2012:2017)
+
+ggplot(us_data, aes(x = year, y = score)) +
+  geom_point(aes(color = Goal)) + 
+  geom_point(data = filter(us_data, goal == "Index"), 
+             aes(x = year, y = score), 
+             color = "red") +
+  labs(title = "U.S. Goal Scores from 2012 to 2017",
+       x = "Year",
+       y = "Score") +
+  theme_minimal()
+
+```
+We're seeing multiple scores per year because there are many sub regions inside the U.S.
+
+## Task 4
+
+For each country and goal (i.e., the 10 goal + 1 Index scores),
+calculate the average score across all years (note: each country should
+have N=11 scores when finished).
+
+```{r across year avg}
+
+## Code to summarize data
+avg_score <- ohi_clean_names %>% 
+  group_by(country, goal) %>% 
+  summarize(avg_score = mean(score, na.rm = TRUE))
+
+```
+
+Create a plot that shows the distribution (e.g., histogram or barplot or
+??) of *Index* scores of all countries.
+
+```{r across year plot}
+
+## Code to create a plot showing distribution of country Index scores
+avg_score %>% 
+  filter(goal == "Index") %>% 
+  ggplot(aes(x = avg_score)) +
+  geom_histogram(fill = "cornflowerblue") +
+  labs(title = "Distribution of Index Scores Across all Countries",
+       x = "Score",
+       y = "Count") +
+  theme_minimal()
+
+
+```
+
+## Task 5
+
+Figure out which goals have the most NA values for scores in 2018. Which
+ones have the least?
+
+```{r missing data}
+
+## Explore missing data
+ohi_clean_names %>% 
+  filter(year == 2018) %>% 
+  group_by(goal) %>% 
+  summarise(na_count = sum(is.na(score))) %>% 
+  arrange(desc(na_count))
+
+ohi_clean_names %>% 
+  filter(year == 2018) %>% 
+  group_by(goal) %>% 
+  summarise(na_count = sum(is.na(score))) %>% 
+  arrange((na_count))
+
+```
