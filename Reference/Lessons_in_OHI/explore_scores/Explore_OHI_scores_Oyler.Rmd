@@ -1,10 +1,6 @@
 ---
 title: "Learning about OHI scores"
-author: Carmen Hoyt
-date: late-modified
 output: html_document
-editor_options: 
-  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -12,8 +8,6 @@ editor_options:
 library(dplyr)
 library(tidyr)
 library(ggplot2)
-library(tidyverse)
-library(janitor)
 ```
 
 
@@ -26,7 +20,7 @@ It is clearly going to be up to you to save the day!!
 
 ## You've got this!
 
-Please help them answer the following questions. You will work from this document, using the code chunks as a work space to work explore the data. Do NOT bother keeping the code chunks neat and organized.   
+Please help them answer the following questions.  You will work from this document, using the code chunks as a work space to work explore the data. Do NOT bother keeping the code chunks neat and organized.   
 
 You can ask us any questions along the way (slack or issues)!
 
@@ -44,16 +38,17 @@ https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/scores.csv
 
 ```{r, include=FALSE}
 ## Working space
-scores <- read_csv('https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/scores.csv', show_col_types = FALSE)
+data <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/scores.csv")
 
-head(scores)
-summary(scores)
-table(scores$goal)
+table(data$dimension)
 ```
 
 ### Region explore
 
 *Question* Why are there N=222 regions (see code below)...aren't there supposed to be 220? 
+
+**Region 0 is the global score, eez weighted average of all the countries. Region 213 is antarctica, all NAs.**
+If you want the global scores for each goal, look at region id = 0. 
 
 Can you make this data more human readable by including the full goal name (vs. the 2 letter abbreviation) and the country name.
 
@@ -63,39 +58,35 @@ Can you make this data more human readable by including the full goal name (vs. 
 
 *Hint 3* Which region has all NA values for scores?
 
-*Answer* Write your answer here! 
-
-- Region 213, Antarctica
+*Answer* **Antarctica**
 
 ```{r, include=FALSE}
 ## Working space
-# Import regions table
-regions <- read_csv('https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/spatial/regions_list.csv', show_col_types = FALSE)
+goal_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/refs/heads/draft/metadata_documentation/ohi_model/tables/ten_goals.csv")
 
-# Import goals table
-goal_names <- read_csv('https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/metadata_documentation/ohi_model/tables/ten_goals.csv', show_col_types = FALSE) %>%
-  clean_names()
+region_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/refs/heads/draft/eez/spatial/regions_list.csv")
 
-# Join tables to scores
-joined_df <- left_join(scores, goal_names, by = c("goal" = "abbreviation")) %>%
-  left_join(regions, by = c("region_id" = "rgn_id"))
 
-# Investigate number of regions
-length(unique(regions$rgn_id)) #221
+## Write code to save the new version of the data frame.
+ohi_clean_names <- data %>% 
+  left_join(region_names, by = join_by(region_id == rgn_id)) %>% 
+  left_join(goal_names, by = join_by(goal == Abbreviation)) %>% 
+  rename(country = admin_country_name) 
 
-# NA region
-na_score <- joined_df %>%
-  group_by(region_id) %>%
-  summarise(score = mean(score, na.rm = TRUE)) %>%
-  filter(is.na(score)) #213, Antarctica
+# Which country has all NAs?
+ohi_clean_names %>% 
+  group_by(country) %>% 
+  summarize(missing_country = all(is.na(score))) %>% 
+  filter(missing_country)
 
-usa_region <- regions %>%
-  filter(rgn_name == "United States") #163
+# What's the region ID for US?
+ohi_clean_names %>% 
+  filter(rgn_name == "United States")
 ```
 
 *Question* Which region id corresponds to the United States?
+**163**
 
-- 163
 
 ### Goal explore
 
@@ -103,22 +94,12 @@ usa_region <- regions %>%
 
 *Hint 1* Review the methods here: https://ohi-science.org/ohi-methods/
 
-*Answer* Write your answer here!
-
-- goals have 2 letters, subgoals have 3 letters (four of the goals are calculated from 2 subgoals)
-- index is a regional average
+*Answer* **This includes goals and subgoals, the goals have 2 letters and the subgoals have 3 letters.** 
 
 ```{r, include=FALSE}
 ## Working space
 
-# 8 Subgoals + Index
-unique(joined_df$goal) 
 
-# 10 Goals
-unique(goal_names$abbreviation)
-
-# Find differences
-setdiff(unique(joined_df$goal), unique(goal_names$abbreviation))
 ```
 
 
@@ -126,19 +107,26 @@ setdiff(unique(joined_df$goal), unique(goal_names$abbreviation))
 
 *Question* There are 6 dimensions reported in this dataset (future, pressures, resilience, score, status, and trend). What are all these things?
 
+score: average of future and status.
+future: comprised of pressures, resilience, and trend
+
+
 *Question* When I look at the number of records in each of these categories, I notice that there are more "score" values reported than "status" values (see working space below). Given that scores are calculated using status, it seems like these should have the same number of records. Can you figure out what is going on here. Is something going wrong?
 
-*Answer* Write your answer here!
-
-- score values includes index values while status values do not
+*Answer* **We don't calculate an average status for index, only score and future!**
 
 ```{r, include=FALSE}
 ## Working space
-unique(scores$dimension)
-table(scores$dimension)
 
-table(scores$goal)
-table(scores$goal, scores$dimension)
+unique(data$dimension)
+# More score values that status values
+table(data$dimension)
+
+table(data$goal)
+
+# Index has future, score, but not status. No pressures, resileince, trend, because those don't average out. 
+table(data$goal, data$dimension)
+
 ```
 
 
@@ -150,19 +138,22 @@ table(scores$goal, scores$dimension)
 
 *Answer* Write your answer here!
 
-- most NA values: TR (Tourism and Recreation)
-- least NA values: SPP (Species Condition - Biodiversity (BD))
-- data availability(?) not yet released, spatial data is always filled in
-
 ```{r, include=FALSE}
 ## Working space
-joined_df %>%
-  filter(year == 2024) %>%
-  filter(dimension == "score") %>%
-  filter(region_id != 0) %>%
-  group_by(goal) %>%
-  summarise(na_values = sum(is.na(score), na.rm = TRUE)) %>%
-  arrange(desc(na_values))
+# Most NAs
+ohi_clean_names %>% 
+  filter(year == 2024) %>% 
+  group_by(Goal) %>% 
+  summarise(na_count = sum(is.na(score))) %>% 
+  arrange(desc(na_count))
+
+# Least NAs
+ohi_clean_names %>% 
+  filter(year == 2024) %>% 
+  group_by(Goal) %>% 
+  summarise(na_count = sum(is.na(score))) %>% 
+  arrange((na_count))
+
 ```
 
 
@@ -172,22 +163,12 @@ joined_df %>%
 
 *Hint* Isolate the future, status, and score values for one region and one goal and see if you can identify a pattern.
 
-*Answer* Write your answer here!
-
-- the average (future + status /2)
+*Answer* **85**
 
 ```{r, include=FALSE}
 ## Working space
-palau <- joined_df %>%
-  filter(region_id == 8) %>% # Palau
-  filter(dimension %in% c("future", "status", "score")) %>%
-  filter(goal == "AO")
+filter(data, region_id == 163)
 
-# Check
-palau %>%
-  pivot_wider(names_from = "dimension", values_from = "score") %>%
-  select(year, future, status, score) %>%
-  mutate(avg = ((future+status)/2))
 ```
 
 
@@ -197,13 +178,13 @@ palau %>%
 
 Write it in the following table.  NOTE: Knit the document to see if the table is formatting correctly (but don't bother if you do not know how to knit a document or if you are running into errors!).
 
-Variable   | Description               | Values
----------- | ------------------------- | ------------------------------
-goal       | benefit category          | 2 character abbreviation (Goals), 3 character abbreviation (Subgoals)
-dimension  | Status                    | "future", "pressures", "resilience", "score", "status", "trend"
-region_id  | Region                    | 1 to 220
-score      | Calculated score          | 0 to 100       
-year       | Scenario year             | 2012 to 2022
+Variable   | Description                  | Values
+---------- | ---------------------------- | ------------------------------
+goal       |                              |
+dimension  |                              | 
+region_id  |                              | 
+score      |                              |          
+year       |  Scenario year               | 2012 to 2022
 
 
 ```{r, include=FALSE}
@@ -218,43 +199,34 @@ year       | Scenario year             | 2012 to 2022
 
 Why might this be? How could you begin to figure this out?
 
-*Answer* Write your answer here!
-
-*unsure*
+*Answer* Plot the difference between the two years, above 
+Plot scores 2012 on x, 2024 y, see what values fall above or below the line. 
 
 ```{r, include=FALSE}
 ## Working space
-joined_df %>%
-  filter(goal == "AO") %>%
-  filter(year %in% c(2012, 2024)) %>%
-  filter(!is.na(score)) %>%
-  filter(dimension == "score") %>%
-  pivot_wider(names_from = year, values_from = score) %>%
-  mutate(diff = `2024` - `2012`) %>%
-  ggplot(aes(region_id, diff)) +
-  geom_point(aes(color = diff < 0), size = 3) +
-  scale_color_manual(values = c("FALSE" = "blue", "TRUE" = "red"), labels = c("Increase", "Decrease")) +
-  labs(x = "Region",
-       y = "Magnitude",
-       color = "Change") +
-  theme_minimal()
+
+
+
 ```
+
 
 Create a plot that shows the distribution (e.g., histogram or barplot or ??) of *Index* scores of all countries.
 
 ```{r across year plot}
 
 ## Code to create a plot showing distribution of country Index scores
-joined_df %>%
-  filter(goal == "Index") %>%
-ggplot(aes(score)) +
-  geom_histogram() +
-  labs(x = "Score",
-       y = "Count",
-       title = "Index Scores") +
+avg_score %>% 
+  filter(goal == "Index") %>% 
+  ggplot(aes(x = avg_score)) +
+  geom_histogram(fill = "cornflowerblue") +
+  labs(title = "Distribution of Index Scores Across all Countries",
+       x = "Score",
+       y = "Count") +
   theme_minimal()
-```
 
+
+```
+The way you actually calculate the global scores, you could get the average for the goal scores, or take the index scores and average those. EEZ weighted averages. bigger EEZ, more impact on scores. The way we do it, we calculate each countries index score, THEN we average those. Rather than average the global goal scores to get the index scores. This leads to slightly different answers. Would be the same if every country had a score for every goal, but some have NAs. i.e. uninhabitated island, toursim and recreation NA. Just an unbalanced design. 
 
 I just got this email from Ben a couple days ago. There is a reasonable explanation why we see this (the data aren't wrong). Can you think of any possible explanations?
 
@@ -306,23 +278,7 @@ Tourism & recreation 18.4
     Mariculture (subgoal) 6.9
 
  
-Global scores: average each index goal
 
-```{r}
-mean_score_df <- joined_df %>% 
-  filter(goal %in% goal_names$abbreviation) %>%
-  filter(year == 2024) %>%
-  filter(dimension == "index") %>%
-  filter(!is.na(score))
-  #filter(region_id != 0) #?
-
-# mean_index_df <- joined_df %>% 
-#   filter(goal %in% goal_names$abbreviation) %>%
-#   filter(year == 2024) %>%
-#   filter(dimension == "index")
-
-mean(mean_df$score, na.rm = TRUE)
-
-```
+ 
 
  
