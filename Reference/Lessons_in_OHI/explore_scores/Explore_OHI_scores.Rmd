@@ -8,6 +8,7 @@ output: html_document
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+library(tidyverse)
 ```
 
 
@@ -38,7 +39,7 @@ https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/scores.csv
 
 ```{r, include=FALSE}
 ## Working space
-
+data <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/scores.csv")
 
 ```
 
@@ -58,8 +59,13 @@ Can you make this data more human readable by including the full goal name (vs. 
 
 ```{r, include=FALSE}
 ## Working space
+rgn213 <- filter(data, region_id == 213)
+rgn0 <- filter(data, region_id == 0)
 
 
+rgns <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/spatial/regions_list.csv")
+
+names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/metadata_documentation/ohi_model/tables/ten_goals.csv")
 ```
 
 *Question* Which region id corresponds to the United States?
@@ -91,11 +97,11 @@ Can you make this data more human readable by including the full goal name (vs. 
 ```{r, include=FALSE}
 ## Working space
 
-# unique(scores$dimension)
-# table(scores$dimension)
+# unique(data$dimension)
+# table(data$dimension)
 # 
-# table(scores$goal)
-# table(scores$goal, scores$dimension)
+# table(data$goal)
+# table(data$goal, data$dimension)
 
 
 ```
@@ -126,8 +132,8 @@ Can you make this data more human readable by including the full goal name (vs. 
 
 ```{r, include=FALSE}
 ## Working space
-
-
+filter(data, region_id == 163)
+mean(c(82.5, 85))
 ```
 
 

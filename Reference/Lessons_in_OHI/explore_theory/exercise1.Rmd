@@ -9,21 +9,13 @@ editor_options:
 Work together to answer these questions.
 
 All the information you need should be in the OHI Methods
-[document](https://raw.githack.com/OHI-Science/ohi-global/published/documents/methods/Supplement.html#2_the_theory_of_ohi).
+[document](https://ohi-science.org/ohi-methods/).
 
-I will be around to answer any questions...so don't hesitate to get
-clarification, extra guidance, or request hints!
 
 ### OHI score models and data
 
-1.  What is the difference between a goal's "status" and "score"?
+1.  Describe the difference between a goal's "status" and "score"?
 
-<br> Status has two components there is the *current status* which is
-comparing a recent measure to a reference point and *likely future
-status* which is the current status modified by variables like
-resilience, pressures, and trend which are expected to influence it. The
-score is the average of the current status and the likely future status.
-<br>
 
 2.  If a region's food provision goal has the following values, what
     would its food provision score be?
@@ -32,7 +24,6 @@ Predicted future status: 80
 
 Current status: 60
 
-<br> 70 <br>
 
 3.  Given the following data, what would this region's Index score be?
 
@@ -53,11 +44,13 @@ Current status: 60
 NOTE: The abbreviations for subgoals have 3 letters and goals have 2
 letters.
 
+
+<br>
+<br>
 ```{r}
-(50+10+100+85+80+60+95+20+30+50+90)/11
+
 ```
 
-<br> 60.9 <br>
 
 4.  Fill in the missing values.
 
@@ -65,17 +58,13 @@ NOTE: Pressure and resilience must be multiplied by 0.01. Trend and
 status are not modified.
 
 ```{r}
-(1+0.67*0.1+(1-0.67)*(0.5-1))
-(1+0.67*0.1+(1-0.67)*(0.5-0.5))
-(75+80)/2
-(75+90)/2
 ```
 
 | Dimension               | Scenario 1 | Scenario 2 |
 |-------------------------|------------|------------|
-| Score                   | 82.5       | 77.5       |
+| Score                   |            | 77.5       |
 | Current status          | 75         | 75         |
-| Predicted future status | 90         | 80         |
+| Predicted future status | 90         |          |
 | Trend                   | 0.10       | 0.10       |
 | Pressure                | 100        | 50         |
 | Resilience              | 50         | 50         |
@@ -83,12 +72,11 @@ status are not modified.
 QUESTION: How did a pressure change from 100 to 50 affect the final
 score? Was this a larger or smaller effect than you would have expected?
 
-<br> it reduced the overall score and predicted future status by more
-than i thought<br>
-
+<br>
+<br>
 ### Humans as part of the ecosystem
 
-<br> 5. To calculate the Fishery subgoal, we:
+ 5. To calculate the Fishery subgoal, we:
 
 a.  Obtain B/Bmsy scores for each stock that is harvested. B/Bmsy is
     defined as: the ratio of observed biomass to the biomass that would
@@ -114,8 +102,6 @@ underharvesting? Why? Do you have any ideas for how we could account for
 underharvesting without unduly penalizing regions that are trying to let
 stocks recover?
 
-<br> I don't think it should be penalized because this could be to
-stabilize the ecosystem. <br>
 
 ### Gapfilling
 
@@ -137,22 +123,17 @@ stabilize the ecosystem. <br>
 | 10     | 76   |
 
 QUESTION: Should the missing values (NA is a missing value in R) remain
-missing? If so, why?
-
+missing? 
 Or, should you try to estimate the missing values? If so, how might you
-go about estimating them? <br> No, all missing data should be filled in
-if possible for index scores to be comparable-unless it isn't relevant
-to a region. It could be estimated by looking at the factors that went
-into determining the economic variable, looking if there is info from a
-previous year, or seeing if other goals variables are related and can be
-used to estimate this one. <br>
-
-### Goal status and trend
+go about estimating them? 
 
 <br>
 
+### Goal status and trend
+
+
 7.  Read the methods section for the Lasting Special Places subgoal:
-    hhttps://oceanhealthindex.org/images/htmls/Supplement.html#692_Lasting_special_places\_(subgoal_of_sense_of_place))
+   <https://ohi-science.org/ohi-methods/>
 
 The information in this section describes how status and trend are
 calculated for this goal, it also includes the data used to calculate
@@ -160,7 +141,6 @@ the pressure and resilience dimensions.
 
 QUESTION: What is the reference point for this subgoal?
 
-30% of area protected
 
 Explore the links to the pressures and resilience data layers.
 
@@ -172,18 +152,14 @@ model described in the Methods with the code. (NOTE: Just aim for a
 large picture overview...at this point you do not need to understand
 every step….or even most of this)
 
-<br> the model in the methods is there in the status_data section of the
-function for LSP but that is just a small component of the function.
-There is a lot more that happens with sorting and combining datasets
 <br>
-
+<br>
 8.  The trend for the Tourism and Recreation goal for the United States
     is -0.15. Describe what this means.
+<br>
+<br>
 
-<br> In 5 years the LSP trend will decrease by 15% and the future status
-is15% less than the current status<br>
-
-9.  We are going to walk through a trend calculation. Using R, foollow
+9.  We are going to walk through a trend calculation. Using R, follow
     along with the calculations.
 
 Status data for a region's Tourism and Recreation goal:
@@ -224,14 +200,10 @@ In 2021, status is predicted to be (ignoring pressure/resilience
 dimensions): 82 \* (1 + 0.1875) = 97
 
 QUESTION: What assumptions are we making by using this formulation of
-trend to calculate the likely future status? No pressure or resilience
-factored in, and the trend stays constant over 5 years.
+trend to calculate the likely future status?
 
 QUESTION: Can you think of any scenarios when we would not use 5 years
-of data to estimate trend? For any goals where data changes
-significantly and not linearly by each year, if an event happens that
-causes an anomaly, or if we have missing values we might have to use
-more than 5 years.
+of data to estimate trend?
 
 <br> <br>
 
@@ -240,7 +212,7 @@ more than 5 years.
 <br>
 
 10. The pressure dimension plays a relatively small role in goal scores
-    (see figure 4.1), but it takes a lot of effort to prepare these
+    (see figure 5.1, https://ohi-science.org/ohi-methods/models/models.html), but it takes a lot of effort to prepare these
     data!
 
 The final pressure dimension is calculated for each region and goal
@@ -248,20 +220,20 @@ using a function from the ohicore package. The function requires several
 pieces of information:
 
 a.  A data layer for each pressure layer describing the magnitude of the
-    pressure on a scale of 0-1. For example, here is the sea surface
+    pressure on a scale of 0-1 for each region. For example, here is the sea surface
     temperature pressure layer (low pressures are good and high
     pressures are bad):
-    <https://github.com/OHI-Science/ohiprep_v2023/blob/gh-pages/globalprep/prs_sst/v2022/output/sst_updated.csv>
+    <https://github.com/OHI-Science/ohiprep_v2025/blob/main/globalprep/prs_sst/v2023/output/sst_updated.csv>
 
 b.  Classifying the pressure category for each data layer. The pressure
     dimension is based on two types of pressures: Ecological and Social
-    (Figure 4.2). The ecological pressures are broken into 5 categories
+    (Figure 5.2, https://ohi-science.org/ohi-methods/models/models.html). The ecological pressures are broken into 5 categories
     (pollution, alien species, habitat destruction, fishing, and climate
     change). Each pressure data layer is assigned to a category in this
     file:
     <https://github.com/OHI-Science/ohi-global/blob/draft/eez/conf/pressure_categories.csv>
 
-QUESTION: How many climate change pressures are there? 4
+QUESTION: How many climate change pressures are there?
 
 c.  Pressure x goal weighting. Pressures have little or no effect on
     some goals, but huge effects on others. The relationship between the
@@ -272,21 +244,8 @@ QUESTION: Which pressure layers affect the FIS subgoal? How many
 regulatory pressure layers are there? How many social layers are there?
 Which is more important: Ecological or Social pressures?
 
-po_chemicals, po_nutrients, sp_alien, sp_genetic, hd_subtidal_sb,
-hd_subtidal_hb, hd_intertidal, fp_com_hb, fp_com_lb, fp_art_lb,
-fp_art_hb, ss_wgi, ss_spi
-
-23 pressure layers, 2 social layers
-
-Both are important since they both affect factors but there are a lot
-more ecological pressures
-
 QUESTION: Some goals, like Coastal Protection, have multiple “elements”.
 Why?
-
-For Coastal Protection there are multiple types of ecosystems like
-mangroves and seagrass that are affected in different ways and
-contribute to protection in different degrees
 
 NOTE: It is convention to add a superscript to the pressure name that
 describes its category: \* po=pollution \* hd=habitat destruction \*
@@ -295,7 +254,7 @@ sp=alien species \* fp=fishing pressure \* cc=climate change
 <br> <br>
 
 11. Similar to the pressures dimension, resilience plays a relatively
-    small role in goal scores (see figure 4.1) but still takes a lot of
+    small role in goal scores (see figure 4.1, https://ohi-science.org/ohi-methods/models/models.html) but still takes a lot of
     effort.
 
 The final pressure dimension is calculated for each region and goal
@@ -303,9 +262,9 @@ using a function from the ohicore package. The function requires several
 pieces of information:
 
 a.  A data layer for each pressure layer describing the magnitude of the
-    pressure on a scale of 0-1. For example, here is the Social Progress
+    pressure on a scale of 0-1 for each region. For example, here is the Social Progress
     Index layer (low resilience is bad and high resilience is good):
-    <https://github.com/OHI-Science/ohiprep_v2023/blob/gh-pages/globalprep/prs_res_spi/v2022/output/spi_res.csv>
+    <https://github.com/OHI-Science/ohiprep_v2025/blob/main/globalprep/prs_res_spi/v2022/output/spi_res.csv>
 
 b.  The resilience dimension includes two major categories: Ecological
     and Social (Figure 4.3). Ecological resilience has two
@@ -324,6 +283,6 @@ c.  The relationship between goals and resilience is described here:
 
 <br>
 
-12. Explore table 7.0.1 in the methods.
+12. Explore table 7.1 in the methods, https://ohi-science.org/ohi-methods/data-layers/data-layer-descriptions.html.
 
 <br> <br>
