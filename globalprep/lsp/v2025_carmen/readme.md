@@ -18,11 +18,7 @@ If using these data, please see our [citation policy](http://ohi-science.org/cit
 ### Prep Files
 
 -   `1_prep_wdpa_rast.Rmd` converts the raw WDPA data into raster
--   `lsp_data_prep.Rmd` prepares the raster so it's ready for processing into the ohi-global toolbox. Any gapfilling and resilience calculation is completed here as well.
-
-### Data Check Files
-
--   `check_updates.Rmd` is a script for additional data checking of score changes from last year's assessment
+-   `2_lsp_data_prep.Rmd` prepares the raster so it's ready for processing into the ohi-global toolbox. Any gapfilling and resilience calculation is completed here as well.
 
 ## Methods
 
