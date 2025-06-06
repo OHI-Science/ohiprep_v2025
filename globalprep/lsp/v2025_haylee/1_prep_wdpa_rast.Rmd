@@ -164,9 +164,14 @@ for(i in names(df_list)) {
   }
 }
 
+print(paste0("Non-MPA Programs in x_0: ", nrow(x_0)))
+print(paste0("Non-MPA Programs in x_1: ", nrow(x_1)))
+print(paste0("Non-MPA Programs in x_2: ", nrow(x_2)))
+
 # remove unneeded objects
-rm(df_list, x_0, x_1, x_2)
+# rm(df_list, x_0, x_1, x_2)
 ```
+**Issue:** There are Non-MPA Programs present in the WDPA polygons. 
 
 ```{r organize and clean}
 
@@ -209,9 +214,9 @@ wdpa_poly_fix_1 <- wdpa_poly_list[[2]]
 wdpa_poly_fix_2 <- wdpa_poly_list[[3]]
 
 # created filepaths for the files, make sure their names aligned with your year's dates
-shp_reorder_0 <- file.path(dir_data, 'shps', 'WDPA_Jun2025_shp_ordered_0') # replace month and year with the appropriate month and year
-shp_reorder_1 <- file.path(dir_data, 'shps', 'WDPA_Jun2025_shp_ordered_1') # replace month and year with the appropriate month and year
-shp_reorder_2 <- file.path(dir_data, 'shps', 'WDPA_Jun2025_shp_ordered_2') # replace month and year with the appropriate month and year
+shp_reorder_0 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_0') # replace month and year with the appropriate month and year
+shp_reorder_1 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_1') # replace month and year with the appropriate month and year
+shp_reorder_2 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_2') # replace month and year with the appropriate month and year
 
 
   
@@ -246,9 +251,9 @@ Transform ordered polygons to Mollweide and save as new polygons.
 ```{r transform_poly}
 
 # file paths for shape files we just wrote to Mazu
-shp_reorder_0 <- file.path(dir_data, 'shps', 'WDPA_Jun2025_shp_ordered_0')
-shp_reorder_1 <- file.path(dir_data, 'shps', 'WDPA_Jun2025_shp_ordered_1')
-shp_reorder_2 <- file.path(dir_data, 'shps', 'WDPA_Jun2025_shp_ordered_2')
+shp_reorder_0 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_0')
+shp_reorder_1 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_1')
+shp_reorder_2 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_2')
 
 # read in those shape files as sf objects to ensure they were written correctly and to use below
 wdpa_poly_0 <- st_read(dsn = shp_reorder_0, 
@@ -289,9 +294,9 @@ wdpa_poly_fix_2 <- wdpa_poly_list[[3]]
 st_crs(wdpa_poly_fix_0)
 
 # set file path for writing, be sure to change these to the correct titles for saving
-shp_xformed_0 <- file.path(dir_data, 'shps', 'WDPA_Jun2025_shp_xformed_0') # replace month and year with the appropriate month and year
-shp_xformed_1 <- file.path(dir_data, 'shps', 'WDPA_Jun2025_shp_xformed_1') # replace month and year with the appropriate month and year
-shp_xformed_2 <- file.path(dir_data, 'shps', 'WDPA_Jun2025_shp_xformed_2') # replace month and year with the appropriate month and year
+shp_xformed_0 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_xformed_0') # replace month and year with the appropriate month and year
+shp_xformed_1 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_xformed_1') # replace month and year with the appropriate month and year
+shp_xformed_2 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_xformed_2') # replace month and year with the appropriate month and year
 
 # write the transformed files to Mazu, this will likely take ~7 mins per file, look at the file size on Mazu to check if it is done writing
 st_write(wdpa_poly_fix_0,
@@ -327,20 +332,20 @@ st_write(wdpa_poly_fix_2,
 # reminder, dir_goal_anx is git-annex/globalprep/lsp/v2024
 rast_wdpa_file <- file.path(dir_goal_anx,
                             'rast',
-                            'wdpa_2024_moll_500m.tif') 
+                            'wdpa_2025_moll_500m.tif') 
 
 # function to create raster file or skip process if raster file is present
 if(!file.exists(rast_wdpa_file)) {
   
   # file paths for vector data created earlier
   # replace month and year with the appropriate month and year
-  shp_xformed_file_0 <- file.path(dir_data, 'shps',
+  shp_xformed_file_0 <- file.path(dir_data, 'shps_ho',
                                   'WDPA_Jun2025_shp_xformed_0', # added this line because we created nested folders to house each shapefile earlier
                                   'WDPA_Jun2025_shp_xformed_0.shp') 
-  shp_xformed_file_1 <- file.path(dir_data, 'shps',
+  shp_xformed_file_1 <- file.path(dir_data, '',
                                   'WDPA_Jun2025_shp_xformed_1',
                                   'WDPA_Jun2025_shp_xformed_1.shp') 
-  shp_xformed_file_2 <- file.path(dir_data, 'shps',
+  shp_xformed_file_2 <- file.path(dir_data, '',
                                   'WDPA_Jun2025_shp_xformed_2',
                                   'WDPA_Jun2025_shp_xformed_2.shp') 
 
@@ -400,7 +405,7 @@ if(!file.exists(rast_wdpa_file)) {
 
 # read in this year and last year's data
 check_current <- terra::rast(rast_wdpa_file)
-check_past <- terra::rast(file.path("/home/shares/ohi/git-annex/globalprep/lsp/v2023/rast/wdpa_2023_moll_500m.tif"))
+check_past <- terra::rast(file.path("/home/shares/ohi/git-annex/globalprep/lsp/v2023/rast/wdpa_2024_moll_500m.tif"))
 
 # visualize both rasters
 plot(check_current, col = 'blue')
@@ -420,9 +425,9 @@ library(sf)
 library(raster)
 
 # file paths for previous data as SF
-shp_reorder_23_0 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2023/WDPA_Jun2023_Public_shp/shps/WDPA_Jun2023_shp_ordered_0')
-shp_reorder_23_1 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2023/WDPA_Jun2023_Public_shp/shps/WDPA_Jun2023_shp_ordered_0')
-shp_reorder_23_2 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2023/WDPA_Jun2023_Public_shp/shps/WDPA_Jun2023_shp_ordered_0')
+shp_reorder_23_0 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_0')
+shp_reorder_23_1 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_0')
+shp_reorder_23_2 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_0')
 
 
 # read in previous data
@@ -441,9 +446,9 @@ wdpa_poly_all_previous <- rbind(wdpa_poly_23_0, wdpa_poly_23_1, wdpa_poly_23_2)
 
 
 # file paths for current data as SF (this is the same exact code from the chunk: transform_poly)
-shp_reorder_0 <- file.path(dir_data, 'shps', 'WDPA_Jun2025_shp_ordered_0') # we used May data in the 2024 update... sorry it's not as easy of a fix as the previous years where you could just change the last number!
-shp_reorder_1 <- file.path(dir_data, 'shps', 'WDPA_Jun2025_shp_ordered_1')
-shp_reorder_2 <- file.path(dir_data, 'shps', 'WDPA_Jun2025_shp_ordered_2')
+shp_reorder_0 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_0') # we used May data in the 2024 update... sorry it's not as easy of a fix as the previous years where you could just change the last number!
+shp_reorder_1 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_1')
+shp_reorder_2 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_2')
 
 
 # read in current data (also the same as the earlier chunk)
