@@ -93,7 +93,7 @@ source('http://ohi-science.org/ohiprep_v2024/workflow/R/common.R')
 
 # standard OHI file path management, change year to current OHI year
 goal     <- 'globalprep/lsp'
-scenario <- 'v2024'
+scenario <- 'v2025'
 dir_goal_anx   <- file.path(dir_M, 'git-annex', goal, scenario) 
 dir_goal  <- file.path(here('globalprep', goal, scenario))
 dir_data <- file.path(dir_M, 'git-annex', 'globalprep', '_raw_data',
@@ -296,7 +296,7 @@ shp_reorder_2 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_2')
 
 # read in those shape files as sf objects to ensure they were written correctly and to use below
 wdpa_poly_0 <- st_read(dsn = shp_reorder_0, 
-                      #    layer = basename(shp_reorder_0),
+                          layer = basename(shp_reorder_0),
                           stringsAsFactors = FALSE)
 
 wdpa_poly_1 <- st_read(dsn = shp_reorder_1, 
@@ -371,7 +371,7 @@ st_write(wdpa_poly_fix_2,
 # reminder, dir_goal_anx is git-annex/globalprep/lsp/v2024
 rast_wdpa_file <- file.path(dir_goal_anx,
                             'rast',
-                            'wdpa_2025_moll_500m.tif') 
+                            'haylee_wdpa_2025_moll_500m.tif') 
 
 # function to create raster file or skip process if raster file is present
 if(!file.exists(rast_wdpa_file)) {
@@ -381,10 +381,10 @@ if(!file.exists(rast_wdpa_file)) {
   shp_xformed_file_0 <- file.path(dir_data, 'shps_ho',
                                   'WDPA_Jun2025_shp_xformed_0', # added this line because we created nested folders to house each shapefile earlier
                                   'WDPA_Jun2025_shp_xformed_0.shp') 
-  shp_xformed_file_1 <- file.path(dir_data, '',
+  shp_xformed_file_1 <- file.path(dir_data, 'shps_ho',
                                   'WDPA_Jun2025_shp_xformed_1',
                                   'WDPA_Jun2025_shp_xformed_1.shp') 
-  shp_xformed_file_2 <- file.path(dir_data, '',
+  shp_xformed_file_2 <- file.path(dir_data, 'shps_ho',
                                   'WDPA_Jun2025_shp_xformed_2',
                                   'WDPA_Jun2025_shp_xformed_2.shp') 
 
