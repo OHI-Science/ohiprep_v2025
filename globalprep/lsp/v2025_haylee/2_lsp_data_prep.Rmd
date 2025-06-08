@@ -85,7 +85,7 @@ library(here)
 source('http://ohi-science.org/ohiprep_v2020/workflow/R/common.R') # ask Mel
 
 goal     <- 'lsp'
-scenario <- 'v2024'
+scenario <- 'v2025'
 dir_anx       <- file.path(dir_M, 'git-annex/globalprep') 
 dir_goal      <- file.path(here('globalprep', goal, scenario))
 dir_goal_anx  <- file.path(dir_anx, goal, scenario)
@@ -119,12 +119,12 @@ Comparing the global WDPA raster to the 3 nautical miles offshore and 1 km inlan
 ```{r lsp_zonal_stats, eval = FALSE}
 
 # list intermedite file paths
-zonal_files <- c('zonal_3nm' =  file.path(dir_goal, 'int', 'zonal_stats_3nm.csv'),
-                 'zonal_1km' =  file.path(dir_goal, 'int', 'zonal_stats_1km.csv'),
-                 'zonal_eez' =  file.path(dir_goal, 'int', 'zonal_stats_eez.csv'))
+zonal_files <- c('zonal_3nm' =  file.path(dir_goal, 'int_haylee', 'zonal_stats_3nm.csv'),
+                 'zonal_1km' =  file.path(dir_goal, 'int_haylee', 'zonal_stats_1km.csv'),
+                 'zonal_eez' =  file.path(dir_goal, 'int_haylee', 'zonal_stats_eez.csv'))
 
 # load raster created in 1_prep_wdpa_rast.rmd
-rast_wdpa <- terra::rast(file.path(dir_goal_anx, 'rast', 'wdpa_2024_moll_500m.tif'))
+rast_wdpa <- terra::rast(file.path(dir_goal_anx, 'rast', 'haylee_wdpa_2025_moll_500m.tif'))
 
 # point to 500 m rasters for 3 nautical mile coastal regions, and 1 km inland coastal regions.
 dir_zones <- file.path(dir_anx, 'spatial/d2014/data/rgn_mol_raster_500m')
@@ -168,7 +168,7 @@ file.copy(files, dest_dir)
 
 # Optionally, check if all files have been copied
 files_dest <- list.files(dest_dir, full.names = TRUE)
-all(paste(dest_dir, basename(files), sep="/") %in% files_t)
+all(paste(dest_dir, basename(files), sep="/") %in% files_dest)
 
 
 
@@ -195,17 +195,27 @@ ptm <- proc.time()
 # run the function over the wdpa raster using each of the LSP zones
 x <- lsp_crosstab(rgn_rast_list[1], rast_values = rast_wdpa) #~35 minutes to run #3nm
 cat('writeRaster elapsed: ', (proc.time() - ptm)[3])
+# 2192.728 ~ 35 minutes
+write_csv(x, '/home/shares/ohi/git-annex/globalprep/lsp/v2025/int_haylee/zonal_stats_3nm.csv')
 
 y <- lsp_crosstab(rgn_rast_list[2], rast_values = rast_wdpa) #35 minutes to run #1km
 cat('writeRaster elapsed: ', (proc.time() - ptm)[3])
+# 4283.705 ~ 1hr 10 minutes
+write_csv(y, '/home/shares/ohi/git-annex/globalprep/lsp/v2025/int_haylee/zonal_stats_1km.csv')
 
 z <- lsp_crosstab(rgn_rast_list[3], rast_values = rast_wdpa) #~51 min minutes to run #eez
 cat('writeRaster elapsed: ', (proc.time() - ptm)[3])
+# 7391.148 ~ 2 hours
+write_csv(z, '/home/shares/ohi/git-annex/globalprep/lsp/v2025/int_haylee/zonal_stats_eez.csv')
 
 ## Save these files to the int folder
-write_csv(x, zonal_files_to_run[1])
-write_csv(y, zonal_files_to_run[2])
-write_csv(z, zonal_files_to_run[3])
+# write_csv(x, zonal_files_to_run[1])
+# write_csv(y, zonal_files_to_run[2])
+# write_csv(z, zonal_files_to_run[3])
+
+# Wrong file paths, something to do with using here()
+
+
 
 ```
 
