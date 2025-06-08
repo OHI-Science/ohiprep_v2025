@@ -87,7 +87,8 @@ source('http://ohi-science.org/ohiprep_v2020/workflow/R/common.R') # ask Mel
 goal     <- 'lsp'
 scenario <- 'v2025'
 dir_anx       <- file.path(dir_M, 'git-annex/globalprep') 
-dir_goal      <- file.path(here('globalprep', goal, scenario))
+# dir_goal      <- file.path(here('globalprep', goal, scenario))
+dir_goal <- file.path('/home/shares/ohi/git-annex/globalprep', goal, scenario)
 dir_goal_anx  <- file.path(dir_anx, goal, scenario)
 ```
 
@@ -215,8 +216,6 @@ write_csv(z, '/home/shares/ohi/git-annex/globalprep/lsp/v2025/int_haylee/zonal_s
 
 # Wrong file paths, something to do with using here()
 
-
-
 ```
 
 ### 2024 Issue with lsp layer: checking to ensure that terr::rast() method works. See Issue LSP #286  
@@ -318,9 +317,9 @@ prot_3nm <- stats_3nm %>% calc_areas()
 prot_eez <- stats_eez %>% calc_areas()
 
 # write results to int folder as csv
-write_csv(prot_3nm, file.path(dir_goal, 'int', 'area_protected_3nm.csv'))
-write_csv(prot_1km, file.path(dir_goal, 'int', 'area_protected_1km.csv'))
-write_csv(prot_eez, file.path(dir_goal, 'int', 'area_protected_eez.csv'))
+write_csv(prot_3nm, file.path(dir_goal, 'int_haylee', 'area_protected_3nm.csv'))
+write_csv(prot_1km, file.path(dir_goal, 'int_haylee', 'area_protected_1km.csv'))
+write_csv(prot_eez, file.path(dir_goal, 'int_haylee', 'area_protected_eez.csv'))
 ```
 
 ------------------------------------------------------------------------
@@ -334,10 +333,10 @@ From the protected area files, write out the individual layers ready for the Too
 
 ```{r write_layers, eval = FALSE}
 # read in files and rename
-prot_3nm <- read_csv(file.path(dir_goal, 'int', 'area_protected_3nm.csv')) %>%
+prot_3nm <- read_csv(file.path(dir_goal, 'int_haylee', 'area_protected_3nm.csv')) %>%
   rename(area = a_tot_km2,
          a_prot_3nm = a_prot_km2)
-prot_1km <- read_csv(file.path(dir_goal, 'int', 'area_protected_1km.csv')) %>%
+prot_1km <- read_csv(file.path(dir_goal, 'int_haylee', 'area_protected_1km.csv')) %>%
   rename(area = a_tot_km2,
          a_prot_1km = a_prot_km2)
 
@@ -346,7 +345,7 @@ write_lsp_layer <- function(df, layers, layername) {
   df1 <- df[ , c('rgn_id', layers)] %>%
     filter(rgn_id <= 250) %>%
     distinct()
-  write_csv(df1, file.path(dir_goal, 'output', paste0(layername, '.csv')))
+  write_csv(df1, file.path(dir_goal, 'output_haylee', paste0(layername, '.csv')))
 }
 
 # write LSP output files
@@ -365,23 +364,22 @@ Some goals require calculation of resilience nearshore (3nm) or entire EEZ.
 area_ref = .30 ### 30% of area protected = reference point
 
 # read in regional data csvs from int
-resil_3nm <- read_csv(file.path(dir_goal, 'int', 'area_protected_3nm.csv')) %>%
+resil_3nm <- read_csv(file.path(dir_goal, 'int_haylee', 'area_protected_3nm.csv')) %>%
   mutate(resilience.score = (a_prot_km2 / a_tot_km2) / area_ref,
          resilience.score = ifelse(resilience.score > 1, 1, resilience.score))
 
-resil_eez <- read_csv(file.path(dir_goal, 'int', 'area_protected_eez.csv')) %>%
+resil_eez <- read_csv(file.path(dir_goal, 'int_haylee', 'area_protected_eez.csv')) %>%
   mutate(resilience.score = (a_prot_km2 / a_tot_km2) / area_ref,
          resilience.score = ifelse(resilience.score > 1, 1, resilience.score))
-# ask Mel about using file.path versus here function
 
 ## Save resilience scores for 3 nm and EEZ data in output
   tmp_3nm <- resil_3nm %>%
     dplyr::select(rgn_id, year, resilience.score)
-  write_csv(tmp_3nm, file.path(dir_goal, 'output', "mpa_3nm_resilience.csv"))
+  write_csv(tmp_3nm, file.path(dir_goal, 'output_haylee', "mpa_3nm_resilience.csv"))
 
   tmp_eez <- resil_eez %>%
     dplyr::select(rgn_id, year, resilience.score)
-  write_csv(tmp_eez, file.path(dir_goal, 'output', "mpa_eez_resilience.csv"))
+  write_csv(tmp_eez, file.path(dir_goal, 'output_haylee', "mpa_eez_resilience.csv"))
 
 ```
 
@@ -394,32 +392,34 @@ There was no gapfilling for these data. Created gapfill files with values of 0.
 ```{r}
 library(dplyr)
 # gap fill for eez
-res_eez <- read.csv("output/mpa_eez_resilience.csv")%>%
+res_eez <- read_csv(file.path(dir_goal, 'output_haylee', "mpa_eez_resilience.csv")) %>% 
   mutate(resilience.score = 0) %>% 
   rename(gapfilled = resilience.score)
 
-write.csv(res_eez, "output/mpa_eez_resilience_gf.csv", row.names=FALSE)
+write.csv(res_eez, file.path(dir_goal, 'output_haylee', "mpa_eez_resilience_gf.csv"), row.names=FALSE)
 
 # gap fill for 3nm
-res_3nm <- read.csv("output/mpa_3nm_resilience.csv")%>%
+res_3nm <- read_csv(file.path(dir_goal, 'output_haylee', "mpa_3nm_resilience.csv")) %>% 
   mutate(resilience.score = 0) %>% 
   rename(gapfilled = resilience.score)
 
-write.csv(res_3nm, "output/mpa_3nm_resilience_gf.csv", row.names=FALSE)
+write.csv(res_3nm, file.path(dir_goal, 'output_haylee', "mpa_3nm_resilience_gf.csv"), row.names=FALSE)
 
 # gap fill for inland 1km
-inland <- read.csv("output/lsp_prot_area_inland1km.csv") %>%
-  mutate(a_prot_1km = 0) %>% 
-  rename(gapfilled = a_prot_1km)
+inland <- read_csv(file.path(dir_goal, 'output_haylee', "lsp_prot_area_inland1km.csv")) %>% 
+  mutate(resilience.score = 0) %>% 
+  rename(gapfilled = resilience.score)
 
-write.csv(inland, "output/lsp_prot_area_inland1km_gf.csv", row.names=FALSE)
+write.csv(inland, file.path(dir_goal, 'output_haylee', "lsp_prot_area_inland1km_gf.csv"), row.names=FALSE)
 
 # gap fill for offshore 3nm
-offshore <- read.csv("output/lsp_prot_area_offshore3nm.csv") %>%
-  mutate(a_prot_3nm = 0)%>% 
-  rename(gapfilled = a_prot_3nm)
+offshore <- read_csv(file.path(dir_goal, 'output_haylee', "lsp_prot_area_offshore3nm.csv")) %>% 
+  mutate(resilience.score = 0) %>% 
+  rename(gapfilled = resilience.score)
 
-write.csv(offshore, "output/lsp_prot_area_offshore3nm_gf.csv", row.names=FALSE)
+write.csv(offshore, file.path(dir_goal, 'output_haylee', "lsp_prot_area_offshore3nm_gf.csv"), row.names=FALSE)
+
+
 ```
 
 ------------------------------------------------------------------------
@@ -431,14 +431,16 @@ Plot scores for 2022 vs 2023 assessment years
 -   2022 AY data goes through December 2022
 -   2023 AY data goes through December (downloaded on May 24, 2024) 2023
 
+**Issue:** Cannot find files from v2024 calculation
+
 ```{r plot_scores_vs_v2022, plotly = TRUE, eval = FALSE}
 
 library(ggplot2)
 #library(plotly)
 
 ## Calculates this year and last year's coastal marine protected area ratio (CMPA/Ref-CMPA) for plotting
-status_3nm_new <- read_csv(file.path(dir_goal, 'output', 'lsp_prot_area_offshore3nm.csv')) %>%
-  full_join(read_csv(file.path(dir_goal, 'output', 'rgn_area_offshore3nm.csv')),
+status_3nm_new <- read_csv(file.path(dir_goal, 'output_haylee', 'lsp_prot_area_offshore3nm.csv')) %>%
+  full_join(read_csv(file.path(dir_goal, 'output_haylee', 'rgn_area_offshore3nm.csv')),
             by = 'rgn_id') %>%
   mutate(pct_prot_3nm_new = a_prot_3nm / area,
          status_3nm_new   = pct_prot_3nm_new / 0.3,
@@ -446,8 +448,8 @@ status_3nm_new <- read_csv(file.path(dir_goal, 'output', 'lsp_prot_area_offshore
   filter(year == max(year)) %>%
   dplyr::select(rgn_id, pct_prot_3nm_new, status_3nm_new)
 
-status_3nm_old <- read_csv(file.path(dir_goal, '../v2023/output', 'lsp_prot_area_offshore3nm.csv')) %>%
-  full_join(read_csv(file.path(dir_goal, 'output', 'rgn_area_offshore3nm.csv')),
+status_3nm_old <- read_csv(file.path(dir_goal, '../v2024/output', 'lsp_prot_area_offshore3nm.csv')) %>%
+  full_join(read_csv(file.path(dir_goal, 'output_haylee', 'rgn_area_offshore3nm.csv')),
             by = 'rgn_id') %>%
   mutate(pct_prot_3nm_old = a_prot_3nm / area,
          status_3nm_old   = pct_prot_3nm_old / 0.3,
@@ -456,8 +458,8 @@ status_3nm_old <- read_csv(file.path(dir_goal, '../v2023/output', 'lsp_prot_area
   dplyr::select(rgn_id, pct_prot_3nm_old, status_3nm_old)
 
 ## Calculates this year and last year's coastline protected ratio (CP/Ref-CP) for plotting
-status_1km_new <- read_csv(file.path(dir_goal, 'output', 'lsp_prot_area_inland1km.csv')) %>%
-  full_join(read_csv(file.path(dir_goal, 'output', 'rgn_area_inland1km.csv')),
+status_1km_new <- read_csv(file.path(dir_goal, 'output_haylee', 'lsp_prot_area_inland1km.csv')) %>%
+  full_join(read_csv(file.path(dir_goal, 'output_haylee', 'rgn_area_inland1km.csv')),
             by = 'rgn_id') %>%
   mutate(pct_prot_1km_new = a_prot_1km / area,
          status_1km_new   = pct_prot_1km_new / 0.3,
@@ -465,8 +467,8 @@ status_1km_new <- read_csv(file.path(dir_goal, 'output', 'lsp_prot_area_inland1k
   filter(year == max(year)) %>%
   dplyr::select(rgn_id, pct_prot_1km_new, status_1km_new)
 
-status_1km_old <- read_csv(file.path(dir_goal, '../v2023/output', 'lsp_prot_area_inland1km.csv')) %>% 
-  full_join(read_csv(file.path(dir_goal, 'output', 'rgn_area_inland1km.csv')),
+status_1km_old <- read_csv(file.path(dir_goal, '../v2024/output', 'lsp_prot_area_inland1km.csv')) %>% 
+  full_join(read_csv(file.path(dir_goal, 'output_haylee', 'rgn_area_inland1km.csv')),
             by = 'rgn_id') %>%
   mutate(pct_prot_1km_old = a_prot_1km / area,
          status_1km_old   = pct_prot_1km_old / 0.3,
@@ -499,17 +501,17 @@ lsp_status_plot <- ggplot(lsp_new_old,
   geom_point(alpha = .6) +
   theme(legend.position = 'none') +
   geom_abline(slope = 1, intercept = 0, color = 'red') +
-  labs(x = 'LSP status v2023 (data through Jan 2022)',
-       y = 'LSP status v2024 (data through Jun 2023)',
-       title = 'Comparing LSP status: 2024 vs 2023') +
+  labs(x = 'LSP status v2024 (data through Jun 2023)',
+       y = 'LSP status v2025 (data through)',
+       title = 'Comparing LSP status: 2025 vs 2024') +
   facet_wrap( ~ rgn)
 
 lsp_status_plot #got rid of ggplotly
 # looks great!
 
 # save plot to figs folder
-ggsave(file.path(dir_goal, 'figs/plot_v2023_v2024.png'), 
-       plot = lsp_status_plot, height = 4.5, width = 6)
+# ggsave(file.path(dir_goal, 'figs/plot_v2023_v2024.png'), 
+#        plot = lsp_status_plot, height = 4.5, width = 6)
 
 # create data frame with scores that changed by more than 0.05
 mjr_score_change <- lsp_new_old %>%
@@ -519,5 +521,5 @@ mjr_score_change <- lsp_new_old %>%
 
 # save major score changes to output folder as csv
 # no data was available - ask Mel
-write.csv(mjr_score_change, "output/major_changes_2024.csv")
+write.csv(mjr_score_change, "output_haylee/major_changes_2025.csv")
 ```
