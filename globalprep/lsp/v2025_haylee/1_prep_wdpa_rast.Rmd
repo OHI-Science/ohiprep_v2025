@@ -444,7 +444,7 @@ if(!file.exists(rast_wdpa_file)) {
 
 # read in this year and last year's data
 check_current <- terra::rast(rast_wdpa_file)
-check_past <- terra::rast(file.path("/home/shares/ohi/git-annex/globalprep/lsp/v2023/rast/wdpa_2024_moll_500m.tif"))
+check_past <- terra::rast(file.path("/home/shares/ohi/git-annex/globalprep/lsp/v2024/rast/wdpa_2024_moll_500m.tif"))
 
 # visualize both rasters
 plot(check_current, col = 'blue')
@@ -452,11 +452,11 @@ plot(check_past, col = 'blue')
 ```
 
 
-Noticing a new big blue blob a little ways off the coast of Madagascar (past the other aggregation of points/blob)
+Some new large blobs off the Northwestern coast of Australia. Various other smaller changes. On the whole, it looks like slightly more area this year compared to last year, just eye-balling things. 
 
 ## Data Checking
 
-Compare shapefile from last year vs this year (2023 v 2024).
+Compare shapefile from last year vs this year (2024 v 2025).
 
 ```{r}
 
@@ -464,28 +464,36 @@ library(sf)
 library(raster)
 
 # file paths for previous data as SF
-shp_reorder_23_0 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_0')
-shp_reorder_23_1 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_0')
-shp_reorder_23_2 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_0')
+shp_reorder_24_0 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_0')
+shp_reorder_24_1 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_1')
+shp_reorder_24_2 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_2')
 
 
 # read in previous data
-wdpa_poly_23_0 <- st_read(dsn = dirname(shp_reorder_23_0), 
-                          layer = basename(shp_reorder_23_0),
+wdpa_poly_24_0 <- st_read(dsn = dirname(shp_reorder_24_0), 
+                          layer = basename(shp_reorder_24_0),
                           stringsAsFactors = FALSE)
-wdpa_poly_23_1 <- st_read(dsn = dirname(shp_reorder_23_1), 
-                          layer = basename(shp_reorder_23_1),
+wdpa_poly_24_1 <- st_read(dsn = dirname(shp_reorder_24_1), 
+                          layer = basename(shp_reorder_24_1),
                           stringsAsFactors = FALSE)
-wdpa_poly_23_2 <- st_read(dsn = dirname(shp_reorder_23_2), 
-                          layer = basename(shp_reorder_23_2),
+wdpa_poly_24_2 <- st_read(dsn = dirname(shp_reorder_24_2), 
+                          layer = basename(shp_reorder_24_2),
                           stringsAsFactors = FALSE)
+```
+
+```{r}
+# Had an error reading in the previous years data. Decided to simplify it for troubleshooting
+wdpa_poly_24_0 <- st_read("/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_0/WDPA_May2024_shp_ordered_0.shp")
+wdpa_poly_24_1 <- st_read("/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_1/WDPA_May2024_shp_ordered_1.shp")
+wdpa_poly_24_2 <- st_read("/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_2/WDPA_May2024_shp_ordered_2.shp")
+
 
 # bind all into one
-wdpa_poly_all_previous <- rbind(wdpa_poly_23_0, wdpa_poly_23_1, wdpa_poly_23_2)
+wdpa_poly_all_previous <- rbind(wdpa_poly_24_0, wdpa_poly_24_1, wdpa_poly_24_2)
 
 
 # file paths for current data as SF (this is the same exact code from the chunk: transform_poly)
-shp_reorder_0 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_0') # we used May data in the 2024 update... sorry it's not as easy of a fix as the previous years where you could just change the last number!
+shp_reorder_0 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_0') 
 shp_reorder_1 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_1')
 shp_reorder_2 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_2')
 
@@ -540,4 +548,5 @@ st_area(test_area_current)
 
 2024 Note: filtering to parent_iso == "GBR" and iso3 == "PCN" resulted in no data for the previous year's lsp data. 
 
-
+2025: Test areas look good!
+area: 843725668865 m^2
