@@ -169,9 +169,48 @@ print(paste0("Non-MPA Programs in x_1: ", nrow(x_1)))
 print(paste0("Non-MPA Programs in x_2: ", nrow(x_2)))
 
 # remove unneeded objects
-# rm(df_list, x_0, x_1, x_2)
+rm(df_list, x_0, x_1, x_2)
 ```
-**Issue:** There are Non-MPA Programs present in the WDPA polygons. 
+
+**Issue:** There are Non-MPA Programs present in the WDPA polygons. For now, I've gone ahead and dropped these rows because each had <50 out of ~ 100K observations. 
+
+```{r}
+# Filter out non-mpa
+wdpa_poly_0 <- wdpa_poly_0 %>%
+  filter(!str_detect(tolower(MANG_PLAN), 'non-mpa program')) 
+
+wdpa_poly_1 <- wdpa_poly_1 %>%
+  filter(!str_detect(tolower(MANG_PLAN), 'non-mpa program'))
+
+wdpa_poly_2 <- wdpa_poly_2 %>%
+  filter(!str_detect(tolower(MANG_PLAN), 'non-mpa program'))
+
+# check for non-mpa program in management plan column, we want them to be empty
+x_0 <- wdpa_poly_0 %>%
+  filter(str_detect(tolower(MANG_PLAN), 'non-mpa program')) 
+
+x_1 <- wdpa_poly_1 %>%
+  filter(str_detect(tolower(MANG_PLAN), 'non-mpa program'))
+
+x_2 <- wdpa_poly_2 %>%
+  filter(str_detect(tolower(MANG_PLAN), 'non-mpa program'))
+
+# List of data frames
+df_list <- list(x_0 = x_0, x_1 = x_1, x_2 = x_2)
+
+# Iterate over the list of data frames
+for(i in names(df_list)) {
+  # Check if the data frame is empty
+  if(nrow(df_list[[i]]) == 0) {
+    print(paste(i, "is empty (good)"))
+  } else {
+    print(paste(i, "is not empty (bad)"))
+  }
+}
+
+# remove unneeded objects
+rm(df_list, x_0, x_1, x_2)
+```
 
 ```{r organize and clean}
 
