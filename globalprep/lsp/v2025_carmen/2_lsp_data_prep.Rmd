@@ -14,6 +14,8 @@ output:
     toc: yes
   word_document:
     toc: yes
+editor_options: 
+  chunk_output_type: console
 ---
 
 
@@ -85,7 +87,7 @@ library(here)
 source('http://ohi-science.org/ohiprep_v2020/workflow/R/common.R') # ask Mel
 
 goal     <- 'lsp'
-scenario <- 'v2024'
+scenario <- 'v2025_carmen'
 dir_anx       <- file.path(dir_M, 'git-annex/globalprep') 
 dir_goal      <- file.path(here('globalprep', goal, scenario))
 dir_goal_anx  <- file.path(dir_anx, goal, scenario)
@@ -118,13 +120,20 @@ Comparing the global WDPA raster to the 3 nautical miles offshore and 1 km inlan
 
 ```{r lsp_zonal_stats, eval = FALSE}
 
-# list intermedite file paths
-zonal_files <- c('zonal_3nm' =  file.path(dir_goal, 'int', 'zonal_stats_3nm.csv'),
-                 'zonal_1km' =  file.path(dir_goal, 'int', 'zonal_stats_1km.csv'),
-                 'zonal_eez' =  file.path(dir_goal, 'int', 'zonal_stats_eez.csv'))
+dir_carmen <- file.path(dir_anx, goal, 'v2025', 'int_carmen')
+
+if (!dir.exists(dir_carmen)) {
+  dir.create(dir_carmen)
+}
+
+# list intermediate file paths
+zonal_files <- c('zonal_3nm' =  file.path(dir_carmen, 'zonal_stats_3nm.csv'),
+                 'zonal_1km' =  file.path(dir_carmen, 'zonal_stats_1km.csv'),
+                 'zonal_eez' =  file.path(dir_carmen, 'zonal_stats_eez.csv'))
+
 
 # load raster created in 1_prep_wdpa_rast.rmd
-rast_wdpa <- terra::rast(file.path(dir_goal_anx, 'rast', 'wdpa_2024_moll_500m.tif'))
+rast_wdpa <- terra::rast(file.path(dir_goal_anx, 'rast', 'carmen_wdpa_2025_moll_500m.tif'))
 
 # point to 500 m rasters for 3 nautical mile coastal regions, and 1 km inland coastal regions.
 dir_zones <- file.path(dir_anx, 'spatial/d2014/data/rgn_mol_raster_500m')
@@ -168,6 +177,8 @@ file.copy(files, dest_dir)
 
 # Optionally, check if all files have been copied
 files_dest <- list.files(dest_dir, full.names = TRUE)
+
+# this?
 all(paste(dest_dir, basename(files), sep="/") %in% files_t)
 
 
@@ -272,7 +283,7 @@ stats_eez <- read_csv(zonal_files['zonal_eez'])
 rgn_eez <- region_data() 
 
 # the WDPA data is published annually, so these should all be the year before the OHI year.
-# currently 2023, checks out!
+# currently 2024, checks out!
 max_year <- max(c(stats_1km$year, stats_3nm$year, stats_eez$year), na.rm = TRUE) 
 
 
@@ -308,9 +319,13 @@ prot_3nm <- stats_3nm %>% calc_areas()
 prot_eez <- stats_eez %>% calc_areas()
 
 # write results to int folder as csv
-write_csv(prot_3nm, file.path(dir_goal, 'int', 'area_protected_3nm.csv'))
-write_csv(prot_1km, file.path(dir_goal, 'int', 'area_protected_1km.csv'))
-write_csv(prot_eez, file.path(dir_goal, 'int', 'area_protected_eez.csv'))
+# write_csv(prot_3nm, file.path(dir_goal, 'int', 'area_protected_3nm.csv'))
+# write_csv(prot_1km, file.path(dir_goal, 'int', 'area_protected_1km.csv'))
+# write_csv(prot_eez, file.path(dir_goal, 'int', 'area_protected_eez.csv'))
+
+write_csv(prot_3nm, file.path(dir_carmen, 'area_protected_3nm.csv'))
+write_csv(prot_1km, file.path(dir_carmen, 'area_protected_1km.csv'))
+write_csv(prot_eez, file.path(dir_carmen, 'area_protected_eez.csv'))
 ```
 
 ------------------------------------------------------------------------
@@ -324,19 +339,39 @@ From the protected area files, write out the individual layers ready for the Too
 
 ```{r write_layers, eval = FALSE}
 # read in files and rename
-prot_3nm <- read_csv(file.path(dir_goal, 'int', 'area_protected_3nm.csv')) %>%
+# prot_3nm <- read_csv(file.path(dir_goal, 'int', 'area_protected_3nm.csv')) %>%
+#   rename(area = a_tot_km2,
+#          a_prot_3nm = a_prot_km2)
+# prot_1km <- read_csv(file.path(dir_goal, 'int', 'area_protected_1km.csv')) %>%
+#   rename(area = a_tot_km2,
+#          a_prot_1km = a_prot_km2)
+
+prot_3nm <- read_csv(file.path(dir_carmen, 'area_protected_3nm.csv')) %>%
   rename(area = a_tot_km2,
          a_prot_3nm = a_prot_km2)
-prot_1km <- read_csv(file.path(dir_goal, 'int', 'area_protected_1km.csv')) %>%
+prot_1km <- read_csv(file.path(dir_carmen, 'area_protected_1km.csv')) %>%
   rename(area = a_tot_km2,
          a_prot_1km = a_prot_km2)
 
 # create function to create LSP layer
+# write_lsp_layer <- function(df, layers, layername) {
+#   df1 <- df[ , c('rgn_id', layers)] %>%
+#     filter(rgn_id <= 250) %>%
+#     distinct()
+#   write_csv(df1, file.path(dir_goal, 'output', paste0(layername, '.csv')))
+# }
+
+dir_carmen_2 <- file.path(dir_anx, goal, 'v2025', 'output_carmen')
+
+if (!dir.exists(dir_carmen_2)) {
+  dir.create(dir_carmen_2)
+}
+
 write_lsp_layer <- function(df, layers, layername) {
   df1 <- df[ , c('rgn_id', layers)] %>%
     filter(rgn_id <= 250) %>%
     distinct()
-  write_csv(df1, file.path(dir_goal, 'output', paste0(layername, '.csv')))
+  write_csv(df1, file.path(dir_carmen_2, paste0(layername, '.csv')))
 }
 
 # write LSP output files
@@ -355,11 +390,11 @@ Some goals require calculation of resilience nearshore (3nm) or entire EEZ.
 area_ref = .30 ### 30% of area protected = reference point
 
 # read in regional data csvs from int
-resil_3nm <- read_csv(file.path(dir_goal, 'int', 'area_protected_3nm.csv')) %>%
+resil_3nm <- read_csv(file.path(dir_carmen, 'area_protected_3nm.csv')) %>%
   mutate(resilience.score = (a_prot_km2 / a_tot_km2) / area_ref,
          resilience.score = ifelse(resilience.score > 1, 1, resilience.score))
 
-resil_eez <- read_csv(file.path(dir_goal, 'int', 'area_protected_eez.csv')) %>%
+resil_eez <- read_csv(file.path(dir_carmen, 'area_protected_eez.csv')) %>%
   mutate(resilience.score = (a_prot_km2 / a_tot_km2) / area_ref,
          resilience.score = ifelse(resilience.score > 1, 1, resilience.score))
 # ask Mel about using file.path versus here function
@@ -367,11 +402,11 @@ resil_eez <- read_csv(file.path(dir_goal, 'int', 'area_protected_eez.csv')) %>%
 ## Save resilience scores for 3 nm and EEZ data in output
   tmp_3nm <- resil_3nm %>%
     dplyr::select(rgn_id, year, resilience.score)
-  write_csv(tmp_3nm, file.path(dir_goal, 'output', "mpa_3nm_resilience.csv"))
+  write_csv(tmp_3nm, file.path(dir_carmen_2, "mpa_3nm_resilience.csv"))
 
   tmp_eez <- resil_eez %>%
     dplyr::select(rgn_id, year, resilience.score)
-  write_csv(tmp_eez, file.path(dir_goal, 'output', "mpa_eez_resilience.csv"))
+  write_csv(tmp_eez, file.path(dir_carmen_2, "mpa_eez_resilience.csv"))
 
 ```
 
@@ -384,32 +419,32 @@ There was no gapfilling for these data. Created gapfill files with values of 0.
 ```{r}
 library(dplyr)
 # gap fill for eez
-res_eez <- read.csv("output/mpa_eez_resilience.csv")%>%
+res_eez <- read.csv(file.path(dir_carmen_2, "mpa_eez_resilience.csv")) %>%
   mutate(resilience.score = 0) %>% 
   rename(gapfilled = resilience.score)
 
-write.csv(res_eez, "output/mpa_eez_resilience_gf.csv", row.names=FALSE)
+write.csv(res_eez, file.path(dir_carmen_2, "mpa_eez_resilience_gf.csv"), row.names=FALSE)
 
 # gap fill for 3nm
-res_3nm <- read.csv("output/mpa_3nm_resilience.csv")%>%
+res_3nm <- read.csv(file.path(dir_carmen_2, "mpa_3nm_resilience.csv")) %>%
   mutate(resilience.score = 0) %>% 
   rename(gapfilled = resilience.score)
 
-write.csv(res_3nm, "output/mpa_3nm_resilience_gf.csv", row.names=FALSE)
+write.csv(res_3nm, file.path(dir_carmen_2, "mpa_3nm_resilience_gf.csv"), row.names=FALSE)
 
 # gap fill for inland 1km
-inland <- read.csv("output/lsp_prot_area_inland1km.csv") %>%
+inland <- read.csv(file.path(dir_carmen_2, "lsp_prot_area_inland1km.csv")) %>%
   mutate(a_prot_1km = 0) %>% 
   rename(gapfilled = a_prot_1km)
 
-write.csv(inland, "output/lsp_prot_area_inland1km_gf.csv", row.names=FALSE)
+write.csv(inland, file.path(dir_carmen_2, "lsp_prot_area_inland1km_gf.csv"), row.names=FALSE)
 
 # gap fill for offshore 3nm
-offshore <- read.csv("output/lsp_prot_area_offshore3nm.csv") %>%
+offshore <- read.csv(file.path(dir_carmen_2, "lsp_prot_area_offshore3nm.csv")) %>%
   mutate(a_prot_3nm = 0)%>% 
   rename(gapfilled = a_prot_3nm)
 
-write.csv(offshore, "output/lsp_prot_area_offshore3nm_gf.csv", row.names=FALSE)
+write.csv(offshore, file.path(dir_carmen_2, "lsp_prot_area_offshore3nm_gf.csv"), row.names=FALSE)
 ```
 
 ------------------------------------------------------------------------
@@ -427,8 +462,8 @@ library(ggplot2)
 #library(plotly)
 
 ## Calculates this year and last year's coastal marine protected area ratio (CMPA/Ref-CMPA) for plotting
-status_3nm_new <- read_csv(file.path(dir_goal, 'output', 'lsp_prot_area_offshore3nm.csv')) %>%
-  full_join(read_csv(file.path(dir_goal, 'output', 'rgn_area_offshore3nm.csv')),
+status_3nm_new <- read_csv(file.path(dir_carmen_2, 'lsp_prot_area_offshore3nm.csv')) %>%
+  full_join(read_csv(file.path(dir_carmen_2, 'rgn_area_offshore3nm.csv')),
             by = 'rgn_id') %>%
   mutate(pct_prot_3nm_new = a_prot_3nm / area,
          status_3nm_new   = pct_prot_3nm_new / 0.3,
@@ -436,6 +471,8 @@ status_3nm_new <- read_csv(file.path(dir_goal, 'output', 'lsp_prot_area_offshore
   filter(year == max(year)) %>%
   dplyr::select(rgn_id, pct_prot_3nm_new, status_3nm_new)
 
+
+# could not find old??
 status_3nm_old <- read_csv(file.path(dir_goal, '../v2023/output', 'lsp_prot_area_offshore3nm.csv')) %>%
   full_join(read_csv(file.path(dir_goal, 'output', 'rgn_area_offshore3nm.csv')),
             by = 'rgn_id') %>%
