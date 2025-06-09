@@ -14,6 +14,8 @@ output:
       in_header: '../../../workflow/templates/ohi_hdr.html'
 pdf_document:
   toc: true
+editor_options: 
+  chunk_output_type: console
 ---
 
 # Summary
@@ -58,12 +60,9 @@ This process is all done in the script: `1_prep_wdpa_rast.Rmd`. After that is co
 
 # Updates from previous assessment
 
-Changed data source to 2023. The source data has now been split into 3 different files, so we will need to merge all three shapefiles together, before we can work with the data.
-
-We updated the script to save 3 separate files for the reordering and transforming, for ease of use and reproducibility.
+We checked the IUCN_CAT variable as a possible way to weight the score, but found that these are unranked categories. They represent styles or type of management. 
 
 
-Saving intermediates to `/home/shares/ohi/git-annex/globalprep/lsp/v2024/rast`
 
 ------------------------------------------------------------------------
 
@@ -129,6 +128,9 @@ wdpa_poly_2 <- st_read(dsn = dirname(shp_raw_2),
                        layer = basename(shp_raw_2),
                        stringsAsFactors = FALSE)
 
+# plot(st_geometry(wdpa_poly_0))
+
+
 # put all shape files into a list
 wdpa_list <- list(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)
 ```
@@ -169,10 +171,10 @@ print(paste0("Non-MPA Programs in x_1: ", nrow(x_1)))
 print(paste0("Non-MPA Programs in x_2: ", nrow(x_2)))
 
 # remove unneeded objects
-rm(df_list, x_0, x_1, x_2)
+# rm(df_list, x_0, x_1, x_2)
 ```
 
-**Issue:** There are Non-MPA Programs present in the WDPA polygons. For now, I've gone ahead and dropped these rows because each had <50 out of ~ 100K observations. 
+**Issue:** There are Non-MPA Programs present in the WDPA polygons. For now, I've gone ahead and dropped these rows because each had <50 out of ~ 100K observations. These all seem to be in the U.S.
 
 ```{r}
 # Filter out non-mpa
@@ -253,7 +255,9 @@ wdpa_poly_fix_1 <- wdpa_poly_list[[2]]
 wdpa_poly_fix_2 <- wdpa_poly_list[[3]]
 
 # created filepaths for the files, make sure their names aligned with your year's dates
-shp_reorder_0 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_0') # replace month and year with the appropriate month and year
+shp_reorder_0 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_0')
+shps_reorder_0 <- file.path('/home/shares/ohi/git-annex/globalprep/lsp/v2025/clean_shapes/WDPA_Jun2025_shp_ordered_0')
+# replace month and year with the appropriate month and year
 shp_reorder_1 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_1') # replace month and year with the appropriate month and year
 shp_reorder_2 <- file.path(dir_data, 'shps_ho', 'WDPA_Jun2025_shp_ordered_2') # replace month and year with the appropriate month and year
 
@@ -280,6 +284,7 @@ suppressWarnings(st_write(wdpa_poly_fix_2,
 rm('wdpa_poly_list', "wdpa_list", "wdpa_poly_0", "wdpa_poly_1", "wdpa_poly_2", "wdpa_poly_fix_0", "wdpa_poly_fix_1", "wdpa_poly_fix_2") 
 gc()
 ```
+**Note** Change file paths for output geospatial files here.
 
 ## Transform to Mollweide Projection
 
@@ -368,7 +373,7 @@ st_write(wdpa_poly_fix_2,
 ```{r rasterize_wdpa, eval = FALSE}
 
 # destination filepath for all the new raster file
-# reminder, dir_goal_anx is git-annex/globalprep/lsp/v2024
+# reminder, dir_goal_anx is git-annex/globalprep/lsp/v2025
 rast_wdpa_file <- file.path(dir_goal_anx,
                             'rast',
                             'haylee_wdpa_2025_moll_500m.tif') 
@@ -447,6 +452,19 @@ check_current <- terra::rast(rast_wdpa_file)
 check_past <- terra::rast(file.path("/home/shares/ohi/git-annex/globalprep/lsp/v2024/rast/wdpa_2024_moll_500m.tif"))
 
 # visualize both rasters
+plot(check_current, col = 'blue')
+plot(check_past, col = 'blue')
+
+# years = values(check_current)
+
+check_current_abs <- ifel(is.na(check_current), 0, 1)
+plot(check_current_abs)
+
+check_past_abs <- ifel(is.na(check_past), 0, 1) 
+
+compare <- check_past_abs - check_current_abs 
+
+plot(compare, col = "blue")
 plot(check_current, col = 'blue')
 plot(check_past, col = 'blue')
 ```
@@ -542,11 +560,10 @@ mapview(test_area_previous)
 st_area(test_area_current) 
 # 2021 836075862002 m2 
 # 2022 841909966909 m2
+# 2025 843725668865 m2
 ```
-
-
 
 2024 Note: filtering to parent_iso == "GBR" and iso3 == "PCN" resulted in no data for the previous year's lsp data. 
 
 2025: Test areas look good!
-area: 843725668865 m^2
+area: 843725668865 m^2 **Check that area of 3 individual shapefiles matches the total raster area**
