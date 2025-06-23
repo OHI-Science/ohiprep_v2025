@@ -509,8 +509,8 @@ lsp_status_plot #got rid of ggplotly
 # looks great!
 
 # save plot to figs folder
-# ggsave(file.path(dir_goal, 'figs/plot_v2023_v2024.png'), 
-#        plot = lsp_status_plot, height = 4.5, width = 6)
+ggsave(file.path(dir_goal, 'figs/plot_v2024_v2025.png'),
+       plot = lsp_status_plot, height = 4.5, width = 6)
 
 # create data frame with scores that changed by more than 0.05
 mjr_score_change <- lsp_new_old %>%
@@ -520,5 +520,5 @@ mjr_score_change <- lsp_new_old %>%
 
 # save major score changes to output folder as csv
 # no data was available - ask Mel
-write.csv(mjr_score_change, "output/major_changes_2025.csv")
+write.csv(mjr_score_change, file.path(dir_goal, 'figs/major_changes_2025.csv'))
 ```
