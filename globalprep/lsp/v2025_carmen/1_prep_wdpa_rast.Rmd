@@ -98,6 +98,9 @@ dir_goal_anx   <- file.path(dir_M, 'git-annex', goal, scenario)
 dir_goal  <- file.path(here('globalprep', goal, scenario))
 dir_data <- file.path(dir_M, 'git-annex', 'globalprep', '_raw_data',
                       'wdpa_mpa', 'd2025', 'WDPA_May2025_Public_shp')
+# June data
+# dir_data <- file.path(dir_M, 'git-annex', 'globalprep', '_raw_data',
+#                       'wdpa_mpa', 'd2025', 'WDPA_Jun2025_Public_shp')
 
 ```
 
@@ -378,6 +381,8 @@ st_area(test_area_current)
 
 sum(st_area(test_area_current)) # 430,905,669 m2
 sum(st_area(test_area_previous)) # 462,674,854 m2
+
+%>% 
 ```
 
 
