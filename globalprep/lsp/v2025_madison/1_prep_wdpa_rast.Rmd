@@ -14,6 +14,8 @@ output:
       in_header: '../../../workflow/templates/ohi_hdr.html'
 pdf_document:
   toc: true
+editor_options: 
+  chunk_output_type: console
 ---
 
 # Summary
@@ -21,13 +23,13 @@ pdf_document:
 -   Setup WDPA shapefile for lasting special places by filtering out non-"Designated" protected areas, and filtering out "non-MPA programmatic management plans" (US protected areas that distort scores).
 -   Rasterize the result using `terra::rasterize()` (`fasterize()` doesn't work with `SpatRaster` objects) and save to disk using `terra::writeRaster()` (this was formerly done with a function defined in the document: `writeRasterBlocks()` - as of now, it has not been updated to use `terra` functions and objects.)
 
-View lsp_data_prep.Rmd for full description of Lasting Special Places data preparation.
+View 2_lsp_data_prep.Rmd for full description of Lasting Special Places data preparation.
 
 # Methods
 
 ## Downloading Data
 
-Accessing and downloading the data was difficult in 2023 due to a downloading bug, luckly there are multiple ways to download the data from the webpage. The below directions sound easy; but it is easy to be navigated to a page where the download functionality is broken.
+Accessing and downloading the data was difficult in 2023 due to a downloading bug, luckily there are multiple ways to download the data from the webpage. The below directions sound easy; but it is easy to be navigated to a page where the download functionality is broken.
 
 Directions to download data:
 
@@ -37,7 +39,7 @@ Directions to download data:
 
 3: Download and unzip the file
 
-4: There will be additional zip files within the zip file you download. Once unzipped, these are the three files you will use throughout the LSP dataprep.
+4: There will be additional zip files within the zip file you download. Once unzipped, you will use the file containing polygons throughout the LSP dataprep.
 
 ## Filter and re-project WDPA polygons
 
@@ -58,12 +60,9 @@ This process is all done in the script: `1_prep_wdpa_rast.Rmd`. After that is co
 
 # Updates from previous assessment
 
-Changed data source to 2023. The source data has now been split into 3 different files, so we will need to merge all three shapefiles together, before we can work with the data.
+Changed data source to 2025. All polygons are in one shapefile, so changes were made throughout the prep document to reflect this. 
 
-We updated the script to save 3 separate files for the reordering and transforming, for ease of use and reproducibility.
-
-
-Saving intermediates to `/home/shares/ohi/git-annex/globalprep/lsp/v2024/rast`
+Saving intermediates to `/home/shares/ohi/git-annex/globalprep/lsp/v2025/rast`
 
 ------------------------------------------------------------------------
 
@@ -87,6 +86,7 @@ library(sf)
 library(mapview)
 library(terra) # not short for pterodactyl
 library(fasterize)
+library(janitor)
 
 # source in OHI functions
 source('http://ohi-science.org/ohiprep_v2024/workflow/R/common.R')
@@ -109,28 +109,12 @@ Read in the polygons from the WDPA dataset; filter as needed.
 
 ```{r read in data}
 
-# create path objects for the 3 different zip files downloaded from source
-shp_raw_0 <- file.path(dir_data, 'WDPA_May2024_Public_shp_0', 'WDPA_May2024_Public_shp-polygons')
-#shp_raw_1 <- file.path(dir_data, 'WDPA_May2024_Public_shp_1', 'WDPA_May2024_Public_shp-polygons')
-#shp_raw_2 <- file.path(dir_data, 'WDPA_May2024_Public_shp_2', 'WDPA_May2024_Public_shp-polygons')
+# create path to polygon shapefile downloaded from source
+shp_raw <- list.files(path = file.path(dir_data, 'WDPA_May2025_Public_shp_2'), pattern = "polygons.shp", full.names = TRUE)
 
-# read shape files in as sf objects
-wdpa_poly_0 <- st_read(dsn = dirname(shp_raw_0), 
-                       layer = basename(shp_raw_0),
-                       stringsAsFactors = FALSE)
+# read in polygon shapefile
+wdpa_poly_object <- st_read(shp_raw, stringsAsFactors = FALSE)
 
-  
-wdpa_poly_1 <- st_read(dsn = dirname(shp_raw_1),
-                       layer = basename(shp_raw_1),
-                       stringsAsFactors = FALSE)
-
-  
-wdpa_poly_2 <- st_read(dsn = dirname(shp_raw_2), 
-                       layer = basename(shp_raw_2),
-                       stringsAsFactors = FALSE)
-
-# put all shape files into a list
-wdpa_list <- list(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)
 ```
 
 Test and inspect the raw data to ensure quality
@@ -139,33 +123,17 @@ Test and inspect the raw data to ensure quality
 
 # inspect status column to find unique values:
 # "Designated"   "Inscribed"    "Proposed"     "Not Reported" "Established"  "Adopted"   
-wdpa_poly_0$STATUS %>% unique()
+wdpa_poly_object$STATUS %>% unique()
 
 # check for non-mpa program in management plan column, we want them to be empty
-x_0 <- wdpa_poly_0 %>%
+x <- wdpa_poly_object %>%
   filter(str_detect(tolower(MANG_PLAN), 'non-mpa program')) 
 
-x_1 <- wdpa_poly_1 %>%
-  filter(str_detect(tolower(MANG_PLAN), 'non-mpa program'))
-
-x_2 <- wdpa_poly_2 %>%
-  filter(str_detect(tolower(MANG_PLAN), 'non-mpa program'))
-
-# List of data frames
-df_list <- list(x_0 = x_0, x_1 = x_1, x_2 = x_2)
-
-# Iterate over the list of data frames
-for(i in names(df_list)) {
-  # Check if the data frame is empty
-  if(nrow(df_list[[i]]) == 0) {
-    print(paste(i, "is empty (good)"))
-  } else {
-    print(paste(i, "is not empty (bad)"))
-  }
+if(nrow(x) == 0) {
+  print("No non-mpa program in management plan column (good).")
+} else {
+  print(paste0("Found ", nrow(x), " non-mpa programs (bad)."))
 }
-
-# remove unneeded objects
-rm(df_list, x_0, x_1, x_2)
 ```
 
 ```{r organize and clean}
@@ -174,7 +142,7 @@ rm(df_list, x_0, x_1, x_2)
 tidy_wdpa_data <- function(wdpa_poly_object) {
   
   DF <- wdpa_poly_object %>%
-    setNames(tolower(names(.))) %>% #improve? # everything()
+  clean_names %>% 
     dplyr::select(wdpaid, name, orig_name, 
                   desig, desig_eng, desig_type,
                   iucn_cat, 
@@ -182,59 +150,41 @@ tidy_wdpa_data <- function(wdpa_poly_object) {
                   status, status_yr, 
                   mang_auth, mang_plan, verif,
                   sub_loc, parent_iso, iso3) %>%
-    dplyr::mutate(status_yr = as.integer(status_yr))
-  
-  DF <- DF[DF$status == 'Designated', ]
-  DF <- DF[!str_detect(tolower(DF$mang_plan), 'non-mpa program'), ]
+    dplyr::mutate(status_yr = as.integer(status_yr)) %>%
+  filter(status == "Designated") %>%
+  filter(!str_detect(tolower(mang_plan), 'non-mpa program'))
   
   return(DF)
 }  
 
 # run function over the list
-wdpa_poly_list <- lapply(wdpa_list, tidy_wdpa_data)
+wdpa_poly <- tidy_wdpa_data(wdpa_poly_object)
+
+unique(wdpa_poly$mang_plan)
 
 # check to see if it worked, we should have 19 columns and fewer observations
-test <- wdpa_poly_list[[1]]
+#test <- wdpa_poly_list[[1]]
 # curious about the "Not Reported" in mang_plan
-
-# remove test for memory
-rm(test)
 ```
 
 ```{r write sf objects to server}
 
-# now we need to unlist them, and write them to the appropriate folder
-wdpa_poly_fix_0 <- wdpa_poly_list[[1]]  
-wdpa_poly_fix_1 <- wdpa_poly_list[[2]]  
-wdpa_poly_fix_2 <- wdpa_poly_list[[3]]
+# created filepaths for the file, make sure their names aligned with your year's dates
+shp_reorder <- file.path(dir_data, 'shps_ch', 'WDPA_May2025_shp_ordered') # fix to "shps"
 
-# created filepaths for the files, make sure their names aligned with your year's dates
-shp_reorder_0 <- file.path(dir_data, 'shps', 'WDPA_May2024_shp_ordered_0') # replace month and year with the appropriate month and year
-shp_reorder_1 <- file.path(dir_data, 'shps', 'WDPA_May2024_shp_ordered_1') # replace month and year with the appropriate month and year
-shp_reorder_2 <- file.path(dir_data, 'shps', 'WDPA_May2024_shp_ordered_2') # replace month and year with the appropriate month and year
+# make new filepath if not already made
+if (!dir.exists(shp_reorder)) {
+  dir.create(shp_reorder, recursive = TRUE)
+  message("Directory created: ", shp_reorder)
+} else {
+  message("Directory already exists: ", shp_reorder)
+}
 
-
-  
-# write the shapefile to the raw_data Mazu folder, warning suppressed, takes about 20 minutes.
-suppressWarnings(st_write(wdpa_poly_fix_0,
-                          dsn = (shp_reorder_0), 
-                          layer = basename(shp_reorder_0),
+# write the shapefile to the raw_data Mazu folder, warning suppressed, takes about 2 minutes.
+suppressWarnings(st_write(wdpa_poly,
+                          dsn = shp_reorder,
                           driver = 'ESRI Shapefile',
                           append = FALSE))
-  
-suppressWarnings(st_write(wdpa_poly_fix_1,
-                          dsn = (shp_reorder_1), 
-                          layer = basename(shp_reorder_1),
-                          driver = 'ESRI Shapefile'))
-  
-suppressWarnings(st_write(wdpa_poly_fix_2,
-                          dsn = (shp_reorder_2), 
-                          layer = basename(shp_reorder_2),
-                          driver = 'ESRI Shapefile'))
-  
-#clean up memory
-rm('wdpa_poly_list', "wdpa_list", "wdpa_poly_0", "wdpa_poly_1", "wdpa_poly_2", "wdpa_poly_fix_0", "wdpa_poly_fix_1", "wdpa_poly_fix_2") 
-gc()
 ```
 
 ## Transform to Mollweide Projection
@@ -243,74 +193,35 @@ Transform ordered polygons to Mollweide and save as new polygons.
 
 2024 Note: We created a nested folder structure such that each shapefile would have their own appropriately named folder. Because of this, we had to remove the `dirname()` line within the `st_read(dsn = ...)` calls. 
 
+2025 Note: We reverted back to a single shapefile. 
+
 ```{r transform_poly}
 
 # file paths for shape files we just wrote to Mazu
-shp_reorder_0 <- file.path(dir_data, 'shps', 'WDPA_May2024_shp_ordered_0')
-shp_reorder_1 <- file.path(dir_data, 'shps', 'WDPA_May2024_shp_ordered_1')
-shp_reorder_2 <- file.path(dir_data, 'shps', 'WDPA_May2024_shp_ordered_2')
+shp_reorder <- file.path(dir_data, 'shps_ch', 'WDPA_May2025_shp_ordered') # change to "shps"
 
 # read in those shape files as sf objects to ensure they were written correctly and to use below
-wdpa_poly_0 <- st_read(dsn = shp_reorder_0, 
-                      #    layer = basename(shp_reorder_0),
-                          stringsAsFactors = FALSE)
+wdpa_poly <- st_read(dsn = shp_reorder, 
+                    stringsAsFactors = FALSE)
 
-wdpa_poly_1 <- st_read(dsn = shp_reorder_1, 
-                          layer = basename(shp_reorder_1),
-                          stringsAsFactors = FALSE)
-
-wdpa_poly_2 <- st_read(dsn = shp_reorder_2, 
-                          layer = basename(shp_reorder_2),
-                          stringsAsFactors = FALSE)
-
-# put the sf objects in a list
-wdpa_list <- list(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)    
-
-# create function to run over list and change the CRS to Mollweide
-change_crs <- function(wdpa_poly_object) {
-
-  message('Spatial transforming WDPA polygons to Mollweide')
-
-  DF <- st_transform(wdpa_poly_object, 
-        crs = '+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs')
-  
-return(DF)
-}  
-
-# run function over list of sf objects
-wdpa_poly_list <- lapply(wdpa_list, change_crs)
-
-# unlist the items
-wdpa_poly_fix_0 <- wdpa_poly_list[[1]]
-wdpa_poly_fix_1 <- wdpa_poly_list[[2]]  
-wdpa_poly_fix_2 <- wdpa_poly_list[[3]]  
+# transform CRS to Mollweide
+wdpa_poly_xformed <- st_transform(wdpa_poly, 
+                                      crs = '+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs')
 
 # validate that the CRS has changed successfully
-st_crs(wdpa_poly_fix_0)
+st_crs(wdpa_poly_xformed)
+
+# convert wdpaid to character to save (too long to save as an integer)
+wdpa_poly_xformed$wdpaid <- as.character(wdpa_poly_xformed$wdpaid)
 
 # set file path for writing, be sure to change these to the correct titles for saving
-shp_xformed_0 <- file.path(dir_data, 'shps', 'WDPA_May2024_shp_xformed_0') # replace month and year with the appropriate month and year
-shp_xformed_1 <- file.path(dir_data, 'shps', 'WDPA_May2024_shp_xformed_1') # replace month and year with the appropriate month and year
-shp_xformed_2 <- file.path(dir_data, 'shps', 'WDPA_May2024_shp_xformed_2') # replace month and year with the appropriate month and year
+shp_xformed <- file.path(dir_data, 'shps_ch', 'WDPA_May2025_shp_xformed') # replace month and year with the appropriate month and year
 
-# write the transformed files to Mazu, this will likely take ~7 mins per file, look at the file size on Mazu to check if it is done writing
-st_write(wdpa_poly_fix_0,
-         dsn = (shp_xformed_0),
-         layer = basename(shp_xformed_0),
-         driver = 'ESRI Shapefile',
-         update = TRUE)
-
-st_write(wdpa_poly_fix_1,
-         dsn = (shp_xformed_1),
-         layer = basename(shp_xformed_1),
-         driver = 'ESRI Shapefile',
-         update = TRUE)
-
-st_write(wdpa_poly_fix_2,
-         dsn = (shp_xformed_2),
-         layer = basename(shp_xformed_2),
-         driver = 'ESRI Shapefile',
-         update = TRUE)
+# write the transformed files to Mazu, this will likely take ~2 mins
+st_write(wdpa_poly_xformed,
+         dsn = shp_xformed,
+         driver = "ESRI Shapefile",
+         append = TRUE)
 ```
 
 ## Shapefile to Raster: `terra::rasterize()`
@@ -327,40 +238,25 @@ st_write(wdpa_poly_fix_2,
 # reminder, dir_goal_anx is git-annex/globalprep/lsp/v2024
 rast_wdpa_file <- file.path(dir_goal_anx,
                             'rast',
-                            'wdpa_2024_moll_500m.tif') 
+                            'wdpa_2025_moll_500m.tif') #update year
 
 # function to create raster file or skip process if raster file is present
 if(!file.exists(rast_wdpa_file)) {
   
   # file paths for vector data created earlier
   # replace month and year with the appropriate month and year
-  shp_xformed_file_0 <- file.path(dir_data, 'shps',
-                                  'WDPA_May2024_shp_xformed_0', # added this line because we created nested folders to house each shapefile earlier
-                                  'WDPA_May2024_shp_xformed_0.shp') 
-  shp_xformed_file_1 <- file.path(dir_data, 'shps',
-                                  'WDPA_May2024_shp_xformed_1',
-                                  'WDPA_May2024_shp_xformed_1.shp') 
-  shp_xformed_file_2 <- file.path(dir_data, 'shps',
-                                  'WDPA_May2024_shp_xformed_2',
-                                  'WDPA_May2024_shp_xformed_2.shp') 
+  shp_xformed_file <- file.path(dir_data, 'shps_ch',
+                                  'WDPA_May2025_shp_xformed', # added this line because we created nested folders to house each shapefile earlier
+                                  'WDPA_May2025_shp_xformed.shp') 
 
   # create time stamp
   ptm <- proc.time()
 
   # read in data as SpatVectors with terra
-  wdpa_poly_0 <- vect(shp_xformed_file_0)
-  wdpa_poly_1 <- vect(shp_xformed_file_1)
-  wdpa_poly_2 <- vect(shp_xformed_file_2)
-  
-  # bind them all together into one object
-  wdpa_poly_all <- rbind(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)
+  wdpa_poly <- vect(shp_xformed_file)
   
   # report time: ~25s to read in each file
   cat('elapsed: ', (proc.time() - ptm)[3])
-  
-  # clear memory
-  rm("wdpa_poly_0", "wdpa_poly_1", "wdpa_poly_2")
-  gc()
 
   # read in base raster file used in OHI
   rast_base <- terra::rast(file.path(dir_M, 'git-annex/globalprep/spatial/d2014',
@@ -372,7 +268,7 @@ if(!file.exists(rast_wdpa_file)) {
   
   # convert vector object into raster object
   # for overlapping polygons, use the oldest (minimum) status year for that area: fun = "min"
-  rast_wdpa <- terra::rasterize(wdpa_poly_all, 
+  rast_wdpa <- terra::rasterize(wdpa_poly, 
                                 rast_base, 
                                 field = 'status_yr', 
                                 fun = 'min')
@@ -383,6 +279,7 @@ if(!file.exists(rast_wdpa_file)) {
   # 2021 fasterize: 45.006 seconds!
   # 2022 terra::rasterize: 876 seconds
   # 2023 terra::rasterize: 454 seconds
+  # 2025 terra::rasterize: ? seconds!
 
   # time stamp
   ptm <- proc.time()
@@ -393,14 +290,15 @@ if(!file.exists(rast_wdpa_file)) {
   # report time stamp: ~76 seconds
   message('writeRaster elapsed: ', (proc.time() - ptm)[3])
 }
+
 ```
 
 ```{r test and examine rasters}
-# you are encouraged to use this space to examing the raster created from the WDPA data 
+# you are encouraged to use this space to examine the raster created from the WDPA data 
 
 # read in this year and last year's data
 check_current <- terra::rast(rast_wdpa_file)
-check_past <- terra::rast(file.path("/home/shares/ohi/git-annex/globalprep/lsp/v2023/rast/wdpa_2023_moll_500m.tif"))
+check_past <- terra::rast(file.path("/home/shares/ohi/git-annex/globalprep/lsp/v2024/rast/wdpa_2024_moll_500m.tif"))
 
 # visualize both rasters
 plot(check_current, col = 'blue')
@@ -408,11 +306,11 @@ plot(check_past, col = 'blue')
 ```
 
 
-Noticing a new big blue blob a little ways off the coast of Madagascar (past the other aggregation of points/blob)
+Past raster seems to cover much more area than current. Potential effect of data download restructuring?
 
 ## Data Checking
 
-Compare shapefile from last year vs this year (2023 v 2024).
+Compare shapefile from last year vs this year (2024 v 2025).
 
 ```{r}
 
@@ -420,80 +318,76 @@ library(sf)
 library(raster)
 
 # file paths for previous data as SF
-shp_reorder_23_0 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2023/WDPA_Jun2023_Public_shp/shps/WDPA_Jun2023_shp_ordered_0')
-shp_reorder_23_1 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2023/WDPA_Jun2023_Public_shp/shps/WDPA_Jun2023_shp_ordered_0')
-shp_reorder_23_2 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2023/WDPA_Jun2023_Public_shp/shps/WDPA_Jun2023_shp_ordered_0')
+shp_reorder_24_0 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_0')
+shp_reorder_24_1 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_1')
+shp_reorder_24_2 <- file.path('/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_2')
 
 
 # read in previous data
-wdpa_poly_23_0 <- st_read(dsn = dirname(shp_reorder_23_0), 
-                          layer = basename(shp_reorder_23_0),
+wdpa_poly_24_0 <- st_read(dsn = shp_reorder_24_0, 
+                          #layer = basename(shp_reorder_24_0),
                           stringsAsFactors = FALSE)
-wdpa_poly_23_1 <- st_read(dsn = dirname(shp_reorder_23_1), 
-                          layer = basename(shp_reorder_23_1),
+wdpa_poly_24_1 <- st_read(dsn = shp_reorder_24_1, 
+                          #layer = basename(shp_reorder_24_1),
                           stringsAsFactors = FALSE)
-wdpa_poly_23_2 <- st_read(dsn = dirname(shp_reorder_23_2), 
-                          layer = basename(shp_reorder_23_2),
+wdpa_poly_24_2 <- st_read(dsn = shp_reorder_24_2, 
+                          #layer = basename(shp_reorder_24_2),
                           stringsAsFactors = FALSE)
 
 # bind all into one
-wdpa_poly_all_previous <- rbind(wdpa_poly_23_0, wdpa_poly_23_1, wdpa_poly_23_2)
+wdpa_poly_all_previous <- rbind(wdpa_poly_24_0, wdpa_poly_24_1, wdpa_poly_24_2)
 
 
 # file paths for current data as SF (this is the same exact code from the chunk: transform_poly)
-shp_reorder_0 <- file.path(dir_data, 'shps', 'WDPA_May2024_shp_ordered_0') # we used May data in the 2024 update... sorry it's not as easy of a fix as the previous years where you could just change the last number!
-shp_reorder_1 <- file.path(dir_data, 'shps', 'WDPA_May2024_shp_ordered_1')
-shp_reorder_2 <- file.path(dir_data, 'shps', 'WDPA_May2024_shp_ordered_2')
+shp_reorder <- file.path(dir_data, 'shps_ch', 'WDPA_May2025_shp_ordered') # change to "shps"
 
-
-# read in current data (also the same as the earlier chunk)
-wdpa_poly_0 <- st_read(dsn = shp_reorder_0, 
-                          layer = basename(shp_reorder_0),
-                          stringsAsFactors = FALSE)
-wdpa_poly_1 <- st_read(dsn = shp_reorder_1, 
-                          layer = basename(shp_reorder_1),
-                          stringsAsFactors = FALSE)
-wdpa_poly_2 <- st_read(dsn = shp_reorder_2, 
-                          layer = basename(shp_reorder_2),
-                          stringsAsFactors = FALSE)
-
-# bind current data together (this is new! before, we just put them in a list)
-wdpa_poly_all_current <- rbind(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)
+# read in those shape files as sf objects to ensure they were written correctly and to use below
+wdpa_poly_current <- st_read(dsn = shp_reorder, 
+                    stringsAsFactors = FALSE)
 
 # check colnames
-colnames(wdpa_poly_all_previous) == colnames(wdpa_poly_all_current)
+colnames(wdpa_poly_all_previous) == colnames(wdpa_poly_current)
 
 # check names
-unique(wdpa_poly_all_current$orig_name)
+unique(wdpa_poly_current$orig_name)
 unique(wdpa_poly_all_previous$orig_name)
 # unique(wdpa_poly_all_previous$parent_iso)
 
+unique(wdpa_poly_current$parent_iso)
+unique(wdpa_poly_current$iso)
 
 # test area to see if things look right
-test_area_current <- wdpa_poly_all_current %>%
+test_area_current <- wdpa_poly_current %>%
   filter(parent_iso == "GBR") %>%
-  filter(iso3 == "PCN")
+  filter(iso3 == "IMN")
 
 
 test_area_previous <- wdpa_poly_all_previous %>%
   filter(parent_iso == "GBR") %>%
-  filter(iso3 == "PCN")
+  filter(iso3 == "IMN")
 
 
 mapview(test_area_current)
 mapview(test_area_previous)
+
 # 2024 note: got an error saying "test_area_previous does not contain data"... the previous steps worked and the wdpa_poly_all_previous object does contain data, so that means that this area just doesn't have data...
 
-
-
-
-st_area(test_area_current) 
+st_area(test_area_current)
 # 2021 836075862002 m2 
 # 2022 841909966909 m2
+
+sum(st_area(test_area_current)) # 430,905,669 m2
+sum(st_area(test_area_previous)) # 462,674,854 m2
 ```
 
 
+2024 Note: 
 
-2024 Note: filtering to parent_iso == "GBR" and iso3 == "PCN" resulted in no data for the previous year's lsp data. 
+- filtering to parent_iso == "GBR" and iso3 == "PCN" resulted in no data for the previous year's lsp data. 
+
+2025 Note: 
+
+- Same, so switched to iso3 == "IMN"
+- Area decreased from 462,674,854 m2 in 2024 to 430,905,669 m2 in 2025
 
 
