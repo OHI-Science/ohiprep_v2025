@@ -235,10 +235,6 @@ WESTERN CENTRAL PACIFIC;
 
 [SeaLifeBase search tool](https://www.sealifebase.se/search.php)
 
- [9] "Smalleyed squillid mantis shrimp" is in the data frame but the name got cut off in the species list to  "Smalleyed squillid mantis shri"
-[12] "Ascidiaceans nei" are also in the data frame as "Ascidiaceans"
-[16] "So-iny (redlip) mullet" has an entry that is "So-iuy mullet". Not sure if these are the same?
-
 ```{r update-species}
 
 ## Commented out 'read.csv' lines are different versions of the dataset, representing the three different seaweed exclusion methods (exclude some seaweed, all seaweed, all seaweed nei (nei = not elsewhere identified)). Use at the end for data checking. The first one is the one which is saved to the "output" folder, and the main analysis to run. 
@@ -273,7 +269,7 @@ sum(str_detect(mar_sp$FAO_name, "nei")) # 103
 length(new_spp) # 112
 
 # Looks like by the numbers, most of these are NEI errors
-
+# Change to lowercase
 mar_lower <- mar %>% 
   mutate(FAO_name = str_replace_all(mar$FAO_name, "NEI", "nei"))
 
@@ -282,10 +278,16 @@ sum(str_detect(mar_lower$FAO_name, "nei")) # 38480
 
 new_spp2 <- setdiff(mar_lower$FAO_name, mar_sp$FAO_name)
 
+mar_lower %>% 
+  filter(FAO_name %in% new_spp2) %>%
+  view()
+
 new_spp2
 # ! Now, there's only 16 new species
 
-
+# Change to lowercase on the original data frame to continue working for now...
+mar <- mar %>% 
+  mutate(FAO_name = str_replace_all(mar$FAO_name, "NEI", "nei"))
   
 
 # Name fixing (v2024)
@@ -296,9 +298,9 @@ mar <- mar %>%
   ))
 
 # run the new_spp code again to check if this update has been successfully implemented
-#new_spp <- setdiff(mar$FAO_name, mar_sp$FAO_name)
-#new_spp
-#character(0) # good!
+new_spp <- setdiff(mar$FAO_name, mar_sp$FAO_name)
+new_spp
+character(0) # good!
 
 # Remove species not relevant to mariculture goal (i.e., non-food species)
 mar_sp_join <- mar %>% dplyr::left_join(mar_sp, by = "FAO_name")
@@ -389,7 +391,7 @@ test <- data.frame(
   dplyr::filter(mar_rgn_agg, rgn_id == 207) %>% # Vietnam
   dplyr::filter(year == 2020) %>%
   arrange(species))
-#View(test)
+# View(test)
 ```
 
 # Gapfilling
@@ -463,7 +465,8 @@ table(mar_rgn_gf$gap_0_fill)
 ## 6441 of these out of 30170 + 6441 cases had NA values converted to 0 - 2021 assessment
 ## 7037 of these out of 30975 + 7037 cases had NA values converted to 0 - 2022 assessment
 ##7367 of these out of 34187 + 7367 cases had NA values converted to 0 -2023 assessment
-## 8201 of these out of 35029 + 8201 (43230) cases had NA values converted to 0 = 0.1897 ≈ 19% of values - 2024 assessment 
+## 8201 of these out of 35029 + 8201 (43230) cases had NA values converted to 0 = 0.1897 ≈ 19% of values - 2024 assessment
+## 2025 assessment: 8928 out of 44598 (~20%) cases had NA values converted to 0
 ```
 
 Remove family-region-environment time series with less than four years of mariculture production \> 0 tonnes (assume these are not established mariculture programs).
@@ -485,6 +488,8 @@ maric <- mar_rgn_gf_filter
 Used to estimate total mariculture yield per country.
 
 Saves the Mariculture-FP file
+
+2025: Have not actually saved this file yet because we're waiting on updates about the new species. 
 
 ```{r save-mariculture-yield, eval=FALSE}
 readr::write_csv(maric, file = here::here(current_mar_dir, "output", "MAR_FP_data.csv"))
