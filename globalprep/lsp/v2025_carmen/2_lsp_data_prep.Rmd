@@ -51,17 +51,18 @@ v2021 Using updated February 2021 data
 
 # Data Source
 
-**Reference**: IUCN and UNEP-WCMC (2023), The World Database on Protected Areas (WDPA) [On-line], May 2024. Cambridge, UK: UNEP-WCMC. Available at: www.protectedplanet.net.
+**Reference**: IUCN and UNEP-WCMC (2023), The World Database on Protected Areas (WDPA) [On-line], May 2025. Cambridge, UK: UNEP-WCMC. Available at: www.protectedplanet.net.
 
-**Downloaded**: May 24, 2024
+**Downloaded**: May 23, 2025
 
 **Description**: Shapefile of World Database on Protected Areas
 
-**Time range**: 1800 - 2023; some protected areas do not have an associated "status year" and are reported as year 0.
+**Time range**: 1800 - 2024; some protected areas do not have an associated "status year" and are reported as year 0.
 
 **Format**: Shapefile
 
-**File location**: `Mazu:home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_Jun2024_Public_shp/`
+**File location**: `Mazu:home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2025/WDPA_May2025_Public_shp_2/`
+  - this file has the polygons
 
 ------------------------------------------------------------------------
 
@@ -91,6 +92,9 @@ scenario <- 'v2025_carmen'
 dir_anx       <- file.path(dir_M, 'git-annex/globalprep') 
 dir_goal      <- file.path(here('globalprep', goal, scenario))
 dir_goal_anx  <- file.path(dir_anx, goal, scenario)
+
+dir_carmen <- file.path(dir_anx, goal, 'v2025', 'int_carmen')
+
 ```
 
 # Methods
@@ -120,8 +124,7 @@ Comparing the global WDPA raster to the 3 nautical miles offshore and 1 km inlan
 
 ```{r lsp_zonal_stats, eval = FALSE}
 
-dir_carmen <- file.path(dir_anx, goal, 'v2025', 'int_carmen')
-
+# create directory if it doesn't already exist
 if (!dir.exists(dir_carmen)) {
   dir.create(dir_carmen)
 }
