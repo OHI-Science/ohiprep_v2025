@@ -240,7 +240,12 @@ WESTERN CENTRAL PACIFIC;
 ## Commented out 'read.csv' lines are different versions of the dataset, representing the three different seaweed exclusion methods (exclude some seaweed, all seaweed, all seaweed nei (nei = not elsewhere identified)). Use at the end for data checking. The first one is the one which is saved to the "output" folder, and the main analysis to run. 
 # Read in species list
 mar_sp <- readr::read_csv(here::here(current_mar_dir, "raw", "species_list.csv")) %>%
-  dplyr::select(FAO_name, exclude, Taxon_code, family, notes, notes_2)
+  dplyr::select(FAO_name, exclude, Taxon_code, family, notes, notes_2) %>% 
+  mutate(FAO_name = case_when(
+    # This name got cutoff when reading in the data
+    FAO_name == "Smalleyed squillid mantis shri" ~ "Smalleyed squillid mantis shrimp",
+    .default = FAO_name
+  ))
 
 # to compare to previous year's csv (in v2024)
 # old_mar_sp <- readr::read_csv(here::here("globalprep/mar/v2023/raw/species_list.csv")) %>%
@@ -293,7 +298,10 @@ mar <- mar %>%
 # Name fixing (v2024)
 mar <- mar %>% 
   mutate(FAO_name = case_when(
-    FAO_name %in% c("Mexican spiny loster") ~ "Mexican spiny lobster",
+    FAO_name == "So-iny (redlip) mullet" ~ "So-iuy mullet",
+    FAO_name == "Kelps nei" ~ "Kelp nei",
+    FAO_name == "Ascidiaceans nei" ~ "Ascidiaceans",
+    FAO_name == "Sea lettuce" ~ "Sea lettuces nei",
     .default = FAO_name
   ))
 
