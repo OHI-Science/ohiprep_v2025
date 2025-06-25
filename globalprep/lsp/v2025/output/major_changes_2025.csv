@@ -1,0 +1,17 @@
+"","rgn_id","rgn","score_new","score_old","rgn_name","diff","abs_diff"
+"1",1,"status",0.934,0,"Cocos Islands",0.934,0.934
+"2",2,"status",1,0.502,"Christmas Island",0.498,0.498
+"3",32,"status",0.318,0.187,"Reunion",0.131,0.131
+"4",40,"status",0.449,0.137,"Sri Lanka",0.312,0.312
+"5",42,"status",0.7,0.426,"Madagascar",0.274,0.274
+"6",43,"status",0.521,0.391,"Kenya",0.13,0.13
+"7",47,"status",0.3,0,"Yemen",0.3,0.3
+"8",48,"status",0.61,1,"Oman",-0.39,0.39
+"9",50,"status",0.651,0.457,"Saudi Arabia",0.194,0.194
+"10",53,"status",0.397,0.509,"Pakistan",-0.112,0.112
+"11",56,"status",0.647,0.016,"Cape Verde",0.631,0.631
+"12",60,"status",1,0.5,"Gibraltar",0.5,0.5
+"13",74,"status",0.361,0.219,"Georgia",0.142,0.142
+"14",79,"status",0.281,0.148,"Israel",0.133,0.133
+"15",120,"status",1,0.919,"Antigua and Barbuda",0.081,0.081
+"16",186,"status",0.49,0.24,"Montenegro",0.25,0.25
