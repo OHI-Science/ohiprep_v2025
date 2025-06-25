@@ -220,6 +220,8 @@ More information can be found in issues #8, #81, #241, #246 for reference.
 
 The species_list.csv is a master list of all the mariculture species in the FAO data. Every year there are potential changes to the FAO data, additional species may be added or names can change, etc. When a species is in the FAO data, but not the species_list.csv it will need to be added to the species_list.csv. To do this, do a quick search within the species_list.csv to make sure it wasn't some small change to the name (e.g. "long-back eel" vs. "longback eel"). Otherwise, do some research to see if any of the synonyms for the FAO species match the names in species_list.csv. If it is one of these scenarios, the information can be copied to a new row with the name modification. If it seems to be a new taxa, You need to add the species output from this (new_spp) to species_list.csv and fill out the corresponding information. Add the new taxa name, Taxon_code (categories defined in the README in the /raw folder), and family (general family from Google) to the species_list.csv. Do some research to make sure the species is being used for food and is marine/brackish. If it is not used for food or is freshwater then it is excluded from the analysis (i.e., a 1 in the exclude column). I.e. add FAO_name, exclude (whether to include in assessment or not. If they are only harvested for medicinal purposes, do not include, or not eaten by humans do not include). Because seaweeds are generally used for both human and non-human consumption, we quantify whether to exclude or not for seaweed species as proportions. For example, if a seaweed species is 80% used for non-human consumption, we would exclude 80% of the harvest (exclude = 0.8). However, for fish species, we only classify as 0 or 1.
 
+After checking the species list, it is recommended to download the list as a csv, open up in excel, and manually add the new species and associated data that way.
+
 Some helpful resources for researching new species:
 
 FAO SPECIES IDENTIFICATION GUIDE FOR FISHERY PURPOSES -- THE LIVING MARINE RESOURCES OF THE
@@ -240,12 +242,7 @@ WESTERN CENTRAL PACIFIC;
 ## Commented out 'read.csv' lines are different versions of the dataset, representing the three different seaweed exclusion methods (exclude some seaweed, all seaweed, all seaweed nei (nei = not elsewhere identified)). Use at the end for data checking. The first one is the one which is saved to the "output" folder, and the main analysis to run. 
 # Read in species list
 mar_sp <- readr::read_csv(here::here(current_mar_dir, "raw", "species_list.csv")) %>%
-  dplyr::select(FAO_name, exclude, Taxon_code, family, notes, notes_2) %>% 
-  mutate(FAO_name = case_when(
-    # This name got cutoff when reading in the data
-    FAO_name == "Smalleyed squillid mantis shri" ~ "Smalleyed squillid mantis shrimp",
-    .default = FAO_name
-  ))
+  dplyr::select(FAO_name, exclude, Taxon_code, family, notes, notes_2)
 
 # to compare to previous year's csv (in v2024)
 # old_mar_sp <- readr::read_csv(here::here("globalprep/mar/v2023/raw/species_list.csv")) %>%
@@ -253,62 +250,19 @@ mar_sp <- readr::read_csv(here::here(current_mar_dir, "raw", "species_list.csv")
 # old_test_spp <- setdiff(mar$FAO_name, old_mar_sp$FAO_name)
 # old_test_spp
 
+# v2025 Change to lowercase on the FAO data frame 
+mar <- mar %>% 
+  mutate(FAO_name = str_replace_all(mar$FAO_name, "NEI", "nei"))
+
 # find differences between species names in new FAO data vs. species list
 new_spp <- setdiff(mar$FAO_name, mar_sp$FAO_name)
 
 new_spp # Check: if dim has 0 rows it means all match
+
 ## If there is a list of species, hand check species_list.csv to see whether to keep (exclude seaweeds and species harvested for ornamental/medicinal). See instructions above.
 
 ### NOTE: if the list of species to add is huge, and it is unmanageable to do by hand, see the mar_dataprep.Rmd in the v2020 folder, and it will have code to use Taxize. Otherwise just do it by hand, because taxize is a pain, and most of them won't be found in taxize anyways... 
 
-# Name fixing 2025
-## It seems like a lot of "different" species come from NEI being all caps instead of nei. I'm going to change the case and see if that shrinks the list down from 112 species. 
-
-# NEIs in the 2025 data
-sum(str_detect(mar$FAO_name, "NEI")) # 38480
-sum(str_detect(mar$FAO_name, "nei")) # 0
-
-# NEIs in the 2024 species list
-sum(str_detect(mar_sp$FAO_name, "NEI")) # 0
-sum(str_detect(mar_sp$FAO_name, "nei")) # 103
-length(new_spp) # 112
-
-# Looks like by the numbers, most of these are NEI errors
-# Change to lowercase
-mar_lower <- mar %>% 
-  mutate(FAO_name = str_replace_all(mar$FAO_name, "NEI", "nei"))
-
-sum(str_detect(mar_lower$FAO_name, "NEI")) # 0
-sum(str_detect(mar_lower$FAO_name, "nei")) # 38480
-
-new_spp2 <- setdiff(mar_lower$FAO_name, mar_sp$FAO_name)
-
-mar_lower %>% 
-  filter(FAO_name %in% new_spp2) %>%
-  view()
-
-new_spp2
-# ! Now, there's only 16 new species
-
-# Change to lowercase on the original data frame to continue working for now...
-mar <- mar %>% 
-  mutate(FAO_name = str_replace_all(mar$FAO_name, "NEI", "nei"))
-  
-
-# Name fixing (v2024)
-mar <- mar %>% 
-  mutate(FAO_name = case_when(
-    FAO_name == "So-iny (redlip) mullet" ~ "So-iuy mullet",
-    FAO_name == "Kelps nei" ~ "Kelp nei",
-    FAO_name == "Ascidiaceans nei" ~ "Ascidiaceans",
-    FAO_name == "Sea lettuce" ~ "Sea lettuces nei",
-    .default = FAO_name
-  ))
-
-# run the new_spp code again to check if this update has been successfully implemented
-new_spp <- setdiff(mar$FAO_name, mar_sp$FAO_name)
-new_spp
-character(0) # good!
 
 # Remove species not relevant to mariculture goal (i.e., non-food species)
 mar_sp_join <- mar %>% dplyr::left_join(mar_sp, by = "FAO_name")
@@ -330,8 +284,9 @@ mar_join_int <- mar_sp_join %>%
 #   mutate(percent = include_total/overall_total)
 # 
 #  mean(seaweed_check2$percent)
-#  ## v2023: 81% .... matches pretty darn well.
-#  # v2024: 80.1% 
+ ## v2023: 81% .... matches pretty darn well.
+ # v2024: 80.1%
+ # v2025: 79.8%
 
 # ---- Eliminate country-species data with zero production across the entire time-series (1950-recent) ----
 mar_value_filter <- mar_join_int %>%
@@ -358,6 +313,7 @@ mar_name_split <- mar_value_filter %>%
   # Bonaire/S.Eustatius/Saba
   # Yugoslavia SFR: no longer a country after 1992, no values 
   # v2024: added new formatting of "Bonaire, Sint Eustatius and Saba"
+  # v2025: Added formatting for USSR
 
 # note: this function was updated in 2024 to use pivot_longer instead of gather, and the new grouped name of "Bonaire, Sint Eustatius and Saba" was accounted for
 

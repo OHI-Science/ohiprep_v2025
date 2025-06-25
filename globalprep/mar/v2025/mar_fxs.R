@@ -92,6 +92,26 @@ mar_split <- function(m) {
     bind_rows(m_ant3) %>%  
     arrange(country, fao, environment, species, year, value) 
   
+  # 2025 update
+  m_ant4 <- m %>%
+    filter(country == 'Union of Soviet Socialist Republics [former]') %>%  # Conch was cultivated for restoration purposes in a joint programme across these 3 countries
+    mutate(value = (value/9),  
+           'Russian Federation' = value,
+           'Ukraine' = value,
+           'Georgia' = value) %>%
+    select(-c(value, country)) %>%
+    pivot_longer(cols = c("Russian Federation", "Ukraine", "Georgia"),
+                 names_to = "country",
+                 values_to = "value") %>%
+    mutate(country = as.character(country),
+           value = as.numeric(value)) %>% 
+    select(c(country, fao, environment, species, year, Taxon_code, family, value))
+  
+  m <- m %>%
+    filter(country != 'Union of Soviet Socialist Republics [former]') %>%
+    bind_rows(m_ant4) %>%  
+    arrange(country, fao, environment, species, year, value)
+  
   
   return(m)
 }
