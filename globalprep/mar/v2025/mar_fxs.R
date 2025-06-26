@@ -4,7 +4,7 @@ mar_split <- function(m) {
   ###   reported regions; break up and distribute values 
   
   m_ant <- m %>%
-    filter(country == 'Netherlands Antilles') %>%  # Conch was cultivated for restoration purposes in a joint programme across these 3 countries
+    filter(country == 'Netherlands Antilles [former]') %>%  # Conch was cultivated for restoration purposes in a joint programme across these 3 countries
     mutate(value = (value/3),  
            'Aruba' = value,
            'Bonaire' = value,
@@ -18,7 +18,7 @@ mar_split <- function(m) {
     select(c(country, fao, environment, species, year, Taxon_code, family, value))
   
   m <- m %>%
-    filter(country != 'Netherlands Antilles') %>%
+    filter(country != 'Netherlands Antilles [former]') %>%
     bind_rows(m_ant) %>%  
     arrange(country, fao, environment, species, year, value) 
   
@@ -77,16 +77,6 @@ mar_split <- function(m) {
            value = as.numeric(value)) %>% 
     select(c(country, fao, environment, species, year, Taxon_code, family, value))
   
-  # m_ant3 <- m %>%
-  #   filter(country == 'Channel Islands') %>%
-  #   mutate(
-  #     value = (value/2),
-  #     'Guernsey' = value,
-  #     'Jersey' = value) %>%
-  #   select(-c(value, country)) %>%
-  #   gather(country, value, -species, -fao, -environment, -year, -Taxon_code) %>% # pre 2024 version
-  #   mutate(country = as.character(country)) 
-  
   m <- m %>%
     filter(country != "Channel Islands") %>%
     bind_rows(m_ant3) %>%  
@@ -94,22 +84,43 @@ mar_split <- function(m) {
   
   # 2025 update
   m_ant4 <- m %>%
-    filter(country == 'Union of Soviet Socialist Republics [former]') %>%  # Conch was cultivated for restoration purposes in a joint programme across these 3 countries
-    mutate(value = (value/9),  
+    filter(country == 'Union of Soviet Socialist Republics [former]') %>%  
+    mutate(value = (value/6),
            'Russian Federation' = value,
+           'Lithuania' = value,
+           'Latvia' = value,
+           'Estonia' = value,
            'Ukraine' = value,
            'Georgia' = value) %>%
     select(-c(value, country)) %>%
-    pivot_longer(cols = c("Russian Federation", "Ukraine", "Georgia"),
+    pivot_longer(cols = c("Russian Federation", "Ukraine", "Georgia", "Lithuania", 
+                          "Latvia", "Estonia"),
                  names_to = "country",
                  values_to = "value") %>%
     mutate(country = as.character(country),
-           value = as.numeric(value)) %>% 
+           value = as.numeric(value)) %>%
+    select(c(country, fao, environment, species, year, Taxon_code, family, value))
+
+  m <- m %>%
+    filter(country != 'Union of Soviet Socialist Republics [former]') %>%
+    bind_rows(m_ant4) %>%
+    arrange(country, fao, environment, species, year, value)
+  
+   m_ant5 <- m %>%
+    filter(country == 'Serbia and Montenegro [former]') %>%  
+    mutate(value = value,
+           'Montenegro' = value) %>%
+    select(-c(value, country)) %>%
+    pivot_longer(cols = c("Montenegro"),
+                 names_to = "country",
+                 values_to = "value") %>%
+    mutate(country = as.character(country),
+           value = as.numeric(value)) %>%
     select(c(country, fao, environment, species, year, Taxon_code, family, value))
   
   m <- m %>%
-    filter(country != 'Union of Soviet Socialist Republics [former]') %>%
-    bind_rows(m_ant4) %>%  
+    filter(country != 'Serbia and Montenegro [former]') %>%
+    bind_rows(m_ant5) %>%
     arrange(country, fao, environment, species, year, value)
   
   
