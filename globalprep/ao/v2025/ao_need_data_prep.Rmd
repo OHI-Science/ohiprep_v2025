@@ -30,7 +30,7 @@ v2024
 One more year of data
 # Data Source 
 
-**Downloaded**: 2024-07-30
+**Downloaded**: 2025-06-23
 
 **Description**:  
 GDP adjusted per capita by PPP (ppppcgdp)
@@ -74,7 +74,7 @@ librarian::shelf(
 update.packages("WDI")
 ### directory paths and relevant files
 source(here::here('workflow', 'R', 'common.R'))
-current_year = 2024
+current_year = 2025
 version_year = paste0("v", current_year)
 version_dir = here::here("globalprep", "ao", version_year)
 ```
@@ -135,8 +135,8 @@ readr::write_csv(gdppcppp_raw, here(paste0(version_dir, '/raw/raw_gdppcppp_', da
 
 
 ```{r raw check, eval=FALSE}
-new_saved_date <- "2024-07-30" # update when new data are downloaded.
-old_saved_date <- "2023-07-12"
+new_saved_date <- "2025-06-23" # update when new data are downloaded.
+old_saved_date <- "2024-08-02"
 
 new <- here::here(version_dir, "raw", paste0('raw_gdppcppp_', new_saved_date,'.csv')) %>% 
   readr::read_csv()
@@ -204,9 +204,10 @@ gdppcppp_gf_1 <- gdppcppp_clean %>%
   dplyr::ungroup() 
 
 head(gdppcppp_gf_1)
-summary(gdppcppp_gf_1) # 42 NAs v2024 
+summary(gdppcppp_gf_1) # 42 NAs v2024. 33 NAs v2025
 
 ```
+
 
 When a country has more than one value (but not a complete series), a within-country regression model is used to predict the missing values.
 
@@ -250,7 +251,7 @@ This is performed by taking the natural log of each value and then dividing by t
 ### Values at the 95th Quantile or greater are given a rescaled score of '1' (the highest value)
 gdppcppp_rescale <- gdppcppp_gf_2 %>%
   dplyr::mutate(
-    ### gives a single value - the 95th quant (v2020=57245.33, v2022=58817.7, v2023 = 58780, v2024= 66603.96)
+    ### gives a single value - the 95th quant (v2020=57245.33, v2022=58817.7, v2023 = 58780, v2024= 66603.96, v2025= 66982.7)
     quantile_95 = quantile(value, probs=0.95),
     ### where does value scale relative to 95th quantile
     value_stand = value/quantile_95,
@@ -266,7 +267,8 @@ head(gdppcppp_rescale)
 ### Check to see if scores make sense - anything above reference point (quant_95) should = 1
 ### everything below it should have a value between 0 and 1 
 rescale_vis <- ggplot(gdppcppp_rescale) +
-  geom_point(aes(x = value , y = score, text = country))
+  geom_point(aes(x = value , y = score, text = country)) +
+  labs(title = "2025 Version: All years 2005-2023")
 
 ggplotly(rescale_vis)
 
@@ -367,7 +369,7 @@ In this case, we gapfill regions with no data using means based on UN-designated
 
 ```{r, eval=F}
 ### how is this different from Mel's georegion function in ohicore? 
-#UNgeorgn() 
+UNgeorgn() 
 head(UNgeorgn)
 summary(UNgeorgn)
 
@@ -412,7 +414,7 @@ d_stand_gf <- d_stand_gf %>%
       T ~ score)) 
 
 ### Load in low population areas
-#low_pop()
+low_pop()
  
 ### filter out regions that have populations > 3000 and keep NA values 
 low_pop <- low_pop %>%
@@ -425,16 +427,23 @@ low_pop_vector <- c(low_pop$rgn_id)
 d_stand_gf_test <- d_stand_gf %>% 
   mutate(score = dplyr::case_when(rgn_id %in% low_pop_vector ~ NA_real_, T ~ score))
 
+summary(d_stand_gf_test)
+```
+
+```{r}
 ### Check number of NAs in score column 
+sum(is.na(d_stand_gf_test$score))
+
+### Find the number of years sampled over 
+length(unique(d_stand_gf_test$year))
+
+### Find the number of low population countries accounted for
+length(unique(low_pop$rgn_id))
+
 ### v2022 has 340 (17 years of data and 20 low pop countries)
 ### v2023 has 360 (18 years of data and 20 low pop countries)
 ### v2024 has 418 (19 years of data and 22 low pop countries)
-summary(d_stand_gf)
-```
-
-
-```{r}
-sum(is.na(d_stand_gf_test$score))
+### v2025 has 418 (19 years of data and 22 low pop countries)
 ```
 
 
@@ -479,7 +488,7 @@ compare <- here::here("globalprep", "ao", paste0("v", current_year), "output", "
   dplyr::select(rgn_id, value, old_value) %>%
   dplyr::mutate(difference = value - old_value) %>% 
   left_join(rgns_eez)
-summary(compare) # 22 NAs; 20 is because of converting unpopulated/low population regions to NAs, the extra 2 might be from the new 2 low pop countries (line 409)
+summary(compare) 
 
 
 p1 <- ggplot(compare, aes(x = value, y = old_value, labels = rgn_name)) +
