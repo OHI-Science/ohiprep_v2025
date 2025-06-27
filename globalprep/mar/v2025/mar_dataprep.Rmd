@@ -506,9 +506,12 @@ These data describe the sustainability country/species combinations. In cases wh
 #                              "SFW_Aquaculture_ratings_053123.csv"), # update with name of new data file
 #                    check.names = FALSE, stringsAsFactors = FALSE, na.strings = c("NA", ""))
 
+data_folder_2023 <- paste0("d", 2023)  # previous assessment year
+
+
 sw_sus_raw <- readr::read_csv(file.path(seafood_watch_dir,
                              #current_data_folder,
-                             previous_data_folder, # had to use old data in v2024
+                             data_folder_2023, # had to use old data in v2024
                              "SFW_Aquaculture_ratings_053123.csv"), # update with name of new data file
                    na = c("NA", ""))
 
@@ -523,7 +526,7 @@ head(sw_sus_raw)
 
 old_sw_sus <- readr::read_csv(file.path(seafood_watch_dir,
                                  #previous_data_folder,
-                                 paste0("d", current_year - 2),
+                                 paste0("d", last_year - 2),
                                  "SFW_Aquaculture_ratings_062222.csv" #v2022 data
                                #  "SFW_Aquaculture_ratings_053123.csv" #v2023 data
                                ), # update with name of data file from previous year 
@@ -864,6 +867,7 @@ anyDuplicated(mar_sw_sus)
 # 2022 scenario year: 532
 #2023 280
 # 2024 scenario year: 316
+# 2025: 329
 
 mar_sw_sus <- mar_sw_sus %>% 
   dplyr::group_by(rgn_id, species) %>% 
@@ -898,6 +902,7 @@ summary(mar_sw_sus)
 # 21215 NA values out of 32051 total obs; ~68% without scores (2022)
 # 16378 NA values out of 33732 total obs ~ 49% without scores (2023)
 # 17126 NA values out of 34920 total obs; ~ 49% without scores (2024)
+# 18688 NA values out of 38000 total obs;~ 49% without scores (2025)
 ```
 
 Gapfilling based on families and taxon_code
