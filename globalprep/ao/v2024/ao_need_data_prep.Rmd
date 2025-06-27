@@ -367,7 +367,7 @@ In this case, we gapfill regions with no data using means based on UN-designated
 
 ```{r, eval=F}
 ### how is this different from Mel's georegion function in ohicore? 
-#UNgeorgn() 
+UNgeorgn() 
 head(UNgeorgn)
 summary(UNgeorgn)
 
@@ -412,7 +412,7 @@ d_stand_gf <- d_stand_gf %>%
       T ~ score)) 
 
 ### Load in low population areas
-#low_pop()
+low_pop()
  
 ### filter out regions that have populations > 3000 and keep NA values 
 low_pop <- low_pop %>%
@@ -422,7 +422,7 @@ low_pop <- low_pop %>%
 low_pop_vector <- c(low_pop$rgn_id) 
 
 ### Use NA values in score column for low population areas
-d_stand_gf_test <- d_stand_gf %>% 
+d_stand_gf_test <- d_stand_gf_test %>% 
   mutate(score = dplyr::case_when(rgn_id %in% low_pop_vector ~ NA_real_, T ~ score))
 
 ### Check number of NAs in score column 
@@ -431,12 +431,6 @@ d_stand_gf_test <- d_stand_gf %>%
 ### v2024 has 418 (19 years of data and 22 low pop countries)
 summary(d_stand_gf)
 ```
-
-
-```{r}
-sum(is.na(d_stand_gf_test$score))
-```
-
 
 ## Save the data
 
