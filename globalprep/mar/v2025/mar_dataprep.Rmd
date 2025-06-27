@@ -1198,9 +1198,8 @@ comp_plot_1 <- ggplot() +
   geom_point(data = yield_1, aes(x = old_value, y = value, text = paste("species:", species, "<br>region ID:", rgn_id))) +
   labs(x = paste("Previous Value", previous_data_year),
        y = paste("Current Value", latest_data_year),
-       title = paste(current_year, "vs.", last_year, "All Countries")) +
-  geom_abline(slope = 1, intercept = 0, col = "red") +
-  labs(title = "")
+       title = paste0(current_year, " (",latest_data_year, ") vs. ", last_year, " (",previous_data_year, ")", " All Countries")) +
+  geom_abline(slope = 1, intercept = 0, col = "red") 
 
 ggplotly(comp_plot_1)
 
@@ -1241,7 +1240,8 @@ mar_new_3 <- mar_new_data %>%
   dplyr::select(rgn_id, species, fao, value, environment)
 
 yield_3 <- mar_old_3 %>% 
-  full_join(mar_new_3, by = c("rgn_id","species","fao")); View(yield_3)
+  full_join(mar_new_3, by = c("rgn_id","species","fao"))
+View(yield_3)
 
 # new plot code
 comp_plot_3 <- ggplot() + 
@@ -1272,7 +1272,8 @@ mar_new_4 <- mar_new_data %>%
   ungroup()
 
 yield_4 <- mar_old_4 %>% 
-  full_join(mar_new_4, by = c("rgn_id","species","fao", "environment")); View(yield_4)
+  full_join(mar_new_4, by = c("rgn_id","species","fao", "environment"))
+View(yield_4)
 
 # new plot code
 comp_plot_4 <- ggplot() + 
@@ -1298,7 +1299,8 @@ mar_new_5 <- mar_new_data %>%
   dplyr::select(rgn_id, species, fao, environment, value)
 
 yield_5 <- mar_old_5 %>% 
-  full_join(mar_new_5, by = c("rgn_id","species","fao", "environment")); View(yield_5)
+  full_join(mar_new_5, by = c("rgn_id","species","fao", "environment"))
+View(yield_5)
 
 comp_plot_5 <- ggplot() + 
   geom_point(data = yield_5,
@@ -1324,7 +1326,8 @@ mar_new_6 <- mar_new_data %>%
   dplyr::select(rgn_id, species, fao, value)
 
 yield_6 <- mar_old_6 %>% 
-  full_join(mar_new_6, by = c("rgn_id","species","fao")); View(yield_6)
+  full_join(mar_new_6, by = c("rgn_id","species","fao"))
+View(yield_6)
 
 comp_plot_6 <- ggplot() + 
   geom_point(data = yield_6,
@@ -1373,7 +1376,8 @@ mar_new_8 <- mar_new_data %>%
   dplyr::select(rgn_id, species, fao, value, environment)
 
 yield_8 <- mar_old_8 %>% 
-  full_join(mar_new_8, by = c("rgn_id","species","fao", "environment")); View(yield_8)
+  full_join(mar_new_8, by = c("rgn_id","species","fao", "environment"))
+View(yield_8)
 
 comp_plot_8 <- ggplot() + 
   geom_point(data = yield_8,
@@ -1400,7 +1404,8 @@ mar_new_9 <- mar_new_data %>%
   dplyr::select(rgn_id, species, fao, value, environment)
 
 yield_9 <- mar_old_9 %>% 
-  full_join(mar_new_9, by = c("rgn_id","species","fao")); View(yield_9)
+  full_join(mar_new_9, by = c("rgn_id","species","fao"))
+View(yield_9)
 
 comp_plot_9 <- ggplot() + 
   geom_point(data = yield_9,
