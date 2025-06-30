@@ -783,17 +783,18 @@ sort(setdiff(maric$species, sw_sus_rgn$species))
 
 ```{r match-type_sw-sus-data}
 # 2025: this code doesn't seem necessary for the 2025 data. Running it produces no sw_sp_w
+
 ## Add column "match_type" to categorize obs. that 1) have a country associated, 2) are "global" Seafood Watch data, or 3) only distinguished by water body
-# sw_sus_rgn <- sw_sus_rgn %>% 
-#   dplyr::mutate(match_type = 
-#                   dplyr::case_when(!is.na(rgn_name) ~ "sw_sp_c", # Add match type specific to species/country
-#                                   country == "Worldwide" ~ "sw_sp_g", # Add match type specific to species/global Seafood Watch data
-#                                   TRUE ~ "sw_sp_w" # Add match type specific to species/water body
-#   ))
-#  # if 0, this is the issue
-# 
-# 
-# table(sw_sus_rgn$match_type)
+sw_sus_rgn <- sw_sus_rgn %>%
+  dplyr::mutate(match_type =
+                  dplyr::case_when(!is.na(rgn_name) ~ "sw_sp_c", # Add match type specific to species/country
+                                  country == "Worldwide" ~ "sw_sp_g", # Add match type specific to species/global Seafood Watch data
+                                  TRUE ~ "sw_sp_w" # Add match type specific to species/water body
+  ))
+ # if 0, this is the issue
+
+
+table(sw_sus_rgn$match_type)
 
 #sw_sp_c sw_sp_g
 #    153     114
@@ -815,24 +816,24 @@ Assign a Mediterranean bordering rgn id to each waterbody row
   # The only water body without a rgn is the Mediterranean; add all countries that border it (source: https://www.medqsr.org/mediterranean-marine-and-coastal-environment#:~:text=Today%2021%20countries%2C%20with%20surface,Syria%2C%20Tunisia%2C%20and%20Turkey.)
 
 # filter for waterbody specific rows 
-sw_sus_rgn_water <- sw_sus_rgn %>%
-  filter(match_type == 'sw_sp_w')
-
-# define Mediterranean rgns
-med_rgns <- data.frame(rgn_id = c(82, 84, 232, 187, 81, 214, 179, 80, 79, 184, 78, 67, 68, 185, 186, 62, 188, 182, 77, 61, 76))
-
-# create new function called expand.grid.df()
-expand.grid.df <- function(...) Reduce(function(...) merge(..., by=NULL), list(...))
-# coming from MEDS, this ^^ was wild to read 
-# Reduce: uses a binary function to successively combine the elements of a given vector and a possibly given initial value.
-# merge: Merge two data frames by common columns or row names, or do other versions of database join operations.
-
-gf_sw_sp_w <- expand.grid.df(sw_sus_rgn_water, med_rgns) %>%
-  dplyr::select(-rgn_id.x, rgn_id = rgn_id.y)
+# sw_sus_rgn_water <- sw_sus_rgn %>%
+#   filter(match_type == 'sw_sp_w')
+# 
+# # define Mediterranean rgns
+# med_rgns <- data.frame(rgn_id = c(82, 84, 232, 187, 81, 214, 179, 80, 79, 184, 78, 67, 68, 185, 186, 62, 188, 182, 77, 61, 76))
+# 
+# # create new function called expand.grid.df()
+# expand.grid.df <- function(...) Reduce(function(...) merge(..., by=NULL), list(...))
+# # coming from MEDS, this ^^ was wild to read 
+# # Reduce: uses a binary function to successively combine the elements of a given vector and a possibly given initial value.
+# # merge: Merge two data frames by common columns or row names, or do other versions of database join operations.
+# 
+# gf_sw_sp_w <- expand.grid.df(sw_sus_rgn_water, med_rgns) %>%
+#   dplyr::select(-rgn_id.x, rgn_id = rgn_id.y)
 
 ```
 
-```{r sw-fao-joining, eval = FALSE}
+```{r sw-fao-joining}
 
 ## Join data specific to species/country
 sw_sp_c <- sw_sus_rgn %>%
@@ -843,12 +844,13 @@ sw_sp_c <- sw_sus_rgn %>%
 mar_sw_sus <- maric %>%
   left_join(sw_sp_c, by = c("species", "rgn_id"))
 
+# 2025: commented this out because we have no water body regions
 ## Join data specific to species/water body
-sw_sp_w <- gf_sw_sp_w %>%
-  select(rgn_id, species, Sust_sw_sp_w = score, esc_sw_sp_w = escapes_score)
-
-mar_sw_sus <- mar_sw_sus %>%
-  left_join(sw_sp_w, by= c("species", "rgn_id"))
+# sw_sp_w <- gf_sw_sp_w %>%
+#   select(rgn_id, species, Sust_sw_sp_w = score, esc_sw_sp_w = escapes_score)
+# 
+# mar_sw_sus <- mar_sw_sus %>%
+#   left_join(sw_sp_w, by= c("species", "rgn_id"))
 
 ## Join data specific to species/global Seafood Watch data
 sw_sp_g <- sw_sus_rgn %>% 
@@ -858,8 +860,19 @@ sw_sp_g <- sw_sus_rgn %>%
 mar_sw_sus <- mar_sw_sus %>%
   left_join(sw_sp_g, by= c("species"))
 
-# test3 <- mar_sw_sus %>%
-#   filter(Taxon_code == "GAST")
+test3 <- mar_sw_sus %>%
+  filter(Taxon_code == "GAST")
+
+nrow(test3) # 1810
+sum(is.na(test3$Sust_sw_sp_c)) # 1810
+# All sust_sw_sp_c and esc_sw_sp_c scores are NA for this test...
+
+# Checking for the entire data frame now
+nrow(mar_sw_sus) # 58086
+sum(is.na(mar_sw_sus$Sust_sw_sp_c)) # 49506
+sum(is.na(mar_sw_sus$esc_sw_sp_c)) # 49506
+
+rm(test3)
 ```
 
 Merge the three Seafood Watch type categories into a single sustainability score and genetic escapes score column in the following order:
@@ -871,19 +884,35 @@ Merge the three Seafood Watch type categories into a single sustainability score
 For example, if Sust_sw_sp_c is missing, use Sust_sw_sp_w and so on.
 
 ```{r sw-fao-sust-scores, eval = FALSE}
-mar_sw_sus <- mar_sw_sus %>% 
-  dplyr::mutate(Sust = ifelse(!is.na(Sust_sw_sp_c), Sust_sw_sp_c, Sust_sw_sp_w)) %>%
-  dplyr::mutate(Sust = ifelse(is.na(Sust), Sust_sw_sp_g, Sust)) %>%
-  dplyr::mutate(gapfill_sus = case_when(Sust_sw_sp_c == 
-                                          Sust ~ "none",
-                                        is.na(Sust_sw_sp_c) & Sust_sw_sp_w == Sust ~ "water_body",
-                                        is.na(Sust_sw_sp_c) & is.na(Sust_sw_sp_w) & Sust_sw_sp_g == Sust ~ "global_species")) %>%
-  dplyr::mutate(esc_score = ifelse(!is.na(esc_sw_sp_c), esc_sw_sp_c, esc_sw_sp_w)) %>%
-  dplyr::mutate(esc_score = ifelse(is.na(esc_score), esc_sw_sp_g, esc_score)) %>%
-  dplyr::mutate(gapfill_esc = case_when(esc_sw_sp_c == esc_score ~ "none",
-                                        is.na(esc_sw_sp_c) & esc_sw_sp_w == esc_score ~ "water_body",
-                                        is.na(esc_sw_sp_c) & is.na(esc_sw_sp_w) & esc_sw_sp_g == esc_score ~ "global_species")) %>%
-  dplyr::select(-c(Sust_sw_sp_c, Sust_sw_sp_w, Sust_sw_sp_g, esc_sw_sp_c, esc_sw_sp_w, esc_sw_sp_g)) 
+# No water body score, so editing this chunk for the 2025 assessment
+
+# mar_sw_sus <- mar_sw_sus %>%
+#   dplyr::mutate(Sust = ifelse(!is.na(Sust_sw_sp_c), Sust_sw_sp_c, Sust_sw_sp_w)) %>%
+#   dplyr::mutate(Sust = ifelse(is.na(Sust), Sust_sw_sp_g, Sust)) %>%
+#   dplyr::mutate(gapfill_sus = case_when(Sust_sw_sp_c ==
+#                                           Sust ~ "none",
+#                                         is.na(Sust_sw_sp_c) & Sust_sw_sp_w == Sust ~ "water_body",
+#                                         is.na(Sust_sw_sp_c) & is.na(Sust_sw_sp_w) & Sust_sw_sp_g == Sust ~ "global_species")) %>%
+#   dplyr::mutate(esc_score = ifelse(!is.na(esc_sw_sp_c), esc_sw_sp_c, esc_sw_sp_w)) %>%
+#   dplyr::mutate(esc_score = ifelse(is.na(esc_score), esc_sw_sp_g, esc_score)) %>%
+#   dplyr::mutate(gapfill_esc = case_when(esc_sw_sp_c == esc_score ~ "none",
+#                                         is.na(esc_sw_sp_c) & esc_sw_sp_w == esc_score ~ "water_body",
+#                                         is.na(esc_sw_sp_c) & is.na(esc_sw_sp_w) & esc_sw_sp_g == esc_score ~ "global_species")) %>%
+#   dplyr::select(-c(Sust_sw_sp_c, Sust_sw_sp_w, Sust_sw_sp_g, esc_sw_sp_c, esc_sw_sp_w, esc_sw_sp_g))
+# 
+# summary(mar_sw_sus)
+
+# 2025 version without water body
+mar_sw_sus <- mar_sw_sus %>%
+  dplyr::mutate(Sust = Sust_sw_sp_c,
+                Sust = ifelse(is.na(Sust), Sust_sw_sp_g, Sust),
+                gapfill_sus = case_when(Sust_sw_sp_c == Sust ~ "none",
+                                        is.na(Sust_sw_sp_c) & Sust_sw_sp_g == Sust ~ "global_species")) %>%
+  dplyr::mutate(esc_score = esc_sw_sp_c,
+                esc_score = ifelse(is.na(esc_score), esc_sw_sp_g, esc_score),
+                gapfill_esc = case_when(esc_sw_sp_c == esc_score ~ "none",
+                                        is.na(esc_sw_sp_c) & esc_sw_sp_g == esc_score ~ "global_species")) %>%
+  dplyr::select(-c(Sust_sw_sp_c, Sust_sw_sp_g, esc_sw_sp_c, esc_sw_sp_g))
 
 summary(mar_sw_sus)
 ```
@@ -910,7 +939,7 @@ mar_sw_sus <- mar_sw_sus %>%
 # code NAN values in Sust_avg and esc_avg columns as NA 
 mar_sw_sus$Sust_avg[is.nan(mar_sw_sus$Sust_avg)] <- NA
 mar_sw_sus$esc_avg[is.nan(mar_sw_sus$esc_avg)] <- NA
-# nrows = 48,748
+# 2025 nrows = 58086
 ```
 
 Get rid of duplicates for region/species/year:
@@ -934,7 +963,7 @@ summary(mar_sw_sus)
 # 21215 NA values out of 32051 total obs; ~68% without scores (2022)
 # 16378 NA values out of 33732 total obs ~ 49% without scores (2023)
 # 17126 NA values out of 34920 total obs; ~ 49% without scores (2024)
-# 18688 NA values out of 38000 total obs;~ 49% without scores (2025)
+# 18875 NA values out of 38000 total obs;~ 49.7% without scores (2025)
 ```
 
 Gapfilling based on families and taxon_code
@@ -1085,7 +1114,8 @@ tonnes_esc <- mar_sw_sus_final %>%
 # use "tonnes" values to weight the regional average of escapes
 genEscapes <- tonnes_esc %>%
   group_by(rgn_id, year) %>%
-  summarize(genEscapes = weighted.mean(esc_score, tonnes, na.rm=TRUE))
+  summarize(genEscapes = weighted.mean(esc_score, tonnes, na.rm=TRUE)) %>% 
+  ungroup()
 ```
 
 Obtain gapfill information from `genEscapes`
