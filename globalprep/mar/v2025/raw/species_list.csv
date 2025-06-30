@@ -592,7 +592,7 @@ Purple dye murex,0,GAST,Muricidae,NA,NA
 Southern red snapper,0,F,Lutjanidae,NA,NA
 Atl.jackknife(=Atl.razor clam),0,BI,Pharidae,NA,NA
 [Cladosiphon okamuranus],0.1,AL,Algae,seaweed: human food/medicine,- food use determined https://en.wikipedia.org/wiki/Cladosiphon_okamuranus - sometimes used to treat cancer
-[Eucheuma isiforme],0.8,AL,Solieriaceae,seaweed: human food/cosmetics/food processing,- non-food use determined using Wikipedia
+[Eucheuma isiforme],0.8,AL,Solieriaceae,seaweed: human food/cosmetics/food processing,#NAME?
 Spotted scat,0,F,Scatophagidae,NA,NA
 Red cusk-eel,1,F,Ophidiidae,NA,NA
 Marine worms,1,GAST,Lineidae,NA,NA
@@ -653,23 +653,23 @@ Barcoo grunter,1,F,Terapontidae,freshwater,NA
 Blacktip grouper,0,F,Serranidae,NA,NA
 Commercial top,1,GAST,Tegulidae,NA,"excluded because it is primarily harvested for its shell, though it can be eaten https://en.wikipedia.org/wiki/Rochia_nilotica"
 Desert dace,1,F,Cyprinidae,freshwater,NA
-SOLIERIACEAE,0.75,AL,Algae,NA,- used red seaweed include value
+SOLIERIACEAE,0.75,AL,Algae,NA,#NAME?
 BANGIACEAE,0.01,AL,Algae,NA,"- food use determined, wikipedia mentions wide food use https://en.wikipedia.org/wiki/Bangiaceae"
 RHIZOSTOMIDAE,0,NS-INV,Rhizostomatidae,NA,NA
 BAGRIDAE,1,F,Bagridae,primarily freshwater,NA
 CORBICULIDAE,0,BI,Corbiculiade,NA,NA
-SARGASSACEAE,0.9,AL,Algae,NA,- used sargassum spp value
+SARGASSACEAE,0.9,AL,Algae,NA,#NAME?
 MUGILIDAE,0,F,Mugilidae,NA,NA
 OPLEGNATHIDAE,0,F,Oplegnathidae,NA,NA
-ULOTRICHACEAE,0.15,AL,Algae,NA,- used overall seaweed exclude value due to lack of available information on the species
+ULOTRICHACEAE,0.15,AL,Algae,NA,#NAME?
 HAEMULIDAE,0,F,Haemulidae,NA,NA
-GIGARTINACEAE,0.75,AL,Algae,NA,- used red seaweed include value
-LESSONIACEAE,0.5,AL,Algae,NA,- used same exclude value as kelp nei
+GIGARTINACEAE,0.75,AL,Algae,NA,#NAME?
+LESSONIACEAE,0.5,AL,Algae,NA,#NAME?
 SOLEIDAE,0,F,Soleidae,NA,NA
 OSCILLATORIACEAE,1,AL,Algae,NA,- excluded as is typically freshwater https://en.wikipedia.org/wiki/Oscillatoria
-DUNALIELLACEAE,0.15,AL,Algae,NA,- used overall seaweed exclude value due to lack of more information
+DUNALIELLACEAE,0.15,AL,Algae,NA,#NAME?
 PORTUNIDAE,0,CRUST,Portunidae,NA,NA
-CHORDARIACEAE,0.5,AL,Algae,seaweed: human food/alginate,- used brown seaweed include value
+CHORDARIACEAE,0.5,AL,Algae,seaweed: human food/alginate,#NAME?
 CALYPTRAEIDAE,1,GAST,Calyptraeidae,NA,seems like they are mainly an invasive though there are attempts to market some species as food https://en.wikipedia.org/wiki/Crepidula_fornicata https://en.wikipedia.org/wiki/Calyptraeidae
 Tarpon snook,0,F,Centropomidae,"Centropomus pectinatus, used for human consumption",https://fishbase.se/country/CountrySpeciesSummary.php?c_code=188&id=1015
 Clown crab,1,CRUST,Xanthidae,"ornamental, used in aquarium trade, too small for human consumption",https://en.wikipedia.org/wiki/Platypodiella_spectabilis
@@ -682,9 +682,24 @@ Mexican spiny lobster,0,CRUST,Palinuridae,NA,NA
 "Mojarras, etc. nei",0,F,Gerreidae,NA,NA
 Northern brown shrimp,0,CRUST,Penaeidae,"Farfantepenaeus aztecus, used for human consumption",https://en.wikipedia.org/wiki/Farfantepenaeus_aztecus
 Sea catfishes nei,0,F,Ariidae,NA,NA
-Smalleyed squillid mantis shri,0,CRUST,Squillidae,"Smalleyed squillid mantis shrimp, mostly for human consumption, found in markets in Phillipines according to FAO guide","https://www.sealifebase.se/country/CountrySpeciesSummary.php?c_code=036&Genus=Miyakea&Species=nepa#:~:text=Miyakea%20nepa%2C%20Smalleyed%20squillid%20mantis,Stomatopoda; FAO guide: https://decapoda.nhm.org/pdfs/27677/27677.pdf -- notes that Miyakea commonly used for human consumption, found in markets in Phillipines"
+Smalleyed squillid mantis shrimp,0,CRUST,Squillidae,"Smalleyed squillid mantis shrimp, mostly for human consumption, found in markets in Phillipines according to FAO guide","https://www.sealifebase.se/country/CountrySpeciesSummary.php?c_code=036&Genus=Miyakea&Species=nepa#:~:text=Miyakea%20nepa%2C%20Smalleyed%20squillid%20mantis,Stomatopoda; FAO guide: https://decapoda.nhm.org/pdfs/27677/27677.pdf -- notes that Miyakea commonly used for human consumption, found in markets in Phillipines"
 Fine flounder,0,F,Paralichthyidae,"used for human consumption, Paralichthys adspersu",https://en.wikipedia.org/wiki/Paralichthys_adspersus
 Ascidiaceans,0,TUN,Pyuridae,sea squirts,NA
 Red king crab,0,CRUST,Lithodidae,used for human consumption,NA
 Truncate donax,0,BI,Donacidae.,"wedge clam, coquina clam; used for human consumption",https://en.wikipedia.org/wiki/Donax_trunculus
 White grouper,0,F,Serranidae,used for human consumption https://en.wikipedia.org/wiki/White_grouper,NA
+[Eucheumatopsis isiformis],1,AL,Algae,seaweed: carageenan,NA
+[Pyropia columbina],0.1,AL ,Algae,seaweed: human food,NA
+Sea lettuce,0.5,AL,Algae,seaweed: human food/aquarium trade feed,NA
+Blow lugworm,1,GAST,Lineidae,Used as fishing bait,
+Southern pink shrimp,0,CRUST,Penaeidae,"Penaeus notialis, used for human consumption",NA
+Southern brown shrimp,0,CRUST,Penaeidae,"Penaeus subtilis, used for human consumption",NA
+Snakeheads(=Murrels) nei,0,F,Channidae,NA,NA
+Shoemaker spinefoot,0,F,Siganidae,NA,NA
+King ragworm,1,GAST,Lineidae,Used as fishing bait,NA
+European razor clam,0,BI,Pharidae,NA,NA
+Ascidiaceans nei,0,TUN,Pyuridae,NA,NA
+Kelps nei,0.5,AL,Algae,seaweed: mixed use,NA
+[Limnospira maxima],0.1,AL,Algae,seaweed,NA
+Peacock hind,0,F,Epinephelidae ,NA,NA
+So-iny (redlip) mullet,0,F,Mugilidae,NA,NA
