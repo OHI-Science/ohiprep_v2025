@@ -122,8 +122,41 @@ mar_split <- function(m) {
     filter(country != 'Serbia and Montenegro [former]') %>%
     bind_rows(m_ant5) %>%
     arrange(country, fao, environment, species, year, value)
-  
+   
   
   return(m)
+}
+
+add_georegion_id <- function(k) {
+  ### Code from Melanie to attach a georegional id tag to dataframe k.
+  region_data()
+  key <- rgns_eez %>% 
+    rename(cntry_key = eez_iso3) %>% 
+    select(-rgn_name)
+  dups <- key$rgn_id[duplicated(key$rgn_id)]
+  key[key$rgn_id %in% dups, ]
+  
+  key  <- key %>%
+    filter(!(cntry_key %in% c('Galapagos Islands', 'Alaska',
+                              'Hawaii', 'Trindade', 'Easter Island',
+                              'PRI', 'GLP', 'MNP')))  %>%
+    select(rgn_id, cntry_key)
+  #PRI (Puerto Rico) and VIR (Virgin Islands) in the same r2 zone (just selected one), 
+  #GLP (Guadalupe) and MTQ (Marinique) in the same r2 zone (just selected one),  
+  #MNP (Northern Mariana Islands) and GUM (Guam)
+  
+  
+  georegion <- read.csv(file.path(here(), "globalprep/np/v2020/raw/cntry_georegions.csv"))
+  
+  
+  georegion <- georegion %>%
+    filter(level == "r2")
+  
+  k1 <- k %>%
+    left_join(key, by = 'rgn_id') %>%
+    left_join(georegion, by = 'cntry_key') %>%
+    select(-cntry_key)
+  ### cleaning out variables
+  return(k1)
 }
 
