@@ -500,19 +500,9 @@ These data describe the sustainability country/species combinations. In cases wh
 
 # ---- Load in Seafood Watch sustainability scores data from Mazu: ----
 # Read in new Seafood Watch data 
-# sw_sus <- read.csv(file.path(seafood_watch_dir,
-#                              #current_data_folder,
-#                              previous_data_folder, # had to use old data from v2023 in v2024
-#                              "SFW_Aquaculture_ratings_053123.csv"), # update with name of new data file
-#                    check.names = FALSE, stringsAsFactors = FALSE, na.strings = c("NA", ""))
-
-data_folder_2023 <- paste0("d", 2023)  # previous assessment year
-
-
 sw_sus_raw <- readr::read_csv(file.path(seafood_watch_dir,
-                             #current_data_folder,
-                             data_folder_2023, # had to use old data in v2024
-                             "SFW_Aquaculture_ratings_053123.csv"), # update with name of new data file
+                             current_data_folder,
+                             "SFW_Aquaculture_ratings_062725.csv"), # update with name of new data file
                    na = c("NA", ""))
 
 head(sw_sus_raw)
@@ -522,15 +512,25 @@ head(sw_sus_raw)
 #                                  "SFW_Aquaculture_ratings_053123.csv"), # update with name of data file from previous year 
 #                        check.names = FALSE, stringsAsFactors = FALSE, na.strings = c("NA", ""))
 
-# v2024: couldn't get new seafood watch data, so pulling in data from prior year
 
+# v2025: 2024 assessment couldn't get new data, so here we're comparing to 2023.
 old_sw_sus <- readr::read_csv(file.path(seafood_watch_dir,
-                                 #previous_data_folder,
-                                 paste0("d", last_year - 2),
-                                 "SFW_Aquaculture_ratings_062222.csv" #v2022 data
-                               #  "SFW_Aquaculture_ratings_053123.csv" #v2023 data
-                               ), # update with name of data file from previous year 
+                                 paste0("d", current_year - 2),
+                                 "SFW_Aquaculture_ratings_053123.csv" #v2023 data
+                               ),
                        na = c("NA", ""))
+
+
+# Check what columns names might have changed between 2023 and 2025
+setdiff(colnames(sw_sus_raw), colnames(old_sw_sus)) 
+# [1] "StandardVersion"    "RecognizedBycatch" 
+# [3] "FAOBOWs"            "ISSCFGCode"        
+# [5] "ISSCFGParentCode"   "ISSCFGAbbreviation"
+
+setdiff(colnames(old_sw_sus), colnames(sw_sus_raw))
+# [1] "RecType"       "Version"       "Streamline"   
+# [4] "ReportStatus"  "UpdateType"    "FAOMajorCodes"
+
 ```
 
 ## Wrangle
@@ -597,7 +597,7 @@ species-specific characteristics, and particularly between native and non-native
 A C6 score of 10 indicates a very low risk of escape with low estimated competitiveness and genetic interactions. An Escape Criterion (C6) score ≤ 1 is considered "Critical" (pg. 52), and may indicate a "High Concern" risk of escape and "High Concern" potential for competitiveness and genetic impact. 
 
 
-```{r tidy_sw-sus, eval = FALSE}
+```{r tidy_sw-sus}
 # ---- Tidy Seafood Watch (SFW) data ----
 sw_sus <- sw_sus_raw %>% 
   # rename columns ----
@@ -615,10 +615,9 @@ sw_sus <- sw_sus_raw %>%
   # select relevant columns
   dplyr::select(report_title, published_date, sw_species, scientific_name, fao_species, fda_species, country, water_body, method, escapes_score, score, rec) %>%
   # filter out freshwater aquaculture
-  filter(!(method %in% c("Freshwater net pen"))) %>% 
+  filter(!method %in% c("Freshwater net pen")) %>% 
   # set scores less than 0 equal to 0
-  mutate(score = case_when(score < 0 ~ 0,
-            TRUE ~ score))
+  mutate(score = ifelse(score < 0, 0, score))
 
 ## Change species names using FAO species name (fao_species); if NA, use common name (sw_species)
 sw_sus$species <- ifelse(!is.na(sw_sus$fao_species), sw_sus$fao_species, sw_sus$sw_species)
@@ -626,23 +625,26 @@ sw_sus$species <- ifelse(!is.na(sw_sus$fao_species), sw_sus$fao_species, sw_sus$
 
 ### Keep NA countries
 
-```{r keep-na-countries_sw-sus, eval = FALSE}
+```{r keep-na-countries_sw-sus}
 
 ## These need to be re-added later (get cut when associated with region ids)
-sw_sus_no_rgn <- filter(sw_sus, is.na(country)|country == "Worldwide")
+sw_sus_no_rgn <- filter(sw_sus, is.na(country) | country == "Worldwide")
+dim(sw_sus_no_rgn)
+
 # 118 entries with no country, 
 # in 2023 assessment there were 114 "Worldwide" rows and only 1 NA row
 # 115 entries in 2024
+# 114 entries in 2025
 ```
 
 ### Convert country names to OHI region IDs.
 
-```{r sw-sus_convert-region, eval = FALSE}
+```{r sw-sus_convert-region}
 
 # ---- Change/update country names to match OHI region names ----
 # Separate rows that are associated with multiple countries
 sw_sus_multiple <- sw_sus %>% 
-  filter(str_detect(country, "\\|")) %>%
+  filter(str_detect(country, "\\|")) %>% # Detects strings with "|" in them
   separate_rows(country, sep = " \\| ")
 
 # Rejoin the rows we just removed, but in clean format (1 row per country)
@@ -668,21 +670,40 @@ sw_sus_rgn <- ohicore::name_2_rgn(df_in = sw_sus_df,
 # 5 Canada  
 # after investigating the data further, these duplicates don't seem to be an issue -- each entry is an unique species and/or based on an unique report
 
+# v2025 duplicates found:
+# 1 United States 
+# 2 Chile         
+# 3 Indonesia     
+# 4 Norway        
+# 5 United Kingdom
+# 6 Canada 
+# Everything is the same as above except we've added Indonesia... will look into this more. 
+
 # Add NA countries back in 
 sw_sus_rgn <- bind_rows(sw_sus_rgn, sw_sus_no_rgn) %>%
   unique()
+dim(sw_sus_rgn)
 # 259 entries
 # v2024: same (because same exact data)
+# v2025: 267 entries
 
 #2023 switched to comparing common names because the scientific name column was two columns in the previous years data. Could compare scientific names next year. No differences in species detected. 
 
-setdiff(sw_sus_rgn$sw_species, old_sw_sus$CommonNames) # character(0)
-setdiff(old_sw_sus$CommonNames, sw_sus_rgn$sw_species) # character(0)
+# 2025: 2 species in each setdiff detected
+
+setdiff(sw_sus_rgn$sw_species, old_sw_sus$CommonNames) # "Yellowtail" "Buri"
+setdiff(old_sw_sus$CommonNames, sw_sus_rgn$sw_species) # "Buri amberjack"       "Yellowtail amberjack"
+
+# 2025 data has changed the names from Yellowtail amberjack --> Yellowtail and Buri amberjack --> Buri. The scientific names are the same for these two. Going off the 2023 note, I'll run these setdiff's again with scientific name.
+
+setdiff(sw_sus_rgn$scientific_name, old_sw_sus$ScientificName)
+setdiff(old_sw_sus$ScientificName, sw_sus_rgn$scientific_name)
+# The only difference here was the overarching "seaweed" species. the scientific names are listed in different order/have slightly different composition between 2023 and 2025. 
 ```
 
 Check that the non-matches between Seafood Watch sustainability data species (sw_sus_rgn) and the FAO mariculture species in the wrangled FAO Aquaculture Production data table (maric) are not due to spelling errors or slightly different names. We want to include as many species that have sustainability scores as possible
 
-```{r sw-sus_check-non-matches, eval = FALSE}
+```{r sw-sus_check-non-matches}
 maric <- readr::read_csv(here::here(current_mar_dir, "output", "MAR_FP_data.csv"))
 
 ## Make sure same species are spelled the same in the two data tables (e.g. check that there are no extra spaces)
@@ -699,7 +720,7 @@ sort(setdiff(maric$species, sw_sus_rgn$species)) # FAO species with no Seafood W
 
 Fix the non-matches
 
-```{r sw-sus_fix-non-matches, eval = FALSE}
+```{r sw-sus_fix-non-matches}
 
 # Rename species in Seafood Watch data to match FAO species data 
 sw_sus_rgn$species <- gsub("Atlantic Bluefin tuna", "Atlantic bluefin tuna", sw_sus_rgn$species)
@@ -754,31 +775,42 @@ identifier <- maric %>%
 maric <- left_join(maric, identifier)
 
 #run again after cleaning to check there are no remaining mismatched species
-sort(setdiff(sw_sus_rgn$species, maric$species)) # Seafood Watch species with no FAO data
+sort(setdiff(sw_sus_rgn$species, maric$species))
 sort(setdiff(maric$species, sw_sus_rgn$species))
 ```
 
 # FAO mariculture and Seafood Watch sustainability scores
 
-```{r match-type_sw-sus-data, eval = FALSE}
-
+```{r match-type_sw-sus-data}
+# 2025: this code doesn't seem necessary for the 2025 data. Running it produces no sw_sp_w
 ## Add column "match_type" to categorize obs. that 1) have a country associated, 2) are "global" Seafood Watch data, or 3) only distinguished by water body
-sw_sus_rgn <- sw_sus_rgn %>% 
-  dplyr::mutate(match_type = 
-                  dplyr::case_when(!is.na(rgn_name) ~ "sw_sp_c", # Add match type specific to species/country
-                                  country == "Worldwide" ~ "sw_sp_g", # Add match type specific to species/global Seafood Watch data
-                                  TRUE ~ "sw_sp_w" # Add match type specific to species/water body
-  ))
+# sw_sus_rgn <- sw_sus_rgn %>% 
+#   dplyr::mutate(match_type = 
+#                   dplyr::case_when(!is.na(rgn_name) ~ "sw_sp_c", # Add match type specific to species/country
+#                                   country == "Worldwide" ~ "sw_sp_g", # Add match type specific to species/global Seafood Watch data
+#                                   TRUE ~ "sw_sp_w" # Add match type specific to species/water body
+#   ))
+#  # if 0, this is the issue
+# 
+# 
+# table(sw_sus_rgn$match_type)
 
-table(sw_sus_rgn$match_type)
+#sw_sp_c sw_sp_g
+#    153     114
+# 2025: no sw_sp_w column, this becomes an issue for the next chunk
 
-#sw_sp_c sw_sp_g sw_sp_w 
-#    144     114       1
+# Confirming that all rgn NAs are just because of worldwide 
+sw_sus_rgn %>% 
+  filter(is.na(rgn_name)) %>% 
+  select(country) %>% 
+  distinct()
+
+sum(is.na(sw_sus_rgn$rgn_name) & sw_sus_rgn$country != "Worldwide") # sums to 0
 ```
 
 Assign a Mediterranean bordering rgn id to each waterbody row
 
-```{r gf_sw_sp_w, eval = FALSE}
+```{r gf_sw_sp_w}
 ## Add a line for each country that borders each water body
   # The only water body without a rgn is the Mediterranean; add all countries that border it (source: https://www.medqsr.org/mediterranean-marine-and-coastal-environment#:~:text=Today%2021%20countries%2C%20with%20surface,Syria%2C%20Tunisia%2C%20and%20Turkey.)
 
@@ -791,7 +823,7 @@ med_rgns <- data.frame(rgn_id = c(82, 84, 232, 187, 81, 214, 179, 80, 79, 184, 7
 
 # create new function called expand.grid.df()
 expand.grid.df <- function(...) Reduce(function(...) merge(..., by=NULL), list(...))
-# coming from MEDS, this ^^ was wild to read
+# coming from MEDS, this ^^ was wild to read 
 # Reduce: uses a binary function to successively combine the elements of a given vector and a possibly given initial value.
 # merge: Merge two data frames by common columns or row names, or do other versions of database join operations.
 
