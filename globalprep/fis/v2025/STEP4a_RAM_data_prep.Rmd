@@ -63,7 +63,7 @@ Reference: Christopher M. Free. 2017. Mapping fish stock boundaries for the orig
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.path = 'figs/',message = FALSE, warning = FALSE, echo = TRUE, eval=FALSE)
 ```
 
-```{r, eval = FALSE}
+```{r}
 ## Libraries
 library(tidyverse)
 library(sf)
@@ -174,7 +174,7 @@ Definitions:
 - Spawning stock: mature, breeding age fish
 - Total biomass: all fish in the stock
 
-```{r load_data, eval = FALSE}
+```{r load_data}
 # Manually download a new database from http://ramlegacy.org/ if applicable
 load(here::here(RAM_dir, "RAMLDB v4.66/R Data/DBdata[asmt][v4.66].RData")) # update if downloading a new database
 
@@ -221,7 +221,7 @@ For each stock:
 
 **Don't limit data years to 2019** = more gapfilling. Go to 2023
 
-```{r gapfill, eval = FALSE}
+```{r gapfill}
 ## gap fill ram_bmsy
 ## based on this it seems reasonable to gap-fill missing values
 
@@ -286,7 +286,7 @@ ram_bmsy_gf_year_gap <- ram_bmsy_gf_3 %>%
 
   
 ## split and do this 3 times for each stock in a for loop 
-stocks <- unique(ram_bmsy_gf_year_gap$stockid) # v2024: [1] "SDOGATLC" "WPOLLWBS" 
+stocks <- unique(ram_bmsy_gf_year_gap$stockid) # v2025: [1] "SDOGATLC" "WPOLLWBS" 
 
 ram_bmsy_gf_interpolate <- data.frame(stockid = NA, stocklong = NA, max_year = NA, year = NA, ram_bmsy = NA, ram_bmsy_gf = NA, gapfilled = NA)
 
@@ -307,7 +307,7 @@ for(stock in stocks){
 ram_bmsy_gf_interpolate_2 <- ram_bmsy_gf_interpolate %>%
   filter(!is.na(stockid)) %>%
   mutate(gapfilled = case_when(
-    stockid == "SDOGATLC" & year %in% c(2019) ~ "down/upfilling",
+    stockid == "SDOGATLC" & year %in% c(2023) ~ "down/upfilling",
     TRUE ~ gapfilled
   )) %>%
   mutate(gapfilled = ifelse(!is.na(ram_bmsy), "none", gapfilled))
@@ -331,8 +331,8 @@ sum(table(tmp$gapfilled))
 # 854 stocks have at least one year of bbmsy values after 2010
 
 
-summary(ram_bmsy_gf_final) # should be no NAs
-sum(ram_bmsy_gf_final$ram_bmsy_gf < 0 )  # should be 0 
+summary(ram_bmsy_gf_final) # should be no NAs. 2025: NA = 2352
+sum(ram_bmsy_gf_final$ram_bmsy_gf < 0 )  # should be 0. 2025: 0
 min(ram_bmsy_gf_final$ram_bmsy_gf, na.rm = TRUE) # v2025: 0.002531646
 
 ## gapfilling record keeping
@@ -475,7 +475,7 @@ Identify the FAO/OHI regions where each RAM stock is located (fao and ohi region
 If there are many differences between RAM spatial file and RAM metadata, check the STEP4_fao_ohi_rgns.Rmd prep again. 
 
 
-```{r final, eval = FALSE}
+```{r final}
 ## Read in RAM spatial stocks file
 ram_spatial <- read_csv(here(int_dir, "RAM_fao_ohi_rgns_final.csv"))
 
@@ -504,7 +504,7 @@ setdiff(ram_spatial_meta$stockid, ram_meta$stockid) # v2024: now it is 0, we can
 
 In most cases, the RAM and SAUP data use the same species names, but there are a few exceptions.  The following code identifies species in the RAM data that are not in the SAUP data. In these cases, different species names may be used (although not necessarily because some of the species may be present in RAM, but not SAUP, for other reasons). For these species, I used fishbase to explore synonyms and create a table to harmonize the RAM species names with the SAUP species names (saved as: int/RAM_species_to_SAUP.csv).
 
-```{r name harmonize, eval = FALSE}
+```{r name harmonize}
 ram_bmsy_gf_final <- read_csv(here(int_dir, "ram_stock_bmsy_gf.csv"))
 
 # get list of RAM species, scientific name
@@ -590,7 +590,7 @@ length(unique(ram_spatial$species)) # v2024: 237
 
 Re-name `stockid` column to `stockid_ram` and create new column `stockid` that matches with the `stockid` column in the CMSY data table prepared in [STEP3_calculate_bbmsy.Rmd](https://cdn.rawgit.com/OHI-Science/ohiprep_v2021/master/globalprep/fis/v2021/STEP3_calculate_bbmsy.html).
 
-```{r, eval = FALSE}
+```{r}
 ## Combine RAM spatial data with B/Bmsy data
 ram_bmsy_gf <- read_csv(here(int_dir,"ram_stock_bmsy_gf.csv"))
 
