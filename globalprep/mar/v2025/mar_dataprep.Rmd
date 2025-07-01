@@ -1089,6 +1089,7 @@ mar_sw_sus_final <- mar_sw_sus %>%
   
   #### final tidying ####
 mutate(taxa_code = paste(species, species_code, sep="_")) %>%
+# mutate(taxa_code = paste(species, species_code, sep="_")) %>%
   select(rgn_id, species, species_code, taxa_code, taxa_group = Taxon_code,
          family, year, gapfill_sus, gapfill_esc, gapfill_fao = gap_0_fill,
          tonnes = value, Sust, esc_score) %>%
@@ -1101,6 +1102,87 @@ filter(mar_sw_sus_final, gapfill_sus == "family_avg")
 filter(mar_sw_sus_final, gapfill_sus == "taxon_group_avg")
 
 ```
+
+```{r}
+# Changing the data years to account for the new SFW data
+latest_data_year <- 2025
+previous_data_year <- 2024
+
+# Compare new/old Mariculture sustainability scores
+sust_old <- read_csv(here("globalprep", "mar", paste0("v", previous_data_year), "output", "mar_sustainability.csv")) %>% 
+  dplyr::select(rgn_id, taxa_code_old = taxa_code, sust_old = sust_coeff)
+
+# tidy up species names (such as "Abalones_1"), rename as species column
+sust_old$species <- str_remove(sust_old$taxa_code_old, "\\_[^.]*$")
+
+# Drop the unneeded taxa code
+sust_old <- sust_old %>% 
+  mutate(year_old = 2024)
+
+mar_sw_sus_final <- mar_sw_sus_final %>% 
+  mutate(year = 2025)
+
+# Join previous and current year data
+sust_comb <- full_join(mar_sw_sus_final, sust_old, by = c("rgn_id", "species"))
+
+# Pivot longer so we only have one year column
+# Check NAs across entire df
+colSums(is.na(sust_comb))
+
+# Fill NAs in sust_old (previous year sustainability) with Sust from this year
+sust_comb_clean <- sust_comb %>%
+  mutate(sust_old = ifelse(is.na(sust_old), Sust, sust_old),
+         Sust = ifelse(is.na(Sust), sust_old, Sust),
+         year_old = ifelse(is.na(year_old), year, year_old),
+         year = ifelse(is.na(year), year_old, year),
+         taxa_code = ifelse(is.na(taxa_code), taxa_code_old, taxa_code),
+         taxa_code_old = ifelse(is.na(taxa_code_old), taxa_code, taxa_code_old))
+
+colSums(is.na(sust_comb_clean))
+
+# Now that we've filled the NAs, reseparate the data frames so we can do a simple bindrows on them
+
+sust_new_clean <- sust_comb_clean %>% 
+  select(rgn_id, species, taxa_code, year, sust = Sust)
+
+sust_old_clean <- sust_comb_clean %>% 
+  select(rgn_id, species, taxa_code = taxa_code_old, year = year_old, sust = sust_old)
+
+sust_clean <- bind_rows(sust_new_clean, sust_old_clean)
+
+# define the maximum sustainability score, check with: summary(mar_sw_sus_final)
+max_sus <- 0.77
+
+## Save sustainability scores data for 2023 (SFW data year)
+mar_sustainability_score <- sust_clean %>%
+  # mutate(year = current_year) %>% #change year if data not updated to current year
+  dplyr::select(rgn_id, year, taxa_code, sust_coeff = sust) %>%
+  unique() %>%
+  mutate(sust_coeff = ifelse(sust_coeff > max_sus, 1, sust_coeff/max_sus)) # rescale to the highest sust score
+
+# Check for any duplicated rows
+sum(duplicated(mar_sustainability_score))
+
+# Check for NAs in the data frame
+colSums(is.na(mar_sustainability_score))
+
+# Confirm that the right balance of years is present in the data frame
+table(mar_sustainability_score$year)
+
+## Saves the appropriate Sustainability Score file 
+#write.csv(mar_sustainability_score, here(current_mar_dir, "output", "mar_sustainability.csv"), row.names = F)
+readr::write_csv(mar_sustainability_score, here(current_mar_dir, "output", "mar_sustainability_new.csv"))
+```
+
+### Combining 2025 and 2024 data
+
+1. In the part of the code where you assign the taxa code (I think when tonnes production and sustainability are in one datatable?), merge in the v2024 sustainability data (get ride of the "_number" part of the taxacode) using the region and taxa name.
+
+2. Fill in any missing rows in the v2024 data with the v2025 data.
+
+3. Make the data long so there is the region id, year (only 2024 and 2025), and taxa_code (and anything else if relevant).
+
+
 
 Now we need to prep the escapes pressure layer a bit more. Final formatting of the escapee data. This is used as a pressure layer.
 
@@ -1195,7 +1277,7 @@ max_sus <- 0.77
 
 ## Save sustainability scores data for 2023 (SFW data year)
 mar_sustainability_score <- mar_sw_sus_final %>%
-  mutate(year = current_year) %>% #change year if data not updated to current year
+  # mutate(year = current_year) %>% #change year if data not updated to current year
   dplyr::select(rgn_id, year, taxa_code, sust_coeff = Sust) %>%
   unique() %>%
   mutate(sust_coeff = ifelse(sust_coeff > max_sus, 1, sust_coeff/max_sus)) # rescale to the highest sust score
