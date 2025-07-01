@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Wed Aug 28 18:36:01 2024 by dduncan" />
+<meta name="author" content="Compiled on Tue Jul 1 20:04:05 2025 by hoyt" />
 
 
-<title>OHI 2024 - Mariculture Population Pressure Layers</title>
+<title>OHI 2025 - Mariculture Population Pressure Layers</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1645,10 +1645,10 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">OHI 2024 - Mariculture Population Pressure
+<h1 class="title toc-ignore">OHI 2025 - Mariculture Population Pressure
 Layers</h1>
-<h4 class="author"><em>Compiled on Wed Aug 28 18:36:01 2024 by
-dduncan</em></h4>
+<h4 class="author"><em>Compiled on Tue Jul 1 20:04:05 2025 by
+hoyt</em></h4>
 
 </div>
 
@@ -1659,19 +1659,35 @@ RMD FILE</a></p>
 <h1><span class="header-section-number">1</span> Summary</h1>
 <p>This document describes the steps for obtaining and wrangling the
 data used to calculate the mariculture population pressure sub-dimension
-for the 2021 global assessment. The general data preparation
+for the 2025 global assessment. The general data preparation
 calculations are summarized <a href="http://ohi-science.org/ohi-global/layers.html#inland_coastal_population">here</a>.
 For context and explanation see the mariculture (subgoal of food
 provision) <a href="http://ohi-science.org/ohi-global/goals.html#food_provision:_mariculture">model
 summary</a>.</p>
 </div>
-<div id="updates-from-previous-assessment" class="section level1" number="2">
+<div id="updates-from-previous-assessments" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Updates from previous
-assessment</h1>
-<p>UN population data were not updated since 2021. CIES data were not
-updated but the data obtained was changed from population_density .tif
-files to population_count .tif files.</p>
+assessments</h1>
 <ul>
+<li><p>Since SEDAC was terminated (see below), we opted to use <a href="https://landscan.ornl.gov/">Oak Ridge National Library LandScan
+Global</a> data for a couple of reasons:</p>
+<ol style="list-style-type: decimal">
+<li>Data are still being updated</li>
+<li>There are data from year 2000 onward (can recalculate old
+scores)</li>
+</ol></li>
+<li><p><a href="https://www.earthdata.nasa.gov/news/data-from-sedac-available-again-earthdata-search">Posted
+June 17, 2025</a>: On April 30, 2025, the contract for NASA’s
+Socioeconomic Data and Applications Center (SEDAC), managed by Columbia
+University’s Center for Integrated Earth System Information (CIESIN),
+was terminated and the datasets SEDAC curated were no longer available.
+Since then, the Earth Science Data and Information System (ESDIS)
+project has been working to get the datasets rehoused. Starting today,
+all SEDAC datasets have been relocated to Earthdata Cloud and can be
+found in Earthdata Search. All of the datasets are complete and will no
+longer be updated with new versions or collections. The Dataset
+Lifecycle Data Basics page explains collection progress states for more
+information.</p></li>
 <li><p>We are no longer reprojecting and resampling population data to
 World Mollweide projection, as that affected the population data for
 “border” regions (i.e. those on the border of where the projection wraps
@@ -1694,34 +1710,32 @@ have been made so.</li>
 </div>
 <div id="data-sources" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Data Sources</h1>
-<div id="gridded-population-of-the-world-v4.11-by-ciese-and-ciat" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Gridded Population of
-the World (v4.11) by CIESE and CIAT</h2>
-<p><strong>Reference</strong>: <a href="http://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-adjusted-to-2015-unwpp-country-totals-rev11/data-download" class="uri">http://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-adjusted-to-2015-unwpp-country-totals-rev11/data-download</a></p>
-<p>Center for International Earth Science Information Network - CIESIN -
-Columbia University. 2018. Gridded Population of the World, Version 4
-(GPWv4): Population Density Adjusted to Match 2015 Revision UN WPP
-Country Totals, Revision 11. Palisades, NY: NASA Socioeconomic Data and
-Applications Center (SEDAC). <a href="https://doi.org/10.7927/H4F47M65" class="uri">https://doi.org/10.7927/H4F47M65</a>. Accessed 17 April
-2019</p>
-<p><strong>Downloaded</strong>: 25 july 2024</p>
-<p><strong>Description</strong>: The Gridded Population of the World,
-Version 4 (GPWv4): Population <strong>Count</strong> Adjusted to Match
-2015 Revision of UN WPP Country Totals, Revision 11 consists of
-estimates of human population density (number of persons per square
-kilometer) based on counts consistent with national censuses and
-population registers with respect to relative spatial distribution, but
-adjusted to match the 2015 Revision of the United Nation’s World
-Population Prospects (UN WPP) country totals, for the years 2000, 2005,
-2011, 2015, and 2020. A proportional allocation gridding algorithm,
-utilizing approximately 13.5 million national and sub-national
-administrative units, was used to assign UN WPP-adjusted population
-counts to 30 arc-second grid cells. The density rasters were created by
-dividing the UN WPP-adjusted population count raster for a given target
-year by the land area raster. Documentation for gridded population of
-the world is located <a href="http://sedac.ciesin.columbia.edu/data/set/gpw-v4-population-density-adjusted-to-2015-unwpp-country-totals-rev11/docs">here</a>.</p>
+<div id="oak-ridge-national-library-landscan" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Oak Ridge National
+Library LandScan</h2>
+<p>As recommended by <a href="https://www.mdpi.com/2220-9964/10/10/681">Yin X, Li P, Feng Z,
+Yang Y, You Z, Xiao C., 2021</a>.</p>
+<p><strong>Reference</strong>: <a href="https://landscan.ornl.gov/">LandScan Global</a></p>
+<p>Lebakula, V., Epting, J., Moehl, J., Stipek, C., Adams, D., Reith,
+A., Kaufman, J., Gonzales, J., Reynolds, B., Basford, S., Martin, A.,
+Buck, W., Faxon, A., Cunningham, A., Roy, A., Barbose, Z., Massaro, J.,
+Walters, S., Woody, C., … Urban, M. (2024). LandScan Silver Edition
+[Data set]. Oak Ridge National Laboratory. <a href="https://doi.org/10.48690/1531770" class="uri">https://doi.org/10.48690/1531770</a></p>
+<p><strong>Downloaded</strong>: 30 June 2025</p>
+<p><strong>Description</strong>: The LandScan Program was initiated at
+Oak Ridge National Laboratory (ORNL) in 1997 to address the need for
+improved estimates of population for consequence assessment. For
+example, natural and manmade disasters across the globe place vast
+populations at risk, often with little or no advance warning. This
+motivated the need for a more realistic population distribution that
+could capture where people are likely to be throughout the course of a
+day, not just residential locations as are reported in official
+censuses. Further, it was critical to develop highly resolved estimates
+so that they were useful to evaluate to events across multiple
+geographic scales. This initial effort is what is known as LandScan
+Global and has been updated annually since the first version in 1998. <a href="https://landscan.ornl.gov/about">See more.</a></p>
 <p><strong>Native data resolution</strong>: 30 arc-seconds</p>
-<p><strong>Time range</strong>: 2000-2020</p>
+<p><strong>Time range</strong>: 2000-2023</p>
 <p><strong>Format</strong>: GeoTiff</p>
 </div>
 <div id="un-population" class="section level2" number="3.2">
@@ -1730,17 +1744,33 @@ the world is located <a href="http://sedac.ciesin.columbia.edu/data/set/gpw-v4-p
 population counts; spatially distributed counts derived from the gridded
 world population are aggregated by region and checked against the UN
 population estimates.</p>
-<p><strong>Reference</strong>: <a href="https://esa.un.org/unpd/wpp/" class="uri">https://esa.un.org/unpd/wpp/</a></p>
-<p><strong>Downloaded</strong>: 26 June 2020</p>
+<p><strong>Reference</strong>: <a href="https://population.un.org/wpp/" class="uri">https://population.un.org/wpp/</a></p>
+<ul>
+<li><p>Data were downloaded for the following options:</p>
+<ul>
+<li>File type: Standard Projections</li>
+<li>Major Topic/Special Groupings: Most Used</li>
+<li>Sub Group: Demographic Indicators</li>
+<li>Files: Compact</li>
+</ul></li>
+</ul>
+<p><strong>Downloaded</strong>: 23 June 2025</p>
 <p><strong>Description</strong>: Population (in thousands) for
 countries.</p>
 <p><strong>Native data resolution</strong>: Country scores</p>
-<p><strong>Time range</strong>: 1950-2020</p>
+<p><strong>Time range</strong>: 1950-2023</p>
 <p><strong>Format</strong>: Excel file</p>
-<p><strong>Data cleaning process</strong>: Values from the “ESTIMATES”
-tab of “WPP2019_POP_F01_1_TOTAL_POPULATION_BOTH_SEXES.xlsx” were copied
-for all countries and years (1950-2020) and pasted into new
-“UN_pop_clean_v2020.csv”.</p>
+<p><strong>Data cleaning process</strong>:</p>
+<p>Values from the “ESTIMATES” tab of
+<code>WPP2024_GEN_F01_DEMOGRAPHIC_INDICATORS_COMPACT.xlsx</code> were
+copied for all countries and years (1950-2023) and pasted into new
+<code>UN_pop_clean_v2025.csv</code>.</p>
+<p><strong>2025 NOTE:</strong> The format of the UN population data
+changed, providing population estimates for January and July. So, I
+decided to take the total population from the “Total Population January”
+column. These numbers are similar to past data
+(i.e. <code>v2024/output/UN_population.csv</code>) but not exactly the
+same.</p>
 <hr />
 </div>
 </div>
@@ -1748,10 +1778,10 @@ for all countries and years (1950-2020) and pasted into new
 <h1><span class="header-section-number">4</span> Setup</h1>
 <p>Load all relevant libraries including parallel processing
 packages</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## Set options for all chunks in code</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Set options for all chunks in code</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">warning =</span> <span class="cn">FALSE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">fig.width =</span> <span class="dv">6</span>, <span class="at">fig.height =</span> <span class="dv">4</span>, <span class="at">fig.path =</span> <span class="st">&quot;figs/&quot;</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">## Load packages, installing them first where necessary</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># Load packages, installing them first where necessary</span></span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>pkg <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;raster&quot;</span>, <span class="st">&quot;sp&quot;</span>, <span class="st">&quot;sf&quot;</span>, <span class="st">&quot;fasterize&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;foreach&quot;</span>, <span class="st">&quot;parallel&quot;</span>,<span class="st">&quot;doParallel&quot;</span>)</span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>new_pkg <span class="ot">&lt;-</span> pkg[<span class="sc">!</span>(pkg <span class="sc">%in%</span> <span class="fu">installed.packages</span>())]</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(new_pkg)){<span class="fu">install.packages</span>(new_pkg)}</span>
@@ -1759,86 +1789,427 @@ packages</p>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu">library</span>(ohicore)</span>
 <span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="do">## Spatial libraries</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co"># Spatial libraries</span></span>
 <span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="co"># library(rgdal)</span></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="fu">library</span>(fasterize)</span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="co"># Vector spatial data</span></span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="fu">library</span>(terra) <span class="co"># Raster spatial data</span></span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="fu">library</span>(tidyterra) <span class="co"># For rasters in GGplot</span></span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="do">## Data wrangling libraries</span></span>
-<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="do">## Parallel processing libraries</span></span>
-<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
-<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a><span class="fu">library</span>(foreach)</span>
-<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="fu">library</span>(doParallel)</span></code></pre></div>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="fu">library</span>(fasterize)</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="co"># Vector spatial data</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="fu">library</span>(terra) <span class="co"># Raster spatial data</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="co"># Data wrangling libraries</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="co"># Parallel processing libraries</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="fu">library</span>(foreach)</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="fu">library</span>(doParallel)</span></code></pre></div>
 <p>Define frequently used pathnames. Change scenario and data years in
 file pathnames code chunk to reflect the most recent data (d) and
 current assessment year (v).</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="do">## Source common and spatial common files</span></span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Source common and spatial common files</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;http://ohi-science.org/ohiprep_v2020/workflow/R/common.R&#39;</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="do">## Update these!</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>scenario_yr <span class="ot">&lt;-</span> <span class="st">&quot;v2024&quot;</span> <span class="co"># change to reflect assessment year!</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>data_yr_gpw <span class="ot">&lt;-</span> <span class="st">&quot;d2024&quot;</span> <span class="co"># change to reflect year of most recently downloaded Gridded Population of the World (GPW) data!</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>data_yr_un_pop <span class="ot">&lt;-</span> <span class="st">&quot;d2020&quot;</span> <span class="co"># change to reflect year of most recently downloaded UN population data! (no change for v2024)</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>scenario_yr <span class="ot">&lt;-</span> <span class="st">&quot;v2025&quot;</span> <span class="co"># change to reflect assessment year!</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>data_yr_gpw <span class="ot">&lt;-</span> <span class="st">&quot;d2025&quot;</span> <span class="co"># change to reflect year of most recently downloaded Gridded Population of the World (GPW) data! (2025 for 2025 assessment)</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>data_yr_un_pop <span class="ot">&lt;-</span> <span class="st">&quot;d2025&quot;</span> <span class="co"># change to reflect year of most recently downloaded UN population data! (changed to 2025 for 2025 assessment)</span></span>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="do">## Define commonly used file paths (matched to what we did in ico_data_prep.Rmd)</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co"># Define commonly used file paths (matched to what we did in ico_data_prep.Rmd)</span></span>
 <span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>dir_server <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_M, <span class="st">&quot;git-annex/globalprep/_raw_data&quot;</span>)</span>
 <span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>dir_github <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">&quot;/globalprep/mar_prs_population&quot;</span>, scenario_yr)</span>
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="do">## Checking to see if there is a README in the mar_prs_pop and mar_prs_pop/v20?? folders - all goal prep files will need a README!</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="fu">file.path</span>(dir_github, <span class="st">&#39;README.md&#39;</span>))) {</span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>  <span class="fu">warning</span>(<span class="fu">sprintf</span>(<span class="st">&#39;No README detected in %s&#39;</span>, dir_github))</span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>}</span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="fu">file.path</span>(<span class="fu">dirname</span>(dir_github), <span class="st">&#39;README.md&#39;</span>))) {</span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  <span class="fu">warning</span>(<span class="fu">sprintf</span>(<span class="st">&#39;No README detected in %s&#39;</span>, <span class="fu">file.path</span>(<span class="fu">dirname</span>(dir_github))))</span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="do">## DOUBLE CHECK</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co"># Checking to see if there is a README in the mar_prs_pop and mar_prs_pop/v20?? folders - all goal prep files will need a README!</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="fu">file.path</span>(dir_github, <span class="st">&#39;README.md&#39;</span>))) {</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>  <span class="fu">warning</span>(<span class="fu">sprintf</span>(<span class="st">&#39;No README detected in %s&#39;</span>, dir_github))</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>}</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(<span class="fu">file.path</span>(<span class="fu">dirname</span>(dir_github), <span class="st">&#39;README.md&#39;</span>))) {</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>  <span class="fu">warning</span>(<span class="fu">sprintf</span>(<span class="st">&#39;No README detected in %s&#39;</span>, <span class="fu">file.path</span>(<span class="fu">dirname</span>(dir_github))))</span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>}</span></code></pre></div>
 <div id="import-raw-data" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Import Raw Data</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="do">## Read in the raw density data to be reprojected and resampled</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">file.path</span>(dir_server, <span class="fu">sprintf</span>(<span class="st">&quot;CIESEandCIAT_population/%s&quot;</span>, data_yr_gpw)),</span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Read in the raw population count data</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">file.path</span>(dir_server, <span class="st">&quot;LandScan_global_population&quot;</span>),</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>                  <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.tif$&quot;</span>,</span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>                  <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>raw <span class="ot">&lt;-</span> raw[<span class="fu">grep</span>(<span class="st">&quot;count_&quot;</span>, raw)] <span class="co"># keep only the files that include the word &quot;count&quot;</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>raw <span class="co"># check that this looks correct; can double check with the folder on Mazu server folder</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>raw <span class="ot">&lt;-</span> raw[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">&quot;-colorized&quot;</span>, raw)] <span class="co"># filter out the &quot;colorized&quot; files</span></span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co"># Rename count files to better work with grep function and interpolate function. These are our start rasters for the &#39;yearly_interpolate_terra&#39; function</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>raw1 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(raw[<span class="dv">1</span>]) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  terra<span class="sc">::</span><span class="fu">writeRaster</span>(., <span class="at">filename =</span> <span class="fu">file.path</span>(dir_M, <span class="fu">sprintf</span>(<span class="st">&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;</span>, scenario_yr, <span class="dv">2000</span>)))</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>raw2 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(raw[<span class="dv">2</span>]) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>  terra<span class="sc">::</span><span class="fu">writeRaster</span>(., <span class="at">filename =</span> <span class="fu">file.path</span>(dir_M, <span class="fu">sprintf</span>(<span class="st">&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;</span>, scenario_yr, <span class="dv">2005</span>)))</span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>raw3 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(raw[<span class="dv">3</span>]) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>  terra<span class="sc">::</span><span class="fu">writeRaster</span>(., <span class="at">filename =</span> <span class="fu">file.path</span>(dir_M, <span class="fu">sprintf</span>(<span class="st">&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;</span>, scenario_yr, <span class="dv">2010</span>)))</span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>raw4 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(raw[<span class="dv">4</span>]) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>  terra<span class="sc">::</span><span class="fu">writeRaster</span>(., <span class="at">filename =</span> <span class="fu">file.path</span>(dir_M, <span class="fu">sprintf</span>(<span class="st">&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;</span>, scenario_yr, <span class="dv">2015</span>)))</span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>raw5 <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(raw[<span class="dv">5</span>]) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>  terra<span class="sc">::</span><span class="fu">writeRaster</span>(., <span class="at">filename =</span> <span class="fu">file.path</span>(dir_M, <span class="fu">sprintf</span>(<span class="st">&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;</span>, scenario_yr, <span class="dv">2020</span>)))</span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="fu">ohi_rasters</span>() <span class="co"># loads rasters</span></span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="co"># eez_raster &lt;- zones # sourced from ohi_rasters()</span></span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="do">## Import raw, cleaned UN population data to be wrangled then used to confirm gpw-derived spatial population</span></span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>pop <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dir_server, </span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>                          <span class="fu">sprintf</span>(<span class="st">&quot;UnitedNations_population/%s/UN_pop_clean_v2020.csv&quot;</span>, data_yr_un_pop)), <span class="co"># change year if updated</span></span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>                <span class="at">strip.white =</span> <span class="cn">TRUE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>raw <span class="co"># check that this looks correct; can double check with the folder on Mazu server folder</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co"># Check if the directory exists, and create it if it doesn&#39;t</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(<span class="fu">file.path</span>(dir_M, <span class="st">&quot;git-annex/globalprep/mar_prs_population/&quot;</span>, scenario_yr, <span class="st">&quot;int/&quot;</span>))) {</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">file.path</span>(dir_M, <span class="st">&quot;git-annex/globalprep/mar_prs_population/&quot;</span>, scenario_yr, <span class="st">&quot;int/&quot;</span>))</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;Directory already exists.&quot;</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>}</span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co"># Rename files for simplicity</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(raw)) {</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>  </span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>  <span class="co"># Identify variable name</span></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>  name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;raw&quot;</span>, i)</span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>  </span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>  <span class="co"># Identify year for file name</span></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>  year <span class="ot">&lt;-</span> <span class="dv">2000</span> <span class="sc">+</span> (i<span class="dv">-1</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>  </span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>  <span class="co"># Load data to variable name and save to Mazu with year included</span></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>  <span class="fu">assign</span>(name, terra<span class="sc">::</span><span class="fu">rast</span>(raw[i]) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>  terra<span class="sc">::</span><span class="fu">writeRaster</span>(., <span class="at">filename =</span> <span class="fu">file.path</span>(dir_M, <span class="fu">sprintf</span>(<span class="st">&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;</span>, scenario_yr, year)), <span class="at">overwrite =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>  </span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>}</span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a><span class="fu">ohi_rasters</span>() <span class="co"># loads ohi rasters</span></span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a><span class="co"># Import raw, cleaned UN population data to be wrangled then used to confirm gpw-derived spatial population</span></span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>pop <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dir_server, </span>
+<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>                          <span class="fu">sprintf</span>(<span class="st">&quot;UnitedNations_population/%s/UN_pop_clean_v2025.csv&quot;</span>,</span>
+<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>                                  data_yr_un_pop)), <span class="co"># change year if updated</span></span>
+<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>                <span class="at">strip.white =</span> <span class="cn">TRUE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>                <span class="co"># Add NA to blank cells</span></span>
+<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>                <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>))</span></code></pre></div>
+</div>
+<div id="crop-rasters-to-common-extent" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Crop rasters to
+common extent</h2>
+<p>The rasters from LandScan vary <em>slightly</em> in extent between
+years. So, extents were compiled into a data frame and then the largest
+common extent was determined. Rasters were cropped to this extent rather
+than filled with NA values, but it would be worth keeping an eye on the
+extents for future years to make sure not significant areas are being
+cut out.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Initiate an empty list</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>rasters <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co"># Add each raw raster to the list to iterate over</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">24</span>) {</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  rasters[[i]] <span class="ot">&lt;-</span> <span class="fu">get</span>(<span class="fu">paste0</span>(<span class="st">&quot;raw&quot;</span>, i))</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>}</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co"># Build data frame of extents from the rasters list</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>extents_df <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">seq_along</span>(rasters), <span class="cf">function</span>(i) {</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>  ex <span class="ot">&lt;-</span> <span class="fu">ext</span>(rasters[[i]])</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>    <span class="at">raster =</span> <span class="fu">paste0</span>(<span class="st">&quot;raster_&quot;</span>, i),</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>    <span class="at">xmin =</span> ex[<span class="dv">1</span>],</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>    <span class="at">xmax =</span> ex[<span class="dv">2</span>],</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>    <span class="at">ymin =</span> ex[<span class="dv">3</span>],</span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>    <span class="at">ymax =</span> ex[<span class="dv">4</span>]</span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>  )</span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>}))</span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co"># Compute common overlapping extent</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>common_extent <span class="ot">&lt;-</span> <span class="fu">ext</span>(</span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>  <span class="fu">max</span>(extents_df<span class="sc">$</span>xmin),  <span class="co"># max of left edges</span></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>  <span class="fu">min</span>(extents_df<span class="sc">$</span>xmax),  <span class="co"># min of right edges</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>  <span class="fu">max</span>(extents_df<span class="sc">$</span>ymin),  <span class="co"># max of bottom edges</span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>  <span class="fu">min</span>(extents_df<span class="sc">$</span>ymax)   <span class="co"># min of top edges</span></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>)</span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="co"># Initiate empty list for cropped rasters</span></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>cropped_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="co"># Crop each raster and save to the cropped list</span></span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(rasters)) {</span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a>  cropped_list[[i]] <span class="ot">&lt;-</span> <span class="fu">crop</span>(rasters[[i]], common_extent)</span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 </div>
 <div id="methods-and-calculations" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Methods and
 Calculations</h1>
-<div id="reproject-eez-25-mile-inland-raster" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Reproject EEZ +
+<div id="append-or-extract-by-ohi-regions" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Append or Extract by
+OHI Regions</h2>
+<p>Stack rasters of population counts for each year, sum within regions
+(using <code>eez_25mi_inland</code>) for each year, and save this as
+<code>coastal_pop_zonal_sums.csv</code> in the intermediate folder.
+Gather this into long format dataframe, and save as
+<code>output/mar_pop_25mi.csv</code>.</p>
+<p>Note: The resampled and reprojected <code>eez_25mi_inland</code>
+raster can be sourced from
+<code>git-annex/globalprep/spatial/v2024/eez_25mi_inland_wgs1984.tif</code>.
+The steps taken to resample and reproject this raster can be found below
+in the Appendix.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Load files and create a SpatRaster of the human_count files (each layer is going to be a year) ---- (these should be each of the &quot;raw#&quot; rasters)</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>pop_all_years <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(cropped_list) <span class="co"># Use terra::rast() on list files to make a spatraster with as many layers as there are files </span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># Check it out </span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>(pop_all_years) <span class="co"># Has 24 layers, one for each of our raster files </span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co"># Read in EEZ plus 25mi inland WGS 1984*** raster and tidy for zonal statistics ---- </span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co"># This was reprojected in 2024, so we can load from the 2024 assessment. See Appendix for more methods.</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>zone_raster <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="fu">file.path</span>(dir_M, <span class="st">&quot;git-annex/globalprep/spatial/v2024/eez_25mi_inland_wgs1984.tif&quot;</span>))</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co"># Need to make it a categorical raster for zonal statistics. See what it loads in as?</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">datatype</span>(zone_raster) <span class="co"># [1] &quot;INT4U&quot;</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>zone_raster <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.factor</span>(zone_raster) <span class="co"># Ensuring R knows its a categorical raster. Won&#39;t have a datatype anymore though</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co"># Need to check names to make sure they are &#39;zone&#39; for zonal statistics</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="fu">names</span>(zone_raster) <span class="co"># [1] &quot;ocean_plus25mile_inland&quot;</span></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="fu">names</span>(zone_raster) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;zone&quot;</span>) <span class="co"># Ensuring R knows that the layer we want defines ZONES!</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="co"># Check it out --&gt; resolution, layer name</span></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>(zone_raster)</span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a><span class="co"># Conduct zonal statistics, tidy up and write out ----</span></span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a><span class="co"># Crop to same common extent as population count rasters</span></span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a>zone_raster <span class="ot">&lt;-</span> <span class="fu">crop</span>(zone_raster, common_extent)</span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a><span class="co"># Conduct zonal statistics</span></span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a>coastal_pop <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">zonal</span>(pop_all_years, zone_raster, <span class="st">&quot;sum&quot;</span>, <span class="at">na.rm=</span><span class="cn">TRUE</span>) </span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a><span class="co"># Check it to see the column names --&gt; fix these in following step</span></span>
+<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a><span class="fu">View</span>(coastal_pop)</span>
+<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a><span class="co"># Rename just in case</span></span>
+<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a>coastal_pop2 <span class="ot">&lt;-</span> coastal_pop</span>
+<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a><span class="co"># Fix column names to &quot;pop_&quot; and year</span></span>
+<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a><span class="fu">colnames</span>(coastal_pop2)[<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(coastal_pop2)] <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;pop_&quot;</span>, <span class="fu">str_extract</span>(<span class="fu">colnames</span>(coastal_pop2)[<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(coastal_pop2)], <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d+&quot;</span>))</span>
+<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a></span>
+<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a><span class="co"># Writing to &#39;int&#39; folder in project to have zonal sums </span></span>
+<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a><span class="fu">write_csv</span>(coastal_pop2, <span class="fu">file.path</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/mar_prs_population/&quot;</span>, scenario_yr, <span class="st">&quot;/int/coastal_pop_zonal_sums.csv&quot;</span>)))</span>
+<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a></span>
+<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a><span class="co"># Pivoting longer to have one &quot;rgn_id&quot; column, one &quot;year&quot; column, and one &quot;popsum&quot; column</span></span>
+<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a>coastal_pop3 <span class="ot">&lt;-</span> coastal_pop2 <span class="sc">%&gt;%</span> </span>
+<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span><span class="fu">c</span>(zone), <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;popsum&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">str_remove_all</span>(year, <span class="st">&quot;pop_&quot;</span>),</span>
+<span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a>         <span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-48"><a href="#cb5-48" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">rgn_id =</span> zone) <span class="sc">%&gt;%</span></span>
+<span id="cb5-49"><a href="#cb5-49" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">rgn_id =</span> <span class="fu">as.numeric</span>(rgn_id)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-50"><a href="#cb5-50" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(rgn_id <span class="sc">&lt;=</span> <span class="dv">250</span>) </span>
+<span id="cb5-51"><a href="#cb5-51" tabindex="-1"></a></span>
+<span id="cb5-52"><a href="#cb5-52" tabindex="-1"></a><span class="co"># Converting NaN&#39;s to 0&#39;s (mostly occur with uninhabited islands)</span></span>
+<span id="cb5-53"><a href="#cb5-53" tabindex="-1"></a>coastal_pop_nona <span class="ot">&lt;-</span> coastal_pop3 <span class="sc">%&gt;%</span> </span>
+<span id="cb5-54"><a href="#cb5-54" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">popsum =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-55"><a href="#cb5-55" tabindex="-1"></a>    popsum <span class="sc">==</span> <span class="st">&quot;NaN&quot;</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb5-56"><a href="#cb5-56" tabindex="-1"></a>    <span class="at">.default=</span>popsum </span>
+<span id="cb5-57"><a href="#cb5-57" tabindex="-1"></a>  ))</span>
+<span id="cb5-58"><a href="#cb5-58" tabindex="-1"></a></span>
+<span id="cb5-59"><a href="#cb5-59" tabindex="-1"></a><span class="co"># Writing it out to &#39;ouput&#39; folder to have the coastal population of each country for all years </span></span>
+<span id="cb5-60"><a href="#cb5-60" tabindex="-1"></a><span class="fu">write_csv</span>(coastal_pop_nona, <span class="fu">file.path</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/mar_prs_population/&quot;</span>, scenario_yr, <span class="st">&quot;/output/mar_pop_25mi.csv&quot;</span>)))</span></code></pre></div>
+</div>
+<div id="calculate-area-of-25mi-inland-buffers" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Calculate Area of
+25mi Inland Buffers</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Load in data calculated in spatial folder </span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>area <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/spatial/v2019/output/area_km2_25mi_inland.csv&quot;</span>)) <span class="co"># last updated v2019</span></span></code></pre></div>
+</div>
+<div id="calculate-mariculture-population-pressure" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Calculate Mariculture
+Population Pressure</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Rescale organized coastal population data</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>pop_rescaled <span class="ot">&lt;-</span> coastal_pop_nona <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  <span class="fu">left_join</span>(area, <span class="at">by=</span><span class="st">&quot;rgn_id&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">density =</span> popsum<span class="sc">/</span>area_km2) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ln_density =</span> <span class="fu">log</span>(density <span class="sc">+</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scalar =</span> <span class="fu">max</span>(ln_density, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dens_rescaled =</span> ln_density<span class="sc">/</span>scalar) <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dens_rescaled =</span> <span class="fu">ifelse</span>(dens_rescaled <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="dv">1</span>, dens_rescaled))</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="fu">filter</span>(pop_rescaled, <span class="fu">is.na</span>(area_km2)) <span class="co"># no NA values for the area column (Antarctica not included)</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>pressure_data <span class="ot">&lt;-</span> pop_rescaled <span class="sc">%&gt;%</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, year, <span class="at">pressure_score =</span> dens_rescaled)</span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="fu">write_csv</span>(pressure_data, <span class="fu">file.path</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/mar_prs_population/&quot;</span>, scenario_yr, <span class="st">&quot;/output/prs_pop_density.csv&quot;</span>)))</span></code></pre></div>
+</div>
+<div id="gapfilling" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Gapfilling</h2>
+<p>No gapfilling was completed as part of this data prep methodology.
+Datasets are saved with “_gf” appended just to indicate they are
+finalized versions.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>prs <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;globalprep/mar_prs_population/&quot;</span>, scenario_yr, <span class="st">&quot;/output/prs_pop_density.csv&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">pressure_score =</span> <span class="dv">0</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="fu">write.csv</span>(prs, <span class="fu">file.path</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/mar_prs_population/&quot;</span>, scenario_yr, <span class="st">&quot;/output/prs_pop_density_gf.csv&quot;</span>)), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>mar <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(<span class="st">&quot;globalprep/mar_prs_population/&quot;</span>, scenario_yr, <span class="st">&quot;/output/mar_pop_25mi.csv&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">popsum =</span> <span class="dv">0</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="fu">write.csv</span>(mar, <span class="fu">file.path</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/mar_prs_population/&quot;</span>, scenario_yr, <span class="st">&quot;/output/mar_pop_25mi_gf.csv&quot;</span>)), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div id="data-checks-andor-meta-analysis" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Data Checks and/or
+Meta-Analysis</h2>
+<div id="create-un_population.csv-for-data-checking" class="section level3" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Create
+<code>UN_population.csv</code> for Data-checking</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Filter for countries (added for 2025 analysis)</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>pop_clean <span class="ot">&lt;-</span> pop <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">filter</span>(Type <span class="sc">==</span> <span class="st">&quot;Country/Area&quot;</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co"># Select population estimates for January</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>pop_gather <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">select</span>(pop_clean, <span class="fu">c</span>(<span class="fu">matches</span>(<span class="st">&quot;Region&quot;</span>), <span class="st">&quot;Year&quot;</span>, <span class="fu">matches</span>(<span class="st">&quot;Total.*January&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>  <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;population&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">population =</span> <span class="fu">gsub</span>(<span class="st">&quot; &quot;</span>, <span class="st">&quot;&quot;</span>, population)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">population =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(population)) <span class="sc">*</span> <span class="dv">1000</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co"># Ignore Jersey and Guernsey (Channel Islands) for now</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>pop_gather_rename <span class="ot">&lt;-</span> pop_gather <span class="sc">%&gt;%</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(country,<span class="st">&quot;C</span><span class="sc">\\</span><span class="st">Ste d&#39;Ivoire&quot;</span>), <span class="st">&quot;Cote d&#39;Ivoire&quot;</span>, country)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(country,<span class="st">&quot;R</span><span class="sc">\\</span><span class="st">Sunion&quot;</span>), <span class="st">&quot;Reunion&quot;</span>, country)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(country,<span class="st">&quot;Cura</span><span class="sc">\\</span><span class="st">Sao&quot;</span>), <span class="st">&quot;Curacao&quot;</span>, country)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">ifelse</span>(country<span class="sc">==</span><span class="st">&quot;China, Taiwan Province of China&quot;</span>, <span class="st">&quot;Taiwan&quot;</span>, country)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">ifelse</span>(country<span class="sc">==</span><span class="st">&quot;Dem. People&#39;s Republic of Korea&quot;</span>, <span class="st">&quot;North Korea&quot;</span>, country))</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>  </span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="co"># Organize the data into regions used in OHI, and save</span></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>pop_rgn <span class="ot">&lt;-</span> <span class="fu">name_2_rgn</span>(<span class="at">df_in =</span> pop_gather_rename, </span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>                      <span class="at">fld_name=</span><span class="st">&#39;country&#39;</span>, </span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>                      <span class="at">flds_unique=</span><span class="fu">c</span>(<span class="st">&#39;year&#39;</span>))</span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a><span class="co"># Sum population by region and year</span></span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>pop_rgn <span class="ot">&lt;-</span> pop_rgn <span class="sc">%&gt;%</span></span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(rgn_id, year) <span class="sc">%&gt;%</span></span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">population =</span> <span class="fu">sum</span>(population)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a><span class="fu">write.csv</span>(pop_rgn, <span class="fu">file.path</span>(<span class="st">&quot;globalprep/mar_prs_population/&quot;</span>, scenario_yr, <span class="st">&quot;/output/UN_population.csv&quot;</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a><span class="co"># OHI regions</span></span>
+<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a>ohi_rgns <span class="ot">&lt;-</span> ohicore<span class="sc">::</span>rgn_master</span></code></pre></div>
+</div>
+<div id="compare-un_population-with-calculated-count" class="section level3" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Compare
+<code>UN_population</code> with Calculated Count</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>compare_yr <span class="ot">&lt;-</span> <span class="dv">2023</span> <span class="co"># comparison between raster and UN population data for a specific year (most recent common year)</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co"># Sum counts regionally for the scenario year</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>pop_rast <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="fu">file.path</span>(dir_M, <span class="fu">sprintf</span>(<span class="st">&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;</span>, scenario_yr, compare_yr)))</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="fu">names</span>(pop_rast) <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">&quot;pop_&quot;</span>, compare_yr))</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>zones <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="fu">file.path</span>(dir_M, <span class="st">&quot;git-annex/globalprep/spatial/v2024/eez_25mi_inland_wgs1984.tif&quot;</span>)) <span class="co"># pulling from 2024 server data</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="fu">names</span>(zones) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;zone&quot;</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>zones <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.factor</span>(zones)</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>pop_counts <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">zonal</span>(pop_rast, zones, <span class="at">fun =</span> <span class="st">&quot;sum&quot;</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>pop_UN <span class="ot">&lt;-</span> pop_rgn <span class="sc">%&gt;%</span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">==</span> compare_yr) <span class="sc">%&gt;%</span></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, <span class="at">pop_UN =</span> population)</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a><span class="co"># Join filtered UN population and summed calculated counts</span></span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>compare_pop <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(pop_counts) <span class="sc">%&gt;%</span></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">sum =</span> <span class="fu">paste0</span>(<span class="st">&quot;pop_&quot;</span>, compare_yr)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="at">rgn_id =</span> zone, <span class="at">pop_rast =</span> sum) <span class="sc">%&gt;%</span></span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">rgn_id =</span> <span class="fu">as.numeric</span>(rgn_id)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(pop_UN, <span class="at">by=</span><span class="st">&quot;rgn_id&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pop_UN))</span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a>compare_pop<span class="sc">$</span>diff <span class="ot">&lt;-</span> compare_pop<span class="sc">$</span>pop_rast <span class="sc">-</span> compare_pop<span class="sc">$</span>pop_UN</span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a></span>
+<span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a><span class="co"># Check out the dataframe</span></span>
+<span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a><span class="fu">View</span>(compare_pop)</span>
+<span id="cb10-31"><a href="#cb10-31" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" tabindex="-1"></a><span class="co"># Check plot - investigate outliers (post to issue first)</span></span>
+<span id="cb10-33"><a href="#cb10-33" tabindex="-1"></a>pop_compare_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(compare_pop) <span class="sc">+</span></span>
+<span id="cb10-34"><a href="#cb10-34" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(pop_rast, pop_UN, <span class="at">label =</span> rgn_id), <span class="at">alpha =</span> .<span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb10-35"><a href="#cb10-35" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span></span>
+<span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">sprintf</span>(<span class="st">&#39;Calculated Population %s&#39;</span>, compare_yr),</span>
+<span id="cb10-37"><a href="#cb10-37" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">sprintf</span>(<span class="st">&#39;UN Population %s&#39;</span>, compare_yr),</span>
+<span id="cb10-38"><a href="#cb10-38" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&#39;Population Comparison&#39;</span>)</span>
+<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="#cb10-40" tabindex="-1"></a><span class="co"># View</span></span>
+<span id="cb10-41"><a href="#cb10-41" tabindex="-1"></a><span class="fu">ggplotly</span>(pop_compare_plot)</span>
+<span id="cb10-42"><a href="#cb10-42" tabindex="-1"></a></span>
+<span id="cb10-43"><a href="#cb10-43" tabindex="-1"></a><span class="do">##Plot log values of same comparison</span></span>
+<span id="cb10-44"><a href="#cb10-44" tabindex="-1"></a>pop_compare_log <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(compare_pop) <span class="sc">+</span></span>
+<span id="cb10-45"><a href="#cb10-45" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="fu">log</span>(pop_rast), <span class="fu">log</span>(pop_UN), <span class="at">label =</span> rgn_id), <span class="at">alpha =</span> .<span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb10-46"><a href="#cb10-46" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span></span>
+<span id="cb10-47"><a href="#cb10-47" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">sprintf</span>(<span class="st">&#39;Log of Calculated Population %s&#39;</span>, compare_yr),</span>
+<span id="cb10-48"><a href="#cb10-48" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">sprintf</span>(<span class="st">&#39;Log of UN Population %s&#39;</span>, compare_yr),</span>
+<span id="cb10-49"><a href="#cb10-49" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&#39;Population Comparison (log values)&#39;</span>)</span>
+<span id="cb10-50"><a href="#cb10-50" tabindex="-1"></a></span>
+<span id="cb10-51"><a href="#cb10-51" tabindex="-1"></a><span class="co"># View</span></span>
+<span id="cb10-52"><a href="#cb10-52" tabindex="-1"></a><span class="fu">ggplotly</span>(pop_compare_log)</span></code></pre></div>
+</div>
+<div id="compare-to-previous-year-for-coastal-population" class="section level3" number="5.5.3">
+<h3><span class="header-section-number">5.5.3</span> Compare to Previous
+Year for Coastal Population</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Assessment year to pull data from</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>prev_scen_yr <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>, <span class="fu">as.numeric</span>(<span class="fu">substr</span>(scenario_yr, <span class="dv">2</span>, <span class="dv">5</span>)) <span class="sc">-</span><span class="dv">1</span>) </span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># Year to compare</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>comp_yr <span class="ot">&lt;-</span> <span class="dv">2020</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>old <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&#39;globalprep/mar_prs_population/&#39;</span>, prev_scen_yr, <span class="st">&#39;/output/mar_pop_25mi.csv&#39;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, year, <span class="at">popsum_old=</span>popsum)</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> coastal_pop_nona <span class="sc">%&gt;%</span></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(old, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;rgn_id&quot;</span>, <span class="st">&quot;year&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>  <span class="co"># Look at 2020 data</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> comp_yr)</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co"># Compare data for a specific year between assessments</span></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>years_compare_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(tmp) <span class="sc">+</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="fu">log</span>(popsum), <span class="fu">log</span>(popsum_old), <span class="at">label =</span> rgn_id), <span class="at">alpha =</span> .<span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span></span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">sprintf</span>(<span class="st">&#39;Log of Calculated Population %s&#39;</span>, scenario_yr),</span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">sprintf</span>(<span class="st">&#39;Log of Calculated Population %s&#39;</span>, prev_scen_yr),</span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a>       <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&#39;Population comparison (25 mi) between assessments for year &#39;</span>, comp_yr))</span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a><span class="co"># View</span></span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a><span class="fu">ggplotly</span>(years_compare_plot)</span></code></pre></div>
+</div>
+<div id="compare-to-previous-year-for-population-density" class="section level3" number="5.5.4">
+<h3><span class="header-section-number">5.5.4</span> Compare to Previous
+Year for Population Density</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Assessment year to pull data from</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>prev_scen_yr <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>, <span class="fu">as.numeric</span>(<span class="fu">substr</span>(scenario_yr, <span class="dv">2</span>, <span class="dv">5</span>)) <span class="sc">-</span><span class="dv">1</span>) </span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co"># Year to compare</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>comp_yr <span class="ot">&lt;-</span> <span class="dv">2020</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>old <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&#39;globalprep/mar_prs_population/&#39;</span>, prev_scen_yr, <span class="st">&#39;/output/prs_pop_density.csv&#39;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, year, <span class="at">pressure_old=</span>pressure_score)</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> pressure_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(old, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;rgn_id&quot;</span>, <span class="st">&quot;year&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>  <span class="co"># Look at 2020 data</span></span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> comp_yr)</span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="co"># Compare data for a specific year between assessments</span></span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a>years_compare_plot_density <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(tmp) <span class="sc">+</span></span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="fu">log</span>(pressure_score), <span class="fu">log</span>(pressure_old), <span class="at">label =</span> rgn_id), <span class="at">alpha =</span> .<span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">sprintf</span>(<span class="st">&#39;Log of Calculated Population Density %s&#39;</span>, scenario_yr),</span>
+<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">sprintf</span>(<span class="st">&#39;Log of Calculated Population Density %s&#39;</span>, prev_scen_yr),</span>
+<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a>       <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">&#39;Population comparison (density) between assessments for year &#39;</span>, comp_yr))</span>
+<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a><span class="co"># View</span></span>
+<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a><span class="fu">ggplotly</span>(years_compare_plot_density)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Compare area with that calculated in previous year (should look very similar)</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>old_area <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&#39;globalprep/mar_prs_population/v2019/int/area_km2_25mi.csv&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">old_area_km2 =</span> area_km2) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">old_area_km2 =</span> <span class="fu">round</span>(old_area_km2)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(area, <span class="at">by =</span> <span class="st">&quot;rgn_id&quot;</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>area_compare_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(old_area) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(area_km2, old_area_km2, <span class="at">label =</span> rgn_id), <span class="at">alpha =</span> .<span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">sprintf</span>(<span class="st">&#39;%s Area (km2)&#39;</span>, scenario_yr),</span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">sprintf</span>(<span class="st">&#39;%s Area (km2)&#39;</span>, <span class="st">&quot;v2019 (last update)&quot;</span>),</span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&#39;Area Calculation Comparison&#39;</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="co"># View</span></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="fu">ggplotly</span>(area_compare_plot)</span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="fu">summary</span>(old_area)</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="appendix" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Appendix</h1>
+<div id="reproject-eez-25-mile-inland-raster" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Reproject EEZ +
 25-mile Inland Raster</h2>
 <p>Gridded world population counts from CIESE and CIAT are in WGS 1984
 Projection, and the ocean_plus25mile_inland.tif is projected in the
@@ -1861,601 +2232,44 @@ propagating, 2. manipulating the ocean raster is methodologically more
 sound, and 3. because we’re not manipulating the population raster
 scale, it doesn’t need to be population density, so we can use an
 unequal areas projection to run zonal statistics.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># No longer using shape files, raster only</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>count_rast <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(raw[<span class="dv">5</span>]) <span class="co"># load one raw raster to use as template for reprojection using raster package</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>count_rast <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(count_rast) <span class="co"># Convert it to SpatRaster using terra::rast()</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co"># Load EEZ + 25mile inland raster using raster package</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>eez_25mi_inland <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(<span class="fu">file.path</span>(dir_M, <span class="st">&quot;git-annex/globalprep/spatial/v2019/ocean_plus25mile_inland.tif&quot;</span>))</span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>eez_25mi_inland <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(eez_25mi_inland) <span class="co"># Convert it to SpatRaster using terra::rast()</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>(eez_25mi_inland) <span class="co"># Check out the object </span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co"># View the datatype of the raster (should be categorical raster to conduct zonal statistics properyly)</span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">datatype</span>(eez_25mi_inland) <span class="co"># &#39;FLT4S&#39;</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co"># Converting it to &#39;int&#39; before factorizing so that any numbers are rounded to whole </span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>ocean_rast_int <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.int</span>(eez_25mi_inland) <span class="co"># Changing from float raster to integer raster </span></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="fu">plot</span>(ocean_rast_int)  <span class="co"># Checking to make sure that it makes sense </span></span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co"># Reproject integer raster to WGS 1984 (same as population count raster)</span></span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>ocean_int_reproj <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">project</span>(<span class="at">x =</span> ocean_rast_int, count_rast, <span class="at">method=</span><span class="st">&quot;near&quot;</span>)</span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a></span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="fu">plot</span>(ocean_int_reproj) <span class="co"># Checking to make sure that it makes sense</span></span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="co"># Factorizing the regions raster to ensure that it is categorical </span></span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>ocean_fact_reproj <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.factor</span>(ocean_int_reproj) </span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a></span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="fu">plot</span>(ocean_fact_reproj) <span class="co"># Checking to make sure it makes sense </span></span>
-<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a></span>
-<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="co"># intersecting the two rasters to obtain TRUE where they overlap and FALSE where they do not </span></span>
-<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a>pop_intersect <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">intersect</span>(count_rast, ocean_fact_reproj)</span>
-<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a></span>
-<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="fu">plot</span>(pop_intersect) <span class="co"># Making sure that I know where R thinks the two overlap. This makes sense!! </span></span>
-<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a></span>
-<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="co"># Checking names of the layers --&gt; The layer name for ocean raster should be &#39;zone&#39; for zonal statistics</span></span>
-<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a><span class="fu">names</span>(ocean_fact_reproj) <span class="co"># [1] &quot;ocean_plus25mile_inland&quot;</span></span>
-<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a></span>
-<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a><span class="fu">names</span>(ocean_fact_reproj) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;zone&quot;</span>) <span class="co"># [1] &quot;zone&quot;</span></span>
-<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a></span>
-<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="co"># Another command can be used to set the layer name of ocean raster </span></span>
-<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a><span class="co"># terra::set.names(ocean_fact_reproj, &quot;zone&quot;)</span></span>
-<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a></span>
-<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a><span class="do">## Writing the ocean raster out to Mazu --&gt; for future reference, you only need to load this raster and then rename the layer to &#39;zone&#39;</span></span>
-<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a></span>
-<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a><span class="co"># zonal_rast &lt;- terra::writeRaster(ocean_fact_reproj, filename = file.path(dir_M, &quot;git-annex/globalprep/spatial/v2024/eez_25mi_inland_wgs1984.tif&quot;), overwrite = TRUE, datatype=&#39;INT4U&#39;)</span></span></code></pre></div>
-</div>
-<div id="interpolate-between-years" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Interpolate between
-Years</h2>
-<p>GWPv4 data is for years 2005, 2010, 2015, and 2020. Data for missing
-years must be generated by interpolation.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## Define and apply function to calculate yearly change in population count </span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="do">## Create function for average yearly change</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>yearly_diff_terra <span class="ot">&lt;-</span> <span class="cf">function</span>(year_min, year_max, <span class="at">count_files =</span> raw, scenario_yr, dir_M){</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="co"># Load the raster files</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  <span class="co"># contingency for rasters with year = 2015 because the grep dont work (picks up all the files because they all have a 2015 in them). Kind of over engineered because you could just replace the year_max within the grep() argument to the contingency and get rid of the if statement but it works either way. </span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  <span class="cf">if</span>(year_max <span class="sc">==</span> <span class="dv">2015</span>){</span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    contingency <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;rev11_&quot;</span>, year_max)</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    rast_max <span class="ot">&lt;-</span> <span class="fu">rast</span>(count_files[<span class="fu">grep</span>(contingency, count_files)])</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    rast_max <span class="ot">&lt;-</span> <span class="fu">rast</span>(count_files[<span class="fu">grep</span>(year_max, count_files)])</span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>  }</span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>  <span class="cf">if</span>(year_min <span class="sc">==</span> <span class="dv">2015</span>){</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    contingency2 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;rev11_&quot;</span>, year_min)</span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>    rast_min <span class="ot">&lt;-</span> <span class="fu">rast</span>(count_files[<span class="fu">grep</span>(contingency2, count_files)])</span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>    rast_min <span class="ot">&lt;-</span> <span class="fu">rast</span>(count_files[<span class="fu">grep</span>(year_min, count_files)])</span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>  }</span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>  </span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>  <span class="co"># Calculate the difference and divide by 5</span></span>
-<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>  rast_diff <span class="ot">&lt;-</span> (rast_max <span class="sc">-</span> rast_min) <span class="sc">/</span> <span class="dv">5</span></span>
-<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>  </span>
-<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a>  <span class="co"># Define the output file path</span></span>
-<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>  output_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_M, <span class="fu">sprintf</span>(<span class="st">&quot;git-annex/globalprep/mar_prs_population/%s/int/yearly_change_%s_to_%s.tif&quot;</span>, scenario_yr, year_min, year_max))</span>
-<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a>  </span>
-<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>  <span class="co"># Save the result to mazu folder </span></span>
-<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>  terra<span class="sc">::</span><span class="fu">writeRaster</span>(rast_diff, <span class="at">filename =</span> output_file, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a>}</span>
-<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a></span>
-<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a><span class="co"># Create four new files --&gt; yearly change 2000-2005, 2005-2010, 2010-2015, and 2015-2020</span></span>
-<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a><span class="do">## This will allow us to use each yearly change raster to interpolate years between each increment</span></span>
-<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a><span class="fu">yearly_diff_terra</span>(<span class="dv">2000</span>, <span class="dv">2005</span>, <span class="at">count_files =</span> raw, <span class="at">dir_M =</span> dir_M, <span class="at">scenario_yr =</span> scenario_yr)</span>
-<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a></span>
-<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a><span class="fu">yearly_diff_terra</span>(<span class="dv">2005</span>, <span class="dv">2010</span>, <span class="at">count_files =</span> raw, <span class="at">dir_M =</span> dir_M, <span class="at">scenario_yr =</span> scenario_yr)</span>
-<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a></span>
-<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a><span class="fu">yearly_diff_terra</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="at">count_files =</span> raw, <span class="at">dir_M =</span> dir_M, <span class="at">scenario_yr =</span> scenario_yr)</span>
-<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a></span>
-<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a><span class="fu">yearly_diff_terra</span>(<span class="dv">2015</span>, <span class="dv">2020</span>, <span class="at">count_files =</span> raw, <span class="at">dir_M =</span> dir_M, <span class="at">scenario_yr =</span> scenario_yr)</span>
-<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a></span>
-<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a><span class="do">################### </span></span>
-<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a><span class="co"># Take a break here and check to make sure that the Mazu folder has both &quot;yearly_change_YYYY_to_YYYY&quot; files and &quot;human_count_YYYY&quot; files. Should be four and five files, respectively</span></span>
-<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a></span>
-<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a></span>
-<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a><span class="do">## Now that we have the yearly change for each five year increment, we&#39;re going to reload the files list to have access for the yearly_interpolate_terra function</span></span>
-<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">file.path</span>(dir_M, <span class="st">&quot;git-annex/globalprep/mar_prs_population/v2024/int&quot;</span>), <span class="at">pattern =</span> <span class="st">&quot;.tif$&quot;</span>, <span class="at">full =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a></span>
-<span id="cb5-48"><a href="#cb5-48" tabindex="-1"></a><span class="do">## Defining function to interpolate years between increments </span></span>
-<span id="cb5-49"><a href="#cb5-49" tabindex="-1"></a>yearly_interpolate_terra <span class="ot">&lt;-</span> <span class="cf">function</span>(files, raw_files, start_years, <span class="at">dir_M=</span>dir_M, <span class="at">scenario_yr=</span>scenario_yr) {</span>
-<span id="cb5-50"><a href="#cb5-50" tabindex="-1"></a>  <span class="co"># Find the files in Mazu folder --&gt; should be written out above to have correct naming convention</span></span>
-<span id="cb5-51"><a href="#cb5-51" tabindex="-1"></a>  <span class="co"># Define start year </span></span>
-<span id="cb5-52"><a href="#cb5-52" tabindex="-1"></a>  <span class="cf">for</span> (start_year <span class="cf">in</span> start_years) { <span class="co"># The start years will have 4 files: 2000, 2005, 2010, 2015</span></span>
-<span id="cb5-53"><a href="#cb5-53" tabindex="-1"></a>    </span>
-<span id="cb5-54"><a href="#cb5-54" tabindex="-1"></a>    end_year <span class="ot">=</span> start_year<span class="sc">+</span><span class="dv">5</span> <span class="co"># The end years are always going to be the last year in each 5-year increment </span></span>
-<span id="cb5-55"><a href="#cb5-55" tabindex="-1"></a>    </span>
-<span id="cb5-56"><a href="#cb5-56" tabindex="-1"></a>    raster_initial <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(raw_files[<span class="fu">grep</span>(<span class="fu">sprintf</span>(<span class="st">&quot;rev11_%s&quot;</span>, start_year), raw_files)])</span>
-<span id="cb5-57"><a href="#cb5-57" tabindex="-1"></a>    </span>
-<span id="cb5-58"><a href="#cb5-58" tabindex="-1"></a>    <span class="fu">names</span>(raster_initial) <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;pop_%s&quot;</span>, start_year)</span>
-<span id="cb5-59"><a href="#cb5-59" tabindex="-1"></a>    </span>
-<span id="cb5-60"><a href="#cb5-60" tabindex="-1"></a>    <span class="co"># Save the initial raster (not necessary but doing it anyways)</span></span>
-<span id="cb5-61"><a href="#cb5-61" tabindex="-1"></a>    terra<span class="sc">::</span><span class="fu">writeRaster</span>(raster_initial, </span>
-<span id="cb5-62"><a href="#cb5-62" tabindex="-1"></a>                       <span class="at">filename =</span> <span class="fu">file.path</span>(dir_M, <span class="fu">sprintf</span>(<span class="st">&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;</span>, scenario_yr, start_year)), </span>
-<span id="cb5-63"><a href="#cb5-63" tabindex="-1"></a>                       <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-64"><a href="#cb5-64" tabindex="-1"></a></span>
-<span id="cb5-65"><a href="#cb5-65" tabindex="-1"></a>        <span class="co"># load change raster </span></span>
-<span id="cb5-66"><a href="#cb5-66" tabindex="-1"></a>        change_raster <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(files[<span class="fu">grep</span>(<span class="fu">sprintf</span>(<span class="st">&quot;change_%s_to_%s&quot;</span>, start_year, end_year), files)])</span>
-<span id="cb5-67"><a href="#cb5-67" tabindex="-1"></a>        </span>
-<span id="cb5-68"><a href="#cb5-68" tabindex="-1"></a>        <span class="co">#. Define each year increment between the start year and end year </span></span>
-<span id="cb5-69"><a href="#cb5-69" tabindex="-1"></a>        <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
-<span id="cb5-70"><a href="#cb5-70" tabindex="-1"></a>          yr <span class="ot">&lt;-</span> start_year <span class="sc">+</span> i <span class="co"># EX: start_year=2000, end_year=2005, yr = 2001, 2002, 2003, 2004</span></span>
-<span id="cb5-71"><a href="#cb5-71" tabindex="-1"></a>          <span class="cf">if</span> (yr <span class="sc">&lt;=</span> end_year) { <span class="co"># Check that year is less than or equal to the end_year (should be)</span></span>
-<span id="cb5-72"><a href="#cb5-72" tabindex="-1"></a>            <span class="co"># Define each raster that its calculating as raster_current </span></span>
-<span id="cb5-73"><a href="#cb5-73" tabindex="-1"></a>            <span class="do">## Calculated with yearly change times the year out that its calculating (1, 2, 3, 4)</span></span>
-<span id="cb5-74"><a href="#cb5-74" tabindex="-1"></a>            raster_current <span class="ot">&lt;-</span> raster_initial <span class="sc">+</span> (i <span class="sc">*</span> change_raster) <span class="co"># calculate w/ change in years * avg change/year  </span></span>
-<span id="cb5-75"><a href="#cb5-75" tabindex="-1"></a>            </span>
-<span id="cb5-76"><a href="#cb5-76" tabindex="-1"></a>            <span class="co"># Rename the current raster with name and the yr variable </span></span>
-<span id="cb5-77"><a href="#cb5-77" tabindex="-1"></a>            <span class="fu">names</span>(raster_current) <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;pop_%s&quot;</span>, yr)</span>
-<span id="cb5-78"><a href="#cb5-78" tabindex="-1"></a>            </span>
-<span id="cb5-79"><a href="#cb5-79" tabindex="-1"></a>            <span class="co"># Write it out to the mazu directory </span></span>
-<span id="cb5-80"><a href="#cb5-80" tabindex="-1"></a>            terra<span class="sc">::</span><span class="fu">writeRaster</span>(raster_current, </span>
-<span id="cb5-81"><a href="#cb5-81" tabindex="-1"></a>                               <span class="at">filename =</span> <span class="fu">file.path</span>(dir_M, <span class="fu">sprintf</span>(<span class="st">&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;</span>, scenario_yr, yr)), </span>
-<span id="cb5-82"><a href="#cb5-82" tabindex="-1"></a>                               <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-83"><a href="#cb5-83" tabindex="-1"></a>          }</span>
-<span id="cb5-84"><a href="#cb5-84" tabindex="-1"></a>        }</span>
-<span id="cb5-85"><a href="#cb5-85" tabindex="-1"></a>        </span>
-<span id="cb5-86"><a href="#cb5-86" tabindex="-1"></a>        <span class="co"># Update for the next iteration --&gt; the new raster_initial is the last end year </span></span>
-<span id="cb5-87"><a href="#cb5-87" tabindex="-1"></a>        raster_initial <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(raw[<span class="fu">grep</span>(<span class="fu">sprintf</span>(<span class="st">&quot;rev11_%s&quot;</span>, end_year), raw)])</span>
-<span id="cb5-88"><a href="#cb5-88" tabindex="-1"></a>        <span class="co"># Rename so that the layer is named pop_&#39;end_year&#39;</span></span>
-<span id="cb5-89"><a href="#cb5-89" tabindex="-1"></a>        <span class="fu">names</span>(raster_initial) <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;pop_%s&quot;</span>, end_year)</span>
-<span id="cb5-90"><a href="#cb5-90" tabindex="-1"></a>  }</span>
-<span id="cb5-91"><a href="#cb5-91" tabindex="-1"></a>}</span>
-<span id="cb5-92"><a href="#cb5-92" tabindex="-1"></a></span>
-<span id="cb5-93"><a href="#cb5-93" tabindex="-1"></a><span class="co"># Letting it rip (but making sure everything is correct beforehand)</span></span>
-<span id="cb5-94"><a href="#cb5-94" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">file.path</span>(dir_M, <span class="fu">sprintf</span>(<span class="st">&quot;git-annex/globalprep/mar_prs_population/%s/int&quot;</span>, scenario_yr), <span class="at">pattern =</span> <span class="st">&quot;.tif$&quot;</span>, <span class="at">full =</span> <span class="cn">TRUE</span>) </span>
-<span id="cb5-95"><a href="#cb5-95" tabindex="-1"></a>start_years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">2005</span>, <span class="dv">2010</span>, <span class="dv">2015</span>) <span class="co"># Starting years</span></span>
-<span id="cb5-96"><a href="#cb5-96" tabindex="-1"></a>dir_M <span class="co"># Checking dir_M</span></span>
-<span id="cb5-97"><a href="#cb5-97" tabindex="-1"></a>scenario_yr <span class="ot">&lt;-</span> scenario_yr <span class="co"># Update with your scenario year</span></span>
-<span id="cb5-98"><a href="#cb5-98" tabindex="-1"></a>scenario_yr <span class="co"># Check to make sure </span></span>
-<span id="cb5-99"><a href="#cb5-99" tabindex="-1"></a></span>
-<span id="cb5-100"><a href="#cb5-100" tabindex="-1"></a><span class="fu">yearly_interpolate_terra</span>(<span class="at">files=</span>files, <span class="at">raw_files =</span> raw, <span class="at">start_years=</span>start_years, dir_M, scenario_yr)</span>
-<span id="cb5-101"><a href="#cb5-101" tabindex="-1"></a></span>
-<span id="cb5-102"><a href="#cb5-102" tabindex="-1"></a><span class="co"># # Check a random raster from the mazu directory</span></span>
-<span id="cb5-103"><a href="#cb5-103" tabindex="-1"></a><span class="co"># count_2018 &lt;- terra::rast(file.path(dir_M, &quot;git-annex/globalprep/mar_prs_population/v2024/int/human_count_2018_mol.tif&quot;))</span></span>
-<span id="cb5-104"><a href="#cb5-104" tabindex="-1"></a><span class="co"># plot(count_2018)</span></span></code></pre></div>
-</div>
-<div id="append-or-extract-by-ohi-regions" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> Append or Extract by
-OHI Regions</h2>
-<p>Stack rasters of population counts for each year, sum within regions
-(using eez_25mi_inland) for each year, and save this as
-<code>coastal_pop_zonal_sums.csv</code> in the intermediate folder.
-Gather this into long format dataframe, and save as
-<code>output/mar_pop_25mi.csv</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Load files and create a SpatRaster of the human_count files (each layer is going to be a year)  ----</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co"># Call in the files created using the interpolate_years_terra function</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">file.path</span>(dir_M, <span class="st">&quot;git-annex/globalprep/mar_prs_population/v2024/int&quot;</span>), <span class="at">pattern =</span> <span class="st">&quot;human_count_</span><span class="sc">\\</span><span class="st">d{4}_mol.tif$&quot;</span>, <span class="at">full =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>files <span class="co"># Check to make sure that they are the correct files </span></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>pop_all_years <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(files) <span class="co"># Use terra::rast() on list files to make a spatraster with as many layers as there are files </span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co"># Check it out </span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>(pop_all_years) <span class="co"># Has 21 layers, one for each of our raster files </span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co"># Read in EEZ plus 25mi inland WGS 1984*** raster and tidy for zonal statistics ---- </span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>zone_raster <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="fu">file.path</span>(dir_M, <span class="st">&quot;git-annex/globalprep/spatial/v2024/eez_25mi_inland_wgs1984.tif&quot;</span>))</span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co"># Check it out --&gt; resolution, layer name</span></span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>(zone_raster)</span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co"># Need to make it a categorical raster for zonal statistics. See what it loads in as?</span></span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">datatype</span>(zone_raster) <span class="co"># [1] &quot;INT4U&quot;</span></span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>zone_raster <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.factor</span>(zone_raster) <span class="co"># Ensuring R knows its a categorical raster. Won&#39;t have a datatype anymore though</span></span>
-<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a></span>
-<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="co"># Need to check names to make sure they are &#39;zone&#39; for zonal statistics</span></span>
-<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="fu">names</span>(zone_raster) <span class="co"># [1] &quot;ocean_plus25mile_inland&quot;</span></span>
-<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a></span>
-<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="fu">names</span>(zone_raster) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;zone&quot;</span>) <span class="co"># Ensuring R knows that the layer we want defines ZONES!</span></span>
-<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a></span>
-<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a></span>
-<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a><span class="co"># Conduct zonal statistics, tidy up and write out ----</span></span>
-<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a></span>
-<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a><span class="co"># Conduct zonal statistics</span></span>
-<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a>coastal_pop <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">zonal</span>(pop_all_years, zone_raster, <span class="st">&quot;sum&quot;</span>, <span class="at">na.rm=</span><span class="cn">TRUE</span>) </span>
-<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a></span>
-<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a><span class="co"># Check it to see the column names --&gt; This is &#39;fixed&#39; (v2024) in following step</span></span>
-<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a><span class="fu">View</span>(coastal_pop)</span>
-<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a></span>
-<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a><span class="co"># Fixing column names (v2024)</span></span>
-<span id="cb6-39"><a href="#cb6-39" tabindex="-1"></a>coastal_pop2 <span class="ot">&lt;-</span> coastal_pop <span class="sc">%&gt;%</span> </span>
-<span id="cb6-40"><a href="#cb6-40" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">pop_2000 =</span> gpw_v4_population_count_adjusted_to_2015_unwpp_country_totals_rev11_2000_30_sec,</span>
-<span id="cb6-41"><a href="#cb6-41" tabindex="-1"></a>                <span class="at">pop_2005 =</span> gpw_v4_population_count_adjusted_to_2015_unwpp_country_totals_rev11_2005_30_sec,</span>
-<span id="cb6-42"><a href="#cb6-42" tabindex="-1"></a>                <span class="at">pop_2010 =</span> gpw_v4_population_count_adjusted_to_2015_unwpp_country_totals_rev11_2010_30_sec,</span>
-<span id="cb6-43"><a href="#cb6-43" tabindex="-1"></a>                <span class="at">pop_2015 =</span> gpw_v4_population_count_adjusted_to_2015_unwpp_country_totals_rev11_2015_30_sec,</span>
-<span id="cb6-44"><a href="#cb6-44" tabindex="-1"></a>                <span class="at">pop_2020 =</span> gpw_v4_population_count_adjusted_to_2015_unwpp_country_totals_rev11_2020_30_sec)</span>
-<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a></span>
-<span id="cb6-46"><a href="#cb6-46" tabindex="-1"></a><span class="co"># Writing to &#39;int&#39; folder in project to have zonal sums </span></span>
-<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a><span class="fu">write_csv</span>(coastal_pop2, <span class="fu">file.path</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/mar_prs_population/v2024/int/coastal_pop_zonal_sums.csv&quot;</span>)))</span>
-<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a></span>
-<span id="cb6-49"><a href="#cb6-49" tabindex="-1"></a><span class="co"># Pivoting longer to have one &quot;rgn_id&quot; column, one &quot;year&quot; column, and one &quot;popsum&quot; column</span></span>
-<span id="cb6-50"><a href="#cb6-50" tabindex="-1"></a>coastal_pop3 <span class="ot">&lt;-</span> coastal_pop2 <span class="sc">%&gt;%</span> </span>
-<span id="cb6-51"><a href="#cb6-51" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span><span class="fu">c</span>(zone), <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;popsum&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-52"><a href="#cb6-52" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">str_remove_all</span>(year, <span class="st">&quot;pop_&quot;</span>),</span>
-<span id="cb6-53"><a href="#cb6-53" tabindex="-1"></a>         <span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-54"><a href="#cb6-54" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">rgn_id =</span> zone) <span class="sc">%&gt;%</span></span>
-<span id="cb6-55"><a href="#cb6-55" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">rgn_id =</span> <span class="fu">as.numeric</span>(rgn_id)) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-56"><a href="#cb6-56" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(rgn_id <span class="sc">&lt;=</span> <span class="dv">250</span>) </span>
-<span id="cb6-57"><a href="#cb6-57" tabindex="-1"></a></span>
-<span id="cb6-58"><a href="#cb6-58" tabindex="-1"></a><span class="co"># Converting NaN&#39;s to 0&#39;s (mostly occur with uninhabited islands)</span></span>
-<span id="cb6-59"><a href="#cb6-59" tabindex="-1"></a>coastal_pop_nona <span class="ot">&lt;-</span> coastal_pop3 <span class="sc">%&gt;%</span> </span>
-<span id="cb6-60"><a href="#cb6-60" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">popsum =</span> <span class="fu">case_when</span>(</span>
-<span id="cb6-61"><a href="#cb6-61" tabindex="-1"></a>    popsum <span class="sc">==</span> <span class="st">&quot;NaN&quot;</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
-<span id="cb6-62"><a href="#cb6-62" tabindex="-1"></a>    <span class="at">.default=</span>popsum </span>
-<span id="cb6-63"><a href="#cb6-63" tabindex="-1"></a>  ))</span>
-<span id="cb6-64"><a href="#cb6-64" tabindex="-1"></a></span>
-<span id="cb6-65"><a href="#cb6-65" tabindex="-1"></a><span class="co"># Writing it out to &#39;int&#39; folder to have the coastal population of each country for all years </span></span>
-<span id="cb6-66"><a href="#cb6-66" tabindex="-1"></a><span class="fu">write_csv</span>(coastal_pop_nona, <span class="fu">file.path</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/mar_prs_population/v2024/output/mar_pop_25mi.csv&quot;</span>)))</span></code></pre></div>
-</div>
-<div id="calculate-area-of-25mi-inland-buffers" class="section level2" number="5.4">
-<h2><span class="header-section-number">5.4</span> Calculate Area of
-25mi Inland Buffers</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Load in data calculated in spatial folder </span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>area <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/spatial/v2019/output/area_km2_25mi_inland.csv&quot;</span>)) <span class="co"># last updated v2019</span></span></code></pre></div>
-</div>
-<div id="calculate-mariculture-population-pressure" class="section level2" number="5.5">
-<h2><span class="header-section-number">5.5</span> Calculate Mariculture
-Population Pressure</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## Rescale organized coastal population data</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>pop_rescaled <span class="ot">&lt;-</span> coastal_pop_nona <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  <span class="fu">left_join</span>(area, <span class="at">by=</span><span class="st">&quot;rgn_id&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">density =</span> popsum<span class="sc">/</span>area_km2) <span class="sc">%&gt;%</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ln_density =</span> <span class="fu">log</span>(density <span class="sc">+</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">scalar =</span> <span class="fu">max</span>(ln_density, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dens_rescaled =</span> ln_density<span class="sc">/</span>scalar) <span class="sc">%&gt;%</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dens_rescaled =</span> <span class="fu">ifelse</span>(dens_rescaled <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="dv">1</span>, dens_rescaled))</span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="fu">filter</span>(pop_rescaled, <span class="fu">is.na</span>(area_km2)) <span class="co"># no NA values for the area column (Antarctica not included)</span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>pressure_data <span class="ot">&lt;-</span> pop_rescaled <span class="sc">%&gt;%</span></span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, year, <span class="at">pressure_score =</span> dens_rescaled)</span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="fu">write_csv</span>(pressure_data, <span class="fu">file.path</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/mar_prs_population/v2024/output/prs_pop_density.csv&quot;</span>)))</span></code></pre></div>
-</div>
-<div id="gapfilling" class="section level2" number="5.6">
-<h2><span class="header-section-number">5.6</span> Gapfilling</h2>
-<p>No gapfilling was completed as part of this data prep methodology.
-Datasets are saved with “_gf” appended just to indicate they are
-finalized versions.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>prs <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;globalprep/mar_prs_population/v2024/output/prs_pop_density.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">pressure_score =</span> <span class="dv">0</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="fu">write.csv</span>(prs, <span class="st">&quot;globalprep/mar_prs_population/v2024/output/prs_pop_density_gf.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>mar <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;globalprep/mar_prs_population/v2024/output/mar_pop_25mi.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">popsum =</span> <span class="dv">0</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="fu">write.csv</span>(mar, <span class="st">&quot;globalprep/mar_prs_population/v2024/output/mar_pop_25mi_gf.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-</div>
-<div id="data-checks-andor-meta-analysis" class="section level2" number="5.7">
-<h2><span class="header-section-number">5.7</span> Data Checks and/or
-Meta-Analysis</h2>
-<div id="create-un_population.csv-for-data-checking" class="section level3" number="5.7.1">
-<h3><span class="header-section-number">5.7.1</span> Create
-<code>UN_population.csv</code> for Data-checking</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>pop_gather <span class="ot">&lt;-</span> pop <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">gather</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;population&quot;</span>, <span class="fu">starts_with</span>(<span class="st">&quot;X&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">population =</span> <span class="fu">gsub</span>(<span class="st">&quot; &quot;</span>, <span class="st">&quot;&quot;</span>, population)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">gsub</span>(<span class="st">&quot;X&quot;</span>, <span class="st">&quot;&quot;</span>, year)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">population =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(population)) <span class="sc">*</span> <span class="dv">1000</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="do">## Ignore Jersey and Guernsey (Channel Islands) for now</span></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>pop_gather_rename <span class="ot">&lt;-</span> pop_gather <span class="sc">%&gt;%</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(country,<span class="st">&quot;C</span><span class="sc">\\</span><span class="st">Ste d&#39;Ivoire&quot;</span>), <span class="st">&quot;Cote d&#39;Ivoire&quot;</span>, country)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(country,<span class="st">&quot;R</span><span class="sc">\\</span><span class="st">Sunion&quot;</span>), <span class="st">&quot;Reunion&quot;</span>, country)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">ifelse</span>(<span class="fu">str_detect</span>(country,<span class="st">&quot;Cura</span><span class="sc">\\</span><span class="st">Sao&quot;</span>), <span class="st">&quot;Curacao&quot;</span>, country)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">ifelse</span>(country<span class="sc">==</span><span class="st">&quot;China, Taiwan Province of China&quot;</span>, <span class="st">&quot;Taiwan&quot;</span>, country)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">country =</span> <span class="fu">ifelse</span>(country<span class="sc">==</span><span class="st">&quot;Dem. People&#39;s Republic of Korea&quot;</span>, <span class="st">&quot;North Korea&quot;</span>, country))</span>
-<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>  </span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="do">## Organize the data into regions used in OHI, and save</span></span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>pop_rgn <span class="ot">&lt;-</span> <span class="fu">name_2_rgn</span>(<span class="at">df_in =</span> pop_gather_rename, </span>
-<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>                      <span class="at">fld_name=</span><span class="st">&#39;country&#39;</span>, </span>
-<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>                      <span class="at">flds_unique=</span><span class="fu">c</span>(<span class="st">&#39;year&#39;</span>))</span>
-<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a></span>
-<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a>pop_rgn <span class="ot">&lt;-</span> pop_rgn <span class="sc">%&gt;%</span></span>
-<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(rgn_id, year) <span class="sc">%&gt;%</span></span>
-<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">population =</span> <span class="fu">sum</span>(population)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a>  <span class="fu">data.frame</span>()</span>
-<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a></span>
-<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a><span class="fu">write.csv</span>(pop_rgn, <span class="st">&quot;globalprep/mar_prs_population/v2024/output/UN_population.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a>ohi_rgns <span class="ot">&lt;-</span> ohicore<span class="sc">::</span>rgn_master</span></code></pre></div>
-</div>
-<div id="compare-un_population-with-calculated-count" class="section level3" number="5.7.2">
-<h3><span class="header-section-number">5.7.2</span> Compare
-<code>UN_population</code> with Calculated Count</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>compare_yr <span class="ot">&lt;-</span> <span class="dv">2020</span> <span class="co"># doing below functions for comparison between raster and UN population data for 2015</span></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="do">## Sum counts regionally for the scenario year</span></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>pop_rast <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="fu">file.path</span>(dir_M, <span class="fu">sprintf</span>(<span class="st">&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;</span>, scenario_yr, compare_yr)))</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="fu">names</span>(pop_rast) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;pop_2020&quot;</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>zones <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="fu">file.path</span>(dir_M, <span class="st">&quot;git-annex/globalprep/spatial/v2024/eez_25mi_inland_wgs1984.tif&quot;</span>)) <span class="co"># pulling from 2024 server data</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="fu">names</span>(zones) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;zone&quot;</span>)</span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>zones <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.factor</span>(zones)</span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>pop_counts <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">zonal</span>(pop_rast, zones, <span class="at">fun =</span> <span class="st">&quot;sum&quot;</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>pop_UN <span class="ot">&lt;-</span> pop_rgn <span class="sc">%&gt;%</span></span>
-<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">==</span> compare_yr) <span class="sc">%&gt;%</span></span>
-<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, <span class="at">pop_UN =</span> population)</span>
-<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a></span>
-<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="do">## Join filtered UN population and summed calculated counts</span></span>
-<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a>compare_pop <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(pop_counts) <span class="sc">%&gt;%</span></span>
-<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">sum =</span> gpw_v4_population_count_adjusted_to_2015_unwpp_country_totals_rev11_2020_30_sec) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="at">rgn_id =</span> zone, <span class="at">pop_rast =</span> sum) <span class="sc">%&gt;%</span></span>
-<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">rgn_id =</span> <span class="fu">as.numeric</span>(rgn_id)) <span class="sc">%&gt;%</span></span>
-<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(pop_UN, <span class="at">by=</span><span class="st">&quot;rgn_id&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pop_UN))</span>
-<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a></span>
-<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
-<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a>compare_pop<span class="sc">$</span>diff <span class="ot">&lt;-</span> compare_pop<span class="sc">$</span>pop_rast <span class="sc">-</span> compare_pop<span class="sc">$</span>pop_UN</span>
-<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a></span>
-<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a><span class="do">## Comparing to the population data that came from ArcGIS Pro! This would only work for the compare year 2020 because the Arc data came from that year. So commenting it out</span></span>
-<span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a></span>
-<span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a><span class="co"># fp_gis &lt;- file.path(dir_M, &quot;git-annex/globalprep/mar_prs_population/v2024/coastal_pop/WGS_1984_OHI_Coastal_Population_Estimates_TableToExcel.xlsx&quot;)</span></span>
-<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a><span class="co"># gis_pop &lt;- readxl::read_xlsx(fp_gis, col_names = TRUE) %&gt;% </span></span>
-<span id="cb11-33"><a href="#cb11-33" tabindex="-1"></a><span class="co">#   dplyr::select(-c(OBJECTID, COUNT, AREA)) %&gt;% </span></span>
-<span id="cb11-34"><a href="#cb11-34" tabindex="-1"></a><span class="co">#   dplyr::rename(rgn_id = Value)</span></span>
-<span id="cb11-35"><a href="#cb11-35" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb11-36"><a href="#cb11-36" tabindex="-1"></a><span class="co"># compare_pop &lt;- compare_pop %&gt;% </span></span>
-<span id="cb11-37"><a href="#cb11-37" tabindex="-1"></a><span class="co">#   dplyr::left_join(gis_pop, by = &quot;rgn_id&quot;)</span></span>
-<span id="cb11-38"><a href="#cb11-38" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb11-39"><a href="#cb11-39" tabindex="-1"></a><span class="co"># # Difference between gis data population estimates versus UN population estimates</span></span>
-<span id="cb11-40"><a href="#cb11-40" tabindex="-1"></a><span class="co"># options(scipen = 999)</span></span>
-<span id="cb11-41"><a href="#cb11-41" tabindex="-1"></a><span class="co"># compare_pop$gis_diff &lt;- compare_pop$pop_rast - compare_pop$SUM</span></span>
-<span id="cb11-42"><a href="#cb11-42" tabindex="-1"></a></span>
-<span id="cb11-43"><a href="#cb11-43" tabindex="-1"></a></span>
-<span id="cb11-44"><a href="#cb11-44" tabindex="-1"></a><span class="do">## Check plot - investigate outliers (post to issue first)</span></span>
-<span id="cb11-45"><a href="#cb11-45" tabindex="-1"></a>pop_compare_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(compare_pop) <span class="sc">+</span></span>
-<span id="cb11-46"><a href="#cb11-46" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(pop_rast, pop_UN, <span class="at">label =</span> rgn_id), <span class="at">alpha =</span> .<span class="dv">6</span>) <span class="sc">+</span></span>
-<span id="cb11-47"><a href="#cb11-47" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span></span>
-<span id="cb11-48"><a href="#cb11-48" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">sprintf</span>(<span class="st">&#39;Calculated Population %s&#39;</span>, compare_yr),</span>
-<span id="cb11-49"><a href="#cb11-49" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">sprintf</span>(<span class="st">&#39;UN Population %s&#39;</span>, compare_yr),</span>
-<span id="cb11-50"><a href="#cb11-50" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&#39;Population Comparison&#39;</span>)</span>
-<span id="cb11-51"><a href="#cb11-51" tabindex="-1"></a><span class="fu">ggplotly</span>(pop_compare_plot)</span>
-<span id="cb11-52"><a href="#cb11-52" tabindex="-1"></a></span>
-<span id="cb11-53"><a href="#cb11-53" tabindex="-1"></a><span class="do">## Plot log values of same comparison</span></span>
-<span id="cb11-54"><a href="#cb11-54" tabindex="-1"></a>pop_compare_log <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(compare_pop) <span class="sc">+</span></span>
-<span id="cb11-55"><a href="#cb11-55" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="fu">log</span>(pop_rast), <span class="fu">log</span>(pop_UN), <span class="at">label =</span> rgn_id), <span class="at">alpha =</span> .<span class="dv">6</span>) <span class="sc">+</span></span>
-<span id="cb11-56"><a href="#cb11-56" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span></span>
-<span id="cb11-57"><a href="#cb11-57" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">sprintf</span>(<span class="st">&#39;Log of Calculated Population %s&#39;</span>, compare_yr),</span>
-<span id="cb11-58"><a href="#cb11-58" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">sprintf</span>(<span class="st">&#39;Log of UN Population %s&#39;</span>, compare_yr),</span>
-<span id="cb11-59"><a href="#cb11-59" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&#39;Population Comparison (log values)&#39;</span>)</span>
-<span id="cb11-60"><a href="#cb11-60" tabindex="-1"></a><span class="fu">ggplotly</span>(pop_compare_log)</span></code></pre></div>
-</div>
-<div id="compare-to-previous-year" class="section level3" number="5.7.3">
-<h3><span class="header-section-number">5.7.3</span> Compare to Previous
-Year</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>prev_scen_yr <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>, <span class="fu">as.numeric</span>(<span class="fu">substr</span>(scenario_yr, <span class="dv">2</span>, <span class="dv">5</span>)) <span class="sc">-</span><span class="dv">3</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>old <span class="ot">&lt;-</span>  <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&#39;globalprep/mar_prs_population/v2019/output/mar_pop_25mi.csv&#39;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, year, <span class="at">popsum_old=</span>popsum)</span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> coastal_pop_nona <span class="sc">%&gt;%</span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(old, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;rgn_id&quot;</span>, <span class="st">&quot;year&quot;</span>))</span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>years_compare_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(tmp) <span class="sc">+</span></span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="fu">log</span>(popsum), <span class="fu">log</span>(popsum_old), <span class="at">label =</span> rgn_id), <span class="at">alpha =</span> .<span class="dv">6</span>) <span class="sc">+</span></span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span></span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">sprintf</span>(<span class="st">&#39;Log of Calculated Population %s&#39;</span>, scenario_yr),</span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">sprintf</span>(<span class="st">&#39;Log of Calculated Population %s&#39;</span>, prev_scen_yr),</span>
-<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&#39;Population comparison between assessments&#39;</span>)</span>
-<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="fu">ggplotly</span>(years_compare_plot)</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="do">## Compare area with that calculated in previous year (should look very similar)</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co"># v2018: old_area &lt;- read.csv(paste0(prev_scen_yr, &quot;/rgn_area_inland25mi.csv&quot;)) %&gt;%</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>old_area <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&#39;globalprep/mar_prs_population/v2019/int/area_km2_25mi.csv&#39;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">old_area_km2 =</span> area_km2) <span class="sc">%&gt;%</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">old_area_km2 =</span> <span class="fu">round</span>(old_area_km2)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(area, <span class="at">by =</span> <span class="st">&quot;rgn_id&quot;</span>)</span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>area_compare_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(old_area) <span class="sc">+</span></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(area_km2, old_area_km2, <span class="at">label =</span> rgn_id), <span class="at">alpha =</span> .<span class="dv">6</span>) <span class="sc">+</span></span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span></span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">sprintf</span>(<span class="st">&#39;%s Area (km2)&#39;</span>, scenario_yr),</span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">sprintf</span>(<span class="st">&#39;%s Area (km2)&#39;</span>, prev_scen_yr),</span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&#39;Area Calculation Comparison&#39;</span>)</span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="fu">ggplotly</span>(area_compare_plot)</span>
-<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a></span>
-<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a></span>
-<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a><span class="fu">summary</span>(old_area)</span></code></pre></div>
-</div>
-</div>
-<div id="manual-option-for-creating-interpolated-files-see-note" class="section level2" number="5.8">
-<h2><span class="header-section-number">5.8</span> Manual option for
-creating interpolated files (See note)</h2>
-<ul>
-<li><p>NOTE: Creating these files and storing them in R will max out the
-tmp directory storage (limit 40GB) for mazu if other large objects are
-also loaded. It is highly recommended to use the
-yearly_interpolate_terra function but if that doesn’t work then use this
-method but I would not recommend running it all at once. Run one, check
-it to make sure it makes sense by runnning the following</p>
-<ul>
-<li><p>global(raster_YYYY, “sum”, na.rm=TRUE)</p></li>
-<li><p>Then write it out using writeRaster, and remove it from the
-environment using rm(raster_YYYY) before moving to the next one</p></li>
-<li><p><strong>You will need each raw raster (2000, 2005, 2010, 2015)
-and each yearly change raster for each of the in-between years over a
-five-year increment, so just remove the “in-between year” rasters after
-they’re written out</strong></p></li>
-</ul></li>
-</ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="do">## Pulling from &quot;files&quot;</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co"># raster_2000 &lt;- terra::rast(files[grep(sprintf(&quot;count_%s_mol&quot;, 2000), files)])</span></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co"># yr=2000</span></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co"># names(raster_2000) = c(&quot;pop_2000&quot;)</span></span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co"># # terra::writeRaster(raster_2000, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="co"># change_1 &lt;- terra::rast(files[grep(sprintf(&quot;change_%s_to_%s&quot;, 2000, 2005), files)])</span></span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co"># i=1</span></span>
-<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="co"># yr = 2000+i</span></span>
-<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="co"># raster_2001 &lt;- raster_2000 + (i * change_1)</span></span>
-<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="co"># names(raster_2001) = c(&quot;pop_2001&quot;)</span></span>
-<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2001, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a><span class="co"># i=2</span></span>
-<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a><span class="co"># yr=2000+i</span></span>
-<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a><span class="co"># raster_2002 &lt;- raster_2000 + (i*change_1)</span></span>
-<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a><span class="co"># names(raster_2002) = c(&quot;pop_2002&quot;)</span></span>
-<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2002, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a><span class="co"># i=3</span></span>
-<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a><span class="co"># yr=2000+i</span></span>
-<span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a><span class="co"># raster_2003 &lt;- raster_2000 + (i*change_1)</span></span>
-<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-34"><a href="#cb14-34" tabindex="-1"></a><span class="co"># names(raster_2003) = c(&quot;pop_2003&quot;)</span></span>
-<span id="cb14-35"><a href="#cb14-35" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-36"><a href="#cb14-36" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2003, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-37"><a href="#cb14-37" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-38"><a href="#cb14-38" tabindex="-1"></a><span class="co"># i=4</span></span>
-<span id="cb14-39"><a href="#cb14-39" tabindex="-1"></a><span class="co"># yr=2000+i</span></span>
-<span id="cb14-40"><a href="#cb14-40" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-41"><a href="#cb14-41" tabindex="-1"></a><span class="co"># raster_2004 &lt;- raster_2000 + (i*change_1)</span></span>
-<span id="cb14-42"><a href="#cb14-42" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-43"><a href="#cb14-43" tabindex="-1"></a><span class="co"># names(raster_2004) = c(&quot;pop_2004&quot;)</span></span>
-<span id="cb14-44"><a href="#cb14-44" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-45"><a href="#cb14-45" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2004, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-46"><a href="#cb14-46" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-47"><a href="#cb14-47" tabindex="-1"></a><span class="co"># raster_2005 &lt;- terra::rast(files[grep(sprintf(&quot;count_%s_mol&quot;, 2005), files)])</span></span>
-<span id="cb14-48"><a href="#cb14-48" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-49"><a href="#cb14-49" tabindex="-1"></a><span class="co"># change_2 &lt;- terra::rast(files[grep(sprintf(&quot;change_%s_to_%s&quot;, 2005, 2010), files)])</span></span>
-<span id="cb14-50"><a href="#cb14-50" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-51"><a href="#cb14-51" tabindex="-1"></a><span class="co"># i=1</span></span>
-<span id="cb14-52"><a href="#cb14-52" tabindex="-1"></a><span class="co"># yr=2005+i</span></span>
-<span id="cb14-53"><a href="#cb14-53" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-54"><a href="#cb14-54" tabindex="-1"></a><span class="co"># raster_2006 &lt;- raster_2005 + (i*change_2)</span></span>
-<span id="cb14-55"><a href="#cb14-55" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-56"><a href="#cb14-56" tabindex="-1"></a><span class="co"># names(raster_2006) = c(&quot;pop_2006&quot;)</span></span>
-<span id="cb14-57"><a href="#cb14-57" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-58"><a href="#cb14-58" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2006, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-59"><a href="#cb14-59" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-60"><a href="#cb14-60" tabindex="-1"></a><span class="co"># i=2</span></span>
-<span id="cb14-61"><a href="#cb14-61" tabindex="-1"></a><span class="co"># yr=2005+i</span></span>
-<span id="cb14-62"><a href="#cb14-62" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-63"><a href="#cb14-63" tabindex="-1"></a><span class="co"># raster_2007 &lt;- raster_2005 + (i*change_2)</span></span>
-<span id="cb14-64"><a href="#cb14-64" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-65"><a href="#cb14-65" tabindex="-1"></a><span class="co"># names(raster_2007) = c(&quot;pop_2007&quot;)</span></span>
-<span id="cb14-66"><a href="#cb14-66" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-67"><a href="#cb14-67" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2007, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-68"><a href="#cb14-68" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-69"><a href="#cb14-69" tabindex="-1"></a><span class="co"># i=3</span></span>
-<span id="cb14-70"><a href="#cb14-70" tabindex="-1"></a><span class="co"># yr=2005+i</span></span>
-<span id="cb14-71"><a href="#cb14-71" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-72"><a href="#cb14-72" tabindex="-1"></a><span class="co"># raster_2008 &lt;- raster_2005 + (i*change_2)</span></span>
-<span id="cb14-73"><a href="#cb14-73" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-74"><a href="#cb14-74" tabindex="-1"></a><span class="co"># names(raster_2008) = c(&quot;pop_2008&quot;)</span></span>
-<span id="cb14-75"><a href="#cb14-75" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-76"><a href="#cb14-76" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2008, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-77"><a href="#cb14-77" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-78"><a href="#cb14-78" tabindex="-1"></a><span class="co"># i=4</span></span>
-<span id="cb14-79"><a href="#cb14-79" tabindex="-1"></a><span class="co"># yr=2005+i</span></span>
-<span id="cb14-80"><a href="#cb14-80" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-81"><a href="#cb14-81" tabindex="-1"></a><span class="co"># raster_2009 &lt;- raster_2005 + (i*change_2)</span></span>
-<span id="cb14-82"><a href="#cb14-82" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-83"><a href="#cb14-83" tabindex="-1"></a><span class="co"># names(raster_2009) = c(&quot;pop_2009&quot;)</span></span>
-<span id="cb14-84"><a href="#cb14-84" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-85"><a href="#cb14-85" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2009, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-86"><a href="#cb14-86" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-87"><a href="#cb14-87" tabindex="-1"></a><span class="co"># raster_2010 &lt;- terra::rast(files[grep(sprintf(&quot;count_%s_mol&quot;, 2010), files)])</span></span>
-<span id="cb14-88"><a href="#cb14-88" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-89"><a href="#cb14-89" tabindex="-1"></a><span class="co"># change_3 &lt;- terra::rast(files[grep(sprintf(&quot;change_%s_to_%s&quot;, 2010, 2015), files)])</span></span>
-<span id="cb14-90"><a href="#cb14-90" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-91"><a href="#cb14-91" tabindex="-1"></a><span class="co"># i=1</span></span>
-<span id="cb14-92"><a href="#cb14-92" tabindex="-1"></a><span class="co"># yr=2010+i</span></span>
-<span id="cb14-93"><a href="#cb14-93" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-94"><a href="#cb14-94" tabindex="-1"></a><span class="co"># raster_2011 &lt;- raster_2010 + (i*change_3)</span></span>
-<span id="cb14-95"><a href="#cb14-95" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-96"><a href="#cb14-96" tabindex="-1"></a><span class="co"># names(raster_2011) = c(&quot;pop_2011&quot;)</span></span>
-<span id="cb14-97"><a href="#cb14-97" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-98"><a href="#cb14-98" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2011, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-99"><a href="#cb14-99" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-100"><a href="#cb14-100" tabindex="-1"></a><span class="co"># i=2</span></span>
-<span id="cb14-101"><a href="#cb14-101" tabindex="-1"></a><span class="co"># yr=2010+i</span></span>
-<span id="cb14-102"><a href="#cb14-102" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-103"><a href="#cb14-103" tabindex="-1"></a><span class="co"># raster_2012 &lt;- raster_2010 + (i*change_3)</span></span>
-<span id="cb14-104"><a href="#cb14-104" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-105"><a href="#cb14-105" tabindex="-1"></a><span class="co"># names(raster_2012) = c(&quot;pop_2012&quot;)</span></span>
-<span id="cb14-106"><a href="#cb14-106" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-107"><a href="#cb14-107" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2012, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-108"><a href="#cb14-108" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-109"><a href="#cb14-109" tabindex="-1"></a><span class="co"># i=3</span></span>
-<span id="cb14-110"><a href="#cb14-110" tabindex="-1"></a><span class="co"># yr=2010+i</span></span>
-<span id="cb14-111"><a href="#cb14-111" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-112"><a href="#cb14-112" tabindex="-1"></a><span class="co"># raster_2013 &lt;- raster_2010 + (i*change_3)</span></span>
-<span id="cb14-113"><a href="#cb14-113" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-114"><a href="#cb14-114" tabindex="-1"></a><span class="co"># names(raster_2013) = c(&quot;pop_2013&quot;)</span></span>
-<span id="cb14-115"><a href="#cb14-115" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-116"><a href="#cb14-116" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2013, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-117"><a href="#cb14-117" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-118"><a href="#cb14-118" tabindex="-1"></a><span class="co"># i=4</span></span>
-<span id="cb14-119"><a href="#cb14-119" tabindex="-1"></a><span class="co"># yr=2010+i</span></span>
-<span id="cb14-120"><a href="#cb14-120" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-121"><a href="#cb14-121" tabindex="-1"></a><span class="co"># raster_2014 &lt;- raster_2010 + (i*change_3)</span></span>
-<span id="cb14-122"><a href="#cb14-122" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-123"><a href="#cb14-123" tabindex="-1"></a><span class="co"># names(raster_2014) = c(&quot;pop_2014&quot;)</span></span>
-<span id="cb14-124"><a href="#cb14-124" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-125"><a href="#cb14-125" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2014, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-126"><a href="#cb14-126" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-127"><a href="#cb14-127" tabindex="-1"></a><span class="co"># raster_2015 &lt;- terra::rast(files[grep(sprintf(&quot;count_%s_mol&quot;, 2015), files)])</span></span>
-<span id="cb14-128"><a href="#cb14-128" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-129"><a href="#cb14-129" tabindex="-1"></a><span class="co"># change_4 &lt;- terra::rast(files[grep(sprintf(&quot;change_%s_to_%s&quot;, 2015, 2020), files)])</span></span>
-<span id="cb14-130"><a href="#cb14-130" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-131"><a href="#cb14-131" tabindex="-1"></a><span class="co"># i=1</span></span>
-<span id="cb14-132"><a href="#cb14-132" tabindex="-1"></a><span class="co"># yr=2015+i</span></span>
-<span id="cb14-133"><a href="#cb14-133" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-134"><a href="#cb14-134" tabindex="-1"></a><span class="co"># raster_2016 &lt;- raster_2015 + (i*change_4)</span></span>
-<span id="cb14-135"><a href="#cb14-135" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-136"><a href="#cb14-136" tabindex="-1"></a><span class="co"># names(raster_2016) = c(&quot;pop_2016&quot;)</span></span>
-<span id="cb14-137"><a href="#cb14-137" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-138"><a href="#cb14-138" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2016, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-139"><a href="#cb14-139" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-140"><a href="#cb14-140" tabindex="-1"></a><span class="co"># i=2</span></span>
-<span id="cb14-141"><a href="#cb14-141" tabindex="-1"></a><span class="co"># yr=2015+i</span></span>
-<span id="cb14-142"><a href="#cb14-142" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-143"><a href="#cb14-143" tabindex="-1"></a><span class="co"># raster_2017 &lt;- raster_2015 + (i*change_4)</span></span>
-<span id="cb14-144"><a href="#cb14-144" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-145"><a href="#cb14-145" tabindex="-1"></a><span class="co"># names(raster_2017) = c(&quot;pop_2017&quot;)</span></span>
-<span id="cb14-146"><a href="#cb14-146" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-147"><a href="#cb14-147" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2017, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-148"><a href="#cb14-148" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-149"><a href="#cb14-149" tabindex="-1"></a><span class="co"># i=3</span></span>
-<span id="cb14-150"><a href="#cb14-150" tabindex="-1"></a><span class="co"># yr=2015+i</span></span>
-<span id="cb14-151"><a href="#cb14-151" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-152"><a href="#cb14-152" tabindex="-1"></a><span class="co"># raster_2018 &lt;- raster_2015 + (i*change_4)</span></span>
-<span id="cb14-153"><a href="#cb14-153" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-154"><a href="#cb14-154" tabindex="-1"></a><span class="co"># names(raster_2018) = c(&quot;pop_2018&quot;)</span></span>
-<span id="cb14-155"><a href="#cb14-155" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-156"><a href="#cb14-156" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2018, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-157"><a href="#cb14-157" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-158"><a href="#cb14-158" tabindex="-1"></a><span class="co"># i=4</span></span>
-<span id="cb14-159"><a href="#cb14-159" tabindex="-1"></a><span class="co"># yr=2015+i</span></span>
-<span id="cb14-160"><a href="#cb14-160" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-161"><a href="#cb14-161" tabindex="-1"></a><span class="co"># raster_2019 &lt;- raster_2015 + (i*change_4)</span></span>
-<span id="cb14-162"><a href="#cb14-162" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-163"><a href="#cb14-163" tabindex="-1"></a><span class="co"># names(raster_2019) = c(&quot;pop_2019&quot;)</span></span>
-<span id="cb14-164"><a href="#cb14-164" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-165"><a href="#cb14-165" tabindex="-1"></a><span class="co"># terra::writeRaster(raster_2019, filename = file.path(dir_M, sprintf(&quot;git-annex/globalprep/mar_prs_population/%s/int/human_count_%s_mol.tif&quot;, scenario_yr, yr)), overwrite = TRUE)</span></span>
-<span id="cb14-166"><a href="#cb14-166" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-167"><a href="#cb14-167" tabindex="-1"></a><span class="co"># raster_2020 &lt;- terra::rast(files[grep(sprintf(&quot;count_%s_mol&quot;, 2020), files)])</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># No longer using shape files, raster only</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>count_rast <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(raw[<span class="dv">1</span>]) <span class="co"># load one raw raster to use as template for reprojection using raster package</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>count_rast <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(count_rast) <span class="co"># Convert it to SpatRaster using terra::rast()</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co"># Load EEZ + 25mile inland raster using raster package</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>eez_25mi_inland <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(<span class="fu">file.path</span>(dir_M, <span class="st">&quot;git-annex/globalprep/spatial/v2019/ocean_plus25mile_inland.tif&quot;</span>))</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>eez_25mi_inland <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(eez_25mi_inland) <span class="co"># Convert it to SpatRaster using terra::rast()</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>(eez_25mi_inland) <span class="co"># Check out the object </span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co"># View the datatype of the raster (should be categorical raster to conduct zonal statistics properly)</span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">datatype</span>(eez_25mi_inland) <span class="co"># &#39;FLT4S&#39;</span></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co"># Converting it to &#39;int&#39; before factorizing so that any numbers are rounded to whole </span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a>ocean_rast_int <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.int</span>(eez_25mi_inland) <span class="co"># Changing from float raster to integer raster </span></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="fu">plot</span>(ocean_rast_int)  <span class="co"># Checking to make sure that it makes sense </span></span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="co"># Reproject integer raster to WGS 1984 (same as population count raster)</span></span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a>ocean_int_reproj <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">project</span>(<span class="at">x =</span> ocean_rast_int, count_rast, <span class="at">method=</span><span class="st">&quot;near&quot;</span>)</span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="fu">plot</span>(ocean_int_reproj) <span class="co"># Checking to make sure that it makes sense</span></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a><span class="co"># Factorizing the regions raster to ensure that it is categorical </span></span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a>ocean_fact_reproj <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.factor</span>(ocean_int_reproj) </span>
+<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a><span class="fu">plot</span>(ocean_fact_reproj) <span class="co"># Checking to make sure it makes sense </span></span>
+<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a></span>
+<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a><span class="co"># intersecting the two rasters to obtain TRUE where they overlap and FALSE where they do not </span></span>
+<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a>pop_intersect <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">intersect</span>(count_rast, ocean_fact_reproj)</span>
+<span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a><span class="fu">plot</span>(pop_intersect) <span class="co"># Making sure that I know where R thinks the two overlap. This makes sense!! </span></span>
+<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a></span>
+<span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a><span class="co"># Checking names of the layers --&gt; The layer name for ocean raster should be &#39;zone&#39; for zonal statistics</span></span>
+<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a><span class="fu">names</span>(ocean_fact_reproj) <span class="co"># [1] &quot;ocean_plus25mile_inland&quot;</span></span>
+<span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a><span class="fu">names</span>(ocean_fact_reproj) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;zone&quot;</span>) <span class="co"># [1] &quot;zone&quot;</span></span>
+<span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a></span>
+<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a><span class="co"># Another command can be used to set the layer name of ocean raster </span></span>
+<span id="cb14-34"><a href="#cb14-34" tabindex="-1"></a><span class="co"># terra::set.names(ocean_fact_reproj, &quot;zone&quot;)</span></span>
+<span id="cb14-35"><a href="#cb14-35" tabindex="-1"></a></span>
+<span id="cb14-36"><a href="#cb14-36" tabindex="-1"></a><span class="do">## Writing the ocean raster out to Mazu --&gt; for future reference, you only need to load this raster and then rename the layer to &#39;zone&#39;</span></span>
+<span id="cb14-37"><a href="#cb14-37" tabindex="-1"></a></span>
+<span id="cb14-38"><a href="#cb14-38" tabindex="-1"></a><span class="co"># zonal_rast &lt;- terra::writeRaster(ocean_fact_reproj, filename = file.path(dir_M, &quot;git-annex/globalprep/spatial/v2024/eez_25mi_inland_wgs1984.tif&quot;), overwrite = TRUE, datatype=&#39;INT4U&#39;)</span></span></code></pre></div>
 </div>
 </div>
 
