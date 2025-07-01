@@ -331,7 +331,7 @@ sum(table(tmp$gapfilled))
 # 854 stocks have at least one year of bbmsy values after 2010
 
 
-summary(ram_bmsy_gf_final) # should be no NAs. 2025: NA = 2352
+summary(ram_bmsy_gf_final) # should be no NAs. 
 sum(ram_bmsy_gf_final$ram_bmsy_gf < 0 )  # should be 0. 2025: 0
 min(ram_bmsy_gf_final$ram_bmsy_gf, na.rm = TRUE) # v2025: 0.002531646
 
