@@ -44,7 +44,7 @@ Link: <https://www.fao.org/sustainable-development-goals/indicators/14b1/en/>
 
 **Description**: Progress by countries in the degree of application of a legal/regulatory/policy/institutional framework which recognizes and protects access rights for small-scale fisheries. It is a composite indicator based on FAO member country responses to the Code of Conduct for Responsible Fisheries (CCRF) survey questionnaire which is circulated by FAO every two years to members and IGOs and INGOs. This indicator is calculated on the basis of the efforts being made by countries to implement selected key provisions of the Voluntary Guidelines for Securing Sustainable Small-Scale Fisheries in the Context of Food Security and Poverty Eradication (SSF Guidelines), as reported in a given year of the survey.
 
-**Time range**: 2018, 2020, 2022
+**Time range**: 2018, 2020, 2022, 2024
 
 **Download link**: We now use the API to access data (v2022) but alternatively you can access data here: <https://unstats.un.org/sdgs/dataportal/database>; Click "select indicators and country or area" and select indicator 14.b. Download all data for this indicator.
 
@@ -116,17 +116,24 @@ region_info <- here::here("globalprep", "ao", version_year, "raw", "un_region_in
       # country_or_area == "Côte d’Ivoire" ~ "Ivory Coast",
       TRUE ~ country_or_area)) %>% 
   dplyr::filter(!m49_code %in% c(344, 446))   # filter out hongkong/macao, they are NA anyways
+```
 
-# This was used in v2025 to determine if there actually were countries missing from the data when pulled in 2025, or if there were mismatches in names 
+```{r}
+# countrycode() was used in v2025 to determine if there actually were countries missing from the data when pulled in 2025, or if there were mismatches in names 
 #region_info$country_name <- countrycode(region_info$country_or_area, origin = "country.name", destination = "country.name")
 ```
+
+## Pull CCRF data from the API
 
 API query builder: <https://unstats.un.org/SDGAPI/swagger/>
 
 ```{r}
 ## Query the API for new data (released every 2 years, i.e. 2018, 2020, 2022)
 ## page size arbitrarily large in order to ensure all data is downloaded in a single page
+
 ## v2023 returned 849 rows of data (with countries and region groupings)
+## v2025 returned 839 rows of data (with countries and region groupings)
+
 url <- "https://unstats.un.org/SDGAPI/v1/sdg/Indicator/Data?indicator=14.b.1&pageSize=10000"
 
 api_get_indicator_data <- jsonlite::fromJSON(url)  
@@ -150,10 +157,9 @@ clean_data <- api_get_indicator_data$data %>%
       geo_area_code %in% regions ~ "region",
       TRUE ~ "country")) %>%
   dplyr::filter(!(geo_area_code %in% c(344, 446)))# filter out hongkong/macao, they are NA anyways
-
-## As above, this was the new method of comparing country names using countrycode() function in v2025 to determine if values were actually missing
-#clean_data$country_name <- countrycode(clean_data$geo_area_name, origin = "country.name", destination = "country.name")
 ```
+
+## Load in the OHI rgns_eez data from common.R
 
 ```{r}
 ## Load in the rgns_eez data from common.R
@@ -161,61 +167,71 @@ region_data()
 
 # Check to see which regions need to be added to the UN data
 setdiff(rgns_eez$rgn_name, clean_data$geo_area_name)
+
+## As used on line 122, the new method of comparing country names using countrycode() function was used in v2025 to determine if values were actually missing
+#clean_data$country_name <- countrycode(clean_data$geo_area_name, origin = "country.name", destination = "country.name")
+
+## it looks like we are missing quite a few... 64 in v2023
+## however, many of these are name mis-matches or regions that need to be split. We will fix these below.
+
+## In v2025, there were around 103 missing regions, but many of these were mis
 ```
 
 
-## Add regions not encapsulated in the clean_data 
+## v2025: Add regions not contained in the clean_data 
 
 ```{r}
 # Create a list with all of the names used in region_info that are also in rgn_eez for gapfilling. Some names are added later in this .Rmd
 
-missing_from_clean_data <- c("American Samoa", "Anguilla", "Antigua and Barbuda", "Australia", "Barbados", "Bermuda", "Bonaire", "British Indian Ocean Territory", "British Virgin Islands", "Cayman Islands", "Cocos (Keeling) Islands", "Christmas Island", "Curacao", "Djibouti", "Falkland Islands (Malvinas)", "French Guiana", "French Polynesia", "Greenland", "Guadeloupe", "Haiti", "Heard Island and McDonald Islands", "Israel", "Jersey", "Jordan", "Liberia", "Mayotte", "Micronesia (Federated States of)", "Monaco", "Montserrat", "New Caledonia", "Nigeria", "Northern Mariana Islands", "Norfolk Island", "Papua New Guinea", "Pitcairn", "Réunion", "Saint Helena", "Saint Lucia", "Saint Pierre and Miquelon", "Sint Maarten (Dutch part)", "South Georgia and the South Sandwich Islands", "Svalbard and Jan Mayen Islands", "Togo", "Turks and Caicos Islands", "Wallis and Futuna", "Wake Island", "Western Sahara")
+# missing_from_clean_data <- c("American Samoa", "Anguilla", "Antigua and Barbuda", "Australia", "Barbados", "Bermuda", "Bonaire", "British Indian Ocean Territory", "British Virgin Islands", "Cayman Islands", "Cocos (Keeling) Islands", "Christmas Island", "Curacao", "Djibouti", "Falkland Islands (Malvinas)", "French Guiana", "French Polynesia", "Greenland", "Guadeloupe", "Haiti", "Heard Island and McDonald Islands", "Israel", "Jersey", "Jordan", "Liberia", "Mayotte", "Micronesia (Federated States of)", "Monaco", "Montserrat", "New Caledonia", "Nigeria", "Northern Mariana Islands", "Norfolk Island", "Papua New Guinea", "Pitcairn", "Réunion", "Saint Helena", "Saint Lucia", "Saint Pierre and Miquelon", "Sint Maarten (Dutch part)", "South Georgia and the South Sandwich Islands", "Svalbard and Jan Mayen Islands", "Togo", "Turks and Caicos Islands", "Wallis and Futuna", "Wake Island", "Western Sahara")
+```
+
+## v2025: Merge API CCRF data with missing regions that are included in UN regional info and rgns_eez data
+
+```{r}
+# # Create a data frame to concatenate with our clean_data
+# 
+# merge_with_clean_data <- data.frame(goal= "14",
+#                                     target= "14.b", 
+#                                     indicator= "14.b.1", 
+#                                     series= "ER_REG_SSFRAR", 
+#                                     series_description= "Degree of application of a legal/regulatory/policy/institutional framework which recognizes and protects access rights for small-scale fisheries (level of implementation: 1 lowest to 5 highest)", 
+#                                     series_count= NA, 
+#                                     geo_area_code= NA, 
+#                                     geo_area_name = missing_from_clean_data, 
+#                                     time_period_start= NA, 
+#                                     value= NA, 
+#                                     value_type= NA, 
+#                                     time_detail= NA, 
+#                                     time_coverage= NA, 
+#                                     upper_bound= NA, 
+#                                     lower_bound= NA, 
+#                                     base_period= NA, 
+#                                     source= NA, 
+#                                     geo_info_url= NA, 
+#                                     footnotes= "NaN = A figure was not provided", 
+#                                     nature= NA, 
+#                                     units= NA, 
+#                                     observation_status= NA, 
+#                                     reporting_type= NA, 
+#                                     score= NA,
+#                                     region_type= "country")
+# 
+# 
+# # Merge this data frame with the clean_data 
+# #clean_data <- rbind(clean_data, merge_with_clean_data)
 ```
 
 
 ```{r}
-# Create a dataframe to concatenate with our clean_data
-merge_with_clean_data <- data.frame(goal= "14",
-                                   target= "14.b",
-                                   indicator= "14.b.1",
-                                   series= "ER_REG_SSFRAR",
-                                   series_description= "Degree of application of a legal/regulatory/policy/institutional framework which recognizes and protects access rights for small-scale fisheries (level of implementation: 1 lowest to 5 highest)",
-                                   series_count= NA,
-                                   geo_area_code= NA,
-                                   geo_area_name = missing_from_clean_data,
-                                   time_period_start= NA,
-                                   value= NA,
-                                   value_type= NA,
-                                   time_detail= NA,
-                                   time_coverage= NA,
-                                   upper_bound= NA,
-                                   lower_bound= NA, 
-                                   base_period= NA,
-                                   source= NA,
-                                   geo_info_url= NA,
-                                   footnotes= "NaN = A figure was not provided",
-                                   nature= NA,
-                                   units= NA,
-                                   observation_status= NA,
-                                   reporting_type= NA,
-                                   score= NA,
-                                   region_type= "country"
-                                   )
-
-# Merge this dataframe with the clean_data 
-clean_data_complete <- rbind(clean_data, merge_with_clean_data)
-```
-
-
-```{r}
-# Join the region_info (manually loaded from UN with m49 codes) and the clean_data (loaded via API with geo_area codes)
-regional_data <- clean_data_complete %>%
+# Join the region_info (manually loaded from UN with m49 codes or "country_or_area") and the clean_data (loaded via API with geo_area codes)
+regional_data <- clean_data %>%
   dplyr::left_join(region_info, by = c("geo_area_name" = "country_or_area")) %>% 
   dplyr::select(region_type, geo_area_code, geo_area_name, time_detail, value, score, region_code, 
                 region_name, sub_region_code, sub_region_name, intermediate_region_code, 
                 intermediate_region_name, iso_alpha3_code, small_island_developing_states_sids)
 
-## save a large region data frame for use in gapfilling later
+## save a large region data frame for use in gap filling later
 region_df <- clean_data %>%
   dplyr::filter(region_type == "region") 
 ```
@@ -227,22 +243,6 @@ region_df <- clean_data %>%
 
 ## Find the differences between OHI regions and UN regions
 setdiff(rgns_eez$rgn_name, regional_data$geo_area_name)
-```
-
-```{r}
-### not quite what we need I think, but maybe useful with more exploration - v2022
-### Perhaps try to integrate in future workflows
-# url_regions <- "https://unstats.un.org/SDGAPI/v1/sdg/GeoArea/Tree"
-# api_get_geoarea_tree <- jsonlite::fromJSON(url_regions) 
-# 
-# un_regions <- api_get_geoarea_tree %>% 
-##   filter(geoAreaName == "World (total) by SDG regions") %>%
-#   unnest() %>% # unnest the tree structure *3 into a dataframe
-#   unnest() %>% 
-#   unnest() %>% 
-#   select(-children) %>% 
-#   clean_names() %>% 
-#   filter(geo_area_code3 %in% clean_data$geo_area_code)
 ```
 
 Use the name2rgn function to fix some of the name mismatches. Additionally, we will manually split some regions.
@@ -390,106 +390,106 @@ all_rgns_data <- rbind(all_rgns_data, match_remaining)
 ## Now check to see what OHI regions are missing (should be uninhabited regions)
 sort(setdiff(rgns_eez$rgn_name, all_rgns_data$rgn_name))
 
-# In the v2025 version, there were 28 regions still unaccounted for, we will now repeat this process for those regions (with the exception of uninhabited regions) 
+# In the v2025 version, there were 28 regions still unaccounted for, we will now repeat this process for those regions (with the exception of the 4 uninhabited regions omitted from previous years: "Antarctica" "Bouvet Island" "Clipperton Island" "Macquarie Island") 
 ```
 
-```{r}
-# Add the remaining inhabited regions in a tibble
-remaining_rgns_2 <- dplyr::tibble(            
-                        geo_area_name = c("Amsterdam Island and Saint Paul Island",
-                                          "Aruba", 
-                                          "Brunei",
-                                          "Democratic Republic of the Congo", 
-                                          "Gibraltar", 
-                                          "Guernsey", 
-                                          "Mozambique", 
-                                          "Niue", 
-                                          "Northern Saint-Martin", 
-                                          "Puerto Rico and Virgin Islands of the United States", 
-                                          "Saba", 
-                                          "Sint Eustatius", 
-                                          "Syria",
-                                          "Juan de Nova Island",
-                                           "Bassas da India",
-                                          "Ile Europa",
-                                          "Ile Tromelin",
-                                          "Crozet Islands",
-                                          "Kerguelen Islands",
-                                          "Jarvis Island",
-                                          "Palmyra Atoll",
-                                          "Howland Island and Baker Island",
-                                          "Johnston Atoll",
-                                          "Glorioso Islands"),
-                        
-                          region_name = c("Africa",
-                                          "Americas", 
-                                          "Asia", 
-                                          "Africa", 
-                                          "Europe", 
-                                          "Europe", 
-                                          "Africa", 
-                                          "Oceania", 
-                                          "Americas", 
-                                          "Americas", 
-                                          "Americas",
-                                          "Americas",
-                                          "Asia",
-                                          "Africa",
-                                          "Africa",
-                                          "Africa",
-                                          "Africa",
-                                          "Africa",
-                                          "Africa",
-                                          "Oceania",
-                                          "Oceania",
-                                          "Oceania",
-                                          "Oceania",
-                                          "Africa"),
-                        
-                      sub_region_name = c("Sub-Saharan Africa", 
-                                          "Latin America and the Caribbean", 
-                                          "South-eastern Asia", 
-                                          "Sub-Saharan Africa",
-                                          "Southern Europe", 
-                                          "Northern Europe", 
-                                          "South-Saharan Africa", 
-                                          "Polynesia", 
-                                          "Latin America and the Caribbean",
-                                          "Latin America and the Caribbean", 
-                                          "Latin America and the Caribbean",
-                                          "Latin America and the Caribbean",
-                                          "Western Asia",
-                                          "Sub-Saharan Africa",
-                                          "Sub-Saharan Africa",
-                                          "Sub-Saharan Africa",
-                                          "Sub-Saharan Africa",
-                                          "Sub-Saharan Africa",
-                                          "Polynesia",
-                                          "Polynesia",
-                                          "Polynesia",
-                                          "Polynesia",
-                                          "Polynesia",
-                                          "Sub-Saharan Africa"),
-                      
-             intermediate_region_name = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA),
-             
-  small_island_developing_states_sids = c("x", "x", "x", NA, NA, NA, NA, "x", "x", NA, "x", "x", NA, "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x")) %>%
-  dplyr::mutate(region_type = "country", score = NA) %>%
-  tidyr::crossing(time_detail = unique(all_rgns_data$time_detail))
-
-## Now run the match2rgn function to get OHI regions
-match_remaining_2 <- name_2_rgn(df_in = remaining_rgns_2, 
-                              fld_name='geo_area_name', 
-                              flds_unique=c('time_detail')) %>%
-  dplyr::select(-geo_area_name)
-
-## Now join with final dataset
-all_rgns_data <- rbind(all_rgns_data, match_remaining_2)
-```
+## v2025: Create df of OHI regions missing from all_rgns_data 
 
 ```{r}
+# # Add the remaining inhabited regions in a tibble
+# remaining_rgns_2 <- dplyr::tibble(            
+#                         geo_area_name = c("Amsterdam Island and Saint Paul Island",
+#                                           "Aruba", 
+#                                           "Brunei",
+#                                           "Democratic Republic of the Congo", 
+#                                           "Gibraltar", 
+#                                           "Guernsey", 
+#                                           "Mozambique", 
+#                                           "Niue", 
+#                                           "Northern Saint-Martin", 
+#                                           "Puerto Rico and Virgin Islands of the United States", 
+#                                           "Saba", 
+#                                           "Sint Eustatius", 
+#                                           "Syria",
+#                                           "Juan de Nova Island",
+#                                            "Bassas da India",
+#                                           "Ile Europa",
+#                                           "Ile Tromelin",
+#                                           "Crozet Islands",
+#                                           "Kerguelen Islands",
+#                                           "Jarvis Island",
+#                                           "Palmyra Atoll",
+#                                           "Howland Island and Baker Island",
+#                                           "Johnston Atoll",
+#                                           "Glorioso Islands"),
+#                         
+#                           region_name = c("Africa",
+#                                           "Americas", 
+#                                           "Asia", 
+#                                           "Africa", 
+#                                           "Europe", 
+#                                           "Europe", 
+#                                           "Africa", 
+#                                           "Oceania", 
+#                                           "Americas", 
+#                                           "Americas", 
+#                                           "Americas",
+#                                           "Americas",
+#                                           "Asia",
+#                                           "Africa",
+#                                           "Africa",
+#                                           "Africa",
+#                                           "Africa",
+#                                           "Africa",
+#                                           "Africa",
+#                                           "Oceania",
+#                                           "Oceania",
+#                                           "Oceania",
+#                                           "Oceania",
+#                                           "Africa"),
+#                         
+#                       sub_region_name = c("Sub-Saharan Africa", 
+#                                           "Latin America and the Caribbean", 
+#                                           "South-eastern Asia", 
+#                                           "Sub-Saharan Africa",
+#                                           "Southern Europe", 
+#                                           "Northern Europe", 
+#                                           "South-Saharan Africa", 
+#                                           "Polynesia", 
+#                                           "Latin America and the Caribbean",
+#                                           "Latin America and the Caribbean", 
+#                                           "Latin America and the Caribbean",
+#                                           "Latin America and the Caribbean",
+#                                           "Western Asia",
+#                                           "Sub-Saharan Africa",
+#                                           "Sub-Saharan Africa",
+#                                           "Sub-Saharan Africa",
+#                                           "Sub-Saharan Africa",
+#                                           "Sub-Saharan Africa",
+#                                           "Polynesia",
+#                                           "Polynesia",
+#                                           "Polynesia",
+#                                           "Polynesia",
+#                                           "Polynesia",
+#                                           "Sub-Saharan Africa"),
+#                       
+#              intermediate_region_name = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA),
+#              
+#   small_island_developing_states_sids = c("x", "x", "x", NA, NA, NA, NA, "x", "x", NA, "x", "x", NA, "x", "x", "x", "x", "x", "x", "x", "x", "x", "x", "x")) %>%
+#  # dplyr::mutate(region_type = "country", score = NA) %>%
+#   tidyr::crossing(time_detail = unique(all_rgns_data$time_detail))
+# 
+# ## Now run the match2rgn function to get OHI regions
+#  match_remaining_2 <- name_2_rgn(df_in = remaining_rgns_2, 
+#                                fld_name='geo_area_name', 
+#                                flds_unique=c('time_detail')) %>%
+#   #dplyr::select(-geo_area_name)
+# 
+# ## Now join with final dataset
+# all_rgns_data <- rbind(all_rgns_data, match_remaining_2)
+
 ## Now check to see what OHI regions are missing (should be uninhabited regions)
-sort(setdiff(rgns_eez$rgn_name, all_rgns_data$rgn_name))
+#sort(setdiff(rgns_eez$rgn_name, all_rgns_data$rgn_name))
 
 ## In the v2025 data, this left us with 4 regions: "Antarctica" "Bouvet Island" "Clipperton Island" "Macquarie Island", all of which are uninhabited and not accounted for in years past. We did it :)
 ```
@@ -655,7 +655,73 @@ gf_step_4b_df <- gf_step_4a_df %>%
     method = dplyr::case_when(
       has_data == 0 & !is.na(score) & is.na(method) ~ "Used sub-region score", 
       TRUE ~ method))
+
+## v2025: There were many regions not filled using this method (about as many as we needed to add manually), so to avoid using the global scores for all of them, we created a case_when() to fill using subregional averages from the 2024 data. There were a couple regions that are normally gapfilled and thus have no data; because they were not included in the survey when the data was pulled in 2025, they need to be added manually.
 ```
+
+
+## v2025 only: Create regional average scores 
+
+```{r}
+# subregion_averages <- all_rgns_data %>%
+#   drop_na(score) %>%
+#   group_by(sub_region_name) %>%
+#   summarize(avg_score = mean(score))
+
+# The subregion averages from v2025 were as follows:
+# 
+# Australia and New Zealand: 0.60
+# Eastern Asia: 0.64
+# Eastern Europe: 0.84
+# Latin America and the Caribbean: 0.86
+# Melanesia: 0.84
+# Micronesia: 0.67
+# Northern Africa: 0.80
+# Northern America: 0.80
+# Northern Europe:0.88
+# Polynesia: 0.83
+# South-eastern Asia: 0.86
+# Southern Asia: 0.77
+# Southern Europe: 0.87
+# Sub-Saharan Africa: 0.83
+# Western Asia: 0.84
+# Western Europe: 0.90
+
+# # Find which regions could not be gap filled using the pipeline
+# missing_scores <- gf_step_4c_df %>%
+#   filter(is.na(score) == TRUE)
+# 
+# # Create a df to gapfill the gf_step_4c_df with (v2025 year for extra regions present, may not be necessary for all years)
+# missing_scores_filled <- missing_scores  %>% 
+#   dplyr::mutate(
+#     score = dplyr::case_when(
+#       sub_region_name == "Australia and New Zealand" ~ 0.60,
+#       sub_region_name == "Eastern Asia" ~ 0.60,
+#       sub_region_name == "Eastern Europe" ~ 0.80,
+#       sub_region_name == "Latin America and the Caribbean" ~ 0.90,
+#       sub_region_name == "Melanesia" ~ 0.80,
+#       sub_region_name == "Micronesia" ~ 0.70,
+#       sub_region_name == "Northern Africa" ~ 0.80,
+#       sub_region_name == "Northern America" ~ 0.80,
+#       sub_region_name == "Northern Europe" ~ 0.90,
+#       sub_region_name == "Polynesia" ~ 0.80,
+#       sub_region_name == "South-eastern Asia" ~ 0.90,
+#       sub_region_name == "Southern Asia" ~ 0.80,
+#       sub_region_name == "Southern Europe" ~ 0.90,
+#       sub_region_name == "Sub-Saharan Africa" ~ 0.80,
+#       sub_region_name == "South-Saharan Africa" ~ 0.80,
+#       sub_region_name == "Western Asia" ~ 0.80,
+#       sub_region_name == "Western Europe" ~ 0.90,
+#       rgn_name == "Wallis and Futuna" ~ 0.80,
+#       rgn_name == "Wake Island" ~ 0.80,
+#       rgn_name == "Curacao" ~ 0.90,
+#       rgn_name == "Bonaire" ~ 0.90))
+# 
+# 
+# ## Now join the gapfill dataset to the gf_step
+# gf_step_4b_df<- rbind( gf_step_4b_df, missing_scores_filled)
+```
+
 
 #### Step 4.c
 
@@ -674,15 +740,29 @@ gf_step_4c_df <- gf_step_4b_df %>%
       has_data == 0 & !is.na(score) & is.na(method) ~ "Used region score", 
       TRUE ~ method))
 ## In v2023, all scores were filled with this method
-## In 2025, all scores were filled with this method
+## v2025: By this point, all of our scores were filled up!
 ```
 
+## v2025 only: Remove extra rows from manual gapfilling
+
+```{r}
+# # Check to see if the same rows from the NA check on lines 691-692 are the only NA's in the data set. If so, drop them from our main data set since they have been duplicated 
+
+# missing_scores_check <- gf_step_4c_df %>%
+#   filter(is.na(score) == TRUE)
+# 
+# # Yes! We have the same 67 NA values in the score column, so we can remove those rows and continue
+# 
+# # Drop the NAs that we are about to fill
+# gf_step_4c_df <- gf_step_4c_df %>%
+#     filter(is.na(score) == FALSE)
+```
 
 #### Step 4.d
 
 If there remain any that can't be gapfilled in one of the regions, gapfill with the world score
 
-**Note:** d. Is an agressive strategy but also an unlikely scenario that will ensure complete data
+**Note:** d. Is an aggressive strategy but also an unlikely scenario that will ensure complete data
 
 ```{r eval = F}
 world_score = gf_step_4c_df %>%  
@@ -701,9 +781,9 @@ gf_step_4d_df <- gf_step_4c_df %>%
     method = dplyr::case_when(
       has_data == 0 & !is.na(score) & is.na(method) ~ "Used world score", 
       TRUE ~ method))
-## v2022 this did not fill anything (already done by step 4.c)
-## v2025 this filled up all of our scores!
+## v2022: this did not fill anything (already done by step 4.c)
 ```
+
 
 ## Save the prepped data
 
@@ -732,8 +812,8 @@ Lets compare to last years AO data.
 ## This is primarily to see how the gapfilling changed the data that matches 
 ## from this assessment to last years assessment 
 
-version_year_new <- paste0("v", 2025 )
-version_year_old <- paste0("v", 2024 )
+version_year_new <- paste0("v", 2025 ) # Replace with current year assessment 
+version_year_old <- paste0("v", 2024 ) # Replace with previous year assessment
 
 region_data()
 
@@ -750,9 +830,9 @@ compare <- new_data %>%
   dplyr::left_join(old_data, by = c("rgn_id", "year", "rgn_name", "admin_country_name"), 
             suffix = c(paste0("_", version_year_new), paste0("_", version_year_old)))
 
-# Replace NA scores with 0 to get new scores to show up on graph
-new_v2024 <- replace(compare$value_v2024, is.na(compare$value_v2024), 0) # Make sure to change this each year
-compare$value_v2024 <- new_v2024
+# v2025: Replace NA scores with 0 to get new scores to show up on graph
+#new_v2024 <- replace(compare$value_v2024, is.na(compare$value_v2024), 0) # Make sure to change this each year
+#compare$value_v2024 <- new_v2024
 
 # Find the difference in values from this year to last year 
 compare <- compare %>%
