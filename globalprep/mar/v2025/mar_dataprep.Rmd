@@ -1488,6 +1488,7 @@ ggplotly(comp_plot_9)
 
 ```
 
+
 ```{r sust-scores}
 # ============= Sustainability scores ==========================================
 
@@ -1516,11 +1517,24 @@ sust_compare <- sust_new %>%
 mean_diff_sus <- ggplot(sust_compare, aes(x = rgn_id, y = mean_rgn_sus_diff)) + 
   geom_point() +
   theme_bw() +
-  labs(title = paste("Mariculture Sustainability: Mean Difference", latest_data_year, "Data - ", previous_data_year, "(2023) Data"),
+  labs(title = paste("Mariculture Sustainability: Mean Difference", latest_data_year, "Assessment - ", previous_data_year, "Assessment"),
        x = "Region ID",
        y = "Average region sustainability difference")
 
 ggplotly(mean_diff_sus)
+
+# Another way to compare sust scores, this is optional
+
+# sust_total <- full_join(sust_new, sust_old, by = c("rgn_id", "species")) 
+# 
+# # Compare sust_coeff between 2025 and 2024
+# diff_plot <- ggplot() + 
+#   geom_abline(slope = 1, intercept = 0, col = "red") +
+#   geom_point(data = sust_total, aes(x = sust_new, y = sust_old, text = paste("Region ID:", rgn_id, "<br>", "Taxa Code:", taxa_code))) +
+#   labs(title = "Sustainability coefficient 2025 vs. 2024",
+#        x = "Sust Coeff 2025",
+#        y = "Sust Coeff 2024") +
+#   theme_bw();plotly::ggplotly(diff_plot)
 ```
 
 ## Data check genetic escapes
