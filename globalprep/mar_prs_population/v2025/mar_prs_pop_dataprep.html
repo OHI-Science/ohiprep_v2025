@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Tue Jul 1 20:04:05 2025 by hoyt" />
+<meta name="author" content="Compiled on Tue Jul 1 20:50:52 2025 by hoyt" />
 
 
 <title>OHI 2025 - Mariculture Population Pressure Layers</title>
@@ -1647,7 +1647,7 @@ border-radius: 0px;
 
 <h1 class="title toc-ignore">OHI 2025 - Mariculture Population Pressure
 Layers</h1>
-<h4 class="author"><em>Compiled on Tue Jul 1 20:04:05 2025 by
+<h4 class="author"><em>Compiled on Tue Jul 1 20:50:52 2025 by
 hoyt</em></h4>
 
 </div>
@@ -2186,23 +2186,6 @@ Year for Population Density</h3>
 <span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a></span>
 <span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a><span class="co"># View</span></span>
 <span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a><span class="fu">ggplotly</span>(years_compare_plot_density)</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Compare area with that calculated in previous year (should look very similar)</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>old_area <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&#39;globalprep/mar_prs_population/v2019/int/area_km2_25mi.csv&#39;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">old_area_km2 =</span> area_km2) <span class="sc">%&gt;%</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">old_area_km2 =</span> <span class="fu">round</span>(old_area_km2)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(area, <span class="at">by =</span> <span class="st">&quot;rgn_id&quot;</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>area_compare_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(old_area) <span class="sc">+</span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(area_km2, old_area_km2, <span class="at">label =</span> rgn_id), <span class="at">alpha =</span> .<span class="dv">6</span>) <span class="sc">+</span></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">sprintf</span>(<span class="st">&#39;%s Area (km2)&#39;</span>, scenario_yr),</span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">sprintf</span>(<span class="st">&#39;%s Area (km2)&#39;</span>, <span class="st">&quot;v2019 (last update)&quot;</span>),</span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&#39;Area Calculation Comparison&#39;</span>)</span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a></span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="co"># View</span></span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="fu">ggplotly</span>(area_compare_plot)</span>
-<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a></span>
-<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="fu">summary</span>(old_area)</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -2232,44 +2215,44 @@ propagating, 2. manipulating the ocean raster is methodologically more
 sound, and 3. because we’re not manipulating the population raster
 scale, it doesn’t need to be population density, so we can use an
 unequal areas projection to run zonal statistics.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># No longer using shape files, raster only</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>count_rast <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(raw[<span class="dv">1</span>]) <span class="co"># load one raw raster to use as template for reprojection using raster package</span></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>count_rast <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(count_rast) <span class="co"># Convert it to SpatRaster using terra::rast()</span></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co"># Load EEZ + 25mile inland raster using raster package</span></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>eez_25mi_inland <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(<span class="fu">file.path</span>(dir_M, <span class="st">&quot;git-annex/globalprep/spatial/v2019/ocean_plus25mile_inland.tif&quot;</span>))</span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>eez_25mi_inland <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(eez_25mi_inland) <span class="co"># Convert it to SpatRaster using terra::rast()</span></span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>(eez_25mi_inland) <span class="co"># Check out the object </span></span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co"># View the datatype of the raster (should be categorical raster to conduct zonal statistics properly)</span></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">datatype</span>(eez_25mi_inland) <span class="co"># &#39;FLT4S&#39;</span></span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a></span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co"># Converting it to &#39;int&#39; before factorizing so that any numbers are rounded to whole </span></span>
-<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a>ocean_rast_int <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.int</span>(eez_25mi_inland) <span class="co"># Changing from float raster to integer raster </span></span>
-<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="fu">plot</span>(ocean_rast_int)  <span class="co"># Checking to make sure that it makes sense </span></span>
-<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a></span>
-<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="co"># Reproject integer raster to WGS 1984 (same as population count raster)</span></span>
-<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a>ocean_int_reproj <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">project</span>(<span class="at">x =</span> ocean_rast_int, count_rast, <span class="at">method=</span><span class="st">&quot;near&quot;</span>)</span>
-<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="fu">plot</span>(ocean_int_reproj) <span class="co"># Checking to make sure that it makes sense</span></span>
-<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a></span>
-<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a><span class="co"># Factorizing the regions raster to ensure that it is categorical </span></span>
-<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a>ocean_fact_reproj <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.factor</span>(ocean_int_reproj) </span>
-<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a><span class="fu">plot</span>(ocean_fact_reproj) <span class="co"># Checking to make sure it makes sense </span></span>
-<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a></span>
-<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a><span class="co"># intersecting the two rasters to obtain TRUE where they overlap and FALSE where they do not </span></span>
-<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a>pop_intersect <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">intersect</span>(count_rast, ocean_fact_reproj)</span>
-<span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a><span class="fu">plot</span>(pop_intersect) <span class="co"># Making sure that I know where R thinks the two overlap. This makes sense!! </span></span>
-<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a></span>
-<span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a><span class="co"># Checking names of the layers --&gt; The layer name for ocean raster should be &#39;zone&#39; for zonal statistics</span></span>
-<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a><span class="fu">names</span>(ocean_fact_reproj) <span class="co"># [1] &quot;ocean_plus25mile_inland&quot;</span></span>
-<span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a><span class="fu">names</span>(ocean_fact_reproj) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;zone&quot;</span>) <span class="co"># [1] &quot;zone&quot;</span></span>
-<span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a></span>
-<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a><span class="co"># Another command can be used to set the layer name of ocean raster </span></span>
-<span id="cb14-34"><a href="#cb14-34" tabindex="-1"></a><span class="co"># terra::set.names(ocean_fact_reproj, &quot;zone&quot;)</span></span>
-<span id="cb14-35"><a href="#cb14-35" tabindex="-1"></a></span>
-<span id="cb14-36"><a href="#cb14-36" tabindex="-1"></a><span class="do">## Writing the ocean raster out to Mazu --&gt; for future reference, you only need to load this raster and then rename the layer to &#39;zone&#39;</span></span>
-<span id="cb14-37"><a href="#cb14-37" tabindex="-1"></a></span>
-<span id="cb14-38"><a href="#cb14-38" tabindex="-1"></a><span class="co"># zonal_rast &lt;- terra::writeRaster(ocean_fact_reproj, filename = file.path(dir_M, &quot;git-annex/globalprep/spatial/v2024/eez_25mi_inland_wgs1984.tif&quot;), overwrite = TRUE, datatype=&#39;INT4U&#39;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># No longer using shape files, raster only</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>count_rast <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(raw[<span class="dv">1</span>]) <span class="co"># load one raw raster to use as template for reprojection using raster package</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>count_rast <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(count_rast) <span class="co"># Convert it to SpatRaster using terra::rast()</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co"># Load EEZ + 25mile inland raster using raster package</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>eez_25mi_inland <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(<span class="fu">file.path</span>(dir_M, <span class="st">&quot;git-annex/globalprep/spatial/v2019/ocean_plus25mile_inland.tif&quot;</span>))</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>eez_25mi_inland <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(eez_25mi_inland) <span class="co"># Convert it to SpatRaster using terra::rast()</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>(eez_25mi_inland) <span class="co"># Check out the object </span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="co"># View the datatype of the raster (should be categorical raster to conduct zonal statistics properly)</span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">datatype</span>(eez_25mi_inland) <span class="co"># &#39;FLT4S&#39;</span></span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="co"># Converting it to &#39;int&#39; before factorizing so that any numbers are rounded to whole </span></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>ocean_rast_int <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.int</span>(eez_25mi_inland) <span class="co"># Changing from float raster to integer raster </span></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="fu">plot</span>(ocean_rast_int)  <span class="co"># Checking to make sure that it makes sense </span></span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="co"># Reproject integer raster to WGS 1984 (same as population count raster)</span></span>
+<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a>ocean_int_reproj <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">project</span>(<span class="at">x =</span> ocean_rast_int, count_rast, <span class="at">method=</span><span class="st">&quot;near&quot;</span>)</span>
+<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a><span class="fu">plot</span>(ocean_int_reproj) <span class="co"># Checking to make sure that it makes sense</span></span>
+<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a><span class="co"># Factorizing the regions raster to ensure that it is categorical </span></span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a>ocean_fact_reproj <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">as.factor</span>(ocean_int_reproj) </span>
+<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a><span class="fu">plot</span>(ocean_fact_reproj) <span class="co"># Checking to make sure it makes sense </span></span>
+<span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co"># intersecting the two rasters to obtain TRUE where they overlap and FALSE where they do not </span></span>
+<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a>pop_intersect <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">intersect</span>(count_rast, ocean_fact_reproj)</span>
+<span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a><span class="fu">plot</span>(pop_intersect) <span class="co"># Making sure that I know where R thinks the two overlap. This makes sense!! </span></span>
+<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a></span>
+<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a><span class="co"># Checking names of the layers --&gt; The layer name for ocean raster should be &#39;zone&#39; for zonal statistics</span></span>
+<span id="cb13-30"><a href="#cb13-30" tabindex="-1"></a><span class="fu">names</span>(ocean_fact_reproj) <span class="co"># [1] &quot;ocean_plus25mile_inland&quot;</span></span>
+<span id="cb13-31"><a href="#cb13-31" tabindex="-1"></a><span class="fu">names</span>(ocean_fact_reproj) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;zone&quot;</span>) <span class="co"># [1] &quot;zone&quot;</span></span>
+<span id="cb13-32"><a href="#cb13-32" tabindex="-1"></a></span>
+<span id="cb13-33"><a href="#cb13-33" tabindex="-1"></a><span class="co"># Another command can be used to set the layer name of ocean raster </span></span>
+<span id="cb13-34"><a href="#cb13-34" tabindex="-1"></a><span class="co"># terra::set.names(ocean_fact_reproj, &quot;zone&quot;)</span></span>
+<span id="cb13-35"><a href="#cb13-35" tabindex="-1"></a></span>
+<span id="cb13-36"><a href="#cb13-36" tabindex="-1"></a><span class="do">## Writing the ocean raster out to Mazu --&gt; for future reference, you only need to load this raster and then rename the layer to &#39;zone&#39;</span></span>
+<span id="cb13-37"><a href="#cb13-37" tabindex="-1"></a></span>
+<span id="cb13-38"><a href="#cb13-38" tabindex="-1"></a><span class="co"># zonal_rast &lt;- terra::writeRaster(ocean_fact_reproj, filename = file.path(dir_M, &quot;git-annex/globalprep/spatial/v2024/eez_25mi_inland_wgs1984.tif&quot;), overwrite = TRUE, datatype=&#39;INT4U&#39;)</span></span></code></pre></div>
 </div>
 </div>
 
