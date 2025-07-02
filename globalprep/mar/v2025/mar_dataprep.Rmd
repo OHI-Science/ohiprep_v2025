@@ -162,15 +162,11 @@ previous_data_folder <- paste0("d", last_year)  # previous assessment year
 #update the data file name to the current last year of data 
 mar_raw <- readr::read_csv(here::here(FAO_mariculture_dir, current_data_folder, paste0("FAO_GlobalAquacultureProduction_Quantity_1950_", latest_data_year, ".csv")))
 
-view(mar_raw)
-
-mar_raw_old <- readr::read_csv(here::here(FAO_mariculture_dir, previous_data_folder, paste0("FAO_GlobalAquacultureProduction_Quantity_1950_", previous_data_year, ".csv")))
-
-view(mar_raw_old)
+# mar_raw_old <- readr::read_csv(here::here(FAO_mariculture_dir, previous_data_folder, paste0("FAO_GlobalAquacultureProduction_Quantity_1950_", previous_data_year, ".csv")))
 
 ```
 
-# Wrangle:
+## Wrangle:
 
 ## Tidy mariculture data
 
@@ -228,7 +224,7 @@ Update species name in the `raw/species_list.csv` file with names in the `mar` d
 
 More information can be found in issues #8, #81, #241, #246 for reference.
 
-The species_list.csv is a master list of all the mariculture species in the FAO data. Every year there are potential changes to the FAO data, additional species may be added or names can change, etc. When a species is in the FAO data, but not the species_list.csv it will need to be added to the species_list.csv. To do this, do a quick search within the species_list.csv to make sure it wasn't some small change to the name (e.g. "long-back eel" vs. "longback eel"). Otherwise, do some research to see if any of the synonyms for the FAO species match the names in species_list.csv. If it is one of these scenarios, the information can be copied to a new row with the name modification. If it seems to be a new taxa, You need to add the species output from this (new_spp) to species_list.csv and fill out the corresponding information. Add the new taxa name, Taxon_code (categories defined in the README in the /raw folder), and family (general family from Google) to the species_list.csv. Do some research to make sure the species is being used for food and is marine/brackish. If it is not used for food or is freshwater then it is excluded from the analysis (i.e., a 1 in the exclude column). I.e. add FAO_name, exclude (whether to include in assessment or not. If they are only harvested for medicinal purposes, do not include, or not eaten by humans do not include). Because seaweeds are generally used for both human and non-human consumption, we quantify whether to exclude or not for seaweed species as proportions. For example, if a seaweed species is 80% used for non-human consumption, we would exclude 80% of the harvest (exclude = 0.8). However, for fish species, we only classify as 0 or 1.
+The species_list.csv is a master list of all the mariculture species in the FAO data. Every year there are potential changes to the FAO data, additional species may be added or names can change, etc. When a species is in the FAO data, but not the species_list.csv it will need to be added to the species_list.csv. To do this, do a quick search within the species_list.csv to make sure it wasn't some small change to the name (e.g. "long-back eel" vs. "longback eel"). Otherwise, do some research to see if any of the synonyms for the FAO species match the names in species_list.csv. If it is one of these scenarios, the information can be copied to a new row with the name modification. If it seems to be a new taxa, You need to add the species output from this (new_spp) to species_list.csv and fill out the corresponding information. Add the new taxa name, taxon_code (categories defined in the README in the /raw folder), and family (general family from Google) to the species_list.csv. Do some research to make sure the species is being used for food and is marine/brackish. If it is not used for food or is freshwater then it is excluded from the analysis (i.e., a 1 in the exclude column). I.e. add FAO_name, exclude (whether to include in assessment or not. If they are only harvested for medicinal purposes, do not include, or not eaten by humans do not include). Because seaweeds are generally used for both human and non-human consumption, we quantify whether to exclude or not for seaweed species as proportions. For example, if a seaweed species is 80% used for non-human consumption, we would exclude 80% of the harvest (exclude = 0.8). However, for fish species, we only classify as 0 or 1.
 
 After checking the species list, it is recommended to download the list as a csv, open up in excel, and manually add the new species and associated data that way.
 
@@ -252,11 +248,11 @@ WESTERN CENTRAL PACIFIC;
 ## Commented out 'read.csv' lines are different versions of the dataset, representing the three different seaweed exclusion methods (exclude some seaweed, all seaweed, all seaweed nei (nei = not elsewhere identified)). Use at the end for data checking. The first one is the one which is saved to the "output" folder, and the main analysis to run. 
 # Read in species list
 mar_sp <- readr::read_csv(here::here(current_mar_dir, "raw", "species_list.csv")) %>%
-  dplyr::select(FAO_name, exclude, Taxon_code, family, notes, notes_2)
+  dplyr::select(FAO_name, exclude, taxon_code = Taxon_code, family, notes, notes_2)
 
 # to compare to previous year's csv (in v2024)
 # old_mar_sp <- readr::read_csv(here::here("globalprep/mar/v2023/raw/species_list.csv")) %>%
-#   dplyr::select(FAO_name, exclude, Taxon_code, family, notes, notes_2)
+#   dplyr::select(FAO_name, exclude, taxon_code = Taxon_code, family, notes, notes_2)
 # old_test_spp <- setdiff(mar$FAO_name, old_mar_sp$FAO_name)
 # old_test_spp
 
@@ -287,7 +283,7 @@ mar_join_int <- mar_sp_join %>%
 ## Check to see if 85% of seaweed goes to human consumption... filter for seaweeds, sum the tonnes included, divide by total tonnes seaweed
 # seaweed_check2 <- mar_join_int %>%
 #   filter(!is.na(value)) %>%
-#   filter(Taxon_code == "AL") %>%
+#   filter(taxon_code == "AL") %>%
 #   group_by(year) %>%
 #   summarise(include_total = sum(value_include),
 #             overall_total = sum(value)) %>%
@@ -302,7 +298,7 @@ mar_join_int <- mar_sp_join %>%
 mar_value_filter <- mar_join_int %>%
   dplyr::filter(!is.na(value_include)) %>% # remove NA values 
   dplyr::select(country, fao, environment, species, year, # select relevant columns
-                Taxon_code, family, value = value_include) %>% 
+                taxon_code, family, value = value_include) %>% 
   dplyr::group_by(country, species) %>% # for each country-species combination
   dplyr::mutate(total_value = sum(value)) %>% # create total_value column
   dplyr::filter(total_value > 0) %>% # omit data with zero production
@@ -334,7 +330,7 @@ split_countries
 # ---- Run name_2_rgn ----
 mar_rgn <- name_2_rgn(df_in = mar_name_split, 
                        fld_name ='country', 
-                       flds_unique = c('species', 'fao', 'environment', 'Taxon_code', 'year')) 
+                       flds_unique = c('species', 'fao', 'environment', 'taxon_code', 'year')) 
 
 # v2024 notes:
 ## deletes Yugoslavia SFR -- this is okay because after 1991 (starting in 1992), the dataset differentiates between the countries that used to make up Yugoslavia (like Croatia, Serbia and Montenegro (Serbia is landlocked and we'll need to deal with the duplicates from this group), Bosnia and Herzegovina, Slovenia) starting in 1992. 
@@ -364,20 +360,20 @@ mar_sum <- mar_name_split %>%
     country %in% c("United Republic of Tanzania", "United Republic of Tanzania, Zanzibar") ~ "United Republic of Tanzania",
     TRUE ~ country
   )) %>%
-  dplyr::group_by(country, year, species, fao, environment, Taxon_code, family) %>%
+  dplyr::group_by(country, year, species, fao, environment, taxon_code, family) %>%
   dplyr::summarise(value = sum(value, na.rm = TRUE)) %>% 
   dplyr::ungroup()
 
 # ---- Run name_2_rgn Again ----
 mar_rgn <- name_2_rgn(df_in = mar_sum, 
                        fld_name ='country', 
-                       flds_unique = c('species', 'fao', 'environment', 'Taxon_code', 'year')) 
+                       flds_unique = c('species', 'fao', 'environment', 'taxon_code', 'year')) 
 
 # Confirmed that duplicate regions have been handled
 
 # ---- Aggregation: sum values of regions with multiple subregions ----
 mar_rgn_agg <- mar_rgn %>%
-  dplyr::group_by(fao, environment, species, year, Taxon_code, rgn_id, rgn_name, family) %>% 
+  dplyr::group_by(fao, environment, species, year, taxon_code, rgn_id, rgn_name, family) %>% 
   dplyr::summarize(value = sum(value)) %>%
   dplyr::ungroup()
 
@@ -385,15 +381,16 @@ mar_rgn_agg <- mar_rgn %>%
 
 Take a look at the tidied data for a single year and region
 
-```{r see-tidy-data}
+```{r see-tidy-data eval=FALSE}
 test <- data.frame(
   dplyr::filter(mar_rgn_agg, rgn_id == 207) %>% # Vietnam
   dplyr::filter(year == 2020) %>%
   arrange(species))
 # View(test)
+rm(test)
 ```
 
-# Gapfilling
+## Gapfilling
 
 ## Fill in missing years after first year of harvest data with 0 values
 
@@ -411,12 +408,12 @@ Checked to make sure that there weren't instances in which it made more sense to
 # mar_rgn_yrs <- mar_rgn_agg %>% 
 #   dplyr::mutate(year = as.numeric(year),
 #          rgn_id = as.character(rgn_id)) %>% 
-#   dplyr::group_by(rgn_id, rgn_name, species, family, Taxon_code, fao, environment) %>% 
+#   dplyr::group_by(rgn_id, rgn_name, species, family, taxon_code, fao, environment) %>% 
 #   tidyr::complete(
 #     year = min(mar_rgn_agg$year):max(mar_rgn_agg$year),
 #     fill = list(value = NA)) %>% 
 #   dplyr::mutate(rgn_id = as.numeric(rgn_id)) %>% 
-#   dplyr::arrange(rgn_id, species, year, Taxon_code, family, fao, environment) %>% 
+#   dplyr::arrange(rgn_id, species, year, taxon_code, family, fao, environment) %>% 
 #   dplyr::ungroup()
 # 
 # toc()
@@ -437,14 +434,14 @@ mar_rgn_yrs_filled <- tidyr::pivot_longer(mar_rgn_spread,
                            cols = num_range("",paste0(1950:latest_data_year)),
                            names_to = "year",
                            values_to = "value") %>% 
-  arrange(rgn_id, species, year, Taxon_code, family, fao, environment)
+  arrange(rgn_id, species, year, taxon_code, family, fao, environment)
 
 
 ## NA values are converted to zero.
 mar_rgn_gf <- mar_rgn_yrs_filled %>%
   mutate(year = as.numeric(year)) %>%
   mutate(value_w_0 = ifelse(is.na(value), 0, value)) %>%
-  group_by(fao, environment, species, Taxon_code, family, rgn_id) %>% 
+  group_by(fao, environment, species, taxon_code, family, rgn_id) %>% 
   mutate(cum_value = cumsum(value_w_0)) %>%
   ungroup() %>%
   filter(cum_value > 0) %>% # Eliminates years before mariculture began
@@ -455,7 +452,7 @@ mar_rgn_gf <- mar_rgn_yrs_filled %>%
 
 Check how may NA values were converted to 0
 
-```{r table-NA-0}
+```{r table-NA-0, eval=FALSE}
 
 table(mar_rgn_gf$gap_0_fill)
 ## 3790 of these out of 27810+3790 cases had NA values converted to 0 - 2018 assessment
@@ -471,7 +468,6 @@ table(mar_rgn_gf$gap_0_fill)
 
 # After changing mar_fxs region splitting...
 ## 2025 assessment: 11101 out of 47619 (~23%) cases had NA values converted to 0
-
 ```
 
 Remove family-region-environment time series with less than four years of mariculture production \> 0 tonnes (assume these are not established mariculture programs).
@@ -483,7 +479,7 @@ mar_rgn_gf_filter <- mar_rgn_gf %>%
   mutate (not_0 = length(value[value > 0])) %>% # Length of vector of years greater than 0
   filter(not_0 > 3) %>% # Filter for groups that have at least four years of mariculture production 
   ungroup() %>% 
-  dplyr::select(rgn_id, species, fao, environment, year, value, Taxon_code, family, gap_0_fill) 
+  dplyr::select(rgn_id, species, fao, environment, year, value, taxon_code, family, gap_0_fill) 
 
 maric <- mar_rgn_gf_filter
 ```
@@ -510,12 +506,11 @@ These data describe the sustainability country/species combinations. In cases wh
 
 # ---- Load in Seafood Watch sustainability scores data from Mazu: ----
 # Read in new Seafood Watch data 
-sw_sus_raw <- readr::read_csv(file.path(seafood_watch_dir,
+sw_sus_raw <- read_csv(file.path(seafood_watch_dir,
                              current_data_folder,
                              "SFW_Aquaculture_ratings_062725.csv"), # update with name of new data file
                    na = c("NA", ""))
 
-head(sw_sus_raw)
 
 # Read in Seafood Watch data from previous year
 # old_sw_sus <- read.csv(file.path(seafood_watch_dir, previous_data_folder,
@@ -641,7 +636,6 @@ sw_sus$species <- ifelse(!is.na(sw_sus$fao_species), sw_sus$fao_species, sw_sus$
 sw_sus_no_rgn <- filter(sw_sus, is.na(country) | country == "Worldwide")
 dim(sw_sus_no_rgn)
 
-# 118 entries with no country, 
 # in 2023 assessment there were 114 "Worldwide" rows and only 1 NA row
 # 115 entries in 2024
 # 114 entries in 2025
@@ -730,17 +724,15 @@ sort(setdiff(maric$species, maric_old$species)) # 2025 not in 2024
 sort(setdiff(maric_old$species, maric$species)) # 2024 not in 2025
 
 # Join previous and current year data
-maric_comb <- full_join(maric, maric_old, by = join_by(rgn_id, species, year))
+maric_comb <- full_join(maric, maric_old, by = join_by(rgn_id, species, year, environment, family))
 
 # Clean names
 maric_comb <- maric_comb %>% 
-  select(rgn_id, species, year, fao25 = fao.x, fao24 = fao.y, 
-         environment = environment.x, value_25 = value.x, 
-         taxon_code25 = Taxon_code.x, taxon_code24 = Taxon_code.y, 
-         family = family.x, gap_0_fill25 = gap_0_fill.x, 
+  select(rgn_id, species, year, environment, family, fao25 = fao.x, 
+         fao24 = fao.y, value_25 = value.x, taxon_code25 = Taxon_code.x, 
+         taxon_code24 = Taxon_code.y, gap_0_fill25 = gap_0_fill.x, 
          gap_0_fill24 = gap_0_fill.y, vyear_25 = vyear.x, 
-         vyear_24 = vyear.y, value_24 = value.y) %>% 
-  view()
+         vyear_24 = vyear.y, value_24 = value.y)
 
 # Check NAs for gap filling
 colSums(is.na(maric_comb))
@@ -764,9 +756,22 @@ colSums(is.na(maric_comb_clean))
 maric_clean <- maric_comb_clean %>% 
   select(rgn_id, species, year, fao = fao25, environment, value_24, value_25, taxon_code = taxon_code25, family, gap_0_fill = gap_0_fill25, vyear_24, vyear_25)
 
-view(maric_clean)
+maric_long <- maric_clean %>%
+  pivot_longer(
+    cols = c(value_24, value_25, vyear_24, vyear_25),
+    names_to = c(".value", "year_old"),
+    names_sep = "_"
+  ) %>% 
+  select(-year_old)
 
-maric <- maric_clean
+maric_long <- maric_clean %>% 
+  pivot_longer(c(value_24, value_25), 
+               names_to = "type", 
+               values_to = "value") 
+
+# view(maric_long)
+
+maric <- maric_long
 
 ## Make sure same species are spelled the same in the two data tables (e.g. check that there are no extra spaces)
 sort(setdiff(sw_sus_rgn$species, maric$species)) # Seafood Watch species with no FAO data
@@ -804,7 +809,7 @@ maric <- maric %>%
     str_detect(species, "clam") ~ "Clams",
     str_detect(species, "Clam") ~ "Clams",
     str_detect(species, "mussel") ~ "Mussels",
-    Taxon_code == "AL" ~ "Seaweed",
+    taxon_code == "AL" ~ "Seaweed",
     family == "Haliotidae" ~ "Abalones", 
     family == "Pectinidae" ~ "Scallops",
     TRUE ~ species)
@@ -818,14 +823,17 @@ maric <- maric %>%
 #updating the names combines species and creates creates duplicate species which we will need to sum
 #also sums duplicates due to multiple fao codes for the same region/species
 maric <- maric %>%
-  group_by(environment, species, year, Taxon_code, rgn_id, family) %>% 
+  group_by(environment, species, year, vyear, taxon_code, rgn_id, family) %>% 
   summarize(value = sum(value), gap_0_fill = first(gap_0_fill)) %>%
   ungroup()
-
+view(maric)
 #run this code to check that there are no duplicates for any species, year, rgn_id combinations. If there are they will be unintentionally deleted later, so you may need to change family or taxon codes to match and rerun the above group by
-duplicate_check <- maric %>% group_by(environment, species, year, rgn_id) %>% 
+duplicate_check <- maric %>% 
+  group_by(rgn_id, species, year, vyear, environment) %>% 
   summarize(n = n())
 unique(duplicate_check$n) #should be 1
+
+# We have duplicates here because when we pivoted longer, we had all the data in both 2024 and 2025. So essentially, we need to cut the length of the data frame in half. 
 
 
 #Add a unique identifier per cultivated stock that describes each species, region, and environment grouping.
@@ -833,12 +841,15 @@ identifier <- maric %>%
   select(rgn_id, species, environment) %>% 
   unique() %>% 
   mutate(species_code = 1:n())
+# 
+maric[1, ] == maric[2, ]
 
 maric <- left_join(maric, identifier)
 
 #run again after cleaning to check there are no remaining mismatched species
 sort(setdiff(sw_sus_rgn$species, maric$species))
 sort(setdiff(maric$species, sw_sus_rgn$species))
+
 ```
 
 # FAO mariculture and Seafood Watch sustainability scores
@@ -894,6 +905,7 @@ Assign a Mediterranean bordering rgn id to each waterbody row
 #   dplyr::select(-rgn_id.x, rgn_id = rgn_id.y)
 
 ```
+# Join mariculture and SFW data
 
 ```{r sw-fao-joining}
 
@@ -923,7 +935,7 @@ mar_sw_sus <- mar_sw_sus %>%
   left_join(sw_sp_g, by= c("species"))
 
 test3 <- mar_sw_sus %>%
-  filter(Taxon_code == "GAST")
+  filter(taxon_code == "GAST")
 
 nrow(test3) # 1810
 sum(is.na(test3$Sust_sw_sp_c)) # 1810
@@ -1079,7 +1091,7 @@ mar_sw_sus <- mar_sw_sus %>%
   mutate(avg_fam_sust = mean(Sust, na.rm = TRUE), # produced some NaN values (2022 scenario year)
          avg_fam_esc = mean(esc_score, na.rm = TRUE)) %>% # produced NaN values (2022 scen ario year)
   ungroup() %>%
-  group_by(Taxon_code) %>%
+  group_by(taxon_code) %>%
   mutate(avg_taxon_code_sust = mean(Sust, na.rm = TRUE), # produced some NaN values (2022 scecario year)
          avg_taxon_code_esc = mean(esc_score, na.rm = TRUE)) %>% # produced some NaN values (2022 scecario year)
   ungroup() %>%
@@ -1130,7 +1142,7 @@ mar_sw_sus_final <- mar_sw_sus %>%
   mutate(gapfill_sus = ifelse(is.na(gapfill_sus) & Sust == avg_fam_sust, "family_avg", gapfill_sus)) %>% ## Add in family gapfill record
   mutate(Sust = ifelse(is.na(Sust), avg_taxon_code_sust, Sust)) %>%
   mutate(gapfill_sus = ifelse(is.na(gapfill_sus) & Sust == avg_taxon_code_sust, "taxon_group_avg", gapfill_sus)) %>%
-  #mutate(Sust = ifelse(Taxon_code == "AL", seaweed_gf_score, Sust)) %>% ## assign any algae with the overall SFW seaweed score, see Steps above for reference to document
+  #mutate(Sust = ifelse(taxon_code == "AL", seaweed_gf_score, Sust)) %>% ## assign any algae with the overall SFW seaweed score, see Steps above for reference to document
   #mutate(gapfill_sus = ifelse(is.na(gapfill_sus) & Sust == seaweed_gf_score, "seaweed_score", gapfill_sus)) %>%
   mutate(Sust = ifelse(is.na(Sust), avg_global, Sust)) %>% 
   mutate(gapfill_sus = ifelse(is.na(gapfill_sus) & Sust == avg_global, "global_avg", gapfill_sus)) %>%
@@ -1144,7 +1156,7 @@ mar_sw_sus_final <- mar_sw_sus %>%
   mutate(gapfill_esc = ifelse(is.na(gapfill_esc) & esc_score == avg_fam_esc, "family_avg", gapfill_esc)) %>% ## Add in family gapfill record
   mutate(esc_score = ifelse(is.na(esc_score), avg_taxon_code_esc, esc_score)) %>%
   mutate(gapfill_esc = ifelse(is.na(gapfill_esc) & esc_score == avg_taxon_code_esc, "taxon_group_avg", gapfill_esc)) %>%
-  #mutate(esc_score = ifelse(Taxon_code == "AL", escapes_gf_score, esc_score)) %>% ## assign any algae with the SFW seaweed score for C6 Escapes, see Steps above for reference to document
+  #mutate(esc_score = ifelse(taxon_code == "AL", escapes_gf_score, esc_score)) %>% ## assign any algae with the SFW seaweed score for C6 Escapes, see Steps above for reference to document
   #mutate(gapfill_esc = ifelse(is.na(gapfill_esc) & esc_score == escapes_gf_score, "seaweed_score", gapfill_esc)) %>%
   mutate(esc_score = ifelse(is.na(esc_score), avg_global_esc, esc_score)) %>% 
   mutate(gapfill_esc = ifelse(is.na(gapfill_esc) & esc_score == avg_global_esc, "global_avg", gapfill_esc)) %>%
@@ -1152,7 +1164,7 @@ mar_sw_sus_final <- mar_sw_sus %>%
   #### final tidying ####
 mutate(taxa_code = paste(species, species_code, sep="_")) %>%
 # mutate(taxa_code = paste(species, species_code, sep="_")) %>%
-  select(rgn_id, species, species_code, taxa_code, taxa_group = Taxon_code,
+  select(rgn_id, species, species_code, taxa_code, taxa_group = taxon_code,
          family, year, gapfill_sus, gapfill_esc, gapfill_fao = gap_0_fill,
          tonnes = value, Sust, esc_score) %>%
   mutate(Sust = round(Sust/10, 2),

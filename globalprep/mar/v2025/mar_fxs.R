@@ -15,7 +15,7 @@ mar_split <- function(m) {
                  values_to = "value") %>%
     mutate(country = as.character(country),
            value = as.numeric(value)) %>% 
-    select(c(country, fao, environment, species, year, Taxon_code, family, value))
+    select(c(country, fao, environment, species, year, taxon_code, family, value))
   
   m <- m %>%
     filter(country != 'Netherlands Antilles [former]') %>%
@@ -36,7 +36,7 @@ mar_split <- function(m) {
                  values_to = "value") %>% 
     mutate(country = as.character(country),
            value = as.numeric(value)) %>% 
-    select(c(country, fao, environment, species, year, Taxon_code, family, value))
+    select(c(country, fao, environment, species, year, taxon_code, family, value))
   
   m <- m %>%
     filter(!country %in% c("Bonaire, Sint Eustatius and Saba")) %>%
@@ -56,7 +56,7 @@ mar_split <- function(m) {
                  values_to = "value") %>% 
     mutate(country = as.character(country),
            value = as.numeric(value)) %>% 
-    select(c(country, fao, environment, species, year, Taxon_code, family, value))
+    select(c(country, fao, environment, species, year, taxon_code, family, value))
   
   m <- m %>%
     filter(country != 'Bonaire/S.Eustatius/Saba') %>%
@@ -75,7 +75,7 @@ mar_split <- function(m) {
                  values_to = "value") %>%
     mutate(country = as.character(country),
            value = as.numeric(value)) %>% 
-    select(c(country, fao, environment, species, year, Taxon_code, family, value))
+    select(c(country, fao, environment, species, year, taxon_code, family, value))
   
   m <- m %>%
     filter(country != "Channel Islands") %>%
@@ -99,7 +99,7 @@ mar_split <- function(m) {
                  values_to = "value") %>%
     mutate(country = as.character(country),
            value = as.numeric(value)) %>%
-    select(c(country, fao, environment, species, year, Taxon_code, family, value))
+    select(c(country, fao, environment, species, year, taxon_code, family, value))
 
   m <- m %>%
     filter(country != 'Union of Soviet Socialist Republics [former]') %>%
@@ -116,7 +116,7 @@ mar_split <- function(m) {
                  values_to = "value") %>%
     mutate(country = as.character(country),
            value = as.numeric(value)) %>%
-    select(c(country, fao, environment, species, year, Taxon_code, family, value))
+    select(c(country, fao, environment, species, year, taxon_code, family, value))
   
   m <- m %>%
     filter(country != 'Serbia and Montenegro [former]') %>%
