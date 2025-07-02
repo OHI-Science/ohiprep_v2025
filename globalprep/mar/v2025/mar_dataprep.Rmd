@@ -601,6 +601,7 @@ species-specific characteristics, and particularly between native and non-native
 
 A C6 score of 10 indicates a very low risk of escape with low estimated competitiveness and genetic interactions. An Escape Criterion (C6) score ≤ 1 is considered "Critical" (pg. 52), and may indicate a "High Concern" risk of escape and "High Concern" potential for competitiveness and genetic impact. 
 
+### Tidy
 
 ```{r tidy_sw-sus}
 # ---- Tidy Seafood Watch (SFW) data ----
@@ -703,6 +704,20 @@ setdiff(old_sw_sus$CommonNames, sw_sus_rgn$sw_species) # "Buri amberjack"       
 setdiff(sw_sus_rgn$scientific_name, old_sw_sus$ScientificName)
 setdiff(old_sw_sus$ScientificName, sw_sus_rgn$scientific_name)
 # The only difference here was the overarching "seaweed" species. the scientific names are listed in different order/have slightly different composition between 2023 and 2025. 
+```
+
+## Add 2024 SFW data
+I've gone back to v2024 to export this intermediate file for ease of combining here. It's called `int_sfw.csv`
+
+```{r}
+# Save intermediate file for 2026 analysis
+# readr::write_csv(sw_sus_rgn, here(current_mar_dir, "int", "int_sfw.csv"))
+
+int_sfw_24 <- read_csv(here(previous_mar_dir, "int", "int_sfw.csv")) %>% 
+  select(escape24 = escapes_score, score24 = score, species, rgn_id, rgn_name, scientific_name, sw_species, fao_species, fda_species, country, water_body, method)
+
+sw_sus_comb <- full_join(sw_sus_rgn, int_sfw_24, by = join_by(rgn_id, species)) %>% 
+  view()
 ```
 
 Check that the non-matches between Seafood Watch sustainability data species (sw_sus_rgn) and the FAO mariculture species in the wrangled FAO Aquaculture Production data table (maric) are not due to spelling errors or slightly different names. We want to include as many species that have sustainability scores as possible
@@ -826,14 +841,31 @@ maric <- maric %>%
   group_by(environment, species, year, vyear, taxon_code, rgn_id, family) %>% 
   summarize(value = sum(value), gap_0_fill = first(gap_0_fill)) %>%
   ungroup()
-view(maric)
+
 #run this code to check that there are no duplicates for any species, year, rgn_id combinations. If there are they will be unintentionally deleted later, so you may need to change family or taxon codes to match and rerun the above group by
 duplicate_check <- maric %>% 
   group_by(rgn_id, species, year, vyear, environment) %>% 
-  summarize(n = n())
+  summarize(n = n()) 
 unique(duplicate_check$n) #should be 1
 
-# We have duplicates here because when we pivoted longer, we had all the data in both 2024 and 2025. So essentially, we need to cut the length of the data frame in half. 
+# Getting closer with the duplicates, still have an issue with seaweed for region 164. 
+
+# Isolate what's going on with region 164 seaweed 
+# maric %>% 
+#   filter(rgn_id == 164 & species == "Seaweed") %>% 
+#   view()
+
+# This revealed that the problem is coming from a mis-match of family. Some are listed as "algae" while others are listed as "Solieriaceae". I'm gonna drop the "Solieriaceae" ones to match the way the rest of the seaweed is classified in the df
+
+# Drop incorrect seaweed family
+maric <- maric %>% 
+  filter(!(rgn_id == 164 & family == "Solieriaceae"))
+ 
+# Run the duplicate check again
+duplicate_check <- maric %>% 
+  group_by(rgn_id, species, year, vyear, environment) %>% 
+  summarize(n = n()) 
+unique(duplicate_check$n) #should be 1
 
 
 #Add a unique identifier per cultivated stock that describes each species, region, and environment grouping.
@@ -841,10 +873,16 @@ identifier <- maric %>%
   select(rgn_id, species, environment) %>% 
   unique() %>% 
   mutate(species_code = 1:n())
-# 
-maric[1, ] == maric[2, ]
+view(identifier)
 
-maric <- left_join(maric, identifier)
+# Not 100% sure if this is joining correctly... need to check out later
+maric_join <- left_join(maric, identifier, by = join_by(rgn_id, species, environment))
+
+view(maric_join)
+
+# It looks like all the identifiers applied correctly 
+length(unique(maric_join$species_code)) # 1367
+nrow(identifier) # 1367
 
 #run again after cleaning to check there are no remaining mismatched species
 sort(setdiff(sw_sus_rgn$species, maric$species))

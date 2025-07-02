@@ -639,6 +639,11 @@ setdiff(sw_sus_rgn$sw_species, old_sw_sus$CommonNames) # character(0)
 setdiff(old_sw_sus$CommonNames, sw_sus_rgn$sw_species) # character(0)
 ```
 
+```{r}
+# Save intermediate file for 2025 analysis
+readr::write_csv(sw_sus_rgn, here(current_mar_dir, "int", "int_sfw.csv"))
+```
+
 Check that the non-matches between Seafood Watch sustainability data species (sw_sus_rgn) and the FAO mariculture species in the wrangled FAO Aquaculture Production data table (maric) are not due to spelling errors or slightly different names. We want to include as many species that have sustainability scores as possible
 
 ```{r sw-sus_check-non-matches, eval = FALSE}
