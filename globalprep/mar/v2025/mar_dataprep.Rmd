@@ -71,8 +71,6 @@ Click browse on Global aquaculture production. Click browse on Global aquacultur
 
 ## Seafood Watch sustainability data
 
-**2025 update**: Still waiting to contact SFW about most recent data. 
-
 Obtained upon request of SFW.
 
 **Reference**:\
@@ -80,7 +78,7 @@ Obtained upon request of SFW.
 [Seafood Watch Scoring Theory](https://www.seafoodwatch.org/globalassets/sfw/pdf/standards/aquaculture/seafood-watch-aquaculture-standard-version-a4.pdf)\
 [Seafood Watch Global Seaweed Assessment](https://www.seafoodwatch.org/recommendation/seaweed/seaweed-31568) (provides gapfilling constants)
 
-**Downloaded**: May 31, 2023
+**Downloaded**: June 27, 2025
 
 **Description**: Monterey Bay Aquarium Seafood Watch aquaculture recommendations. Sustainability scored from 0-10. Rescaled to 0-1 using the max score in the data.
 
@@ -114,9 +112,13 @@ if (!require(librarian)){
 
 
 # ---- Set directories & source functions ----
-current_year <- 2025 # update this!
+current_year <- 2025 # update these!
+previous_year <-  2024 # update these!
 version_year <- paste0("v", current_year)
+old_version_year <- paste0("v", previous_year)
 current_mar_dir <- here::here("globalprep", "mar", version_year)
+previous_mar_dir <- here::here("globalprep", "mar", old_version_year)
+
 
 # ---- Load FAO-specific user-defined functions ----
 # functions specific to mariculture dealing with compound countries, updated in 2024
@@ -140,6 +142,10 @@ seafood_watch_dir <- here::here(raw_data_dir, "seafood_watch_mar_sustainability"
 
 Mariculture production in tonnes.
 
+## 2025 update
+
+Since we have new SFW data, we've decided to combine data from v2024 and v2025 to have two years of data and to assist with gapfilling. In order for the final output csv `mar_sustainability_score.csv` to have the correct final values, we also need to combine the mariculture data up here at the top. 
+
 ```{r import-data}
 ## UPDATE THESE!
 current_year <- current_year # update in previous chunk
@@ -154,10 +160,14 @@ current_data_folder <- paste0("d", current_year) # assessment year for file path
 previous_data_folder <- paste0("d", last_year)  # previous assessment year
 
 #update the data file name to the current last year of data 
-mar_raw <- readr::read_csv(here::here(FAO_mariculture_dir, current_data_folder,
-                          paste0("FAO_GlobalAquacultureProduction_Quantity_1950_", latest_data_year, ".csv")))
+mar_raw <- readr::read_csv(here::here(FAO_mariculture_dir, current_data_folder, paste0("FAO_GlobalAquacultureProduction_Quantity_1950_", latest_data_year, ".csv")))
 
-head(mar_raw)
+view(mar_raw)
+
+mar_raw_old <- readr::read_csv(here::here(FAO_mariculture_dir, previous_data_folder, paste0("FAO_GlobalAquacultureProduction_Quantity_1950_", previous_data_year, ".csv")))
+
+view(mar_raw_old)
+
 ```
 
 # Wrangle:
@@ -706,12 +716,64 @@ Check that the non-matches between Seafood Watch sustainability data species (sw
 ```{r sw-sus_check-non-matches}
 maric <- readr::read_csv(here::here(current_mar_dir, "output", "MAR_FP_data.csv"))
 
+maric_old <- readr::read_csv(here::here(previous_mar_dir, "output", "MAR_FP_data.csv"))
+
+# Add a new year column that is the version year
+maric <- maric %>% 
+  mutate(vyear = 2025) 
+
+maric_old <- maric_old %>% 
+  mutate(vyear = 2024)
+
+# compare species between v2024 and v2025
+sort(setdiff(maric$species, maric_old$species)) # 2025 not in 2024
+sort(setdiff(maric_old$species, maric$species)) # 2024 not in 2025
+
+# Join previous and current year data
+maric_comb <- full_join(maric, maric_old, by = join_by(rgn_id, species, year))
+
+# Clean names
+maric_comb <- maric_comb %>% 
+  select(rgn_id, species, year, fao25 = fao.x, fao24 = fao.y, 
+         environment = environment.x, value_25 = value.x, 
+         taxon_code25 = Taxon_code.x, taxon_code24 = Taxon_code.y, 
+         family = family.x, gap_0_fill25 = gap_0_fill.x, 
+         gap_0_fill24 = gap_0_fill.y, vyear_25 = vyear.x, 
+         vyear_24 = vyear.y, value_24 = value.y) %>% 
+  view()
+
+# Check NAs for gap filling
+colSums(is.na(maric_comb))
+
+# Gap fill with other year data
+maric_comb_clean <- maric_comb %>%
+  mutate(value_24 = ifelse(is.na(value_24), value_25, value_24),
+         value_25 = ifelse(is.na(value_25), value_24, value_25),
+         vyear_25 = ifelse(is.na(vyear_25), 2025, vyear_25),
+         vyear_24 = ifelse(is.na(vyear_24), 2024, vyear_24),
+         taxon_code25 = ifelse(is.na(taxon_code25), taxon_code24, taxon_code25),
+         taxon_code24 = ifelse(is.na(taxon_code24), taxon_code25, taxon_code24),
+         fao25 = ifelse(is.na(fao25), fao24, fao25),
+         fao24 = ifelse(is.na(fao24), fao25, fao24),
+         gap_0_fill25 = ifelse(is.na(gap_0_fill25), gap_0_fill24, gap_0_fill25),
+         gap_0_fill24 = ifelse(is.na(gap_0_fill24), gap_0_fill25, gap_0_fill24))
+
+# Confirm NAs are gone for columns of interest
+colSums(is.na(maric_comb_clean))
+
+maric_clean <- maric_comb_clean %>% 
+  select(rgn_id, species, year, fao = fao25, environment, value_24, value_25, taxon_code = taxon_code25, family, gap_0_fill = gap_0_fill25, vyear_24, vyear_25)
+
+view(maric_clean)
+
+maric <- maric_clean
+
 ## Make sure same species are spelled the same in the two data tables (e.g. check that there are no extra spaces)
 sort(setdiff(sw_sus_rgn$species, maric$species)) # Seafood Watch species with no FAO data
 sort(setdiff(maric$species, sw_sus_rgn$species)) # FAO species with no Seafood Watch data - there will probably be a long list
 #this is a baseline check, run the fixes in the next chunk from previous years before hand fixing any species
 
-#instructions for updating speices:
+#instructions for updating species:
 ## Hand check each of the species output here, check to make sure there aren't obvious cases when the species is the same, but the names are presented slightly differently in the lists. For example, some species might have an extra space in the name somewhere. If any of these obvious differences exist, we need to go in and change the names to match. 
 ## The FAO list has far more species than the sustainability list. But, go over them to make sure that we are getting sustainability scores for as many species as we can.
 # note -- Seafood Watch makes a distinction between Common sole and Dover sole
@@ -1130,6 +1192,9 @@ sust_comb <- full_join(mar_sw_sus_final, sust_old, by = c("rgn_id", "species"))
 colSums(is.na(sust_comb))
 
 # Fill NAs in sust_old (previous year sustainability) with Sust from this year
+
+# Don't fill year, just score. 
+
 sust_comb_clean <- sust_comb %>%
   mutate(sust_old = ifelse(is.na(sust_old), Sust, sust_old),
          Sust = ifelse(is.na(Sust), sust_old, Sust),
@@ -1141,7 +1206,6 @@ sust_comb_clean <- sust_comb %>%
 colSums(is.na(sust_comb_clean))
 
 # Now that we've filled the NAs, reseparate the data frames so we can do a simple bindrows on them
-
 sust_new_clean <- sust_comb_clean %>% 
   select(rgn_id, species, taxa_code, year, sust = Sust)
 
@@ -1150,7 +1214,10 @@ sust_old_clean <- sust_comb_clean %>%
 
 sust_clean <- bind_rows(sust_new_clean, sust_old_clean)
 
-# define the maximum sustainability score, check with: summary(mar_sw_sus_final)
+# define the maximum sustainability score, check with:
+summary(mar_sw_sus_final)
+
+# Issue: the 2024 data was already scaled. Should I pull from the unscaled version of the 2024 data and recalculate score? Or, I can scale the 2025 data before I combine it with the 2024 data? 
 max_sus <- 0.77
 
 ## Save sustainability scores data for 2023 (SFW data year)
@@ -1169,9 +1236,11 @@ colSums(is.na(mar_sustainability_score))
 # Confirm that the right balance of years is present in the data frame
 table(mar_sustainability_score$year)
 
+view(mar_sustainability_score)
+
 ## Saves the appropriate Sustainability Score file 
 #write.csv(mar_sustainability_score, here(current_mar_dir, "output", "mar_sustainability.csv"), row.names = F)
-readr::write_csv(mar_sustainability_score, here(current_mar_dir, "output", "mar_sustainability_new.csv"))
+# readr::write_csv(mar_sustainability_score, here(current_mar_dir, "output", "mar_sustainability_new.csv"))
 ```
 
 ### Combining 2025 and 2024 data
@@ -1277,7 +1346,7 @@ max_sus <- 0.77
 
 ## Save sustainability scores data for 2023 (SFW data year)
 mar_sustainability_score <- mar_sw_sus_final %>%
-  # mutate(year = current_year) %>% #change year if data not updated to current year
+  mutate(year = current_year) %>% #change year if data not updated to current year
   dplyr::select(rgn_id, year, taxa_code, sust_coeff = Sust) %>%
   unique() %>%
   mutate(sust_coeff = ifelse(sust_coeff > max_sus, 1, sust_coeff/max_sus)) # rescale to the highest sust score
