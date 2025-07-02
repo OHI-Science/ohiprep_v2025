@@ -65,6 +65,9 @@ The LandScan Program was initiated at Oak Ridge National Laboratory (ORNL) in 19
 
 **Format**: GeoTiff
 
+**2025 NOTE:**
+The population trends for some of the smaller (potentially more data-deficient) countries are a little odd. We explored this a little in issue [#336](https://github.com/OHI-Science/globalfellows-issues/issues/336). We concluded that it was likely a modeling issue on ORNL's end.
+
 ## UN Population
 
 UN population data is used in this data prep routine to check population counts; spatially distributed counts derived from the gridded world population are aggregated by region and checked against the UN population estimates.
