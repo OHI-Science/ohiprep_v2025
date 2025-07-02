@@ -530,27 +530,6 @@ ggplotly(years_compare_plot_density)
 
 ```
 
-```{r check_areas, eval=FALSE}
-
-# Compare area with that calculated in previous year (should look very similar)
-old_area <- read_csv(here('globalprep/mar_prs_population/v2019/int/area_km2_25mi.csv')) %>%
-  rename(old_area_km2 = area_km2) %>%
-  dplyr::mutate(old_area_km2 = round(old_area_km2)) %>%
-  dplyr::left_join(area, by = "rgn_id")
-
-area_compare_plot <- ggplot(old_area) +
-  geom_point(aes(area_km2, old_area_km2, label = rgn_id), alpha = .6) +
-  geom_abline(slope = 1, intercept = 0, color = 'red') +
-  labs(x = sprintf('%s Area (km2)', scenario_yr),
-       y = sprintf('%s Area (km2)', "v2019 (last update)"),
-       title = 'Area Calculation Comparison')
-
-# View
-ggplotly(area_compare_plot)
-
-summary(old_area)
-```
-
 # Appendix
 
 ## Reproject EEZ + 25-mile Inland Raster
