@@ -1001,10 +1001,10 @@ identifier <- maric %>%
   mutate(species_code = 1:n())
 
 # Not 100% sure if this is joining correctly... need to check out later
-maric_join <- left_join(maric, identifier, by = join_by(rgn_id, species, environment))
+maric <- left_join(maric, identifier, by = join_by(rgn_id, species, environment))
 
 # It looks like all the identifiers applied correctly 
-length(unique(maric_join$species_code)) # 1501
+length(unique(maric$species_code)) # 1501
 nrow(identifier) # 1501
 
 #run again after cleaning to check there are no remaining mismatched species
@@ -1073,17 +1073,18 @@ gf_sw_sp_w <- expand.grid.df(sw_sus_rgn_water, med_rgns) %>%
   dplyr::select(-rgn_id.x, rgn_id = rgn_id.y)
 
 ```
+
 # Join mariculture and SFW data
 
 ```{r sw-fao-joining}
 
-nrow(maric) # 80223
-nrow(sw_sp_c) #374
-nrow(sw_sp_g) #228
-nrow(sw_sp_w) #42
-
-colnames(maric)
-colnames(sw_sp_c)
+# nrow(maric) # 80223
+# nrow(sw_sp_c) #374
+# nrow(sw_sp_g) #228
+# nrow(sw_sp_w) #42
+# 
+# colnames(maric)
+# colnames(sw_sp_c)
 
 ## Join data specific to species/country
 sw_sp_c <- sw_sus_rgn %>%
@@ -1154,18 +1155,18 @@ mar_sw_sus <- mar_sw_sus %>%
 summary(mar_sw_sus)
 
 # 2025 version without water body
-mar_sw_sus <- mar_sw_sus %>%
-  dplyr::mutate(Sust = Sust_sw_sp_c,
-                Sust = ifelse(is.na(Sust), Sust_sw_sp_g, Sust),
-                gapfill_sus = case_when(Sust_sw_sp_c == Sust ~ "none",
-                                        is.na(Sust_sw_sp_c) & Sust_sw_sp_g == Sust ~ "global_species")) %>%
-  dplyr::mutate(esc_score = esc_sw_sp_c,
-                esc_score = ifelse(is.na(esc_score), esc_sw_sp_g, esc_score),
-                gapfill_esc = case_when(esc_sw_sp_c == esc_score ~ "none",
-                                        is.na(esc_sw_sp_c) & esc_sw_sp_g == esc_score ~ "global_species")) %>%
-  dplyr::select(-c(Sust_sw_sp_c, Sust_sw_sp_g, esc_sw_sp_c, esc_sw_sp_g))
-
-summary(mar_sw_sus)
+# mar_sw_sus <- mar_sw_sus %>%
+#   dplyr::mutate(Sust = Sust_sw_sp_c,
+#                 Sust = ifelse(is.na(Sust), Sust_sw_sp_g, Sust),
+#                 gapfill_sus = case_when(Sust_sw_sp_c == Sust ~ "none",
+#                                         is.na(Sust_sw_sp_c) & Sust_sw_sp_g == Sust ~ "global_species")) %>%
+#   dplyr::mutate(esc_score = esc_sw_sp_c,
+#                 esc_score = ifelse(is.na(esc_score), esc_sw_sp_g, esc_score),
+#                 gapfill_esc = case_when(esc_sw_sp_c == esc_score ~ "none",
+#                                         is.na(esc_sw_sp_c) & esc_sw_sp_g == esc_score ~ "global_species")) %>%
+#   dplyr::select(-c(Sust_sw_sp_c, Sust_sw_sp_g, esc_sw_sp_c, esc_sw_sp_g))
+# 
+# summary(mar_sw_sus)
 ```
 
 Since some regions have multiple sustainability scores for the same species due to multiple aquaculture methods, but we don't know what proportions of which methods are used, we take the average of the sustainability scores in these instances.
@@ -1180,9 +1181,10 @@ anyDuplicated(mar_sw_sus)
 #2023 280
 # 2024 scenario year: 316
 # 2025: 329
+# 2025 combined: 664
 
 mar_sw_sus <- mar_sw_sus %>% 
-  dplyr::group_by(rgn_id, species) %>% 
+  dplyr::group_by(rgn_id, species, vyear) %>% 
   dplyr::mutate(Sust_avg = mean(Sust, na.rm = TRUE),
                 esc_avg = mean(esc_score, na.rm = TRUE)) %>% 
   dplyr::ungroup()
@@ -1198,7 +1200,7 @@ Get rid of duplicates for region/species/year:
 ```{r sw-sus-dup}
 
 mar_sw_sus <- mar_sw_sus %>% 
-  dplyr::distinct(rgn_id, species, environment, year, .keep_all = TRUE) %>%
+  dplyr::distinct(rgn_id, species, environment, year, vyear, .keep_all = TRUE) %>%
   # remove old Sust column (which was used to produce Sust_avg column) &
   # rename Sust_avg to Sust &
   # remove old esc_score column (which was used to produce esc_avg column) &
@@ -1215,7 +1217,8 @@ summary(mar_sw_sus)
 # 16378 NA values out of 33732 total obs ~ 49% without scores (2023)
 # 17126 NA values out of 34920 total obs; ~ 49% without scores (2024)
 # 18875 NA values out of 38000 total obs:~ 49.7% without scores (2025)
-# 20023 NA values out of 40133 total obs: ~ 49.9% without scores (2025 + 2024 combined)
+# This makes sense, since the data is twice as long now
+# 40046 NA values out of 80223 total obs: ~ 49.9% without scores (2025 + 2024 combined)
 ```
 
 Gapfilling based on families and taxon_code
@@ -1257,19 +1260,19 @@ mar_sw_sus <- mar_sw_sus %>%
 #unique(mar_sw_sus$avg_global_esc)
 
 mar_sw_sus <- mar_sw_sus %>%
-  group_by(rgn_id, family) %>%
+  group_by(rgn_id, family, vyear) %>%
   mutate(avg_rgn_fam_sust = mean(Sust, na.rm = TRUE), # produced NaN values (2022 scenario year)
          avg_rgn_fam_esc = mean(esc_score, na.rm = TRUE)) %>% # produced NaN values (2022 secario year)
   ungroup() %>%
-  group_by(georgn_id, family) %>%
+  group_by(georgn_id, family, vyear) %>%
   mutate(avg_gr_fam_sust = mean(Sust, na.rm = TRUE), # produced some NaN values (2023 scenario year)
          avg_gr_fam_esc = mean(esc_score, na.rm = TRUE)) %>% # produced NaN values (2023 scenario year)
   ungroup() %>%
-  group_by(family) %>%
+  group_by(family, vyear) %>%
   mutate(avg_fam_sust = mean(Sust, na.rm = TRUE), # produced some NaN values (2022 scenario year)
          avg_fam_esc = mean(esc_score, na.rm = TRUE)) %>% # produced NaN values (2022 scen ario year)
   ungroup() %>%
-  group_by(taxon_code) %>%
+  group_by(taxon_code, vyear) %>%
   mutate(avg_taxon_code_sust = mean(Sust, na.rm = TRUE), # produced some NaN values (2022 scecario year)
          avg_taxon_code_esc = mean(esc_score, na.rm = TRUE)) %>% # produced some NaN values (2022 scecario year)
   ungroup() %>%
@@ -1341,9 +1344,8 @@ mar_sw_sus_final <- mar_sw_sus %>%
   
   #### final tidying ####
 mutate(taxa_code = paste(species, species_code, sep="_")) %>%
-# mutate(taxa_code = paste(species, species_code, sep="_")) %>%
   select(rgn_id, species, species_code, taxa_code, taxa_group = taxon_code,
-         family, year, gapfill_sus, gapfill_esc, gapfill_fao = gap_0_fill,
+         family, year, vyear, gapfill_sus, gapfill_esc, gapfill_fao = gap_0_fill,
          tonnes = value, Sust, esc_score) %>%
   mutate(Sust = round(Sust/10, 2),
          esc_score = 1 - round(esc_score/10, 2))
@@ -1355,78 +1357,78 @@ filter(mar_sw_sus_final, gapfill_sus == "taxon_group_avg")
 
 ```
 
-```{r}
+```{r old-data-comb}
 # Changing the data years to account for the new SFW data
-latest_data_year <- 2025
-previous_data_year <- 2024
-
-# Compare new/old Mariculture sustainability scores
-sust_old <- read_csv(here("globalprep", "mar", paste0("v", previous_data_year), "output", "mar_sustainability.csv")) %>% 
-  dplyr::select(rgn_id, taxa_code_old = taxa_code, sust_old = sust_coeff)
-
-# tidy up species names (such as "Abalones_1"), rename as species column
-sust_old$species <- str_remove(sust_old$taxa_code_old, "\\_[^.]*$")
-
-# Drop the unneeded taxa code
-sust_old <- sust_old %>% 
-  mutate(year_old = 2024)
-
-mar_sw_sus_final <- mar_sw_sus_final %>% 
-  mutate(year = 2025)
-
-# Join previous and current year data
-sust_comb <- full_join(mar_sw_sus_final, sust_old, by = c("rgn_id", "species"))
-
-# Pivot longer so we only have one year column
-# Check NAs across entire df
-colSums(is.na(sust_comb))
-
-# Fill NAs in sust_old (previous year sustainability) with Sust from this year
-
-# Don't fill year, just score. 
-
-sust_comb_clean <- sust_comb %>%
-  mutate(sust_old = ifelse(is.na(sust_old), Sust, sust_old),
-         Sust = ifelse(is.na(Sust), sust_old, Sust),
-         year_old = ifelse(is.na(year_old), year, year_old),
-         year = ifelse(is.na(year), year_old, year),
-         taxa_code = ifelse(is.na(taxa_code), taxa_code_old, taxa_code),
-         taxa_code_old = ifelse(is.na(taxa_code_old), taxa_code, taxa_code_old))
-
-colSums(is.na(sust_comb_clean))
-
-# Now that we've filled the NAs, reseparate the data frames so we can do a simple bindrows on them
-sust_new_clean <- sust_comb_clean %>% 
-  select(rgn_id, species, taxa_code, year, sust = Sust)
-
-sust_old_clean <- sust_comb_clean %>% 
-  select(rgn_id, species, taxa_code = taxa_code_old, year = year_old, sust = sust_old)
-
-sust_clean <- bind_rows(sust_new_clean, sust_old_clean)
-
-# define the maximum sustainability score, check with:
-summary(mar_sw_sus_final)
-
-# Issue: the 2024 data was already scaled. Should I pull from the unscaled version of the 2024 data and recalculate score? Or, I can scale the 2025 data before I combine it with the 2024 data? 
-max_sus <- 0.77
-
-## Save sustainability scores data for 2023 (SFW data year)
-mar_sustainability_score <- sust_clean %>%
-  # mutate(year = current_year) %>% #change year if data not updated to current year
-  dplyr::select(rgn_id, year, taxa_code, sust_coeff = sust) %>%
-  unique() %>%
-  mutate(sust_coeff = ifelse(sust_coeff > max_sus, 1, sust_coeff/max_sus)) # rescale to the highest sust score
-
-# Check for any duplicated rows
-sum(duplicated(mar_sustainability_score))
-
-# Check for NAs in the data frame
-colSums(is.na(mar_sustainability_score))
-
-# Confirm that the right balance of years is present in the data frame
-table(mar_sustainability_score$year)
-
-view(mar_sustainability_score)
+# latest_data_year <- 2025
+# previous_data_year <- 2024
+# 
+# # Compare new/old Mariculture sustainability scores
+# sust_old <- read_csv(here("globalprep", "mar", paste0("v", previous_data_year), "output", "mar_sustainability.csv")) %>% 
+#   dplyr::select(rgn_id, taxa_code_old = taxa_code, sust_old = sust_coeff)
+# 
+# # tidy up species names (such as "Abalones_1"), rename as species column
+# sust_old$species <- str_remove(sust_old$taxa_code_old, "\\_[^.]*$")
+# 
+# # Drop the unneeded taxa code
+# sust_old <- sust_old %>% 
+#   mutate(year_old = 2024)
+# 
+# mar_sw_sus_final <- mar_sw_sus_final %>% 
+#   mutate(year = 2025)
+# 
+# # Join previous and current year data
+# sust_comb <- full_join(mar_sw_sus_final, sust_old, by = c("rgn_id", "species"))
+# 
+# # Pivot longer so we only have one year column
+# # Check NAs across entire df
+# colSums(is.na(sust_comb))
+# 
+# # Fill NAs in sust_old (previous year sustainability) with Sust from this year
+# 
+# # Don't fill year, just score. 
+# 
+# sust_comb_clean <- sust_comb %>%
+#   mutate(sust_old = ifelse(is.na(sust_old), Sust, sust_old),
+#          Sust = ifelse(is.na(Sust), sust_old, Sust),
+#          year_old = ifelse(is.na(year_old), year, year_old),
+#          year = ifelse(is.na(year), year_old, year),
+#          taxa_code = ifelse(is.na(taxa_code), taxa_code_old, taxa_code),
+#          taxa_code_old = ifelse(is.na(taxa_code_old), taxa_code, taxa_code_old))
+# 
+# colSums(is.na(sust_comb_clean))
+# 
+# # Now that we've filled the NAs, reseparate the data frames so we can do a simple bindrows on them
+# sust_new_clean <- sust_comb_clean %>% 
+#   select(rgn_id, species, taxa_code, year, sust = Sust)
+# 
+# sust_old_clean <- sust_comb_clean %>% 
+#   select(rgn_id, species, taxa_code = taxa_code_old, year = year_old, sust = sust_old)
+# 
+# sust_clean <- bind_rows(sust_new_clean, sust_old_clean)
+# 
+# # define the maximum sustainability score, check with:
+# summary(mar_sw_sus_final)
+# 
+# # Issue: the 2024 data was already scaled. Should I pull from the unscaled version of the 2024 data and recalculate score? Or, I can scale the 2025 data before I combine it with the 2024 data? 
+# max_sus <- 0.77
+# 
+# ## Save sustainability scores data for 2023 (SFW data year)
+# mar_sustainability_score <- sust_clean %>%
+#   # mutate(year = current_year) %>% #change year if data not updated to current year
+#   dplyr::select(rgn_id, year, taxa_code, sust_coeff = sust) %>%
+#   unique() %>%
+#   mutate(sust_coeff = ifelse(sust_coeff > max_sus, 1, sust_coeff/max_sus)) # rescale to the highest sust score
+# 
+# # Check for any duplicated rows
+# sum(duplicated(mar_sustainability_score))
+# 
+# # Check for NAs in the data frame
+# colSums(is.na(mar_sustainability_score))
+# 
+# # Confirm that the right balance of years is present in the data frame
+# table(mar_sustainability_score$year)
+# 
+# view(mar_sustainability_score)
 
 ## Saves the appropriate Sustainability Score file 
 #write.csv(mar_sustainability_score, here(current_mar_dir, "output", "mar_sustainability.csv"), row.names = F)
@@ -1450,11 +1452,11 @@ For each region/year: take a weighted average of the genetic escape probability 
 ```{r gen-esc-formatting}
 # subset the cleaned data to only include escapes data
 tonnes_esc <- mar_sw_sus_final %>%
-  dplyr::select(rgn_id, year, species, gapfill_esc, esc_score, tonnes)
+  dplyr::select(rgn_id, year, species, gapfill_esc, esc_score, tonnes, vyear)
 
 # use "tonnes" values to weight the regional average of escapes
 genEscapes <- tonnes_esc %>%
-  group_by(rgn_id, year) %>%
+  group_by(rgn_id, year, vyear) %>%
   summarize(genEscapes = weighted.mean(esc_score, tonnes, na.rm=TRUE)) %>% 
   ungroup()
 ```
@@ -1468,7 +1470,7 @@ Gapfill values in output file are the proportion of data that is gapfilled.
 # Obtain corresponding gapfilling information for each region (average of gapfilled data, weighted by tonnes of mariculture).
 genEscapes_gf <- tonnes_esc %>%
   mutate(gapfill = ifelse(gapfill_esc == "none", 0, 1)) %>%
-  group_by(rgn_id, year) %>%
+  group_by(rgn_id, year, vyear) %>%
   summarize(genEscapes = weighted.mean(gapfill, tonnes, na.rm = TRUE)) %>%
   ungroup() %>%
   filter(year == latest_data_year) %>%
@@ -1484,7 +1486,7 @@ genEscapes_gf <- tonnes_esc %>%
 
 ```{r save-gen-esc-gapfilled, eval = FALSE}
 # Save the Genetic Escapes Gapfill file
-readr::write_csv(genEscapes_gf, here(current_mar_dir, "output", "GenEsc_gf.csv"))
+readr::write_csv(genEscapes_gf, here(current_mar_dir, "output", "GenEsc_gf_comb.csv"))
 
 ```
 
@@ -1494,7 +1496,7 @@ Obtain escapee data layers from `genEscapes`
 
 # Create the escapee data layers:
 data <- genEscapes %>%
-    dplyr::select(rgn_id, year, pressure_score = genEscapes)
+    dplyr::select(rgn_id, year, pressure_score = genEscapes, vyear)
 
 ```
 
@@ -1503,7 +1505,7 @@ data <- genEscapes %>%
 ```{r save-gen-esc-pressure-layer, eval = FALSE}
 
 ## Saves the Genetic Escapes data file 
-readr::write_csv(data, here(current_mar_dir, "output", "GenEsc.csv"))  
+readr::write_csv(data, here(current_mar_dir, "output", "GenEsc_comb.csv"))  
 
 ```
 
@@ -1513,31 +1515,31 @@ readr::write_csv(data, here(current_mar_dir, "output", "GenEsc.csv"))
 
 ## Save mariculture harvest data
 mar_harvest_tonnes <- mar_sw_sus_final %>%
-  dplyr::select(rgn_id, taxa_code, taxa_group, family, year, tonnes)
+  dplyr::select(rgn_id, taxa_code, taxa_group, family, year, tonnes, vyear)
 
 anyDuplicated(mar_harvest_tonnes) # Check for duplication
 
 ## Saves the appropriate Mariculture Harvest Tonnes file
 #write.csv(mar_harvest_tonnes, here(current_mar_dir, "output", "mar_harvest_tonnes.csv"), row.names = F)
-readr::write_csv(mar_harvest_tonnes, here::here(current_mar_dir, "output", "mar_harvest_tonnes.csv"))
+readr::write_csv(mar_harvest_tonnes, here::here(current_mar_dir, "output", "mar_harvest_tonnes_comb.csv"))
 
 
 ## Save gapfill data for mariculture harvest
 mar_harvest_tonnes_gf <- mar_sw_sus_final %>%
-  dplyr::select(rgn_id, taxa_code, taxa_group, family, year, tonnes = gapfill_fao)
+  dplyr::select(rgn_id, taxa_code, taxa_group, family, year, tonnes = gapfill_fao, vyear)
 
 
 ## Saves the appropriate Mariculture Harvest Gapfill file 
 #write.csv(mar_harvest_tonnes_gf, here(current_mar_dir, "output", "mar_harvest_tonnes_gf.csv"), row.names = F)
-readr::write_csv(mar_harvest_tonnes_gf, here::here(current_mar_dir, "output", "mar_harvest_tonnes_gf.csv"))
+readr::write_csv(mar_harvest_tonnes_gf, here::here(current_mar_dir, "output", "mar_harvest_tonnes_gf_comb.csv"))
 
 # define the maximum sustainability score, check with: summary(mar_sw_sus_final)
 max_sus <- 0.77
 
 ## Save sustainability scores data for 2023 (SFW data year)
 mar_sustainability_score <- mar_sw_sus_final %>%
-  mutate(year = current_year) %>% #change year if data not updated to current year
-  dplyr::select(rgn_id, year, taxa_code, sust_coeff = Sust) %>%
+  # mutate(year = current_year) %>% #change year if data not updated to current year
+  dplyr::select(rgn_id, year, taxa_code, sust_coeff = Sust, vyear) %>%
   unique() %>%
   mutate(sust_coeff = ifelse(sust_coeff > max_sus, 1, sust_coeff/max_sus)) # rescale to the highest sust score
 
@@ -1546,30 +1548,30 @@ anyDuplicated(mar_sustainability_score)
 
 ## Saves the appropriate Sustainability Score file 
 #write.csv(mar_sustainability_score, here(current_mar_dir, "output", "mar_sustainability.csv"), row.names = F)
-readr::write_csv(mar_sustainability_score, here::here(current_mar_dir, "output", "mar_sustainability.csv"))
+readr::write_csv(mar_sustainability_score, here::here(current_mar_dir, "output", "mar_sustainability_comb.csv"))
 
 
 ## Save gapfill data for sustainability scores
 mar_sustainability_score_gf = mar_sw_sus_final %>%
-  select(rgn_id, taxa_code, sust_coeff = gapfill_sus) %>%
+  select(rgn_id, taxa_code, sust_coeff = gapfill_sus, vyear) %>%
   unique()
 
 
 ## Saves the appropriate Sustainability Score Gapfill file 
 #write.csv(mar_sustainability_score_gf, here(current_mar_dir, "output", "mar_sustainability_gf.csv"), row.names = F)
-readr::write_csv(mar_sustainability_score_gf, here::here(current_mar_dir, "output", "mar_sustainability_gf.csv"))
+readr::write_csv(mar_sustainability_score_gf, here::here(current_mar_dir, "output", "mar_sustainability_gf_comb.csv"))
 
 
 ## save mar sustainability for data checking; rgn_id, species, score
 mar_sustainability_score <- mar_sw_sus_final %>%
-  mutate(year = current_year) %>% # Only 2023 sustainability scores exist (Seafood Watch)
-  select(rgn_id, year, species, sust_coeff = Sust) %>%
+  # mutate(year = current_year) %>% # Only 2023 sustainability scores exist (Seafood Watch)
+  select(rgn_id, year, species, sust_coeff = Sust, vyear) %>%
   unique() %>% 
     mutate(sust_coeff = ifelse(sust_coeff > max_sus, 1, sust_coeff/max_sus)) # rescale to the highest sust score
 
 ## Saves the appropriate Sustainability Score file
 #write.csv(mar_sustainability_score, here(current_mar_dir, "int", "mar_sustainability_check.csv"), row.names = F)
-readr::write_csv(mar_sustainability_score, here::here(current_mar_dir, "int", "mar_sustainability_check.csv"))
+readr::write_csv(mar_sustainability_score, here::here(current_mar_dir, "int", "mar_sustainability_check_comb.csv"))
 
 ```
 
@@ -1583,9 +1585,15 @@ options(scipen = 999)
 # ============== Mariculture Yield =============================================
 
 # ---- Read in old and new data for plots ----
-mar_old_data <- readr::read_csv(here::here("globalprep", "mar", paste0( "v", last_year), "output", "MAR_FP_data.csv")) 
-mar_new_data <- readr::read_csv(here::here(current_mar_dir, "output", "MAR_FP_data.csv"))
+# mar_old_data <- readr::read_csv(here::here("globalprep", "mar", paste0( "v", last_year), "output", "MAR_FP_data.csv")) 
+# mar_new_data <- readr::read_csv(here::here(current_mar_dir, "output", "MAR_FP_data.csv"))
 
+# Comparing 2023 data to the combined data
+mar_old_data <- readr::read_csv(here::here("globalprep", "mar", "v2023", "output", "MAR_FP_data.csv"))
+mar_new_data <- readr::read_csv(here::here(current_mar_dir, "output", "MAR_FP_data_comb.csv"))
+
+previous_data_year <- 2021
+latest_data_year
 
 # ---- Compare mariculture yield data for all countries: ----
 # previous data year (2022) vs. current data year (2023) 
@@ -1785,7 +1793,6 @@ mar_new_8 <- mar_new_data %>%
 
 yield_8 <- mar_old_8 %>% 
   full_join(mar_new_8, by = c("rgn_id","species","fao", "environment"))
-View(yield_8)
 
 comp_plot_8 <- ggplot() + 
   geom_point(data = yield_8,
@@ -1835,7 +1842,7 @@ ggplotly(comp_plot_9)
 
 # Changing the data years to account for the new SFW data
 latest_data_year <- 2025
-previous_data_year <- 2024
+previous_data_year <- 2022
 
 # Compare new/old Mariculture sustainability scores
 
@@ -1846,7 +1853,7 @@ sust_old <- readr::read_csv(here::here("globalprep", "mar", paste0("v", previous
 # tidy up species names (such as "Abalones_1"), rename as species column
 sust_old$species <- str_remove(sust_old$taxa_code, "\\_[^.]*$") 
 
-sust_new <- readr::read_csv(here::here(current_mar_dir, "int", "mar_sustainability_check.csv")) %>% 
+sust_new <- readr::read_csv(here::here(current_mar_dir, "int", "mar_sustainability_check_comb.csv")) %>% 
   dplyr::select(rgn_id, species, sust_new = sust_coeff)
 
 sust_compare <- sust_new %>% 
@@ -1866,16 +1873,16 @@ ggplotly(mean_diff_sus)
 
 # Another way to compare sust scores, this is optional
 
-# sust_total <- full_join(sust_new, sust_old, by = c("rgn_id", "species")) 
-# 
-# # Compare sust_coeff between 2025 and 2024
-# diff_plot <- ggplot() + 
-#   geom_abline(slope = 1, intercept = 0, col = "red") +
-#   geom_point(data = sust_total, aes(x = sust_new, y = sust_old, text = paste("Region ID:", rgn_id, "<br>", "Taxa Code:", taxa_code))) +
-#   labs(title = "Sustainability coefficient 2025 vs. 2024",
-#        x = "Sust Coeff 2025",
-#        y = "Sust Coeff 2024") +
-#   theme_bw();plotly::ggplotly(diff_plot)
+sust_total <- full_join(sust_new, sust_old, by = c("rgn_id", "species"))
+
+# Compare sust_coeff between 2025 and 2024
+diff_plot <- ggplot() +
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  geom_point(data = sust_total, aes(x = sust_new, y = sust_old, text = paste("Region ID:", rgn_id, "<br>", "Taxa Code:", taxa_code))) +
+  labs(title = "Sustainability coefficient 2025 vs. 2024",
+       x = "Sust Coeff 2025",
+       y = "Sust Coeff 2024") +
+  theme_bw();plotly::ggplotly(diff_plot)
 ```
 
 ## Data check genetic escapes
@@ -1914,8 +1921,10 @@ ggplotly(comp_gen_years_plot)
 
 
 # ---- Compare old genetic escape pressure scores for the same year ----
-old_gen_esc_data <- readr::read_csv(here::here("globalprep", "mar", paste0("v", last_year),
+old_gen_esc_data <- readr::read_csv(here::here("globalprep", "mar", "v2022",
                                   "output", "GenEsc.csv")) 
+
+previous_data_year <- 2020
 
 old_last_year <- old_gen_esc_data %>%
   filter(year == previous_data_year) %>% 
@@ -1927,7 +1936,7 @@ new_last_year <- current_gen_esc_data %>%
 
 compare_gen_data_years <- full_join(old_last_year, new_last_year, by = c("rgn_id"))
 
-# View(compare_gen_data_years)
+View(compare_gen_data_years)
 
 comp_gen_data_years_plot <- ggplot() + 
   geom_point(data = compare_gen_data_years, aes(x = prs_score_old, y = pressure_score, text = paste("Region ID:", rgn_id))) +
@@ -1948,12 +1957,14 @@ new_gen_vietnam <- current_gen_esc_data %>%
   filter(rgn_id == 207) %>% 
   select(rgn_id, year, pressure_score)
 
-compare_gen_vietnam <- full_join(old_gen_vietnam, new_gen_vietnam, by = c("rgn_id", "year"))
+compare_gen_vietnam <- full_join(old_gen_vietnam, new_gen_vietnam, 
+                                 by = c("rgn_id", "year"))
 
-# View(compare_gen_vietnam)
+View(compare_gen_vietnam)
 
 compare_gen_vietnam_plot <- ggplot() + 
-  geom_point(data = compare_gen_vietnam, aes(x = prs_score_old, y = pressure_score, text = paste("Region ID:", rgn_id))) +
+  geom_point(data = compare_gen_vietnam, aes(x = prs_score_old, y = pressure_score, 
+                                             text = paste("Region ID:", rgn_id))) +
   labs(x = paste("Previous Pressure", previous_data_year), 
        y = paste("Current Pressure", previous_data_year),
        title = "Vietnam MAR current and previous pressure") +
@@ -1970,12 +1981,14 @@ new_gen_denmark <- current_gen_esc_data %>%
   filter(rgn_id == 175) %>% 
   select(rgn_id, year, pressure_score)
 
-compare_gen_denmark <- full_join(old_gen_denmark, new_gen_denmark, by = c("rgn_id","year"))
+compare_gen_denmark <- full_join(old_gen_denmark, new_gen_denmark, 
+                                 by = c("rgn_id","year"))
 
-# View(compare_gen_denmark)
+View(compare_gen_denmark)
 
 compare_gen_denmark_plot <- ggplot() + 
-  geom_point(data = compare_gen_denmark, aes(x = prs_score_old, y = pressure_score, text = paste("Region ID:", rgn_id))) +
+  geom_point(data = compare_gen_denmark, aes(x = prs_score_old, y = pressure_score, 
+                                             text = paste("Region ID:", rgn_id))) +
   labs(x = paste("Previous Pressure", previous_data_year), 
        y = paste("Current Pressure", previous_data_year),
        title = "Denmark MAR current and previous pressure") +
