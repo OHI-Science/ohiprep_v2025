@@ -337,7 +337,7 @@ mar_rgn <- name_2_rgn(df_in = mar_name_split,
 
 
 # ---- Aggregation: sum values of regions with multiple subregions ----
-mar_rgn_agg <- mar_rgn %>%
+mar_rgn_agg_old <- mar_rgn %>%
   dplyr::group_by(fao, environment, species, year, Taxon_code, rgn_id, rgn_name, family) %>% 
   dplyr::summarize(value = sum(value)) %>%
   dplyr::ungroup()
@@ -352,6 +352,12 @@ test <- data.frame(
   dplyr::filter(year == 2020) %>%
   arrange(species))
 #View(test)
+```
+
+```{r}
+# colSums(is.na(mar_rgn_agg))
+# Save intermediate file for 2025 analysis
+readr::write_csv(mar_rgn_agg, here(current_mar_dir, "int", "int_mar.csv"))
 ```
 
 # Gapfilling
@@ -388,10 +394,15 @@ Checked to make sure that there weren't instances in which it made more sense to
 ```{r gapfill-missing-0}
 # ---- fill "years" column for gapfilling ----
 # Spread mar_rgn to create a value for every year-species-region (if missing it will be given a NA)
-mar_rgn_spread <- tidyr::pivot_wider(mar_rgn_agg,
+mar_rgn_agg_old %>%
+  dplyr::count(rgn_id, species, fao, environment, Taxon_code, family, year) %>%
+  dplyr::filter(n > 1) %>% 
+  view()
+
+mar_rgn_spread_old <- tidyr::pivot_wider(mar_rgn_agg_old,
                                      names_from = year,
                                      values_from = value)
-dim(mar_rgn_spread)
+view(mar_rgn_spread_old)
 
 # Turn data frame back into long format
 mar_rgn_yrs_filled <- tidyr::pivot_longer(mar_rgn_spread,
@@ -637,6 +648,11 @@ sw_sus_rgn <- bind_rows(sw_sus_rgn, sw_sus_no_rgn) %>%
 
 setdiff(sw_sus_rgn$sw_species, old_sw_sus$CommonNames) # character(0)
 setdiff(old_sw_sus$CommonNames, sw_sus_rgn$sw_species) # character(0)
+```
+
+```{r}
+# Save intermediate file for 2025 analysis
+readr::write_csv(sw_sus_rgn, here(current_mar_dir, "int", "int_sfw.csv"))
 ```
 
 Check that the non-matches between Seafood Watch sustainability data species (sw_sus_rgn) and the FAO mariculture species in the wrangled FAO Aquaculture Production data table (maric) are not due to spelling errors or slightly different names. We want to include as many species that have sustainability scores as possible
