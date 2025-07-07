@@ -706,7 +706,7 @@ regions_stats_clean <- regions_stats %>%
   mutate(pressure_score = format(pressure_score, scientific = FALSE)) # remove scientific notation formating
 
 # write out acid.csv, which is in the same format as previous years.  All future .csv write-outs are in different formats than previous years
-# write_csv(regions_stats_clean, "output/acid.csv")
+write_csv(regions_stats_clean, "output/acid.csv")
 
 # bringing the names in to allow for greater readability
 regions_stats_join <- left_join(regions_stats_clean, rgn_data, by = "rgn_id") %>% 
@@ -734,7 +734,7 @@ Save output files in `output_dir`, refer back to the setup chunk.
 
 ```{r plot_final}
 # ----- save all data (commented out in case someone runs the whole script) ---------
-# write_csv(regions_stats_join, "prs_oa_all_yrs.csv")
+write_csv(regions_stats_join, "prs_oa_all_yrs.csv")
 
 # group the data by year
 yearly_data <- regions_stats_join %>%
@@ -771,7 +771,7 @@ regions_stats_join$pressure_score <- as.numeric(regions_stats_join$pressure_scor
 # Using region_stats_join, apply a 4-year rolling average 
 four_year_average <- regions_stats_join %>%
   group_by(rgn_name) %>%
-  mutate(mean_scores = rollmean(pressure_score, 4, 0, "left"))
+  mutate(mean_scores = rollmean(pressure_score, 4, NA, "right"))
 ```
 
 ```{r}
