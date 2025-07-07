@@ -1613,12 +1613,13 @@ For each region/year: take a weighted average of the genetic escape probability 
 
 ```{r gen-esc-formatting}
 # subset the cleaned data to only include escapes data
+# Genetic escapes will use the combined data, but we don't need to inlcude version year here
 tonnes_esc <- mar_sw_sus_final %>%
-  dplyr::select(rgn_id, year, species, gapfill_esc, esc_score, tonnes, vyear)
+  dplyr::select(rgn_id, year, species, gapfill_esc, esc_score, tonnes)
 
 # use "tonnes" values to weight the regional average of escapes
 genEscapes <- tonnes_esc %>%
-  group_by(rgn_id, year, vyear) %>%
+  group_by(rgn_id, year) %>%
   summarize(genEscapes = weighted.mean(esc_score, tonnes, na.rm=TRUE)) %>% 
   ungroup()
 ```
@@ -1632,9 +1633,9 @@ Gapfill values in output file are the proportion of data that is gapfilled.
 # Obtain corresponding gapfilling information for each region (average of gapfilled data, weighted by tonnes of mariculture).
 genEscapes_gf <- tonnes_esc %>%
   mutate(gapfill = ifelse(gapfill_esc == "none", 0, 1)) %>%
-  group_by(rgn_id, year, vyear) %>%
+  group_by(rgn_id, year) %>%
   summarize(genEscapes = weighted.mean(gapfill, tonnes, na.rm = TRUE)) %>%
-  ungroup() %>%
+  ungroup() %>% 
   filter(year == latest_data_year) %>%
   select(rgn_id, pressures.score = genEscapes) %>%
   mutate(pressures.score = ifelse(pressures.score == "NaN", NA, pressures.score)) %>%
@@ -1696,8 +1697,8 @@ max_sus <- 0.77
 
 ## Save sustainability scores data for 2023 (SFW data year)
 mar_sustainability_score <- mar_sw_sus_final %>%
-  # mutate(year = current_year) %>% #change year if data not updated to current year
-  dplyr::select(rgn_id, year, taxa_code, sust_coeff = Sust, vyear) %>%
+  mutate(year = current_year) %>% # change year if data not updated to current year
+  dplyr::select(rgn_id, year, taxa_code, sust_coeff = Sust) %>%
   unique() %>%
   mutate(sust_coeff = ifelse(sust_coeff > max_sus, 1, sust_coeff/max_sus)) # rescale to the highest sust score
 
@@ -1711,7 +1712,7 @@ readr::write_csv(mar_sustainability_score, here::here(current_mar_dir, "output",
 
 ## Save gapfill data for sustainability scores
 mar_sustainability_score_gf = mar_sw_sus_final %>%
-  select(rgn_id, taxa_code, sust_coeff = gapfill_sus, vyear) %>%
+  select(rgn_id, taxa_code, sust_coeff = gapfill_sus) %>%
   unique()
 
 
@@ -1722,8 +1723,8 @@ readr::write_csv(mar_sustainability_score_gf, here::here(current_mar_dir, "outpu
 
 ## save mar sustainability for data checking; rgn_id, species, score
 mar_sustainability_score <- mar_sw_sus_final %>%
-  # mutate(year = current_year) %>% # Only 2023 sustainability scores exist (Seafood Watch)
-  select(rgn_id, year, species, sust_coeff = Sust, vyear) %>%
+  mutate(year = current_year) %>% # Only 2023 sustainability scores exist (Seafood Watch)
+  select(rgn_id, year, species, sust_coeff = Sust) %>%
   unique() %>% 
     mutate(sust_coeff = ifelse(sust_coeff > max_sus, 1, sust_coeff/max_sus)) # rescale to the highest sust score
 
