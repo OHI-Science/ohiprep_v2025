@@ -593,6 +593,7 @@ readr::write_csv(maric_comb, file = here::here(current_mar_dir, "output", "MAR_F
 ```
 
 # Sustainability Scores from Seafood Watch Data
+These data will be complete combined with the 2024 scenario data. There is no need to keep them separate like there is with the mariculture data. 
 
 ## Import data: Seafood Watch sustainability scores
 
@@ -811,7 +812,8 @@ maric_uncomb <- readr::read_csv(here::here(current_mar_dir, "output", "MAR_FP_da
 
 ```
 
-## 2024 SFW data
+## 2024 assessnent SFW data
+
 I've gone back to v2024 to export this intermediate file for ease of combining here. It's called `int_sfw.csv`
 
 ```{r combine-new-old-sfw-data}
@@ -837,23 +839,11 @@ sfw_int_old_clean <- sfw_int_old %>%
 # Check that the 4 duplicate rows got dropped
 nrow(sfw_int_old_clean) # 255
 
-# There are 115 missing rgn_ids in the 2024 data. These will get updated later on
-# sfw_int_old %>% 
-# filter(is.na(rgn_id))
 
 # Filter down before combining
 sfw_int_old <- sfw_int_old %>% 
   select(escapes_old = escapes_score, score_old = score, species, rgn_id, rgn_name, scientific_name, sw_species, fao_species, water_body, method, rec, country)
 
-# Trying to determine what I need to join on to avoid duplicates (i.e. what is the primary key)
-# sfw_int_old %>%
-#   count(rgn_id, species, method, water_body, rec) %>%
-#   filter(n > 1)
-# 
-# 
-# sw_sus_rgn %>%
-#   count(rgn_id, species, method, water_body, rec) %>%
-#   filter(n > 1)
 
 # Add a new year column that is the version year
 sfw_int_old <- sfw_int_old %>% 
@@ -864,7 +854,6 @@ sw_sus_rgn <- sw_sus_rgn %>%
   # Rename for pivoting later on
   rename(score_new = score, escapes_new = escapes_score) %>% 
   select(-c(report_title, fda_species, published_date))
-colnames(sw_sus_rgn)
 
 # Join previous and current year data
 sw_sus_rgn_comb <- full_join(sw_sus_rgn, sfw_int_old, by = join_by(rgn_id, species, method, water_body, rec))
@@ -922,7 +911,6 @@ sw_sus_rgn_long <- sw_sus_rgn_filt %>%
 
 table(sw_sus_rgn_long$vyear)
 
-
 # Reassign the combined mariculture data to maric for further processing
 sw_sus_rgn <- sw_sus_rgn_long
 ```
@@ -942,6 +930,7 @@ The FAO list has far more species than the sustainability list. But, go over the
 
 note -- Seafood Watch makes a distinction between Common sole and Dover sole
 
+**2025 note**: A lot of the non-matches are because FAO classifies a species as freshwater and thus it gets filtered out early on. The freshwater SFW species will be dropped here because we do not want to include them in our final analysis. See [issue #338](https://github.com/OHI-Science/globalfellows-issues/issues/338) for more information about the species list. 
 
 Fix the non-matches
 
@@ -949,7 +938,10 @@ Fix the non-matches
 
 # Rename species in Seafood Watch data to match FAO species data 
 sw_sus_rgn$species <- gsub("Atlantic Bluefin tuna", "Atlantic bluefin tuna", sw_sus_rgn$species)
-#sw_sus_rgn$species <- gsub("Scallops", "Scallops nei", sw_sus_rgn$species)
+
+# ---- Drop freshwater SFW species ----
+sw_sus_rgn <- sw_sus_rgn %>% 
+  filter(!species %in% c("American eel", "American yellow perch", "Atlantic sturgeon", "Blue tilapia", "Channel catfish", "Danube sturgeon(=Osetr)", "Giant river prawn", "Hybrid red tilapia", "Hybrid tilapia", "Mozambique tilapia", "Nile tilapia", "NorthAfrican catfish", "Red swamp crawfish", "Sabaki tilapia", "Siberian sturgeon", "Sterlet sturgeon", "Striped catfish", "Wami tilapia", "Wels(=Som) catfish", "White sturgeon"))
 
 # ---- Fix FAO species names ----
 # rename any "mistakes" in the FAO data, such as species names whose first word is uncapitalized  
@@ -1016,11 +1008,11 @@ maric <- left_join(maric, identifier, by = join_by(rgn_id, species, environment)
 length(unique(maric$species_code)) # 1501
 nrow(identifier) # 1501
 
-#run again after cleaning to check there are no remaining mismatched species
+# run again after cleaning to check there are less mismatched species. The remaining ones will be gapfilled. 
 sort(setdiff(sw_sus_rgn$species, maric$species))
 sort(setdiff(maric$species, sw_sus_rgn$species))
 
-nrow(sw_sus_rgn) # 604
+nrow(sw_sus_rgn) # 494
 
 
 ## Uncombined data
@@ -1064,17 +1056,6 @@ duplicate_check <- maric_uncomb %>%
   summarize(n = n()) 
 unique(duplicate_check$n) #should be 1
 
-# Incorrect seaweed families were causing duplicate issues for the combined data, so drop those here
-maric_uncomb <- maric_uncomb %>% 
-  filter(!(rgn_id == 164 & family == "Solieriaceae")) %>% 
-  filter(!(rgn_id == 216 & family == "Caulerpaceae"))
- 
-# Run the duplicate check again
-duplicate_check <- maric_uncomb %>% 
-  group_by(rgn_id, species, year, environment) %>% 
-  summarize(n = n()) 
-unique(duplicate_check$n) #should be 1
-
 
 #Add a unique identifier per cultivated stock that describes each species, region, and environment grouping.
 identifier <- maric_uncomb %>% 
@@ -1086,14 +1067,12 @@ identifier <- maric_uncomb %>%
 maric_uncomb <- left_join(maric_uncomb, identifier, by = join_by(rgn_id, species, environment))
 
 # It looks like all the identifiers applied correctly 
-length(unique(maric_uncomb$species_code)) # 1501
-nrow(identifier) # 1501
+length(unique(maric_uncomb$species_code)) # 1350
+nrow(identifier) # 1350
 
-#run again after cleaning to check there are no remaining mismatched species
+# run again after cleaning to check there are less mismatched species. The remaining ones will be gapfilled. 
 sort(setdiff(sw_sus_rgn$species, maric_uncomb$species))
 sort(setdiff(maric_uncomb$species, sw_sus_rgn$species))
-
-nrow(sw_sus_rgn) # 604
 ```
 
 # FAO mariculture and Seafood Watch sustainability scores
@@ -1114,13 +1093,10 @@ sw_sus_rgn <- sw_sus_rgn %>%
 
 
 table(sw_sus_rgn$match_type)
-# 2025 uncombined: no sw_sp_w column, this becomes an issue for the next chunk
-#sw_sp_c sw_sp_g
-#    153     114
 
 # 2025 combined: 
 # sw_sp_c sw_sp_g sw_sp_w 
-#     374     228       2 
+#     316     176       2 
 
 ```
 
@@ -1151,7 +1127,7 @@ gf_sw_sp_w <- expand.grid.df(sw_sus_rgn_water, med_rgns) %>%
 # Join mariculture and SFW data
 
 ```{r sw-fao-joining}
-
+# Combined
 ## Join data specific to species/country
 sw_sp_c <- sw_sus_rgn %>%
   filter(match_type == 'sw_sp_c') %>%
@@ -1161,35 +1137,21 @@ sw_sp_c <- sw_sus_rgn %>%
 mar_sw_sus <- maric %>%
   left_join(sw_sp_c, by = c("species", "rgn_id", "vyear"))
 
-# Uncombined version
-mar_sw_sus_uncomb <- maric_uncomb %>%
-  left_join(sw_sp_c, by = c("species", "rgn_id"))
-
 # 2025: commented this out because we have no water body regions
 # Join data specific to species/water body
 sw_sp_w <- gf_sw_sp_w %>%
   select(rgn_id, species, Sust_sw_sp_w = score, esc_sw_sp_w = escapes_score, vyear)
 
-# Combined
 mar_sw_sus <- mar_sw_sus %>%
   left_join(sw_sp_w, by= c("species", "rgn_id", "vyear"))
-
-# Uncombined
-mar_sw_sus_uncomb <- mar_sw_sus_uncomb %>%
-  left_join(sw_sp_w, by= c("species", "rgn_id"))
 
 ## Join data specific to species/global Seafood Watch data
 sw_sp_g <- sw_sus_rgn %>% 
   filter(match_type == 'sw_sp_g') %>%
   select(species, Sust_sw_sp_g = score, esc_sw_sp_g = escapes_score, vyear)
 
-# Combined
 mar_sw_sus <- mar_sw_sus %>%
   left_join(sw_sp_g, by= c("species", "vyear"))
-
-# Uncombined
-mar_sw_sus_uncomb <- mar_sw_sus_uncomb %>%
-  left_join(sw_sp_g, by= c("species"))
 
 test3 <- mar_sw_sus %>%
   filter(taxon_code == "GAST")
@@ -1199,12 +1161,40 @@ sum(is.na(test3$Sust_sw_sp_c)) # 3918
 # All sust_sw_sp_c and esc_sw_sp_c scores are NA for this test...
 
 # Checking for the entire data frame now
-# These numbers feel too high. I think it still has to do with the duplicate rows at the very beginning
-nrow(mar_sw_sus) # 58086 127150
+nrow(mar_sw_sus) # 127150
 sum(is.na(mar_sw_sus$Sust_sw_sp_c)) # 104190
 sum(is.na(mar_sw_sus$esc_sw_sp_c)) # 104190
 
-rm(test3)
+# Uncombined
+## Join data specific to species/country
+sw_sp_c <- sw_sus_rgn %>%
+  filter(match_type == 'sw_sp_c') %>%
+  select(rgn_id, species, Sust_sw_sp_c = score, esc_sw_sp_c = escapes_score)
+
+#there will be many to many relationship b/c maric has more than one of the same species for a rgn_id due to year and the sustainability may have more than one method for a species/rgn combination
+mar_sw_sus_uncomb <- maric_uncomb %>%
+  left_join(sw_sp_c, by = c("species", "rgn_id"))
+
+# Join data specific to species/water body
+sw_sp_w <- gf_sw_sp_w %>%
+  select(rgn_id, species, Sust_sw_sp_w = score, esc_sw_sp_w = escapes_score)
+
+mar_sw_sus_uncomb <- mar_sw_sus_uncomb %>%
+  left_join(sw_sp_w, by= c("species", "rgn_id"))
+
+## Join data specific to species/global Seafood Watch data
+sw_sp_g <- sw_sus_rgn %>% 
+  filter(match_type == 'sw_sp_g') %>%
+  select(species, Sust_sw_sp_g = score, esc_sw_sp_g = escapes_score)
+
+mar_sw_sus_uncomb <- mar_sw_sus_uncomb %>%
+  left_join(sw_sp_g, by= c("species"))
+
+# Checking for the entire data frame now
+nrow(mar_sw_sus_uncomb) # 125468
+sum(is.na(mar_sw_sus_uncomb$Sust_sw_sp_c)) # 79950
+sum(is.na(mar_sw_sus_uncomb$esc_sw_sp_c)) # 79950
+
 ```
 
 Merge the three Seafood Watch type categories into a single sustainability score and genetic escapes score column in the following order:
@@ -1532,6 +1522,8 @@ mutate(taxa_code = paste(species, species_code, sep="_")) %>%
          esc_score = 1 - round(esc_score/10, 2))
 
 summary(mar_sw_sus_uncomb_final)
+summary(mar_sw_sus_final)
+
 filter(mar_sw_sus_uncomb_final, gapfill_sus == "georegion_family_avg")
 filter(mar_sw_sus_uncomb_final, gapfill_sus == "family_avg")
 filter(mar_sw_sus_uncomb_final, gapfill_sus == "taxon_group_avg")
@@ -1664,7 +1656,7 @@ Obtain escapee data layers from `genEscapes`
 ```{r create-gen-esc-layers}
 # Create the escapee data layers:
 data <- genEscapes %>%
-    dplyr::select(rgn_id, year, pressure_score = genEscapes, vyear)
+    dplyr::select(rgn_id, year, pressure_score = genEscapes)
 ```
 
 ## Save escapee pressure layer
