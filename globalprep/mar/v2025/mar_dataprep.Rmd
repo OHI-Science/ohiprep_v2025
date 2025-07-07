@@ -21,27 +21,9 @@ editor_options:
 
 This analysis converts FAO mariculture and seafood watch sustainability data into data used to calculate the OHI global mariculture status score. This also calculates the genetic escapee from mariculture pressure data.
 
-# 2024 updates from 2023 assessment
+# 2025 updates from 2024 assessment
+- We got updated Seafood Watch data from the Monterey Bay Aquarium in 2025. Because of this, we wanted to combine the SFW data from 2024 and 2025 together as a way to gapfill and as a way to change the data year in the `scenario_data_years.csv` for the OHI-global score checking. Gapfilling by a different data year occurs BEFORE all of the other gapfilling methods and has not been documented in the gapfill csv yet. This is a change that future assessments could add.
 
--   fixed issues relating to system-dependent file paths by using `{here}` package
-
--   made some file names more reproducible with updated entries in setup chunks
-
--   updated formatting of code and comments using in-line/chunk comment headers
-
--   updated from `read.csv` and `write.csv` to `{readr}`'s  `read_csv` and `write_csv`
-
--   renamed some variables so that iterations of data processing steps weren't overwriting the same variable -- allows for comparison between different stages of dataprep (with a few exceptions mentioned below)
-
--   generally rewrote data cleaning to follow tidyverse style more closely and be more reproducible & less prone to human error with the exception of some object names that were rewritten to save space (consider updating this in future years)
-
--   updated `mar_split()` function in `mar_fxs.R` to use `pivot_longer()` instead of `gather()`, and added the new grouped name of "Bonaire, Sint Eustatius and Saba" (make sure to source the current year's `mar_fxs.R`)
-
--   fixed an issue in `mar_fxs.R` where updated data was not being properly bound to original data
-
--   updated README of FishStatJ data download to be more explicit and functional with updated program; created README with detailed instructions on how to download data from FAO Data Query Portal if next year decides to pivot to this method instead (will need to rewrite data cleaning code, refer to `workflow/R/fao_query_data_tidy.R` for guidance and examples of how we approached this in v2024)
-
--   added notes on what "escapes" are -- Criterion 6 in Seafood Watch sustainability scoring theory guide https://www.seafoodwatch.org/globalassets/sfw/pdf/standards/aquaculture/seafood-watch-aquaculture-standard-version-a4.pdf
 
 ------------------------------------------------------------------------
 
@@ -153,10 +135,8 @@ previous_data_year <- last_year - 2 #last year of data in the last assessment, f
 current_data_folder <- paste0("d", current_year) # assessment year for file paths
 previous_data_folder <- paste0("d", last_year)  # previous assessment year
 
-#update the data file name to the current last year of data 
+# update the data file name to the current last year of data 
 mar_raw <- readr::read_csv(here::here(FAO_mariculture_dir, current_data_folder, paste0("FAO_GlobalAquacultureProduction_Quantity_1950_", latest_data_year, ".csv")))
-
-# mar_raw_old <- readr::read_csv(here::here(FAO_mariculture_dir, previous_data_folder, paste0("FAO_GlobalAquacultureProduction_Quantity_1950_", previous_data_year, ".csv")))
 
 ```
 
@@ -383,7 +363,9 @@ test <- data.frame(
 rm(test)
 ```
 
-# Int Mariculture Joining 
+# Intermediate Mariculture Data Joining 
+
+This step is ONLY used for the SFW `mar_sustainability_score.csv` later on. Mariculture tonnes does not get exported in that file, but mariculture and sustainability data do get combined before that final csv is written out, hence the reason to also combine the mariculture data.  
 
 ```{r}
 # Join 2024 data before gapfilling
@@ -400,19 +382,15 @@ mar_rgn_agg %>%
   filter(n > 1)
 
 # Add a new year column that is the version year
-mar_rgn_agg <- mar_rgn_agg %>% 
+mar_rgn_agg_vyear <- mar_rgn_agg %>% 
   mutate(vyear = 2025) 
 
 int_mar_old <- int_mar_old %>% 
   mutate(vyear = 2024,
          year = as.character(year)) 
 
-# Compare species between old and new data
-sort(setdiff(mar_rgn_agg$species, int_mar_old$species)) # 2025 not in 2024
-sort(setdiff(int_mar_old$species, mar_rgn_agg$species)) # 2024 not in 2025
-
 # Join previous and current year data
-mar_rgn_agg_comb <- full_join(mar_rgn_agg, int_mar_old, by = join_by(rgn_id, species, year, environment, family, fao))
+mar_rgn_agg_comb <- full_join(mar_rgn_agg_vyear, int_mar_old, by = join_by(rgn_id, species, year, environment, family, fao))
 
 # Clean names
 mar_rgn_agg_comb <- mar_rgn_agg_comb %>% 
@@ -455,10 +433,11 @@ mar_rgn_agg_long <- mar_rgn_agg_filt %>%
 
 table(mar_rgn_agg_long$vyear)
 
-# view(maric_long)
-
 # Reassign the combined mariculture data to maric for further processing
-mar_rgn_agg <- mar_rgn_agg_long
+mar_rgn_agg_comb <- mar_rgn_agg_long
+
+# Remove unneeded variables
+rm(mar_rgn_agg_vyear, mar_rgn_agg_clean, mar_rgn_agg_filt, mar_rgn_agg_long)
 ```
 
 # Gapfilling
@@ -471,14 +450,49 @@ Checked to make sure that there weren't instances in which it made more sense to
 
 
 ```{r gapfill-missing-0}
+# Uncombined data
 # ---- fill "years" column for gapfilling ----
 # Confirm there are no duplicates in the combined data frame
 mar_rgn_agg %>%
-  dplyr::count(rgn_id, species, fao, environment, taxon_code, family, year, vyear) %>%
+  dplyr::count(rgn_id, species, fao, environment, taxon_code, family, year) %>%
   dplyr::filter(n > 1)
 
 # Spread mar_rgn to create a value for every year-species-region (if missing it will be given a NA)
 mar_rgn_spread <- tidyr::pivot_wider(mar_rgn_agg,
+                                     names_from = c(year),
+                                     values_from = value)
+dim(mar_rgn_spread)
+
+# Turn data frame back into long format
+mar_rgn_yrs_filled <- tidyr::pivot_longer(mar_rgn_spread,
+                           cols = num_range("",paste0(1950:latest_data_year)),
+                           names_to = "year",
+                           values_to = "value") %>% 
+  arrange(rgn_id, species, year, taxon_code, family, fao, environment)
+
+
+## NA values are converted to zero.
+mar_rgn_gf <- mar_rgn_yrs_filled %>%
+  mutate(year = as.numeric(year)) %>%
+  mutate(value_w_0 = ifelse(is.na(value), 0, value)) %>%
+  group_by(fao, environment, species, taxon_code, family, rgn_id) %>% 
+  mutate(cum_value = cumsum(value_w_0)) %>%
+  ungroup() %>%
+  filter(cum_value > 0) %>% # Eliminates years before mariculture began
+  mutate(gap_0_fill = ifelse(is.na(value), "NA_to_zero", "0")) %>% # Record gapfill
+  mutate(value = ifelse(is.na(value), 0, value)) %>% # Finally, convert all NAs in original column to 0
+  dplyr::select(-cum_value, -value_w_0)
+
+
+## Combined data
+# ---- fill "years" column for gapfilling ----
+# Confirm there are no duplicates in the combined data frame
+mar_rgn_agg_comb %>%
+  dplyr::count(rgn_id, species, fao, environment, taxon_code, family, year, vyear) %>%
+  dplyr::filter(n > 1)
+
+# Spread mar_rgn to create a value for every year-species-region (if missing it will be given a NA)
+mar_rgn_spread <- tidyr::pivot_wider(mar_rgn_agg_comb,
                                      names_from = c(year, vyear),
                                      values_from = value)
 dim(mar_rgn_spread)
@@ -495,7 +509,7 @@ mar_rgn_yrs_filled <- mar_rgn_spread %>%
 
 
 ## NA values are converted to zero.
-mar_rgn_gf <- mar_rgn_yrs_filled %>%
+mar_rgn_comb_gf <- mar_rgn_yrs_filled %>%
   mutate(year = as.numeric(year)) %>%
   mutate(vyear = as.numeric(vyear)) %>%
   mutate(value_w_0 = ifelse(is.na(value), 0, value)) %>%
@@ -512,10 +526,10 @@ Check how may NA values were converted to 0
 
 ```{r table-NA-0, eval=FALSE}
 # Sanity check for combing 24 and 25 data
-old <- mar_rgn_gf %>% 
+old <- mar_rgn_comb_gf %>% 
   filter(vyear == 2024)
 
-new <- mar_rgn_gf %>% 
+new <- mar_rgn_comb_gf %>% 
   filter(vyear == 2025)
 
 # See how many MAR values differ between them
@@ -533,8 +547,6 @@ table(mar_rgn_gf$gap_0_fill)
 ## 8201 of these out of 35029 + 8201 (43230) cases had NA values converted to 0 = 0.1897 ≈ 19% of values - 2024 assessment
 
 # 2025 Assessment
-## Before changing region splitting: 8928 out of 44598 (~20%) cases had NA values converted to 0
-
 # After changing mar_fxs region splitting: 11101 out of 47619 (~23%) cases had NA values converted to 0
 
 # After combining with 2024 data: 22046 out of 96271 (~23%) cases had NA values converted to 0
@@ -543,15 +555,25 @@ table(mar_rgn_gf$gap_0_fill)
 Remove family-region-environment time series with less than four years of mariculture production \> 0 tonnes (assume these are not established mariculture programs).
 
 ```{r remove-less-four-years}
-
+# Uncombined data
 mar_rgn_gf_filter <- mar_rgn_gf %>% 
+  group_by(rgn_id, family, fao, environment) %>%
+  mutate (not_0 = length(value[value > 0])) %>% # Length of vector of years greater than 0
+  filter(not_0 > 3) %>% # Filter for groups that have at least four years of mariculture production 
+  ungroup() %>% 
+  dplyr::select(rgn_id, species, fao, environment, year, value, taxon_code, family, gap_0_fill) 
+
+maric <- mar_rgn_gf_filter
+
+# Combined data
+mar_rgn_gf_filter <- mar_rgn_comb_gf %>% 
   group_by(rgn_id, family, fao, environment) %>%
   mutate (not_0 = length(value[value > 0])) %>% # Length of vector of years greater than 0
   filter(not_0 > 3) %>% # Filter for groups that have at least four years of mariculture production 
   ungroup() %>% 
   dplyr::select(rgn_id, species, fao, environment, year, vyear, value, taxon_code, family, gap_0_fill) 
 
-maric <- mar_rgn_gf_filter
+maric_comb <- mar_rgn_gf_filter
 ```
 
 # Save mariculture file
@@ -563,10 +585,11 @@ Saves the Mariculture-FP file
 2025: Have not actually saved this file yet because we're waiting on updates about the new species. 
 
 ```{r save-mariculture-yield, eval=FALSE}
-# readr::write_csv(maric, file = here::here(current_mar_dir, "output", "MAR_FP_data.csv"))
+# Write out only 2025 mariculture data
+readr::write_csv(maric, file = here::here(current_mar_dir, "output", "MAR_FP_data.csv"))
 
 # Change name here for the combined data
-readr::write_csv(maric, file = here::here(current_mar_dir, "output", "MAR_FP_data_comb.csv"))
+readr::write_csv(maric_comb, file = here::here(current_mar_dir, "output", "MAR_FP_data_comb.csv"))
 ```
 
 # Sustainability Scores from Seafood Watch Data
@@ -772,17 +795,20 @@ setdiff(sw_sus_rgn$scientific_name, old_sw_sus$ScientificName)
 setdiff(old_sw_sus$ScientificName, sw_sus_rgn$scientific_name)
 # The only difference here was the overarching "seaweed" species. the scientific names are listed in different order/have slightly different composition between 2023 and 2025. 
 ```
+
 Check that the non-matches between Seafood Watch sustainability data species (sw_sus_rgn) and the FAO mariculture species in the wrangled FAO Aquaculture Production data table (maric) are not due to spelling errors or slightly different names. We want to include as many species that have sustainability scores as possible
-
-
 
 # 2025 update
 
 Since we have new SFW data, we've decided to combine data from v2024 and v2025 to have two years of data and to assist with gapfilling. In order for the final output csv `mar_sustainability_score.csv` to have the correct final values, we also need to combine the mariculture data up here at the top. 
 
-```{r read-comb-mar-data}
-# Read in the combined MAR data we just wrote
+```{r read-mar-data}
+# Read in the combined MAR data we just wrote. Most of the final ouputs use the combined data, so it will be the main file here
 maric <- readr::read_csv(here::here(current_mar_dir, "output", "MAR_FP_data_comb.csv"))
+
+# We will also use the uncombined data, but only for looking at mar_harvest_tonnes
+maric_uncomb <- readr::read_csv(here::here(current_mar_dir, "output", "MAR_FP_data.csv"))
+
 ```
 
 ## 2024 SFW data
@@ -840,10 +866,6 @@ sw_sus_rgn <- sw_sus_rgn %>%
   select(-c(report_title, fda_species, published_date))
 colnames(sw_sus_rgn)
 
-# Compare species between old and new data
-# sort(setdiff(sw_sus_rgn$species, sfw_int_old$species)) # character 0
-# sort(setdiff(sfw_int_old$species, sw_sus_rgn$species)) # character 0
-
 # Join previous and current year data
 sw_sus_rgn_comb <- full_join(sw_sus_rgn, sfw_int_old, by = join_by(rgn_id, species, method, water_body, rec))
 
@@ -857,9 +879,6 @@ sw_sus_rgn_comb <- sw_sus_rgn_comb %>%
 
 # Check NAs for gap filling
 colSums(is.na(sw_sus_rgn_comb))
-
-# sw_sus_rgn_comb %>% 
-# filter(is.na(rgn_id)) %>% view()
 
 # Gap fill with other year data
 sw_sus_rgn_clean <- sw_sus_rgn_comb %>%
@@ -900,8 +919,6 @@ sw_sus_rgn_long <- sw_sus_rgn_filt %>%
   ) %>% 
   select(-year_old) %>% 
   rename(escapes_score = escapes)
-
-dim(sw_sus_rgn_long)
 
 table(sw_sus_rgn_long$vyear)
 
@@ -974,15 +991,7 @@ duplicate_check <- maric %>%
   summarize(n = n()) 
 unique(duplicate_check$n) #should be 1
 
-# Getting closer with the duplicates, still have an issue with seaweed for region 164. 
-
-# Isolate what's going on with region 164 seaweed 
-# maric %>%
-#   filter(rgn_id == 216 & species == "Seaweed") 
-
-# This revealed that the problem is coming from a mis-match of family. Some are listed as "algae" while others are listed as "Solieriaceae". I'm gonna drop the "Solieriaceae" ones to match the way the rest of the seaweed is classified in the df
-
-# Drop incorrect seaweed family
+# Incorrect seaweed families were causing duplicate issues for the combined data, so drop those here
 maric <- maric %>% 
   filter(!(rgn_id == 164 & family == "Solieriaceae")) %>% 
   filter(!(rgn_id == 216 & family == "Caulerpaceae"))
@@ -1012,6 +1021,79 @@ sort(setdiff(sw_sus_rgn$species, maric$species))
 sort(setdiff(maric$species, sw_sus_rgn$species))
 
 nrow(sw_sus_rgn) # 604
+
+
+## Uncombined data
+# ---- Fix FAO species names ----
+# rename any "mistakes" in the FAO data, such as species names whose first word is uncapitalized  
+maric_uncomb$species <- gsub("blood cockle", "Blood cockle", maric_uncomb$species)
+maric_uncomb$species <- gsub("\\[Solea spp\\]", "Common sole", maric_uncomb$species)
+
+# rename FAO species to general categories when used in Seafood Watch data 
+maric_uncomb <- maric_uncomb %>% 
+  # Oysters
+  mutate(species = case_when(
+    family == "Cardiidae" ~ "Cockles",
+    str_detect(species,"oyster") ~ "Oysters",
+    # Clams
+    species == "CORBICULIDAE" ~ "Clams",
+    str_detect(species, "clam") ~ "Clams",
+    str_detect(species, "Clam") ~ "Clams",
+    str_detect(species, "mussel") ~ "Mussels",
+    taxon_code == "AL" ~ "Seaweed",
+    family == "Haliotidae" ~ "Abalones", 
+    family == "Pectinidae" ~ "Scallops",
+    TRUE ~ species)
+    ) %>% 
+  mutate(family = case_when(species == "Clams" ~ NA,
+                            species == "Oysters"~ NA,
+                            TRUE ~ family
+  )) #setting family as NA when the group contains more than one family
+
+
+#updating the names combines species and creates creates duplicate species which we will need to sum
+#also sums duplicates due to multiple fao codes for the same region/species
+maric_uncomb <- maric_uncomb %>%
+  group_by(environment, species, year, taxon_code, rgn_id, family) %>% 
+  summarize(value = sum(value), gap_0_fill = first(gap_0_fill)) %>%
+  ungroup()
+
+#run this code to check that there are no duplicates for any species, year, rgn_id combinations. If there are they will be unintentionally deleted later, so you may need to change family or taxon codes to match and rerun the above group by
+duplicate_check <- maric_uncomb %>% 
+  group_by(rgn_id, species, year, environment) %>% 
+  summarize(n = n()) 
+unique(duplicate_check$n) #should be 1
+
+# Incorrect seaweed families were causing duplicate issues for the combined data, so drop those here
+maric_uncomb <- maric_uncomb %>% 
+  filter(!(rgn_id == 164 & family == "Solieriaceae")) %>% 
+  filter(!(rgn_id == 216 & family == "Caulerpaceae"))
+ 
+# Run the duplicate check again
+duplicate_check <- maric_uncomb %>% 
+  group_by(rgn_id, species, year, environment) %>% 
+  summarize(n = n()) 
+unique(duplicate_check$n) #should be 1
+
+
+#Add a unique identifier per cultivated stock that describes each species, region, and environment grouping.
+identifier <- maric_uncomb %>% 
+  select(rgn_id, species, environment) %>% 
+  unique() %>% 
+  mutate(species_code = 1:n())
+
+# Not 100% sure if this is joining correctly... need to check out later
+maric_uncomb <- left_join(maric_uncomb, identifier, by = join_by(rgn_id, species, environment))
+
+# It looks like all the identifiers applied correctly 
+length(unique(maric_uncomb$species_code)) # 1501
+nrow(identifier) # 1501
+
+#run again after cleaning to check there are no remaining mismatched species
+sort(setdiff(sw_sus_rgn$species, maric_uncomb$species))
+sort(setdiff(maric_uncomb$species, sw_sus_rgn$species))
+
+nrow(sw_sus_rgn) # 604
 ```
 
 # FAO mariculture and Seafood Watch sustainability scores
@@ -1032,22 +1114,14 @@ sw_sus_rgn <- sw_sus_rgn %>%
 
 
 table(sw_sus_rgn$match_type)
-
+# 2025 uncombined: no sw_sp_w column, this becomes an issue for the next chunk
 #sw_sp_c sw_sp_g
 #    153     114
-# 2025: no sw_sp_w column, this becomes an issue for the next chunk
 
 # 2025 combined: 
 # sw_sp_c sw_sp_g sw_sp_w 
 #     374     228       2 
 
-# Confirming that all rgn NAs are just because of worldwide 
-sw_sus_rgn %>% 
-  filter(is.na(rgn_name)) %>% 
-  select(country) %>% 
-  distinct()
-
-sum(is.na(sw_sus_rgn$rgn_name) & sw_sus_rgn$country != "Worldwide") # sums to 0
 ```
 
 Assign a Mediterranean bordering rgn id to each waterbody row
@@ -1078,14 +1152,6 @@ gf_sw_sp_w <- expand.grid.df(sw_sus_rgn_water, med_rgns) %>%
 
 ```{r sw-fao-joining}
 
-# nrow(maric) # 80223
-# nrow(sw_sp_c) #374
-# nrow(sw_sp_g) #228
-# nrow(sw_sp_w) #42
-# 
-# colnames(maric)
-# colnames(sw_sp_c)
-
 ## Join data specific to species/country
 sw_sp_c <- sw_sus_rgn %>%
   filter(match_type == 'sw_sp_c') %>%
@@ -1095,21 +1161,35 @@ sw_sp_c <- sw_sus_rgn %>%
 mar_sw_sus <- maric %>%
   left_join(sw_sp_c, by = c("species", "rgn_id", "vyear"))
 
+# Uncombined version
+mar_sw_sus_uncomb <- maric_uncomb %>%
+  left_join(sw_sp_c, by = c("species", "rgn_id"))
+
 # 2025: commented this out because we have no water body regions
 # Join data specific to species/water body
 sw_sp_w <- gf_sw_sp_w %>%
   select(rgn_id, species, Sust_sw_sp_w = score, esc_sw_sp_w = escapes_score, vyear)
 
+# Combined
 mar_sw_sus <- mar_sw_sus %>%
   left_join(sw_sp_w, by= c("species", "rgn_id", "vyear"))
+
+# Uncombined
+mar_sw_sus_uncomb <- mar_sw_sus_uncomb %>%
+  left_join(sw_sp_w, by= c("species", "rgn_id"))
 
 ## Join data specific to species/global Seafood Watch data
 sw_sp_g <- sw_sus_rgn %>% 
   filter(match_type == 'sw_sp_g') %>%
   select(species, Sust_sw_sp_g = score, esc_sw_sp_g = escapes_score, vyear)
 
+# Combined
 mar_sw_sus <- mar_sw_sus %>%
   left_join(sw_sp_g, by= c("species", "vyear"))
+
+# Uncombined
+mar_sw_sus_uncomb <- mar_sw_sus_uncomb %>%
+  left_join(sw_sp_g, by= c("species"))
 
 test3 <- mar_sw_sus %>%
   filter(taxon_code == "GAST")
@@ -1121,8 +1201,8 @@ sum(is.na(test3$Sust_sw_sp_c)) # 3918
 # Checking for the entire data frame now
 # These numbers feel too high. I think it still has to do with the duplicate rows at the very beginning
 nrow(mar_sw_sus) # 58086 127150
-sum(is.na(mar_sw_sus$Sust_sw_sp_c)) # 49506 104190
-sum(is.na(mar_sw_sus$esc_sw_sp_c)) # 49506 104190
+sum(is.na(mar_sw_sus$Sust_sw_sp_c)) # 104190
+sum(is.na(mar_sw_sus$esc_sw_sp_c)) # 104190
 
 rm(test3)
 ```
@@ -1136,8 +1216,7 @@ Merge the three Seafood Watch type categories into a single sustainability score
 For example, if Sust_sw_sp_c is missing, use Sust_sw_sp_w and so on.
 
 ```{r sw-fao-sust-scores}
-# No water body score, so editing this chunk for the 2025 assessment
-
+# Combined
 mar_sw_sus <- mar_sw_sus %>%
   dplyr::mutate(Sust = ifelse(!is.na(Sust_sw_sp_c), Sust_sw_sp_c, Sust_sw_sp_w)) %>%
   dplyr::mutate(Sust = ifelse(is.na(Sust), Sust_sw_sp_g, Sust)) %>%
@@ -1153,6 +1232,23 @@ mar_sw_sus <- mar_sw_sus %>%
   dplyr::select(-c(Sust_sw_sp_c, Sust_sw_sp_w, Sust_sw_sp_g, esc_sw_sp_c, esc_sw_sp_w, esc_sw_sp_g))
 
 summary(mar_sw_sus)
+
+# Uncombined
+mar_sw_sus_uncomb <- mar_sw_sus_uncomb %>%
+  dplyr::mutate(Sust = ifelse(!is.na(Sust_sw_sp_c), Sust_sw_sp_c, Sust_sw_sp_w)) %>%
+  dplyr::mutate(Sust = ifelse(is.na(Sust), Sust_sw_sp_g, Sust)) %>%
+  dplyr::mutate(gapfill_sus = case_when(Sust_sw_sp_c ==
+                                          Sust ~ "none",
+                                        is.na(Sust_sw_sp_c) & Sust_sw_sp_w == Sust ~ "water_body",
+                                        is.na(Sust_sw_sp_c) & is.na(Sust_sw_sp_w) & Sust_sw_sp_g == Sust ~ "global_species")) %>%
+  dplyr::mutate(esc_score = ifelse(!is.na(esc_sw_sp_c), esc_sw_sp_c, esc_sw_sp_w)) %>%
+  dplyr::mutate(esc_score = ifelse(is.na(esc_score), esc_sw_sp_g, esc_score)) %>%
+  dplyr::mutate(gapfill_esc = case_when(esc_sw_sp_c == esc_score ~ "none",
+                                        is.na(esc_sw_sp_c) & esc_sw_sp_w == esc_score ~ "water_body",
+                                        is.na(esc_sw_sp_c) & is.na(esc_sw_sp_w) & esc_sw_sp_g == esc_score ~ "global_species")) %>%
+  dplyr::select(-c(Sust_sw_sp_c, Sust_sw_sp_w, Sust_sw_sp_g, esc_sw_sp_c, esc_sw_sp_w, esc_sw_sp_g))
+
+summary(mar_sw_sus_uncomb)
 
 # 2025 version without water body
 # mar_sw_sus <- mar_sw_sus %>%
@@ -1193,14 +1289,34 @@ mar_sw_sus <- mar_sw_sus %>%
 mar_sw_sus$Sust_avg[is.nan(mar_sw_sus$Sust_avg)] <- NA
 mar_sw_sus$esc_avg[is.nan(mar_sw_sus$esc_avg)] <- NA
 # 2025 nrows = 58086
+
+# Uncombined
+mar_sw_sus_uncomb <- mar_sw_sus_uncomb %>% 
+  dplyr::group_by(rgn_id, species) %>% 
+  dplyr::mutate(Sust_avg = mean(Sust, na.rm = TRUE),
+                esc_avg = mean(esc_score, na.rm = TRUE)) %>% 
+  dplyr::ungroup()
+
+# code NAN values in Sust_avg and esc_avg columns as NA 
+mar_sw_sus_uncomb$Sust_avg[is.nan(mar_sw_sus_uncomb$Sust_avg)] <- NA
+mar_sw_sus_uncomb$esc_avg[is.nan(mar_sw_sus_uncomb$esc_avg)] <- NA
 ```
 
 Get rid of duplicates for region/species/year:
 
 ```{r sw-sus-dup}
-
+# Combined
 mar_sw_sus <- mar_sw_sus %>% 
   dplyr::distinct(rgn_id, species, environment, year, vyear, .keep_all = TRUE) %>%
+  # remove old Sust column (which was used to produce Sust_avg column) &
+  # rename Sust_avg to Sust &
+  # remove old esc_score column (which was used to produce esc_avg column) &
+  # rename esc_avg to esc_score :
+  dplyr::select(-Sust, Sust = Sust_avg, -esc_score, esc_score = esc_avg)
+
+# Uncombined
+mar_sw_sus_uncomb <- mar_sw_sus_uncomb %>% 
+  dplyr::distinct(rgn_id, species, environment, year, .keep_all = TRUE) %>%
   # remove old Sust column (which was used to produce Sust_avg column) &
   # rename Sust_avg to Sust &
   # remove old esc_score column (which was used to produce esc_avg column) &
@@ -1235,29 +1351,10 @@ Steps:\
 
 ```{r sw-gapfill-categories}
 ## First we need to add a georegion column that we can group by later on. 
-
+# Combined
 mar_sw_sus <- mar_sw_sus %>%
   add_georegion_id() %>%
   dplyr::select(-level)
-
-# ## Exploratory plots on whether regions or species drive the sustainability scores...
-# plot(mar_sw_sus$georgn_id, mar_sw_sus$Sust)
-#  plot(as.factor(mar_sw_sus$species), mar_sw_sus$Sust)
-# # 
-#  mod_spp <- lm(Sust ~ as.factor(georgn_id) + species, data = mar_sw_sus)
-# # anova(mod_spp)
-#  summary(mod_spp)
-# # 
-#  mod_rgn <- lm(Sust ~ as.factor(georgn_id), data = mar_sw_sus)
-# # anova(mod_rgn)
-# # summary(mod_rgn)
-# # 
-# mod_spp1 <- lm(Sust ~ family, data = mar_sw_sus)
-# # anova(mod_rgn)
-#  summary(mod_spp1)
-# it makes more sense to use species/taxon gapfilling methods
-
-#unique(mar_sw_sus$avg_global_esc)
 
 mar_sw_sus <- mar_sw_sus %>%
   group_by(rgn_id, family, vyear) %>%
@@ -1289,6 +1386,43 @@ mar_sw_sus$avg_fam_sust[is.nan(mar_sw_sus$avg_fam_sust)] <- NA
 mar_sw_sus$avg_fam_esc[is.nan(mar_sw_sus$avg_fam_esc)] <- NA
 mar_sw_sus$avg_taxon_code_sust[is.nan(mar_sw_sus$avg_taxon_code_sust)] <- NA
 mar_sw_sus$avg_taxon_code_esc[is.nan(mar_sw_sus$avg_taxon_code_esc)] <- NA
+
+
+# Uncombined
+mar_sw_sus_uncomb <- mar_sw_sus_uncomb %>%
+  add_georegion_id() %>%
+  dplyr::select(-level)
+
+mar_sw_sus_uncomb <- mar_sw_sus_uncomb %>%
+  group_by(rgn_id, family) %>%
+  mutate(avg_rgn_fam_sust = mean(Sust, na.rm = TRUE), # produced NaN values (2022 scenario year)
+         avg_rgn_fam_esc = mean(esc_score, na.rm = TRUE)) %>% # produced NaN values (2022 secario year)
+  ungroup() %>%
+  group_by(georgn_id, family) %>%
+  mutate(avg_gr_fam_sust = mean(Sust, na.rm = TRUE), # produced some NaN values (2023 scenario year)
+         avg_gr_fam_esc = mean(esc_score, na.rm = TRUE)) %>% # produced NaN values (2023 scenario year)
+  ungroup() %>%
+  group_by(family) %>%
+  mutate(avg_fam_sust = mean(Sust, na.rm = TRUE), # produced some NaN values (2022 scenario year)
+         avg_fam_esc = mean(esc_score, na.rm = TRUE)) %>% # produced NaN values (2022 scen ario year)
+  ungroup() %>%
+  group_by(taxon_code) %>%
+  mutate(avg_taxon_code_sust = mean(Sust, na.rm = TRUE), # produced some NaN values (2022 scecario year)
+         avg_taxon_code_esc = mean(esc_score, na.rm = TRUE)) %>% # produced some NaN values (2022 scecario year)
+  ungroup() %>%
+  mutate(avg_global = mean(Sust, na.rm = TRUE),
+         avg_global_esc = mean(esc_score, na.rm = TRUE)) %>%
+  ungroup()
+
+# code NaN as NA for the columns that produced NaN, likely due to taking the mean of a set of all NA values 
+mar_sw_sus_uncomb$avg_rgn_fam_sust[is.nan(mar_sw_sus_uncomb$avg_rgn_fam_sust)] <- NA
+mar_sw_sus_uncomb$avg_rgn_fam_esc[is.nan(mar_sw_sus_uncomb$avg_rgn_fam_esc)] <- NA
+mar_sw_sus_uncomb$avg_gr_fam_sust[is.nan(mar_sw_sus_uncomb$avg_gr_fam_sust)] <- NA
+mar_sw_sus_uncomb$avg_gr_fam_esc[is.nan(mar_sw_sus_uncomb$avg_gr_fam_esc)] <- NA
+mar_sw_sus_uncomb$avg_fam_sust[is.nan(mar_sw_sus_uncomb$avg_fam_sust)] <- NA
+mar_sw_sus_uncomb$avg_fam_esc[is.nan(mar_sw_sus_uncomb$avg_fam_esc)] <- NA
+mar_sw_sus_uncomb$avg_taxon_code_sust[is.nan(mar_sw_sus_uncomb$avg_taxon_code_sust)] <- NA
+mar_sw_sus_uncomb$avg_taxon_code_esc[is.nan(mar_sw_sus_uncomb$avg_taxon_code_esc)] <- NA
 ```
 
 Obtain a sustainability and escapes score for each record, and a book-keeping column of whether it's actual or gapfilled
@@ -1310,6 +1444,7 @@ Steps:
 # escapes_gf_score <- 4 
 #in 2023 this wasn't necessary because these scores were already included in the seafood watch data, and I already applied them to all seaweed species when cleaning seafood watch data. Left the code above in case it is needed in future years. 
 
+# Combined
 mar_sw_sus_final <- mar_sw_sus %>%
   
   
@@ -1355,6 +1490,51 @@ filter(mar_sw_sus_final, gapfill_sus == "georegion_family_avg")
 filter(mar_sw_sus_final, gapfill_sus == "family_avg")
 filter(mar_sw_sus_final, gapfill_sus == "taxon_group_avg")
 
+# Uncombined
+mar_sw_sus_uncomb_final <- mar_sw_sus_uncomb %>%
+  
+  
+  #### sustainability scores ####
+  mutate(Sust = ifelse(is.na(Sust), avg_rgn_fam_sust, Sust)) %>% # Gapfill with region/family level
+  mutate(gapfill_sus = ifelse(is.na(gapfill_sus) & Sust == avg_rgn_fam_sust, "region_family_avg", gapfill_sus)) %>%
+  ## add in rgn family gapfill record
+  mutate(Sust = ifelse(is.na(Sust), avg_gr_fam_sust, Sust)) %>% # Gapfill with georegion/family level
+  mutate(gapfill_sus = ifelse(is.na(gapfill_sus) & Sust == avg_gr_fam_sust, "georegion_family_avg", gapfill_sus)) %>% # Add in georegion/family gapfill record
+  mutate(Sust = ifelse(is.na(Sust),  avg_fam_sust, Sust)) %>% # Gapfill with family level
+  mutate(gapfill_sus = ifelse(is.na(gapfill_sus) & Sust == avg_fam_sust, "family_avg", gapfill_sus)) %>% ## Add in family gapfill record
+  mutate(Sust = ifelse(is.na(Sust), avg_taxon_code_sust, Sust)) %>%
+  mutate(gapfill_sus = ifelse(is.na(gapfill_sus) & Sust == avg_taxon_code_sust, "taxon_group_avg", gapfill_sus)) %>%
+  #mutate(Sust = ifelse(taxon_code == "AL", seaweed_gf_score, Sust)) %>% ## assign any algae with the overall SFW seaweed score, see Steps above for reference to document
+  #mutate(gapfill_sus = ifelse(is.na(gapfill_sus) & Sust == seaweed_gf_score, "seaweed_score", gapfill_sus)) %>%
+  mutate(Sust = ifelse(is.na(Sust), avg_global, Sust)) %>% 
+  mutate(gapfill_sus = ifelse(is.na(gapfill_sus) & Sust == avg_global, "global_avg", gapfill_sus)) %>%
+  
+  #### genetic escapes scores ####
+  mutate(esc_score = ifelse(is.na(esc_score), avg_rgn_fam_esc, esc_score)) %>% # Gapfill with region/family level
+  mutate(gapfill_esc = ifelse(is.na(gapfill_esc) & esc_score == avg_rgn_fam_esc, "region_family_avg", gapfill_esc)) %>% ## add in rgn family gapfill record
+  mutate(esc_score = ifelse(is.na(esc_score), avg_gr_fam_esc, esc_score)) %>% # Gapfill with georegion/family level
+  mutate(gapfill_esc = ifelse(is.na(gapfill_esc) & esc_score == avg_gr_fam_esc, "georegion_family_avg", gapfill_esc)) %>% # Add in georegion/family gapfill record
+  mutate(esc_score = ifelse(is.na(esc_score),  avg_fam_esc, esc_score)) %>% # Gapfill with family level
+  mutate(gapfill_esc = ifelse(is.na(gapfill_esc) & esc_score == avg_fam_esc, "family_avg", gapfill_esc)) %>% ## Add in family gapfill record
+  mutate(esc_score = ifelse(is.na(esc_score), avg_taxon_code_esc, esc_score)) %>%
+  mutate(gapfill_esc = ifelse(is.na(gapfill_esc) & esc_score == avg_taxon_code_esc, "taxon_group_avg", gapfill_esc)) %>%
+  #mutate(esc_score = ifelse(taxon_code == "AL", escapes_gf_score, esc_score)) %>% ## assign any algae with the SFW seaweed score for C6 Escapes, see Steps above for reference to document
+  #mutate(gapfill_esc = ifelse(is.na(gapfill_esc) & esc_score == escapes_gf_score, "seaweed_score", gapfill_esc)) %>%
+  mutate(esc_score = ifelse(is.na(esc_score), avg_global_esc, esc_score)) %>% 
+  mutate(gapfill_esc = ifelse(is.na(gapfill_esc) & esc_score == avg_global_esc, "global_avg", gapfill_esc)) %>%
+  
+  #### final tidying ####
+mutate(taxa_code = paste(species, species_code, sep="_")) %>%
+  select(rgn_id, species, species_code, taxa_code, taxa_group = taxon_code,
+         family, year, gapfill_sus, gapfill_esc, gapfill_fao = gap_0_fill,
+         tonnes = value, Sust, esc_score) %>%
+  mutate(Sust = round(Sust/10, 2),
+         esc_score = 1 - round(esc_score/10, 2))
+
+summary(mar_sw_sus_uncomb_final)
+filter(mar_sw_sus_uncomb_final, gapfill_sus == "georegion_family_avg")
+filter(mar_sw_sus_uncomb_final, gapfill_sus == "family_avg")
+filter(mar_sw_sus_uncomb_final, gapfill_sus == "taxon_group_avg")
 ```
 
 ```{r old-data-comb}
@@ -1435,16 +1615,6 @@ filter(mar_sw_sus_final, gapfill_sus == "taxon_group_avg")
 # readr::write_csv(mar_sustainability_score, here(current_mar_dir, "output", "mar_sustainability_new.csv"))
 ```
 
-### Combining 2025 and 2024 data
-
-1. In the part of the code where you assign the taxa code (I think when tonnes production and sustainability are in one datatable?), merge in the v2024 sustainability data (get ride of the "_number" part of the taxacode) using the region and taxa name.
-
-2. Fill in any missing rows in the v2024 data with the v2025 data.
-
-3. Make the data long so there is the region id, year (only 2024 and 2025), and taxa_code (and anything else if relevant).
-
-
-
 Now we need to prep the escapes pressure layer a bit more. Final formatting of the escapee data. This is used as a pressure layer.
 
 For each region/year: take a weighted average of the genetic escape probability for each taxa based on tonnes of mariculture.
@@ -1486,27 +1656,22 @@ genEscapes_gf <- tonnes_esc %>%
 
 ```{r save-gen-esc-gapfilled, eval = FALSE}
 # Save the Genetic Escapes Gapfill file
-readr::write_csv(genEscapes_gf, here(current_mar_dir, "output", "GenEsc_gf_comb.csv"))
-
+readr::write_csv(genEscapes_gf, here(current_mar_dir, "output", "GenEsc_gf.csv"))
 ```
 
 Obtain escapee data layers from `genEscapes`
 
 ```{r create-gen-esc-layers}
-
 # Create the escapee data layers:
 data <- genEscapes %>%
     dplyr::select(rgn_id, year, pressure_score = genEscapes, vyear)
-
 ```
 
 ## Save escapee pressure layer
 
 ```{r save-gen-esc-pressure-layer, eval = FALSE}
-
 ## Saves the Genetic Escapes data file 
-readr::write_csv(data, here(current_mar_dir, "output", "GenEsc_comb.csv"))  
-
+readr::write_csv(data, here(current_mar_dir, "output", "GenEsc.csv"))  
 ```
 
 # Save Data: Mariculture tonnes and sustainability scores
@@ -1514,24 +1679,25 @@ readr::write_csv(data, here(current_mar_dir, "output", "GenEsc_comb.csv"))
 ```{r save-mar-sw-harvest-data, eval = FALSE}
 
 ## Save mariculture harvest data
-mar_harvest_tonnes <- mar_sw_sus_final %>%
-  dplyr::select(rgn_id, taxa_code, taxa_group, family, year, tonnes, vyear)
+mar_harvest_tonnes <- mar_sw_sus_uncomb_final %>%
+  # This data frame ONLY has MAR data, therefore this one will not use the combined 2024 and 2025 data
+  dplyr::select(rgn_id, taxa_code, taxa_group, family, year, tonnes)
 
 anyDuplicated(mar_harvest_tonnes) # Check for duplication
 
 ## Saves the appropriate Mariculture Harvest Tonnes file
-#write.csv(mar_harvest_tonnes, here(current_mar_dir, "output", "mar_harvest_tonnes.csv"), row.names = F)
-readr::write_csv(mar_harvest_tonnes, here::here(current_mar_dir, "output", "mar_harvest_tonnes_comb.csv"))
+# write.csv(mar_harvest_tonnes, here(current_mar_dir, "output", "mar_harvest_tonnes.csv"), row.names = F)
+readr::write_csv(mar_harvest_tonnes, here::here(current_mar_dir, "output", "mar_harvest_tonnes.csv"))
 
 
 ## Save gapfill data for mariculture harvest
 mar_harvest_tonnes_gf <- mar_sw_sus_final %>%
-  dplyr::select(rgn_id, taxa_code, taxa_group, family, year, tonnes = gapfill_fao, vyear)
+  dplyr::select(rgn_id, taxa_code, taxa_group, family, year, tonnes = gapfill_fao)
 
 
 ## Saves the appropriate Mariculture Harvest Gapfill file 
 #write.csv(mar_harvest_tonnes_gf, here(current_mar_dir, "output", "mar_harvest_tonnes_gf.csv"), row.names = F)
-readr::write_csv(mar_harvest_tonnes_gf, here::here(current_mar_dir, "output", "mar_harvest_tonnes_gf_comb.csv"))
+readr::write_csv(mar_harvest_tonnes_gf, here::here(current_mar_dir, "output", "mar_harvest_tonnes_gf.csv"))
 
 # define the maximum sustainability score, check with: summary(mar_sw_sus_final)
 max_sus <- 0.77
@@ -1548,7 +1714,7 @@ anyDuplicated(mar_sustainability_score)
 
 ## Saves the appropriate Sustainability Score file 
 #write.csv(mar_sustainability_score, here(current_mar_dir, "output", "mar_sustainability.csv"), row.names = F)
-readr::write_csv(mar_sustainability_score, here::here(current_mar_dir, "output", "mar_sustainability_comb.csv"))
+readr::write_csv(mar_sustainability_score, here::here(current_mar_dir, "output", "mar_sustainability.csv"))
 
 
 ## Save gapfill data for sustainability scores
@@ -1559,7 +1725,7 @@ mar_sustainability_score_gf = mar_sw_sus_final %>%
 
 ## Saves the appropriate Sustainability Score Gapfill file 
 #write.csv(mar_sustainability_score_gf, here(current_mar_dir, "output", "mar_sustainability_gf.csv"), row.names = F)
-readr::write_csv(mar_sustainability_score_gf, here::here(current_mar_dir, "output", "mar_sustainability_gf_comb.csv"))
+readr::write_csv(mar_sustainability_score_gf, here::here(current_mar_dir, "output", "mar_sustainability_gf.csv"))
 
 
 ## save mar sustainability for data checking; rgn_id, species, score
@@ -1571,7 +1737,7 @@ mar_sustainability_score <- mar_sw_sus_final %>%
 
 ## Saves the appropriate Sustainability Score file
 #write.csv(mar_sustainability_score, here(current_mar_dir, "int", "mar_sustainability_check.csv"), row.names = F)
-readr::write_csv(mar_sustainability_score, here::here(current_mar_dir, "int", "mar_sustainability_check_comb.csv"))
+readr::write_csv(mar_sustainability_score, here::here(current_mar_dir, "int", "mar_sustainability_check.csv"))
 
 ```
 
@@ -1886,6 +2052,31 @@ diff_plot <- ggplot() +
 ```
 
 ## Data check genetic escapes
+
+Comparing combined genetic escape data to uncombined data
+
+```{r}
+# Read in uncombined data
+gen_esc <- readr::read_csv(here::here(current_mar_dir, "output", "GenEsc.csv"))
+
+# Read in combined data
+gen_esc_comb <- readr::read_csv(here::here(current_mar_dir, "output", "GenEsc_comb.csv"))
+
+gen_esc24 <- gen_esc_comb %>% 
+  filter(vyear == 2025) %>% 
+  rename(prs_score_old = pressure_score) %>% 
+  select(-vyear)
+
+gen_compare <- full_join(gen_esc, gen_esc24, by = c("rgn_id", "year"))
+
+# plot current data of previous and current year
+comp_gen_years_plot <- ggplot() + 
+  geom_point(data = gen_compare, aes(x = prs_score_old, y = pressure_score, text = paste("Region ID:", rgn_id))) +
+  labs(x = paste("Previous Pressure", previous_data_year), y = paste("Current Pressure", latest_data_year)) +
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  theme_bw();ggplotly(comp_gen_years_plot)
+
+```
 
 Comparing this year's data to previous year's data. Expect small variation from year to year. Plot to view differences.
 

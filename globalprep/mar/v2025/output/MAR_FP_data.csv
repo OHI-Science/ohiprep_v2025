@@ -1,4 +1,4 @@
-rgn_id,species,fao,environment,year,value,Taxon_code,family,gap_0_fill
+rgn_id,species,fao,environment,year,value,taxon_code,family,gap_0_fill
 5,Blue shrimp,"Pacific, Western Central",Brackishwater,1983,16,SH,Penaeidae,0
 5,Blue shrimp,"Pacific, Western Central",Brackishwater,1984,51,SH,Penaeidae,0
 5,Blue shrimp,"Pacific, Western Central",Brackishwater,1985,87,SH,Penaeidae,0
