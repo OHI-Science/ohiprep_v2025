@@ -375,12 +375,16 @@ sust_new$species <- str_remove(sust_new$taxa_code, "\\_[^.]*$")
 view(sust_old) 
 view(sust_new) 
 
+sust_new %>% 
+  filter(rgn_id == 182 & year == 2024) %>% 
+  view()
+
 # Filter down to just taiwan (country with largest decrease in score) for checking
 old_taiwan <- sust_old %>% 
-  filter(rgn_id == 14)
+  filter(rgn_id == 182)
 
 new_taiwan <- sust_new %>% 
-  filter(rgn_id == 14)
+  filter(rgn_id == 182)
 
 view(old_taiwan)
 view(new_taiwan)
@@ -397,32 +401,40 @@ setdiff(new_taiwan$species, old_taiwan$species) # rows in the new data that aren
 setdiff(old_taiwan$species, new_taiwan$species) # rows in the old data that aren't in the new data
 # character(0)
 
+sust_new24 <- sust_new %>% 
+  filter(year == 2024)
+
 # Compare across the entire dataset
-sust_total <- full_join(sust_new, sust_old, by = c("rgn_id", "species"))
+sust_total <- full_join(sust_new24, sust_old, by = c("rgn_id", "species", "year"))
+
+sust_2024 <- sust_total %>% 
+  filter(year == 2024)
+
+view(sust_total)
 
 # Compare sust_coeff between 2025 and 2024
 diff_plot <- ggplot() +
   geom_abline(slope = 1, intercept = 0, col = "red") +
-  geom_point(data = sust_total, aes(x = sust_new, y = sust_old, text = paste("Region ID:", rgn_id, "<br>", "Species:", species))) +
+  geom_jitter(data = sust_total, aes(x = sust_new, y = sust_old, text = paste("Region ID:", rgn_id, "<br>", "Species:", species)), alpha = 0.6) +
   labs(title = "Sustainability coefficient 2025 vs. 2024",
        x = "Sust Coeff 2025",
        y = "Sust Coeff 2024") +
   theme_bw();plotly::ggplotly(diff_plot)
 
 # Compare for just taiwan
-total_taiwan <- sust_total %>% 
-  filter(rgn_id == 14)
+total_spain <- sust_total %>% 
+  filter(rgn_id == 182)
 
-nrow(total_taiwan) # 100
+nrow(total_spain) # 100
 
-taiwan_plot <- ggplot() +
+spain_plot <- ggplot() +
   geom_abline(slope = 1, intercept = 0, col = "red") +
   # Added jitter and alpha to help with the overlap
-  geom_jitter(data = total_taiwan, aes(x = sust_new, y = sust_old, text = paste("Region ID:", rgn_id, "<br>", "Species:", species)), alpha = 0.6) +
-  labs(title = "Sustainability Taiwan 2025 vs. 2024",
+  geom_jitter(data = total_spain, aes(y = sust_new, x = sust_old, text = paste("Region ID:", rgn_id, "<br>", "Species:", species)), alpha = 0.6) +
+  labs(title = "Sustainability Spain 2025 vs. 2024",
        x = "Sust Coeff 2025",
        y = "Sust Coeff 2024") +
-  theme_bw();plotly::ggplotly(taiwan_plot)
+  theme_bw();plotly::ggplotly(spain_plot)
 
 ```
 

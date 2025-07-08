@@ -1739,20 +1739,39 @@ mar_sustainability_score <- mar_sw_sus_final %>%
   unique() %>%
   mutate(sust_coeff = ifelse(sust_coeff > max_sus, 1, sust_coeff/max_sus)) # rescale to the highest sust score
 
+
+
 anyDuplicated(mar_sustainability_score)
 view(mar_sustainability_score)
 
-taiwan7 <- mar_sustainability_score %>% 
-  filter(rgn_id == 14)
-
-colSums(is.na(taiwan7)) # 0
-nrow(taiwan7) # 62
-
-taiwan_old24 <- mar_sustainability %>% 
-  filter(rgn_id == 14) %>% 
+spain <- mar_sustainability_score %>% 
+  filter(rgn_id == 182) %>% 
   view()
 
-setdiff(taiwan7$sust_coeff, taiwan_old24$sust_coeff)
+colSums(is.na(spain)) # 0
+nrow(spain) # 146
+
+spain_24 <- spain %>% 
+  filter(year == 2024)
+
+spain_25 <- spain %>% 
+  filter(year == 2025)
+
+setdiff(spain_24$sust_coeff, spain_25$sust_coeff) # numeric(0)
+setdiff(spain_25$sust_coeff, spain_24$sust_coeff) # numeric(0)
+
+
+# Compare to the original 2024 data
+sust_old <- readr::read_csv(here::here("globalprep", "mar", "v2024",
+                                       "output", "mar_sustainability.csv")) %>% 
+  dplyr::select(rgn_id, taxa_code, sust_old = sust_coeff, year)
+sust_old$species <- str_remove(sust_old$taxa_code, "\\_[^.]*$") 
+
+spain_old <- sust_old %>% 
+  filter(rgn_id == 182) %>% view()
+
+setdiff(spain_24$sust_coeff, spain_old$sust_old) 
+# [1] 0.8961039 0.9090909
 
 ## Saves the appropriate Sustainability Score file 
 #write.csv(mar_sustainability_score, here(current_mar_dir, "output", "mar_sustainability.csv"), row.names = F)
