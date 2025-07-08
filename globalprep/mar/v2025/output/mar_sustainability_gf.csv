@@ -4,1499 +4,1348 @@ rgn_id,taxa_code,sust_coeff
 25,Abalones_3,global_species
 102,Abalones_4,global_species
 224,Abalones_5,global_species
-48,Abalones_6,global_species
-216,Akiami paste shrimp_7,taxon_group_avg
-14,Amberjacks nei_8,region_family_avg
-207,Aquatic invertebrates nei_9,global_avg
-143,Arctic char_10,none
-183,Atlantic ditch shrimp_11,taxon_group_avg
-182,Atlantic ditch shrimp_12,taxon_group_avg
-183,Atlantic salmon_13,global_species
-143,Atlantic salmon_14,global_species
-175,Atlantic salmon_15,global_species
-75,Baltic prawn_16,taxon_group_avg
-216,Banana prawn_17,region_family_avg
-207,Banana prawn_18,region_family_avg
-13,Banana prawn_19,region_family_avg
-208,Banana prawn_20,region_family_avg
-15,Banana prawn_21,region_family_avg
-25,Banana prawn_22,region_family_avg
-206,Banana prawn_23,region_family_avg
-216,Banded grouper_24,family_avg
-216,Barramundi(=Giant seaperch)_25,global_species
-25,Barramundi(=Giant seaperch)_26,global_species
-206,Barramundi(=Giant seaperch)_27,global_species
-16,Barramundi(=Giant seaperch)_28,global_species
-14,Barramundi(=Giant seaperch)_29,global_species
-15,Barramundi(=Giant seaperch)_30,global_species
-208,Barramundi(=Giant seaperch)_31,global_species
-79,Barramundi(=Giant seaperch)_32,global_species
-147,Barramundi(=Giant seaperch)_33,global_species
-40,Barramundi(=Giant seaperch)_34,global_species
-17,Barramundi(=Giant seaperch)_35,global_species
-203,Barramundi(=Giant seaperch)_36,global_species
-6,Barramundi(=Giant seaperch)_37,global_species
-53,Barramundi(=Giant seaperch)_38,global_species
-54,Barramundi(=Giant seaperch)_39,global_species
-216,Barred-chest grouper_40,family_avg
-20,Bastard halibut_41,taxon_group_avg
-182,Beluga_42,global_species
-216,Bigeye trevally_43,region_family_avg
-216,Black pomfret_44,region_family_avg
-163,Black seabass_45,global_species
-14,Blackhead seabream_46,family_avg
-216,Blacktail snapper_47,taxon_group_avg
-216,Blood cockle_48,taxon_group_avg
-163,Blue crab_49,global_avg
-137,Blue shrimp_50,region_family_avg
-129,Blue shrimp_51,region_family_avg
-147,Blue shrimp_52,georegion_family_avg
-5,Blue shrimp_53,georegion_family_avg
-134,Blue shrimp_54,region_family_avg
-131,Blue shrimp_55,region_family_avg
-139,Blue shrimp_56,region_family_avg
-247,Blue shrimp_57,region_family_avg
-6,Blue shrimp_58,region_family_avg
-216,Blue shrimp_59,region_family_avg
-18,Blue shrimp_60,region_family_avg
-135,Blue shrimp_61,region_family_avg
-14,Blue swimming crab_62,global_avg
-208,Blue swimming crab_63,global_avg
-50,Bluespot mullet_64,taxon_group_avg
-216,Bluespot mullet_65,taxon_group_avg
-135,Bonefish_66,taxon_group_avg
-183,Brill_67,taxon_group_avg
-16,Brine shrimp_68,taxon_group_avg
-191,Brine shrimps nei_69,taxon_group_avg
-182,Brown meagre_70,region_family_avg
-16,Brown tiger prawn_71,region_family_avg
-208,Brown-marbled grouper_72,family_avg
-216,Brown-marbled grouper_73,family_avg
-135,Callinectes swimcrabs nei_74,global_avg
-84,Caramote prawn_75,georegion_family_avg
-182,Caramote prawn_76,region_family_avg
-14,Clams_77,global_species
-62,Clams_78,global_species
-135,Clams_79,global_species
-183,Clams_80,global_species
-216,Coarse shrimp_81,region_family_avg
-14,Cobia_82,global_species
-182,Cockles_83,global_species
-182,Common prawn_84,taxon_group_avg
-184,Common prawn_85,taxon_group_avg
-115,Common snook_86,taxon_group_avg
-84,Common sole_87,global_species
-183,Common sole_88,global_species
-80,Common sole_89,global_species
-184,Common two-banded seabream_90,region_family_avg
-182,Corrugated venus_91,taxon_group_avg
-183,Corrugated venus_92,taxon_group_avg
-224,Corvina drum_93,family_avg
-208,Crimson snapper_94,taxon_group_avg
-216,Deepwater longtail red snapper_95,taxon_group_avg
-14,Diphos sanguin_96,taxon_group_avg
-16,Eastern king prawn_97,region_family_avg
-16,Eastern school shrimp_98,region_family_avg
-184,European eel_99,global_species
-84,European eel_100,global_species
-179,European eel_101,global_species
-62,European eel_102,global_species
-183,European eel_103,global_species
-186,European eel_104,global_species
-80,European eel_105,global_species
-175,European eel_106,global_species
-182,European eel_107,global_species
-75,European flounder_108,family_avg
-184,European seabass_109,none
-61,European seabass_110,global_species
-179,European seabass_111,none
-80,European seabass_112,none
-214,European seabass_113,none
-183,European seabass_114,none
-176,European seabass_115,global_species
-79,European seabass_116,global_species
-182,European seabass_117,none
-78,European seabass_118,global_species
-84,European seabass_119,global_species
-175,European whitefish_120,region_family_avg
-138,Fine flounder_121,taxon_group_avg
-138,Flatfishes nei_122,taxon_group_avg
-14,Flathead grey mullet_123,taxon_group_avg
-184,Flathead grey mullet_124,taxon_group_avg
-18,Flathead grey mullet_125,taxon_group_avg
-61,Flathead grey mullet_126,taxon_group_avg
-80,Flathead grey mullet_127,taxon_group_avg
-167,Flathead grey mullet_128,taxon_group_avg
-216,Flathead grey mullet_129,taxon_group_avg
-20,Fleshy prawn_130,region_family_avg
-209,Fleshy prawn_131,region_family_avg
-25,Fourfinger threadfin_132,taxon_group_avg
-14,Fourfinger threadfin_133,taxon_group_avg
-208,Fourfinger threadfin_134,taxon_group_avg
-216,Foursaddle grouper_135,family_avg
-208,Giant grouper_136,family_avg
-14,Giant tiger prawn_137,global_species
-207,Giant tiger prawn_138,none
-216,Giant tiger prawn_139,none
-15,Giant tiger prawn_140,global_species
-203,Giant tiger prawn_141,none
-206,Giant tiger prawn_142,none
-25,Giant tiger prawn_143,global_species
-40,Giant tiger prawn_144,global_species
-18,Giant tiger prawn_145,global_species
-16,Giant tiger prawn_146,global_species
-50,Giant tiger prawn_147,global_species
-7,Giant tiger prawn_148,global_species
-31,Giant tiger prawn_149,global_species
-37,Giant tiger prawn_150,global_species
-42,Giant tiger prawn_151,global_species
-153,Giant tiger prawn_152,global_species
-184,Giant tiger prawn_153,global_species
-205,Giant tiger prawn_154,none
-102,Giant tiger prawn_155,global_species
-247,Giant tiger prawn_156,global_species
-208,Giant tiger prawn_157,global_species
-194,Giant tiger prawn_158,global_species
-41,Giant tiger prawn_159,global_species
-209,Giant tiger prawn_160,global_species
-54,Giant tiger prawn_161,global_species
-202,Giant tiger prawn_162,global_species
-17,Giant tiger prawn_163,global_species
-204,Giant tiger prawn_164,none
-106,Giant tiger prawn_165,global_species
-182,Giant tiger prawn_166,global_species
-80,Giant tiger prawn_167,global_species
-184,Gilthead seabream_168,none
-61,Gilthead seabream_169,global_species
-80,Gilthead seabream_170,none
-214,Gilthead seabream_171,none
-183,Gilthead seabream_172,none
-79,Gilthead seabream_173,global_species
-182,Gilthead seabream_174,none
-78,Gilthead seabream_175,global_species
-54,Gilthead seabream_176,global_species
-84,Gilthead seabream_177,global_species
-190,Gilthead seabream_178,global_species
-75,Gobies nei_179,taxon_group_avg
-183,Golden carpet shell_180,taxon_group_avg
-8,Golden-lined spinefoot_181,taxon_group_avg
-206,Greasy grouper_182,family_avg
-14,Greasyback shrimp_183,region_family_avg
-209,Green mud crab_184,global_avg
-54,Green tiger prawn_185,region_family_avg
-184,Green tiger prawn_186,region_family_avg
-48,Green tiger prawn_187,region_family_avg
-216,Greenback mullet_188,taxon_group_avg
-182,Grooved carpet shell_189,taxon_group_avg
-184,Grooved carpet shell_190,taxon_group_avg
-62,Grooved carpet shell_191,taxon_group_avg
-25,Groupers nei_192,family_avg
-14,Groupers nei_193,family_avg
-216,Groupers nei_194,family_avg
-214,Groupers nei_195,family_avg
-208,Groupers nei_196,family_avg
-15,"Groupers, seabasses nei_197",family_avg
-216,"Groupers, seabasses nei_198",family_avg
-115,"Gudgeons, sleepers nei_199",taxon_group_avg
-208,Humpback grouper_200,family_avg
-216,Humpback grouper_201,family_avg
-207,Indian white prawn_202,region_family_avg
-203,Indian white prawn_203,region_family_avg
-191,Indian white prawn_204,region_family_avg
-81,Indian white prawn_205,georegion_family_avg
-102,Indian white prawn_206,region_family_avg
-50,Indian white prawn_207,region_family_avg
-54,Indian white prawn_208,region_family_avg
-48,Indian white prawn_209,region_family_avg
-41,Indian white prawn_210,region_family_avg
-47,Indian white prawn_211,georegion_family_avg
-204,Indian white prawn_212,region_family_avg
-14,Indo-Pacific swamp crab_213,global_avg
-216,Indo-Pacific swamp crab_214,global_avg
-15,Indo-Pacific swamp crab_215,global_avg
-25,Indo-Pacific swamp crab_216,global_avg
-206,Indo-Pacific swamp crab_217,global_avg
-37,Indo-Pacific swamp crab_218,global_avg
-16,Indo-Pacific swamp crab_219,global_avg
-40,Indo-Pacific swamp crab_220,global_avg
-247,Indo-Pacific swamp crab_221,global_avg
-202,Indo-Pacific swamp crab_222,global_avg
-42,Indo-Pacific swamp crab_223,global_avg
-24,Indo-Pacific swamp crab_224,global_avg
-17,Indo-Pacific swamp crab_225,global_avg
-207,Indo-Pacific swamp crab_226,global_avg
-18,Indo-Pacific swamp crab_227,global_avg
-43,Indo-Pacific swamp crab_228,global_avg
-208,Indo-Pacific swamp crab_229,global_avg
-231,Indo-Pacific swamp crab_230,global_avg
-152,Indo-Pacific swamp crab_231,global_avg
-184,Japanese carpet shell_232,taxon_group_avg
-14,Japanese carpet shell_233,taxon_group_avg
-182,Japanese carpet shell_234,taxon_group_avg
-14,Japanese eel_235,none
-102,Japanese meagre_236,family_avg
-209,Japanese seabass_237,taxon_group_avg
-14,Japanese seabass_238,taxon_group_avg
-14,Japanese spiny lobster_239,global_avg
-216,Jawla paste shrimp_240,taxon_group_avg
-208,John's snapper_241,taxon_group_avg
-210,Kuruma prawn_242,georegion_family_avg
-14,Kuruma prawn_243,region_family_avg
-20,Kuruma prawn_244,region_family_avg
-179,Kuruma prawn_245,georegion_family_avg
-182,Kuruma prawn_246,region_family_avg
-16,Kuruma prawn_247,region_family_avg
-183,Kuruma prawn_248,georegion_family_avg
-184,Kuruma prawn_249,region_family_avg
-80,Kuruma prawn_250,region_family_avg
-102,Kuruma prawn_251,region_family_avg
-82,Kuruma prawn_252,georegion_family_avg
-209,Kuruma prawn_253,region_family_avg
-14,Largemouth black bass_254,taxon_group_avg
-167,Lebranche mullet_255,taxon_group_avg
-209,Lefteye flounders nei_256,taxon_group_avg
-216,Longfin trevally_257,region_family_avg
-216,Longspine grouper_258,family_avg
-208,Malabar grouper_259,family_avg
-208,Mangrove red snapper_260,taxon_group_avg
-216,Mangrove red snapper_261,taxon_group_avg
-208,Marble goby_262,taxon_group_avg
-14,Marine crabs nei_263,global_avg
-209,Marine crabs nei_264,global_avg
-20,Marine crustaceans nei_265,global_avg
-80,Marine crustaceans nei_266,global_avg
-14,Marine fishes nei_267,taxon_group_avg
-204,Marine fishes nei_268,taxon_group_avg
-32,Marine fishes nei_269,taxon_group_avg
-132,Marine fishes nei_270,taxon_group_avg
-134,Marine fishes nei_271,taxon_group_avg
-214,Marine fishes nei_272,taxon_group_avg
-203,Marine fishes nei_273,taxon_group_avg
-25,Marine fishes nei_274,taxon_group_avg
-15,Marine fishes nei_275,taxon_group_avg
-184,Marine fishes nei_276,taxon_group_avg
-208,Marine fishes nei_277,taxon_group_avg
-79,Marine fishes nei_278,taxon_group_avg
-80,Marine fishes nei_279,taxon_group_avg
-207,Marine fishes nei_280,taxon_group_avg
-180,Marine fishes nei_281,taxon_group_avg
-45,Marine fishes nei_282,taxon_group_avg
-14,Marine molluscs nei_283,taxon_group_avg
-24,Marine molluscs nei_284,taxon_group_avg
-216,Masked grouper_285,family_avg
-184,Meagre_286,none
-182,Meagre_287,none
-214,Meagre_288,none
-80,Mediterranean shore crab_289,global_avg
-216,Metapenaeus shrimps nei_290,region_family_avg
-15,Metapenaeus shrimps nei_291,region_family_avg
-25,Metapenaeus shrimps nei_292,region_family_avg
-207,Metapenaeus shrimps nei_293,region_family_avg
-14,Milkfish_294,taxon_group_avg
-15,Milkfish_295,taxon_group_avg
-216,Milkfish_296,taxon_group_avg
-9,Milkfish_297,taxon_group_avg
-212,Milkfish_298,taxon_group_avg
-153,Milkfish_299,taxon_group_avg
-155,Milkfish_300,taxon_group_avg
-10,Milkfish_301,taxon_group_avg
-13,Milkfish_302,taxon_group_avg
-202,Milkfish_303,taxon_group_avg
-231,Milkfish_304,taxon_group_avg
-8,Milkfish_305,taxon_group_avg
-40,Milkfish_306,taxon_group_avg
-17,Milkfish_307,taxon_group_avg
-43,Milkfish_308,taxon_group_avg
-206,Milkfish_309,taxon_group_avg
-7,Milkfish_310,taxon_group_avg
-8,Mottled spinefoot_311,taxon_group_avg
-208,Mud spiny lobster_312,global_avg
-216,Mullets nei_313,taxon_group_avg
-196,Mullets nei_314,taxon_group_avg
-183,Mullets nei_315,taxon_group_avg
-84,Mullets nei_316,taxon_group_avg
-214,Mullets nei_317,taxon_group_avg
-13,Mullets nei_318,taxon_group_avg
-75,Mullets nei_319,taxon_group_avg
-115,Mullets nei_320,taxon_group_avg
-182,Mullets nei_321,taxon_group_avg
-65,Mullets nei_322,taxon_group_avg
-184,Mullets nei_323,taxon_group_avg
-184,Mussels_324,global_species
-61,Mussels_325,global_species
-136,Mussels_326,global_species
-182,Mussels_327,global_species
-40,Mussels_328,global_species
-216,Mussels_329,global_species
-14,Natantian decapods nei_330,global_avg
-130,Natantian decapods nei_331,global_avg
-76,Natantian decapods nei_332,global_avg
-135,Northern brown shrimp_333,region_family_avg
-216,Northern velvet shrimp_334,region_family_avg
-163,Northern white shrimp_335,region_family_avg
-135,Northern white shrimp_336,region_family_avg
-205,Orange mud crab_337,global_avg
-203,Orange mud crab_338,global_avg
-204,Orange mud crab_339,global_avg
-216,Orange mud crab_340,global_avg
-54,Orange-spotted grouper_341,family_avg
-208,Orange-spotted grouper_342,family_avg
-66,Oysters_343,global_species
-184,Oysters_344,global_species
-61,Oysters_345,global_species
-16,Oysters_346,global_species
-183,Oysters_347,global_species
-17,Oysters_348,global_species
-135,Oysters_349,global_species
-182,Oysters_350,global_species
-40,Oysters_351,global_species
-65,Oysters_352,global_species
-182,Palaemonid shrimps nei_353,taxon_group_avg
-25,Penaeus shrimps nei_354,region_family_avg
-204,Penaeus shrimps nei_355,region_family_avg
-209,Penaeus shrimps nei_356,region_family_avg
-43,Penaeus shrimps nei_357,georegion_family_avg
-115,Penaeus shrimps nei_358,region_family_avg
-136,Penaeus shrimps nei_359,region_family_avg
-167,Penaeus shrimps nei_360,region_family_avg
-53,Penaeus shrimps nei_361,georegion_family_avg
-65,Penaeus shrimps nei_362,georegion_family_avg
-62,Penaeus shrimps nei_363,georegion_family_avg
-173,Penaeus shrimps nei_364,georegion_family_avg
-24,Penaeus shrimps nei_365,georegion_family_avg
-116,Penaeus shrimps nei_366,georegion_family_avg
-15,Penaeus shrimps nei_367,region_family_avg
-45,Penaeus shrimps nei_368,georegion_family_avg
-214,Penaeus shrimps nei_369,region_family_avg
-16,Penaeus shrimps nei_370,region_family_avg
-231,Penaeus shrimps nei_371,region_family_avg
-208,Penaeus shrimps nei_372,region_family_avg
-8,Penaeus shrimps nei_373,family_avg
-84,Penaeus shrimps nei_374,georegion_family_avg
-196,Penaeus shrimps nei_375,georegion_family_avg
-205,Penaeus shrimps nei_376,region_family_avg
-182,Pod razor shell_377,taxon_group_avg
-14,"Porgies, seabreams nei_378",family_avg
-184,"Porgies, seabreams nei_379",region_family_avg
-216,Portunus swimcrabs nei_380,global_avg
-209,Portunus swimcrabs nei_381,global_avg
-25,Portunus swimcrabs nei_382,global_avg
-176,Rainbow trout_383,global_species
-143,Rainbow trout_384,global_species
-180,Rainbow trout_385,global_species
-175,Rainbow trout_386,global_species
-191,Rainbow trout_387,global_species
-79,Red drum_388,georegion_family_avg
-163,Red drum_389,none
-184,Red drum_390,region_family_avg
-14,Red seabream_391,family_avg
-14,Redtail prawn_392,region_family_avg
-209,Righteye flounders nei_393,family_avg
-20,Righteye flounders nei_394,family_avg
-15,Scats_395,taxon_group_avg
-135,Sea catfishes nei_396,taxon_group_avg
-175,Sea trout_397,family_avg
-183,Seabasses nei_398,family_avg
-14,Seaweed_399,global_species
-184,Seaweed_400,global_species
-155,Seaweed_401,global_species
-216,Seaweed_402,global_species
-102,Seaweed_403,global_species
-66,Seaweed_404,global_species
-163,Seaweed_405,global_species
-40,Seaweed_406,global_species
-183,Seaweed_407,global_species
-182,Seaweed_408,global_species
-207,Seaweed_409,global_species
-182,Senegalese sole_410,region_family_avg
-143,Senegalese sole_411,family_avg
-183,Senegalese sole_412,region_family_avg
-80,Sharpsnout seabream_413,region_family_avg
-206,Snappers nei_414,taxon_group_avg
-208,Snappers nei_415,taxon_group_avg
-216,Snappers nei_416,taxon_group_avg
-14,"Snappers, jobfishes nei_417",taxon_group_avg
-135,Snooks(=Robalos) nei_418,taxon_group_avg
-208,Snubnose pompano_419,global_species
-75,So-iny (redlip) mullet_420,taxon_group_avg
-75,So-iuy mullet_421,taxon_group_avg
-182,Soles nei_422,taxon_group_avg
-167,Southern brown shrimp_423,region_family_avg
-194,Southern pink shrimp_424,region_family_avg
-112,Southern white shrimp_425,region_family_avg
-167,Southern white shrimp_426,region_family_avg
-204,Speckled shrimp_427,region_family_avg
-18,Spinefeet(=Rabbitfishes) nei_428,taxon_group_avg
-15,Spinefeet(=Rabbitfishes) nei_429,taxon_group_avg
-8,Spinefeet(=Rabbitfishes) nei_430,taxon_group_avg
-208,Spotted coralgrouper_431,family_avg
-182,Spotted seabass_432,family_avg
-25,Squaretail mullet_433,taxon_group_avg
-182,Starry sturgeon_434,global_species
-75,Sturgeons nei_435,family_avg
-132,Tarpon_436,taxon_group_avg
-167,Tarpon snook_437,taxon_group_avg
-61,Thinlip grey mullet_438,taxon_group_avg
-21,Tiger pufferfish_439,taxon_group_avg
-206,Tropical spiny lobsters nei_440,global_avg
-40,Tropical spiny lobsters nei_441,global_avg
-182,Turbot_442,global_species
-224,Turbot_443,global_species
-177,Turbot_444,global_species
-183,Turbot_445,global_species
-184,Turbot_446,global_species
-209,Turbot_447,global_species
-175,Turbot_448,global_species
-227,Turbot_449,global_species
-228,Turbot_450,global_species
-14,Two-spot red snapper_451,taxon_group_avg
-14,Waigieu seaperch_452,region_family_avg
-216,Whiskered velvet shrimp_453,region_family_avg
-80,White seabream_454,region_family_avg
-214,White seabream_455,region_family_avg
-182,White seabream_456,region_family_avg
-184,White seabream_457,region_family_avg
-183,White seabream_458,region_family_avg
-190,White-spotted spinefoot_459,taxon_group_avg
-216,White-spotted spinefoot_460,taxon_group_avg
-137,Whiteleg shrimp_461,none
-129,Whiteleg shrimp_462,global_species
-133,Whiteleg shrimp_463,none
-138,Whiteleg shrimp_464,global_species
-171,Whiteleg shrimp_465,global_species
-132,Whiteleg shrimp_466,global_species
-131,Whiteleg shrimp_467,none
-110,Whiteleg shrimp_468,global_species
-163,Whiteleg shrimp_469,none
-164,Whiteleg shrimp_470,global_species
-135,Whiteleg shrimp_471,none
-130,Whiteleg shrimp_472,global_species
-139,Whiteleg shrimp_473,global_species
-119,Whiteleg shrimp_474,global_species
-134,Whiteleg shrimp_475,global_species
-168,Whiteleg shrimp_476,global_species
-194,Whiteleg shrimp_477,global_species
-14,Whiteleg shrimp_478,global_species
-209,Whiteleg shrimp_479,none
-25,Whiteleg shrimp_480,none
-166,Whiteleg shrimp_481,global_species
-207,Whiteleg shrimp_482,none
-13,Whiteleg shrimp_483,global_species
-78,Whiteleg shrimp_484,global_species
-136,Whiteleg shrimp_485,global_species
-112,Whiteleg shrimp_486,global_species
-216,Whiteleg shrimp_487,none
-208,Whiteleg shrimp_488,global_species
-20,Whiteleg shrimp_489,global_species
-15,Whiteleg shrimp_490,global_species
-102,Whiteleg shrimp_491,global_species
-191,Whiteleg shrimp_492,global_species
-203,Whiteleg shrimp_493,none
-206,Whiteleg shrimp_494,none
-6,Whiteleg shrimp_495,global_species
-115,Whiteleg shrimp_496,global_species
-50,Whiteleg shrimp_497,global_species
-182,Whiteleg shrimp_498,global_species
-61,Whiteleg shrimp_499,global_species
-214,Whiteleg shrimp_500,global_species
-231,Whiteleg shrimp_501,global_species
-56,Whiteleg shrimp_502,global_species
-40,Whiteleg shrimp_503,global_species
-190,Whiteleg shrimp_504,global_species
-247,Whiteleg shrimp_505,global_species
-76,Whiteleg shrimp_506,global_species
-205,Whiteleg shrimp_507,global_species
-48,Whiteleg shrimp_508,global_species
-51,Whiteleg shrimp_509,global_species
-54,Whiteleg shrimp_510,global_species
-80,Whiteleg shrimp_511,global_species
-31,Whiteleg shrimp_512,global_species
-167,Whiteleg shrimp_513,global_species
-167,Whitemouth croaker_514,family_avg
-224,Yellowtail amberjack_515,global_species
-177,Yellowtail amberjack_516,global_species
-54,Yellowtail amberjack_517,global_species
-175,Yellowtail amberjack_518,global_species
-102,Yellowtail amberjack_519,global_species
-184,[Mugil spp]_520,taxon_group_avg
-209,[Rhopilema esculentum]_521,global_avg
-25,[Scylla spp]_522,taxon_group_avg
-20,Abalones_523,global_species
-14,Abalones_524,global_species
-228,Abalones_525,global_species
-16,Abalones_526,global_species
-102,Abalones_527,global_species
-135,Abalones_528,global_species
-224,Abalones_529,global_species
-143,Abalones_530,global_species
-227,Abalones_531,global_species
-138,Abalones_532,global_species
-162,Abalones_533,global_species
-209,Abalones_534,global_species
-101,Abalones_535,global_species
-181,Abalones_536,global_species
-179,Abalones_537,global_species
-182,Abalones_538,global_species
-206,Abalones_539,global_species
-14,Amberjacks nei_540,region_family_avg
-209,Amberjacks nei_541,region_family_avg
-20,Amberjacks nei_542,georegion_family_avg
-209,Aquatic invertebrates nei_543,global_avg
-20,Aquatic invertebrates nei_544,global_avg
-210,Aquatic invertebrates nei_545,global_avg
-16,Aquatic invertebrates nei_546,global_avg
-205,Aquatic invertebrates nei_547,global_avg
-73,Aquatic invertebrates nei_548,global_avg
-181,Aquatic invertebrates nei_549,global_avg
-182,Aquatic invertebrates nei_550,global_avg
-209,Areolate grouper_551,family_avg
-20,Ascidiaceans_552,global_avg
-20,Ascidiaceans nei_553,global_avg
-218,Atlantic bluefin tuna_554,family_avg
-182,Atlantic bluefin tuna_555,none
-187,Atlantic bluefin tuna_556,none
-184,Atlantic bluefin tuna_557,none
-61,Atlantic bluefin tuna_558,none
-67,Atlantic bluefin tuna_559,none
-76,Atlantic bluefin tuna_560,none
-81,Atlantic bluefin tuna_561,none
-183,Atlantic bluefin tuna_562,georegion_family_avg
-68,Atlantic bluefin tuna_563,none
-80,Atlantic bluefin tuna_564,none
-82,Atlantic bluefin tuna_565,water_body
-218,Atlantic cod_566,global_species
-223,Atlantic cod_567,global_species
-143,Atlantic cod_568,global_species
-180,Atlantic cod_569,global_species
-175,Atlantic cod_570,global_species
-143,Atlantic halibut_571,global_species
-180,Atlantic halibut_572,global_species
-223,Atlantic halibut_573,global_species
-223,Atlantic salmon_574,none
-180,Atlantic salmon_575,none
-181,Atlantic salmon_576,global_species
-143,Atlantic salmon_577,global_species
-141,Atlantic salmon_578,none
-222,Atlantic salmon_579,global_species
-218,Atlantic salmon_580,none
-174,Atlantic salmon_581,global_species
-182,Atlantic salmon_582,global_species
-16,Atlantic salmon_583,global_species
-163,Atlantic salmon_584,none
-224,Atlantic salmon_585,none
-76,Atlantic salmon_586,global_species
-179,Atlantic salmon_587,global_species
-73,Atlantic salmon_588,global_species
-175,Atlantic salmon_589,global_species
-21,Atlantic salmon_590,global_species
-54,Atlantic salmon_591,global_species
-143,Atlantic wolffish_592,taxon_group_avg
-208,Banana prawn_593,region_family_avg
-15,Banana prawn_594,region_family_avg
-182,Banded carpet shell_595,taxon_group_avg
-216,Banded grouper_596,family_avg
-209,Barramundi(=Giant seaperch)_597,global_species
-208,Barramundi(=Giant seaperch)_598,global_species
-206,Barramundi(=Giant seaperch)_599,global_species
-247,Barramundi(=Giant seaperch)_600,global_species
-147,Barramundi(=Giant seaperch)_601,global_species
-14,Barramundi(=Giant seaperch)_602,global_species
-50,Barramundi(=Giant seaperch)_603,global_species
-216,Barramundi(=Giant seaperch)_604,global_species
-24,Barramundi(=Giant seaperch)_605,global_species
-205,Barramundi(=Giant seaperch)_606,global_species
-40,Barramundi(=Giant seaperch)_607,global_species
-51,Barramundi(=Giant seaperch)_608,global_species
-191,Barramundi(=Giant seaperch)_609,global_species
-190,Barramundi(=Giant seaperch)_610,global_species
-216,Barred-chest grouper_611,family_avg
-210,Bastard halibut_612,taxon_group_avg
-176,Bastard halibut_613,taxon_group_avg
-135,Bastard halibuts nei_614,taxon_group_avg
-182,Big-scale sand smelt_615,taxon_group_avg
-208,Bigeye trevally_616,region_family_avg
-216,Bigeye trevally_617,region_family_avg
-134,Black ark_618,taxon_group_avg
-208,Black grouper_619,family_avg
-216,Black jack_620,region_family_avg
-216,Blackbanded trevally_621,region_family_avg
-210,Blackhead seabream_622,family_avg
-14,Blackhead seabream_623,family_avg
-20,Blackhead seabream_624,family_avg
-216,Blacksaddled coralgrouper_625,family_avg
-182,Blackspot seabream_626,region_family_avg
-183,Blackspot seabream_627,region_family_avg
-216,Blacktail snapper_628,taxon_group_avg
-206,Blacktip grouper_629,family_avg
-20,Blood cockle_630,taxon_group_avg
-25,Blood cockle_631,taxon_group_avg
-206,Blood cockle_632,taxon_group_avg
-14,Blood cockle_633,taxon_group_avg
-209,Blood cockle_634,taxon_group_avg
-24,Blood cockle_635,taxon_group_avg
-216,Blood cockle_636,taxon_group_avg
-216,Bludger_637,region_family_avg
-147,Blue shrimp_638,georegion_family_avg
-208,Blue swimming crab_639,global_avg
-216,Bluefin trevally_640,region_family_avg
-76,Bluespotted seabream_641,region_family_avg
-216,Brassy trevally_642,region_family_avg
-110,Brine shrimp_643,taxon_group_avg
-42,Brine shrimp_644,taxon_group_avg
-138,Brine shrimp_645,taxon_group_avg
-206,Broad geloina_646,taxon_group_avg
-208,Brown-marbled grouper_647,family_avg
-39,Brown-marbled grouper_648,family_avg
-206,Brown-marbled grouper_649,family_avg
-216,Brown-marbled grouper_650,family_avg
-110,Caribbean spiny lobster_651,global_avg
-117,Caribbean spiny lobster_652,global_avg
-102,Carpet shells nei_653,taxon_group_avg
-61,Carpet shells nei_654,taxon_group_avg
-223,Chars nei_655,taxon_group_avg
-162,Chinook(=Spring=King) salmon_656,none
-163,Chinook(=Spring=King) salmon_657,global_species
-218,Chinook(=Spring=King) salmon_658,none
-224,Chinook(=Spring=King) salmon_659,global_species
-16,Chinook(=Spring=King) salmon_660,global_species
-69,Chum(=Keta=Dog) salmon_661,region_family_avg
-70,Chum(=Keta=Dog) salmon_662,region_family_avg
-73,Chum(=Keta=Dog) salmon_663,region_family_avg
-74,Chum(=Keta=Dog) salmon_664,region_family_avg
-75,Chum(=Keta=Dog) salmon_665,region_family_avg
-189,Chum(=Keta=Dog) salmon_666,region_family_avg
-14,Clams_667,global_species
-20,Clams_668,global_species
-210,Clams_669,global_species
-21,Clams_670,global_species
-9,Clams_671,global_species
-163,Clams_672,global_species
-218,Clams_673,global_species
-80,Clams_674,global_species
-176,Clams_675,global_species
-175,Clams_676,global_species
-182,Clams_677,global_species
-18,Clams_678,global_species
-183,Clams_679,global_species
-135,Clams_680,global_species
-8,Clams_681,global_species
-179,Clams_682,global_species
-180,Clams_683,global_species
-184,Clams_684,global_species
-188,Clams_685,global_species
-206,Clams_686,global_species
-14,Cobia_687,global_species
-32,Cobia_688,global_species
-116,Cobia_689,global_species
-110,Cobia_690,global_species
-209,Cobia_691,global_species
-140,Cobia_692,global_species
-29,Cobia_693,global_species
-115,Cobia_694,global_species
-129,Cobia_695,none
-164,Cobia_696,global_species
-207,Cobia_697,global_species
-208,Cobia_698,global_species
-132,Cobia_699,global_species
-137,Cobia_700,global_species
-171,Cobia_701,global_species
-216,Cobia_702,global_species
-20,Cockles_703,global_species
-183,Cockles_704,global_species
-163,Cockles_705,global_species
-8,Cockles_706,global_species
-179,Cockles_707,global_species
-180,Cockles_708,global_species
-152,Cockles_709,global_species
-182,Cockles_710,global_species
-155,Cockles_711,global_species
-153,Cockles_712,global_species
-147,Cockles_713,global_species
-17,Cockles_714,global_species
-11,Cockles_715,global_species
-163,Coho(=Silver) salmon_716,global_species
-224,Coho(=Silver) salmon_717,none
-210,Coho(=Silver) salmon_718,global_species
-218,Coho(=Silver) salmon_719,global_species
-179,Coho(=Silver) salmon_720,global_species
-175,Coho(=Silver) salmon_721,global_species
-61,Common cuttlefish_722,global_avg
-183,Common cuttlefish_723,global_avg
-182,Common cuttlefish_724,global_avg
-182,Common dentex_725,region_family_avg
-232,Common dentex_726,region_family_avg
-187,Common dentex_727,region_family_avg
-80,Common dentex_728,region_family_avg
-76,Common dentex_729,region_family_avg
-80,Common pandora_730,region_family_avg
-81,Common pandora_731,region_family_avg
-183,Common sole_732,global_species
-182,Common sole_733,global_species
-61,Common sole_734,global_species
-184,Common sole_735,global_species
-76,Common two-banded seabream_736,region_family_avg
-20,Convict grouper_737,family_avg
-183,Corrugated venus_738,taxon_group_avg
-182,Corrugated venus_739,taxon_group_avg
-135,Crevalle jack_740,georegion_family_avg
-210,Crimson seabream_741,family_avg
-14,Crimson seabream_742,family_avg
-208,Crimson snapper_743,taxon_group_avg
-14,"Croakers, drums nei_744",family_avg
-50,"Croakers, drums nei_745",region_family_avg
-183,"Croakers, drums nei_746",region_family_avg
-14,Diphos sanguin_747,taxon_group_avg
-20,Dotted gizzard shad_748,taxon_group_avg
-32,Drums nei_749,family_avg
-216,Duskytail grouper_750,family_avg
-16,Eastern king prawn_751,region_family_avg
-5,Emperor red snapper_752,taxon_group_avg
-61,European eel_753,global_species
-182,European eel_754,global_species
-184,European eel_755,global_species
-68,European eel_756,global_species
-80,European eel_757,global_species
-175,European flounder_758,georegion_family_avg
-80,European seabass_759,none
-183,European seabass_760,none
-81,European seabass_761,none
-84,European seabass_762,global_species
-179,European seabass_763,none
-182,European seabass_764,none
-184,European seabass_765,none
-76,European seabass_766,none
-62,European seabass_767,global_species
-68,European seabass_768,none
-187,European seabass_769,none
-188,European seabass_770,none
-79,European seabass_771,global_species
-143,European seabass_772,global_species
-67,European seabass_773,global_species
-232,European seabass_774,global_species
-48,European seabass_775,global_species
-54,European seabass_776,global_species
-115,European seabass_777,global_species
-180,European seabass_778,global_species
-82,European seabass_779,global_species
-186,European seabass_780,global_species
-61,European seabass_781,global_species
-37,European seabass_782,global_species
-191,European seabass_783,global_species
-50,European seabass_784,global_species
-174,European whitefish_785,region_family_avg
-210,Filefishes nei_786,taxon_group_avg
-20,"Filefishes, leatherjackets nei_787",taxon_group_avg
-223,Finfishes nei_788,taxon_group_avg
-16,Finfishes nei_789,taxon_group_avg
-179,Finfishes nei_790,taxon_group_avg
-69,Flatfishes nei_791,taxon_group_avg
-70,Flatfishes nei_792,taxon_group_avg
-73,Flatfishes nei_793,taxon_group_avg
-74,Flatfishes nei_794,taxon_group_avg
-75,Flatfishes nei_795,taxon_group_avg
-189,Flatfishes nei_796,taxon_group_avg
-210,Flathead grey mullet_797,taxon_group_avg
-14,Flathead grey mullet_798,taxon_group_avg
-135,Flathead grey mullet_799,taxon_group_avg
-80,Flathead grey mullet_800,taxon_group_avg
-50,Flathead grey mullet_801,taxon_group_avg
-184,Flathead grey mullet_802,taxon_group_avg
-208,Flathead grey mullet_803,taxon_group_avg
-216,Flathead grey mullet_804,taxon_group_avg
-15,Flathead lobster_805,global_avg
-216,Flathead lobster_806,global_avg
-110,Florida pompano_807,global_species
-129,Florida pompano_808,global_species
-115,Florida pompano_809,global_species
-208,Fourfinger threadfin_810,taxon_group_avg
-206,Fourfinger threadfin_811,taxon_group_avg
-216,Foursaddle grouper_812,family_avg
-182,Gastropods nei_813,taxon_group_avg
-135,Gastropods nei_814,taxon_group_avg
-210,Gazami crab_815,global_avg
-208,Giant grouper_816,family_avg
-206,Giant grouper_817,family_avg
-15,Giant tiger prawn_818,global_species
-208,Giant tiger prawn_819,global_species
-208,Giant trevally_820,region_family_avg
-183,Gilthead seabream_821,none
-79,Gilthead seabream_822,global_species
-80,Gilthead seabream_823,none
-84,Gilthead seabream_824,global_species
-179,Gilthead seabream_825,none
-182,Gilthead seabream_826,none
-76,Gilthead seabream_827,none
-81,Gilthead seabream_828,none
-62,Gilthead seabream_829,global_species
-184,Gilthead seabream_830,none
-68,Gilthead seabream_831,none
-187,Gilthead seabream_832,none
-188,Gilthead seabream_833,global_species
-67,Gilthead seabream_834,global_species
-48,Gilthead seabream_835,global_species
-51,Gilthead seabream_836,global_species
-82,Gilthead seabream_837,global_species
-232,Gilthead seabream_838,global_species
-54,Gilthead seabream_839,global_species
-115,Gilthead seabream_840,global_species
-52,Gilthead seabream_841,global_species
-186,Gilthead seabream_842,global_species
-50,Gilthead seabream_843,global_species
-61,Gilthead seabream_844,global_species
-183,Golden carpet shell_845,taxon_group_avg
-208,Golden trevally_846,region_family_avg
-206,Golden trevally_847,region_family_avg
-5,Golden-lined spinefoot_848,taxon_group_avg
-209,Goldlined seabream_849,family_avg
-50,Goldlined seabream_850,region_family_avg
-54,Goldlined seabream_851,region_family_avg
-37,Goldlined seabream_852,family_avg
-51,Goldsilk seabream_853,region_family_avg
-134,Grand ark_854,taxon_group_avg
-209,Greasy grouper_855,family_avg
-54,Greasy grouper_856,family_avg
-182,Greater amberjack_857,global_species
-14,Greater amberjack_858,global_species
-80,Greater amberjack_859,global_species
-182,Green crab_860,global_avg
-208,Green humphead parrotfish_861,taxon_group_avg
-216,Greenback mullet_862,taxon_group_avg
-179,Grooved carpet shell_863,taxon_group_avg
-183,Grooved carpet shell_864,taxon_group_avg
-182,Grooved carpet shell_865,taxon_group_avg
-180,Grooved carpet shell_866,taxon_group_avg
-84,Grooved carpet shell_867,taxon_group_avg
-227,Grooved carpet shell_868,taxon_group_avg
-228,Grooved carpet shell_869,taxon_group_avg
-184,Grooved carpet shell_870,taxon_group_avg
-62,Grooved carpet shell_871,taxon_group_avg
-182,Groundfishes nei_872,taxon_group_avg
-208,Groupers nei_873,family_avg
-14,Groupers nei_874,family_avg
-61,Groupers nei_875,family_avg
-50,Groupers nei_876,family_avg
-171,Groupers nei_877,family_avg
-216,Groupers nei_878,family_avg
-209,Groupers nei_879,family_avg
-205,Groupers nei_880,family_avg
-206,Groupers nei_881,family_avg
-247,Groupers nei_882,family_avg
-15,"Groupers, seabasses nei_883",family_avg
-216,"Groupers, seabasses nei_884",family_avg
-143,Haddock_885,taxon_group_avg
-20,Half-crenated ark_886,taxon_group_avg
-216,Harry hotlips_887,taxon_group_avg
-216,Highfin coralgrouper_888,family_avg
-216,Highfin grouper_889,family_avg
-209,Hong Kong grouper_890,family_avg
-20,Horned turban_891,taxon_group_avg
-208,Humpback grouper_892,family_avg
-206,Humpback grouper_893,family_avg
-216,Humpback grouper_894,family_avg
-216,Humphead snapper_895,taxon_group_avg
-208,Indo-Pacific swamp crab_896,global_avg
-15,Indo-Pacific swamp crab_897,global_avg
-205,Indo-Pacific swamp crab_898,global_avg
-41,Indo-Pacific swamp crab_899,global_avg
-247,Indo-Pacific swamp crab_900,global_avg
-20,Inflated ark_901,taxon_group_avg
-20,Jack and horse mackerels nei_902,georegion_family_avg
-247,"Jacks, crevalles nei_903",region_family_avg
-15,"Jacks, crevalles nei_904",region_family_avg
-135,"Jacks, crevalles nei_905",georegion_family_avg
-206,"Jacks, crevalles nei_906",region_family_avg
-210,Japanese amberjack_907,none
-20,Japanese carpet shell_908,taxon_group_avg
-209,Japanese carpet shell_909,taxon_group_avg
-14,Japanese carpet shell_910,taxon_group_avg
-163,Japanese carpet shell_911,taxon_group_avg
-218,Japanese carpet shell_912,taxon_group_avg
-180,Japanese carpet shell_913,taxon_group_avg
-181,Japanese carpet shell_914,taxon_group_avg
-182,Japanese carpet shell_915,taxon_group_avg
-179,Japanese carpet shell_916,taxon_group_avg
-184,Japanese carpet shell_917,taxon_group_avg
-183,Japanese carpet shell_918,taxon_group_avg
-210,Japanese jack mackerel_919,region_family_avg
-41,Japanese meagre_920,family_avg
-37,Japanese meagre_921,family_avg
-209,Japanese sea cucumber_922,global_avg
-21,Japanese sea cucumber_923,global_avg
-73,Japanese sea cucumber_924,global_avg
-20,Japanese sea cucumber_925,global_avg
-20,Japanese seabass_926,taxon_group_avg
-208,Japanese seabass_927,taxon_group_avg
-14,Japanese spiny lobster_928,global_avg
-208,John's snapper_929,taxon_group_avg
-206,John's snapper_930,taxon_group_avg
-20,Korean rockfish_931,taxon_group_avg
-14,Kuruma prawn_932,region_family_avg
-184,Kuruma prawn_933,region_family_avg
-208,Kuruma prawn_934,region_family_avg
-209,Large yellow croaker_935,family_avg
-206,Leopard coralgrouper_936,family_avg
-216,Leopard coralgrouper_937,family_avg
-216,Longfin trevally_938,region_family_avg
-163,Longfin yellowtail_939,none
-129,Longfin yellowtail_940,global_species
-216,Longlegged spiny lobster_941,global_avg
-216,Longnose trevally_942,region_family_avg
-216,Longspine grouper_943,family_avg
-182,Mackerels nei_944,region_family_avg
-208,Malabar grouper_945,family_avg
-14,Malabar trevally_946,region_family_avg
-216,Malabar trevally_947,region_family_avg
-206,Mangrove red snapper_948,taxon_group_avg
-209,Mangrove red snapper_949,taxon_group_avg
-32,Mangrove red snapper_950,taxon_group_avg
-208,Mangrove red snapper_951,taxon_group_avg
-29,Mangrove red snapper_952,taxon_group_avg
-216,Mangrove red snapper_953,taxon_group_avg
-81,Marbled spinefoot_954,taxon_group_avg
-14,Marine crabs nei_955,global_avg
-111,Marine crabs nei_956,global_avg
-210,Marine crustaceans nei_957,global_avg
-61,Marine crustaceans nei_958,global_avg
-223,Marine crustaceans nei_959,global_avg
-210,Marine fishes nei_960,taxon_group_avg
-209,Marine fishes nei_961,taxon_group_avg
-37,Marine fishes nei_962,taxon_group_avg
-206,Marine fishes nei_963,taxon_group_avg
-20,Marine fishes nei_964,taxon_group_avg
-51,Marine fishes nei_965,taxon_group_avg
-140,Marine fishes nei_966,taxon_group_avg
-208,Marine fishes nei_967,taxon_group_avg
-61,Marine fishes nei_968,taxon_group_avg
-15,Marine fishes nei_969,taxon_group_avg
-62,Marine fishes nei_970,taxon_group_avg
-247,Marine fishes nei_971,taxon_group_avg
-14,Marine fishes nei_972,taxon_group_avg
-80,Marine fishes nei_973,taxon_group_avg
-179,Marine fishes nei_974,taxon_group_avg
-188,Marine fishes nei_975,taxon_group_avg
-16,Marine fishes nei_976,taxon_group_avg
-171,Marine fishes nei_977,taxon_group_avg
-79,Marine fishes nei_978,taxon_group_avg
-147,Marine fishes nei_979,taxon_group_avg
-187,Marine fishes nei_980,taxon_group_avg
-73,Marine fishes nei_981,taxon_group_avg
-135,Marine fishes nei_982,taxon_group_avg
-183,Marine fishes nei_983,taxon_group_avg
-216,Marine fishes nei_984,taxon_group_avg
-182,Marine fishes nei_985,taxon_group_avg
-184,Marine fishes nei_986,taxon_group_avg
-76,Marine fishes nei_987,taxon_group_avg
-68,Marine fishes nei_988,taxon_group_avg
-24,Marine fishes nei_989,taxon_group_avg
-138,Marine fishes nei_990,taxon_group_avg
-207,Marine fishes nei_991,taxon_group_avg
-29,Marine fishes nei_992,taxon_group_avg
-175,Marine fishes nei_993,taxon_group_avg
-232,Marine fishes nei_994,taxon_group_avg
-163,Marine fishes nei_995,taxon_group_avg
-21,Marine fishes nei_996,taxon_group_avg
-74,Marine fishes nei_997,taxon_group_avg
-137,Marine fishes nei_998,taxon_group_avg
-191,Marine fishes nei_999,taxon_group_avg
-218,Marine fishes nei_1000,taxon_group_avg
-207,Marine molluscs nei_1001,taxon_group_avg
-209,Marine molluscs nei_1002,taxon_group_avg
-171,Marine molluscs nei_1003,taxon_group_avg
-20,Marine molluscs nei_1004,taxon_group_avg
-218,Marine molluscs nei_1005,taxon_group_avg
-181,Marine molluscs nei_1006,taxon_group_avg
-179,Marine molluscs nei_1007,taxon_group_avg
-182,Marine molluscs nei_1008,taxon_group_avg
-183,Marine molluscs nei_1009,taxon_group_avg
-187,Marine molluscs nei_1010,taxon_group_avg
-14,Marine molluscs nei_1011,taxon_group_avg
-216,Marine molluscs nei_1012,taxon_group_avg
-180,Marine molluscs nei_1013,taxon_group_avg
-80,Marine molluscs nei_1014,taxon_group_avg
-16,Marine molluscs nei_1015,taxon_group_avg
-224,Masu(=Cherry) salmon_1016,region_family_avg
-179,Meagre_1017,none
-184,Meagre_1018,none
-182,Meagre_1019,none
-183,Meagre_1020,global_species
-81,Meagre_1021,none
-187,Meagre_1022,none
-80,Meagre_1023,none
-76,Meagre_1024,none
-84,Meagre_1025,global_species
-61,Meagre_1026,global_species
-50,Meagre_1027,global_species
-115,Meagre_1028,global_species
-62,Meagre_1029,global_species
-216,Metapenaeus shrimps nei_1030,region_family_avg
-135,Mexican spiny lobster_1031,global_avg
-20,Mi-iuy (brown) croaker_1032,family_avg
-14,Mi-iuy (brown) croaker_1033,family_avg
-15,Milkfish_1034,taxon_group_avg
-14,Milkfish_1035,taxon_group_avg
-208,Milkfish_1036,taxon_group_avg
-19,Milkfish_1037,taxon_group_avg
-216,Milkfish_1038,taxon_group_avg
-247,Milkfish_1039,taxon_group_avg
-216,Minstrel sweetlips_1040,taxon_group_avg
-135,"Mojarras, etc. nei_1041",taxon_group_avg
-208,Mud spiny lobster_1042,global_avg
-205,Mud spiny lobster_1043,global_avg
-69,Mullets nei_1044,taxon_group_avg
-70,Mullets nei_1045,taxon_group_avg
-73,Mullets nei_1046,taxon_group_avg
-74,Mullets nei_1047,taxon_group_avg
-75,Mullets nei_1048,taxon_group_avg
-189,Mullets nei_1049,taxon_group_avg
-20,Mullets nei_1050,taxon_group_avg
-102,Mullets nei_1051,taxon_group_avg
-182,Mullets nei_1052,taxon_group_avg
-54,Mullets nei_1053,taxon_group_avg
-171,Mullets nei_1054,taxon_group_avg
-20,Mussels_1055,global_species
-25,Mussels_1056,global_species
-162,Mussels_1057,global_species
-163,Mussels_1058,global_species
-176,Mussels_1059,global_species
-177,Mussels_1060,global_species
-179,Mussels_1061,global_species
-181,Mussels_1062,global_species
-182,Mussels_1063,global_species
-209,Mussels_1064,global_species
-222,Mussels_1065,global_species
-224,Mussels_1066,global_species
-184,Mussels_1067,global_species
-102,Mussels_1068,global_species
-218,Mussels_1069,global_species
-15,Mussels_1070,global_species
-80,Mussels_1071,global_species
-82,Mussels_1072,global_species
-147,Mussels_1073,global_species
-208,Mussels_1074,global_species
-71,Mussels_1075,global_species
-84,Mussels_1076,global_species
-16,Mussels_1077,global_species
-18,Mussels_1078,global_species
-69,Mussels_1079,global_species
-70,Mussels_1080,global_species
-73,Mussels_1081,global_species
-74,Mussels_1082,global_species
-75,Mussels_1083,global_species
-139,Mussels_1084,global_species
-180,Mussels_1085,global_species
-189,Mussels_1086,global_species
-206,Mussels_1087,global_species
-223,Mussels_1088,global_species
-183,Mussels_1089,global_species
-101,Mussels_1090,global_species
-186,Mussels_1091,global_species
-187,Mussels_1092,global_species
-188,Mussels_1093,global_species
-76,Mussels_1094,global_species
-135,Mussels_1095,global_species
-171,Mussels_1096,global_species
-203,Mussels_1097,global_species
-62,Mussels_1098,global_species
-227,Mussels_1099,global_species
-228,Mussels_1100,global_species
-172,Mussels_1101,global_species
-232,Mussels_1102,global_species
-143,Mussels_1103,global_species
-175,Mussels_1104,global_species
-95,Mussels_1105,global_species
-24,Mussels_1106,global_species
-72,Mussels_1107,global_species
-219,Mussels_1108,global_species
-66,Mussels_1109,global_species
-216,Mussels_1110,global_species
-247,Mussels_1111,global_species
-61,Octopuses nei_1112,global_avg
-182,Octopuses nei_1113,global_avg
-210,"Octopuses, etc. nei_1114",global_avg
-20,Okhotsk atka mackerel_1115,taxon_group_avg
-216,Orange mud crab_1116,global_avg
-51,Orange-spotted grouper_1117,family_avg
-208,Orange-spotted grouper_1118,family_avg
-247,Orange-spotted grouper_1119,family_avg
-24,Orange-spotted grouper_1120,family_avg
-52,Orange-spotted grouper_1121,family_avg
-209,Orange-spotted grouper_1122,family_avg
-54,Orange-spotted grouper_1123,family_avg
-14,Oysters_1124,global_species
-16,Oysters_1125,global_species
-20,Oysters_1126,global_species
-25,Oysters_1127,global_species
-162,Oysters_1128,global_species
-163,Oysters_1129,global_species
-179,Oysters_1130,global_species
-181,Oysters_1131,global_species
-209,Oysters_1132,global_species
-210,Oysters_1133,global_species
-218,Oysters_1134,global_species
-224,Oysters_1135,global_species
-180,Oysters_1136,global_species
-182,Oysters_1137,global_species
-62,Oysters_1138,global_species
-112,Oysters_1139,global_species
-15,Oysters_1140,global_species
-166,Oysters_1141,global_species
-37,Oysters_1142,global_species
-84,Oysters_1143,global_species
-222,Oysters_1144,global_species
-102,Oysters_1145,global_species
-147,Oysters_1146,global_species
-176,Oysters_1147,global_species
-223,Oysters_1148,global_species
-227,Oysters_1149,global_species
-228,Oysters_1150,global_species
-18,Oysters_1151,global_species
-177,Oysters_1152,global_species
-5,Oysters_1153,global_species
-101,Oysters_1154,global_species
-135,Oysters_1155,global_species
-115,Oysters_1156,global_species
-206,Oysters_1157,global_species
-187,Oysters_1158,global_species
-80,Oysters_1159,global_species
-116,Oysters_1160,global_species
-171,Oysters_1161,global_species
-203,Oysters_1162,global_species
-132,Oysters_1163,global_species
-138,Oysters_1164,global_species
-172,Oysters_1165,global_species
-66,Oysters_1166,global_species
-183,Oysters_1167,global_species
-17,Oysters_1168,global_species
-184,Oysters_1169,global_species
-232,Oysters_1170,global_species
-79,Oysters_1171,global_species
-95,Oysters_1172,global_species
-208,Oysters_1173,global_species
-130,Oysters_1174,global_species
-153,Oysters_1175,global_species
-65,Oysters_1176,global_species
-134,Oysters_1177,global_species
-73,Oysters_1178,global_species
-137,Oysters_1179,global_species
-186,Oysters_1180,global_species
-72,Oysters_1181,global_species
-31,Oysters_1182,global_species
-54,Oysters_1183,global_species
-71,Oysters_1184,global_species
-153,Pacific asaphis_1185,taxon_group_avg
-135,Pacific bluefin tuna_1186,none
-210,Pacific bluefin tuna_1187,none
-20,Pacific chub mackerel_1188,georegion_family_avg
-163,Pacific geoduck_1189,none
-182,Palinurid spiny lobsters nei_1190,global_avg
-208,Papuan black snapper_1191,taxon_group_avg
-32,Pargo breams nei_1192,family_avg
-187,Pargo breams nei_1193,region_family_avg
-209,Pen shells nei_1194,taxon_group_avg
-208,Penaeus shrimps nei_1195,region_family_avg
-183,Peppery furrow_1196,taxon_group_avg
-179,Periwinkles nei_1197,taxon_group_avg
-76,Pink dentex_1198,region_family_avg
-73,Pink(=Humpback) salmon_1199,region_family_avg
-182,Pollack_1200,family_avg
-209,Pompano_1201,region_family_avg
-14,"Porgies, seabreams nei_1202",family_avg
-20,"Porgies, seabreams nei_1203",family_avg
-48,"Porgies, seabreams nei_1204",region_family_avg
-184,"Porgies, seabreams nei_1205",region_family_avg
-209,"Porgies, seabreams nei_1206",family_avg
-76,"Porgies, seabreams nei_1207",region_family_avg
-208,Potato grouper_1208,family_avg
-20,Pufferfishes nei_1209,taxon_group_avg
-183,Purple dye murex_1210,taxon_group_avg
-111,Queen conch_1211,taxon_group_avg
-218,Rainbow trout_1212,none
-223,Rainbow trout_1213,global_species
-141,Rainbow trout_1214,global_species
-179,Rainbow trout_1215,global_species
-181,Rainbow trout_1216,global_species
-174,Rainbow trout_1217,global_species
-175,Rainbow trout_1218,global_species
-180,Rainbow trout_1219,global_species
-163,Rainbow trout_1220,none
-222,Rainbow trout_1221,global_species
-16,Rainbow trout_1222,global_species
-224,Rainbow trout_1223,none
-70,Rainbow trout_1224,global_species
-73,Rainbow trout_1225,global_species
-76,Rainbow trout_1226,global_species
-182,Rainbow trout_1227,global_species
-143,Rainbow trout_1228,global_species
-172,Rainbow trout_1229,global_species
-187,Rainbow trout_1230,global_species
-74,Rainbow trout_1231,global_species
-20,Rainbow trout_1232,global_species
-102,Rainbow trout_1233,global_species
-102,Red bait_1234,global_avg
-140,Red drum_1235,family_avg
-110,Red drum_1236,georegion_family_avg
-79,Red drum_1237,georegion_family_avg
-137,Red drum_1238,family_avg
-32,Red drum_1239,family_avg
-29,Red drum_1240,family_avg
-209,Red drum_1241,family_avg
-37,Red drum_1242,family_avg
-135,Red drum_1243,family_avg
-73,Red king crab_1244,global_avg
-210,Red oyas_1245,global_avg
-20,Red oyas_1246,global_avg
-80,Red porgy_1247,region_family_avg
-81,Red porgy_1248,region_family_avg
-76,Red porgy_1249,region_family_avg
-210,Red seabream_1250,family_avg
-20,Red seabream_1251,family_avg
-81,Red seabream_1252,region_family_avg
-14,Red seabream_1253,family_avg
-76,Redbanded seabream_1254,region_family_avg
-203,Rooster venus_1255,taxon_group_avg
-153,Rough turban_1256,taxon_group_avg
-209,Russell's snapper_1257,taxon_group_avg
-218,Salmonids nei_1258,region_family_avg
-69,Salmonoids nei_1259,region_family_avg
-70,Salmonoids nei_1260,region_family_avg
-73,Salmonoids nei_1261,region_family_avg
-74,Salmonoids nei_1262,region_family_avg
-75,Salmonoids nei_1263,region_family_avg
-189,Salmonoids nei_1264,region_family_avg
-174,Salmonoids nei_1265,region_family_avg
-163,Sand gaper_1266,taxon_group_avg
-183,Sargo breams nei_1267,region_family_avg
-61,Sargo breams nei_1268,region_family_avg
-216,Scalloped spiny lobster_1269,global_avg
-210,Scallops_1270,global_species
-138,Scallops_1271,global_species
-209,Scallops_1272,global_species
-224,Scallops_1273,global_species
-69,Scallops_1274,global_species
-70,Scallops_1275,global_species
-73,Scallops_1276,global_species
-74,Scallops_1277,global_species
-75,Scallops_1278,global_species
-189,Scallops_1279,global_species
-182,Scallops_1280,global_species
-180,Scallops_1281,global_species
-135,Scallops_1282,global_species
-137,Scallops_1283,global_species
-218,Scallops_1284,global_species
-16,Scallops_1285,global_species
-20,Scallops_1286,global_species
-179,Scallops_1287,global_species
-227,Scallops_1288,global_species
-228,Scallops_1289,global_species
-181,Scallops_1290,global_species
-62,Scallops_1291,global_species
-171,Scallops_1292,global_species
-223,Scallops_1293,global_species
-21,Scallops_1294,global_species
-187,Scallops_1295,global_species
-219,Scallops_1296,global_species
-80,Sciaenas nei_1297,region_family_avg
-76,Sciaenas nei_1298,region_family_avg
-20,"Scorpionfishes, redfishes nei_1299",taxon_group_avg
-216,Sea cucumbers nei_1300,global_avg
-42,Sea cucumbers nei_1301,global_avg
-209,Sea snails_1302,taxon_group_avg
-69,Sea trout_1303,family_avg
-70,Sea trout_1304,family_avg
-73,Sea trout_1305,family_avg
-74,Sea trout_1306,georegion_family_avg
-75,Sea trout_1307,family_avg
-189,Sea trout_1308,family_avg
-179,Sea trout_1309,region_family_avg
-180,Sea trout_1310,family_avg
-174,Sea trout_1311,family_avg
-73,Sea urchins nei_1312,global_avg
-209,Sea urchins nei_1313,global_avg
-182,Seabasses nei_1314,family_avg
-15,Seaweed_1315,global_species
-20,Seaweed_1316,global_species
-21,Seaweed_1317,global_species
-207,Seaweed_1318,global_species
-209,Seaweed_1319,global_species
-210,Seaweed_1320,global_species
-216,Seaweed_1321,global_species
-69,Seaweed_1322,global_species
-70,Seaweed_1323,global_species
-73,Seaweed_1324,global_species
-74,Seaweed_1325,global_species
-75,Seaweed_1326,global_species
-189,Seaweed_1327,global_species
-224,Seaweed_1328,global_species
-14,Seaweed_1329,global_species
-9,Seaweed_1330,global_species
-18,Seaweed_1331,global_species
-122,Seaweed_1332,global_species
-179,Seaweed_1333,global_species
-212,Seaweed_1334,global_species
-202,Seaweed_1335,global_species
-139,Seaweed_1336,global_species
-42,Seaweed_1337,global_species
-101,Seaweed_1338,global_species
-120,Seaweed_1339,global_species
-102,Seaweed_1340,global_species
-138,Seaweed_1341,global_species
-206,Seaweed_1342,global_species
-24,Seaweed_1343,global_species
-203,Seaweed_1344,global_species
-7,Seaweed_1345,global_species
-41,Seaweed_1346,global_species
-182,Seaweed_1347,global_species
-181,Seaweed_1348,global_species
-231,Seaweed_1349,global_species
-155,Seaweed_1350,global_species
-171,Seaweed_1351,global_species
-175,Seaweed_1352,global_species
-205,Seaweed_1353,global_species
-17,Seaweed_1354,global_species
-43,Seaweed_1355,global_species
-164,Seaweed_1356,global_species
-127,Seaweed_1357,global_species
-177,Seaweed_1358,global_species
-119,Seaweed_1359,global_species
-137,Seaweed_1360,global_species
-125,Seaweed_1361,global_species
-135,Seaweed_1362,global_species
-141,Seaweed_1363,global_species
-153,Seaweed_1364,global_species
-163,Seaweed_1365,global_species
-223,Seaweed_1366,global_species
-62,Seaweed_1367,global_species
-152,Seaweed_1368,global_species
-204,Seaweed_1369,global_species
-66,Seaweed_1370,global_species
-61,Seaweed_1371,global_species
-123,Seaweed_1372,global_species
-145,Seaweed_1373,global_species
-182,Senegalese sole_1374,region_family_avg
-81,Sharpsnout seabream_1375,region_family_avg
-184,Sharpsnout seabream_1376,region_family_avg
-187,Sharpsnout seabream_1377,region_family_avg
-188,Sharpsnout seabream_1378,region_family_avg
-80,Sharpsnout seabream_1379,region_family_avg
-76,Sharpsnout seabream_1380,region_family_avg
-81,Shi drum_1381,region_family_avg
-184,Shi drum_1382,region_family_avg
-80,Shi drum_1383,region_family_avg
-76,Shi drum_1384,region_family_avg
-37,Shoemaker spinefoot_1385,taxon_group_avg
-208,Silver grunt_1386,taxon_group_avg
-147,Sixfinger threadfin_1387,taxon_group_avg
-11,Sixfinger threadfin_1388,taxon_group_avg
-205,Smalleyed squillid mantis shri_1389,global_avg
-205,Smalleyed squillid mantis shrimp_1390,global_avg
-102,Smooth mactra_1391,taxon_group_avg
-208,Snappers nei_1392,taxon_group_avg
-196,Snappers nei_1393,taxon_group_avg
-247,Snappers nei_1394,taxon_group_avg
-15,Snappers nei_1395,taxon_group_avg
-135,Snappers nei_1396,taxon_group_avg
-24,Snappers nei_1397,taxon_group_avg
-209,Snappers nei_1398,taxon_group_avg
-216,Snappers nei_1399,taxon_group_avg
-14,"Snappers, jobfishes nei_1400",taxon_group_avg
-171,Snooks(=Robalos) nei_1401,taxon_group_avg
-209,Snubnose pompano_1402,global_species
-208,Snubnose pompano_1403,global_species
-15,Snubnose pompano_1404,global_species
-206,Snubnose pompano_1405,global_species
-247,Snubnose pompano_1406,global_species
-216,Snubnose pompano_1407,global_species
-52,Sobaity seabream_1408,region_family_avg
-51,Sobaity seabream_1409,region_family_avg
-54,Sobaity seabream_1410,region_family_avg
-50,Sobaity seabream_1411,region_family_avg
-69,Sockeye(=Red) salmon_1412,global_species
-70,Sockeye(=Red) salmon_1413,global_species
-73,Sockeye(=Red) salmon_1414,global_species
-74,Sockeye(=Red) salmon_1415,global_species
-75,Sockeye(=Red) salmon_1416,global_species
-189,Sockeye(=Red) salmon_1417,global_species
-182,Soles nei_1418,taxon_group_avg
-177,Soles nei_1419,taxon_group_avg
-16,Southern bluefin tuna_1420,none
-208,Southern red snapper_1421,taxon_group_avg
-216,Speckled blue grouper_1422,family_avg
-50,Spinefeet(=Rabbitfishes) nei_1423,taxon_group_avg
-208,Spinefeet(=Rabbitfishes) nei_1424,taxon_group_avg
-15,Spinefeet(=Rabbitfishes) nei_1425,taxon_group_avg
-37,Spinefeet(=Rabbitfishes) nei_1426,taxon_group_avg
-182,Spinous spider crab_1427,global_avg
-210,Spiny lobsters nei_1428,global_avg
-208,Spotted coralgrouper_1429,family_avg
-130,Spotted rose snapper_1430,taxon_group_avg
-131,Spotted rose snapper_1431,taxon_group_avg
-247,Spotted scat_1432,taxon_group_avg
-182,Spotted seabass_1433,family_avg
-143,Spotted wolffish_1434,taxon_group_avg
-216,Squaretail coralgrouper_1435,family_avg
-205,Squillids nei_1436,taxon_group_avg
-181,Stony sea urchin_1437,global_avg
-208,Streaked spinefoot_1438,taxon_group_avg
-135,Striped bass_1439,none
-79,"Striped bass, hybrid_1440",global_species
-182,"Striped bass, hybrid_1441",global_species
-182,Striped venus_1442,taxon_group_avg
-244,Stromboid conchs nei_1443,taxon_group_avg
-245,Stromboid conchs nei_1444,taxon_group_avg
-250,Stromboid conchs nei_1445,taxon_group_avg
-132,Tarpon_1446,taxon_group_avg
-210,Tiger pufferfish_1447,taxon_group_avg
-209,Tiger pufferfish_1448,taxon_group_avg
-206,"Tiger-dragon grouper, hybrid_1449",family_avg
-15,Tropical spiny lobsters nei_1450,global_avg
-112,Tropical spiny lobsters nei_1451,global_avg
-207,Tropical spiny lobsters nei_1452,global_avg
-216,Tropical spiny lobsters nei_1453,global_avg
-247,Tropical spiny lobsters nei_1454,global_avg
-205,Tropical spiny lobsters nei_1455,global_avg
-76,Trouts nei_1456,region_family_avg
-218,Trouts nei_1457,georegion_family_avg
-14,Trumpet emperor_1458,taxon_group_avg
-76,Truncate donax_1459,taxon_group_avg
-179,Turbot_1460,global_species
-176,Turbot_1461,global_species
-181,Turbot_1462,global_species
-68,Turbot_1463,global_species
-183,Turbot_1464,global_species
-102,Turbot_1465,global_species
-180,Turbot_1466,global_species
-143,Turbot_1467,global_species
-175,Turbot_1468,global_species
-72,Turbot_1469,global_species
-187,Turbot_1470,global_species
-191,Twobar seabream_1471,family_avg
-182,Warty venus_1472,taxon_group_avg
-188,Warty venus_1473,taxon_group_avg
-80,White seabream_1474,region_family_avg
-179,White seabream_1475,region_family_avg
-182,White seabream_1476,region_family_avg
-183,White seabream_1477,region_family_avg
-184,White seabream_1478,region_family_avg
-210,White trevally_1479,region_family_avg
-216,White-edged lyretail_1480,family_avg
-54,White-spotted spinefoot_1481,taxon_group_avg
-52,White-spotted spinefoot_1482,taxon_group_avg
-208,White-spotted spinefoot_1483,taxon_group_avg
-5,White-spotted spinefoot_1484,taxon_group_avg
-216,White-spotted spinefoot_1485,taxon_group_avg
-182,Whiteleg shrimp_1486,global_species
-208,Whiteleg shrimp_1487,global_species
-176,Whiteleg shrimp_1488,global_species
-71,Whiteleg shrimp_1489,global_species
-76,Whiteleg shrimp_1490,global_species
-216,Whiteleg shrimp_1491,none
-14,Yellowback seabream_1492,family_avg
-190,Yellowfin seabream_1493,region_family_avg
-48,Yellowfin seabream_1494,region_family_avg
-208,Yellowfin seabream_1495,family_avg
-135,Yellowfin tuna_1496,region_family_avg
-48,Yellowfin tuna_1497,georegion_family_avg
-216,Yellowspotted trevally_1498,region_family_avg
-54,Yellowtail amberjack_1499,global_species
-20,[Oplegnathus fasciatus]_1500,taxon_group_avg
-206,[Pomadasys spp]_1501,taxon_group_avg
+216,Akiami paste shrimp_6,taxon_group_avg
+14,Amberjacks nei_7,region_family_avg
+207,Aquatic invertebrates nei_8,global_avg
+143,Arctic char_9,none
+183,Atlantic ditch shrimp_10,taxon_group_avg
+182,Atlantic ditch shrimp_11,taxon_group_avg
+183,Atlantic salmon_12,global_species
+143,Atlantic salmon_13,global_species
+175,Atlantic salmon_14,global_species
+75,Baltic prawn_15,taxon_group_avg
+216,Banana prawn_16,region_family_avg
+207,Banana prawn_17,region_family_avg
+13,Banana prawn_18,region_family_avg
+208,Banana prawn_19,region_family_avg
+15,Banana prawn_20,region_family_avg
+25,Banana prawn_21,region_family_avg
+206,Banana prawn_22,region_family_avg
+216,Banded grouper_23,taxon_group_avg
+216,Barramundi(=Giant seaperch)_24,global_species
+25,Barramundi(=Giant seaperch)_25,global_species
+206,Barramundi(=Giant seaperch)_26,global_species
+16,Barramundi(=Giant seaperch)_27,global_species
+14,Barramundi(=Giant seaperch)_28,global_species
+15,Barramundi(=Giant seaperch)_29,global_species
+208,Barramundi(=Giant seaperch)_30,global_species
+79,Barramundi(=Giant seaperch)_31,global_species
+147,Barramundi(=Giant seaperch)_32,global_species
+40,Barramundi(=Giant seaperch)_33,global_species
+203,Barramundi(=Giant seaperch)_34,global_species
+53,Barramundi(=Giant seaperch)_35,global_species
+54,Barramundi(=Giant seaperch)_36,global_species
+216,Barred-chest grouper_37,taxon_group_avg
+20,Bastard halibut_38,taxon_group_avg
+216,Bigeye trevally_39,region_family_avg
+216,Black pomfret_40,region_family_avg
+14,Blackhead seabream_41,family_avg
+216,Blacktail snapper_42,taxon_group_avg
+163,Blue crab_43,global_avg
+137,Blue shrimp_44,region_family_avg
+129,Blue shrimp_45,region_family_avg
+147,Blue shrimp_46,georegion_family_avg
+5,Blue shrimp_47,georegion_family_avg
+134,Blue shrimp_48,region_family_avg
+131,Blue shrimp_49,region_family_avg
+139,Blue shrimp_50,region_family_avg
+247,Blue shrimp_51,region_family_avg
+6,Blue shrimp_52,region_family_avg
+216,Blue shrimp_53,region_family_avg
+18,Blue shrimp_54,region_family_avg
+135,Blue shrimp_55,region_family_avg
+14,Blue swimming crab_56,global_avg
+208,Blue swimming crab_57,global_avg
+16,Brine shrimp_58,taxon_group_avg
+191,Brine shrimps nei_59,taxon_group_avg
+16,Brown tiger prawn_60,region_family_avg
+208,Brown-marbled grouper_61,taxon_group_avg
+216,Brown-marbled grouper_62,taxon_group_avg
+84,Caramote prawn_63,georegion_family_avg
+182,Caramote prawn_64,region_family_avg
+14,Clams_65,global_species
+62,Clams_66,global_species
+216,Coarse shrimp_67,region_family_avg
+14,Cobia_68,global_species
+182,Cockles_69,global_species
+182,Common prawn_70,taxon_group_avg
+184,Common prawn_71,taxon_group_avg
+115,Common snook_72,taxon_group_avg
+84,Common sole_73,global_species
+183,Common sole_74,global_species
+80,Common sole_75,global_species
+184,Common two-banded seabream_76,region_family_avg
+182,Corrugated venus_77,taxon_group_avg
+224,Corvina drum_78,family_avg
+208,Crimson snapper_79,taxon_group_avg
+216,Deepwater longtail red snapper_80,taxon_group_avg
+14,Diphos sanguin_81,taxon_group_avg
+16,Eastern king prawn_82,region_family_avg
+16,Eastern school shrimp_83,region_family_avg
+184,European eel_84,global_species
+84,European eel_85,global_species
+179,European eel_86,global_species
+62,European eel_87,global_species
+183,European eel_88,global_species
+186,European eel_89,global_species
+80,European eel_90,global_species
+175,European eel_91,global_species
+182,European eel_92,global_species
+75,European flounder_93,family_avg
+184,European seabass_94,none
+61,European seabass_95,global_species
+179,European seabass_96,none
+80,European seabass_97,none
+214,European seabass_98,none
+183,European seabass_99,none
+176,European seabass_100,global_species
+79,European seabass_101,global_species
+182,European seabass_102,none
+78,European seabass_103,global_species
+175,European whitefish_104,region_family_avg
+138,Fine flounder_105,taxon_group_avg
+14,Flathead grey mullet_106,taxon_group_avg
+184,Flathead grey mullet_107,taxon_group_avg
+18,Flathead grey mullet_108,taxon_group_avg
+61,Flathead grey mullet_109,taxon_group_avg
+80,Flathead grey mullet_110,taxon_group_avg
+167,Flathead grey mullet_111,taxon_group_avg
+20,Fleshy prawn_112,region_family_avg
+209,Fleshy prawn_113,region_family_avg
+25,Fourfinger threadfin_114,taxon_group_avg
+14,Fourfinger threadfin_115,taxon_group_avg
+216,Foursaddle grouper_116,taxon_group_avg
+208,Giant grouper_117,taxon_group_avg
+14,Giant tiger prawn_118,global_species
+207,Giant tiger prawn_119,none
+216,Giant tiger prawn_120,none
+15,Giant tiger prawn_121,global_species
+203,Giant tiger prawn_122,none
+206,Giant tiger prawn_123,none
+25,Giant tiger prawn_124,global_species
+40,Giant tiger prawn_125,global_species
+18,Giant tiger prawn_126,global_species
+16,Giant tiger prawn_127,global_species
+50,Giant tiger prawn_128,global_species
+7,Giant tiger prawn_129,global_species
+31,Giant tiger prawn_130,global_species
+37,Giant tiger prawn_131,global_species
+42,Giant tiger prawn_132,global_species
+153,Giant tiger prawn_133,global_species
+184,Giant tiger prawn_134,global_species
+205,Giant tiger prawn_135,none
+102,Giant tiger prawn_136,global_species
+247,Giant tiger prawn_137,global_species
+208,Giant tiger prawn_138,global_species
+194,Giant tiger prawn_139,global_species
+41,Giant tiger prawn_140,global_species
+209,Giant tiger prawn_141,global_species
+54,Giant tiger prawn_142,global_species
+202,Giant tiger prawn_143,global_species
+17,Giant tiger prawn_144,global_species
+204,Giant tiger prawn_145,none
+106,Giant tiger prawn_146,global_species
+182,Giant tiger prawn_147,global_species
+80,Giant tiger prawn_148,global_species
+184,Gilthead seabream_149,none
+61,Gilthead seabream_150,global_species
+80,Gilthead seabream_151,none
+214,Gilthead seabream_152,none
+183,Gilthead seabream_153,none
+79,Gilthead seabream_154,global_species
+182,Gilthead seabream_155,none
+78,Gilthead seabream_156,global_species
+75,Gobies nei_157,taxon_group_avg
+8,Golden-lined spinefoot_158,taxon_group_avg
+206,Greasy grouper_159,taxon_group_avg
+14,Greasyback shrimp_160,region_family_avg
+209,Green mud crab_161,global_avg
+54,Green tiger prawn_162,region_family_avg
+184,Green tiger prawn_163,region_family_avg
+48,Green tiger prawn_164,region_family_avg
+182,Grooved carpet shell_165,taxon_group_avg
+184,Grooved carpet shell_166,taxon_group_avg
+25,Groupers nei_167,taxon_group_avg
+14,Groupers nei_168,taxon_group_avg
+216,Groupers nei_169,taxon_group_avg
+208,Groupers nei_170,taxon_group_avg
+15,"Groupers, seabasses nei_171",taxon_group_avg
+216,"Groupers, seabasses nei_172",taxon_group_avg
+115,"Gudgeons, sleepers nei_173",taxon_group_avg
+208,Humpback grouper_174,taxon_group_avg
+216,Humpback grouper_175,taxon_group_avg
+207,Indian white prawn_176,region_family_avg
+203,Indian white prawn_177,region_family_avg
+191,Indian white prawn_178,region_family_avg
+81,Indian white prawn_179,georegion_family_avg
+102,Indian white prawn_180,region_family_avg
+50,Indian white prawn_181,region_family_avg
+54,Indian white prawn_182,region_family_avg
+48,Indian white prawn_183,region_family_avg
+41,Indian white prawn_184,region_family_avg
+47,Indian white prawn_185,georegion_family_avg
+204,Indian white prawn_186,region_family_avg
+14,Indo-Pacific swamp crab_187,global_avg
+216,Indo-Pacific swamp crab_188,global_avg
+15,Indo-Pacific swamp crab_189,global_avg
+25,Indo-Pacific swamp crab_190,global_avg
+206,Indo-Pacific swamp crab_191,global_avg
+37,Indo-Pacific swamp crab_192,global_avg
+16,Indo-Pacific swamp crab_193,global_avg
+40,Indo-Pacific swamp crab_194,global_avg
+247,Indo-Pacific swamp crab_195,global_avg
+202,Indo-Pacific swamp crab_196,global_avg
+42,Indo-Pacific swamp crab_197,global_avg
+24,Indo-Pacific swamp crab_198,global_avg
+17,Indo-Pacific swamp crab_199,global_avg
+207,Indo-Pacific swamp crab_200,global_avg
+18,Indo-Pacific swamp crab_201,global_avg
+43,Indo-Pacific swamp crab_202,global_avg
+208,Indo-Pacific swamp crab_203,global_avg
+231,Indo-Pacific swamp crab_204,global_avg
+184,Japanese carpet shell_205,taxon_group_avg
+14,Japanese carpet shell_206,taxon_group_avg
+182,Japanese carpet shell_207,taxon_group_avg
+14,Japanese eel_208,none
+102,Japanese meagre_209,family_avg
+209,Japanese seabass_210,taxon_group_avg
+14,Japanese seabass_211,taxon_group_avg
+14,Japanese spiny lobster_212,global_avg
+208,John's snapper_213,taxon_group_avg
+210,Kuruma prawn_214,georegion_family_avg
+14,Kuruma prawn_215,region_family_avg
+20,Kuruma prawn_216,region_family_avg
+179,Kuruma prawn_217,georegion_family_avg
+182,Kuruma prawn_218,region_family_avg
+16,Kuruma prawn_219,region_family_avg
+183,Kuruma prawn_220,georegion_family_avg
+184,Kuruma prawn_221,region_family_avg
+80,Kuruma prawn_222,region_family_avg
+102,Kuruma prawn_223,region_family_avg
+82,Kuruma prawn_224,georegion_family_avg
+209,Kuruma prawn_225,region_family_avg
+167,Lebranche mullet_226,taxon_group_avg
+209,Lefteye flounders nei_227,taxon_group_avg
+216,Longfin trevally_228,region_family_avg
+216,Longspine grouper_229,taxon_group_avg
+208,Malabar grouper_230,taxon_group_avg
+208,Mangrove red snapper_231,taxon_group_avg
+216,Mangrove red snapper_232,taxon_group_avg
+14,Marine crabs nei_233,global_avg
+209,Marine crabs nei_234,global_avg
+20,Marine crustaceans nei_235,global_avg
+14,Marine fishes nei_236,taxon_group_avg
+204,Marine fishes nei_237,taxon_group_avg
+32,Marine fishes nei_238,taxon_group_avg
+134,Marine fishes nei_239,taxon_group_avg
+214,Marine fishes nei_240,taxon_group_avg
+203,Marine fishes nei_241,taxon_group_avg
+25,Marine fishes nei_242,taxon_group_avg
+15,Marine fishes nei_243,taxon_group_avg
+79,Marine fishes nei_244,taxon_group_avg
+80,Marine fishes nei_245,taxon_group_avg
+207,Marine fishes nei_246,taxon_group_avg
+180,Marine fishes nei_247,taxon_group_avg
+45,Marine fishes nei_248,taxon_group_avg
+14,Marine molluscs nei_249,taxon_group_avg
+24,Marine molluscs nei_250,taxon_group_avg
+216,Masked grouper_251,taxon_group_avg
+184,Meagre_252,none
+182,Meagre_253,none
+214,Meagre_254,none
+80,Mediterranean shore crab_255,global_avg
+216,Metapenaeus shrimps nei_256,region_family_avg
+15,Metapenaeus shrimps nei_257,region_family_avg
+25,Metapenaeus shrimps nei_258,region_family_avg
+207,Metapenaeus shrimps nei_259,region_family_avg
+14,Milkfish_260,taxon_group_avg
+15,Milkfish_261,taxon_group_avg
+216,Milkfish_262,taxon_group_avg
+9,Milkfish_263,taxon_group_avg
+212,Milkfish_264,taxon_group_avg
+153,Milkfish_265,taxon_group_avg
+155,Milkfish_266,taxon_group_avg
+10,Milkfish_267,taxon_group_avg
+13,Milkfish_268,taxon_group_avg
+202,Milkfish_269,taxon_group_avg
+231,Milkfish_270,taxon_group_avg
+8,Milkfish_271,taxon_group_avg
+40,Milkfish_272,taxon_group_avg
+17,Milkfish_273,taxon_group_avg
+43,Milkfish_274,taxon_group_avg
+206,Milkfish_275,taxon_group_avg
+7,Milkfish_276,taxon_group_avg
+8,Mottled spinefoot_277,taxon_group_avg
+208,Mud spiny lobster_278,global_avg
+216,Mullets nei_279,taxon_group_avg
+196,Mullets nei_280,taxon_group_avg
+183,Mullets nei_281,taxon_group_avg
+84,Mullets nei_282,taxon_group_avg
+214,Mullets nei_283,taxon_group_avg
+13,Mullets nei_284,taxon_group_avg
+75,Mullets nei_285,taxon_group_avg
+115,Mullets nei_286,taxon_group_avg
+182,Mullets nei_287,taxon_group_avg
+65,Mullets nei_288,taxon_group_avg
+184,Mullets nei_289,taxon_group_avg
+184,Mussels_290,global_species
+61,Mussels_291,global_species
+136,Mussels_292,global_species
+14,Natantian decapods nei_293,global_avg
+130,Natantian decapods nei_294,global_avg
+76,Natantian decapods nei_295,global_avg
+135,Northern brown shrimp_296,region_family_avg
+216,Northern velvet shrimp_297,region_family_avg
+163,Northern white shrimp_298,region_family_avg
+135,Northern white shrimp_299,region_family_avg
+205,Orange mud crab_300,global_avg
+203,Orange mud crab_301,global_avg
+204,Orange mud crab_302,global_avg
+216,Orange mud crab_303,global_avg
+54,Orange-spotted grouper_304,taxon_group_avg
+208,Orange-spotted grouper_305,taxon_group_avg
+66,Oysters_306,global_species
+184,Oysters_307,global_species
+61,Oysters_308,global_species
+16,Oysters_309,global_species
+183,Oysters_310,global_species
+17,Oysters_311,global_species
+135,Oysters_312,global_species
+182,Oysters_313,global_species
+40,Oysters_314,global_species
+182,Palaemonid shrimps nei_315,taxon_group_avg
+25,Penaeus shrimps nei_316,region_family_avg
+204,Penaeus shrimps nei_317,region_family_avg
+209,Penaeus shrimps nei_318,region_family_avg
+43,Penaeus shrimps nei_319,georegion_family_avg
+115,Penaeus shrimps nei_320,region_family_avg
+136,Penaeus shrimps nei_321,region_family_avg
+167,Penaeus shrimps nei_322,region_family_avg
+53,Penaeus shrimps nei_323,georegion_family_avg
+62,Penaeus shrimps nei_324,georegion_family_avg
+173,Penaeus shrimps nei_325,georegion_family_avg
+24,Penaeus shrimps nei_326,georegion_family_avg
+116,Penaeus shrimps nei_327,georegion_family_avg
+15,Penaeus shrimps nei_328,region_family_avg
+45,Penaeus shrimps nei_329,georegion_family_avg
+214,Penaeus shrimps nei_330,region_family_avg
+16,Penaeus shrimps nei_331,region_family_avg
+231,Penaeus shrimps nei_332,region_family_avg
+208,Penaeus shrimps nei_333,region_family_avg
+8,Penaeus shrimps nei_334,family_avg
+84,Penaeus shrimps nei_335,georegion_family_avg
+196,Penaeus shrimps nei_336,georegion_family_avg
+205,Penaeus shrimps nei_337,region_family_avg
+182,Pod razor shell_338,taxon_group_avg
+14,"Porgies, seabreams nei_339",family_avg
+184,"Porgies, seabreams nei_340",region_family_avg
+216,Portunus swimcrabs nei_341,global_avg
+209,Portunus swimcrabs nei_342,global_avg
+25,Portunus swimcrabs nei_343,global_avg
+176,Rainbow trout_344,global_species
+143,Rainbow trout_345,global_species
+180,Rainbow trout_346,global_species
+175,Rainbow trout_347,global_species
+191,Rainbow trout_348,global_species
+79,Red drum_349,georegion_family_avg
+163,Red drum_350,none
+184,Red drum_351,region_family_avg
+14,Red seabream_352,family_avg
+14,Redtail prawn_353,region_family_avg
+209,Righteye flounders nei_354,family_avg
+20,Righteye flounders nei_355,family_avg
+15,Scats_356,taxon_group_avg
+175,Sea trout_357,family_avg
+183,Seabasses nei_358,taxon_group_avg
+14,Seaweed_359,global_species
+184,Seaweed_360,global_species
+155,Seaweed_361,global_species
+216,Seaweed_362,global_species
+102,Seaweed_363,global_species
+163,Seaweed_364,global_species
+40,Seaweed_365,global_species
+183,Seaweed_366,global_species
+182,Seaweed_367,global_species
+207,Seaweed_368,global_species
+182,Senegalese sole_369,region_family_avg
+143,Senegalese sole_370,family_avg
+183,Senegalese sole_371,region_family_avg
+80,Sharpsnout seabream_372,region_family_avg
+206,Snappers nei_373,taxon_group_avg
+208,Snappers nei_374,taxon_group_avg
+216,Snappers nei_375,taxon_group_avg
+14,"Snappers, jobfishes nei_376",taxon_group_avg
+208,Snubnose pompano_377,global_species
+75,So-iny (redlip) mullet_378,taxon_group_avg
+182,Soles nei_379,taxon_group_avg
+167,Southern brown shrimp_380,region_family_avg
+194,Southern pink shrimp_381,region_family_avg
+112,Southern white shrimp_382,region_family_avg
+167,Southern white shrimp_383,region_family_avg
+204,Speckled shrimp_384,region_family_avg
+18,Spinefeet(=Rabbitfishes) nei_385,taxon_group_avg
+15,Spinefeet(=Rabbitfishes) nei_386,taxon_group_avg
+8,Spinefeet(=Rabbitfishes) nei_387,taxon_group_avg
+208,Spotted coralgrouper_388,taxon_group_avg
+182,Spotted seabass_389,taxon_group_avg
+25,Squaretail mullet_390,taxon_group_avg
+132,Tarpon_391,taxon_group_avg
+61,Thinlip grey mullet_392,taxon_group_avg
+21,Tiger pufferfish_393,taxon_group_avg
+206,Tropical spiny lobsters nei_394,global_avg
+40,Tropical spiny lobsters nei_395,global_avg
+182,Turbot_396,global_species
+224,Turbot_397,global_species
+177,Turbot_398,global_species
+183,Turbot_399,global_species
+209,Turbot_400,global_species
+227,Turbot_401,global_species
+14,Two-spot red snapper_402,taxon_group_avg
+14,Waigieu seaperch_403,region_family_avg
+216,Whiskered velvet shrimp_404,region_family_avg
+80,White seabream_405,region_family_avg
+182,White seabream_406,region_family_avg
+184,White seabream_407,region_family_avg
+183,White seabream_408,region_family_avg
+190,White-spotted spinefoot_409,taxon_group_avg
+137,Whiteleg shrimp_410,none
+129,Whiteleg shrimp_411,global_species
+133,Whiteleg shrimp_412,none
+138,Whiteleg shrimp_413,global_species
+171,Whiteleg shrimp_414,global_species
+132,Whiteleg shrimp_415,global_species
+131,Whiteleg shrimp_416,none
+110,Whiteleg shrimp_417,global_species
+163,Whiteleg shrimp_418,none
+164,Whiteleg shrimp_419,global_species
+135,Whiteleg shrimp_420,none
+130,Whiteleg shrimp_421,global_species
+139,Whiteleg shrimp_422,global_species
+134,Whiteleg shrimp_423,global_species
+168,Whiteleg shrimp_424,global_species
+194,Whiteleg shrimp_425,global_species
+14,Whiteleg shrimp_426,global_species
+209,Whiteleg shrimp_427,none
+25,Whiteleg shrimp_428,none
+166,Whiteleg shrimp_429,global_species
+207,Whiteleg shrimp_430,none
+13,Whiteleg shrimp_431,global_species
+78,Whiteleg shrimp_432,global_species
+136,Whiteleg shrimp_433,global_species
+112,Whiteleg shrimp_434,global_species
+216,Whiteleg shrimp_435,none
+208,Whiteleg shrimp_436,global_species
+20,Whiteleg shrimp_437,global_species
+15,Whiteleg shrimp_438,global_species
+102,Whiteleg shrimp_439,global_species
+191,Whiteleg shrimp_440,global_species
+203,Whiteleg shrimp_441,none
+206,Whiteleg shrimp_442,none
+6,Whiteleg shrimp_443,global_species
+115,Whiteleg shrimp_444,global_species
+50,Whiteleg shrimp_445,global_species
+182,Whiteleg shrimp_446,global_species
+61,Whiteleg shrimp_447,global_species
+214,Whiteleg shrimp_448,global_species
+231,Whiteleg shrimp_449,global_species
+56,Whiteleg shrimp_450,global_species
+40,Whiteleg shrimp_451,global_species
+190,Whiteleg shrimp_452,global_species
+247,Whiteleg shrimp_453,global_species
+205,Whiteleg shrimp_454,global_species
+48,Whiteleg shrimp_455,global_species
+54,Whiteleg shrimp_456,global_species
+80,Whiteleg shrimp_457,global_species
+31,Whiteleg shrimp_458,global_species
+167,Whiteleg shrimp_459,global_species
+167,Whitemouth croaker_460,family_avg
+224,Yellowtail amberjack_461,global_species
+177,Yellowtail amberjack_462,global_species
+54,Yellowtail amberjack_463,global_species
+175,Yellowtail amberjack_464,global_species
+184,[Mugil spp]_465,taxon_group_avg
+209,[Rhopilema esculentum]_466,global_avg
+25,[Scylla spp]_467,taxon_group_avg
+20,Abalones_468,global_species
+14,Abalones_469,global_species
+228,Abalones_470,global_species
+16,Abalones_471,global_species
+102,Abalones_472,global_species
+135,Abalones_473,global_species
+224,Abalones_474,global_species
+143,Abalones_475,global_species
+138,Abalones_476,global_species
+162,Abalones_477,global_species
+209,Abalones_478,global_species
+101,Abalones_479,global_species
+181,Abalones_480,global_species
+179,Abalones_481,global_species
+182,Abalones_482,global_species
+206,Abalones_483,global_species
+14,Amberjacks nei_484,region_family_avg
+209,Amberjacks nei_485,region_family_avg
+20,Amberjacks nei_486,georegion_family_avg
+209,Aquatic invertebrates nei_487,global_avg
+20,Aquatic invertebrates nei_488,global_avg
+210,Aquatic invertebrates nei_489,global_avg
+16,Aquatic invertebrates nei_490,global_avg
+205,Aquatic invertebrates nei_491,global_avg
+73,Aquatic invertebrates nei_492,global_avg
+181,Aquatic invertebrates nei_493,global_avg
+182,Aquatic invertebrates nei_494,global_avg
+209,Areolate grouper_495,taxon_group_avg
+20,Ascidiaceans nei_496,global_avg
+218,Atlantic bluefin tuna_497,family_avg
+182,Atlantic bluefin tuna_498,none
+187,Atlantic bluefin tuna_499,none
+184,Atlantic bluefin tuna_500,none
+61,Atlantic bluefin tuna_501,none
+76,Atlantic bluefin tuna_502,none
+81,Atlantic bluefin tuna_503,none
+183,Atlantic bluefin tuna_504,georegion_family_avg
+68,Atlantic bluefin tuna_505,none
+80,Atlantic bluefin tuna_506,none
+218,Atlantic cod_507,global_species
+223,Atlantic cod_508,global_species
+143,Atlantic cod_509,global_species
+180,Atlantic cod_510,global_species
+143,Atlantic halibut_511,global_species
+180,Atlantic halibut_512,global_species
+223,Atlantic halibut_513,global_species
+223,Atlantic salmon_514,none
+180,Atlantic salmon_515,none
+181,Atlantic salmon_516,global_species
+143,Atlantic salmon_517,global_species
+141,Atlantic salmon_518,none
+222,Atlantic salmon_519,global_species
+218,Atlantic salmon_520,none
+174,Atlantic salmon_521,global_species
+182,Atlantic salmon_522,global_species
+16,Atlantic salmon_523,global_species
+163,Atlantic salmon_524,none
+224,Atlantic salmon_525,none
+76,Atlantic salmon_526,global_species
+179,Atlantic salmon_527,global_species
+73,Atlantic salmon_528,global_species
+175,Atlantic salmon_529,global_species
+21,Atlantic salmon_530,global_species
+208,Banana prawn_531,region_family_avg
+15,Banana prawn_532,region_family_avg
+182,Banded carpet shell_533,taxon_group_avg
+216,Banded grouper_534,taxon_group_avg
+209,Barramundi(=Giant seaperch)_535,global_species
+208,Barramundi(=Giant seaperch)_536,global_species
+206,Barramundi(=Giant seaperch)_537,global_species
+247,Barramundi(=Giant seaperch)_538,global_species
+147,Barramundi(=Giant seaperch)_539,global_species
+14,Barramundi(=Giant seaperch)_540,global_species
+50,Barramundi(=Giant seaperch)_541,global_species
+216,Barramundi(=Giant seaperch)_542,global_species
+24,Barramundi(=Giant seaperch)_543,global_species
+205,Barramundi(=Giant seaperch)_544,global_species
+40,Barramundi(=Giant seaperch)_545,global_species
+191,Barramundi(=Giant seaperch)_546,global_species
+216,Barred-chest grouper_547,taxon_group_avg
+210,Bastard halibut_548,taxon_group_avg
+135,Bastard halibuts nei_549,taxon_group_avg
+182,Big-scale sand smelt_550,taxon_group_avg
+208,Bigeye trevally_551,region_family_avg
+216,Bigeye trevally_552,region_family_avg
+134,Black ark_553,taxon_group_avg
+208,Black grouper_554,taxon_group_avg
+216,Black jack_555,region_family_avg
+216,Blackbanded trevally_556,region_family_avg
+210,Blackhead seabream_557,family_avg
+14,Blackhead seabream_558,family_avg
+20,Blackhead seabream_559,family_avg
+216,Blacksaddled coralgrouper_560,taxon_group_avg
+182,Blackspot seabream_561,region_family_avg
+183,Blackspot seabream_562,region_family_avg
+216,Blacktail snapper_563,taxon_group_avg
+206,Blacktip grouper_564,taxon_group_avg
+20,Blood cockle_565,taxon_group_avg
+25,Blood cockle_566,taxon_group_avg
+206,Blood cockle_567,taxon_group_avg
+14,Blood cockle_568,taxon_group_avg
+209,Blood cockle_569,taxon_group_avg
+24,Blood cockle_570,taxon_group_avg
+216,Blood cockle_571,taxon_group_avg
+216,Bludger_572,region_family_avg
+147,Blue shrimp_573,georegion_family_avg
+208,Blue swimming crab_574,global_avg
+216,Bluefin trevally_575,region_family_avg
+76,Bluespotted seabream_576,region_family_avg
+216,Brassy trevally_577,region_family_avg
+110,Brine shrimp_578,taxon_group_avg
+206,Broad geloina_579,taxon_group_avg
+208,Brown-marbled grouper_580,taxon_group_avg
+39,Brown-marbled grouper_581,taxon_group_avg
+206,Brown-marbled grouper_582,taxon_group_avg
+216,Brown-marbled grouper_583,taxon_group_avg
+110,Caribbean spiny lobster_584,global_avg
+117,Caribbean spiny lobster_585,global_avg
+102,Carpet shells nei_586,taxon_group_avg
+61,Carpet shells nei_587,taxon_group_avg
+223,Chars nei_588,taxon_group_avg
+162,Chinook(=Spring=King) salmon_589,none
+163,Chinook(=Spring=King) salmon_590,global_species
+218,Chinook(=Spring=King) salmon_591,none
+224,Chinook(=Spring=King) salmon_592,global_species
+16,Chinook(=Spring=King) salmon_593,global_species
+69,Chum(=Keta=Dog) salmon_594,region_family_avg
+70,Chum(=Keta=Dog) salmon_595,region_family_avg
+73,Chum(=Keta=Dog) salmon_596,region_family_avg
+74,Chum(=Keta=Dog) salmon_597,region_family_avg
+75,Chum(=Keta=Dog) salmon_598,region_family_avg
+189,Chum(=Keta=Dog) salmon_599,region_family_avg
+14,Clams_600,global_species
+20,Clams_601,global_species
+210,Clams_602,global_species
+21,Clams_603,global_species
+9,Clams_604,global_species
+163,Clams_605,global_species
+218,Clams_606,global_species
+80,Clams_607,global_species
+175,Clams_608,global_species
+182,Clams_609,global_species
+18,Clams_610,global_species
+183,Clams_611,global_species
+135,Clams_612,global_species
+8,Clams_613,global_species
+179,Clams_614,global_species
+180,Clams_615,global_species
+184,Clams_616,global_species
+188,Clams_617,global_species
+14,Cobia_618,global_species
+32,Cobia_619,global_species
+116,Cobia_620,global_species
+110,Cobia_621,global_species
+209,Cobia_622,global_species
+140,Cobia_623,global_species
+29,Cobia_624,global_species
+115,Cobia_625,global_species
+129,Cobia_626,none
+164,Cobia_627,global_species
+207,Cobia_628,global_species
+208,Cobia_629,global_species
+132,Cobia_630,global_species
+171,Cobia_631,global_species
+20,Cockles_632,global_species
+183,Cockles_633,global_species
+163,Cockles_634,global_species
+8,Cockles_635,global_species
+179,Cockles_636,global_species
+180,Cockles_637,global_species
+152,Cockles_638,global_species
+182,Cockles_639,global_species
+155,Cockles_640,global_species
+153,Cockles_641,global_species
+147,Cockles_642,global_species
+17,Cockles_643,global_species
+11,Cockles_644,global_species
+163,Coho(=Silver) salmon_645,global_species
+224,Coho(=Silver) salmon_646,none
+210,Coho(=Silver) salmon_647,global_species
+218,Coho(=Silver) salmon_648,global_species
+179,Coho(=Silver) salmon_649,global_species
+175,Coho(=Silver) salmon_650,global_species
+61,Common cuttlefish_651,global_avg
+183,Common cuttlefish_652,global_avg
+182,Common dentex_653,region_family_avg
+232,Common dentex_654,region_family_avg
+187,Common dentex_655,region_family_avg
+80,Common dentex_656,region_family_avg
+76,Common dentex_657,region_family_avg
+80,Common pandora_658,region_family_avg
+81,Common pandora_659,region_family_avg
+183,Common sole_660,global_species
+182,Common sole_661,global_species
+61,Common sole_662,global_species
+184,Common sole_663,global_species
+76,Common two-banded seabream_664,region_family_avg
+20,Convict grouper_665,taxon_group_avg
+183,Corrugated venus_666,taxon_group_avg
+182,Corrugated venus_667,taxon_group_avg
+135,Crevalle jack_668,georegion_family_avg
+210,Crimson seabream_669,family_avg
+14,Crimson seabream_670,family_avg
+208,Crimson snapper_671,taxon_group_avg
+14,"Croakers, drums nei_672",family_avg
+50,"Croakers, drums nei_673",region_family_avg
+183,"Croakers, drums nei_674",region_family_avg
+14,Diphos sanguin_675,taxon_group_avg
+20,Dotted gizzard shad_676,taxon_group_avg
+32,Drums nei_677,family_avg
+216,Duskytail grouper_678,taxon_group_avg
+16,Eastern king prawn_679,region_family_avg
+5,Emperor red snapper_680,taxon_group_avg
+61,European eel_681,global_species
+182,European eel_682,global_species
+184,European eel_683,global_species
+80,European eel_684,global_species
+175,European flounder_685,georegion_family_avg
+80,European seabass_686,none
+183,European seabass_687,none
+81,European seabass_688,none
+84,European seabass_689,global_species
+179,European seabass_690,none
+182,European seabass_691,none
+184,European seabass_692,none
+76,European seabass_693,none
+62,European seabass_694,global_species
+68,European seabass_695,none
+187,European seabass_696,none
+188,European seabass_697,none
+79,European seabass_698,global_species
+143,European seabass_699,global_species
+67,European seabass_700,global_species
+232,European seabass_701,global_species
+54,European seabass_702,global_species
+115,European seabass_703,global_species
+180,European seabass_704,global_species
+82,European seabass_705,global_species
+186,European seabass_706,global_species
+61,European seabass_707,global_species
+37,European seabass_708,global_species
+174,European whitefish_709,region_family_avg
+210,Filefishes nei_710,taxon_group_avg
+20,"Filefishes, leatherjackets nei_711",taxon_group_avg
+223,Finfishes nei_712,taxon_group_avg
+16,Finfishes nei_713,taxon_group_avg
+179,Finfishes nei_714,taxon_group_avg
+69,Flatfishes nei_715,taxon_group_avg
+70,Flatfishes nei_716,taxon_group_avg
+73,Flatfishes nei_717,taxon_group_avg
+74,Flatfishes nei_718,taxon_group_avg
+75,Flatfishes nei_719,taxon_group_avg
+189,Flatfishes nei_720,taxon_group_avg
+210,Flathead grey mullet_721,taxon_group_avg
+14,Flathead grey mullet_722,taxon_group_avg
+135,Flathead grey mullet_723,taxon_group_avg
+80,Flathead grey mullet_724,taxon_group_avg
+50,Flathead grey mullet_725,taxon_group_avg
+184,Flathead grey mullet_726,taxon_group_avg
+208,Flathead grey mullet_727,taxon_group_avg
+15,Flathead lobster_728,global_avg
+129,Florida pompano_729,global_species
+115,Florida pompano_730,global_species
+208,Fourfinger threadfin_731,taxon_group_avg
+206,Fourfinger threadfin_732,taxon_group_avg
+216,Foursaddle grouper_733,taxon_group_avg
+182,Gastropods nei_734,taxon_group_avg
+135,Gastropods nei_735,taxon_group_avg
+210,Gazami crab_736,global_avg
+208,Giant grouper_737,taxon_group_avg
+206,Giant grouper_738,taxon_group_avg
+15,Giant tiger prawn_739,global_species
+208,Giant tiger prawn_740,global_species
+208,Giant trevally_741,region_family_avg
+183,Gilthead seabream_742,none
+79,Gilthead seabream_743,global_species
+80,Gilthead seabream_744,none
+84,Gilthead seabream_745,global_species
+179,Gilthead seabream_746,none
+182,Gilthead seabream_747,none
+76,Gilthead seabream_748,none
+81,Gilthead seabream_749,none
+62,Gilthead seabream_750,global_species
+184,Gilthead seabream_751,none
+68,Gilthead seabream_752,none
+187,Gilthead seabream_753,none
+188,Gilthead seabream_754,global_species
+67,Gilthead seabream_755,global_species
+48,Gilthead seabream_756,global_species
+51,Gilthead seabream_757,global_species
+82,Gilthead seabream_758,global_species
+232,Gilthead seabream_759,global_species
+54,Gilthead seabream_760,global_species
+115,Gilthead seabream_761,global_species
+52,Gilthead seabream_762,global_species
+186,Gilthead seabream_763,global_species
+50,Gilthead seabream_764,global_species
+61,Gilthead seabream_765,global_species
+183,Golden carpet shell_766,taxon_group_avg
+208,Golden trevally_767,region_family_avg
+206,Golden trevally_768,region_family_avg
+5,Golden-lined spinefoot_769,taxon_group_avg
+209,Goldlined seabream_770,family_avg
+50,Goldlined seabream_771,region_family_avg
+54,Goldlined seabream_772,region_family_avg
+37,Goldlined seabream_773,family_avg
+51,Goldsilk seabream_774,region_family_avg
+134,Grand ark_775,taxon_group_avg
+209,Greasy grouper_776,taxon_group_avg
+54,Greasy grouper_777,taxon_group_avg
+182,Greater amberjack_778,global_species
+14,Greater amberjack_779,global_species
+80,Greater amberjack_780,global_species
+182,Green crab_781,global_avg
+208,Green humphead parrotfish_782,taxon_group_avg
+179,Grooved carpet shell_783,taxon_group_avg
+183,Grooved carpet shell_784,taxon_group_avg
+182,Grooved carpet shell_785,taxon_group_avg
+180,Grooved carpet shell_786,taxon_group_avg
+84,Grooved carpet shell_787,taxon_group_avg
+227,Grooved carpet shell_788,taxon_group_avg
+184,Grooved carpet shell_789,taxon_group_avg
+62,Grooved carpet shell_790,taxon_group_avg
+182,Groundfishes nei_791,taxon_group_avg
+208,Groupers nei_792,taxon_group_avg
+14,Groupers nei_793,taxon_group_avg
+61,Groupers nei_794,taxon_group_avg
+50,Groupers nei_795,taxon_group_avg
+171,Groupers nei_796,taxon_group_avg
+216,Groupers nei_797,taxon_group_avg
+209,Groupers nei_798,taxon_group_avg
+205,Groupers nei_799,taxon_group_avg
+206,Groupers nei_800,taxon_group_avg
+247,Groupers nei_801,taxon_group_avg
+15,"Groupers, seabasses nei_802",taxon_group_avg
+216,"Groupers, seabasses nei_803",taxon_group_avg
+143,Haddock_804,taxon_group_avg
+20,Half-crenated ark_805,taxon_group_avg
+216,Highfin coralgrouper_806,taxon_group_avg
+216,Highfin grouper_807,taxon_group_avg
+209,Hong Kong grouper_808,taxon_group_avg
+20,Horned turban_809,taxon_group_avg
+208,Humpback grouper_810,taxon_group_avg
+206,Humpback grouper_811,taxon_group_avg
+216,Humpback grouper_812,taxon_group_avg
+216,Humphead snapper_813,taxon_group_avg
+208,Indo-Pacific swamp crab_814,global_avg
+15,Indo-Pacific swamp crab_815,global_avg
+205,Indo-Pacific swamp crab_816,global_avg
+41,Indo-Pacific swamp crab_817,global_avg
+247,Indo-Pacific swamp crab_818,global_avg
+20,Inflated ark_819,taxon_group_avg
+20,Jack and horse mackerels nei_820,georegion_family_avg
+247,"Jacks, crevalles nei_821",region_family_avg
+15,"Jacks, crevalles nei_822",region_family_avg
+135,"Jacks, crevalles nei_823",georegion_family_avg
+206,"Jacks, crevalles nei_824",region_family_avg
+210,Japanese amberjack_825,none
+20,Japanese carpet shell_826,taxon_group_avg
+209,Japanese carpet shell_827,taxon_group_avg
+14,Japanese carpet shell_828,taxon_group_avg
+163,Japanese carpet shell_829,taxon_group_avg
+218,Japanese carpet shell_830,taxon_group_avg
+180,Japanese carpet shell_831,taxon_group_avg
+181,Japanese carpet shell_832,taxon_group_avg
+182,Japanese carpet shell_833,taxon_group_avg
+179,Japanese carpet shell_834,taxon_group_avg
+184,Japanese carpet shell_835,taxon_group_avg
+183,Japanese carpet shell_836,taxon_group_avg
+210,Japanese jack mackerel_837,region_family_avg
+41,Japanese meagre_838,family_avg
+37,Japanese meagre_839,family_avg
+209,Japanese sea cucumber_840,global_avg
+21,Japanese sea cucumber_841,global_avg
+73,Japanese sea cucumber_842,global_avg
+20,Japanese sea cucumber_843,global_avg
+20,Japanese seabass_844,taxon_group_avg
+208,Japanese seabass_845,taxon_group_avg
+14,Japanese spiny lobster_846,global_avg
+208,John's snapper_847,taxon_group_avg
+206,John's snapper_848,taxon_group_avg
+20,Korean rockfish_849,taxon_group_avg
+14,Kuruma prawn_850,region_family_avg
+184,Kuruma prawn_851,region_family_avg
+208,Kuruma prawn_852,region_family_avg
+209,Large yellow croaker_853,family_avg
+206,Leopard coralgrouper_854,taxon_group_avg
+216,Leopard coralgrouper_855,taxon_group_avg
+216,Longfin trevally_856,region_family_avg
+163,Longfin yellowtail_857,none
+129,Longfin yellowtail_858,global_species
+216,Longlegged spiny lobster_859,global_avg
+216,Longnose trevally_860,region_family_avg
+216,Longspine grouper_861,taxon_group_avg
+182,Mackerels nei_862,region_family_avg
+208,Malabar grouper_863,taxon_group_avg
+14,Malabar trevally_864,region_family_avg
+216,Malabar trevally_865,region_family_avg
+206,Mangrove red snapper_866,taxon_group_avg
+209,Mangrove red snapper_867,taxon_group_avg
+208,Mangrove red snapper_868,taxon_group_avg
+216,Mangrove red snapper_869,taxon_group_avg
+81,Marbled spinefoot_870,taxon_group_avg
+14,Marine crabs nei_871,global_avg
+111,Marine crabs nei_872,global_avg
+210,Marine crustaceans nei_873,global_avg
+61,Marine crustaceans nei_874,global_avg
+223,Marine crustaceans nei_875,global_avg
+210,Marine fishes nei_876,taxon_group_avg
+209,Marine fishes nei_877,taxon_group_avg
+37,Marine fishes nei_878,taxon_group_avg
+206,Marine fishes nei_879,taxon_group_avg
+20,Marine fishes nei_880,taxon_group_avg
+51,Marine fishes nei_881,taxon_group_avg
+140,Marine fishes nei_882,taxon_group_avg
+208,Marine fishes nei_883,taxon_group_avg
+61,Marine fishes nei_884,taxon_group_avg
+15,Marine fishes nei_885,taxon_group_avg
+62,Marine fishes nei_886,taxon_group_avg
+247,Marine fishes nei_887,taxon_group_avg
+14,Marine fishes nei_888,taxon_group_avg
+80,Marine fishes nei_889,taxon_group_avg
+179,Marine fishes nei_890,taxon_group_avg
+16,Marine fishes nei_891,taxon_group_avg
+171,Marine fishes nei_892,taxon_group_avg
+79,Marine fishes nei_893,taxon_group_avg
+147,Marine fishes nei_894,taxon_group_avg
+187,Marine fishes nei_895,taxon_group_avg
+135,Marine fishes nei_896,taxon_group_avg
+183,Marine fishes nei_897,taxon_group_avg
+216,Marine fishes nei_898,taxon_group_avg
+182,Marine fishes nei_899,taxon_group_avg
+184,Marine fishes nei_900,taxon_group_avg
+76,Marine fishes nei_901,taxon_group_avg
+68,Marine fishes nei_902,taxon_group_avg
+24,Marine fishes nei_903,taxon_group_avg
+207,Marine fishes nei_904,taxon_group_avg
+163,Marine fishes nei_905,taxon_group_avg
+21,Marine fishes nei_906,taxon_group_avg
+191,Marine fishes nei_907,taxon_group_avg
+218,Marine fishes nei_908,taxon_group_avg
+207,Marine molluscs nei_909,taxon_group_avg
+209,Marine molluscs nei_910,taxon_group_avg
+171,Marine molluscs nei_911,taxon_group_avg
+20,Marine molluscs nei_912,taxon_group_avg
+218,Marine molluscs nei_913,taxon_group_avg
+179,Marine molluscs nei_914,taxon_group_avg
+182,Marine molluscs nei_915,taxon_group_avg
+183,Marine molluscs nei_916,taxon_group_avg
+14,Marine molluscs nei_917,taxon_group_avg
+80,Marine molluscs nei_918,taxon_group_avg
+224,Masu(=Cherry) salmon_919,region_family_avg
+179,Meagre_920,none
+184,Meagre_921,none
+182,Meagre_922,none
+183,Meagre_923,global_species
+81,Meagre_924,none
+187,Meagre_925,none
+80,Meagre_926,none
+76,Meagre_927,none
+61,Meagre_928,global_species
+50,Meagre_929,global_species
+115,Meagre_930,global_species
+216,Metapenaeus shrimps nei_931,region_family_avg
+20,Mi-iuy (brown) croaker_932,family_avg
+14,Mi-iuy (brown) croaker_933,family_avg
+15,Milkfish_934,taxon_group_avg
+208,Milkfish_935,taxon_group_avg
+19,Milkfish_936,taxon_group_avg
+216,Milkfish_937,taxon_group_avg
+247,Milkfish_938,taxon_group_avg
+208,Mud spiny lobster_939,global_avg
+69,Mullets nei_940,taxon_group_avg
+70,Mullets nei_941,taxon_group_avg
+73,Mullets nei_942,taxon_group_avg
+74,Mullets nei_943,taxon_group_avg
+75,Mullets nei_944,taxon_group_avg
+189,Mullets nei_945,taxon_group_avg
+20,Mullets nei_946,taxon_group_avg
+102,Mullets nei_947,taxon_group_avg
+182,Mullets nei_948,taxon_group_avg
+54,Mullets nei_949,taxon_group_avg
+171,Mullets nei_950,taxon_group_avg
+20,Mussels_951,global_species
+25,Mussels_952,global_species
+162,Mussels_953,global_species
+163,Mussels_954,global_species
+176,Mussels_955,global_species
+177,Mussels_956,global_species
+179,Mussels_957,global_species
+181,Mussels_958,global_species
+182,Mussels_959,global_species
+209,Mussels_960,global_species
+222,Mussels_961,global_species
+224,Mussels_962,global_species
+184,Mussels_963,global_species
+102,Mussels_964,global_species
+218,Mussels_965,global_species
+15,Mussels_966,global_species
+80,Mussels_967,global_species
+82,Mussels_968,global_species
+147,Mussels_969,global_species
+208,Mussels_970,global_species
+71,Mussels_971,global_species
+84,Mussels_972,global_species
+16,Mussels_973,global_species
+18,Mussels_974,global_species
+69,Mussels_975,global_species
+70,Mussels_976,global_species
+73,Mussels_977,global_species
+74,Mussels_978,global_species
+75,Mussels_979,global_species
+139,Mussels_980,global_species
+180,Mussels_981,global_species
+189,Mussels_982,global_species
+206,Mussels_983,global_species
+223,Mussels_984,global_species
+183,Mussels_985,global_species
+101,Mussels_986,global_species
+186,Mussels_987,global_species
+187,Mussels_988,global_species
+188,Mussels_989,global_species
+76,Mussels_990,global_species
+135,Mussels_991,global_species
+171,Mussels_992,global_species
+203,Mussels_993,global_species
+62,Mussels_994,global_species
+227,Mussels_995,global_species
+172,Mussels_996,global_species
+232,Mussels_997,global_species
+143,Mussels_998,global_species
+175,Mussels_999,global_species
+95,Mussels_1000,global_species
+24,Mussels_1001,global_species
+72,Mussels_1002,global_species
+219,Mussels_1003,global_species
+66,Mussels_1004,global_species
+216,Mussels_1005,global_species
+247,Mussels_1006,global_species
+61,Octopuses nei_1007,global_avg
+182,Octopuses nei_1008,global_avg
+210,"Octopuses, etc. nei_1009",global_avg
+20,Okhotsk atka mackerel_1010,taxon_group_avg
+51,Orange-spotted grouper_1011,taxon_group_avg
+208,Orange-spotted grouper_1012,taxon_group_avg
+247,Orange-spotted grouper_1013,taxon_group_avg
+24,Orange-spotted grouper_1014,taxon_group_avg
+52,Orange-spotted grouper_1015,taxon_group_avg
+209,Orange-spotted grouper_1016,taxon_group_avg
+14,Oysters_1017,global_species
+16,Oysters_1018,global_species
+20,Oysters_1019,global_species
+25,Oysters_1020,global_species
+162,Oysters_1021,global_species
+163,Oysters_1022,global_species
+179,Oysters_1023,global_species
+181,Oysters_1024,global_species
+209,Oysters_1025,global_species
+210,Oysters_1026,global_species
+218,Oysters_1027,global_species
+224,Oysters_1028,global_species
+180,Oysters_1029,global_species
+182,Oysters_1030,global_species
+62,Oysters_1031,global_species
+112,Oysters_1032,global_species
+15,Oysters_1033,global_species
+166,Oysters_1034,global_species
+37,Oysters_1035,global_species
+84,Oysters_1036,global_species
+222,Oysters_1037,global_species
+102,Oysters_1038,global_species
+147,Oysters_1039,global_species
+176,Oysters_1040,global_species
+223,Oysters_1041,global_species
+227,Oysters_1042,global_species
+18,Oysters_1043,global_species
+177,Oysters_1044,global_species
+5,Oysters_1045,global_species
+101,Oysters_1046,global_species
+135,Oysters_1047,global_species
+228,Oysters_1048,global_species
+115,Oysters_1049,global_species
+206,Oysters_1050,global_species
+187,Oysters_1051,global_species
+80,Oysters_1052,global_species
+171,Oysters_1053,global_species
+203,Oysters_1054,global_species
+138,Oysters_1055,global_species
+172,Oysters_1056,global_species
+66,Oysters_1057,global_species
+183,Oysters_1058,global_species
+17,Oysters_1059,global_species
+184,Oysters_1060,global_species
+232,Oysters_1061,global_species
+216,Oysters_1062,global_species
+95,Oysters_1063,global_species
+208,Oysters_1064,global_species
+130,Oysters_1065,global_species
+65,Oysters_1066,global_species
+134,Oysters_1067,global_species
+73,Oysters_1068,global_species
+137,Oysters_1069,global_species
+186,Oysters_1070,global_species
+54,Oysters_1071,global_species
+153,Pacific asaphis_1072,taxon_group_avg
+135,Pacific bluefin tuna_1073,none
+210,Pacific bluefin tuna_1074,none
+20,Pacific chub mackerel_1075,georegion_family_avg
+163,Pacific geoduck_1076,none
+208,Papuan black snapper_1077,taxon_group_avg
+32,Pargo breams nei_1078,family_avg
+187,Pargo breams nei_1079,region_family_avg
+209,Pen shells nei_1080,taxon_group_avg
+208,Penaeus shrimps nei_1081,region_family_avg
+183,Peppery furrow_1082,taxon_group_avg
+179,Periwinkles nei_1083,taxon_group_avg
+76,Pink dentex_1084,region_family_avg
+73,Pink(=Humpback) salmon_1085,region_family_avg
+182,Pollack_1086,family_avg
+209,Pompano_1087,region_family_avg
+14,"Porgies, seabreams nei_1088",family_avg
+20,"Porgies, seabreams nei_1089",family_avg
+48,"Porgies, seabreams nei_1090",region_family_avg
+184,"Porgies, seabreams nei_1091",region_family_avg
+209,"Porgies, seabreams nei_1092",family_avg
+76,"Porgies, seabreams nei_1093",region_family_avg
+208,Potato grouper_1094,taxon_group_avg
+20,Pufferfishes nei_1095,taxon_group_avg
+183,Purple dye murex_1096,taxon_group_avg
+111,Queen conch_1097,taxon_group_avg
+218,Rainbow trout_1098,none
+223,Rainbow trout_1099,global_species
+141,Rainbow trout_1100,global_species
+179,Rainbow trout_1101,global_species
+181,Rainbow trout_1102,global_species
+174,Rainbow trout_1103,global_species
+175,Rainbow trout_1104,global_species
+180,Rainbow trout_1105,global_species
+163,Rainbow trout_1106,none
+222,Rainbow trout_1107,global_species
+16,Rainbow trout_1108,global_species
+224,Rainbow trout_1109,none
+70,Rainbow trout_1110,global_species
+73,Rainbow trout_1111,global_species
+76,Rainbow trout_1112,global_species
+143,Rainbow trout_1113,global_species
+182,Rainbow trout_1114,global_species
+172,Rainbow trout_1115,global_species
+20,Rainbow trout_1116,global_species
+102,Red bait_1117,global_avg
+140,Red drum_1118,family_avg
+110,Red drum_1119,georegion_family_avg
+79,Red drum_1120,georegion_family_avg
+137,Red drum_1121,family_avg
+32,Red drum_1122,family_avg
+29,Red drum_1123,family_avg
+209,Red drum_1124,family_avg
+37,Red drum_1125,family_avg
+135,Red drum_1126,family_avg
+210,Red oyas_1127,global_avg
+20,Red oyas_1128,global_avg
+80,Red porgy_1129,region_family_avg
+81,Red porgy_1130,region_family_avg
+76,Red porgy_1131,region_family_avg
+210,Red seabream_1132,family_avg
+20,Red seabream_1133,family_avg
+81,Red seabream_1134,region_family_avg
+14,Red seabream_1135,family_avg
+76,Redbanded seabream_1136,region_family_avg
+153,Rough turban_1137,taxon_group_avg
+209,Russell's snapper_1138,taxon_group_avg
+218,Salmonids nei_1139,region_family_avg
+69,Salmonoids nei_1140,region_family_avg
+70,Salmonoids nei_1141,region_family_avg
+73,Salmonoids nei_1142,region_family_avg
+74,Salmonoids nei_1143,region_family_avg
+75,Salmonoids nei_1144,region_family_avg
+189,Salmonoids nei_1145,region_family_avg
+174,Salmonoids nei_1146,region_family_avg
+163,Sand gaper_1147,taxon_group_avg
+183,Sargo breams nei_1148,region_family_avg
+61,Sargo breams nei_1149,region_family_avg
+216,Scalloped spiny lobster_1150,global_avg
+210,Scallops_1151,global_species
+138,Scallops_1152,global_species
+209,Scallops_1153,global_species
+224,Scallops_1154,global_species
+69,Scallops_1155,global_species
+70,Scallops_1156,global_species
+73,Scallops_1157,global_species
+74,Scallops_1158,global_species
+75,Scallops_1159,global_species
+189,Scallops_1160,global_species
+182,Scallops_1161,global_species
+180,Scallops_1162,global_species
+135,Scallops_1163,global_species
+137,Scallops_1164,global_species
+218,Scallops_1165,global_species
+16,Scallops_1166,global_species
+20,Scallops_1167,global_species
+179,Scallops_1168,global_species
+227,Scallops_1169,global_species
+181,Scallops_1170,global_species
+62,Scallops_1171,global_species
+171,Scallops_1172,global_species
+223,Scallops_1173,global_species
+21,Scallops_1174,global_species
+187,Scallops_1175,global_species
+80,Sciaenas nei_1176,region_family_avg
+76,Sciaenas nei_1177,region_family_avg
+20,"Scorpionfishes, redfishes nei_1178",taxon_group_avg
+216,Sea cucumbers nei_1179,global_avg
+42,Sea cucumbers nei_1180,global_avg
+209,Sea snails_1181,taxon_group_avg
+179,Sea trout_1182,region_family_avg
+180,Sea trout_1183,family_avg
+174,Sea trout_1184,family_avg
+73,Sea urchins nei_1185,global_avg
+209,Sea urchins nei_1186,global_avg
+15,Seaweed_1187,global_species
+20,Seaweed_1188,global_species
+21,Seaweed_1189,global_species
+207,Seaweed_1190,global_species
+209,Seaweed_1191,global_species
+210,Seaweed_1192,global_species
+216,Seaweed_1193,global_species
+69,Seaweed_1194,global_species
+70,Seaweed_1195,global_species
+73,Seaweed_1196,global_species
+74,Seaweed_1197,global_species
+75,Seaweed_1198,global_species
+189,Seaweed_1199,global_species
+224,Seaweed_1200,global_species
+14,Seaweed_1201,global_species
+9,Seaweed_1202,global_species
+18,Seaweed_1203,global_species
+122,Seaweed_1204,global_species
+179,Seaweed_1205,global_species
+212,Seaweed_1206,global_species
+202,Seaweed_1207,global_species
+139,Seaweed_1208,global_species
+42,Seaweed_1209,global_species
+101,Seaweed_1210,global_species
+102,Seaweed_1211,global_species
+138,Seaweed_1212,global_species
+206,Seaweed_1213,global_species
+24,Seaweed_1214,global_species
+203,Seaweed_1215,global_species
+7,Seaweed_1216,global_species
+41,Seaweed_1217,global_species
+182,Seaweed_1218,global_species
+181,Seaweed_1219,global_species
+231,Seaweed_1220,global_species
+155,Seaweed_1221,global_species
+171,Seaweed_1222,global_species
+175,Seaweed_1223,global_species
+205,Seaweed_1224,global_species
+17,Seaweed_1225,global_species
+43,Seaweed_1226,global_species
+164,Seaweed_1227,global_species
+127,Seaweed_1228,global_species
+177,Seaweed_1229,global_species
+119,Seaweed_1230,global_species
+137,Seaweed_1231,global_species
+125,Seaweed_1232,global_species
+135,Seaweed_1233,global_species
+141,Seaweed_1234,global_species
+163,Seaweed_1235,global_species
+223,Seaweed_1236,global_species
+62,Seaweed_1237,global_species
+152,Seaweed_1238,global_species
+204,Seaweed_1239,global_species
+66,Seaweed_1240,global_species
+61,Seaweed_1241,global_species
+145,Seaweed_1242,global_species
+182,Senegalese sole_1243,region_family_avg
+81,Sharpsnout seabream_1244,region_family_avg
+184,Sharpsnout seabream_1245,region_family_avg
+187,Sharpsnout seabream_1246,region_family_avg
+188,Sharpsnout seabream_1247,region_family_avg
+80,Sharpsnout seabream_1248,region_family_avg
+76,Sharpsnout seabream_1249,region_family_avg
+81,Shi drum_1250,region_family_avg
+184,Shi drum_1251,region_family_avg
+80,Shi drum_1252,region_family_avg
+76,Shi drum_1253,region_family_avg
+37,Shoemaker spinefoot_1254,taxon_group_avg
+147,Sixfinger threadfin_1255,taxon_group_avg
+11,Sixfinger threadfin_1256,taxon_group_avg
+102,Smooth mactra_1257,taxon_group_avg
+208,Snappers nei_1258,taxon_group_avg
+196,Snappers nei_1259,taxon_group_avg
+247,Snappers nei_1260,taxon_group_avg
+15,Snappers nei_1261,taxon_group_avg
+135,Snappers nei_1262,taxon_group_avg
+24,Snappers nei_1263,taxon_group_avg
+209,Snappers nei_1264,taxon_group_avg
+216,Snappers nei_1265,taxon_group_avg
+14,"Snappers, jobfishes nei_1266",taxon_group_avg
+171,Snooks(=Robalos) nei_1267,taxon_group_avg
+209,Snubnose pompano_1268,global_species
+208,Snubnose pompano_1269,global_species
+15,Snubnose pompano_1270,global_species
+206,Snubnose pompano_1271,global_species
+247,Snubnose pompano_1272,global_species
+216,Snubnose pompano_1273,global_species
+52,Sobaity seabream_1274,region_family_avg
+51,Sobaity seabream_1275,region_family_avg
+54,Sobaity seabream_1276,region_family_avg
+50,Sobaity seabream_1277,region_family_avg
+69,Sockeye(=Red) salmon_1278,global_species
+70,Sockeye(=Red) salmon_1279,global_species
+73,Sockeye(=Red) salmon_1280,global_species
+74,Sockeye(=Red) salmon_1281,global_species
+75,Sockeye(=Red) salmon_1282,global_species
+189,Sockeye(=Red) salmon_1283,global_species
+182,Soles nei_1284,taxon_group_avg
+177,Soles nei_1285,taxon_group_avg
+16,Southern bluefin tuna_1286,none
+208,Southern red snapper_1287,taxon_group_avg
+216,Speckled blue grouper_1288,taxon_group_avg
+50,Spinefeet(=Rabbitfishes) nei_1289,taxon_group_avg
+208,Spinefeet(=Rabbitfishes) nei_1290,taxon_group_avg
+15,Spinefeet(=Rabbitfishes) nei_1291,taxon_group_avg
+182,Spinous spider crab_1292,global_avg
+210,Spiny lobsters nei_1293,global_avg
+208,Spotted coralgrouper_1294,taxon_group_avg
+130,Spotted rose snapper_1295,taxon_group_avg
+131,Spotted rose snapper_1296,taxon_group_avg
+182,Spotted seabass_1297,taxon_group_avg
+216,Squaretail coralgrouper_1298,taxon_group_avg
+181,Stony sea urchin_1299,global_avg
+208,Streaked spinefoot_1300,taxon_group_avg
+135,Striped bass_1301,none
+79,"Striped bass, hybrid_1302",global_species
+182,"Striped bass, hybrid_1303",global_species
+182,Striped venus_1304,taxon_group_avg
+244,Stromboid conchs nei_1305,taxon_group_avg
+245,Stromboid conchs nei_1306,taxon_group_avg
+250,Stromboid conchs nei_1307,taxon_group_avg
+210,Tiger pufferfish_1308,taxon_group_avg
+209,Tiger pufferfish_1309,taxon_group_avg
+206,"Tiger-dragon grouper, hybrid_1310",taxon_group_avg
+15,Tropical spiny lobsters nei_1311,global_avg
+112,Tropical spiny lobsters nei_1312,global_avg
+207,Tropical spiny lobsters nei_1313,global_avg
+216,Tropical spiny lobsters nei_1314,global_avg
+247,Tropical spiny lobsters nei_1315,global_avg
+76,Trouts nei_1316,region_family_avg
+218,Trouts nei_1317,georegion_family_avg
+14,Trumpet emperor_1318,taxon_group_avg
+179,Turbot_1319,global_species
+176,Turbot_1320,global_species
+181,Turbot_1321,global_species
+183,Turbot_1322,global_species
+102,Turbot_1323,global_species
+180,Turbot_1324,global_species
+143,Turbot_1325,global_species
+175,Turbot_1326,global_species
+182,Warty venus_1327,taxon_group_avg
+188,Warty venus_1328,taxon_group_avg
+80,White seabream_1329,region_family_avg
+179,White seabream_1330,region_family_avg
+182,White seabream_1331,region_family_avg
+183,White seabream_1332,region_family_avg
+184,White seabream_1333,region_family_avg
+210,White trevally_1334,region_family_avg
+216,White-edged lyretail_1335,taxon_group_avg
+54,White-spotted spinefoot_1336,taxon_group_avg
+52,White-spotted spinefoot_1337,taxon_group_avg
+208,White-spotted spinefoot_1338,taxon_group_avg
+5,White-spotted spinefoot_1339,taxon_group_avg
+182,Whiteleg shrimp_1340,global_species
+208,Whiteleg shrimp_1341,global_species
+176,Whiteleg shrimp_1342,global_species
+71,Whiteleg shrimp_1343,global_species
+216,Whiteleg shrimp_1344,none
+190,Yellowfin seabream_1345,georegion_family_avg
+48,Yellowfin seabream_1346,region_family_avg
+135,Yellowfin tuna_1347,region_family_avg
+48,Yellowfin tuna_1348,georegion_family_avg
+216,Yellowspotted trevally_1349,region_family_avg
+20,[Oplegnathus fasciatus]_1350,taxon_group_avg
