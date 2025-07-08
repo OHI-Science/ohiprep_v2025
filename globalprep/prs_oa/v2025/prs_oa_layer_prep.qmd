@@ -171,7 +171,8 @@ librarian::shelf(
   reticulate, # for python coding
   ncmeta,
   ncdf4,
-  plotly
+  plotly,
+  zoo
 )
 
 # ---- sources! ----
@@ -600,7 +601,7 @@ plot(oa_rescaled) # v2024: this looks great!
 
 ```{r, eval = FALSE}
 # Examine the OHI eez raster
-plot(log(zones)) # examine the .tif and ensure it looks correct
+plot(log(zones)) # examine the .tif and ensure it looks correct. Using log() highlights zones
 # example: convert anything greater than 500 to 1 to check data
 crs(zones) # v2024: PROJCRS[\"Mollweide\",\n
 res(zones) # 934.4789 934.4789, lower cell size = higher resolution
@@ -705,7 +706,7 @@ regions_stats_clean <- regions_stats %>%
   mutate(pressure_score = format(pressure_score, scientific = FALSE)) # remove scientific notation formating
 
 # write out acid.csv, which is in the same format as previous years.  All future .csv write-outs are in different formats than previous years
-# write_csv(regions_stats_clean, "output/acid.csv")
+write_csv(regions_stats_clean, "output/acid.csv")
 
 # bringing the names in to allow for greater readability
 regions_stats_join <- left_join(regions_stats_clean, rgn_data, by = "rgn_id") %>% 
@@ -733,7 +734,7 @@ Save output files in `output_dir`, refer back to the setup chunk.
 
 ```{r plot_final}
 # ----- save all data (commented out in case someone runs the whole script) ---------
-# write_csv(regions_stats_join, "prs_oa_all_yrs.csv")
+write_csv(regions_stats_join, "prs_oa_all_yrs.csv")
 
 # group the data by year
 yearly_data <- regions_stats_join %>%
@@ -756,6 +757,34 @@ write_csv_by_year <- function(data, year) {
 ## use map2 (which allows two vectors of the same length) to iterate over the split data and years to write individual csvs for each year
 # map2(yearly_data, years, write_csv_by_year) 
 ```
+
+# Create 4-year rolling average for scores: 
+
+- To reduce some of the variation we see, and to get a better idea of annual trends, we will be implementing a 4-year rolling average to the oa scores using the rollaply() function from the 'zoo' package.
+
+- This will be used as a check in the future for region trends
+
+```{r}
+# Convert the pressure scores to integers
+regions_stats_join$pressure_score <- as.numeric(regions_stats_join$pressure_score)
+
+# Using region_stats_join, apply a 4-year rolling average 
+four_year_average <- regions_stats_join %>%
+  group_by(rgn_name) %>%
+  mutate(mean_scores = rollmean(pressure_score, 4, NA, "right"))
+```
+
+```{r}
+# Plot the 4-year rolling average scores
+pressure_oa_plot <- four_year_average %>%
+  plot_ly(x = ~year, y = ~mean_scores, color = ~rgn_name, 
+          type = "scatter", mode = "lines") %>%
+  layout(title = "Ocean Acidification 4-Year Averaged Pressure Scores by Region",
+         xaxis = list(title = "Year"),
+         yaxis = list(title = "Pressure Score"))
+pressure_oa_plot
+```
+
 
 # Citation information
 

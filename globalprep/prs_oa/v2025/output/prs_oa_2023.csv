@@ -1,0 +1,221 @@
+"rgn_id","rgn_name","year","pressure_score"
+1,"Cocos Islands",2023,0
+2,"Christmas Island",2023,0
+3,"Norfolk Island",2023,7.38380730282752e-05
+4,"Macquarie Island",2023,0.224140025475715
+5,"New Caledonia",2023,0
+6,"Vanuatu",2023,0
+7,"Solomon Islands",2023,0
+8,"Palau",2023,0
+9,"Micronesia",2023,0
+10,"Nauru",2023,0
+11,"Marshall Islands",2023,0
+12,"Wake Island",2023,0
+13,"Northern Mariana Islands and Guam",2023,0
+14,"Taiwan",2023,0
+15,"Philippines",2023,0
+16,"Australia",2023,0.0321686755757533
+17,"Papua New Guinea",2023,0
+18,"Fiji",2023,0
+19,"Tuvalu",2023,0
+20,"South Korea",2023,0.0544314654881781
+21,"North Korea",2023,0.0853387152853941
+24,"Cambodia",2023,0
+25,"Thailand",2023,0
+26,"Andaman and Nicobar",2023,0
+28,"Comoro Islands",2023,0
+29,"Mayotte",2023,0
+30,"Glorioso Islands",2023,0
+31,"Seychelles",2023,0
+32,"Reunion",2023,0
+33,"Juan de Nova Island",2023,0
+34,"Bassas da India",2023,0
+35,"Ile Europa",2023,0
+36,"Ile Tromelin",2023,0
+37,"Mauritius",2023,0
+38,"British Indian Ocean Territory",2023,0
+39,"Maldives",2023,0
+40,"Sri Lanka",2023,0
+41,"Mozambique",2023,0
+42,"Madagascar",2023,0
+43,"Kenya",2023,0
+44,"Somalia",2023,0
+45,"Eritrea",2023,0
+46,"Djibouti",2023,0
+47,"Yemen",2023,0
+48,"Oman",2023,0
+49,"Sudan",2023,0
+50,"Saudi Arabia",2023,0
+51,"Kuwait",2023,0
+52,"Bahrain",2023,0
+53,"Pakistan",2023,0
+54,"United Arab Emirates",2023,0
+55,"Azores",2023,0.0151708010081311
+56,"Cape Verde",2023,0
+57,"Madeira",2023,0
+58,"Canary Islands",2023,2.1910157236e-09
+59,"Belgium",2023,0.124058856783384
+60,"Gibraltar",2023,0.00624032530422304
+61,"Tunisia",2023,0
+62,"Morocco",2023,0.00112944837548751
+63,"Western Sahara",2023,0.00401624839361017
+64,"Mauritania",2023,0.000558454694517613
+65,"Gambia",2023,0
+66,"Senegal",2023,0
+67,"Libya",2023,0
+68,"Malta",2023,0
+69,"Latvia",2023,1
+70,"Estonia",2023,1
+71,"Bulgaria",2023,0.33587034565532
+72,"Romania",2023,0.0490578199249452
+73,"Russia",2023,0.37633685600679
+74,"Georgia",2023,1
+75,"Ukraine",2023,0.259867542128883
+76,"Turkey",2023,0.409281117574322
+77,"Syria",2023,0
+78,"Lebanon",2023,0
+79,"Israel",2023,0
+80,"Greece",2023,0
+81,"Cyprus",2023,0
+82,"Albania",2023,0
+84,"Algeria",2023,0
+85,"Ascension",2023,0
+86,"Saint Helena",2023,0
+88,"Tristan da Cunha",2023,0.138100363461231
+89,"South Georgia and the South Sandwich Islands",2023,0.309219751011597
+90,"Prince Edward Islands",2023,0.268017808798853
+91,"Crozet Islands",2023,0.230102663292748
+92,"Amsterdam Island and Saint Paul Island",2023,0.128345821772571
+93,"Kerguelen Islands",2023,0.207315127324938
+94,"Heard and McDonald Islands",2023,0.242130268251396
+95,"Falkland Islands",2023,0.211304083528224
+96,"Sierra Leone",2023,0
+97,"Liberia",2023,0
+98,"Togo",2023,0
+99,"Benin",2023,0
+100,"Republique du Congo",2023,0
+101,"Namibia",2023,0.153341839029203
+102,"South Africa",2023,0.0400282094053347
+103,"Sao Tome and Principe",2023,0
+104,"Equatorial Guinea",2023,0
+105,"Bouvet Island",2023,0.330118346119489
+106,"Ghana",2023,0
+107,"Clipperton Island",2023,0
+108,"Bermuda",2023,0
+110,"Bahamas",2023,0
+111,"Turks and Caicos Islands",2023,0
+112,"Cuba",2023,0
+113,"Cayman Islands",2023,0
+114,"Haiti",2023,0
+115,"Dominican Republic",2023,0
+116,"Puerto Rico and Virgin Islands of the United States",2023,0
+117,"British Virgin Islands",2023,0
+118,"Anguilla",2023,0
+119,"Saint Kitts and Nevis",2023,0
+120,"Antigua and Barbuda",2023,0
+121,"Montserrat",2023,0
+122,"Saint Lucia",2023,0
+123,"Dominica",2023,0
+124,"Barbados",2023,0
+125,"Grenada",2023,0
+126,"Trinidad and Tobago",2023,0
+127,"Saint Vincent and the Grenadines",2023,0
+129,"Panama",2023,0
+130,"Costa Rica",2023,0
+131,"Nicaragua",2023,0
+132,"Colombia",2023,0
+133,"Honduras",2023,0
+134,"El Salvador",2023,0
+135,"Mexico",2023,0.0326783535396642
+136,"Guatemala",2023,0
+137,"Ecuador",2023,0.00123584361528713
+138,"Peru",2023,0.0231064065572717
+139,"Venezuela",2023,0
+140,"Guadeloupe and Martinique",2023,0
+141,"Faeroe Islands",2023,0.139106509010559
+143,"Iceland",2023,0.138001739915267
+144,"Jan Mayen",2023,0.147262299543525
+145,"Greenland",2023,0.25834829520086
+146,"Pitcairn",2023,0
+147,"French Polynesia",2023,2.10154683803463e-05
+148,"Line Group",2023,0
+149,"Jarvis Island",2023,0
+150,"Palmyra Atoll",2023,0
+151,"American Samoa",2023,0
+152,"Samoa",2023,0
+153,"Cook Islands",2023,0
+154,"Niue",2023,0
+155,"Tonga",2023,0
+156,"Tokelau",2023,0
+157,"Phoenix Group",2023,0
+158,"Howland Island and Baker Island",2023,0
+159,"Johnston Atoll",2023,0
+161,"Wallis and Futuna",2023,0
+162,"New Zealand",2023,0.0968110039522151
+163,"United States",2023,0.116487848567988
+164,"Belize",2023,0
+166,"Jamaica",2023,0
+167,"Guyana",2023,0
+168,"Suriname",2023,0
+169,"French Guiana",2023,0
+171,"Brazil",2023,0.00146930394330966
+172,"Argentina",2023,0.162668312821211
+173,"Uruguay",2023,0.038871556281466
+174,"Finland",2023,1
+175,"Denmark",2023,0.244353370328077
+176,"Germany",2023,0.22402598208185
+177,"Netherlands",2023,0.133275673276994
+178,"Poland",2023,1
+179,"France",2023,0.0869882990483617
+180,"United Kingdom",2023,0.131208450925817
+181,"Ireland",2023,0.117316710373568
+182,"Spain",2023,0.0546885727410275
+183,"Portugal",2023,0.0404636547296765
+184,"Italy",2023,1.04833292728616e-05
+185,"Monaco",2023,0.000665313341543064
+186,"Montenegro",2023,0
+187,"Croatia",2023,0
+188,"Slovenia",2023,0
+189,"Lithuania",2023,1
+190,"Qatar",2023,0
+191,"Iran",2023,0
+192,"Iraq",2023,0
+193,"Guinea Bissau",2023,0
+194,"Guinea",2023,0
+195,"Ivory Coast",2023,0
+196,"Nigeria",2023,0
+197,"Cameroon",2023,0
+198,"Gabon",2023,0
+199,"Democratic Republic of the Congo",2023,0
+200,"Angola",2023,0.00615806038467169
+202,"Tanzania",2023,0
+203,"India",2023,0
+204,"Bangladesh",2023,0
+205,"Myanmar",2023,0
+206,"Malaysia",2023,0
+207,"Vietnam",2023,0
+208,"Singapore",2023,0
+209,"China",2023,0.021405120473035
+210,"Japan",2023,0.00671633151355767
+212,"Kiribati",2023,0
+214,"Egypt",2023,0
+215,"Jordan",2023,0
+216,"Indonesia",2023,0
+218,"Canada",2023,0.440397452900097
+219,"Saint Pierre and Miquelon",2023,0.183328621721777
+220,"Sint Maarten",2023,0
+221,"Northern Saint-Martin",2023,0
+222,"Sweden",2023,0.944833606888385
+223,"Norway",2023,0.139056137283458
+224,"Chile",2023,0.122397745724017
+227,"Jersey",2023,0.168167563534361
+228,"Guernsey",2023,0.150802352554196
+231,"East Timor",2023,0
+232,"Bosnia and Herzegovina",2023,0
+237,"Oecussi Ambeno",2023,0
+244,"Curacao",2023,0
+245,"Bonaire",2023,0
+247,"Brunei",2023,0
+248,"Saba",2023,0
+249,"Sint Eustatius",2023,0
+250,"Aruba",2023,0
