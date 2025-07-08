@@ -1133,9 +1133,20 @@ sw_sp_c <- sw_sus_rgn %>%
   filter(match_type == 'sw_sp_c') %>%
   select(rgn_id, species, Sust_sw_sp_c = score, esc_sw_sp_c = escapes_score, vyear)
 
+taiwan_before <- sw_sp_c %>% 
+  filter(rgn_id == 14)
+colSums(is.na(taiwan_before)) # sust and escapes both have 0 NAs
+nrow(taiwan_before) # 4
+
 #there will be many to many relationship b/c maric has more than one of the same species for a rgn_id due to year and the sustainability may have more than one method for a species/rgn combination
 mar_sw_sus <- maric %>%
   left_join(sw_sp_c, by = c("species", "rgn_id", "vyear"))
+
+taiwan <- mar_sw_sus %>% 
+  filter(rgn_id == 14) 
+
+colSums(is.na(taiwan)) # sust and escapes both have 4680 NAs
+nrow(taiwan) # 4812
 
 # 2025: commented this out because we have no water body regions
 # Join data specific to species/water body
@@ -1279,6 +1290,11 @@ mar_sw_sus <- mar_sw_sus %>%
 mar_sw_sus$Sust_avg[is.nan(mar_sw_sus$Sust_avg)] <- NA
 mar_sw_sus$esc_avg[is.nan(mar_sw_sus$esc_avg)] <- NA
 # 2025 nrows = 58086
+taiwan3 <- mar_sw_sus %>% 
+  filter(rgn_id == 14)
+
+colSums(is.na(taiwan3)) # 3422
+nrow(taiwan3) # 5978
 
 # Uncombined
 mar_sw_sus_uncomb <- mar_sw_sus_uncomb %>% 
@@ -1303,6 +1319,12 @@ mar_sw_sus <- mar_sw_sus %>%
   # remove old esc_score column (which was used to produce esc_avg column) &
   # rename esc_avg to esc_score :
   dplyr::select(-Sust, Sust = Sust_avg, -esc_score, esc_score = esc_avg)
+
+taiwan4 <- mar_sw_sus %>% 
+  filter(rgn_id == 14)
+
+colSums(is.na(taiwan4)) # 3422
+nrow(taiwan4) # 4812
 
 # Uncombined
 mar_sw_sus_uncomb <- mar_sw_sus_uncomb %>% 
@@ -1377,6 +1399,11 @@ mar_sw_sus$avg_fam_esc[is.nan(mar_sw_sus$avg_fam_esc)] <- NA
 mar_sw_sus$avg_taxon_code_sust[is.nan(mar_sw_sus$avg_taxon_code_sust)] <- NA
 mar_sw_sus$avg_taxon_code_esc[is.nan(mar_sw_sus$avg_taxon_code_esc)] <- NA
 
+taiwan5 <- mar_sw_sus %>% 
+  filter(rgn_id == 14)
+
+colSums(is.na(taiwan5)) # 3422
+nrow(taiwan5) # 4812
 
 # Uncombined
 mar_sw_sus_uncomb <- mar_sw_sus_uncomb %>%
@@ -1479,6 +1506,12 @@ summary(mar_sw_sus_final)
 filter(mar_sw_sus_final, gapfill_sus == "georegion_family_avg")
 filter(mar_sw_sus_final, gapfill_sus == "family_avg")
 filter(mar_sw_sus_final, gapfill_sus == "taxon_group_avg")
+
+taiwan6 <- mar_sw_sus_final %>% 
+  filter(rgn_id == 14)
+
+colSums(is.na(taiwan6)) # 0
+nrow(taiwan6) # 4812
 
 # Uncombined
 mar_sw_sus_uncomb_final <- mar_sw_sus_uncomb %>%
@@ -1695,15 +1728,31 @@ readr::write_csv(mar_harvest_tonnes_gf, here::here(current_mar_dir, "output", "m
 # define the maximum sustainability score, check with: summary(mar_sw_sus_final)
 max_sus <- 0.77
 
+mar_sw_sus_final <- mar_sw_sus_final %>% 
+  select(-year) %>% 
+  rename(year = vyear)
+
 ## Save sustainability scores data for 2023 (SFW data year)
 mar_sustainability_score <- mar_sw_sus_final %>%
-  mutate(year = current_year) %>% # change year if data not updated to current year
+  # mutate(year = current_year) %>% # change year if data not updated to current year
   dplyr::select(rgn_id, year, taxa_code, sust_coeff = Sust) %>%
   unique() %>%
   mutate(sust_coeff = ifelse(sust_coeff > max_sus, 1, sust_coeff/max_sus)) # rescale to the highest sust score
 
 anyDuplicated(mar_sustainability_score)
+view(mar_sustainability_score)
 
+taiwan7 <- mar_sustainability_score %>% 
+  filter(rgn_id == 14)
+
+colSums(is.na(taiwan7)) # 0
+nrow(taiwan7) # 62
+
+taiwan_old24 <- mar_sustainability %>% 
+  filter(rgn_id == 14) %>% 
+  view()
+
+setdiff(taiwan7$sust_coeff, taiwan_old24$sust_coeff)
 
 ## Saves the appropriate Sustainability Score file 
 #write.csv(mar_sustainability_score, here(current_mar_dir, "output", "mar_sustainability.csv"), row.names = F)
