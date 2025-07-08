@@ -396,3 +396,16 @@ write_csv(rgn_assess_hist, file.path(dir_goal, '_data',
 
 ```
 
+
+```{r}
+# Remove "Global" (see above)
+global <- rl_scopes(code = "1")$assessments
+
+global_marine <- global %>%
+  rename(iucn_sid = sis_taxon_id, 
+         sciname = taxon_scientific_name, 
+         category = red_list_category_code,
+         year = year_published) %>%
+  filter(iucn_sid %in% marine_species_list)
+```
+
