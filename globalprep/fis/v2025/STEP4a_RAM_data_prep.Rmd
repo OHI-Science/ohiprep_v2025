@@ -357,55 +357,6 @@ Get a general idea of how well the model predicts missing data based on observed
 mod <- lm(ram_bmsy ~ ram_bmsy_gf, data=ram_bmsy_gf_final)
 summary(mod)
 
-# Call:
-# lm(formula = ram_bmsy ~ ram_bmsy_gf, data = ram_bmsy_gf_final)
-# 
-# Residuals:
-#                  Min                   1Q               Median                   3Q                  Max 
-# -0.00000000000012957 -0.00000000000000081 -0.00000000000000037  0.00000000000000004  0.00000000000240348 
-# 
-# Coefficients:
-#                            Estimate              Std. Error                t value             Pr(>|t|)    
-# (Intercept) 0.000000000000002819139 0.000000000000000376042                  7.497   0.0000000000000741 ***
-# ram_bmsy_gf 0.999999999999999777955 0.000000000000000003205 312050693973460224.000 < 0.0000000000000002 ***
-# ---
-# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-# 
-# Residual standard error: 0.00000000000003019 on 6503 degrees of freedom
-#   (1646 observations deleted due to missingness)
-# Multiple R-squared:      1,	Adjusted R-squared:      1 
-# F-statistic: 9.738e+34 on 1 and 6503 DF,  p-value: < 0.00000000000000022
-
-
-# v2023
-# Call:
-# lm(formula = ram_bmsy ~ ram_bmsy_gf, data = ram_bmsy_gf_final)
-# 
-# Residuals:
-#        Min         1Q     Median         3Q 
-# -1.417e-15 -1.860e-17 -1.000e-18  1.460e-17 
-#        Max 
-#  1.150e-14 
-# 
-# Coefficients:
-#              Estimate Std. Error   t value
-# (Intercept) 1.634e-16  2.446e-18 6.679e+01
-# ram_bmsy_gf 1.000e+00  1.353e-18 7.391e+17
-#             Pr(>|t|)    
-# (Intercept)   <2e-16 ***
-# ram_bmsy_gf   <2e-16 ***
-# ---
-# Signif. codes:  
-# 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-# 
-# Residual standard error: 1.447e-16 on 7566 degrees of freedom
-#   (1001 observations deleted due to missingness)
-# Multiple R-squared:      1,	Adjusted R-squared:      1 
-# F-statistic: 5.462e+35 on 1 and 7566 DF,  p-value: < 2.2e-16
-# 
-# Warning message:
-# In summary.lm(mod) : essentially perfect fit: summary may be unreliable
-
 # v2024
 # Call:
 # lm(formula = ram_bmsy ~ ram_bmsy_gf, data = ram_bmsy_gf_final)
@@ -474,6 +425,7 @@ Identify the FAO/OHI regions where each RAM stock is located (fao and ohi region
 
 If there are many differences between RAM spatial file and RAM metadata, check the STEP4_fao_ohi_rgns.Rmd prep again. 
 
+**Issue 2025**: I cannot find this intermediate file. It looks like it gets made in the next step, so jumping there for now. 
 
 ```{r final}
 ## Read in RAM spatial stocks file

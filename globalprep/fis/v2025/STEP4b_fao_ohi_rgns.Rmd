@@ -34,7 +34,7 @@ Generates a dataset describing the OHI and FAO major fishing regions that corres
 
 ```{r}
 ## Libraries
-library(dplyr)
+library(tidyverse)
 library(tidyr)
 library(readr)
 library(sf)
@@ -108,7 +108,7 @@ These include:
 [3] "TARAKENZ"   "TARAKSA"  
 
 
-There were 22 stocks present in the old data but not the new.
+There were 2 stocks present in the old data but not the new.
 These include:
 
 [1] "COD2J3KL" "TARAKNZ" 
@@ -124,7 +124,6 @@ new_stocks
 unused_stocks <- setdiff(old_stockid, new_stockid) # these are no longer included in the RAM data, will be deleted
 unused_stocks
 
-# v2021: See the mispelling for COD1F-XIV vs COD1f-XIV. This is ok. We will just use the new spelling and assign the fao-ohi regions again. 
 ```
 
 
@@ -259,7 +258,7 @@ RAM_na_non_multi <- RAM_nas %>%
   mutate(fao_id = primary_FAOarea) %>%
   left_join(rgns_eez, by = c("ISO3_code" = "eez_iso3"), relationship =
   "many-to-many") %>%
-  dplyr::select(rgn_id, fao_id, RAM_area_m2, stockid, stocklong) %>%
+  dplyr::select(rgn_id, fao_id, RAM_area_m2, stockid, stocklong, region) %>%
   mutate(fao_id = as.double(fao_id)) 
 
 unique(RAM_na_non_multi$region) # v2025: 4 are from new zealand
