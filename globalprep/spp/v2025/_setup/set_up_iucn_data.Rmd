@@ -137,7 +137,9 @@ marine_species_list <- unique(marine_species$iucn_sid)
 
 ### Data: `iucn_risk_current_2025-1.csv`
 
-Using `rl_scopes()`, pull all global assessments and filter for species from `marine_species_list`. This takes approximately 3 hours.
+Using `rl_scopes()`, pull all global species assessments and filter for species from `marine_species_list`. 
+
+*This takes approximately 3 hours.*
 
 ```{r}
 # Clean up the time series: reclassify old codes to current codes
@@ -154,6 +156,7 @@ global_marine <- global %>%
          year = year_published) %>%
   filter(iucn_sid %in% marine_species_list)
 
+# Prepare layer
 marine_species_risk <- global_marine %>%
   # Current assessments
   filter(latest == TRUE) %>%
@@ -164,7 +167,7 @@ marine_species_risk <- global_marine %>%
          cat = code_current) %>%
   # Add version column
   mutate(iucn_version = "2025-1") %>%
-  select(iucn_sid, sciname, year, old_cat, cat, cat_score, iucn_version) #criteria
+  select(iucn_sid, sciname, year, old_cat, cat, cat_score, iucn_version) #criteria left out for now
 
 # Write csv
 write_csv(marine_species_risk, file.path(dir_goal, '_data', 
@@ -236,9 +239,15 @@ write_csv(marine_species_risk, file.path(dir_goal, '_data',
 Check out the results for 2025, assess differences from 2024.
 
 ```{r}
-## COMPARE TO LAST YEAR AND ASSESS DIFFS
-nrow(marine_species_risk) # 23,314
+# Compare to last year
+nrow(marine_species_risk) # 19, 529
 
+# Shouldn't have any duplicates
+marine_species_risk %>%
+  count(iucn_sid) %>%
+  filter(n > 1)
+
+# Import last year (change year as needed)
 marine_species_risk_2024 <- read_csv(file.path(dir_goal, sprintf('_data/iucn_risk_current_%s.csv', "2024-1")), show_col_types = FALSE)
 
 nrow(marine_species_risk_2024) # 18,599
@@ -250,13 +259,6 @@ new_species <- marine_species_risk %>%
   anti_join(marine_species_risk_2024, by = "iucn_sid") %>%
   # Check to see if new species are all from same habitat? published year?
   left_join(marine_species, by = c("iucn_sid", "year", "sciname"))
-
-marine_species_risk %>% 
-  count(iucn_sid) %>%
-  filter(n > 1)
-
-nrow(global_marine %>%
-  filter(latest == TRUE))
 ```
 
 ### Data: `spp_marine_from_api_2025-1.csv`
@@ -276,7 +278,7 @@ marine_species_depths <- marine_species %>%
   filter(latest == TRUE) %>%
   # Break down the codes into cat, subcat1, and subcat2
   separate(code, c('cat', 'subcat1', 'subcat2'),
-           remove = FALSE, convert = TRUE) %>%
+           remove = FALSE, convert = TRUE, fill = "right") %>%
   arrange(cat, subcat1, subcat2) %>%
   # Assign descriptions to each cat
   mutate(
@@ -284,8 +286,8 @@ marine_species_depths <- marine_species %>%
       cat == 10 & subcat1 %in% 3:4         ~ "deep oceanic",
       cat %in% c(10, 11)                   ~ "200 m +",
       cat %in% c(9, 15)                    ~ "< 200 m",
-      cat %in% c(12, 13)                  ~ "< 20 m",
-      TRUE                                ~ "unknown"),
+      cat %in% c(12, 13)                   ~ "< 20 m",
+      TRUE                                 ~ "unknown"),
     # To make it easier to pick the deepest (min) depth rating
     levels = c("deep oceanic", "200 m +", "< 200 m", "< 20 m", "unknown")))%>%
   left_join(iucn_habitats, by = "code")
@@ -302,16 +304,28 @@ habs <- marine_species_depths %>%
 # Write csv
 write_csv(habs, file.path(dir_goal, '_data',
                           sprintf('spp_marine_from_api_%s.csv', api_version)))
+```
 
-nrow(habs) #
-nrow(read_csv(file.path(dir_goal, sprintf('_data/spp_marine_from_api_%s.csv', "2024-1")), show_col_types = FALSE)) #
+Check out the results for 2025, assess differences from 2024.
+
+```{r}
+nrow(habs) # 19,899
+nrow(marine_species_risk) # 19,529
+
+# Check species that are in habs but not in global
+check <- anti_join(habs, marine_species_risk, by = "iucn_sid")
+
+## Interesting: iucn_sid 155168 appears in marine_species_list and marine_species (obtained from rl_habitats(), but does not appear in global_marine and thus marine_species_risk despite having a scope of 1 (global) listed in marine_species)
+
+habs_2024 <- read_csv(file.path(dir_goal, sprintf('_data/spp_marine_from_api_%s.csv', "2024-1")), show_col_types = FALSE)
+nrow(habs_2024) # 18,590
 ```
 
 ## Regional Assessment
 
 Using the `rl_scopes()` function, get the species list for species coded with the following regions: Europe (2), Mediterranean (4), Western Africa (8), S. Africa FW (9), Pan-Africa (10), Central Africa (16), Northeastern Africa (17), Eastern Africa (18), Northern Africa (21), Gulf of Mexico (45433062), Caribbean (45433063), Persian Gulf (45433064), Arabian Sea (100765562). 
 
-Essentially all but Global (1).
+Essentially all *but* Global (1).
 
 ```{r}
 # Get list of scopes (regions)
@@ -341,16 +355,15 @@ for (i in scopes$code) {
 }
 
 # Combine assessments
-rgn_assess <- dplyr::bind_rows(scopes_assessments) %>%
-  # filters for most recent assessment?
+rgn_assess <- bind_rows(scopes_assessments) %>%
+  # Current assessments
   filter(latest == TRUE) %>%
-  dplyr::rename(iucn_sid = sis_taxon_id, 
+  rename(iucn_sid = sis_taxon_id, 
                 sciname = taxon_scientific_name, 
                 category = red_list_category_code,
                 year = year_published) %>%
-  dplyr::select(iucn_sid, sciname, year, category, code) %>%
+  select(iucn_sid, sciname, year, category, code) %>%
   mutate(year = as.integer(year))
-
 ```
 
 ### Data: `iucn_risk_rgn_current_2025-1.csv`
@@ -362,7 +375,7 @@ rgn_assess_marine <- rgn_assess %>%
   filter(iucn_sid %in% marine_species_list) %>%
   # Add region description
   left_join(scopes, by = "code") %>%
-  mutate(iucn_rgn = str_replace_all(tolower(description), " ", '-')) %>%
+  mutate(iucn_rgn = str_replace_all(tolower(description), " ", '_')) %>%
   left_join(cat_lookup, by = c("category" = "code")) %>%
   select(iucn_sid, 
          sciname,
@@ -373,65 +386,58 @@ rgn_assess_marine <- rgn_assess %>%
 
 # Write csv
 write_csv(rgn_assess_marine, file.path(dir_goal, sprintf('_data/iucn_risk_rgn_current_%s.csv', api_version)))
-
-# Check
-nrow(rgn_assess_full) #5032
-nrow(read_csv(file.path(dir_goal, sprintf('_data/iucn_risk_rgn_current_%s.csv', "2024-1")), show_col_types = FALSE)) #2181
 ```
 
-Once regional assessments are gleaned from the API, check them against the global marine species list.  Species are matched by ID numbers.  Species whose regional category differs from the global category are kept and scored.
-
-* note, quick check of scientific names showed they all match
-* 113 spp fall into this...
+Check out the results for 2025, assess differences from 2024.
 
 ```{r}
-marine_spp %>%
-  rename(global_cat = )
+# Check
+nrow(rgn_assess_marine) #5032
+unique(rgn_assess_marine$iucn_rgn)
+length(unique(rgn_assess_marine$iucn_rgn)) #13
 
+rgn_assess_marine_2024 <- read_csv(file.path(dir_goal, sprintf('_data/iucn_risk_rgn_current_%s.csv', "2024-1")), show_col_types = FALSE)
+nrow(rgn_assess_marine_2024) #2181
+unique(rgn_assess_marine_2024$iucn_rgn)
+length(unique(rgn_assess_marine_2024$iucn_rgn))
 
-rgn_assess_match <- rgn_assess %>%
-  # Add region description
-  left_join(scopes, by = "code") %>%
-  mutate(iucn_rgn = str_replace_all(tolower(description), " ", '-')) %>%
-  select(-c(code, description)) %>%
-  # load marine species risk again? keep only species in common
-  inner_join(marine_species, by = c("iucn_sid", "sciname", "year")) %>%
-  select(iucn_sid, 
-         sciname, 
-         rgn_cat = category, 
-         iucn_rgn, cat_score, 
-         global_cat = cat) 
+print(paste0("The following regions are in v2025 and not v2024: ", setdiff(unique(rgn_assess_marine$iucn_rgn), unique(rgn_assess_marine_2024$iucn_rgn))))
+```
 
-rgn_spp_list <- rgn_assess_match %>%
+Once regional assessments are gleaned from the API, check them against the global marine species list. Species are matched by ID numbers.  Species whose regional category differs from the global category are kept and scored.
+
+* note, quick check of scientific names showed they all match
+* 2025: 582 spp fall into this...
+* 2024: 113 spp fall into this...
+
+```{r}
+# Species with different regional categories from global categories
+cat_mismatch <- marine_species_risk %>%
+  rename(global_cat = cat) %>%
+  left_join(rgn_assess_marine, by = c("iucn_sid", "sciname")) %>%
+  select(iucn_sid, sciname, year, global_cat, global_cat_score = cat_score.x, iucn_rgn, rgn_cat = cat_current, rgn_cat_score = cat_score.y) %>%
   mutate(match = ifelse(global_cat == rgn_cat, TRUE, FALSE)) %>%
   filter(match == FALSE)
 
-#265 differences
-# this may not reflect "global" cat rather most rescent assessment from one habitat
+length(unique(cat_mismatch$iucn_sid)) #582 species
 ```
 
 ## Get IUCN regional historical assessments
 
 ### Data: `iucn_risk_ts_rgn_2025-1.csv`
 
-**2025 NOTE:** This .csv file has species from all the regions, while v2024 only included "europe" and "mediterranean". This appears to be why v2024 has only 388 rows while v2025 has 1019 rows. 
-
-Upon filtering v2025 for med and europe there are ~800 values
+**2025 NOTE:** This .csv file has species from 10 of the regions, while v2024 only included "europe" and "mediterranean". This appears to be why v2024 has fewer rows than v2025. 
 
 ```{r}
 # Combine species lists by region (this time don't filter for latest)
-rgn_assess_hist <- bind_rows(scopes_assessments) %>%
+rgn_risk_ts <- bind_rows(scopes_assessments) %>%
   rename(iucn_sid = sis_taxon_id, 
          sciname = taxon_scientific_name, 
-         category = red_list_category_code,
-         year = year_published) %>%
+         old_cat = red_list_category_code,
+         year = year_published,
+         iucn_rgn = code) %>%
   # Filter for species in the marine species list
   filter(iucn_sid %in% marine_species_list) %>%
-  select(iucn_sid, 
-         year,
-         sciname,
-         old_cat = category, 
-         iucn_rgn = code) %>%
   # Add new updated cat codes
   left_join(cat_lookup, by = c('old_cat' = 'code')) %>%
   distinct() %>%
@@ -448,21 +454,29 @@ rgn_assess_hist <- bind_rows(scopes_assessments) %>%
   ungroup() %>%
   # Add region description
   left_join(scopes, by = c("iucn_rgn" = "code")) %>%
-  mutate(iucn_rgn = str_replace_all(tolower(description), " ", "-")) %>%
+  mutate(iucn_rgn = str_replace_all(tolower(description), " ", "_")) %>%
   select(-description)
 
 # Write csv
-write_csv(rgn_assess_hist, file.path(dir_goal, '_data',
+write_csv(rgn_risk_ts, file.path(dir_goal, '_data',
                                  sprintf('iucn_risk_ts_rgn_%s.csv', api_version)))
-
-# Check
-nrow(rgn_assess_hist) #
-nrow(read_csv(file.path(dir_goal, sprintf('_data/iucn_risk_ts_rgn_%s.csv', "2024-1")), show_col_types = FALSE)) #
 ```
 
-## IUCN trends
+```{r}
+# Check
+nrow(rgn_risk_ts) #1,330
+unique(rgn_risk_ts$iucn_rgn)
+length(unique(rgn_risk_ts$iucn_rgn)) #10
 
+rgn_risk_ts_2024 <- read_csv(file.path(dir_goal, sprintf('_data/iucn_risk_ts_rgn_%s.csv', "2024-1")), show_col_types = FALSE)
+nrow(rgn_risk_ts_2024) #388
+unique(rgn_risk_ts_2024$iucn_rgn)
+length(unique(rgn_risk_ts_2024$iucn_rgn)) #2
+```
 
+## Get IUCN trends assessments
+
+### Data: 
 
 ```{r}
 # Remove "Global" (see above)
