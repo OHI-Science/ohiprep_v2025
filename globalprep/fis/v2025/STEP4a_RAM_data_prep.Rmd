@@ -436,11 +436,11 @@ ram_meta <- metadata %>%
 
 setdiff(ram_spatial$stockid, ram_meta$stockid) # make sure all the spatial data has corresponding metadata (should be 0). It is not 0, probably because these are ones that have been removed from the RAM database since the 2017 assessment... delete these from the data frame below. 
 
-# v2024: 
-#  [1] "HERR2529-33"   "HERR2529-34"   "HERR2529-35"  
-#  [4] "HERR2529-36"   "HERR2529-37"   "HERR30-32"    
-#  [7] "SOLEIIIa-2225" "SOLEIIIa-2226" "SOLEIIIa-2227"
-# [10] "SOLEIIIa-2228"
+# v2025:
+#  [1] "TARAKNZ"       "HERR2529-33"   "HERR2529-34"  
+#  [4] "HERR2529-35"   "HERR2529-36"   "HERR2529-37"  
+#  [7] "HERR30-32"     "SOLEIIIa-2225" "SOLEIIIa-2226"
+# [10] "SOLEIIIa-2227" "SOLEIIIa-2228"
 
 # join with metadata to get scientific name
 ram_spatial_meta <- ram_spatial %>%
@@ -449,7 +449,7 @@ ram_spatial_meta <- ram_spatial %>%
   rename(RAM_species = scientificname) %>%
   filter(!is.na(stocklong)) ## filtering out ones that didn't match above
 
-setdiff(ram_spatial_meta$stockid, ram_meta$stockid) # v2024: now it is 0, we can move on
+setdiff(ram_spatial_meta$stockid, ram_meta$stockid) # v2025: now it is 0, we can move on
 ```
 
 ## Standardize species names
@@ -475,10 +475,12 @@ SAUP_sp <- read_csv(here(dir_M,"git-annex","globalprep","fis","v2022","int","sto
 
 
 # compare names - what's in RAM that's not in SAUP
-tmp <- data.frame(scientificname = sort(setdiff(ram_sp$scientificname, SAUP_sp$SAUP_scientificname))) # 40 species names
+tmp <- data.frame(scientificname = sort(setdiff(ram_sp$scientificname, SAUP_sp$SAUP_scientificname))) 
+tmp # 40 species names
 
 # compare names - what's in SAUP that's not in RAM
-tmp2 <- data.frame(scientificname = sort(setdiff(SAUP_sp$SAUP_scientificname, ram_sp$scientificname))) # 2343 species names.. unfortunately a lot.
+tmp2 <- data.frame(scientificname = sort(setdiff(SAUP_sp$SAUP_scientificname, ram_sp$scientificname))) # 2341 species names.. unfortunately a lot.
+nrow(tmp2)
 
 write_csv(tmp, here(int_dir, "unmatched_RAM_species.csv"))
 write_csv(tmp2, here(int_dir, "SAUP_species_no_RAM.csv"))
@@ -513,7 +515,7 @@ species_to_add <- data.frame(
 
 RAM_species_to_SAUP_updated <- rbind(RAM_species_to_SAUP, species_to_add)
 
-write_csv(RAM_species_to_SAUP_updated, here(int_dir, "RAM_species_to_SAUP.csv")
+write_csv(RAM_species_to_SAUP_updated, here(int_dir, "RAM_species_to_SAUP.csv"))
 
 ram_name_corr <- read_csv(here(int_dir, "RAM_species_to_SAUP.csv")) %>%
    filter(!is.na(SAUP_species))  # SAUP to RAM name conversion
