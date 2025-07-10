@@ -57,6 +57,7 @@ Link: <https://www.fao.org/sustainable-development-goals/indicators/14b1/en/>
 ## Setup
 
 ```{r setup, message = FALSE, warning = FALSE, eval=F}
+
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.path = 'figs/', message = FALSE, warning = FALSE)
 if (!require(ohicore)){
   devtools::install_github('ohi-science/ohicore@dev')
@@ -141,8 +142,9 @@ api_get_indicator_data <- jsonlite::fromJSON(url)
 clean_data <- api_get_indicator_data$data %>% 
   dplyr::tibble() %>%
   tidyr::unnest(cols = c(goal, target, indicator, footnotes, attributes, dimensions)) %>% # unnest list and df columns then save raw file to csv before cleaning
-  
-  readr::write_csv(here::here("globalprep", "ao", version_year, "raw", "raw_sdg_14_data.csv")) %>% 
+  readr::write_csv(here::here("globalprep", "ao", version_year, "raw", "raw_sdg_14_data.csv")) 
+
+clean_data <- read_csv(here::here("globalprep", "ao", version_year, "raw", "raw_sdg_14_data.csv")) %>%
   janitor::clean_names() %>% 
   dplyr::mutate(
     time_detail = time_period_start,

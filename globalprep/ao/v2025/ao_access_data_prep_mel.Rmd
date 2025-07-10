@@ -1,0 +1,327 @@
+---
+title: "OHI `r format(Sys.Date(), '%Y')` - Artisanal Opportunities: Preparing access data"
+author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
+output: 
+  html_document:
+    code_folding: show
+    toc: true
+    toc_depth: 1
+    toc_float: yes
+    number_sections: true
+    theme: cerulean
+    highlight: haddock
+    includes: 
+      in_header: '../../../workflow/templates/ohi_hdr.html'
+pdf_document:
+  toc: true
+editor_options: 
+  chunk_output_type: console
+---
+
+# Summary
+
+This script generates the "access" layer for the artisanal opportunities goal. This prep uses the UN sustainable development goal 14.b.1, "Degree of application of a legal/regulatory/policy/institutional framework which recognizes and protects access rights for small-scale fisheries (level of implementation: 1 lowest to 5 highest)". We will rescale the scores to be between 0 and 1, match to OHI regions, and gapfill based on larger regions within the data.
+
+Link: <https://www.fao.org/sustainable-development-goals/indicators/14b1/en/>
+
+# Updates from previous assessment
+
+-   2025 Many countries not included that were in the past, added manually. Minor code reorganization.
+
+------------------------------------------------------------------------
+
+# Data Source
+
+**Reference**: Food and Agriculture Organization of the United Nations, 2020. Progress in the degree of implementation of international instruments to promote and protect small-scale fisheries, 2020.
+
+**Downloaded**: 7/10/2023
+
+**Description**: Progress by countries in the degree of application of a legal/regulatory/policy/institutional framework which recognizes and protects access rights for small-scale fisheries. It is a composite indicator based on FAO member country responses to the Code of Conduct for Responsible Fisheries (CCRF) survey questionnaire which is circulated by FAO every two years to members and IGOs and INGOs. This indicator is calculated on the basis of the efforts being made by countries to implement selected key provisions of the Voluntary Guidelines for Securing Sustainable Small-Scale Fisheries in the Context of Food Security and Poverty Eradication (SSF Guidelines), as reported in a given year of the survey.
+
+**Time range**: 2018, 2020, 2022, 2024
+
+**Download link**: We now use the API to access data (v2022) but alternatively you can access data here: <https://unstats.un.org/sdgs/dataportal/database>; Click "select indicators and country or area" and select indicator 14.b. Download all data for this indicator.
+
+**Note**: This data prep is also used for "Artisanal fisheries management effectiveness" (fp_artisinal). This means that when done with the data prep, you will need to update `ohi-global/metadata_documentation/layers_eez_base.csv`, `ao_access` and `fp_artisanal`. You will also need to update `ohi-global/eez/conf/scenario_data_years.csv` twice at `ao_access` and `fp_artisinal`. Each one should be run separately to see the effect of each update on the scores.
+
+------------------------------------------------------------------------
+
+# Methods
+
+## Setup
+
+```{r setup, message = FALSE, warning = FALSE, eval=F}
+
+knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.path = 'figs/', message = FALSE, warning = FALSE)
+if (!require(ohicore)){
+  devtools::install_github('ohi-science/ohicore@dev')
+  library(ohicore)
+}
+if (!require(librarian)){
+  install.packages("librarian")
+  library(librarian)
+}
+librarian::shelf(
+  tidyverse,
+  here,
+  janitor,
+  jsonlite,
+  plotly,
+  countrycode
+) 
+### directory paths and relevant files
+source(here::here('workflow', 'R', 'common.R'))
+
+version_year <- "v2025"
+```
+
+
+## Pull CCRF data from the API
+
+API query builder: <https://unstats.un.org/SDGAPI/swagger/>
+
+```{r}
+## Query the API for new data (released every 2 years, i.e. 2018, 2020, 2022)
+## page size arbitrarily large in order to ensure all data is downloaded in a single page
+
+## v2023 returned 849 rows of data (with countries and region groupings)
+## v2025 returned 839 rows of data (with countries and region groupings)
+
+url <- "https://unstats.un.org/SDGAPI/v1/sdg/Indicator/Data?indicator=14.b.1&pageSize=10000"
+
+api_get_indicator_data <- jsonlite::fromJSON(url)  
+
+clean_data <- api_get_indicator_data$data %>% 
+  dplyr::tibble() %>%
+  tidyr::unnest(cols = c(goal, target, indicator, footnotes, attributes, dimensions)) %>% # unnest list and df columns then save raw file to csv before cleaning
+  readr::write_csv(here::here("globalprep", "ao", version_year, "raw", "raw_sdg_14_data.csv")) 
+```
+
+Clean the downloaded UN data.
+
+```{r}
+
+## getting rid of non-useful columns (to see better what is going on)
+un_data <- read_csv(here::here("globalprep", "ao", version_year, "raw", "raw_sdg_14_data.csv")) %>%
+  janitor::clean_names() %>% 
+  dplyr::mutate(
+    geo_area_code = as.integer(geo_area_code),
+    score = dplyr::case_when( # Rescale values between 0 and 1
+      value == 1 ~ 0.2, 
+      value == 2 ~ 0.4, 
+      value == 3 ~ 0.6, 
+      value == 4 ~ 0.8, 
+      value == 5 ~ 1)) %>%
+  dplyr::select(geo_area_code, geo_area_name, year = time_period_start, score)
+
+## add standardized country names:
+
+un_data$rgn_name_standard <- countrycode(
+  sourcevar = un_data$geo_area_name,
+  origin = "country.name",
+  destination = "country.name.en"
+)
+
+table(un_data$rgn_name_standard) # should all have the same number
+filter(un_data, rgn_name_standard=="Nepal") #missing 2018 for Nepal, add in
+
+un_data <- rbind(un_data, data.frame(geo_area_code=524, geo_area_name="Nepal", year = 2018, score = NA, rgn_name_standard="Nepal"))
+
+
+# georegions data will be used to gapfill the regions that do not have country information in the UN access data.
+un_georegions <- filter(un_data, is.na(un_data$rgn_name_standard)) 
+unique(georegions$geo_area_name)
+un_data <- filter(un_data, !is.na(un_data$rgn_name_standard))
+un_data <- un_data %>% select(rgn_name_standard, year, score)
+
+```
+
+## Load in the OHI rgns_eez data from common.R
+Clean
+
+```{r}
+## Load in the rgns_eez data from common.R
+rgns_eez <- region_data()
+
+rgns_eez$rgn_name_standard <- countrycode(
+  sourcevar = rgns_eez$rgn_name,
+  origin = "country.name",
+  destination = "country.name.en"
+)
+
+#1: Some values were not matched unambiguously: Amsterdam Island and Saint Paul Island, Andaman and Nicobar, Ascension, Azores, Bonaire, Canary Islands, Clipperton Island, Crozet Islands, Glorioso Islands, Guadeloupe and Martinique, Howland Island and Baker Island, Ile Europa, Ile Tromelin, Jan Mayen, Jarvis Island, Johnston Atoll, Juan de Nova Island, Kerguelen Islands, Macquarie Island, Madeira, Micronesia, Northern Mariana Islands and Guam, Northern Saint-Martin, Oecussi Ambeno, Palmyra Atoll, Prince Edward Islands, Puerto Rico and Virgin Islands of the United States, Saba, Sint Eustatius, Tristan da Cunha, Wake Island
+ 
+#2: Some strings were matched more than once, and therefore set to <NA> in the result: Guadeloupe and Martinique,Guadeloupe,Martinique; Northern Mariana Islands and Guam,Guam,Northern Mariana Islands; Puerto Rico and Virgin Islands of the United States,Puerto Rico,U.S. Virgin Islands,United States
+filter(rgns_eez, is.na(rgns_eez$rgn_name_standard)) %>% arrange(rgn_name) %>% data.frame()
+
+
+# Check to see which regions need to be gapfilled
+intersect(rgns_eez$rgn_name_standard, un_data$rgn_name_standard) # yay! these look good!
+setdiff(rgns_eez$rgn_name_standard, un_data$rgn_name_standard) # these will be gapfilled with UN averages for georegions
+setdiff(un_data$rgn_name_standard, rgns_eez$rgn_name_standard) # these are all landlocked: missing nothing here
+
+# We will use OHI region_names when country.code was unable to assign a name.
+# This is fine because setdiff(un_data$rgn_name_standard, rgns_eez$rgn_name_standard)
+# does not include any variants of these
+rgns_eez <- rgns_eez %>%
+  dplyr::mutate(rgn_name_standard = ifelse(is.na(rgn_name_standard), rgn_name, rgn_name_standard))
+rgns_eez[duplicated(rgns_eez$rgn_name_standard),]
+
+
+rgns_eez[duplicated(rgns_eez$rgn_name_standard),] # some duplicates, the Kiribati regions will all be assigned the same value, so this is fine. 
+# Do need to correct the Bassa da India, which is an uninhabited island and will get cut later on
+rgns_eez <- rgns_eez %>%
+  mutate(rgn_name_standard = ifelse(rgn_id==34, "Bassas da India", rgn_name_standard))
+
+# join to UN region designations for gapfilling (these match the UN georegions, with the exception of the Southern Islands, 
+# which all are uninhabited)
+rgns_eez <- left_join(rgns_eez, UNgeorgn, by="rgn_id") %>%
+  select(rgn_id, rgn_name, rgn_name_standard, r2_label) %>%
+  mutate(r2_label = ifelse(r2_label == "Australia and New Zealand", "Oceania (exc. Australia and New Zealand)", r2_label))
+
+setdiff(rgns_eez$r2_label, un_georegions$geo_area_name) # the southern islands are uninhabited and will get cut.
+
+
+```
+
+
+## Now gapfill
+
+STEP 1: Gapfill within the un_data
+This gapfills countries with some (but not all years of data) with nearest value                          
+      
+```{r}
+
+un_data_gf <- un_data %>%
+  dplyr::group_by(rgn_name_standard) %>%
+  tidyr::fill(score, .direction = "down") %>%
+  tidyr::fill(score, .direction = "up") %>%
+  dplyr::ungroup() 
+
+```
+
+STEP 2: Gapfill across regions using the UN's summarized data.
+
+```{r}
+
+# make the full grid for regions
+full_grid <- expand.grid(rgn_id = rgns_eez$rgn_id, year=c(2018,2020, 2022, 2024))
+
+rgns_eez_gf <- left_join(full_grid, rgns_eez)
+
+rgns_eez_gf <- left_join(rgns_eez_gf, un_data_gf)
+
+rgns_eez_gf <- rgns_eez_gf %>%
+  mutate(gf = ifelse(is.na(score), "gf", NA))
+
+
+#clean the UN geeregions  data:
+un_geos_gf <- un_georegions %>%
+  select(r2_label = geo_area_name, year, geo_score = score) 
+
+# gapfill up and down
+un_geos_gf <- un_geos_gf  %>%
+  dplyr::group_by(r2_label) %>%
+  tidyr::fill(geo_score, .direction = "down") %>%
+  tidyr::fill(geo_score, .direction = "up") %>%
+  dplyr::ungroup() 
+
+
+rgns_eez_gf2 <- rgns_eez_gf %>%
+  left_join(un_geos_gf) %>%
+  mutate(score = ifelse(is.na(score), geo_score, score))
+  
+
+filter(rgns_eez_gf2, is.na(score)) # Antarctica and Southern Islands (all essentially uninhabited), which is fine
+
+```
+
+# make uninhabited regions NA 
+```{r}
+low_pop <- low_pop()
+
+rgns_eez_gf3 <- rgns_eez_gf2 %>%
+  mutate(score = ifelse(rgn_id %in% low_pop$rgn_id, NA, score))
+
+```
+
+
+# final formatting and save
+```{r, eval = F}
+final_gf_df <- gf_step_4d_df %>%
+  dplyr::select(rgn_id, year = time_detail, value = score,
+                completeness_pre_gf = data_completeness, gapfilled, method)
+
+## save gapfilling flag dataset
+final_gf_flags <- rgns_eez_gf3 %>%
+  dplyr::select(rgn_id, year, gapfilled = gf) %>%
+  readr::write_csv(here::here("globalprep", "ao", version_year, "output", "sdg_14_b_1_ao_gf.csv"))
+
+## save value dataset
+final_data <- rgns_eez_gf3 %>%
+  dplyr::select(rgn_id, year, value=score) %>% 
+  readr::write_csv(here::here("globalprep", "ao", version_year, "output", "sdg_14_b_1_ao.csv"))
+```
+
+
+##### I did not do anything after this!!!
+
+
+## Datacheck
+
+Lets compare to last years AO data.
+
+```{r, eval = F}
+## This section is checking if we get the same values as last years assesment 
+## This is primarily to see how the gapfilling changed the data that matches 
+## from this assessment to last years assessment 
+
+version_year_new <- paste0("v", 2025 ) # Replace with current year assessment 
+version_year_old <- paste0("v", 2024 ) # Replace with previous year assessment
+
+region_data()
+
+new_data <- here::here("globalprep", "ao", version_year_new, "output", "sdg_14_b_1_ao.csv") %>% 
+  readr::read_csv() %>%
+  dplyr::left_join(rgns_eez)
+
+old_data <- here::here("globalprep", "ao", version_year_old, "output", "sdg_14_b_1_ao.csv") %>% 
+  readr::read_csv() %>%
+  dplyr::left_join(rgns_eez)
+
+compare <- new_data %>%
+  dplyr::filter(year < current_year) %>%
+  dplyr::left_join(old_data, by = c("rgn_id", "year", "rgn_name", "admin_country_name"), 
+            suffix = c(paste0("_", version_year_new), paste0("_", version_year_old)))
+
+# v2025: Replace NA scores with 0 to get new scores to show up on graph
+#new_v2024 <- replace(compare$value_v2024, is.na(compare$value_v2024), 0) # Make sure to change this each year
+#compare$value_v2024 <- new_v2024
+
+# Find the difference in values from this year to last year 
+compare <- compare %>%
+dplyr::mutate(difference = value_v2024 - value_v2025) # Make sure to change this each year
+
+compare_diff <- compare %>% 
+  dplyr::filter(difference != 0) %>% 
+  dplyr::select(rgn_id, rgn_name, admin_country_name, year, value_v2024, value_v2025, difference) # Make sure to change this each year
+
+plot_diff <- 
+  ggplot2::ggplot(
+    compare, 
+    ggplot2::aes(x = !!rlang::sym(paste0("value_", version_year_old)), 
+        y = !!rlang::sym(paste0("value_", version_year_new)),
+        color = as.factor(year),
+        text = rgn_name,
+        label = rgn_id), color = "black") +
+  ggplot2::geom_jitter(width = 0.025, height = .025) +
+  ggplot2::geom_abline() +
+  ggplot2::labs(title = paste0("SDG 14.b.1 values (", version_year_old, " vs. ", version_year_new, ")"), 
+       x = paste(version_year_old, "values"), 
+       y = paste(version_year_new, "values"), 
+       color = "Data year") +
+  ggplot2::theme_bw() 
+
+plotly::ggplotly(plot_diff, tooltip = c("as.factor(year)", "rgn_id", "rgn_name", "x", "y"))
+```
+
