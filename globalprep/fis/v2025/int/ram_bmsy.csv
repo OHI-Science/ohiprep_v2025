@@ -3647,10 +3647,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2001,16746976058,1.3809946714032,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2001,24424401720,1.3809946714032,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2001,293108000000,1.3809946714032,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2001,NA,0.635046952092949,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2001,NA,1.07069754915163,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2001,NA,1.07069754915163,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2001,NA,1.07069754915163,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2001,NA,0.635046952092949,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2001,85189840185,0.387251250399064,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2001,35732769.58,0.387251250399064,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2001,NA,0.813126785230282,0,none
@@ -7715,10 +7715,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2002,16746976058,1.31882770870337,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2002,24424401720,1.31882770870337,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2002,293108000000,1.31882770870337,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2002,NA,0.666878879516155,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2002,NA,0.9315917048209,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2002,NA,0.9315917048209,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2002,NA,0.9315917048209,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2002,NA,0.666878879516155,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2002,85189840185,0.461707637189174,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2002,35732769.58,0.461707637189174,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2002,NA,0.925713570877551,0,none
@@ -11783,10 +11783,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2003,16746976058,1.28774422735346,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2003,24424401720,1.28774422735346,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2003,293108000000,1.28774422735346,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2003,NA,0.765557854528092,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2003,NA,0.936035550767573,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2003,NA,0.936035550767573,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2003,NA,0.936035550767573,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2003,NA,0.765557854528092,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2003,85189840185,0.481820439147246,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2003,35732769.58,0.481820439147246,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2003,NA,1.06957446364906,0,none
@@ -15851,10 +15851,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2004,16746976058,1.13676731793961,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2004,24424401720,1.13676731793961,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2004,293108000000,1.13676731793961,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2004,NA,0.935858666242241,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2004,NA,0.834455516653201,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2004,NA,0.834455516653201,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2004,NA,0.834455516653201,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2004,NA,0.935858666242241,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2004,85189840185,0.43691248980171,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2004,35732769.58,0.43691248980171,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2004,NA,1.23845464211997,0,none
@@ -19919,10 +19919,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2005,16746976058,1.15008880994671,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2005,24424401720,1.15008880994671,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2005,293108000000,1.15008880994671,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2005,NA,1.08546872513131,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2005,NA,0.905422389801598,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2005,NA,0.905422389801598,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2005,NA,0.905422389801598,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2005,NA,1.08546872513131,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2005,85189840185,0.379837536802526,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2005,35732769.58,0.379837536802526,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2005,NA,0.877759939953714,0,none
@@ -23987,10 +23987,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2006,16746976058,1.25222024866785,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2006,24424401720,1.25222024866785,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2006,293108000000,1.25222024866785,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2006,NA,1.04090402673882,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2006,NA,1.0422389801598,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2006,NA,1.0422389801598,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2006,NA,1.0422389801598,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2006,NA,1.04090402673882,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2006,85189840185,0.391082260295839,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2006,35732769.58,0.391082260295839,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2006,NA,0.815211725705231,0,none
@@ -28055,10 +28055,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2007,16746976058,1.22113676731794,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2007,24424401720,1.22113676731794,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2007,293108000000,1.22113676731794,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2007,NA,1.00588890657329,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2007,NA,1.18529490977646,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2007,NA,1.18529490977646,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2007,NA,1.18529490977646,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2007,NA,1.00588890657329,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2007,85189840185,0.50111737788656,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2007,35732769.58,0.50111737788656,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2007,NA,0.765173154306445,0,none
@@ -32123,10 +32123,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2008,16746976058,1.13676731793961,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2008,24424401720,1.13676731793961,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2008,293108000000,1.13676731793961,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2008,NA,1.06477797230622,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2008,NA,1.44218511536045,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2008,NA,1.44218511536045,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2008,NA,1.44218511536045,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2008,NA,1.06477797230622,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2008,85189840185,0.531233372352879,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2008,35732769.58,0.531233372352879,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2008,NA,0.719304463857557,0,none
@@ -36191,10 +36191,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2009,16746976058,1.01687388987567,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2009,24424401720,1.01687388987567,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2009,293108000000,1.01687388987567,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2009,NA,1.12525863441031,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2009,NA,1.74117963910584,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2009,NA,1.74117963910584,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2009,NA,1.74117963910584,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2009,NA,1.12525863441031,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2009,85189840185,0.513639104678798,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2009,35732769.58,0.513639104678798,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2009,NA,0.896524404228259,0,none
@@ -40259,10 +40259,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2010,16746976058,0.976909413854352,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2010,24424401720,0.976909413854352,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2010,293108000000,0.976909413854352,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2010,NA,1.14276619449308,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2010,NA,1.49183050543137,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2010,NA,1.49183050543137,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2010,NA,1.49183050543137,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2010,NA,1.14276619449308,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2010,85189840185,0.648150118832251,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2010,35732769.58,0.648150118832251,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2010,NA,1.35312636824219,0,none
@@ -44327,10 +44327,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2011,16746976058,0.97246891651865,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2011,24424401720,0.97246891651865,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2011,293108000000,0.97246891651865,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2011,NA,1.19688047111253,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2011,NA,1.36798635425083,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2011,NA,1.36798635425083,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2011,NA,1.36798635425083,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2011,NA,1.19688047111253,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2011,85189840185,0.762441914086056,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2011,35732769.58,0.762441914086056,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2011,NA,1.35104142776724,0,none
@@ -48395,10 +48395,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2012,16746976058,0.941385435168739,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2012,24424401720,0.941385435168739,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2012,293108000000,0.941385435168739,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2012,NA,1.32261658443419,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2012,NA,1.45497800520693,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2012,NA,1.45497800520693,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2012,NA,1.45497800520693,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2012,NA,1.32261658443419,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2012,85189840185,0.777517647476145,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2012,35732769.58,0.777517647476145,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2012,NA,1.21969017784542,0,none
@@ -52463,10 +52463,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2013,16746976058,1.18579234972678,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2013,24424401720,1.18579234972678,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2013,293108000000,1.18579234972678,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2013,NA,1.47859302880789,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2013,NA,1.51117694586588,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2013,NA,1.51117694586588,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2013,NA,1.51117694586588,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2013,NA,1.47859302880789,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2013,85189840185,0.775673087155475,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2013,35732769.58,0.775673087155475,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2013,NA,1.1091883326731,0,none
@@ -56531,10 +56531,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2014,16746976058,1.13661202185792,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2014,24424401720,1.13661202185792,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2014,293108000000,1.13661202185792,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2014,NA,1.65526022600668,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2014,NA,1.7272196786067,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2014,NA,1.7272196786067,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2014,NA,1.7272196786067,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2014,NA,1.65526022600668,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2014,85189840185,0.737221098932283,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2014,35732769.58,0.737221098932283,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2014,NA,1.26972874924421,0,none
@@ -60599,10 +60599,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2015,16746976058,1.13114754098361,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2015,24424401720,1.13114754098361,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2015,293108000000,1.13114754098361,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2015,NA,1.7507560082763,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2015,NA,2.09704641350211,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2015,NA,2.09704641350211,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2015,NA,2.09704641350211,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2015,NA,1.7507560082763,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2015,85189840185,0.679046504203469,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2015,35732769.58,0.679046504203469,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2015,NA,1.28432333256886,0,none
@@ -64667,10 +64667,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2016,16746976058,1.13114754098361,0,none
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2016,24424401720,1.13114754098361,0,none
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2016,293108000000,1.13114754098361,0,none
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2016,NA,1.81441986312271,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2016,NA,2.04807433342311,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2016,NA,2.04807433342311,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2016,NA,2.04807433342311,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2016,NA,1.81441986312271,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2016,85189840185,0.786988755276507,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2016,35732769.58,0.786988755276507,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2016,NA,1.06540458269916,0,none
@@ -68735,10 +68735,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2017,16746976058,1.13114754098361,1,down/upfilling
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2017,24424401720,1.13114754098361,1,down/upfilling
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2017,293108000000,1.13114754098361,1,down/upfilling
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2017,NA,1.87808371796912,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2017,NA,2.33948289792621,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2017,NA,2.33948289792621,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2017,NA,2.33948289792621,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2017,NA,1.87808371796912,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2017,85189840185,0.839736085984889,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2017,35732769.58,0.839736085984889,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2017,NA,0.779767737631091,0,none
@@ -72803,10 +72803,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2018,16746976058,1.13114754098361,1,down/upfilling
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2018,24424401720,1.13114754098361,1,down/upfilling
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2018,293108000000,1.13114754098361,1,down/upfilling
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2018,NA,1.95766353652714,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2018,NA,2.50403985995152,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2018,NA,2.50403985995152,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2018,NA,2.50403985995152,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2018,NA,1.95766353652714,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2018,85189840185,0.68670852399702,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2018,35732769.58,0.68670852399702,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2018,NA,0.590038154410692,0,none
@@ -76871,10 +76871,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2019,16746976058,1.13114754098361,1,down/upfilling
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2019,24424401720,1.13114754098361,1,down/upfilling
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2019,293108000000,1.13114754098361,1,down/upfilling
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2019,NA,2.00541142766195,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2019,NA,3.26995241942724,0,none
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2019,NA,3.26995241942724,0,none
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2019,NA,3.26995241942724,0,none
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2019,NA,2.00541142766195,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2019,85189840185,0.754708949664787,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2019,35732769.58,0.754708949664787,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2019,NA,0.610887559160186,0,none
@@ -80939,10 +80939,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2020,16746976058,1.13114754098361,1,down/upfilling
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2020,24424401720,1.13114754098361,1,down/upfilling
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2020,293108000000,1.13114754098361,1,down/upfilling
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2020,NA,1.98949546395034,0,none
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2020,NA,3.26995241942724,1,down/upfilling
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2020,NA,3.26995241942724,1,down/upfilling
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2020,NA,3.26995241942724,1,down/upfilling
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2020,NA,1.98949546395034,0,none
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2020,85189840185,0.888900712993509,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2020,35732769.58,0.888900712993509,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2020,NA,0.646331547234327,0,none
@@ -85007,10 +85007,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2021,16746976058,1.13114754098361,1,down/upfilling
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2021,24424401720,1.13114754098361,1,down/upfilling
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2021,293108000000,1.13114754098361,1,down/upfilling
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2021,NA,1.98949546395034,1,down/upfilling
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2021,NA,3.26995241942724,1,down/upfilling
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2021,NA,3.26995241942724,1,down/upfilling
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2021,NA,3.26995241942724,1,down/upfilling
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2021,NA,1.98949546395034,1,down/upfilling
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2021,85189840185,0.691603703309567,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2021,35732769.58,0.691603703309567,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2021,NA,0.646331547234327,1,down/upfilling
@@ -89075,10 +89075,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2022,16746976058,1.13114754098361,1,down/upfilling
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2022,24424401720,1.13114754098361,1,down/upfilling
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2022,293108000000,1.13114754098361,1,down/upfilling
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2022,NA,1.98949546395034,1,down/upfilling
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2022,NA,3.26995241942724,1,down/upfilling
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2022,NA,3.26995241942724,1,down/upfilling
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2022,NA,3.26995241942724,1,down/upfilling
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2022,NA,1.98949546395034,1,down/upfilling
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2022,85189840185,0.637721258557696,0,none
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2022,35732769.58,0.637721258557696,0,none
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2022,NA,0.646331547234327,1,down/upfilling
@@ -93143,10 +93143,10 @@ rgn_id,stockid,stockid_ram,stocklong,year,RAM_area_m2,ram_bmsy,gapfilled,method
 110,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2023,16746976058,1.13114754098361,1,down/upfilling
 163,Rhomboplites_aurorubens-21,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2023,24424401720,1.13114754098361,1,down/upfilling
 163,Rhomboplites_aurorubens-31,VSNAPSATLC,Vermilion snapper Southern Atlantic coast,2023,293108000000,1.13114754098361,1,down/upfilling
-182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2023,NA,1.98949546395034,1,down/upfilling
 179,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2023,NA,3.26995241942724,1,down/upfilling
 182,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2023,NA,3.26995241942724,1,down/upfilling
 180,Lophius_piscatorius-27,WANGLVII-VIIIabd,White anglerfish ICES 7-8abd,2023,NA,3.26995241942724,1,down/upfilling
+182,Lophius_piscatorius-27,WANGLVIIIc-IXa,White anglerfish ICES 8c-9a,2023,NA,1.98949546395034,1,down/upfilling
 163,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2023,85189840185,0.637721258557696,1,down/upfilling
 218,Urophycis_tenuis-21,WHAKEGBGOM,White hake Gulf of Maine / Georges Bank,2023,35732769.58,0.637721258557696,1,down/upfilling
 179,Merlangius_merlangus-27,WHITVIIbce-k,Whiting Celtic Sea,2023,NA,0.646331547234327,1,down/upfilling
