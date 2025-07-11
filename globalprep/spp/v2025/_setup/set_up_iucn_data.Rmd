@@ -531,7 +531,7 @@ iucn_risk_ts_and_trends <- pop_trends_marine %>%
 write_csv(iucn_risk_ts_and_trends, file.path(dir_setup, 'int/trend_calcs',
                          sprintf('iucn_risk_ts_and_trends_%s.csv', api_version)))
 
-
+# Make one file for both global and regional assessments
 all_ts <- marine_species_risk_timeseries %>%
   mutate(iucn_rgn = "global") %>%
   bind_rows(rgn_risk_ts %>%
@@ -633,4 +633,5 @@ trend_df <- iucn_risk_ts_and_trends %>%
 # Write csv
 write_csv(trend_df, file.path(dir_data, sprintf('iucn_trend_by_spp_%s.csv', api_version)))
 ```
+
 
