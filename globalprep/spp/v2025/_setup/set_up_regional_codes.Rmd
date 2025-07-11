@@ -28,6 +28,7 @@ library(raster)
 library(here)
 #library(ggridges)
 library(ggplot2)
+library(sf)
 
 source(here('workflow/R/common.R'))
 
@@ -131,6 +132,14 @@ Options:
 * LME 32 (NOTE: this encompasses the entire Arabian Sea)
 * MEOW 90:91
 
+
+```{r}
+meow <- st_read(file.path(dir_anx, "_raw_data", "meow"))
+
+plot(meow)
+```
+
+
 ```{r}
 unique(rgn_risk_ts$iucn_rgn)
 
@@ -157,6 +166,38 @@ rgn_to_meow_df <- data.frame(iucn_rgn = names(rgn_to_meow),
   arrange(priority)
 
 write_csv(rgn_to_meow_df, file.path(dir_goal, sprintf('_spatial/iucn_rgn_to_meow.csv')))
+```
+
+
+UPDATE 
+
+
+``` {r code LMEs}
+
+rgn_to_lme <- c('europe'              = '20,21,22,23,24,25,26,59',
+                'northern_africa'     = '26,27,33',
+                'western_africa'      = '28', 
+                'central_africa'      = '28,29',
+                'northeastern_africa' = '32,33',
+                'southern_africa'     = '29,30',
+                'eastern_africa'      = '30,31',
+                'pan-africa'          = '26,27,28,29,30,31,32,33',
+                'gulf_of_mexico'      = '5',
+                'mediterranean'       = '26,62', 
+                'persian_gulf'        = '32',
+                'global'              = paste0(1:66, collapse = ','))
+
+rgn_to_lme_df <- data.frame(iucn_rgn = names(rgn_to_lme),
+                            lme_id = rgn_to_lme) %>%
+  mutate(lme_id = str_split(lme_id, ',')) %>%
+  unnest(lme_id) %>%
+  group_by(iucn_rgn) %>%
+  mutate(lme_id = as.integer(lme_id),
+         priority = n()) %>%
+  arrange(priority)
+
+write_csv(rgn_to_lme_df, file.path(dir_goal, sprintf('_spatial/iucn_rgn_to_lme.csv')))
+
 ```
 
 Where an LME is assigned to multiple regions, use a prioritization then averaging method:
