@@ -136,7 +136,7 @@ Options:
 ```{r}
 meow <- st_read(file.path(dir_anx, "_raw_data", "meow"))
 
-plot(meow)
+plot(meow["ECOREGION"])
 ```
 
 
