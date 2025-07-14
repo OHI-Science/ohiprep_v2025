@@ -12,6 +12,8 @@ output:
       in_header: '../../../workflow/templates/ohi_hdr.html'
   pdf_document:
     toc: true
+editor_options: 
+  chunk_output_type: console
 ---
 
 [REFERENCE RMD FILE: <http://ohi-science.org/ohiprep_v2021/globalprep/np/v2021/STEP1a_np_ornamentals_prep.html>]
@@ -161,18 +163,11 @@ files_old <- list.files(dir_fao_data_old, pattern = glob2rx('*.csv'), full.names
   ##  in data vs commodities in lookup table
   
   # Load lookup for converting commodities to products
-  #com2prod <- read.csv(here::here(current_np_dir, "raw", "commodities2products_weighting.csv"), na.strings = '')
   com2prod <- readr::read_csv(here::here(current_np_dir, "raw", "commodities2products_weighting.csv"), na = '')
   
-  ## version used in 2019:
-  ##    read.csv(here('globalprep/np/v2019/raw/commodities2products.csv'), na.strings='')
-  ## version used in 2018:
-  ##    com2prod <- read.csv('raw/commodities2products.csv', na.strings='')
-  ## version used in 2015: use when testing....
-  ##    com2prod <- read.csv('../v2014_test/commodities2products.csv', na.strings='')
-    
-  ## Check the current commodity-to-product lookup table.  If necessary, make changes to     "raw/commodities2products_weighting.csv"
-  ## v2021: Missing a couple in each category. 
+  sum(str_detect(m$commodity, "seaweed"))
+  length(str_detect(m$commodity, "seaweed"))
+  
   # Make sure to examine the fish oil category thoroughly though. Some of the instances that are caught here are NOT fish oil. For example: "Whole lobsters Homarus spp,  in shell or not, dried, salted/in brine, smoked,  cooked by steaming/boiling in water" is including because "boiling" has "oil" in it. Add the appropriate missing commodities to commodities2products_weighting.csv
 
     # Don't worry about any that show up under corals, shells, or sponges, since we don't include them in the assessment anyways. We are just keeping them in for now, because we use them as an example in the methods document (see below).
@@ -185,42 +180,43 @@ files_old <- list.files(dir_fao_data_old, pattern = glob2rx('*.csv'), full.names
   # many-to-many relationship is expected
     
     
+ # FAO changed naming conventions in 2025 by adding '[former]' to antiquated country names. Strip that here for using the split_regions
+  m <- m %>% 
+    mutate(country = str_remove(country, "\\s*\\[former\\]")) # used regex here to account for the brackets
+    
   ## Special case: user-defined function deals with 
   ##   breaking up Antilles into separate reported rgns
   m <- ohicore::split_regions(m)
-    
-  ## Some changes to region names that aren't working in name_2_rgn()
-  m <- m  %>%
-    filter(country != "Azerbaijan") 
 
   m_rgn <- ohicore::name_2_rgn(df_in = m,
                       fld_name = 'country', 
                       flds_unique = c('commodity', 'product', 'year'))
   
-  # check duplicates
-  # m_duplicates <- m_rgn[duplicated(m_rgn[, c("rgn_name", "year", "commodity", "product")]),]
-  # unique(m_duplicates$country)
-  # unique(m_duplicates$rgn_name)
-
-  
-  # v2024 removed: 
-  # Ascension, Saint Helena and Tristan da Cunha -- new syntax from previous years, will update ohicore::split_regions() to account for this change
+  # v2025 removed: 
   # Yugoslavia SFR  -- this is fine, since it broke up into the six modern countries: Croatia, Montenegro, Serbia, Slovenia, Bosnia and Herzegovina, and Macedonia in 1990-1992, which means the relevant data is still captured.
+  # Union of Soviet Socialist Republics -- Also fine since it happened so long ago it isn't relevant to our assessment
   
-  # v2021 duplicates:  [1] "China" "China, Hong Kong SAR" "China, Macao SAR"  "Guadeloupe"           
-  # [5] "Martinique" "Montenegro"  "Russian Federation" "Serbia and Montenegro"
-  # [9] "Sudan" "Sudan (former)" "Un. Sov. Soc. Rep."   - these are all fixed in the group by and summarise below  
+  # check duplicates
+  m_duplicates <- m_rgn[duplicated(m_rgn[, c("rgn_name", "year", "commodity", "product")]),]
+  unique(m_duplicates$country) # v2025:
+  # [1] "China, Hong Kong SAR" 
+  # [2] "China, Macao SAR"     
+  # [3] "Martinique"           
+  # [4] "Serbia and Montenegro"
+  unique(m_duplicates$rgn_name) 
+  # [1] "China"                    
+  # [2] "Guadeloupe and Martinique"
+  # [3] "Montenegro"  
   
-  # v2024 duplicates for quantity and value: 
-  # [1] "China, Hong Kong SAR"  "China, Macao SAR"      "Martinique"    
-  # [4] "Serbia and Montenegro" "Sudan (former)"        "Un. Sov. Soc. Rep." 
+  # These will be combined in the next step
   
   ## combine composite regions
   ## When summarizing the dataset, this function provides a modified way to sum the value column while maintaining NA values when both variables are NA (rather than turning to zero values). The function will sum non-NA values normally.
   sum_function <- function(x) {
     if (sum(is.na(x)) == length(x)) 
       return(NA)
-    return(sum(x, na.rm = T))}
+    return(sum(x, na.rm = T))
+    }
   
   m_rgn <- m_rgn %>%
     group_by(rgn_id, rgn_name, commodity, product, year) %>%

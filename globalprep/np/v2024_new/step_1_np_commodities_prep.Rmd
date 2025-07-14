@@ -212,6 +212,9 @@ for (f in files) {
   ## Some changes to region names that aren't working in name_2_rgn()
   m <- m  %>%
     filter(country != "Azerbaijan") 
+  
+  m <- m %>% 
+    mutate(country = str_remove(country, "\\s*\\[former\\]")) # used regex here to account for the brackets
 
   m_rgn <- ohicore::name_2_rgn(df_in = m,
                       fld_name = 'country', 
