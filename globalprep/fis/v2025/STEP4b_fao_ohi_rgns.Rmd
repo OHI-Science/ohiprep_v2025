@@ -34,15 +34,16 @@ Generates a dataset describing the OHI and FAO major fishing regions that corres
 
 ```{r}
 ## Libraries
-library(dplyr)
-library(tidyr)
-library(readr)
+library(tidyverse)
 library(sf)
-library(ggplot2)
-library(stringr)
 library(here) 
 
 source(here("workflow", "R", "common.R"))
+
+# ---- set year and file path info ----
+current_year <- 2025 # Update this in the future!!
+version_year <- paste0("v",current_year)
+data_dir_version_year <- paste0("d", current_year)
 ```
 
 ## Identify Newly Added Stocks
@@ -101,21 +102,7 @@ length(unique(ram_bmsy$stockid)) # v2025: 476 unique entries
 
 
 ### Investigate Differences
-There were 4 stocks included in the new data but not the old data.
-These include: 
 
-[1] "PRGURNGUR3" "PRGURNGUR7"
-[3] "TARAKENZ"   "TARAKSA"  
-
-
-There were 22 stocks present in the old data but not the new.
-These include:
-
-[1] "COD2J3KL" "TARAKNZ" 
-
-v2023:
- - PERCHQCI: ID changed to PERCHHG (redefined)
- - LOBSTERGOM: now LOBSTERGOMGB (merged)
 
 ```{r}
 ## find newly added stocks, when using timeseries_values_views
@@ -124,9 +111,28 @@ new_stocks
 unused_stocks <- setdiff(old_stockid, new_stockid) # these are no longer included in the RAM data, will be deleted
 unused_stocks
 
-# v2021: See the mispelling for COD1F-XIV vs COD1f-XIV. This is ok. We will just use the new spelling and assign the fao-ohi regions again. 
+# Fix the stock name error in the old stock
+# ram_bmsy_old <- ram_bmsy_old %>% 
+#   mutate(stockid = str_replace_all(stockid, "TARAKNZ", "TARAKENZ"))
+
 ```
 
+There were 4 stocks included in the new data but not the old data.
+These include: 
+
+[1] "PRGURNGUR3" "PRGURNGUR7"
+[3] "TARAKENZ"   "TARAKSA"  
+
+
+There were 2 stocks present in the old data but not the new.
+These include:
+
+[1] "COD2J3KL" "TARAKNZ" 
+
+v2025:
+- "TARAKNZ" is sub-antarctic and "TARAKENZ" is eastern new zealand.
+- "COD2J3KL" is not anywhere in the new data
+ 
 
 Subset for just the additional stocks in RAM v4.65 data
 
@@ -134,9 +140,12 @@ Subset for just the additional stocks in RAM v4.65 data
 ram_bmsy_new <- ram_bmsy %>% 
   filter(stockid %in% new_stocks) 
 
+# Find just the unique new stocks
 id_new <- ram_bmsy_new %>% 
   select(stockid, stocklong) %>% 
   distinct()
+
+# view(id_new)
 ```
 
 
@@ -158,9 +167,9 @@ RAM_fao_ohi_rgns_fix <- RAM_fao_ohi_rgns %>%
   
 #filter for duplicates
 dupes <- RAM_fao_ohi_rgns_fix %>%
-  filter(dupe == "TRUE") # v2024: 0 good
+  filter(dupe == "TRUE") # v2025: 0 good
 
-dupes$stockid # these are our problem duplicates: 0
+dupes$stockid # no duplicates
 
 ## fix the dupes 
 dupes_fix <- dupes %>%
@@ -184,7 +193,7 @@ filter(RAM_rgns_old, stockid %in% unused_stocks) # quick check to see which stoc
 
 # filter out any stocks that are unused
 RAM_rgns_old_filt <- RAM_rgns_old %>%
-  filter(!(stockid %in% unused_stocks)) # v2024: changed so it does not overwrite RAM_rgns_old
+  filter(!(stockid %in% unused_stocks)) 
 ```
 
 ## Combine New and Old Stock Data
@@ -199,14 +208,12 @@ setdiff(id_new$stockid, RAM_rgns_old_filt$stockid)
 # "PRGURNGUR7" Pacific red gurnard New Zealand Area GUR 7
 # "TARAKENZ" Tarakihi Eastern New Zealand
 
-# Not super sure about this one, had a hard time finding the sub-antarctic but did find one for western australia. 
-# "TARAKSA" Tarakihi Sub-Antarctic
-
-
 RAM_rgns_new <- RAM_rgns_old_filt %>% 
   full_join(id_new, by = c("stockid","stocklong")) ## added the 4 new stocks, still don't have rgn_ids etc
-
+nrow(RAM_rgns_new)
 ```
+
+**2025 stocks**
 
 [PRGURNGUR3](https://fs.fish.govt.nz/Page.aspx?pk=8&stock=GUR3)
 [PRGURNGUR7](https://fs.fish.govt.nz/Page.aspx?pk=8&stock=GUR7)
@@ -259,7 +266,7 @@ RAM_na_non_multi <- RAM_nas %>%
   mutate(fao_id = primary_FAOarea) %>%
   left_join(rgns_eez, by = c("ISO3_code" = "eez_iso3"), relationship =
   "many-to-many") %>%
-  dplyr::select(rgn_id, fao_id, RAM_area_m2, stockid, stocklong) %>%
+  dplyr::select(rgn_id, fao_id, RAM_area_m2, stockid, stocklong, region) %>%
   mutate(fao_id = as.double(fao_id)) 
 
 unique(RAM_na_non_multi$region) # v2025: 4 are from new zealand
@@ -269,6 +276,9 @@ RAM_na_multi <- RAM_nas %>%
   filter(country == "multinational")
  
 unique(RAM_na_multi$region) # v2025: none are multinational
+
+# Because we have no multinational stocks, everything already has an FAO and OHI ID. We'll use RAM_rgns_new later on to complete the cleaning
+
 
 ```
 
@@ -377,9 +387,7 @@ For reference, here is what v2024 did:
  # Mode  :character 
 ```
 
-
 ## Tidy Final Datatable
-
 
 ### Fix Incorrect FAO-OHI Matches
 
@@ -400,32 +408,38 @@ fao_ohi_id <- fao_ohi %>%
 
 ## Filter for correct fao-ohi pairs in the RAM regions table 
 RAM_rgns_new_final <- fao_ohi_id %>% 
-  left_join(RAM_na_all, by = c("rgn_id", "fao_id")) %>% 
+  left_join(RAM_na_non_multi, by = c("rgn_id", "fao_id")) %>% 
+  # 2024 version of this line
+  # left_join(RAM_na_all, by = c("rgn_id", "fao_id")) %>% 
   filter(!is.na(stockid)) %>% # keep matches only
  arrange(stocklong, fao_id)
+
+# Confirm everything has an ID
+colSums(is.na(RAM_rgns_new_final))
 ```
 
 Compare with unfiltered RAM regions table to check on fao-ohi pairs that were dropped
 
 ```{r}
 ## Number of unique stocks after joining
-nrow(RAM_rgns_new_final) #v2024: 13
+nrow(RAM_rgns_new_final) #v2025: 4
 
 ## Number of unique stocks before joining
-RAM_temp <- RAM_na_all %>% select(rgn_id, fao_id, stockid, stocklong) %>% distinct() %>% arrange(stocklong, fao_id)
-nrow(RAM_temp) #v2024: 13
+# v2025 Use RAM_na_non_multi instead of RAM_na_all because we had no multinational stocks
+RAM_temp <- RAM_na_non_multi %>% select(rgn_id, fao_id, stockid, stocklong) %>% distinct() %>% arrange(stocklong, fao_id)
+nrow(RAM_temp) #v2025: 4
 
 ## add identifier for the two RAM table versions
 RAM_temp$idtemp <- 1:nrow(RAM_temp)
 RAM_rgns_new_final$idtemp2 <- 1:nrow(RAM_rgns_new_final)
 
 ## view the ohi-fao pairs that would be removed
-combine <- RAM_temp %>% 
+RAM_temp %>% 
   full_join(RAM_rgns_new_final, by = c("rgn_id", "fao_id", "stockid", "stocklong")) %>% 
-  filter(is.na(idtemp2)) ## v2024: we did not lose any!
+  filter(is.na(idtemp2)) ## v2025: we did not lose any!
 ```
 
-Tidy up RAM data table.  After the final check (located below), I hand added some new regions for some of the stocks. 
+Tidy up RAM data table.  
 ```{r}
 # v2024: none hand-added
 ## directory for intermediate outputs
@@ -434,7 +448,7 @@ int_dir <- here::here("globalprep","fis", version_year, "int")
 write_csv(RAM_rgns_new_final, here(int_dir, "RAM_new_stocks.csv"))
 
 ## check that there are still 4 unique stock ids
-length(unique(RAM_rgns_new_final$stockid)) # v2024: 4, great!
+length(unique(RAM_rgns_new_final$stockid)) # v2025: 4, great!
 ```
 
 ### RETURN: Combine with full dataset
@@ -448,6 +462,9 @@ RAM_final <- bind_rows(read_csv(here::here(int_dir,"RAM_new_stocks.csv"))) %>%
 RAM_fao_ohi_rgn_final <- RAM_rgns_old %>% 
   full_join(RAM_final, by = c("rgn_id", "fao_id", "stockid", "stocklong")) %>%
   select(-RAM_area_m2.y, RAM_area_m2 = RAM_area_m2.x) 
+
+# no NAs in IDs
+colSums(is.na(RAM_fao_ohi_rgn_final))
 
 RAM_fao_ohi_rgn_final_v2 <- RAM_rgns_old %>% 
   full_join(RAM_final, by = c("rgn_id", "fao_id", "stockid", "stocklong", "RAM_area_m2"))

@@ -63,7 +63,7 @@ Reference: Christopher M. Free. 2017. Mapping fish stock boundaries for the orig
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.path = 'figs/',message = FALSE, warning = FALSE, echo = TRUE, eval=FALSE)
 ```
 
-```{r, eval = FALSE}
+```{r}
 ## Libraries
 library(dplyr)
 library(tidyr)
@@ -510,7 +510,7 @@ species_to_add <- data.frame(
 
 RAM_species_to_SAUP_updated <- rbind(RAM_species_to_SAUP, species_to_add)
 
-write_csv(RAM_species_to_SAUP_updated, here(int_dir, "RAM_species_to_SAUP.csv")
+write_csv(RAM_species_to_SAUP_updated, here(int_dir, "RAM_species_to_SAUP.csv"))
 
 ram_name_corr <- read_csv(here(int_dir, "RAM_species_to_SAUP.csv")) %>%
    filter(!is.na(SAUP_species))  # SAUP to RAM name conversion
