@@ -14,6 +14,8 @@ output:
       in_header: '../../../../workflow/templates/ohi_hdr.html'
   pdf_document:
     toc: true
+editor_options: 
+  chunk_output_type: console
 ---
 
 ``` {r setup, echo = TRUE, message = FALSE, warning = FALSE}
@@ -529,9 +531,9 @@ system.time({
                                         FUN = function(x) crosstab_chunk(wdpa_marine_rast_500m, 
                                                                          rast_cell_id_500m, 
                                                                          chunk = x, n_chunks))
-  #     user   system  elapsed 
-  # 5335.773  588.892  550.586  - about ten minutes! 
   
+  #    user   system  elapsed 
+  # 5623.300 1018.111  622.959 - about ten minutes!
 })
 
 
@@ -552,18 +554,19 @@ wdpa_area_df <- wdpa_cells_df %>%
   summarize(mpa_pct = sum(mpa_pct), prot_area_km2 = sum(prot_area_km2)) %>%
   ungroup()
 
-# old <- read_csv(file.path(here(), "globalprep/spp/v2021/_spatial/wdpa_mpa_area.csv"))
+old <- read_csv(file.path(here(), "globalprep/spp/v2024/_spatial/wdpa_mpa_area.csv"))
 
 sum(old$prot_area_km2) # 26841457
+# 2024: 24690672
+
 sum(wdpa_area_df$prot_area_km2) # 24690672 
+# 2025: 30000565
 
 write_csv(wdpa_area_df, wdpa_cell_area_file)
-
 ```
 
 
 ``` {r crosstab mpa years}
-
 wdpa_yr_rast_500m <- raster(wdpa_prot_yr_file)
 rast_cell_id    <- raster(cell_id_file)    ### cell IDs at 10 km^2
 rast_ocean_500m  <- raster(ocean_500m_file)  ### ocean presence at 1 km^2
@@ -575,7 +578,7 @@ rast_cell_id_500m <- raster(cell_id_500m_file)
 wdpa_cell_year_file <- file.path(dir_spatial, 'wdpa_mpa_year.csv')
 
 ### now break into chunks and mclapply across them to crosstab WDPA categories to cell IDs
-if(!file.exists(wdpa_cell_year_file)) {
+#if(!file.exists(wdpa_cell_year_file)) {
   ### Break into smaller chunks for faster processing and eventual parallelizing
   n_chunks <- 60
   
@@ -610,7 +613,7 @@ if(!file.exists(wdpa_cell_year_file)) {
                                         rast_cell_id_500m, 
                                         chunk = x, n_chunks))
 #     user   system  elapsed 
-# 5401.628  619.072  562.306 - about 10 mins
+# 5304.982 1057.941  597.739 
   })
   
   
@@ -634,8 +637,295 @@ if(!file.exists(wdpa_cell_year_file)) {
   
   write_csv(wdpa_year_df, wdpa_cell_year_file)
   
-} else {
+#} else {
   # git_prov(wdpa_cell_year_file, 'output')
-}
+#}
 
 ```
+
+### View WDPA protected area proportions as raster
+
+Proportional protection can be multiplied by ocean area raster to get area of protection.  Collect by category (to avoid duplicate "by" values):
+
+* No Take (categories 1 & 2 and specifically designated "no take")
+    * classified as 1, 2, and -1 respectively
+* Conservation (categories 1-4 plus no take)
+    * classified as 1, 2, 3, 4, and -1 (no take)
+* All protection (non-NA)
+    * classified as 1-6, -1 (no take), and 8 (other protection)
+
+Note: these are not saved as separate rasters at this point... they are easily created from the dataframe of cell ID to protected proportion.
+
+``` {r}
+
+wdpa_area_df <- read_csv(wdpa_cell_area_file, show_col_types = FALSE)
+
+# wdpa_area_df <- read_csv("/home/sgclawson/github/ohiprep_v2022/globalprep/spp/v2021/_spatial/wdpa_mpa_area.csv")
+
+notake_df <- wdpa_area_df %>%
+  filter(wdpa_category <= 2) %>%
+  group_by(cell_id) %>%
+  summarize(mpa_pct = sum(mpa_pct)) %>%
+  rename(from = cell_id, to = mpa_pct)
+
+conservation_df <- wdpa_area_df %>%
+  filter(wdpa_category <= 4) %>%
+  group_by(cell_id) %>%
+  summarize(mpa_pct = sum(mpa_pct)) %>%
+  rename(from = cell_id, to = mpa_pct)
+
+all_prot_df <- wdpa_area_df %>%
+  group_by(cell_id) %>%
+  summarize(mpa_pct = sum(mpa_pct)) %>%
+  rename(from = cell_id, to = mpa_pct)
+
+notake_raster <- classify(x = rast(rast_cell_id), notake_df, others = NA)
+plot(notake_raster, main = 'No take protection (Ia, Ib, II + no take)')
+
+system.time({
+    notake_raster <- classify(x = rast(rast_cell_id), notake_df, others = NA)
+#     user   system  elapsed 
+# 5304.982 1057.941  597.739 
+  })
+plot(notake_raster, main = 'No take protection (Ia, Ib, II + no take)')
+
+
+conservation_raster <- classify(rast(rast_cell_id), conservation_df, others = NA)
+plot(conservation_raster, main = 'Conservation protection (Ia - IV + no take)')
+
+system.time({
+    conservation_raster <- classify(rast(rast_cell_id), conservation_df, others = NA)
+#    user  system elapsed 
+# 561.630   7.179 551.211 
+  })
+plot(conservation_raster, main = 'Conservation protection (Ia - IV + no take)')
+
+all_prot_raster <- classify(rast(rast_cell_id), all_prot_df, others = NA)
+plot(all_prot_raster, main = 'All protection (any category)')
+
+system.time({
+    all_prot_raster <- classify(rast(rast_cell_id), all_prot_df, others = NA)
+#     user   system  elapsed 
+# 1070.091   13.821 1051.193
+  })
+plot(all_prot_raster, main = 'All protection (any category)')
+```
+
+# Summary
+
+Set up analysis rasters for EEZs, MEOWs, and bathymetry at Gall-Peters 10 km^2 resolution.
+
+* EEZs will include all EEZs as well as FAO regions and CCAMLR regions, based on the global OHI EEZ map.
+* MEOWs will include all MEOW provinces, though only some are appropriate for IUCN regional assessments (see `2a_set_up_regional_codes.Rmd`).
+* Bathymetry will include regions for 200m+, 20-200m, and <20m.  
+* All will be clipped to the same ocean presence using the area raster.
+* Note: This likely won't be updated (since the data isn't updated on a yearly basis, but you should still check)
+
+# Methods
+
+## EEZ raster
+
+Using the OHI global EEZ shapefile, we will include all EEZs by OHI region code, as well as FAO regions and Antarctica, using unique identifiers.  This will allow for separation by high seas vs. EEZ, or different takes on IUCN regional assessments using FAO or EEZ identifiers.
+
+EEZ is rasterized for both land and sea, and then clipped to cells with non-NA values in the ocean_area raster.  This ensures presence of more coastal cells with fractional ocean area coverage.
+
+# Data Sources
+Marine Ecoregions of the World:
+
+* __Reference__: 
+    * Spalding, Mark D. et al. 2007. “Marine Ecoregions of the World: A Bioregionalization of Coastal and Shelf Areas.” BioScience 57(7): 573–83.
+        * Shapefiles available from: https://www.worldwildlife.org/publications/marine-ecoregions-of-the-world-a-bioregionalization-of-coastal-and-shelf-areas
+        * __Downloaded__: May 08, 2019
+
+``` {r set up EEZ raster}
+
+eez_rast_file <- file.path(dir_goal, '_spatial', 'eez_rast.tif')
+eez_shp_file  <- file.path(dir_M, 'git-annex/globalprep/spatial/v2017/regions_2017_update.shp')
+
+area_rast <- raster(file.path(dir_goal, '_spatial', 'ocean_area_rast.tif'))
+values(area_rast)[values(area_rast) <= .005] <- NA
+
+
+#if(!file.exists(eez_rast_file)) {
+eez_sf <- read_sf(eez_shp_file)
+
+eez_df <- eez_sf %>%
+  as.data.frame() %>%
+  dplyr::select(-geometry)
+
+eez_ids <- eez_df %>%
+  dplyr::select(rgn_id, rgn_name, rgn_ant_id) %>%
+  distinct()
+### rgn_ant_id is same as rgn_id except for Antarctica.  We don't really
+### need to chunk out Antarctica at this point so just use rgn_id.
+### Filter out all land polygons and project to Gall-Peters
+### EDIT: don't filter out land; leave it in, then later mask using the 
+### area raster.  This should ensure more partial-ocean coastal cells are included.
+
+eez_sf_reclass <- eez_sf %>%
+  clip_to_globe() %>%
+  ### in common_fxn.R: ensures no coordinates outside +-180, +-90
+  dplyr::select(rgn_id, geometry) %>%
+  st_transform(gp_proj4)
+
+#plot(eez_sf_reclass)
+
+rast_base <- area_rast
+
+eez_rast <- fasterize::fasterize(eez_sf_reclass, rast_base, 
+                                 field = 'rgn_id', fun = 'min')
+
+eez_rast_ocean <- eez_rast %>%
+  mask(area_rast)
+
+writeRaster(eez_rast_ocean, eez_rast_file, overwrite = TRUE)
+
+# } else {
+#   # git_prov(eez_shp_file, 'input')
+#   # git_prov(eez_rast_file, 'output')
+#   eez_rast_ocean <- raster::raster(eez_rast_file)
+# }
+
+plot(eez_rast_ocean, main = 'EEZ raster 10 km^2 Gall-Peters projection')
+
+```
+
+## MEOW raster
+
+Using the MEOW shapefile, we will include all the shapes at the province level and then mask out land using the area raster (for consistency).
+
+``` {r set up MEOW raster}
+meow_rast_file <- file.path(dir_goal, '_spatial', 'meow_rast.tif')
+meow_shp_file  <- file.path(dir_raw_data_anx, 'meow/meow_ecos.shp')
+
+#if(!file.exists(meow_rast_file)) {
+meow_sf <- read_sf(meow_shp_file) %>%
+  clip_to_globe()
+### in common_fxn.R: ensures no coordinates outside +-180, +-90
+
+
+meow_sf_reclass <- meow_sf %>%
+  dplyr::select(ECO_CODE_X, geometry) %>%
+  st_transform(gp_proj4)
+
+#plot(meow_sf_reclass)
+
+rast_base <- area_rast
+
+meow_rast <- fasterize::fasterize(meow_sf_reclass, rast_base, 
+                                  field = 'ECO_CODE_X', fun = 'min')
+
+meow_rast <- meow_rast %>%
+  mask(area_rast)
+    
+  ### check whether there are shoreline gaps between MEOW maps and EEZ maps
+   #x <- eez_rast
+   #x[!is.na(values(meow_rast))] <- NA
+   #plot(x)
+  ### MEOWs seem to go inland to prevent shoreline gaps! yay
+  
+writeRaster(meow_rast, meow_rast_file, overwrite = TRUE)
+# } else {
+#   # git_prov(meow_shp_file, 'input')
+#   # git_prov(meow_rast_file, 'output')
+#   meow_rast <- raster::raster(meow_rast_file)
+# }
+
+plot(meow_rast, main = 'MEOW raster 10 km^2 Gall-Peters')
+
+crs(meow_rast)
+
+```
+
+## Bathymetry raster
+
+Using [General Bathymetric Chart of the Oceans (GEBCO) bathymetry raster](https://www.gebco.net/data_and_products/historical_data_sets/#gebco_2014), identify min depth of ocean cells.  For neritic and coastal cells, leaving as min depth allows for changing depth thresholds if desired.  We will not clip based on anything below 200 m, so can classify these more coarsely.
+
+NOTE: 1 arcmin and 30 arcsec are available; 30 arcsec is more recent but one arcmin should be sufficient for our purposes.  Resample to 6 arc-minute (0.10°) using min depth in each cell.
+
+Bathymetry is masked to the ocean area raster.
+
+### Create and view minimum depth raster
+
+``` {r set up bathymetry raster}
+
+bathy_rast_file <- file.path(dir_goal, '_spatial', 'bathy_rast.tif')
+
+gebco_rast_file <- file.path(dir_raw_data_anx, 'gebco', 'd2017', 'GRIDONE_1D.nc')
+gebco_rast_raw  <- raster(gebco_rast_file)
+
+#if(!file.exists(bathy_rast_file)) {
+  ### The GEBCO raster is elevation, so depth is neg... for min depth, 
+  ### aggregate by max (and vice versa)
+bathy_rast_min <- gebco_rast_raw %>%
+  raster::aggregate(fact = 6, fun = max)
+
+bathy_rast_min <- -1 * bathy_rast_min ### depth is positive
+
+rast_base <- area_rast
+
+crs(bathy_rast_min)
+ext(bathy_rast_min)
+
+# The project step kept returning errors, so chatGPT recommended cutting the polar latitudes ("CEA projections often can't handle polar regions")
+bathy_rast_min <- crop(bathy_rast_min, extent(-180, 180, -85, 85))
+
+# bathy_rast_raw <- bathy_rast_min %>%
+#   projectRaster(rast_base, 
+#                 progress = 'text',
+#                 method = 'ngb')
+
+bathy_rast_raw <- terra::project(
+  rast(bathy_rast_min), 
+  rast(rast_base), 
+  method = "near")
+
+### reclassify:
+### compress cells above zero to sea level;
+### compress cells below 200 m to rough depth clips
+bathy_rast <- bathy_rast_raw
+values(bathy_rast)[values(bathy_rast_raw) < 0] <- 0
+values(bathy_rast)[values(bathy_rast_raw) > 200] <- 1000
+values(bathy_rast)[values(bathy_rast_raw) > 1000] <- 2000
+values(bathy_rast)[values(bathy_rast_raw) > 2000] <- 3000
+values(bathy_rast)[values(bathy_rast_raw) > 3000] <- 4000
+values(bathy_rast)[values(bathy_rast_raw) > 4000] <- 5000
+values(bathy_rast)[values(bathy_rast_raw) > 5000] <- 6000
+values(bathy_rast)[values(bathy_rast_raw) > 6000] <- 7000
+values(bathy_rast)[values(bathy_rast_raw) > 7000] <- 8000
+
+bathy_rast <- bathy_rast %>%
+  terra::mask(rast(area_rast))
+
+plot(bathy_rast)
+
+# Min depth bathy raster 10 km^2 Gall-Peters
+writeRaster(bathy_rast, bathy_rast_file, overwrite = TRUE)
+
+rast_neritic <- rast_shallow <- bathy_rast
+values(rast_neritic) <- ifelse(values(bathy_rast) <= 200, 1, NA)
+values(rast_shallow) <- ifelse(values(bathy_rast) <=  60, 1, NA)
+
+plot(rast_neritic)
+plot(rast_shallow)
+
+writeRaster(rast_neritic, file.path(dir_goal, '_spatial', 'bathy_rast_neritic.tif'),
+            overwrite = TRUE)
+writeRaster(rast_shallow, file.path(dir_goal, '_spatial', 'bathy_rast_shallow.tif'),
+            overwrite = TRUE)
+  
+# } else {
+#   # git_prov(bathy_rast_file, 'output')
+#   bathy_rast <- raster::raster(bathy_rast_file)
+# }
+
+
+# library(RColorBrewer)
+# 
+# color_palette <- colorRampPalette(brewer.pal(9, "Oranges"))
+# plot(bathy_rast, main = 'Bathymetry (minimum depth,) raster 10 km^2 Gall-Peters',
+#      col = color_palette(100))
+
+```
+
+
