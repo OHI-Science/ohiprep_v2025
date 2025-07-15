@@ -1,1083 +1,885 @@
-rgn_id,year,completeness_pre_gf,gapfilled,method
-82,2018,3/4,0,No gapfill needed
-82,2020,3/4,0,No gapfill needed
-82,2022,3/4,0,No gapfill needed
-82,2024,3/4,1,Used closest year score
-84,2018,1/4,1,Used closest year score
-84,2020,1/4,1,Used closest year score
-84,2022,1/4,1,Used closest year score
-84,2024,1/4,0,No gapfill needed
-200,2018,2/4,1,Used closest year score
-200,2020,2/4,0,No gapfill needed
-200,2022,2/4,1,Used closest year score
-200,2024,2/4,0,No gapfill needed
-120,2018,4/5,0,No gapfill needed
-120,2020,4/5,0,No gapfill needed
-120,2022,4/5,0,No gapfill needed
-120,2024,4/5,0,No gapfill needed
-120,NA,4/5,1,Used closest year score
-172,2018,3/4,1,Used closest year score
-172,2020,3/4,0,No gapfill needed
-172,2022,3/4,0,No gapfill needed
-172,2024,3/4,0,No gapfill needed
-110,2018,2/4,0,No gapfill needed
-110,2020,2/4,1,Used closest year score
-110,2022,2/4,1,Used closest year score
-110,2024,2/4,0,No gapfill needed
-52,2018,0/4,1,Used sub-region score
-52,2020,0/4,1,Used sub-region score
-52,2022,0/4,1,Used sub-region score
-52,2024,0/4,1,Used sub-region score
-204,2018,3/4,0,No gapfill needed
-204,2020,3/4,1,Used closest year score
-204,2022,3/4,0,No gapfill needed
-204,2024,3/4,0,No gapfill needed
-59,2018,4/4,0,Data complete
-59,2020,4/4,0,Data complete
-59,2022,4/4,0,Data complete
-59,2024,4/4,0,Data complete
-164,2018,4/4,0,Data complete
-164,2020,4/4,0,Data complete
-164,2022,4/4,0,Data complete
-164,2024,4/4,0,Data complete
-99,2018,2/4,0,No gapfill needed
-99,2020,2/4,1,Used closest year score
-99,2022,2/4,1,Used closest year score
-99,2024,2/4,0,No gapfill needed
-232,2018,1/4,1,Used closest year score
-232,2020,1/4,1,Used closest year score
-232,2022,1/4,1,Used closest year score
-232,2024,1/4,0,No gapfill needed
-171,2018,2/4,1,Used closest year score
-171,2020,2/4,1,Used closest year score
-171,2022,2/4,0,No gapfill needed
-171,2024,2/4,0,No gapfill needed
-71,2018,4/4,0,Data complete
-71,2020,4/4,0,Data complete
-71,2022,4/4,0,Data complete
-71,2024,4/4,0,Data complete
-56,2018,4/4,0,Data complete
-56,2020,4/4,0,Data complete
-56,2022,4/4,0,Data complete
-56,2024,4/4,0,Data complete
-24,2018,2/4,1,Used closest year score
-24,2020,2/4,0,No gapfill needed
-24,2022,2/4,1,Used closest year score
-24,2024,2/4,0,No gapfill needed
-197,2018,2/4,0,No gapfill needed
-197,2020,2/4,1,Used closest year score
-197,2022,2/4,1,Used closest year score
-197,2024,2/4,0,No gapfill needed
-218,2018,3/4,0,No gapfill needed
-218,2020,3/4,1,Used closest year score
-218,2022,3/4,0,No gapfill needed
-218,2024,3/4,0,No gapfill needed
-224,2018,3/4,0,No gapfill needed
-224,2020,3/4,0,No gapfill needed
-224,2022,3/4,0,No gapfill needed
-224,2024,3/4,1,Used closest year score
-209,2018,2/4,1,Used closest year score
-209,2020,2/4,0,No gapfill needed
-209,2022,2/4,0,No gapfill needed
-209,2024,2/4,1,Used closest year score
-14,2018,2/4,1,Used closest year score
-14,2020,2/4,0,No gapfill needed
-14,2022,2/4,0,No gapfill needed
-14,2024,2/4,1,Used closest year score
-132,2018,3/4,1,Used closest year score
-132,2020,3/4,0,No gapfill needed
-132,2022,3/4,0,No gapfill needed
-132,2024,3/4,0,No gapfill needed
-28,2018,1/4,1,Used closest year score
-28,2020,1/4,1,Used closest year score
-28,2022,1/4,1,Used closest year score
-28,2024,1/4,0,No gapfill needed
-100,2018,2/4,1,Used closest year score
-100,2020,2/4,1,Used closest year score
-100,2022,2/4,0,No gapfill needed
-100,2024,2/4,0,No gapfill needed
-153,2018,1/4,1,Used closest year score
-153,2020,1/4,1,Used closest year score
-153,2022,1/4,0,No gapfill needed
-153,2024,1/4,1,Used closest year score
-130,2018,3/4,1,Used closest year score
-130,2020,3/4,0,No gapfill needed
-130,2022,3/4,0,No gapfill needed
-130,2024,3/4,0,No gapfill needed
-195,2018,3/4,0,No gapfill needed
-195,2020,3/4,0,No gapfill needed
-195,2022,3/4,0,No gapfill needed
-195,2024,3/4,1,Used closest year score
-187,2018,4/4,0,Data complete
-187,2020,4/4,0,Data complete
-187,2022,4/4,0,Data complete
-187,2024,4/4,0,Data complete
-112,2018,3/4,0,No gapfill needed
-112,2020,3/4,0,No gapfill needed
-112,2022,3/4,0,No gapfill needed
-112,2024,3/4,1,Used closest year score
-81,2018,4/4,0,Data complete
-81,2020,4/4,0,Data complete
-81,2022,4/4,0,Data complete
-81,2024,4/4,0,Data complete
-21,2018,0/4,1,Used sub-region score
-21,2020,0/4,1,Used sub-region score
-21,2022,0/4,1,Used sub-region score
-21,2024,0/4,1,Used sub-region score
-175,2018,4/4,0,Data complete
-175,2020,4/4,0,Data complete
-175,2022,4/4,0,Data complete
-175,2024,4/4,0,Data complete
-123,2018,2/4,0,No gapfill needed
-123,2020,2/4,1,Used closest year score
-123,2022,2/4,0,No gapfill needed
-123,2024,2/4,1,Used closest year score
-115,2018,3/4,0,No gapfill needed
-115,2020,3/4,1,Used closest year score
-115,2022,3/4,0,No gapfill needed
-115,2024,3/4,0,No gapfill needed
-137,2018,3/4,1,Used closest year score
-137,2020,3/4,0,No gapfill needed
-137,2022,3/4,0,No gapfill needed
-137,2024,3/4,0,No gapfill needed
-214,2018,1/4,1,Used closest year score
-214,2020,1/4,1,Used closest year score
-214,2022,1/4,1,Used closest year score
-214,2024,1/4,0,No gapfill needed
-134,2018,3/4,0,No gapfill needed
-134,2020,3/4,1,Used closest year score
-134,2022,3/4,0,No gapfill needed
-134,2024,3/4,0,No gapfill needed
-104,2018,1/4,1,Used closest year score
-104,2020,1/4,1,Used closest year score
-104,2022,1/4,0,No gapfill needed
-104,2024,1/4,1,Used closest year score
-45,2018,4/4,0,Data complete
-45,2020,4/4,0,Data complete
-45,2022,4/4,0,Data complete
-45,2024,4/4,0,Data complete
-70,2018,4/4,0,Data complete
-70,2020,4/4,0,Data complete
-70,2022,4/4,0,Data complete
-70,2024,4/4,0,Data complete
-141,2018,3/4,0,No gapfill needed
-141,2020,3/4,1,Used closest year score
-141,2022,3/4,0,No gapfill needed
-141,2024,3/4,0,No gapfill needed
-18,2018,1/4,0,No gapfill needed
-18,2020,1/4,1,Used closest year score
-18,2022,1/4,1,Used closest year score
-18,2024,1/4,1,Used closest year score
-174,2018,3/4,0,No gapfill needed
-174,2020,3/4,1,Used closest year score
-174,2022,3/4,0,No gapfill needed
-174,2024,3/4,0,No gapfill needed
-179,2018,4/4,0,Data complete
-179,2020,4/4,0,Data complete
-179,2022,4/4,0,Data complete
-179,2024,4/4,0,Data complete
-198,2018,1/4,1,Used closest year score
-198,2020,1/4,1,Used closest year score
-198,2022,1/4,1,Used closest year score
-198,2024,1/4,0,No gapfill needed
-65,2018,1/4,0,No gapfill needed
-65,2020,1/4,1,Used closest year score
-65,2022,1/4,1,Used closest year score
-65,2024,1/4,1,Used closest year score
-74,2018,1/4,0,No gapfill needed
-74,2020,1/4,1,Used closest year score
-74,2022,1/4,1,Used closest year score
-74,2024,1/4,1,Used closest year score
-176,2018,4/4,0,Data complete
-176,2020,4/4,0,Data complete
-176,2022,4/4,0,Data complete
-176,2024,4/4,0,Data complete
-106,2018,3/4,0,No gapfill needed
-106,2020,3/4,1,Used closest year score
-106,2022,3/4,0,No gapfill needed
-106,2024,3/4,0,No gapfill needed
-80,2018,4/4,0,Data complete
-80,2020,4/4,0,Data complete
-80,2022,4/4,0,Data complete
-80,2024,4/4,0,Data complete
-125,2018,1/4,1,Used closest year score
-125,2020,1/4,0,No gapfill needed
-125,2022,1/4,1,Used closest year score
-125,2024,1/4,1,Used closest year score
-136,2018,3/4,0,No gapfill needed
-136,2020,3/4,0,No gapfill needed
-136,2022,3/4,0,No gapfill needed
-136,2024,3/4,1,Used closest year score
-194,2018,2/4,0,No gapfill needed
-194,2020,2/4,1,Used closest year score
-194,2022,2/4,1,Used closest year score
-194,2024,2/4,0,No gapfill needed
-193,2018,1/4,1,Used closest year score
-193,2020,1/4,1,Used closest year score
-193,2022,1/4,1,Used closest year score
-193,2024,1/4,0,No gapfill needed
-167,2018,4/4,0,Data complete
-167,2020,4/4,0,Data complete
-167,2022,4/4,0,Data complete
-167,2024,4/4,0,Data complete
-133,2018,4/4,0,Data complete
-133,2020,4/4,0,Data complete
-133,2022,4/4,0,Data complete
-133,2024,4/4,0,Data complete
-143,2018,2/4,0,No gapfill needed
-143,2020,2/4,1,Used closest year score
-143,2022,2/4,0,No gapfill needed
-143,2024,2/4,1,Used closest year score
-203,2018,3/4,1,Used closest year score
-203,2020,3/4,0,No gapfill needed
-203,2022,3/4,0,No gapfill needed
-203,2024,3/4,0,No gapfill needed
-216,2018,3/4,0,No gapfill needed
-216,2020,3/4,1,Used closest year score
-216,2022,3/4,0,No gapfill needed
-216,2024,3/4,0,No gapfill needed
-191,2018,1/4,0,No gapfill needed
-191,2020,1/4,1,Used closest year score
-191,2022,1/4,1,Used closest year score
-191,2024,1/4,1,Used closest year score
-192,2018,0/4,1,Used sub-region score
-192,2020,0/4,1,Used sub-region score
-192,2022,0/4,1,Used sub-region score
-192,2024,0/4,1,Used sub-region score
-181,2018,4/4,0,Data complete
-181,2020,4/4,0,Data complete
-181,2022,4/4,0,Data complete
-181,2024,4/4,0,Data complete
-184,2018,3/4,0,No gapfill needed
-184,2020,3/4,1,Used closest year score
-184,2022,3/4,0,No gapfill needed
-184,2024,3/4,0,No gapfill needed
-166,2018,2/4,0,No gapfill needed
-166,2020,2/4,0,No gapfill needed
-166,2022,2/4,1,Used closest year score
-166,2024,2/4,1,Used closest year score
-210,2018,4/4,0,Data complete
-210,2020,4/4,0,Data complete
-210,2022,4/4,0,Data complete
-210,2024,4/4,0,Data complete
-43,2018,2/4,1,Used closest year score
-43,2020,2/4,0,No gapfill needed
-43,2022,2/4,1,Used closest year score
-43,2024,2/4,0,No gapfill needed
-148,2018,1/4,1,Used closest year score
-157,2018,1/4,1,Used closest year score
-212,2018,1/4,1,Used closest year score
-148,2020,1/4,0,No gapfill needed
-157,2020,1/4,0,No gapfill needed
-212,2020,1/4,0,No gapfill needed
-148,2022,1/4,1,Used closest year score
-157,2022,1/4,1,Used closest year score
-212,2022,1/4,1,Used closest year score
-148,2024,1/4,1,Used closest year score
-157,2024,1/4,1,Used closest year score
-212,2024,1/4,1,Used closest year score
-51,2018,0/4,1,Used sub-region score
-51,2020,0/4,1,Used sub-region score
-51,2022,0/4,1,Used sub-region score
-51,2024,0/4,1,Used sub-region score
-69,2018,4/4,0,Data complete
-69,2020,4/4,0,Data complete
-69,2022,4/4,0,Data complete
-69,2024,4/4,0,Data complete
-78,2018,3/4,0,No gapfill needed
-78,2020,3/4,0,No gapfill needed
-78,2022,3/4,1,Used closest year score
-78,2024,3/4,0,No gapfill needed
-67,2018,2/4,0,No gapfill needed
-67,2020,2/4,1,Used closest year score
-67,2022,2/4,1,Used closest year score
-67,2024,2/4,0,No gapfill needed
-189,2018,4/4,0,Data complete
-189,2020,4/4,0,Data complete
-189,2022,4/4,0,Data complete
-189,2024,4/4,0,Data complete
-42,2018,3/4,0,No gapfill needed
-42,2020,3/4,0,No gapfill needed
-42,2022,3/4,1,Used closest year score
-42,2024,3/4,0,No gapfill needed
-206,2018,3/4,0,No gapfill needed
-206,2020,3/4,1,Used closest year score
-206,2022,3/4,0,No gapfill needed
-206,2024,3/4,0,No gapfill needed
-39,2018,3/4,0,No gapfill needed
-39,2020,3/4,0,No gapfill needed
-39,2022,3/4,1,Used closest year score
-39,2024,3/4,0,No gapfill needed
-68,2018,4/4,0,Data complete
-68,2020,4/4,0,Data complete
-68,2022,4/4,0,Data complete
-68,2024,4/4,0,Data complete
-11,2018,2/4,1,Used closest year score
-11,2020,2/4,1,Used closest year score
-11,2022,2/4,0,No gapfill needed
-11,2024,2/4,0,No gapfill needed
-64,2018,2/4,0,No gapfill needed
-64,2020,2/4,1,Used closest year score
-64,2022,2/4,1,Used closest year score
-64,2024,2/4,0,No gapfill needed
-37,2018,3/4,1,Used closest year score
-37,2020,3/4,0,No gapfill needed
-37,2022,3/4,0,No gapfill needed
-37,2024,3/4,0,No gapfill needed
-135,2018,4/4,0,Data complete
-135,2020,4/4,0,Data complete
-135,2022,4/4,0,Data complete
-135,2024,4/4,0,Data complete
-9,2018,6/10,1,Used closest year score
-9,2020,6/10,0,No gapfill needed
-9,2022,6/10,0,No gapfill needed
-9,2024,6/10,0,No gapfill needed
-9,NA,6/10,1,Used closest year score
-186,2018,2/4,1,Used closest year score
-186,2020,2/4,0,No gapfill needed
-186,2022,2/4,0,No gapfill needed
-186,2024,2/4,1,Used closest year score
-62,2018,4/4,0,Data complete
-62,2020,4/4,0,Data complete
-62,2022,4/4,0,Data complete
-62,2024,4/4,0,Data complete
-205,2018,3/4,0,No gapfill needed
-205,2020,3/4,0,No gapfill needed
-205,2022,3/4,1,Used closest year score
-205,2024,3/4,0,No gapfill needed
-101,2018,3/4,1,Used closest year score
-101,2020,3/4,0,No gapfill needed
-101,2022,3/4,0,No gapfill needed
-101,2024,3/4,0,No gapfill needed
-10,2018,3/4,1,Used closest year score
-10,2020,3/4,0,No gapfill needed
-10,2022,3/4,0,No gapfill needed
-10,2024,3/4,0,No gapfill needed
-177,2018,4/4,0,Data complete
-177,2020,4/4,0,Data complete
-177,2022,4/4,0,Data complete
-177,2024,4/4,0,Data complete
-162,2018,2/4,0,No gapfill needed
-162,2020,2/4,0,No gapfill needed
-162,2022,2/4,1,Used closest year score
-162,2024,2/4,1,Used closest year score
-131,2018,3/4,0,No gapfill needed
-131,2020,3/4,1,Used closest year score
-131,2022,3/4,0,No gapfill needed
-131,2024,3/4,0,No gapfill needed
-223,2018,0/4,1,Used sub-region score
-223,2020,0/4,1,Used sub-region score
-223,2022,0/4,1,Used sub-region score
-223,2024,0/4,1,Used sub-region score
-48,2018,3/4,0,No gapfill needed
-48,2020,3/4,0,No gapfill needed
-48,2022,3/4,1,Used closest year score
-48,2024,3/4,0,No gapfill needed
-53,2018,3/4,0,No gapfill needed
-53,2020,3/4,0,No gapfill needed
-53,2022,3/4,1,Used closest year score
-53,2024,3/4,0,No gapfill needed
-8,2018,3/4,0,No gapfill needed
-8,2020,3/4,0,No gapfill needed
-8,2022,3/4,0,No gapfill needed
-8,2024,3/4,1,Used closest year score
-129,2018,3/4,1,Used closest year score
-129,2020,3/4,0,No gapfill needed
-129,2022,3/4,0,No gapfill needed
-129,2024,3/4,0,No gapfill needed
-138,2018,4/4,0,Data complete
-138,2020,4/4,0,Data complete
-138,2022,4/4,0,Data complete
-138,2024,4/4,0,Data complete
-15,2018,3/4,0,No gapfill needed
-15,2020,3/4,0,No gapfill needed
-15,2022,3/4,0,No gapfill needed
-15,2024,3/4,1,Used closest year score
-178,2018,4/4,0,Data complete
-178,2020,4/4,0,Data complete
-178,2022,4/4,0,Data complete
-178,2024,4/4,0,Data complete
-183,2018,4/4,0,Data complete
-183,2020,4/4,0,Data complete
-183,2022,4/4,0,Data complete
-183,2024,4/4,0,Data complete
-190,2018,1/4,1,Used closest year score
-190,2020,1/4,1,Used closest year score
-190,2022,1/4,1,Used closest year score
-190,2024,1/4,0,No gapfill needed
-20,2018,1/4,0,No gapfill needed
-20,2020,1/4,1,Used closest year score
-20,2022,1/4,1,Used closest year score
-20,2024,1/4,1,Used closest year score
-72,2018,4/4,0,Data complete
-72,2020,4/4,0,Data complete
-72,2022,4/4,0,Data complete
-72,2024,4/4,0,Data complete
-73,2018,2/4,0,No gapfill needed
-73,2020,2/4,1,Used closest year score
-73,2022,2/4,0,No gapfill needed
-73,2024,2/4,1,Used closest year score
-119,2018,3/4,0,No gapfill needed
-119,2020,3/4,0,No gapfill needed
-119,2022,3/4,0,No gapfill needed
-119,2024,3/4,1,Used closest year score
-127,2018,4/4,0,Data complete
-127,2020,4/4,0,Data complete
-127,2022,4/4,0,Data complete
-127,2024,4/4,0,Data complete
-152,2018,3/4,0,No gapfill needed
-152,2020,3/4,0,No gapfill needed
-152,2022,3/4,0,No gapfill needed
-152,2024,3/4,1,Used closest year score
-103,2018,1/4,0,No gapfill needed
-103,2020,1/4,1,Used closest year score
-103,2022,1/4,1,Used closest year score
-103,2024,1/4,1,Used closest year score
-50,2018,1/4,1,Used closest year score
-50,2020,1/4,0,No gapfill needed
-50,2022,1/4,1,Used closest year score
-50,2024,1/4,1,Used closest year score
-66,2018,2/4,0,No gapfill needed
-66,2020,2/4,1,Used closest year score
-66,2022,2/4,1,Used closest year score
-66,2024,2/4,0,No gapfill needed
-31,2018,3/4,0,No gapfill needed
-31,2020,3/4,1,Used closest year score
-31,2022,3/4,0,No gapfill needed
-31,2024,3/4,0,No gapfill needed
-96,2018,1/4,0,No gapfill needed
-96,2020,1/4,1,Used closest year score
-96,2022,1/4,1,Used closest year score
-96,2024,1/4,1,Used closest year score
-208,2018,0/4,1,Used SIDS score
-208,2020,0/4,1,Used SIDS score
-208,2022,0/4,1,Used SIDS score
-208,2024,0/4,1,Used SIDS score
-188,2018,4/4,0,Data complete
-188,2020,4/4,0,Data complete
-188,2022,4/4,0,Data complete
-188,2024,4/4,0,Data complete
-7,2018,3/4,0,No gapfill needed
-7,2020,3/4,0,No gapfill needed
-7,2022,3/4,0,No gapfill needed
-7,2024,3/4,1,Used closest year score
-44,2018,1/4,0,No gapfill needed
-44,2020,1/4,1,Used closest year score
-44,2022,1/4,1,Used closest year score
-44,2024,1/4,1,Used closest year score
-102,2018,1/4,1,Used closest year score
-102,2020,1/4,1,Used closest year score
-102,2022,1/4,1,Used closest year score
-102,2024,1/4,0,No gapfill needed
-182,2018,4/4,0,Data complete
-182,2020,4/4,0,Data complete
-182,2022,4/4,0,Data complete
-182,2024,4/4,0,Data complete
-40,2018,1/4,0,No gapfill needed
-40,2020,1/4,1,Used closest year score
-40,2022,1/4,1,Used closest year score
-40,2024,1/4,1,Used closest year score
-49,2018,1/4,0,No gapfill needed
-49,2020,1/4,1,Used closest year score
-49,2022,1/4,1,Used closest year score
-49,2024,1/4,1,Used closest year score
-168,2018,4/4,0,Data complete
-168,2020,4/4,0,Data complete
-168,2022,4/4,0,Data complete
-168,2024,4/4,0,Data complete
-222,2018,4/4,0,Data complete
-222,2020,4/4,0,Data complete
-222,2022,4/4,0,Data complete
-222,2024,4/4,0,Data complete
-25,2018,4/4,0,Data complete
-25,2020,4/4,0,Data complete
-25,2022,4/4,0,Data complete
-25,2024,4/4,0,Data complete
-231,2018,1/4,1,Used closest year score
-231,2020,1/4,1,Used closest year score
-231,2022,1/4,1,Used closest year score
-231,2024,1/4,0,No gapfill needed
-156,2018,0/4,1,Used sub-region score
-156,2020,0/4,1,Used sub-region score
-156,2022,0/4,1,Used sub-region score
-156,2024,0/4,1,Used sub-region score
-155,2018,3/4,0,No gapfill needed
-155,2020,3/4,0,No gapfill needed
-155,2022,3/4,1,Used closest year score
-155,2024,3/4,0,No gapfill needed
-126,2018,4/4,0,Data complete
-126,2020,4/4,0,Data complete
-126,2022,4/4,0,Data complete
-126,2024,4/4,0,Data complete
-61,2018,1/4,1,Used closest year score
-61,2020,1/4,1,Used closest year score
-61,2022,1/4,1,Used closest year score
-61,2024,1/4,0,No gapfill needed
-76,2018,4/4,0,Data complete
-76,2020,4/4,0,Data complete
-76,2022,4/4,0,Data complete
-76,2024,4/4,0,Data complete
-19,2018,0/4,1,Used SIDS score
-19,2020,0/4,1,Used SIDS score
-19,2022,0/4,1,Used SIDS score
-19,2024,0/4,1,Used SIDS score
-75,2018,1/4,1,Used closest year score
-75,2020,1/4,0,No gapfill needed
-75,2022,1/4,1,Used closest year score
-75,2024,1/4,1,Used closest year score
-54,2018,1/4,1,Used closest year score
-54,2020,1/4,1,Used closest year score
-54,2022,1/4,0,No gapfill needed
-54,2024,1/4,1,Used closest year score
-180,2018,3/4,0,No gapfill needed
-180,2020,3/4,1,Used closest year score
-180,2022,3/4,0,No gapfill needed
-180,2024,3/4,0,No gapfill needed
-202,2018,3/4,0,No gapfill needed
-202,2020,3/4,1,Used closest year score
-202,2022,3/4,0,No gapfill needed
-202,2024,3/4,0,No gapfill needed
-163,2018,0/4,1,Used sub-region score
-163,2020,0/4,1,Used sub-region score
-163,2022,0/4,1,Used sub-region score
-163,2024,0/4,1,Used sub-region score
-173,2018,3/4,0,No gapfill needed
-173,2020,3/4,0,No gapfill needed
-173,2022,3/4,1,Used closest year score
-173,2024,3/4,0,No gapfill needed
-6,2018,1/4,0,No gapfill needed
-6,2020,1/4,1,Used closest year score
-6,2022,1/4,1,Used closest year score
-6,2024,1/4,1,Used closest year score
-139,2018,3/4,0,No gapfill needed
-139,2020,3/4,0,No gapfill needed
-139,2022,3/4,0,No gapfill needed
-139,2024,3/4,1,Used closest year score
-207,2018,3/4,0,No gapfill needed
-207,2020,3/4,0,No gapfill needed
-207,2022,3/4,1,Used closest year score
-207,2024,3/4,0,No gapfill needed
-47,2018,2/4,1,Used closest year score
-47,2020,2/4,1,Used closest year score
-47,2022,2/4,0,No gapfill needed
-47,2024,2/4,0,No gapfill needed
-151,NA,0/1,1,Used SIDS score
-118,NA,0/1,1,Used SIDS score
-124,NA,0/1,1,Used SIDS score
-117,NA,0/1,1,Used SIDS score
-147,NA,0/1,1,Used SIDS score
-114,NA,0/1,1,Used SIDS score
-9,2018,6/10,1,Used closest year score
-9,2020,6/10,0,No gapfill needed
-9,2022,6/10,0,No gapfill needed
-9,2024,6/10,0,No gapfill needed
-9,NA,6/10,1,Used closest year score
-121,NA,0/1,1,Used SIDS score
-5,NA,0/1,1,Used SIDS score
-13,NA,0/1,1,Used SIDS score
-17,NA,0/1,1,Used SIDS score
-122,NA,0/1,1,Used SIDS score
-220,NA,0/1,1,Used SIDS score
-26,2018,0/5,1,Used SIDS score
-26,2020,0/5,1,Used SIDS score
-26,2022,0/5,1,Used SIDS score
-26,2024,0/5,1,Used SIDS score
-26,NA,0/5,1,Used SIDS score
-85,2018,0/5,1,Used SIDS score
-85,2020,0/5,1,Used SIDS score
-85,2022,0/5,1,Used SIDS score
-85,2024,0/5,1,Used SIDS score
-85,NA,0/5,1,Used SIDS score
-55,2018,0/5,1,Used sub-region score
-55,2020,0/5,1,Used sub-region score
-55,2022,0/5,1,Used sub-region score
-55,2024,0/5,1,Used sub-region score
-58,2018,0/5,1,Used sub-region score
-58,2020,0/5,1,Used sub-region score
-58,2022,0/5,1,Used sub-region score
-58,2024,0/5,1,Used sub-region score
-57,2018,0/5,1,Used sub-region score
-57,2020,0/5,1,Used sub-region score
-57,2022,0/5,1,Used sub-region score
-57,2024,0/5,1,Used sub-region score
-237,2018,0/5,1,Used SIDS score
-237,2020,0/5,1,Used SIDS score
-237,2022,0/5,1,Used SIDS score
-237,2024,0/5,1,Used SIDS score
-237,NA,0/5,1,Used SIDS score
-90,2018,0/5,1,Used sub-region score
-90,2020,0/5,1,Used sub-region score
-90,2022,0/5,1,Used sub-region score
-90,2024,0/5,1,Used sub-region score
-88,2018,0/5,1,Used SIDS score
-88,2020,0/5,1,Used SIDS score
-88,2022,0/5,1,Used SIDS score
-88,2024,0/5,1,Used SIDS score
-88,NA,0/5,1,Used SIDS score
-92,2018,0/25,1,Used SIDS score
-92,2020,0/25,1,Used SIDS score
-92,2022,0/25,1,Used SIDS score
-92,2024,0/25,1,Used SIDS score
-92,NA,0/25,1,Used SIDS score
-250,2018,0/25,1,Used SIDS score
-250,2020,0/25,1,Used SIDS score
-250,2022,0/25,1,Used SIDS score
-250,2024,0/25,1,Used SIDS score
-250,NA,0/25,1,Used SIDS score
-247,2018,0/25,1,Used SIDS score
-247,2020,0/25,1,Used SIDS score
-247,2022,0/25,1,Used SIDS score
-247,2024,0/25,1,Used SIDS score
-247,NA,0/25,1,Used SIDS score
-199,2018,0/25,1,Used sub-region score
-199,2020,0/25,1,Used sub-region score
-199,2022,0/25,1,Used sub-region score
-199,2024,0/25,1,Used sub-region score
-60,2018,0/25,1,Used sub-region score
-60,2020,0/25,1,Used sub-region score
-60,2022,0/25,1,Used sub-region score
-60,2024,0/25,1,Used sub-region score
-228,2018,0/25,1,Used sub-region score
-228,2020,0/25,1,Used sub-region score
-228,2022,0/25,1,Used sub-region score
-228,2024,0/25,1,Used sub-region score
-41,2018,0/25,1,Used region score
-41,2020,0/25,1,Used region score
-41,2022,0/25,1,Used region score
-41,2024,0/25,1,Used region score
-154,2018,0/25,1,Used SIDS score
-154,2020,0/25,1,Used SIDS score
-154,2022,0/25,1,Used SIDS score
-154,2024,0/25,1,Used SIDS score
-154,NA,0/25,1,Used SIDS score
-221,2018,0/25,1,Used SIDS score
-221,2020,0/25,1,Used SIDS score
-221,2022,0/25,1,Used SIDS score
-221,2024,0/25,1,Used SIDS score
-221,NA,0/25,1,Used SIDS score
-116,2018,0/25,1,Used sub-region score
-116,2020,0/25,1,Used sub-region score
-116,2022,0/25,1,Used sub-region score
-116,2024,0/25,1,Used sub-region score
-248,2018,0/25,1,Used SIDS score
-248,2020,0/25,1,Used SIDS score
-248,2022,0/25,1,Used SIDS score
-248,2024,0/25,1,Used SIDS score
-248,NA,0/25,1,Used SIDS score
-249,2018,0/25,1,Used SIDS score
-249,2020,0/25,1,Used SIDS score
-249,2022,0/25,1,Used SIDS score
-249,2024,0/25,1,Used SIDS score
-249,NA,0/25,1,Used SIDS score
-77,2018,0/25,1,Used sub-region score
-77,2020,0/25,1,Used sub-region score
-77,2022,0/25,1,Used sub-region score
-77,2024,0/25,1,Used sub-region score
-92,2018,0/25,1,Used SIDS score
-92,2020,0/25,1,Used SIDS score
-92,2022,0/25,1,Used SIDS score
-92,2024,0/25,1,Used SIDS score
-92,NA,0/25,1,Used SIDS score
-250,2018,0/25,1,Used SIDS score
-250,2020,0/25,1,Used SIDS score
-250,2022,0/25,1,Used SIDS score
-250,2024,0/25,1,Used SIDS score
-250,NA,0/25,1,Used SIDS score
-247,2018,0/25,1,Used SIDS score
-247,2020,0/25,1,Used SIDS score
-247,2022,0/25,1,Used SIDS score
-247,2024,0/25,1,Used SIDS score
-247,NA,0/25,1,Used SIDS score
-199,2018,0/25,1,Used sub-region score
-199,2020,0/25,1,Used sub-region score
-199,2022,0/25,1,Used sub-region score
-199,2024,0/25,1,Used sub-region score
-60,2018,0/25,1,Used sub-region score
-60,2020,0/25,1,Used sub-region score
-60,2022,0/25,1,Used sub-region score
-60,2024,0/25,1,Used sub-region score
-228,2018,0/25,1,Used sub-region score
-228,2020,0/25,1,Used sub-region score
-228,2022,0/25,1,Used sub-region score
-228,2024,0/25,1,Used sub-region score
-41,2018,0/25,1,Used region score
-41,2020,0/25,1,Used region score
-41,2022,0/25,1,Used region score
-41,2024,0/25,1,Used region score
-154,2018,0/25,1,Used SIDS score
-154,2020,0/25,1,Used SIDS score
-154,2022,0/25,1,Used SIDS score
-154,2024,0/25,1,Used SIDS score
-154,NA,0/25,1,Used SIDS score
-221,2018,0/25,1,Used SIDS score
-221,2020,0/25,1,Used SIDS score
-221,2022,0/25,1,Used SIDS score
-221,2024,0/25,1,Used SIDS score
-221,NA,0/25,1,Used SIDS score
-116,2018,0/25,1,Used sub-region score
-116,2020,0/25,1,Used sub-region score
-116,2022,0/25,1,Used sub-region score
-116,2024,0/25,1,Used sub-region score
-248,2018,0/25,1,Used SIDS score
-248,2020,0/25,1,Used SIDS score
-248,2022,0/25,1,Used SIDS score
-248,2024,0/25,1,Used SIDS score
-248,NA,0/25,1,Used SIDS score
-249,2018,0/25,1,Used SIDS score
-249,2020,0/25,1,Used SIDS score
-249,2022,0/25,1,Used SIDS score
-249,2024,0/25,1,Used SIDS score
-249,NA,0/25,1,Used SIDS score
-77,2018,0/25,1,Used sub-region score
-77,2020,0/25,1,Used sub-region score
-77,2022,0/25,1,Used sub-region score
-77,2024,0/25,1,Used sub-region score
-92,2018,0/25,1,Used SIDS score
-92,2020,0/25,1,Used SIDS score
-92,2022,0/25,1,Used SIDS score
-92,2024,0/25,1,Used SIDS score
-92,NA,0/25,1,Used SIDS score
-250,2018,0/25,1,Used SIDS score
-250,2020,0/25,1,Used SIDS score
-250,2022,0/25,1,Used SIDS score
-250,2024,0/25,1,Used SIDS score
-250,NA,0/25,1,Used SIDS score
-247,2018,0/25,1,Used SIDS score
-247,2020,0/25,1,Used SIDS score
-247,2022,0/25,1,Used SIDS score
-247,2024,0/25,1,Used SIDS score
-247,NA,0/25,1,Used SIDS score
-199,2018,0/25,1,Used sub-region score
-199,2020,0/25,1,Used sub-region score
-199,2022,0/25,1,Used sub-region score
-199,2024,0/25,1,Used sub-region score
-60,2018,0/25,1,Used sub-region score
-60,2020,0/25,1,Used sub-region score
-60,2022,0/25,1,Used sub-region score
-60,2024,0/25,1,Used sub-region score
-228,2018,0/25,1,Used sub-region score
-228,2020,0/25,1,Used sub-region score
-228,2022,0/25,1,Used sub-region score
-228,2024,0/25,1,Used sub-region score
-41,2018,0/25,1,Used region score
-41,2020,0/25,1,Used region score
-41,2022,0/25,1,Used region score
-41,2024,0/25,1,Used region score
-154,2018,0/25,1,Used SIDS score
-154,2020,0/25,1,Used SIDS score
-154,2022,0/25,1,Used SIDS score
-154,2024,0/25,1,Used SIDS score
-154,NA,0/25,1,Used SIDS score
-221,2018,0/25,1,Used SIDS score
-221,2020,0/25,1,Used SIDS score
-221,2022,0/25,1,Used SIDS score
-221,2024,0/25,1,Used SIDS score
-221,NA,0/25,1,Used SIDS score
-116,2018,0/25,1,Used sub-region score
-116,2020,0/25,1,Used sub-region score
-116,2022,0/25,1,Used sub-region score
-116,2024,0/25,1,Used sub-region score
-248,2018,0/25,1,Used SIDS score
-248,2020,0/25,1,Used SIDS score
-248,2022,0/25,1,Used SIDS score
-248,2024,0/25,1,Used SIDS score
-248,NA,0/25,1,Used SIDS score
-249,2018,0/25,1,Used SIDS score
-249,2020,0/25,1,Used SIDS score
-249,2022,0/25,1,Used SIDS score
-249,2024,0/25,1,Used SIDS score
-249,NA,0/25,1,Used SIDS score
-77,2018,0/25,1,Used sub-region score
-77,2020,0/25,1,Used sub-region score
-77,2022,0/25,1,Used sub-region score
-77,2024,0/25,1,Used sub-region score
-92,2018,0/25,1,Used SIDS score
-92,2020,0/25,1,Used SIDS score
-92,2022,0/25,1,Used SIDS score
-92,2024,0/25,1,Used SIDS score
-92,NA,0/25,1,Used SIDS score
-250,2018,0/25,1,Used SIDS score
-250,2020,0/25,1,Used SIDS score
-250,2022,0/25,1,Used SIDS score
-250,2024,0/25,1,Used SIDS score
-250,NA,0/25,1,Used SIDS score
-34,2018,0/10,1,Used SIDS score
-34,2020,0/10,1,Used SIDS score
-34,2022,0/10,1,Used SIDS score
-34,2024,0/10,1,Used SIDS score
-34,NA,0/10,1,Used SIDS score
-247,2018,0/25,1,Used SIDS score
-247,2020,0/25,1,Used SIDS score
-247,2022,0/25,1,Used SIDS score
-247,2024,0/25,1,Used SIDS score
-247,NA,0/25,1,Used SIDS score
-91,2018,0/10,1,Used SIDS score
-91,2020,0/10,1,Used SIDS score
-91,2022,0/10,1,Used SIDS score
-91,2024,0/10,1,Used SIDS score
-91,NA,0/10,1,Used SIDS score
-199,2018,0/25,1,Used sub-region score
-199,2020,0/25,1,Used sub-region score
-199,2022,0/25,1,Used sub-region score
-199,2024,0/25,1,Used sub-region score
-60,2018,0/25,1,Used sub-region score
-60,2020,0/25,1,Used sub-region score
-60,2022,0/25,1,Used sub-region score
-60,2024,0/25,1,Used sub-region score
-228,2018,0/25,1,Used sub-region score
-228,2020,0/25,1,Used sub-region score
-228,2022,0/25,1,Used sub-region score
-228,2024,0/25,1,Used sub-region score
-158,2018,0/10,1,Used SIDS score
-158,2020,0/10,1,Used SIDS score
-158,2022,0/10,1,Used SIDS score
-158,2024,0/10,1,Used SIDS score
-158,NA,0/10,1,Used SIDS score
-35,2018,0/10,1,Used SIDS score
-35,2020,0/10,1,Used SIDS score
-35,2022,0/10,1,Used SIDS score
-35,2024,0/10,1,Used SIDS score
-35,NA,0/10,1,Used SIDS score
-36,2018,0/10,1,Used SIDS score
-36,2020,0/10,1,Used SIDS score
-36,2022,0/10,1,Used SIDS score
-36,2024,0/10,1,Used SIDS score
-36,NA,0/10,1,Used SIDS score
-149,2018,0/10,1,Used SIDS score
-149,2020,0/10,1,Used SIDS score
-149,2022,0/10,1,Used SIDS score
-149,2024,0/10,1,Used SIDS score
-149,NA,0/10,1,Used SIDS score
-159,2018,0/10,1,Used SIDS score
-159,2020,0/10,1,Used SIDS score
-159,2022,0/10,1,Used SIDS score
-159,2024,0/10,1,Used SIDS score
-159,NA,0/10,1,Used SIDS score
-33,2018,0/10,1,Used SIDS score
-33,2020,0/10,1,Used SIDS score
-33,2022,0/10,1,Used SIDS score
-33,2024,0/10,1,Used SIDS score
-33,NA,0/10,1,Used SIDS score
-93,2018,0/10,1,Used SIDS score
-93,2020,0/10,1,Used SIDS score
-93,2022,0/10,1,Used SIDS score
-93,2024,0/10,1,Used SIDS score
-93,NA,0/10,1,Used SIDS score
-41,2018,0/25,1,Used region score
-41,2020,0/25,1,Used region score
-41,2022,0/25,1,Used region score
-41,2024,0/25,1,Used region score
-154,2018,0/25,1,Used SIDS score
-154,2020,0/25,1,Used SIDS score
-154,2022,0/25,1,Used SIDS score
-154,2024,0/25,1,Used SIDS score
-154,NA,0/25,1,Used SIDS score
-221,2018,0/25,1,Used SIDS score
-221,2020,0/25,1,Used SIDS score
-221,2022,0/25,1,Used SIDS score
-221,2024,0/25,1,Used SIDS score
-221,NA,0/25,1,Used SIDS score
-150,2018,0/10,1,Used SIDS score
-150,2020,0/10,1,Used SIDS score
-150,2022,0/10,1,Used SIDS score
-150,2024,0/10,1,Used SIDS score
-150,NA,0/10,1,Used SIDS score
-116,2018,0/25,1,Used sub-region score
-116,2020,0/25,1,Used sub-region score
-116,2022,0/25,1,Used sub-region score
-116,2024,0/25,1,Used sub-region score
-248,2018,0/25,1,Used SIDS score
-248,2020,0/25,1,Used SIDS score
-248,2022,0/25,1,Used SIDS score
-248,2024,0/25,1,Used SIDS score
-248,NA,0/25,1,Used SIDS score
-249,2018,0/25,1,Used SIDS score
-249,2020,0/25,1,Used SIDS score
-249,2022,0/25,1,Used SIDS score
-249,2024,0/25,1,Used SIDS score
-249,NA,0/25,1,Used SIDS score
-77,2018,0/25,1,Used sub-region score
-77,2020,0/25,1,Used sub-region score
-77,2022,0/25,1,Used sub-region score
-77,2024,0/25,1,Used sub-region score
-92,2018,0/25,1,Used SIDS score
-92,2020,0/25,1,Used SIDS score
-92,2022,0/25,1,Used SIDS score
-92,2024,0/25,1,Used SIDS score
-92,NA,0/25,1,Used SIDS score
-250,2018,0/25,1,Used SIDS score
-250,2020,0/25,1,Used SIDS score
-250,2022,0/25,1,Used SIDS score
-250,2024,0/25,1,Used SIDS score
-250,NA,0/25,1,Used SIDS score
-34,2018,0/10,1,Used SIDS score
-34,2020,0/10,1,Used SIDS score
-34,2022,0/10,1,Used SIDS score
-34,2024,0/10,1,Used SIDS score
-34,NA,0/10,1,Used SIDS score
-247,2018,0/25,1,Used SIDS score
-247,2020,0/25,1,Used SIDS score
-247,2022,0/25,1,Used SIDS score
-247,2024,0/25,1,Used SIDS score
-247,NA,0/25,1,Used SIDS score
-91,2018,0/10,1,Used SIDS score
-91,2020,0/10,1,Used SIDS score
-91,2022,0/10,1,Used SIDS score
-91,2024,0/10,1,Used SIDS score
-91,NA,0/10,1,Used SIDS score
-199,2018,0/25,1,Used sub-region score
-199,2020,0/25,1,Used sub-region score
-199,2022,0/25,1,Used sub-region score
-199,2024,0/25,1,Used sub-region score
-60,2018,0/25,1,Used sub-region score
-60,2020,0/25,1,Used sub-region score
-60,2022,0/25,1,Used sub-region score
-60,2024,0/25,1,Used sub-region score
-30,2018,0/5,1,Used SIDS score
-30,2020,0/5,1,Used SIDS score
-30,2022,0/5,1,Used SIDS score
-30,2024,0/5,1,Used SIDS score
-30,NA,0/5,1,Used SIDS score
-228,2018,0/25,1,Used sub-region score
-228,2020,0/25,1,Used sub-region score
-228,2022,0/25,1,Used sub-region score
-228,2024,0/25,1,Used sub-region score
-158,2018,0/10,1,Used SIDS score
-158,2020,0/10,1,Used SIDS score
-158,2022,0/10,1,Used SIDS score
-158,2024,0/10,1,Used SIDS score
-158,NA,0/10,1,Used SIDS score
-35,2018,0/10,1,Used SIDS score
-35,2020,0/10,1,Used SIDS score
-35,2022,0/10,1,Used SIDS score
-35,2024,0/10,1,Used SIDS score
-35,NA,0/10,1,Used SIDS score
-36,2018,0/10,1,Used SIDS score
-36,2020,0/10,1,Used SIDS score
-36,2022,0/10,1,Used SIDS score
-36,2024,0/10,1,Used SIDS score
-36,NA,0/10,1,Used SIDS score
-149,2018,0/10,1,Used SIDS score
-149,2020,0/10,1,Used SIDS score
-149,2022,0/10,1,Used SIDS score
-149,2024,0/10,1,Used SIDS score
-149,NA,0/10,1,Used SIDS score
-159,2018,0/10,1,Used SIDS score
-159,2020,0/10,1,Used SIDS score
-159,2022,0/10,1,Used SIDS score
-159,2024,0/10,1,Used SIDS score
-159,NA,0/10,1,Used SIDS score
-33,2018,0/10,1,Used SIDS score
-33,2020,0/10,1,Used SIDS score
-33,2022,0/10,1,Used SIDS score
-33,2024,0/10,1,Used SIDS score
-33,NA,0/10,1,Used SIDS score
-93,2018,0/10,1,Used SIDS score
-93,2020,0/10,1,Used SIDS score
-93,2022,0/10,1,Used SIDS score
-93,2024,0/10,1,Used SIDS score
-93,NA,0/10,1,Used SIDS score
-41,2018,0/25,1,Used region score
-41,2020,0/25,1,Used region score
-41,2022,0/25,1,Used region score
-41,2024,0/25,1,Used region score
-154,2018,0/25,1,Used SIDS score
-154,2020,0/25,1,Used SIDS score
-154,2022,0/25,1,Used SIDS score
-154,2024,0/25,1,Used SIDS score
-154,NA,0/25,1,Used SIDS score
-221,2018,0/25,1,Used SIDS score
-221,2020,0/25,1,Used SIDS score
-221,2022,0/25,1,Used SIDS score
-221,2024,0/25,1,Used SIDS score
-221,NA,0/25,1,Used SIDS score
-150,2018,0/10,1,Used SIDS score
-150,2020,0/10,1,Used SIDS score
-150,2022,0/10,1,Used SIDS score
-150,2024,0/10,1,Used SIDS score
-150,NA,0/10,1,Used SIDS score
-116,2018,0/25,1,Used sub-region score
-116,2020,0/25,1,Used sub-region score
-116,2022,0/25,1,Used sub-region score
-116,2024,0/25,1,Used sub-region score
-248,2018,0/25,1,Used SIDS score
-248,2020,0/25,1,Used SIDS score
-248,2022,0/25,1,Used SIDS score
-248,2024,0/25,1,Used SIDS score
-248,NA,0/25,1,Used SIDS score
-249,2018,0/25,1,Used SIDS score
-249,2020,0/25,1,Used SIDS score
-249,2022,0/25,1,Used SIDS score
-249,2024,0/25,1,Used SIDS score
-249,NA,0/25,1,Used SIDS score
-77,2018,0/25,1,Used sub-region score
-77,2020,0/25,1,Used sub-region score
-77,2022,0/25,1,Used sub-region score
-77,2024,0/25,1,Used sub-region score
-16,NA,0/1,1,Used region score
-108,NA,0/1,1,Used region score
-245,NA,0/1,1,Used region score
-38,NA,0/1,1,Used region score
-113,NA,0/1,1,Used region score
-1,NA,0/1,1,Used region score
-2,NA,0/1,1,Used region score
-244,NA,0/1,1,Used region score
-46,NA,0/1,1,Used region score
-95,NA,0/1,1,Used region score
-169,NA,0/1,1,Used region score
-145,NA,0/1,1,Used region score
-140,NA,0/1,1,Used region score
-94,NA,0/1,1,Used region score
-79,NA,0/1,1,Used region score
-227,NA,0/1,1,Used region score
-215,NA,0/1,1,Used region score
-97,NA,0/1,1,Used region score
-29,NA,0/1,1,Used region score
-185,NA,0/1,1,Used region score
-196,NA,0/1,1,Used region score
-3,NA,0/1,1,Used region score
-146,NA,0/1,1,Used region score
-32,NA,0/1,1,Used region score
-86,NA,0/1,1,Used region score
-219,NA,0/1,1,Used region score
-89,NA,0/1,1,Used region score
-144,NA,0/1,1,Used region score
-98,NA,0/1,1,Used region score
-111,NA,0/1,1,Used region score
-161,NA,0/1,1,Used region score
-12,NA,0/1,1,Used region score
-63,NA,0/1,1,Used region score
-55,NA,0/5,1,Used region score
-58,NA,0/5,1,Used region score
-57,NA,0/5,1,Used region score
-90,NA,0/5,1,Used region score
-199,NA,0/25,1,Used region score
-60,NA,0/25,1,Used region score
-228,NA,0/25,1,Used region score
-41,NA,0/25,1,Used region score
-116,NA,0/25,1,Used region score
-77,NA,0/25,1,Used region score
-199,NA,0/25,1,Used region score
-60,NA,0/25,1,Used region score
-228,NA,0/25,1,Used region score
-41,NA,0/25,1,Used region score
-116,NA,0/25,1,Used region score
-77,NA,0/25,1,Used region score
-199,NA,0/25,1,Used region score
-60,NA,0/25,1,Used region score
-228,NA,0/25,1,Used region score
-41,NA,0/25,1,Used region score
-116,NA,0/25,1,Used region score
-77,NA,0/25,1,Used region score
-199,NA,0/25,1,Used region score
-60,NA,0/25,1,Used region score
-228,NA,0/25,1,Used region score
-41,NA,0/25,1,Used region score
-116,NA,0/25,1,Used region score
-77,NA,0/25,1,Used region score
-199,NA,0/25,1,Used region score
-60,NA,0/25,1,Used region score
-228,NA,0/25,1,Used region score
-41,NA,0/25,1,Used region score
-116,NA,0/25,1,Used region score
-77,NA,0/25,1,Used region score
+rgn_id,year,gapfilled
+1,2018,gf
+2,2018,gf
+3,2018,gf
+4,2018,gf
+5,2018,gf
+6,2018,NA
+7,2018,NA
+8,2018,NA
+9,2018,gf
+10,2018,NA
+11,2018,NA
+12,2018,gf
+13,2018,gf
+14,2018,gf
+15,2018,NA
+16,2018,gf
+17,2018,gf
+18,2018,NA
+19,2018,gf
+20,2018,NA
+21,2018,gf
+24,2018,NA
+25,2018,NA
+26,2018,gf
+28,2018,NA
+29,2018,gf
+30,2018,gf
+31,2018,NA
+32,2018,gf
+33,2018,gf
+34,2018,gf
+35,2018,gf
+36,2018,gf
+37,2018,NA
+38,2018,gf
+39,2018,NA
+40,2018,NA
+41,2018,gf
+42,2018,NA
+43,2018,NA
+44,2018,NA
+45,2018,NA
+46,2018,gf
+47,2018,NA
+48,2018,NA
+49,2018,NA
+50,2018,NA
+51,2018,gf
+52,2018,gf
+53,2018,NA
+54,2018,NA
+55,2018,gf
+56,2018,NA
+57,2018,gf
+58,2018,gf
+59,2018,NA
+60,2018,gf
+61,2018,NA
+62,2018,NA
+63,2018,gf
+64,2018,NA
+65,2018,NA
+66,2018,NA
+67,2018,NA
+68,2018,NA
+69,2018,NA
+70,2018,NA
+71,2018,NA
+72,2018,NA
+73,2018,NA
+74,2018,NA
+75,2018,NA
+76,2018,NA
+77,2018,gf
+78,2018,NA
+79,2018,gf
+80,2018,NA
+81,2018,NA
+82,2018,NA
+84,2018,NA
+85,2018,gf
+86,2018,gf
+88,2018,gf
+89,2018,gf
+90,2018,gf
+91,2018,gf
+92,2018,gf
+93,2018,gf
+94,2018,gf
+95,2018,gf
+96,2018,NA
+97,2018,gf
+98,2018,gf
+99,2018,NA
+100,2018,NA
+101,2018,NA
+102,2018,NA
+103,2018,NA
+104,2018,NA
+105,2018,gf
+106,2018,NA
+107,2018,gf
+108,2018,gf
+110,2018,NA
+111,2018,gf
+112,2018,NA
+113,2018,gf
+114,2018,gf
+115,2018,NA
+116,2018,gf
+117,2018,gf
+118,2018,gf
+119,2018,NA
+120,2018,NA
+121,2018,gf
+122,2018,gf
+123,2018,NA
+124,2018,gf
+125,2018,NA
+126,2018,NA
+127,2018,NA
+129,2018,NA
+130,2018,NA
+131,2018,NA
+132,2018,NA
+133,2018,NA
+134,2018,NA
+135,2018,NA
+136,2018,NA
+137,2018,NA
+138,2018,NA
+139,2018,NA
+140,2018,gf
+141,2018,NA
+143,2018,NA
+144,2018,gf
+145,2018,gf
+146,2018,gf
+147,2018,gf
+148,2018,NA
+149,2018,gf
+150,2018,gf
+151,2018,gf
+152,2018,NA
+153,2018,NA
+154,2018,gf
+155,2018,NA
+156,2018,gf
+157,2018,NA
+158,2018,gf
+159,2018,gf
+161,2018,gf
+162,2018,NA
+163,2018,gf
+164,2018,NA
+166,2018,NA
+167,2018,NA
+168,2018,NA
+169,2018,gf
+171,2018,NA
+172,2018,NA
+173,2018,NA
+174,2018,NA
+175,2018,NA
+176,2018,NA
+177,2018,NA
+178,2018,NA
+179,2018,NA
+180,2018,NA
+181,2018,NA
+182,2018,NA
+183,2018,NA
+184,2018,NA
+185,2018,gf
+186,2018,NA
+187,2018,NA
+188,2018,NA
+189,2018,NA
+190,2018,NA
+191,2018,NA
+192,2018,gf
+193,2018,NA
+194,2018,NA
+195,2018,NA
+196,2018,gf
+197,2018,NA
+198,2018,NA
+199,2018,gf
+200,2018,NA
+202,2018,NA
+203,2018,NA
+204,2018,NA
+205,2018,NA
+206,2018,NA
+207,2018,NA
+208,2018,gf
+209,2018,NA
+210,2018,NA
+212,2018,NA
+213,2018,gf
+214,2018,NA
+215,2018,gf
+216,2018,NA
+218,2018,NA
+219,2018,gf
+220,2018,gf
+221,2018,gf
+222,2018,NA
+223,2018,gf
+224,2018,NA
+227,2018,gf
+228,2018,gf
+231,2018,NA
+232,2018,NA
+237,2018,gf
+244,2018,gf
+245,2018,gf
+247,2018,gf
+248,2018,gf
+249,2018,gf
+250,2018,gf
+1,2020,gf
+2,2020,gf
+3,2020,gf
+4,2020,gf
+5,2020,gf
+6,2020,NA
+7,2020,NA
+8,2020,NA
+9,2020,gf
+10,2020,NA
+11,2020,NA
+12,2020,gf
+13,2020,gf
+14,2020,gf
+15,2020,NA
+16,2020,gf
+17,2020,gf
+18,2020,NA
+19,2020,gf
+20,2020,NA
+21,2020,gf
+24,2020,NA
+25,2020,NA
+26,2020,gf
+28,2020,NA
+29,2020,gf
+30,2020,gf
+31,2020,NA
+32,2020,gf
+33,2020,gf
+34,2020,gf
+35,2020,gf
+36,2020,gf
+37,2020,NA
+38,2020,gf
+39,2020,NA
+40,2020,NA
+41,2020,gf
+42,2020,NA
+43,2020,NA
+44,2020,NA
+45,2020,NA
+46,2020,gf
+47,2020,NA
+48,2020,NA
+49,2020,NA
+50,2020,NA
+51,2020,gf
+52,2020,gf
+53,2020,NA
+54,2020,NA
+55,2020,gf
+56,2020,NA
+57,2020,gf
+58,2020,gf
+59,2020,NA
+60,2020,gf
+61,2020,NA
+62,2020,NA
+63,2020,gf
+64,2020,NA
+65,2020,NA
+66,2020,NA
+67,2020,NA
+68,2020,NA
+69,2020,NA
+70,2020,NA
+71,2020,NA
+72,2020,NA
+73,2020,NA
+74,2020,NA
+75,2020,NA
+76,2020,NA
+77,2020,gf
+78,2020,NA
+79,2020,gf
+80,2020,NA
+81,2020,NA
+82,2020,NA
+84,2020,NA
+85,2020,gf
+86,2020,gf
+88,2020,gf
+89,2020,gf
+90,2020,gf
+91,2020,gf
+92,2020,gf
+93,2020,gf
+94,2020,gf
+95,2020,gf
+96,2020,NA
+97,2020,gf
+98,2020,gf
+99,2020,NA
+100,2020,NA
+101,2020,NA
+102,2020,NA
+103,2020,NA
+104,2020,NA
+105,2020,gf
+106,2020,NA
+107,2020,gf
+108,2020,gf
+110,2020,NA
+111,2020,gf
+112,2020,NA
+113,2020,gf
+114,2020,gf
+115,2020,NA
+116,2020,gf
+117,2020,gf
+118,2020,gf
+119,2020,NA
+120,2020,NA
+121,2020,gf
+122,2020,gf
+123,2020,NA
+124,2020,gf
+125,2020,NA
+126,2020,NA
+127,2020,NA
+129,2020,NA
+130,2020,NA
+131,2020,NA
+132,2020,NA
+133,2020,NA
+134,2020,NA
+135,2020,NA
+136,2020,NA
+137,2020,NA
+138,2020,NA
+139,2020,NA
+140,2020,gf
+141,2020,NA
+143,2020,NA
+144,2020,gf
+145,2020,gf
+146,2020,gf
+147,2020,gf
+148,2020,NA
+149,2020,gf
+150,2020,gf
+151,2020,gf
+152,2020,NA
+153,2020,NA
+154,2020,gf
+155,2020,NA
+156,2020,gf
+157,2020,NA
+158,2020,gf
+159,2020,gf
+161,2020,gf
+162,2020,NA
+163,2020,gf
+164,2020,NA
+166,2020,NA
+167,2020,NA
+168,2020,NA
+169,2020,gf
+171,2020,NA
+172,2020,NA
+173,2020,NA
+174,2020,NA
+175,2020,NA
+176,2020,NA
+177,2020,NA
+178,2020,NA
+179,2020,NA
+180,2020,NA
+181,2020,NA
+182,2020,NA
+183,2020,NA
+184,2020,NA
+185,2020,gf
+186,2020,NA
+187,2020,NA
+188,2020,NA
+189,2020,NA
+190,2020,NA
+191,2020,NA
+192,2020,gf
+193,2020,NA
+194,2020,NA
+195,2020,NA
+196,2020,gf
+197,2020,NA
+198,2020,NA
+199,2020,gf
+200,2020,NA
+202,2020,NA
+203,2020,NA
+204,2020,NA
+205,2020,NA
+206,2020,NA
+207,2020,NA
+208,2020,gf
+209,2020,NA
+210,2020,NA
+212,2020,NA
+213,2020,gf
+214,2020,NA
+215,2020,gf
+216,2020,NA
+218,2020,NA
+219,2020,gf
+220,2020,gf
+221,2020,gf
+222,2020,NA
+223,2020,gf
+224,2020,NA
+227,2020,gf
+228,2020,gf
+231,2020,NA
+232,2020,NA
+237,2020,gf
+244,2020,gf
+245,2020,gf
+247,2020,gf
+248,2020,gf
+249,2020,gf
+250,2020,gf
+1,2022,gf
+2,2022,gf
+3,2022,gf
+4,2022,gf
+5,2022,gf
+6,2022,NA
+7,2022,NA
+8,2022,NA
+9,2022,gf
+10,2022,NA
+11,2022,NA
+12,2022,gf
+13,2022,gf
+14,2022,gf
+15,2022,NA
+16,2022,gf
+17,2022,gf
+18,2022,NA
+19,2022,gf
+20,2022,NA
+21,2022,gf
+24,2022,NA
+25,2022,NA
+26,2022,gf
+28,2022,NA
+29,2022,gf
+30,2022,gf
+31,2022,NA
+32,2022,gf
+33,2022,gf
+34,2022,gf
+35,2022,gf
+36,2022,gf
+37,2022,NA
+38,2022,gf
+39,2022,NA
+40,2022,NA
+41,2022,gf
+42,2022,NA
+43,2022,NA
+44,2022,NA
+45,2022,NA
+46,2022,gf
+47,2022,NA
+48,2022,NA
+49,2022,NA
+50,2022,NA
+51,2022,gf
+52,2022,gf
+53,2022,NA
+54,2022,NA
+55,2022,gf
+56,2022,NA
+57,2022,gf
+58,2022,gf
+59,2022,NA
+60,2022,gf
+61,2022,NA
+62,2022,NA
+63,2022,gf
+64,2022,NA
+65,2022,NA
+66,2022,NA
+67,2022,NA
+68,2022,NA
+69,2022,NA
+70,2022,NA
+71,2022,NA
+72,2022,NA
+73,2022,NA
+74,2022,NA
+75,2022,NA
+76,2022,NA
+77,2022,gf
+78,2022,NA
+79,2022,gf
+80,2022,NA
+81,2022,NA
+82,2022,NA
+84,2022,NA
+85,2022,gf
+86,2022,gf
+88,2022,gf
+89,2022,gf
+90,2022,gf
+91,2022,gf
+92,2022,gf
+93,2022,gf
+94,2022,gf
+95,2022,gf
+96,2022,NA
+97,2022,gf
+98,2022,gf
+99,2022,NA
+100,2022,NA
+101,2022,NA
+102,2022,NA
+103,2022,NA
+104,2022,NA
+105,2022,gf
+106,2022,NA
+107,2022,gf
+108,2022,gf
+110,2022,NA
+111,2022,gf
+112,2022,NA
+113,2022,gf
+114,2022,gf
+115,2022,NA
+116,2022,gf
+117,2022,gf
+118,2022,gf
+119,2022,NA
+120,2022,NA
+121,2022,gf
+122,2022,gf
+123,2022,NA
+124,2022,gf
+125,2022,NA
+126,2022,NA
+127,2022,NA
+129,2022,NA
+130,2022,NA
+131,2022,NA
+132,2022,NA
+133,2022,NA
+134,2022,NA
+135,2022,NA
+136,2022,NA
+137,2022,NA
+138,2022,NA
+139,2022,NA
+140,2022,gf
+141,2022,NA
+143,2022,NA
+144,2022,gf
+145,2022,gf
+146,2022,gf
+147,2022,gf
+148,2022,NA
+149,2022,gf
+150,2022,gf
+151,2022,gf
+152,2022,NA
+153,2022,NA
+154,2022,gf
+155,2022,NA
+156,2022,gf
+157,2022,NA
+158,2022,gf
+159,2022,gf
+161,2022,gf
+162,2022,NA
+163,2022,gf
+164,2022,NA
+166,2022,NA
+167,2022,NA
+168,2022,NA
+169,2022,gf
+171,2022,NA
+172,2022,NA
+173,2022,NA
+174,2022,NA
+175,2022,NA
+176,2022,NA
+177,2022,NA
+178,2022,NA
+179,2022,NA
+180,2022,NA
+181,2022,NA
+182,2022,NA
+183,2022,NA
+184,2022,NA
+185,2022,gf
+186,2022,NA
+187,2022,NA
+188,2022,NA
+189,2022,NA
+190,2022,NA
+191,2022,NA
+192,2022,gf
+193,2022,NA
+194,2022,NA
+195,2022,NA
+196,2022,gf
+197,2022,NA
+198,2022,NA
+199,2022,gf
+200,2022,NA
+202,2022,NA
+203,2022,NA
+204,2022,NA
+205,2022,NA
+206,2022,NA
+207,2022,NA
+208,2022,gf
+209,2022,NA
+210,2022,NA
+212,2022,NA
+213,2022,gf
+214,2022,NA
+215,2022,gf
+216,2022,NA
+218,2022,NA
+219,2022,gf
+220,2022,gf
+221,2022,gf
+222,2022,NA
+223,2022,gf
+224,2022,NA
+227,2022,gf
+228,2022,gf
+231,2022,NA
+232,2022,NA
+237,2022,gf
+244,2022,gf
+245,2022,gf
+247,2022,gf
+248,2022,gf
+249,2022,gf
+250,2022,gf
+1,2024,gf
+2,2024,gf
+3,2024,gf
+4,2024,gf
+5,2024,gf
+6,2024,NA
+7,2024,NA
+8,2024,NA
+9,2024,gf
+10,2024,NA
+11,2024,NA
+12,2024,gf
+13,2024,gf
+14,2024,gf
+15,2024,NA
+16,2024,gf
+17,2024,gf
+18,2024,NA
+19,2024,gf
+20,2024,NA
+21,2024,gf
+24,2024,NA
+25,2024,NA
+26,2024,gf
+28,2024,NA
+29,2024,gf
+30,2024,gf
+31,2024,NA
+32,2024,gf
+33,2024,gf
+34,2024,gf
+35,2024,gf
+36,2024,gf
+37,2024,NA
+38,2024,gf
+39,2024,NA
+40,2024,NA
+41,2024,gf
+42,2024,NA
+43,2024,NA
+44,2024,NA
+45,2024,NA
+46,2024,gf
+47,2024,NA
+48,2024,NA
+49,2024,NA
+50,2024,NA
+51,2024,gf
+52,2024,gf
+53,2024,NA
+54,2024,NA
+55,2024,gf
+56,2024,NA
+57,2024,gf
+58,2024,gf
+59,2024,NA
+60,2024,gf
+61,2024,NA
+62,2024,NA
+63,2024,gf
+64,2024,NA
+65,2024,NA
+66,2024,NA
+67,2024,NA
+68,2024,NA
+69,2024,NA
+70,2024,NA
+71,2024,NA
+72,2024,NA
+73,2024,NA
+74,2024,NA
+75,2024,NA
+76,2024,NA
+77,2024,gf
+78,2024,NA
+79,2024,gf
+80,2024,NA
+81,2024,NA
+82,2024,NA
+84,2024,NA
+85,2024,gf
+86,2024,gf
+88,2024,gf
+89,2024,gf
+90,2024,gf
+91,2024,gf
+92,2024,gf
+93,2024,gf
+94,2024,gf
+95,2024,gf
+96,2024,NA
+97,2024,gf
+98,2024,gf
+99,2024,NA
+100,2024,NA
+101,2024,NA
+102,2024,NA
+103,2024,NA
+104,2024,NA
+105,2024,gf
+106,2024,NA
+107,2024,gf
+108,2024,gf
+110,2024,NA
+111,2024,gf
+112,2024,NA
+113,2024,gf
+114,2024,gf
+115,2024,NA
+116,2024,gf
+117,2024,gf
+118,2024,gf
+119,2024,NA
+120,2024,NA
+121,2024,gf
+122,2024,gf
+123,2024,NA
+124,2024,gf
+125,2024,NA
+126,2024,NA
+127,2024,NA
+129,2024,NA
+130,2024,NA
+131,2024,NA
+132,2024,NA
+133,2024,NA
+134,2024,NA
+135,2024,NA
+136,2024,NA
+137,2024,NA
+138,2024,NA
+139,2024,NA
+140,2024,gf
+141,2024,NA
+143,2024,NA
+144,2024,gf
+145,2024,gf
+146,2024,gf
+147,2024,gf
+148,2024,NA
+149,2024,gf
+150,2024,gf
+151,2024,gf
+152,2024,NA
+153,2024,NA
+154,2024,gf
+155,2024,NA
+156,2024,gf
+157,2024,NA
+158,2024,gf
+159,2024,gf
+161,2024,gf
+162,2024,NA
+163,2024,gf
+164,2024,NA
+166,2024,NA
+167,2024,NA
+168,2024,NA
+169,2024,gf
+171,2024,NA
+172,2024,NA
+173,2024,NA
+174,2024,NA
+175,2024,NA
+176,2024,NA
+177,2024,NA
+178,2024,NA
+179,2024,NA
+180,2024,NA
+181,2024,NA
+182,2024,NA
+183,2024,NA
+184,2024,NA
+185,2024,gf
+186,2024,NA
+187,2024,NA
+188,2024,NA
+189,2024,NA
+190,2024,NA
+191,2024,NA
+192,2024,gf
+193,2024,NA
+194,2024,NA
+195,2024,NA
+196,2024,gf
+197,2024,NA
+198,2024,NA
+199,2024,gf
+200,2024,NA
+202,2024,NA
+203,2024,NA
+204,2024,NA
+205,2024,NA
+206,2024,NA
+207,2024,NA
+208,2024,gf
+209,2024,NA
+210,2024,NA
+212,2024,NA
+213,2024,gf
+214,2024,NA
+215,2024,gf
+216,2024,NA
+218,2024,NA
+219,2024,gf
+220,2024,gf
+221,2024,gf
+222,2024,NA
+223,2024,gf
+224,2024,NA
+227,2024,gf
+228,2024,gf
+231,2024,NA
+232,2024,NA
+237,2024,gf
+244,2024,gf
+245,2024,gf
+247,2024,gf
+248,2024,gf
+249,2024,gf
+250,2024,gf
