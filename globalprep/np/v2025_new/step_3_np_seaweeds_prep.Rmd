@@ -112,6 +112,7 @@ data_years <- c("1950", "2023") # update to correct data years
 current_np_dir <- here::here("globalprep", "np", paste0(v_scen_year, "_new")) # update this if name changes
 # Mariculture directory on GitHub
 current_mar_dir <- here::here("globalprep", "mar", v_scen_year)
+rgn_labels <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/refs/heads/draft/eez/layers/rgn_labels.csv")
 
 # ======== Source functions ===========
 source(here::here("workflow", "R", "common.R")) # directory locations
@@ -478,7 +479,7 @@ Below is the old code for reading in and wrangling Seafood Watch data. Unfortuna
 
 These data describe the sustainability country/species combinations. In cases where these data were not available for a specific county/species, we just used the seafood watch seaweed sustainability score (6.72) (this was all of the seaweed species listed).
 
-```{r sw-scores, eval = FALSE}
+```{r sw-scores}
 # ---- Load in Seafood Watch sustainability scores data from Mazu ----
 # Go look at the file path, the file name changes from year to year
 sw_sus <- read.csv(file.path(dir_M, paste0('git-annex/globalprep/_raw_data/seafood_watch_mar_sustainability/d',
@@ -487,7 +488,6 @@ sw_sus <- read.csv(file.path(dir_M, paste0('git-annex/globalprep/_raw_data/seafo
                                            
                                            '/SFW_Aquaculture_ratings_062725.csv')), # update this file name
                    check.names = FALSE, stringsAsFactors = FALSE, na.strings = c("NA", ""))
-
 head(sw_sus)
 ```
 
@@ -497,7 +497,7 @@ head(sw_sus)
 
 Rename columns to match with MAR data and fill in species column
 
-```{r tidy_sw-sus, eval = FALSE}
+```{r tidy_sw-sus}
 # ---- Rename columns ----
 sw_sus <- sw_sus %>%
   rename(report_title = 'ReportTitle',
@@ -523,7 +523,7 @@ sw_sus$species <- ifelse(!is.na(sw_sus$fao_species), sw_sus$fao_species, sw_sus$
 
 ### Keep NA countries
 
-```{r keep-na-countries_sw-sus, eval = FALSE}
+```{r keep-na-countries_sw-sus}
 # These need to be re-added later (get cut when associated with region ids)
 sw_sus_no_rgn <- filter(sw_sus, is.na(country)|country == "Worldwide")
 nrow(sw_sus_no_rgn)
@@ -533,7 +533,7 @@ nrow(sw_sus_no_rgn)
 
 ### Convert country names to OHI region IDs.
 
-```{r sw-sus_convert-region, eval = FALSE}
+```{r sw-sus_convert-region}
 # ---- Update country names ----
 # Change country names to match OHI region names
 sw_sus_multiple <- sw_sus %>% 
@@ -567,6 +567,7 @@ sw_sus_rgn <- name_2_rgn(df_in = sw_sus_df,
 sw_sus_rgn <- bind_rows(sw_sus_rgn, sw_sus_no_rgn) %>%
   unique()
 nrow(sw_sus_rgn)
+summary(sw_sus_rgn)
   # 254 obs - v2021
   # 273 obs - v2022 
   # 269 obs - v2023
@@ -576,7 +577,7 @@ nrow(sw_sus_rgn)
 
 **Join the seaweed sustainability data with the mariculture data**
 
-```{r sw-fao-joining, eval = FALSE}
+```{r sw-fao-joining}
 maric <- readr::read_csv(here(current_np_dir, "int", "np_seaweeds_tonnes_weighting.csv"))
 
 maric <- maric %>%
@@ -614,9 +615,10 @@ setdiff(mar_rgn_gf$species, sw_sus_rgn$species)
 mar_sw_sus_join <- maric %>%
   left_join(sw_sus_rgn, # has score column
             by = c("species", "rgn_id")) %>%
-  dplyr::select(rgn_id, year, species, Taxon_code, score, value, gap_0_fill, species_code) %>% ## none of the specific species match
+  dplyr::select(rgn_id, rgn_name, year, species, Taxon_code, score, value, gap_0_fill, species_code) %>% ## none of the specific species match
   rename(tonnes = value)
- 
+summary(mar_sw_sus_join)
+colSums(is.na(mar_sw_sus_join))
 ```
 
 **Since there are no sustainability scores for any of the species listed, we will gapfill with the seafood watch "Seaweed (Global)" score, which is 6.72.**
@@ -636,7 +638,7 @@ Since some regions have multiple sustainability scores for the same species due 
 
 Average sustainability scores within regions with more than score (due to more than one aquaculture method):
 
-```{r sw-sus-avg, eval = FALSE}
+```{r sw-sus-avg}
 # aggregation: average sustainability per species per region
 mar_sw_sus_avg <- mar_sw_sus_calc %>% 
   dplyr::group_by(rgn_id, species) %>% 
@@ -646,7 +648,7 @@ mar_sw_sus_avg <- mar_sw_sus_calc %>%
 
 Get rid of duplicates for region/species/year:
 
-```{r sw-sus-dup, eval = FALSE}
+```{r sw-sus-dup}
 
 mar_sw_sus <- mar_sw_sus_avg %>% 
   # keep only unique rows from the data frame
@@ -658,7 +660,7 @@ mar_sw_sus <- mar_sw_sus_avg %>%
 
 **Now look at a summary after appending all the Seafood Watch data**
 
-```{r sw-sus-summary, eval = FALSE}
+```{r sw-sus-summary}
 summary(mar_sw_sus)
 colSums(is.na(mar_sw_sus))
 # No NAs in sust! (sust_coeff) 
@@ -734,7 +736,7 @@ mar_seaweed_total_tonnes <- mar_sw_sus_filter %>%
   ungroup() %>% 
   dplyr::arrange(rgn_id, year)
 
-#summary(mar_seaweed_total_tonnes)
+summary(mar_seaweed_total_tonnes)
 #head(mar_seaweed_total_tonnes)
 
 
@@ -788,7 +790,7 @@ Identify max value from rolling average of sustainable tonnes (maybe limit to mo
 
 end_data_year <- max(mar_sw_sus_filter$year)
 seaweed_decade <- c((end_data_year - 10):end_data_year)
-
+seaweed_decade
 
 # find peak sustainable tonnes 
 seaweed_st_max <- seaweed_st_rolling %>% 
@@ -830,7 +832,7 @@ summary(seaweed_relative_sust_tonnes)
 
 
 # save full df to int folder
-readr::write_csv(orn_relative_sust_tonnes, here(current_np_dir, "int", "np_relative_sust_tonnes_seaweeds_full.csv"))
+readr::write_csv(seaweed_relative_sust_tonnes, here(current_np_dir, "int", "np_relative_sust_tonnes_seaweeds_full.csv"))
 
 
 # save selected columns to output folder
@@ -846,81 +848,110 @@ Compare seaweed sustainability from previous years
 
 ```{r}
 # Read in previous assessment data
-old_rel <- read_csv(here("globalprep", "np", paste0(prev_v_scen_year, "_new"), "output", "np_relative_sust_tonnes_seaweeds.csv"))
-old_harvest <- read_csv(here("globalprep", "np", paste0(prev_v_scen_year, "_new"), "output", "np_seaweed_harvest_tonnes_gf.csv"))
-old_sust <- read_csv(here("globalprep", "np", paste0(prev_v_scen_year, "_new"), "output", "np_seaweed_sust_gf.csv"))
+old_seaweed <- read_csv(here("globalprep", "np", paste0(prev_v_scen_year, "_new"), "int", "np_relative_sust_tonnes_seaweeds_full.csv"))
 
 # Read in current assessment data
-new_rel <- read_csv(here("globalprep", "np", paste0(v_scen_year, "_new"), "output", "np_relative_sust_tonnes_seaweeds.csv"))
-new_harvest <- read_csv(here("globalprep", "np", paste0(v_scen_year, "_new"), "output", "np_seaweed_harvest_tonnes_gf.csv"))
-new_sust <- read_csv(here("globalprep", "np", paste0(v_scen_year, "_new"), "output", "np_seaweed_sust_gf.csv"))
+new_seaweed <- read_csv(here("globalprep", "np", paste0(v_scen_year, "_new"), "int", "np_relative_sust_tonnes_seaweeds_full.csv"))
+max(new_seaweed$year)
 
 previous_data_year <- 2022
-latest_data_year <- 2023
+current_data_year <- 2023
 
 # ---- Compare ornamental sust data for all countries: ----
 # previous data year (2022) 
-old_rel1 <- old_rel %>% 
+old_sw1 <- old_seaweed %>% 
   filter(year == previous_data_year) %>% 
-  dplyr::select(rgn_id, product, old_rel_sust_tonnes = rel_sust_tonnes)
+  dplyr::select(rgn_id, product, old_rel_sust_tonnes = rel_sust_tonnes, old_sust = sustainability, old_tonnes = tonnes, old_sust_tonnes = sust_tonnes, old_peak = peak_sust_tonnes)
 
-new_rel1 <- new_rel %>% 
+new_sw1 <- new_seaweed %>% 
   filter(year == previous_data_year) %>% 
-  dplyr::select(rgn_id, product, rel_sust_tonnes)
+  dplyr::select(rgn_id, product, rel_sust_tonnes, sustainability, tonnes, sust_tonnes, peak_sust_tonnes)
 
+sw_total1 <- old_sw1 %>% 
+  full_join(new_sw1, by = c("rgn_id", "product"))
 
-rel_total <- old_rel1 %>% 
-  full_join(new_rel1, by = c("rgn_id", "product"))
+# Join region labels for easier viewing
+sw_total1 <- sw_total1 %>% 
+  left_join(rgn_labels, by = "rgn_id") %>% 
+  select(-type, rgn_name = label)
 
+###### Sustainable Tonnes ######
 comp_plot1 <- ggplot() + 
-  geom_jitter(data = rel_total, aes(x = old_rel_sust_tonnes, y = rel_sust_tonnes, text = paste("Product:", product, "<br>Region:", rgn_id)), alpha = 0.7) +
+  geom_jitter(data = sw_total1, aes(x = old_sust_tonnes, y = sust_tonnes, text = paste("Product:", product, "<br>Region:", rgn_name)), alpha = 0.7) +
+  labs(x = paste("Previous Value", previous_data_year), 
+       y = paste("Current Value", previous_data_year),
+       title = paste("Sustainable tonnes of seaweed", previous_data_year, "Data", prev_scen_year, "Assessment vs.", previous_data_year, "Data", scen_year_number, "assessment")) +
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  theme_bw();ggplotly(comp_plot1)
+
+###### Relative Sustainable tonnes ######
+comp_plot2 <- ggplot() + 
+  geom_jitter(data = sw_total1, aes(x = old_rel_sust_tonnes, y = rel_sust_tonnes, text = paste("Product:", product, "<br>Region:", rgn_name)), alpha = 0.7) +
   labs(x = paste("Previous Value", previous_data_year), 
        y = paste("Current Value", previous_data_year),
        title = paste("Relative sustainable tonnes of seaweed", previous_data_year, "Data", prev_scen_year, "Assessment vs.", previous_data_year, "Data", scen_year_number, "assessment")) +
   geom_abline(slope = 1, intercept = 0, col = "red") +
-  theme_bw();ggplotly(comp_plot1)
+  theme_bw();ggplotly(comp_plot2)
 
-
-# Plot sustainability
-comp_plot_4 <- ggplot() + 
-  geom_jitter(data = total_2, aes(x = old_sust, y = sustainability, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
-  labs(x = paste("Previous Value", previous_data_year),
+###### Harvest Tonnes ######
+comp_plot3 <- ggplot() + 
+  geom_jitter(data = sw_total1, aes(x = old_tonnes, y = tonnes, text = paste("Product:", product, "<br>Region:", rgn_name)), alpha = 0.7) +
+  labs(x = paste("Previous Value", previous_data_year), 
        y = paste("Current Value", previous_data_year),
-       title = paste("Sustainability:", previous_data_year, "Data", prev_scen_year, "Assessment vs.", previous_data_year, "Data", scen_year_number, "assessment")) +
+       title = paste("Seaweed harvest tonnes", previous_data_year, "Data", prev_scen_year, "Assessment vs.", previous_data_year, "Data", scen_year_number, "assessment")) +
   geom_abline(slope = 1, intercept = 0, col = "red") +
-  theme_bw(); ggplotly(comp_plot_4)
+  theme_bw();ggplotly(comp_plot3)
+
+
+
 
 # ---- Compare relative seaweed sust data for all countries: ----
 # previous data year (2022) vs. current data year (2023) 
-old_rel_1 <- old_seaweed %>% 
+old_sw2 <- old_seaweed %>% 
   filter(year == previous_data_year) %>% 
-  dplyr::select(rgn_id, product, old_rel_sust_tonnes = rel_sust_tonnes)
+  dplyr::select(rgn_id, product, old_rel_sust_tonnes = rel_sust_tonnes, old_sust = sustainability, old_tonnes = tonnes, old_sust_tonnes = sust_tonnes, old_peak = peak_sust_tonnes)
 
-new_orn_1 <- new_orn %>% 
-  filter(year == latest_data_year) %>% 
-  dplyr::select(rgn_id, product, rgn_name, sust_tonnes, tonnes, sustainability, rel_sust_tonnes, peak_sust_tonnes, sust_tonnes_orig)
+new_sw2 <- new_seaweed %>% 
+  filter(year == current_data_year) %>% 
+  dplyr::select(rgn_id, product, rel_sust_tonnes, sustainability, tonnes, sust_tonnes, peak_sust_tonnes)
 
+sw_total2 <- old_sw2 %>% 
+  full_join(new_sw2, by = c("rgn_id", "product"))
 
-total <- old_orn_1 %>% 
-  full_join(new_orn_1, by = c("rgn_id", "product", "rgn_name"))
+# Join region labels for easier viewing
+sw_total2 <- sw_total2 %>% 
+  left_join(rgn_labels, by = "rgn_id") %>% 
+  select(-type, rgn_name = label)
 
-# Plot sustainable tonnes
-comp_plot_1 <- ggplot() + 
-  geom_jitter(data = total, aes(x = old_sust_tonnes, y = sust_tonnes, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
-  labs(x = paste("Previous Value", previous_data_year),
-       y = paste("Current Value", latest_data_year),
-       title = paste0("Sustainable tonnes: ", scen_year_number, " Assessment (",latest_data_year, " data) vs. ", prev_scen_year, " Assessment (",previous_data_year, " data)", " All Countries")) +
+###### Sustainable Tonnes ######
+comp_plot5 <- ggplot() + 
+  geom_jitter(data = sw_total2, aes(x = old_sust_tonnes, y = sust_tonnes, text = paste("Product:", product, "<br>Region:", rgn_name)), alpha = 0.7) +
+  labs(x = paste("Previous Value", previous_data_year), 
+       y = paste("Current Value", current_data_year),
+       title = paste("Sustainable tonnes of seaweed", previous_data_year, "Data", prev_scen_year, "Assessment vs.", current_data_year, "Data", scen_year_number, "assessment")) +
   geom_abline(slope = 1, intercept = 0, col = "red") +
-  theme_bw(); ggplotly(comp_plot_1)
+  theme_bw();ggplotly(comp_plot5)
 
-# Plot sustainability
-comp_plot_2 <- ggplot() + 
-  geom_jitter(data = total, aes(x = old_sust, y = sustainability, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
-  labs(x = paste("Previous Value", previous_data_year),
-       y = paste("Current Value", latest_data_year),
-       title = paste0("Sustainability: ", scen_year_number, " Assessment (",latest_data_year, " data) vs. ", prev_scen_year, " Assessment (",previous_data_year, " data)", " All Countries")) +
+###### Relative Sustainable tonnes ######
+comp_plot6 <- ggplot() + 
+  geom_jitter(data = sw_total2, aes(x = old_rel_sust_tonnes, y = rel_sust_tonnes, text = paste("Product:", product, "<br>Region:", rgn_name)), alpha = 0.7) +
+  labs(x = paste("Previous Value", previous_data_year), 
+       y = paste("Current Value", current_data_year),
+       title = paste("Relative sustainable tonnes of seaweed", previous_data_year, "Data", prev_scen_year, "Assessment vs.", current_data_year, "Data", scen_year_number, "assessment")) +
   geom_abline(slope = 1, intercept = 0, col = "red") +
-  theme_bw(); ggplotly(comp_plot_2)
+  theme_bw();ggplotly(comp_plot6)
+
+colnames(sw_total2)
+
+###### Harvest Tonnes ######
+comp_plot7 <- ggplot() + 
+  geom_jitter(data = sw_total2, aes(x = old_tonnes, y = tonnes, text = paste("Product:", product, "<br>Region:", rgn_name)), alpha = 0.7) +
+  labs(x = paste("Previous Value", previous_data_year), 
+       y = paste("Current Value", current_data_year),
+       title = paste("Seaweed harvest tonnes", previous_data_year, "Data", prev_scen_year, "Assessment vs.", current_data_year, "Data", scen_year_number, "assessment")) +
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  theme_bw();ggplotly(comp_plot7)
+
 
 ```
 
