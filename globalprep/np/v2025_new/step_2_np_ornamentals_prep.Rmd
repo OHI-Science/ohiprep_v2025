@@ -35,7 +35,7 @@ This analysis calculates the score for ornamentals per region based on FAO commo
 **Reference**:\
 <https://www.fao.org/fishery/en/statistics/software/fishstatj> App release date: March 2024 FAO raw commodities quantity 1976_2023 FAO raw commodities value 1976_2023 [FAO metadata](http://www.fao.org/fishery/statistics/global-commodities-production/en)
 
-- Global aquatic trade - All partners aggregated - Quantities and Values - 1976-2022 (Release date: July 2024)
+- Global aquatic trade - All partners aggregated - Quantities and Values - 1976-2023 (Release date: July 2025)
 
 
 **Downloaded**: 2025-07-14
@@ -94,6 +94,7 @@ prev_scen_year <- as.character(scen_year_number - 1)
 data_dir_year <- paste0("d", scen_year)
 prev_data_dir_year <- paste0("d", prev_scen_year)
 v_scen_year <- paste0("v", scen_year)
+prev_v_scen_year <- paste0("v", prev_scen_year)
 
 current_np_dir <- here::here("globalprep", "np", paste0(v_scen_year, "_new")) # update this if name changes
 

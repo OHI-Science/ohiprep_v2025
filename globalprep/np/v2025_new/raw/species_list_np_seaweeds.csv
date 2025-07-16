@@ -198,15 +198,20 @@ Slender wart weed,0.75,AL,Algae,seaweed: agar/human food/fish feed,"- food and n
 [Macrocystis integrifolia],0.001,AL,Algae,seaweed: human food/alginates,"- food use determined https://www.centralcoastbiodiversity.org/giant-perennial-kelp-bull-macrocystis-integrifolia.html
  - 1% proportion determined by best guess."
 [Cladosiphon okamuranus],0.1,AL,Algae,seaweed: human food/medicine,- food use determined https://en.wikipedia.org/wiki/Cladosiphon_okamuranus - sometimes used to treat cancer
-[Eucheuma isiforme],0.8,AL,Solieriaceae,seaweed: human food/cosmetics/food processing,- non-food use determined using Wikipedia
+[Eucheuma isiforme],0.8,AL,Solieriaceae,seaweed: human food/cosmetics/food processing,#NAME?
 Skottsberg's gigartina,0.75,AL,Algae,seaweed: agar/carrageenan/human food,- non-food and food use determined using FAO (red algae in Indonesia and Portugal mostly agar-containing seaweeds) (The main uses of red seaweeds are as food and as sources of two hydrocolloids: agar and carrageenan):http://www.fao.org/3/a-y4765e.pdf
 Green sea feather,0.2,AL,Caulerpaceae,used as food and medicine,- food use determined https://sealifebase.nrm.se/summary/Caulerpa-sertularioides.html
-SOLIERIACEAE,0.75,AL,Algae,NA,- used red seaweed include value
+SOLIERIACEAE,0.75,AL,Algae,NA,#NAME?
 BANGIACEAE,0.01,AL,Algae,NA,"- food use determined, wikipedia mentions wide food use https://en.wikipedia.org/wiki/Bangiaceae"
-SARGASSACEAE,0.9,AL,Algae,NA,- used sargassum spp value
-ULOTRICHACEAE,0.15,AL,Algae,NA,- used overall seaweed exclude value due to lack of available information on the species
-GIGARTINACEAE,0.75,AL,Algae,NA,- used red seaweed include value
-LESSONIACEAE,0.5,AL,Algae,NA,- used same exclude value as kelp nei
+SARGASSACEAE,0.9,AL,Algae,NA,#NAME?
+ULOTRICHACEAE,0.15,AL,Algae,NA,#NAME?
+GIGARTINACEAE,0.75,AL,Algae,NA,#NAME?
+LESSONIACEAE,0.5,AL,Algae,NA,#NAME?
 OSCILLATORIACEAE,1,AL,Algae,NA,- excluded as is typically freshwater https://en.wikipedia.org/wiki/Oscillatoria
-DUNALIELLACEAE,0.15,AL,Algae,NA,- used overall seaweed exclude value due to lack of more information
-CHORDARIACEAE,0.5,AL,Algae,seaweed: human food/alginate,- used brown seaweed include value
+DUNALIELLACEAE,0.15,AL,Algae,NA,#NAME?
+CHORDARIACEAE,0.5,AL,Algae,seaweed: human food/alginate,#NAME?
+[Eucheumatopsis isiformis],1,AL,Algae,seaweed: carageenan,NA
+[Pyropia columbina],0.1,AL,Algae,seaweed: human food,NA
+Sea lettuce,0.5,AL,Algae,seaweed: human food/aquarium trade feed,NA
+Kelps nei,0.5,AL,Algae,seaweed: mixed use,NA
+[Limnospira maxima],0.1,AL,Algae,seaweed,NA
