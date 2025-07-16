@@ -25,13 +25,9 @@ knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.path = 'Figs/',
 
 
 library(dplyr)
-# library(rgdal)
 library(raster)
 library(here)
-#library(ggridges)
 library(ggplot2)
-library(sf)
-library(raster)
 library(sf)
 library(fasterize)
 library(stringr)
@@ -61,15 +57,49 @@ source(file.path(dir_setup, 'common_fxns.R'))
 
 Examine IUCN Red List regional assessments for extinction risk categories.
 
+To define spatial areas more accurately, create rasters of WDPA and ocean area at Gall-Peters resolution of 0.25 km^2. These can then be aggregated back to Gall Peters 10 km^2 working rasters, summing the total ocean area and total protected area within each working cell.
+
+* Ocean area - use Natural Earth 10 m land polygons; mask over cell ID raster to exclude land.
+
 # Data Sources
 
-### IUCN Red List
+## Geographic scope of regional assessments
 
-# Methods: Geographic scope of regional assessments
+[MEOW Regions](https://www.worldwildlife.org/publications/marine-ecoregions-of-the-world-a-bioregionalization-of-coastal-and-shelf-areas)
+[LME Regions](https://upload.wikimedia.org/wikipedia/commons/4/4d/Global_map_of_large_marine_ecosystems.jpg)
 
-For each regional assessment, spatially classify by [Large Marine Ecosystems](https://upload.wikimedia.org/wikipedia/commons/4/4d/Global_map_of_large_marine_ecosystems.jpg) (other potential options: EEZs and/or FAO Major Fishing Areas).  Use the [https://en.wikipedia.org/wiki/United_Nations_geoscheme](UN geoscheme) to roughly identify subregional zones.  Note there may be some overlaps.
+## WDPA
+**Reference**: IUCN and UNEP-WCMC (2025), The World Database on Protected Areas (WDPA) [On-line], June 2025. Cambridge, UK: UNEP-WCMC. Available at: www.protectedplanet.net.
 
-## Europe ('europe'):
+**Downloaded**: June 22, 2025
+
+**Description**:  Shapefile of World Database on Protected Areas
+
+**Time range**: 1800 - 2025; some protected areas do not have an associated "status year" and are reported as year 0.
+
+**Format**:  Shapefile
+
+**File location**: `Mazu:git-annex/globalprep/_raw_data/wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/`
+
+## Marine Ecoregions of the World (MEOW)
+
+**Reference**: Spalding, Mark D. et al. 2007. “Marine Ecoregions of the World: A Bioregionalization of Coastal and Shelf Areas.” BioScience 57(7): 573–83. [URL](https://www.worldwildlife.org/publications/marine-ecoregions-of-the-world-a-bioregionalization-of-coastal-and-shelf-areas)
+
+**Downloaded**: May 08, 2019
+
+**Description**:  Shapefile of Marine Ecoregions
+
+**Format**:  Shapefile
+
+**File location**: `Mazu:git-annex/globalprep/_raw_data/wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/`
+
+# Methods: 
+
+## Geographic scope of regional assessments
+
+The following descriptions may be useful for assigning MEOW and LME regions:
+
+**Europe ('europe'):**
 
 from European marine fishes: 
 
@@ -90,81 +120,90 @@ Options:
 * MEOW 2 (Northern Iceland/Svalbard), [21:27, 30:31, 34:36] (Mediterranean), 44 (Black Sea)
 * Alternately: Use EEZs for all countries listed as Europe by UN classification
 
-## Northern Africa 
+**Northern Africa**
 
 * LME 33 (Red Sea), 26 (Mediterranean), 27 (West Coast of North Africa)
 * MEOW 87-88 (Red Sea), [32, 33, 35, 36] (Mediterranean), 28, 29 (Lusitanean upwelling)
 
-## Southern Africa 
+**Southern Africa**
 
 * LME 29 (Western Southern Africa) and 30 (Madagascar)
 * MEOW 192:194 (Temperate southern Africa)
 
-## Eastern Africa 
+**Eastern Africa** 
 
 * LME 30 (Madagascar) and 31 (Horn of Africa)
 * MEOW 94:102 (Western Indian Ocean)
 
-## Western Africa   
+**Western Africa**   
 
 * LME 28
 * MEOW 79:86 (West African Transition, Gulf of Guinea)
 
-## Central Africa  
+**Central Africa**  
 
 * LME 28, 29
 * If this is truly "Central" then no marine anyway! ignore
 
-## Northeastern Africa 
+**Northeastern Africa** 
 
 * LME 32, 33
 * MEOW 87:93 (Red Sea, Gulf of Aden, Somali/Arabian)
 
-## Pan-Africa 
+**Pan-Africa** 
 
 * LME 26-33
 * MEOW 28, 29, 32, 33, 35, 36 (Med and N), 
     79:86 (West), 87:89, 93 (NE), 94:102 (E), 192:194 (S)
 
-## Gulf of Mexico 
+**Gulf of Mexico** 
 
 * LME 5
 * MEOW 43 (N Gulf), 68:70 (S Gulf)
 
-## Mediterranean
+**Mediterranean**
 
 * LME 26 and 62 for Mediterranean and Black Seas
 * MEOW 30:36, 44
 
-## Persian Gulf
+**Persian Gulf**
 
 * LME 32 (NOTE: this encompasses the entire Arabian Sea)
 * MEOW 90:91
 
+### Spatial: `iucn_rgn_to_meow.csv`
 
 ```{r}
-meow <- st_read(file.path(dir_anx, "_raw_data", "meow"))
+# Load region risk csv to view regions
+rgn_risk_ts <- read_csv(file.path(dir_goal, '_data',
+                                 sprintf('iucn_risk_ts_rgn_%s.csv', api_version)), show_col_types = FALSE)
 
-plot(meow["ECOREGION"])
-```
-
-
-```{r}
+# View regions
 unique(rgn_risk_ts$iucn_rgn)
 
-rgn_to_meow <- c('europe'             = paste(c(2,21:27, 30:31, 34:36, 44), collapse = ','), #updated
-                'western_africa'      = paste0(79:83, collapse = ','), #updated
-                's._africa_fw'     = paste0(192:194, collapse = ','),
-                'pan-africa'          = paste0(c(28, 29, 32, 33, 35, 36, 79:89, 93:102, 192:194), #updated
-                                                 collapse = ','),
-                'gulf_of_mexico'      = paste0(c(43, 69:70), collapse = ','), #updated
-                'mediterranean'       = paste0(c(30:36, 44), collapse = ','), #updated
-                'persian_gulf'        = paste0(c(90:91), collapse = ','), #updated
-                'global'              = paste0(c(1:232), collapse = ','),
-                'arabian_sea'         = paste0(c(89, 91:92, 103, 105:106), collapse = ','), #updated
-                'caribbean'           = paste0(c(63:68), collapse = ","), #updated
-                'central_africa'      = paste0(c(84:86), collapse = ',')) #updated
+# Assign MEOWS to regions
+rgn_to_meow <- c('europe'             = paste(c(2,21:27, 30:31, 34:36, 44), 
+                                              collapse = ','), #updated 2025
+                'gulf_of_mexico'      = paste0(c(43, 69:70), 
+                                               collapse = ','), #updated 2025
+                'pan-africa'          = paste0(c(28:29, 32:33, 35:36, 79:89, 93:102, 190:194), 
+                                               collapse = ','), #updated 2025
+                'mediterranean'       = paste0(c(30:36, 44), 
+                                               collapse = ','), #updated 2025
+                'arabian_sea'         = paste0(c(89, 91:92, 103, 105:106), 
+                                               collapse = ','), #updated 2025
+                'caribbean'           = paste0(c(63:68), 
+                                               collapse = ","), #updated 2025
+                'western_africa'      = paste0(79:83, 
+                                               collapse = ','), #updated 2025
+                'central_africa'      = paste0(c(81:85), 
+                                               collapse = ','), #updated 2025
+                'persian_gulf'        = paste0(c(90:91), 
+                                               collapse = ','), #updated 2025
+                'global'              = paste0(c(1:232), 
+                                               collapse = ','))
 
+# Create data frame for layer
 rgn_to_meow_df <- data.frame(iucn_rgn = names(rgn_to_meow),
                              meow_id  = rgn_to_meow) %>%
   mutate(meow_id = str_split(meow_id, ',')) %>%
@@ -174,28 +213,39 @@ rgn_to_meow_df <- data.frame(iucn_rgn = names(rgn_to_meow),
          priority = n()) %>%
   arrange(priority)
 
+# Write csv
 write_csv(rgn_to_meow_df, file.path(dir_goal, sprintf('_spatial/iucn_rgn_to_meow.csv')))
+
+# Check
+if(setdiff(unique(rgn_to_meow_df$iucn_rgn), unique(rgn_risk_ts$iucn_rgn)) != "global") {
+  warning("Extra regions not accounted for in MEOW assignments.")
+}
 ```
 
+### Spatial: `iucn_rgn_to_lme.csv`
 
-UPDATE 
+Where an LME is assigned to multiple regions, use a prioritization then averaging method:
 
+* Prioritize by the region comprising the smallest number of LMEs; e.g. Mediterranean has 1 LME, North Africa has 3, Europe has 8; they all overlap in LME 26.  So for the score for LME 26 for a species assessed in all three regions, keep the score for the Mediterranean.
+* If after prioritizing, multiple regions still overlap in an LME, take the average score of the overlapping regional assessments for that LME.
 
 ``` {r code LMEs}
+# View regions
+unique(rgn_risk_ts$iucn_rgn)
 
+# Assign LMEs to regions
 rgn_to_lme <- c('europe'              = '20,21,22,23,24,25,26,59',
-                'northern_africa'     = '26,27,33',
+                'gulf_of_mexico'      = '5',
+                'pan-africa'          = '26,27,28,29,30,31,32,33',
+                'mediterranean'       = '26,62',
+                'arabian_sea'         = '32',
+                'caribbean'           = '12',
                 'western_africa'      = '28', 
                 'central_africa'      = '28,29',
-                'northeastern_africa' = '32,33',
-                'southern_africa'     = '29,30',
-                'eastern_africa'      = '30,31',
-                'pan-africa'          = '26,27,28,29,30,31,32,33',
-                'gulf_of_mexico'      = '5',
-                'mediterranean'       = '26,62', 
                 'persian_gulf'        = '32',
                 'global'              = paste0(1:66, collapse = ','))
 
+# Create data frame for layer
 rgn_to_lme_df <- data.frame(iucn_rgn = names(rgn_to_lme),
                             lme_id = rgn_to_lme) %>%
   mutate(lme_id = str_split(lme_id, ',')) %>%
@@ -205,39 +255,13 @@ rgn_to_lme_df <- data.frame(iucn_rgn = names(rgn_to_lme),
          priority = n()) %>%
   arrange(priority)
 
+# Write csv
 write_csv(rgn_to_lme_df, file.path(dir_goal, sprintf('_spatial/iucn_rgn_to_lme.csv')))
 
+if(setdiff(unique(rgn_to_lme_df$iucn_rgn), unique(rgn_risk_ts$iucn_rgn)) != "global") {
+  warning("Extra regions not accounted for in LME assignments.")
+}
 ```
-
-Where an LME is assigned to multiple regions, use a prioritization then averaging method:
-
-* Prioritize by the region comprising the smallest number of LMEs; e.g. Mediterranean has 1 LME, North Africa has 3, Europe has 8; they all overlap in LME 26.  So for the score for LME 26 for a species assessed in all three regions, keep the score for the Mediterranean.
-* If after prioritizing, multiple regions still overlap in an LME, take the average score of the overlapping regional assessments for that LME.
-
-
-# Summary
-
-To define spatial areas more accurately, create rasters of WDPA and ocean area at Gall-Peters resolution of 0.25 km^2. These can then be aggregated back to Gall Peters 10 km^2 working rasters, summing the total ocean area and total protected area within each working cell.
-
-* Ocean area - use Natural Earth 10 m land polygons; mask over cell ID raster to exclude land.
-
-# Data Sources
-
-### WDPA
-# Data Source
-**Reference**: IUCN and UNEP-WCMC (2025), The World Database on Protected Areas (WDPA) [On-line], June 2025. Cambridge, UK: UNEP-WCMC. Available at: www.protectedplanet.net.
-
-**Downloaded**: June 22, 2025
-
-**Description**:  Shapefile of World Database on Protected Areas
-
-**Time range**: 1800 - 2025; some protected areas do not have an associated "status year" and are reported as year 0.
-
-**Format**:  Shapefile
-
-**File location**: `Mazu:git-annex/globalprep/_raw_data/wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/`
-
-# Methods
 
 ## Ocean area raster
 
@@ -249,15 +273,6 @@ To define spatial areas more accurately, create rasters of WDPA and ocean area a
 
  - Note: Just copy this over from last years, it doesn't change. 
  
-```{r}
-ocean_area_file <- file.path(dir_spatial, 'ocean_area_rast.tif')
-
-cell_id_file <- file.path(dir_spatial, 'cell_id_rast.tif')
-
-# copy from last year
-ocean_500m_file  <- file.path(dir_anx, 'spp', 'v2024', 'spp_risk_dists', 'spatial', 'ocean_500m.tif')
-```
-
 ## Create WDPA MPA percent protection data frame
 
 Marine regions are any protected area with MARINE flag of 1 or 2, or non-zero GIS_M_AREA.  Classify by IUCN category (I-VI -> 1-6; non-classified get 8).  Include only designated, adopted, and established parks.  Omit non-MPA management plans from U.S.  Rasterize to CHI resolution, calculate protected cells vs total cells to get percent of protection for each IUCN protection category.
@@ -268,14 +283,22 @@ Because we are rasterizing the protected areas down to 500 m resolution, we risk
 
 Actually, create two maps: one by protection category, another by year for no-take only (categories Ia, Ib, II, and no-take).
 
-```{r}
-rast_cell_id <- rast(cell_id_file)
+### Git-annex: `wdpa_mar_by_cat_Jun2025_500m.tif`
 
-# Goal file
+```{r}
+# Copy from last year (already in _spatial folder)
+ocean_area_file <- file.path(dir_spatial, 'ocean_area_rast.tif')
+cell_id_file <- file.path(dir_spatial, 'cell_id_rast.tif')
+ocean_500m_file  <- file.path(dir_anx, 'spp', 'v2024', 'spp_risk_dists', 'spatial', 'ocean_500m.tif')
+
+rast_cell_id <- rast(cell_id_file)
+rast_ocean_500m <- rast(ocean_500m_file)
+
+# Goal files
 wdpa_marine_file <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/wdpa_mar_by_cat_Jun2025_500m.tif')
 wdpa_marine_file_int <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/wdpa_mar_by_cat_Jun2025_500m_int.tif')
 
-
+# File paths to WDPA files (change to current year)
 wdpa_poly_file_0   <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/WDPA_Jun2025_Public_shp_0', 
                               'WDPA_Jun2025_Public_shp-polygons.shp')
 wdpa_poly_file_1   <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/WDPA_Jun2025_Public_shp_1', 
@@ -283,84 +306,89 @@ wdpa_poly_file_1   <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/WDPA_Jun2025_P
 wdpa_poly_file_2   <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/WDPA_Jun2025_Public_shp_2', 
                               'WDPA_Jun2025_Public_shp-polygons.shp')
 
-if(!file.exists(wdpa_marine_file)) {
-  
-  wdpa_poly_0 <- sf::st_read(wdpa_poly_file_0)
-  wdpa_poly_1 <- sf::st_read(wdpa_poly_file_1)
-  wdpa_poly_2 <- sf::st_read(wdpa_poly_file_2)
-  
-  wdpa_poly <- rbind(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)
+#if(!file.exists(wdpa_marine_file)) {
 
-   #wdpa_poly$IUCN_CAT %>% unique() 
-  ##only grab ones that are reported/assigned/applicable
-  iucn_cats <- c('Ia'  = 1,
-                 'Ib'  = 1,
-                 'II'  = 2,
-                 'III' = 3,
-                 'IV'  = 4,
-                 'V'   = 5,
-                 'VI'  = 6)
-   wdpa_poly$STATUS %>% table()
-     # Adopted   Designated  Established    Inscribed Not Reported     Proposed 
-     #      34       254937         2401          250           34         1219 
-  # wdpa_poly$NO_TAKE %>% unique()
-  # x <- wdpa_poly %>% filter(NO_TAKE %in% c('All', 'Part'))
-  # x <- wdpa_poly %>% filter(WDPAID == 309888)
-  
-  wdpa_marine <- wdpa_poly %>%
-    filter(MARINE > 0 | GIS_M_AREA > 0) %>%
-    filter(STATUS %in% c('Designated', 'Adopted', 'Established')) %>%
-      ### no paper parks!
-    filter(!str_detect(tolower(MANG_PLAN), 'non-mpa')) %>%
-      ### omit non-MPA fisheries or species management plans!
-    mutate(NO_TAKE = ifelse(WDPAID == 309888, TRUE, NO_TAKE),
-             ### patch PIPA to be no take - currently "not reported"
-           no_take = (NO_TAKE == 'All') | (NO_TAKE == 'Part' & NO_TK_AREA > 0.75 * GIS_M_AREA),
-             ### if NO_TK_AREA is 75% or more of GIS area, count it...
-           cat = iucn_cats[IUCN_CAT],
-           cat = ifelse(no_take & !cat %in% 1:2, -1, cat), ### use -1 as a "no take" flag
-           cat = ifelse(is.na(cat), 8, cat)) %>%           ### use 8 as an "other protected" flag
-    arrange(cat) %>%
-    st_transform(crs = gp_proj4)
+# Read in WDPA files
+wdpa_poly_0 <- sf::st_read(wdpa_poly_file_0)
+wdpa_poly_1 <- sf::st_read(wdpa_poly_file_1)
+wdpa_poly_2 <- sf::st_read(wdpa_poly_file_2)
 
-  
-  wdpa_marine_vect <- vect(wdpa_marine)
+wdpa_poly <- rbind(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)
 
-  rm(wdpa_marine)
-  rm(wdpa_poly_0)
-  rm(wdpa_poly_1)
-  rm(wdpa_poly_2)
-  rm(wdpa_poly) ## free up some space
-    
-  ### rasterize all protected areas to 500m global raster;
-  ### use min value: will prioritize no-take and higher levels of protection
-  terra::rasterize(x = wdpa_marine_vect, 
-                                        y = rast_ocean_500m,
-                                        field  = 'cat', 
-                                        fun    = 'min', 
-                                        filename = wdpa_marine_file_int)   
+#wdpa_poly$IUCN_CAT %>% unique() 
+##only grab ones that are reported/assigned/applicable
+iucn_cats <- c('Ia'  = 1,
+               'Ib'  = 1,
+               'II'  = 2,
+               'III' = 3,
+               'IV'  = 4,
+               'V'   = 5,
+               'VI'  = 6)
+wdpa_poly$STATUS %>% table()
+# Adopted   Designated  Established    Inscribed Not Reported     Proposed 
+#      34       254937         2401          250           34         1219 
+# wdpa_poly$NO_TAKE %>% unique()
+# x <- wdpa_poly %>% filter(NO_TAKE %in% c('All', 'Part'))
+# x <- wdpa_poly %>% filter(WDPAID == 309888)
 
-  #plot(wdpa_all_rast_500m)
-  
-  wdpa_all_rast_500m <- rast(wdpa_marine_file_int)
-  
-  rm(wdpa_marine_vect) ## free up some space
-  
-  rast_ocean_500m <- terra::classify(rast_ocean_500m ,cbind(-Inf, 0.005, NA), right=FALSE)
-  # plot(rast_ocean_500m)
-  
-  wdpa_marine_rast_500m <- terra::mask(wdpa_all_rast_500m, rast_ocean_500m)
-  
-  # plot(wdpa_marine_rast_500m)
-  # plot(rast(file.path(dir_raw_data_anx, 'wdpa_mpa/d2021/wdpa_mar_by_cat_Feb2021_500m.tif')))
-  
-  writeRaster(wdpa_marine_rast_500m, wdpa_marine_file, 
-              overwrite = TRUE)
-  
-}
+wdpa_marine <- wdpa_poly %>%
+  filter(MARINE > 0 | GIS_M_AREA > 0) %>%
+  filter(STATUS %in% c('Designated', 'Adopted', 'Established')) %>%
+  ### no paper parks!
+  filter(!str_detect(tolower(MANG_PLAN), 'non-mpa')) %>%
+  ### omit non-MPA fisheries or species management plans!
+  mutate(NO_TAKE = ifelse(WDPAID == 309888, TRUE, NO_TAKE),
+         ### patch PIPA to be no take - currently "not reported"
+         no_take = (NO_TAKE == 'All') | (NO_TAKE == 'Part' & NO_TK_AREA > 0.75 * GIS_M_AREA),
+         ### if NO_TK_AREA is 75% or more of GIS area, count it...
+         cat = iucn_cats[IUCN_CAT],
+         cat = ifelse(no_take & !cat %in% 1:2, -1, cat), ### use -1 as a "no take" flag
+         cat = ifelse(is.na(cat), 8, cat)) %>%           ### use 8 as an "other protected" flag
+  arrange(cat) %>%
+  st_transform(crs = gp_proj4)
 
+wdpa_marine_vect <- vect(wdpa_marine)
 
+# Free up space
+rm(wdpa_marine)
+rm(wdpa_poly_0)
+rm(wdpa_poly_1)
+rm(wdpa_poly_2)
+rm(wdpa_poly)
+
+# Rasterize all protected areas to 500m global raster;
+# Use min value: will prioritize no-take and higher levels of protection
+terra::rasterize(x = wdpa_marine_vect, 
+                 y = rast_ocean_500m,
+                 field  = 'cat', 
+                 fun    = 'min', 
+                 filename = wdpa_marine_file_int,
+                 overwrite = TRUE)   
+
+wdpa_all_rast_500m <- rast(wdpa_marine_file_int)
+
+#plot(wdpa_all_rast_500m)
+
+# Free up space
+rm(wdpa_marine_vect)
+
+rast_ocean_500m <- terra::classify(rast_ocean_500m ,cbind(-Inf, 0.005, NA), right=FALSE)
+
+# plot(rast_ocean_500m)
+
+wdpa_marine_rast_500m <- terra::mask(wdpa_all_rast_500m, rast_ocean_500m)
+
+# plot(wdpa_marine_rast_500m)
+# plot(rast(file.path(dir_raw_data_anx, 'wdpa_mpa/d2021/wdpa_mar_by_cat_Feb2021_500m.tif')))
+
+writeRaster(wdpa_marine_rast_500m, wdpa_marine_file, 
+            overwrite = TRUE)
+  
+#}
 ```
+
+#### Git-annex: `wdpa_mar_by_prot_yr_Jun2025_500m.tif`
+
 ```{r}
 
 rast_ocean_500m <- rast(ocean_500m_file)
@@ -380,83 +408,88 @@ wdpa_poly_file_1   <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/WDPA_Jun2025_P
 wdpa_poly_file_2   <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/WDPA_Jun2025_Public_shp_2',
                                 'WDPA_Jun2025_Public_shp-polygons.shp')
 
-if(!file.exists(wdpa_prot_yr_file)) {
+#if(!file.exists(wdpa_prot_yr_file)) {
   
-  wdpa_poly_0 <- sf::st_read(wdpa_poly_file_0)
-  wdpa_poly_1 <- sf::st_read(wdpa_poly_file_1)
-  wdpa_poly_2 <- sf::st_read(wdpa_poly_file_2)
-  
-  wdpa_poly <- rbind(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)
+wdpa_poly_0 <- sf::st_read(wdpa_poly_file_0)
+wdpa_poly_1 <- sf::st_read(wdpa_poly_file_1)
+wdpa_poly_2 <- sf::st_read(wdpa_poly_file_2)
 
-   #wdpa_poly$IUCN_CAT %>% unique()
-  iucn_cats <- c('Ia'  = 1,
-                 'Ib'  = 1,
-                 'II'  = 2,
-                 'III' = 3,
-                 'IV'  = 4,
-                 'V'   = 5,
-                 'VI'  = 6)
-    #wdpa_poly$STATUS %>% table()
-         # Adopted   Designated  Established    Inscribed Not Reported     Proposed 
-         #  34       242940         1148          249           34         1201 
-  # wdpa_poly$NO_TAKE %>% unique()
-  # x <- wdpa_poly %>% filter(NO_TAKE %in% c('All', 'Part'))
-  
-  wdpa_no_take <- wdpa_poly %>%
-    filter(MARINE > 0 | GIS_M_AREA > 0) %>%
-    filter(STATUS %in% c('Designated', 'Adopted', 'Established')) %>%
-      ### no paper parks!
-    filter(!str_detect(tolower(MANG_PLAN), 'non-mpa')) %>%
-      ### omit non-MPA fisheries or species management plans!
-    mutate(NO_TAKE = ifelse(WDPAID == 309888, TRUE, NO_TAKE),
-             ### patch PIPA to be no take - currently "not reported"
-           no_take = (NO_TAKE == 'All') | (NO_TAKE == 'Part' & NO_TK_AREA > 0.75 * GIS_M_AREA),
-             ### if NO_TK_AREA is 75% or more of GIS area, count it...
-           cat = iucn_cats[IUCN_CAT],
-           cat = ifelse(no_take & !cat %in% 1:2, -1, cat), ### use -1 as a "no take" flag
-           cat = ifelse(is.na(cat), 8, cat)) %>%           ### use 8 as an "other protected" flag
-    arrange(cat) %>%
-    filter(cat <= 2) %>% ### this limits to categories Ia, Ib, II, and no-take
-    st_transform(crs = gp_proj4)
-  
-  rm(wdpa_poly_0 , wdpa_poly_1, wdpa_poly_2, wdpa_poly)
-  
-  wdpa_no_take_vect <- vect(wdpa_no_take)
-  
-  rm(wdpa_no_take, wdpa_marine_rast_500m)
-  
-  ### rasterize all protected areas to 500 m global raster;
-  ### use min value: will prioritize no-take and higher levels of protection
-           wdpa_all_rast_500m <-   terra::rasterize(x = wdpa_no_take_vect, 
-                                        y = rast_ocean_500m,
-                                        field  = 'STATUS_YR', 
-                                        fun    = 'min')
-           
-           writeRaster(wdpa_all_rast_500m, wdpa_prot_yr_file_int)
-  
-  rm(wdpa_no_take_vect)
-  
-  rast_ocean_500m <- terra::classify(rast_ocean_500m ,cbind(-Inf, 0.005, NA), right=FALSE)
-  
-    ### in case of floating point not-quite-zeros...
-  
-  wdpa_all_rast_500m <- rast(wdpa_prot_yr_file_int)
-  
-   terra::mask(wdpa_all_rast_500m, rast_ocean_500m, filename = wdpa_prot_yr_file)
-   
-   
-   # wdpa_yr_rast_500m <- rast(wdpa_prot_yr_file)
-    #plot(wdpa_yr_rast_500m)
-  #plot(raster(file.path(dir_raw_data_anx, 'wdpa_mpa/d2020/wdpa_mar_by_prot_yr_Apr2020_500m.tif')))
-  
-  # writeRaster(wdpa_yr_rast_500m, wdpa_prot_yr_file, 
-  #             overwrite = TRUE)
-  # 
-}
+wdpa_poly <- rbind(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)
+
+#wdpa_poly$IUCN_CAT %>% unique()
+iucn_cats <- c('Ia'  = 1,
+               'Ib'  = 1,
+               'II'  = 2,
+               'III' = 3,
+               'IV'  = 4,
+               'V'   = 5,
+               'VI'  = 6)
+#wdpa_poly$STATUS %>% table()
+# Adopted   Designated  Established    Inscribed Not Reported     Proposed 
+#  34       242940         1148          249           34         1201 
+# wdpa_poly$NO_TAKE %>% unique()
+# x <- wdpa_poly %>% filter(NO_TAKE %in% c('All', 'Part'))
+
+wdpa_no_take <- wdpa_poly %>%
+  filter(MARINE > 0 | GIS_M_AREA > 0) %>%
+  filter(STATUS %in% c('Designated', 'Adopted', 'Established')) %>%
+  ### no paper parks!
+  filter(!str_detect(tolower(MANG_PLAN), 'non-mpa')) %>%
+  ### omit non-MPA fisheries or species management plans!
+  mutate(NO_TAKE = ifelse(WDPAID == 309888, TRUE, NO_TAKE),
+         ### patch PIPA to be no take - currently "not reported"
+         no_take = (NO_TAKE == 'All') | (NO_TAKE == 'Part' & NO_TK_AREA > 0.75 * GIS_M_AREA),
+         ### if NO_TK_AREA is 75% or more of GIS area, count it...
+         cat = iucn_cats[IUCN_CAT],
+         cat = ifelse(no_take & !cat %in% 1:2, -1, cat), ### use -1 as a "no take" flag
+         cat = ifelse(is.na(cat), 8, cat)) %>%           ### use 8 as an "other protected" flag
+  arrange(cat) %>%
+  filter(cat <= 2) %>% ### this limits to categories Ia, Ib, II, and no-take
+  st_transform(crs = gp_proj4)
+
+rm(wdpa_poly_0 , wdpa_poly_1, wdpa_poly_2, wdpa_poly)
+
+wdpa_no_take_vect <- vect(wdpa_no_take)
+
+rm(wdpa_no_take, wdpa_marine_rast_500m)
+
+### rasterize all protected areas to 500 m global raster;
+### use min value: will prioritize no-take and higher levels of protection
+wdpa_all_rast_500m <-   terra::rasterize(x = wdpa_no_take_vect, 
+                                         y = rast_ocean_500m,
+                                         field  = 'STATUS_YR', 
+                                         fun    = 'min',
+                                         overwrite = TRUE)
+
+writeRaster(wdpa_all_rast_500m, wdpa_prot_yr_file_int, overwrite = TRUE)
+
+rm(wdpa_no_take_vect)
+
+rast_ocean_500m <- terra::classify(rast_ocean_500m ,cbind(-Inf, 0.005, NA), right=FALSE)
+
+### in case of floating point not-quite-zeros...
+
+wdpa_all_rast_500m <- rast(wdpa_prot_yr_file_int)
+
+terra::mask(wdpa_all_rast_500m, 
+            rast_ocean_500m, 
+            filename = wdpa_prot_yr_file,
+            overwrite = TRUE)
+
+
+# wdpa_yr_rast_500m <- rast(wdpa_prot_yr_file)
+#plot(wdpa_yr_rast_500m)
+#plot(raster(file.path(dir_raw_data_anx, 'wdpa_mpa/d2020/wdpa_mar_by_prot_yr_Apr2020_500m.tif')))
+
+# writeRaster(wdpa_yr_rast_500m, wdpa_prot_yr_file, 
+#             overwrite = TRUE)
+# 
+#}
 
 # View
 plot(wdpa_all_rast_500m)
 ```
+
 ### Crosstab WDPA map to cell IDs
 
 Be cautious when using `raster::crosstab()` as it returns factors that need to be coerced into integers... This code results in a file of cell IDs, IUCN protected area categories (1 = Ia and Ib, 2-6 = II - VI, 7 = no take, -1 = other), and proportion of cell protected by that category.
@@ -486,6 +519,7 @@ rast_cell_id_500m <- terra::resample(x = rast_cell_id, y = rast_ocean_500m,
 #plot(rast_cell_id_500m)
 #plot(raster(file.path("/home/shares/ohi/git-annex/globalprep/spp/v2020/spp_risk_dists/spatial/cell_id_500m.tif")))
 
+# Goal file
 wdpa_cell_area_file <- file.path(dir_spatial, 'wdpa_mpa_area.csv')
 
 ### now break into chunks and mclapply across them to crosstab WDPA categories to cell IDs
@@ -532,10 +566,9 @@ system.time({
                                                                          rast_cell_id_500m, 
                                                                          chunk = x, n_chunks))
   
-  #    user   system  elapsed 
-  # 5623.300 1018.111  622.959 - about ten minutes!
+#    user   system  elapsed 
+# 5041.803  971.565  553.962 
 })
-
 
 wdpa_cells_df <- bind_rows(wdpa_cells_list)
 
@@ -554,17 +587,22 @@ wdpa_area_df <- wdpa_cells_df %>%
   summarize(mpa_pct = sum(mpa_pct), prot_area_km2 = sum(prot_area_km2)) %>%
   ungroup()
 
-old <- read_csv(file.path(here(), "globalprep/spp/v2024/_spatial/wdpa_mpa_area.csv"))
+# Last year's file
+old <- read_csv(file.path(here(), "globalprep/spp/v2024/_spatial/wdpa_mpa_area.csv"), show_col_types = FALSE)
 
-sum(old$prot_area_km2) # 26841457
+sum(old$prot_area_km2) 
+# 2023: 26841457
 # 2024: 24690672
 
-sum(wdpa_area_df$prot_area_km2) # 24690672 
+sum(wdpa_area_df$prot_area_km2) 
+# 2024: 24690672 
 # 2025: 30000565
 
-write_csv(wdpa_area_df, wdpa_cell_area_file)
+# Write csv
+write_csv(wdpa_area_df, wdpa_cell_area_file) 
 ```
 
+#### Spatial: `wdpa_mpa_year.csv` 
 
 ``` {r crosstab mpa years}
 wdpa_yr_rast_500m <- raster(wdpa_prot_yr_file)
@@ -575,67 +613,68 @@ rast_ocean_area <- raster(ocean_area_file) ### ocean proportional area at 10 km^
 cell_id_500m_file <- file.path(dir_goal_anx, 'spatial/cell_id_500m.tif')
 rast_cell_id_500m <- raster(cell_id_500m_file)
 
+# Goal file
 wdpa_cell_year_file <- file.path(dir_spatial, 'wdpa_mpa_year.csv')
 
 ### now break into chunks and mclapply across them to crosstab WDPA categories to cell IDs
 #if(!file.exists(wdpa_cell_year_file)) {
-  ### Break into smaller chunks for faster processing and eventual parallelizing
-  n_chunks <- 60
-  
-  crosstab_chunk2 <- function(rast1, rast2, chunk, n_chunks) {
-    ### chunk <- 30
-    chunk_size <- ceiling(ncol(rast1) / n_chunks)
-    left_bound <- (chunk - 1) * chunk_size + 1
-    right_bound <- min(left_bound + chunk_size - 1, ncol(rast1))
-    
-    chunk_ext <- extent(rast1, 1, nrow(rast1), left_bound, right_bound)
-    message('Processing ', chunk, ': ', paste0(as.character(round(chunk_ext)), collapse = ', '))
-    wdpa_chunk    <- crop(rast1, chunk_ext)
-    cell_id_chunk <- crop(rast2, chunk_ext)
-    
-    wdpa_cells <- crosstab(wdpa_chunk, cell_id_chunk, 
-                           progress = 'text',
-                           long = TRUE) %>%
-      setNames(c('mpa_year', 'cell_id', 'n_prot')) %>%
-      mutate(mpa_year = as.integer(as.character(mpa_year)),
-             cell_id  = as.integer(as.character(cell_id)))
-        ### mpa_year and cell_id are crosstabbed as factors - first
-        ### convert to character (to unfactorize it) then to integer.  Otherwise
-        ### you end up with factor index, not actual cell ID or category.
-    
-    return(wdpa_cells)
-  }
+### Break into smaller chunks for faster processing and eventual parallelizing
+n_chunks <- 60
 
-  ### Use the function in an mclapply call
-  system.time({
-    wdpa_cells_list <- parallel::mclapply(1:n_chunks, mc.cores = 12,
-      FUN = function(x) crosstab_chunk2(wdpa_yr_rast_500m, 
-                                        rast_cell_id_500m, 
-                                        chunk = x, n_chunks))
+crosstab_chunk2 <- function(rast1, rast2, chunk, n_chunks) {
+  ### chunk <- 30
+  chunk_size <- ceiling(ncol(rast1) / n_chunks)
+  left_bound <- (chunk - 1) * chunk_size + 1
+  right_bound <- min(left_bound + chunk_size - 1, ncol(rast1))
+  
+  chunk_ext <- extent(rast1, 1, nrow(rast1), left_bound, right_bound)
+  message('Processing ', chunk, ': ', paste0(as.character(round(chunk_ext)), collapse = ', '))
+  wdpa_chunk    <- crop(rast1, chunk_ext)
+  cell_id_chunk <- crop(rast2, chunk_ext)
+  
+  wdpa_cells <- crosstab(wdpa_chunk, cell_id_chunk, 
+                         progress = 'text',
+                         long = TRUE) %>%
+    setNames(c('mpa_year', 'cell_id', 'n_prot')) %>%
+    mutate(mpa_year = as.integer(as.character(mpa_year)),
+           cell_id  = as.integer(as.character(cell_id)))
+  ### mpa_year and cell_id are crosstabbed as factors - first
+  ### convert to character (to unfactorize it) then to integer.  Otherwise
+  ### you end up with factor index, not actual cell ID or category.
+  
+  return(wdpa_cells)
+}
+
+### Use the function in an mclapply call
+system.time({
+  wdpa_cells_list <- parallel::mclapply(1:n_chunks, mc.cores = 12,
+                                          FUN = function(x) crosstab_chunk2(wdpa_yr_rast_500m, 
+                                                                            rast_cell_id_500m, 
+                                                                            chunk = x, n_chunks))
 #     user   system  elapsed 
-# 5304.982 1057.941  597.739 
-  })
+# 5015.587 1036.650  571.401 
+})
   
   
-  wdpa_cells_df <- bind_rows(wdpa_cells_list)
-  
-  area_df <- data.frame(cell_id  = raster::values(rast_cell_id),
-                        area_km2 = raster::values(rast_ocean_area))
-  
-  wdpa_year_df <- wdpa_cells_df %>%
-    full_join(area_df, by = 'cell_id') %>%
-    filter(!is.na(mpa_year)) %>%
-    mutate(prot_area_km2 = n_prot / 4, 
-              ### count of cells in 500 x 500 m^2 raster, times .25 km^2 area per cell
-           mpa_pct = prot_area_km2 / area_km2) %>%
-    dplyr::select(mpa_year, cell_id, mpa_pct, prot_area_km2) %>%
-      ### mpa pct is relative to *ocean* area - not *total cell* area
-    group_by(mpa_year, cell_id) %>%
-    summarize(mpa_pct = sum(mpa_pct), prot_area_km2 = sum(prot_area_km2)) %>%
-    ungroup()
-  
-  
-  write_csv(wdpa_year_df, wdpa_cell_year_file)
+wdpa_cells_df <- bind_rows(wdpa_cells_list)
+
+area_df <- data.frame(cell_id  = raster::values(rast_cell_id),
+                      area_km2 = raster::values(rast_ocean_area))
+
+wdpa_year_df <- wdpa_cells_df %>%
+  full_join(area_df, by = 'cell_id') %>%
+  filter(!is.na(mpa_year)) %>%
+  mutate(prot_area_km2 = n_prot / 4, 
+         ### count of cells in 500 x 500 m^2 raster, times .25 km^2 area per cell
+         mpa_pct = prot_area_km2 / area_km2) %>%
+  dplyr::select(mpa_year, cell_id, mpa_pct, prot_area_km2) %>%
+  ### mpa pct is relative to *ocean* area - not *total cell* area
+  group_by(mpa_year, cell_id) %>%
+  summarize(mpa_pct = sum(mpa_pct), prot_area_km2 = sum(prot_area_km2)) %>%
+  ungroup()
+
+
+write_csv(wdpa_year_df, wdpa_cell_year_file)
   
 #} else {
   # git_prov(wdpa_cell_year_file, 'output')
@@ -679,8 +718,8 @@ all_prot_df <- wdpa_area_df %>%
   summarize(mpa_pct = sum(mpa_pct)) %>%
   rename(from = cell_id, to = mpa_pct)
 
-notake_raster <- classify(x = rast(rast_cell_id), notake_df, others = NA)
-plot(notake_raster, main = 'No take protection (Ia, Ib, II + no take)')
+# notake_raster <- classify(x = rast(rast_cell_id), notake_df, others = NA)
+# plot(notake_raster, main = 'No take protection (Ia, Ib, II + no take)')
 
 system.time({
     notake_raster <- classify(x = rast(rast_cell_id), notake_df, others = NA)
@@ -689,9 +728,8 @@ system.time({
   })
 plot(notake_raster, main = 'No take protection (Ia, Ib, II + no take)')
 
-
-conservation_raster <- classify(rast(rast_cell_id), conservation_df, others = NA)
-plot(conservation_raster, main = 'Conservation protection (Ia - IV + no take)')
+# conservation_raster <- classify(rast(rast_cell_id), conservation_df, others = NA)
+# plot(conservation_raster, main = 'Conservation protection (Ia - IV + no take)')
 
 system.time({
     conservation_raster <- classify(rast(rast_cell_id), conservation_df, others = NA)
@@ -700,8 +738,8 @@ system.time({
   })
 plot(conservation_raster, main = 'Conservation protection (Ia - IV + no take)')
 
-all_prot_raster <- classify(rast(rast_cell_id), all_prot_df, others = NA)
-plot(all_prot_raster, main = 'All protection (any category)')
+# all_prot_raster <- classify(rast(rast_cell_id), all_prot_df, others = NA)
+# plot(all_prot_raster, main = 'All protection (any category)')
 
 system.time({
     all_prot_raster <- classify(rast(rast_cell_id), all_prot_df, others = NA)
@@ -711,31 +749,20 @@ system.time({
 plot(all_prot_raster, main = 'All protection (any category)')
 ```
 
-# Summary
+## Set up analysis rasters (EEZs, MEOWs, and bathymetry) at Gall-Peters 10 km^2 resolution.
 
-Set up analysis rasters for EEZs, MEOWs, and bathymetry at Gall-Peters 10 km^2 resolution.
+- EEZs will include all EEZs as well as FAO regions and CCAMLR regions, based on the global OHI EEZ map. 
+- MEOWs will include all MEOW provinces, though only some are appropriate for IUCN regional assessments (see `2a_set_up_regional_codes.Rmd`). 
+- Bathymetry will include regions for 200m+, 20-200m, and <20m.  
+- All will be clipped to the same ocean presence using the area raster.
 
-* EEZs will include all EEZs as well as FAO regions and CCAMLR regions, based on the global OHI EEZ map.
-* MEOWs will include all MEOW provinces, though only some are appropriate for IUCN regional assessments (see `2a_set_up_regional_codes.Rmd`).
-* Bathymetry will include regions for 200m+, 20-200m, and <20m.  
-* All will be clipped to the same ocean presence using the area raster.
-* Note: This likely won't be updated (since the data isn't updated on a yearly basis, but you should still check)
-
-# Methods
-
-## EEZ raster
+*Note:* This likely won't be updated (since the data isn't updated on a yearly basis, but you should still check)
+        
+### Spatial: `eez_rast.tif`
 
 Using the OHI global EEZ shapefile, we will include all EEZs by OHI region code, as well as FAO regions and Antarctica, using unique identifiers.  This will allow for separation by high seas vs. EEZ, or different takes on IUCN regional assessments using FAO or EEZ identifiers.
 
-EEZ is rasterized for both land and sea, and then clipped to cells with non-NA values in the ocean_area raster.  This ensures presence of more coastal cells with fractional ocean area coverage.
-
-# Data Sources
-Marine Ecoregions of the World:
-
-* __Reference__: 
-    * Spalding, Mark D. et al. 2007. “Marine Ecoregions of the World: A Bioregionalization of Coastal and Shelf Areas.” BioScience 57(7): 573–83.
-        * Shapefiles available from: https://www.worldwildlife.org/publications/marine-ecoregions-of-the-world-a-bioregionalization-of-coastal-and-shelf-areas
-        * __Downloaded__: May 08, 2019
+EEZ is rasterized for both land and sea, and then clipped to cells with non-NA values in the ocean_area raster. This ensures presence of more coastal cells with fractional ocean area coverage.
 
 ``` {r set up EEZ raster}
 
@@ -790,7 +817,7 @@ plot(eez_rast_ocean, main = 'EEZ raster 10 km^2 Gall-Peters projection')
 
 ```
 
-## MEOW raster
+### Spatial: `meow_rast.tif`
 
 Using the MEOW shapefile, we will include all the shapes at the province level and then mask out land using the area raster (for consistency).
 
@@ -803,6 +830,7 @@ meow_sf <- read_sf(meow_shp_file) %>%
   clip_to_globe()
 ### in common_fxn.R: ensures no coordinates outside +-180, +-90
 
+ext(meow_sf)
 
 meow_sf_reclass <- meow_sf %>%
   dplyr::select(ECO_CODE_X, geometry) %>%
@@ -837,15 +865,17 @@ crs(meow_rast)
 
 ```
 
-## Bathymetry raster
+### Spatial: 
+
+- `bathy_rast.tif`
+- `bathy_rast_neritic.tif`
+- `bathy_rast_shallow.tif`
 
 Using [General Bathymetric Chart of the Oceans (GEBCO) bathymetry raster](https://www.gebco.net/data_and_products/historical_data_sets/#gebco_2014), identify min depth of ocean cells.  For neritic and coastal cells, leaving as min depth allows for changing depth thresholds if desired.  We will not clip based on anything below 200 m, so can classify these more coarsely.
 
 NOTE: 1 arcmin and 30 arcsec are available; 30 arcsec is more recent but one arcmin should be sufficient for our purposes.  Resample to 6 arc-minute (0.10°) using min depth in each cell.
 
 Bathymetry is masked to the ocean area raster.
-
-### Create and view minimum depth raster
 
 ``` {r set up bathymetry raster}
 

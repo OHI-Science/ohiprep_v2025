@@ -52,7 +52,7 @@ source(file.path(dir_setup, 'common_fxns.R'))
 dir_bli <- file.path(dir_M, 'git-annex/globalprep/_raw_data/birdlife_intl/d2025')
 dir_shp <- file.path(dir_M, 'git-annex/globalprep/_raw_data/iucn_spp/d2025-1')
   ### in this folder are shapefiles at a taxonomic level, both from
-  ### IUCN spatial data download (version 2020-3)
+  ### IUCN spatial data download (version 2025-1)
 
 ```
 
@@ -322,6 +322,8 @@ write_csv(subpops_match,
 
 Not all maps are for species that are included in comprehensively assessed taxonomic groups.  Get info on comprehensive assessment status for species from the API.
 
+#### Data: `iucn_comp_assessed_2025-1.csv`
+
 ``` {r get comp assess status}
 comp_file <- file.path(dir_data, 
                        sprintf('iucn_comp_assessed_%s.csv', api_version))
@@ -527,6 +529,11 @@ write_csv(marine_map_info,
                     sprintf('spp_marine_maps_%s.csv', api_version)))
 
 ```
+
+#### Output: 
+
+- `spp_included_summary.csv`
+- `spp_included_by_family.csv`
 
 ``` {r generate table of species}
 
