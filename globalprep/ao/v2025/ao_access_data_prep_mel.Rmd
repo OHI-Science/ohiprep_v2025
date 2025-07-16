@@ -175,13 +175,11 @@ rgns_eez <- rgns_eez %>%
 
 # join to UN region designations for gapfilling (these match the UN georegions, with the exception of the Southern Islands, 
 # which all are uninhabited)
-rgns_eez <- left_join(rgns_eez, UNgeorgn, by="rgn_id") %>%
+rgns_eez <- left_join(rgns_eez, UNgeorgn, by= "rgn_id") %>%
   select(rgn_id, rgn_name, rgn_name_standard, r2_label) %>%
   mutate(r2_label = ifelse(r2_label == "Australia and New Zealand", "Oceania (exc. Australia and New Zealand)", r2_label))
 
 setdiff(rgns_eez$r2_label, un_georegions$geo_area_name) # the southern islands are uninhabited and will get cut.
-
-
 ```
 
 
@@ -248,10 +246,6 @@ rgns_eez_gf3 <- rgns_eez_gf2 %>%
 
 # final formatting and save
 ```{r, eval = F}
-final_gf_df <- gf_step_4d_df %>%
-  dplyr::select(rgn_id, year = time_detail, value = score,
-                completeness_pre_gf = data_completeness, gapfilled, method)
-
 ## save gapfilling flag dataset
 final_gf_flags <- rgns_eez_gf3 %>%
   dplyr::select(rgn_id, year, gapfilled = gf) %>%
@@ -278,6 +272,7 @@ Lets compare to last years AO data.
 
 version_year_new <- paste0("v", 2025 ) # Replace with current year assessment 
 version_year_old <- paste0("v", 2024 ) # Replace with previous year assessment
+current_year <- 2025
 
 region_data()
 
@@ -304,7 +299,7 @@ dplyr::mutate(difference = value_v2024 - value_v2025) # Make sure to change this
 
 compare_diff <- compare %>% 
   dplyr::filter(difference != 0) %>% 
-  dplyr::select(rgn_id, rgn_name, admin_country_name, year, value_v2024, value_v2025, difference) # Make sure to change this each year
+  dplyr::select(rgn_id, rgn_name, year, value_v2024, value_v2025, difference) # Make sure to change this each year
 
 plot_diff <- 
   ggplot2::ggplot(

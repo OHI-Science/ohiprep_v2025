@@ -1,0 +1,354 @@
+---
+title: 'OHI: Clean Waters/Trash trend'
+author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
+output: 
+  html_document:
+    toc: true
+    number_sections: true
+    theme: cerulean
+    highlight: haddock
+    includes: 
+      in_header: '../../../src/templates/ohi_hdr.html'
+  pdf_document:
+    toc: true
+---
+
+# Summary
+
+The coastal & marine trash trend score is calculated based on the most recently available data sources on a few different forms of marine trash: marine macroplastics/debris, marine microplastics, and coastal debris. 
+
+Different data sources were investigated and compiled in v2025, and information on them was combined here to create an overall trash trend score analysis.
+
+# Microplatics
+
+Source: https://www.ncei.noaa.gov/products/microplastics
+
+There is microplastics data from NOAA's National Center for Environmental Information 'NCEI Marine Microplastics product'. The data is available as a csv, shapefiles, GeoJSON, JSON, FGDB, or KML. The data on microplastic concentrations contains measurements in pieces/cubic meter,and were ranked on a scale of 'Very Low', 'Low', 'Medium', and 'High'. 
+
+Observations were not specified at the country level, but merely grouped by ocean, or in some cases subregion. However, the point observations could be rasterized and grouped into the eez boundaries of each country. The concentration values could be rescaled for a 0-1 range. 
+
+
+
+```{r setup, message = FALSE, warning = FALSE, verbose = FALSE}
+#set options for all chunks in code
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, eval=FALSE)
+
+# load packages
+if (!require(librarian)){
+  install.packages("librarian")
+  library(librarian)
+}
+librarian::shelf(
+  here,
+  janitor,
+  raster,
+  terra,
+  sf,
+  stars,
+  maps,
+  httr,
+  jsonlite,
+  purrr,
+  tictoc,
+  sf, 
+  googleVis,
+  RColorBrewer,
+  foreach,
+  doParallel, # for using multiple cores, if needed
+  tidyverse, 
+  ohicore,
+  ggplot2,
+  ncmeta,
+  ncdf4,
+  plotly,
+  zoo,
+gstat
+)
+
+# ---- sources! ----
+source(here("workflow", "R", "common.R")) # file creates objects to process data
+
+# ---- set year and file path info ----
+current_year <- 2025 # Update this in the future!!
+version_year <- paste0("v",current_year)
+data_dir_version_year <- paste0("d", current_year)
+
+# ---- data directories ----
+
+# Raw data directory (on Mazu)
+raw_data_dir <- here::here(dir_M, "git-annex", "globalprep", "_raw_data")
+
+# prs_oa dir
+cw_dir <- here::here(dir_M, "git-annex", "globalprep", "cw_trend_trash", version_year)
+
+# output data dir for intermediate data products
+int_dir <- here::here(cw_dir, "int")
+# dir.create(int_dir) # to create the path on Mazu if it has not already been done
+
+# final output dir
+output_dir <- here::here("globalprep","cw_trend_trash", version_year, "output")
+
+# set colors
+cols = rev(colorRampPalette(brewer.pal(9, 'Spectral'))(255)) # rainbow color scheme
+```
+
+
+# Method 1: Use vector data and intersect for each region
+
+```{r}
+# Load in the microplastics data from the Mazu server
+microplastics_data <- st_read(here::here(raw_data_dir , "NOAA_NEI_Marine_Microplastics", "Microplastic_Data_MasterList_GISTeam_XYTableToPoint.shp"))
+```
+# Rescale the microplastics data on a 0-1 scale
+
+```{r}
+# Check the microplastics columns
+colnames(microplastics_data)
+
+# Check the unique methods of sampling
+unique(microplastics_data$Medium)
+
+# Check to see the different ways of scaling for each medium
+unique(microplastics_data$Symbology)
+
+# We are gonna rescale using the Symbology column, grouping by general category so that the different concentration units can be plotted together.
+```
+
+
+```{r}
+# Again, we will be rescaling by sampling method, each of which had different units 
+# Create data frames for each sample setting
+ocean_subsurface <- microplastics_data %>%
+  filter(str_detect(microplastics_data$Symbology, "Ocean Subsurface"))
+
+ocean_surface <- microplastics_data %>%
+  filter(str_detect(microplastics_data$Symbology, "Ocean Surface"))
+
+ocean_sediment <- microplastics_data %>%
+  filter(str_detect(microplastics_data$Symbology, "Ocean Sediment"))
+
+beach <- microplastics_data %>%
+  filter(str_detect(microplastics_data$Symbology, "Beach"))
+
+nurdle_patrol <- microplastics_data %>%
+  filter(str_detect(microplastics_data$Symbology, "Nurdle Patrol"))
+```
+
+```{r}
+# Create function to rescale each df separately based on their 95th percentile value
+rescale_95 <- function(x) {
+  x_min <- min(x)
+  x_95 <- quantile(x, 0.95)
+  x_scaled <- (x - x_min) / (x_95 - x_min)
+  x_scaled[x_scaled > 1] <- 1
+  return(x_scaled)
+}
+
+# Rescale all the dfs
+ocean_subsurface$concentration_rescaled <- rescale_95(ocean_subsurface$Microplast)
+ocean_surface$concentration_rescaled <- rescale_95(ocean_surface$Microplast)
+ocean_sediment$concentration_rescaled <- rescale_95(ocean_sediment$Microplast)
+beach$concentration_rescaled <- rescale_95(beach$Microplast)
+nurdle_patrol$concentration_rescaled <- rescale_95(nurdle_patrol$Microplast)
+
+# Create a column for setting so that we could view observations by setting if so desired
+ocean_subsurface <- ocean_subsurface %>%
+  mutate(Setting = "Subsurface")
+
+ocean_surface <- ocean_surface %>%
+  mutate(Setting = "Surface")
+
+ocean_sediment <- ocean_sediment %>%
+  mutate(Setting = "Sediment")
+
+beach <- beach %>%
+  mutate(Setting = "Beach")
+
+nurdle_patrol <- nurdle_patrol %>%
+  mutate(Setting = "Nurdle Patrol")
+
+# Concatenate all the df together for our total rescaled data
+microplastics_rescaled <- rbind(ocean_subsurface,
+                                ocean_surface,
+                                ocean_sediment,
+                                beach,
+                                nurdle_patrol)
+```
+
+
+# Rasterize the Microplastics observations for masking
+
+```{r}
+# Rasterize the microplastic observations:
+# Isolate points from the data set
+points <- st_as_sf(microplastics_rescaled, coords = c("Longitude_", "Latitude_"), remove = FALSE, crs = 4326) 
+
+# Get the bounding box (extent) of the points
+microplastics_bbox <- ext(points)
+
+# Expand slightly to ensure full 1-degree cell coverage
+microplastics_bbox <- extend(microplastics_bbox, 0.5)  # adds 0.5 degree padding on all sides
+
+# Create a raster with 1-degree resolution
+rast_template <- rast(extent = microplastics_bbox, 
+                   resolution = 1, 
+                   crs = "EPSG:4326")
+
+# Rasterize using mean value per cell (you can also use "sum", "max", etc.)
+microplastics_rast <- rasterize(points, rast_template, field = "concentration_rescaled", fun = mean)
+```
+
+```{r}
+# Plot the raster
+plot(microplastics_rast)
+```
+
+# Run an Inverse-Distance Weighted Correlation to gapfill our data
+
+```{r}
+# Get cell coordinates
+coords <- as.data.frame(xyFromCell(microplastics_rast, 1:ncell(microplastics_rast)))
+coords$value <- values(microplastics_rast)
+
+# Separate known and NA cells
+known <- coords[!is.na(coords$value), ]
+unknown <- coords[is.na(coords$value), ]
+
+# Convert to sf objects for gstat
+known_sf <- st_as_sf(known, coords = c("x", "y"), crs = crs(microplastics_rast))
+unknown_sf <- st_as_sf(unknown, coords = c("x", "y"), crs = crs(microplastics_rast))
+
+# Create a gstat IDW model
+idw_model <- gstat(formula = value ~ 1, data = known_sf, nmax = 15, set = list(idp = 2))
+
+# Predict missing values
+predicted <- predict(idw_model, newdata = unknown_sf)
+
+# Add predicted values back to raster
+coords[is.na(coords$value), "value"] <- predicted$var1.pred
+
+# Fill in the values for our raster
+filled_r <- microplastics_rast
+values(filled_r) <- coords$value
+
+# Plot the results
+plot(filled_r)
+```
+
+# Load in the land mass rasters
+
+```{r}
+# Load in the land mass data from the Mazu server
+landmasses <- terra::rast("/home/shares/ohi/git-annex/globalprep/_raw_data/landmass_raster/landmasses.tif")
+```
+
+```{r}
+plot(landmasses)
+```
+```{r}
+# Check the total number of layers in the raster and their names
+nlyr(landmasses) 
+names(landmasses)
+
+# Grab only a single one of the landmass rasters
+landmasses_single <- landmasses[[3]]
+
+# Plot the third layer to see how we need to assign values 
+plot(landmasses_single)
+```
+
+# Mask out the 
+
+```{r}
+# Set values higher than 250 to NA
+landmasses_single[landmasses_single < 250] <- NA
+
+# Resample the landmass raster to match the filler raster
+landmasses_r <- resample(landmasses_single, filled_r, method = "near")
+
+# Mask out raster1 where raster2 has non-NA values
+masked_microplastics <- mask(filled_r, landmasses_r)
+```
+
+```{r}
+# Plot the newly masked microplastics data to check if it worked correctly
+plot(masked_microplastics)
+```
+
+# Get the eez regions for each country in OHI
+
+```{r}
+# Grab regional data from OHI:
+# Get the region boundaries for all countries we will calculate scores for
+ohi_rasters()
+```
+
+```{r}
+# Check to see if crs are matched
+# Match the crs of the data
+microplastics_rast <- terra::project(masked_microplastics, crs(zones))
+
+# Match the extent of the data by resampling
+zones_aligned <- resample(zones, microplastics_rast, method = "near")
+
+# Check to see if everything matches
+crs(microplastics_rast) == crs(zones_aligned) #v2025: TRUE
+ext(microplastics_rast) == ext(zones_aligned) # v2025: TRUE
+res(microplastics_rast) == res(zones_aligned) # v2025: TRUE
+```
+
+# Find observations that overlap with eez regions
+
+```{r}
+# Use zonal to compute mean of point values per zone
+zonal_stats <- zonal(microplastics_rast, zones_aligned, fun = "mean", na.rm = TRUE)
+```
+
+```{r}
+# Check for NAs
+sum(is.na(zonal_stats$mean))
+
+# Subset the rows with NAs in the mean column for zonal_stats to view which countries are missing
+missing_countries <- zonal_stats %>%
+  filter(is.na(mean) == TRUE) %>%
+  filter(regions_eez_with_fao_ant <= 277) # Remove zones for continents and subregions
+```
+
+# Potential Gapfilling: 
+
+
+```{r}
+# Rename the columns for ease of use
+zonal_stats_clean <- zonal_stats %>% 
+  rename_at('mean', ~'avg_concentration') %>%
+  rename_at('regions_eez_with_fao_ant', ~'region')
+
+# Get the mean of avg_concentration
+mean_conc <- mean(zonal_stats_clean$avg_concentration, na.rm= TRUE)
+
+# Load the regions all data for data names
+region_data()
+
+# Gapfill the 59 missing values with the global average concentration
+zonal_stats_filled <- zonal_stats_clean %>%
+   mutate(avg_concentration = case_when(
+    is.na(avg_concentration) ~ mean_conc,
+    TRUE ~ avg_concentration)) # Return values that are present; do not replace with NA
+
+# Add in the region names
+microplastics_eez <- left_join(rgns_all, zonal_stats_filled, by= c("rgn_ant_id" = "region"))
+```
+
+
+# Plot the results
+
+```{r}
+# Find missing values in the zonal_statistics
+plot <- ggplot(microplastics_eez, aes(x= avg_concentration, y = rgn_id, colour = rgn_name)) +
+  geom_point() +
+  labs(title= "Microplastics Concentration by Region", 
+       x= "Microplastics Concentration (pieces/m^3)",
+y= "Region ID")
+
+ggplotly(plot)
+```

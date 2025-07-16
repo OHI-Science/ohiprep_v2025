@@ -1,0 +1,158 @@
+shp_iucn_sid,sciname,shp_subpop,api_iucn_sid,api_subpop
+2055,Arctocephalus australis,Peruvian/Northern Chilean,2055,Peruvian/Northern Chilean subpopulation
+9660,Halichoerus grypus,Baltic sea subpopulation,9660,Baltic Sea subpopulation
+2467,Balaena mysticetus,East Greenland-Svalbard-Barents Sea,2467,East Greenland-Svalbard-Barents Sea subpopulation
+2467,Balaena mysticetus,Bering-Chukchi-Beaufort Sea,2467,Bering-Chukchi-Beaufort Sea subpopulation
+2467,Balaena mysticetus,Okhotsk Sea,2467,Okhotsk Sea subpopulation
+6335,Delphinapterus leucas,Cook Inlet,6335,Cook Inlet subpopulation
+6909,Dugong dugon,Nansei,6909,Nansei subpopulation
+8097,Eschrichtius robustus,Western,8097,western subpopulation
+17027,Phocoena phocoena,Baltic Sea,17027,Baltic Sea subpopulation
+17978,Pontoporia blainvillei,Rio Grande do Sul/Uruguay,17978,Rio Grande do Sul/Uruguay subpopulation
+22563,Tursiops truncatus,Fiordland,22563,Fiordland subpopulation
+134817215,Delphinus delphis,Mediterranean,134817215,Mediterranean subpopulation
+222,Acipenser brevirostrum,Connecticut subpopulation,222,Connecticut subpopulation
+222,Acipenser brevirostrum,N to S Carolina subpopulation,222,N to S Carolina subpopulation
+222,Acipenser brevirostrum,Hudson subpopulation,222,Hudson subpopulation
+222,Acipenser brevirostrum,Gulf of Maine subpopulation,222,Gulf of Maine subpopulation
+222,Acipenser brevirostrum,Delaware/Chesapeake Bay subpopulation,222,Delaware/Chesapeake Bay subpopulation
+222,Acipenser brevirostrum,Canada subpopulation,222,Canada subpopulation
+222,Acipenser brevirostrum,Southeast subpopulation,222,Southeast subpopulation
+10269,Huso huso,Black Sea and Sea of Azov,10269,Black Sea and Sea of Azov subpopulation
+10269,Huso huso,Adriatic Sea,10269,Adriatic Sea subpopulation
+10269,Huso huso,Caspian Sea subpopulation,10269,Caspian Sea subpopulation
+225,Acipenser nudiventris,Aral Sea subpopulation,225,Aral Sea subpopulation
+225,Acipenser nudiventris,Black Sea and Sea of Azov subpopulation,225,Black Sea and Sea of Azov subpopulation
+225,Acipenser nudiventris,Caspian Sea subpopulation,225,Caspian Sea subpopulation
+229,Acipenser stellatus,Black Sea and Sea of Azov subpopulation,229,Black Sea and Sea of Azov subpopulation
+229,Acipenser stellatus,Caspian Sea subpopulation,229,Caspian Sea subpopulation
+245,Acipenser oxyrinchus,New York Bight subpopulation,245,New York Bight subpopulation
+245,Acipenser oxyrinchus,Baltic Sea subpopulation,245,Baltic Sea subpopulation
+245,Acipenser oxyrinchus,Baltic Sea,245,Baltic Sea subpopulation
+245,Acipenser oxyrinchus,South Atlantic subpopulation,245,South Atlantic subpopulation
+245,Acipenser oxyrinchus,Canadian Maritime subpopulation,245,Canadian Maritime subpopulation
+245,Acipenser oxyrinchus,Gulf of Maine subpopulation,245,Gulf of Maine subpopulation
+245,Acipenser oxyrinchus,Chesapeake Bay subpopulation,245,Chesapeake Bay subpopulation
+245,Acipenser oxyrinchus,Carolina subpopulation,245,Carolina subpopulation
+135301,Oncorhynchus nerka,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Schoen Ck/Davie R,135301,PUGET SOUND-GEORGIA BASIN: Schoen Ck/Davie R
+135301,Oncorhynchus nerka,Oncorhynchus nerka TRANSBOUNDARY FJORDS: Kah Sheets Lk/S Kupreanof Is,135301,TRANSBOUNDARY FJORDS: Kah Sheets Lk/S Kupreanof Is
+135301,Oncorhynchus nerka,"Oncorhynchus nerka STIKINE RIVER, LOWER",135301,"STIKINE RIVER, LOWER"
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Gates Ck and Channel (early summer)",135301,"FRASER RIVER, MIDDLE: Gates Ck and Channel (early summer)"
+135301,Oncorhynchus nerka,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Atnarko R,135301,HECATE STRAIT-Q.C. SOUND: Atnarko R
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, LOWER: Chilliwack Lk (early summer)",135301,"FRASER RIVER, LOWER: Chilliwack Lk (early summer)"
+135301,Oncorhynchus nerka,Oncorhynchus nerka WESTERN ARCTIC CURRENT (COLD),135301,WESTERN ARCTIC CURRENT (COLD)
+135301,Oncorhynchus nerka,Oncorhynchus nerka NASS-SKEENA ESTUARY: North of Nass,135301,NASS-SKEENA ESTUARY: North of Nass
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, S THOMPSON: Shuswap, Kamloops (late)",135301,"FRASER RIVER, S THOMPSON: Shuswap, Kamloops (late)"
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Chilko (summer)",135301,"FRASER RIVER, MIDDLE: Chilko (summer)"
+135301,Oncorhynchus nerka,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Hecate Strait,135301,HECATE STRAIT-Q.C. SOUND: Hecate Strait
+135301,Oncorhynchus nerka,"Oncorhynchus nerka SKEENA R, MIDDLE: Babine",135301,"SKEENA R, MIDDLE: Babine"
+135301,Oncorhynchus nerka,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Kitimat to Kitlope R,135301,HECATE STRAIT-Q.C. SOUND: Kitimat to Kitlope R
+135301,Oncorhynchus nerka,"Oncorhynchus nerka COLUMBIA RIVER: Upper, Headwater/Arrow, Whatsan Lk",135301,"COLUMBIA RIVER: Upper, Headwater/Arrow, Whatsan Lk"
+135301,Oncorhynchus nerka,Oncorhynchus nerka SEA OF OKHOTSK CURRENT (COLD),135301,SEA OF OKHOTSK CURRENT (COLD)
+135301,Oncorhynchus nerka,"Oncorhynchus nerka SKEENA R, MIDDLE: Kispiox R, Club",135301,"SKEENA R, MIDDLE: Kispiox R, Club"
+135301,Oncorhynchus nerka,Oncorhynchus nerka SOUTHEAST BERING SEA INNER SHELF,135301,SOUTHEAST BERING SEA INNER SHELF
+135301,Oncorhynchus nerka,"Oncorhynchus nerka SKEENA R, LOWER: Alastair",135301,"SKEENA R, LOWER: Alastair"
+135301,Oncorhynchus nerka,Oncorhynchus nerka WESTERN KAMCHATKA CURRENT (WARM),135301,WESTERN KAMCHATKA CURRENT (WARM)
+135301,Oncorhynchus nerka,Oncorhynchus nerka ALSEK RIVER,135301,ALSEK RIVER
+135301,Oncorhynchus nerka,Oncorhynchus nerka OKHOTSK-OYASHIO MIXING,135301,OKHOTSK-OYASHIO MIXING
+135301,Oncorhynchus nerka,Oncorhynchus nerka KAMCHATKA RIVER,135301,KAMCHATKA RIVER
+135301,Oncorhynchus nerka,Oncorhynchus nerka NASS-SKEENA ESTUARY: N Hadai Gwaii,135301,NASS-SKEENA ESTUARY: N Hadai Gwaii
+135301,Oncorhynchus nerka,Oncorhynchus nerka TRANSBOUNDARY FJORDS: North,135301,TRANSBOUNDARY FJORDS: North
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, LOWER: Widgeon Creek (late)",135301,"FRASER RIVER, LOWER: Widgeon Creek (late)"
+135301,Oncorhynchus nerka,Oncorhynchus nerka COLUMBIA RIVER: Wenatchee,135301,COLUMBIA RIVER: Wenatchee
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, UPPER: Bowron (early summer)",135301,"FRASER RIVER, UPPER: Bowron (early summer)"
+135301,Oncorhynchus nerka,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: E Hadai Gwaii,135301,HECATE STRAIT-Q.C. SOUND: E Hadai Gwaii
+135301,Oncorhynchus nerka,Oncorhynchus nerka NASS RIVER: Upper Nass,135301,NASS RIVER: Upper Nass
+135301,Oncorhynchus nerka,Oncorhynchus nerka TRANSBOUNDARY FJORDS: South,135301,TRANSBOUNDARY FJORDS: South
+135301,Oncorhynchus nerka,Oncorhynchus nerka NOATAK RIVER,135301,NOATAK RIVER
+135301,Oncorhynchus nerka,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Glendale Ck/Knight Inl,135301,PUGET SOUND-GEORGIA BASIN: Glendale Ck/Knight Inl
+135301,Oncorhynchus nerka,Oncorhynchus nerka NASS RIVER: Coastal,135301,NASS RIVER: Coastal
+135301,Oncorhynchus nerka,Oncorhynchus nerka TRANSBOUNDARY FJORDS: Petersburg Lk/N Kupreanof Is,135301,TRANSBOUNDARY FJORDS: Petersburg Lk/N Kupreanof Is
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, S THOMPSON: Shuswap (early summer)",135301,"FRASER RIVER, S THOMPSON: Shuswap (early summer)"
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Chilko (early summer)",135301,"FRASER RIVER, MIDDLE: Chilko (early summer)"
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, LOWER: Harrison River (late)",135301,"FRASER RIVER, LOWER: Harrison River (late)"
+135301,Oncorhynchus nerka,Oncorhynchus nerka YUKON RIVER INFLUENCE,135301,YUKON RIVER
+135301,Oncorhynchus nerka,Oncorhynchus nerka YUKON RIVER INFLUENCE,135301,YUKON RIVER INFLUENCE
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Nahatlatch (early summer)",135301,"FRASER RIVER, MIDDLE: Nahatlatch (early summer)"
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Nadina, Nechako (early summer)",135301,"FRASER RIVER, MIDDLE: Nadina, Nechako (early summer)"
+135301,Oncorhynchus nerka,Oncorhynchus nerka YUKON RIVER,135301,YUKON RIVER
+135301,Oncorhynchus nerka,Oncorhynchus nerka SHELIKHOV GULF (COLD),135301,SHELIKHOV GULF (COLD)
+135301,Oncorhynchus nerka,Oncorhynchus nerka COLUMBIA RIVER: Yakima R,135301,COLUMBIA RIVER: Yakima R
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, N THOMPSON: Kamloops (early summer)",135301,"FRASER RIVER, N THOMPSON: Kamloops (early summer)"
+135301,Oncorhynchus nerka,Oncorhynchus nerka NASS RIVER: Gingit,135301,NASS RIVER: Gingit
+135301,Oncorhynchus nerka,"Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Phillips R, Heydon Ck",135301,"PUGET SOUND-GEORGIA BASIN: Phillips R, Heydon Ck"
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, LILLOOET: Birkenhead (late)",135301,"FRASER RIVER, LILLOOET: Birkenhead (late)"
+135301,Oncorhynchus nerka,"Oncorhynchus nerka ALASKA COASTAL DOWNWELLING, WESTERN GULF OF ALASKA",135301,"ALASKA COASTAL DOWNWELLING, WESTERN GULF OF ALASKA"
+135301,Oncorhynchus nerka,Oncorhynchus nerka COLUMBIA RIVER: Wallowa Lk,135301,COLUMBIA RIVER: Wallowa Lk
+135301,Oncorhynchus nerka,Oncorhynchus nerka OUTER ISLANDS: NW Vancouver Island,135301,OUTER ISLANDS: NW Vancouver Island
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Taseko (early summer)",135301,"FRASER RIVER, MIDDLE: Taseko (early summer)"
+135301,Oncorhynchus nerka,Oncorhynchus nerka OUTER ISLANDS: W Hadai Gwaii,135301,OUTER ISLANDS: W Hadai Gwaii
+135301,Oncorhynchus nerka,Oncorhynchus nerka COLUMBIA RIVER: Payette R,135301,COLUMBIA RIVER: Payette R
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Stuart (early Stuart)",135301,"FRASER RIVER, MIDDLE: Stuart (early Stuart)"
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Nechako (summer)",135301,"FRASER RIVER, MIDDLE: Nechako (summer)"
+135301,Oncorhynchus nerka,Oncorhynchus nerka ANADYR CURRENT,135301,ANADYR CURRENT
+135301,Oncorhynchus nerka,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Queen Charlotte Sound,135301,HECATE STRAIT-Q.C. SOUND: Queen Charlotte Sound
+135301,Oncorhynchus nerka,Oncorhynchus nerka COLUMBIA RIVER: Suttle Lk/Deschutes R,135301,COLUMBIA RIVER: Suttle Lk/Deschutes R
+135301,Oncorhynchus nerka,Oncorhynchus nerka PENZHINA INTRACOASTAL,135301,PENZHINA INTRACOASTAL
+135301,Oncorhynchus nerka,Oncorhynchus nerka PRINCE WILLIAM SOUND,135301,PRINCE WILLIAM SOUND
+135301,Oncorhynchus nerka,"Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Village Bay Ck, Sakinaw",135301,"PUGET SOUND-GEORGIA BASIN: Village Bay Ck, Sakinaw"
+135301,Oncorhynchus nerka,Oncorhynchus nerka ANADYR RIVER,135301,ANADYR RIVER
+135301,Oncorhynchus nerka,Oncorhynchus nerka BERING-ALASKAN MIXING,135301,BERING-ALASKAN MIXING
+135301,Oncorhynchus nerka,Oncorhynchus nerka BERING SLOPE/KAMCHATKA CURRENTS,135301,BERING SLOPE/KAMCHATKA CURRENTS
+135301,Oncorhynchus nerka,Oncorhynchus nerka COLUMBIA RIVER: Okanogan R/Osoyoos Lk,135301,COLUMBIA RIVER: Okanogan R/Osoyoos Lk
+135301,Oncorhynchus nerka,Oncorhynchus nerka COLUMBIA RIVER: Redfish Lk,135301,COLUMBIA RIVER: Redfish Lk
+135301,Oncorhynchus nerka,"Oncorhynchus nerka SKEENA R, MIDDLE: Nanika Lk/Morice R",135301,"SKEENA R, MIDDLE: Nanika Lk/Morice R"
+135301,Oncorhynchus nerka,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Baker Lk/Puget Sound,135301,PUGET SOUND-GEORGIA BASIN: Baker Lk/Puget Sound
+135301,Oncorhynchus nerka,"Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Nimpkish, Mackenzie R",135301,"PUGET SOUND-GEORGIA BASIN: Nimpkish, Mackenzie R"
+135301,Oncorhynchus nerka,Oncorhynchus nerka COOK INLET,135301,COOK INLET
+135301,Oncorhynchus nerka,Oncorhynchus nerka SEASONAL UPWELLING CLINE,135301,SEASONAL UPWELLING CLINE
+135301,Oncorhynchus nerka,"Oncorhynchus nerka SKEENA R, UPPER",135301,"SKEENA R, UPPER"
+135301,Oncorhynchus nerka,Oncorhynchus nerka VANCOUVER ISLAND COASTAL CURRENT,135301,VANCOUVER ISLAND COASTAL CURRENT
+135301,Oncorhynchus nerka,Oncorhynchus nerka VELIKAYA RIVER,135301,VELIKAYA RIVER
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, LOWER: Big Silver (late)",135301,"FRASER RIVER, LOWER: Big Silver (late)"
+135301,Oncorhynchus nerka,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Klinaklini River,135301,PUGET SOUND-GEORGIA BASIN: Klinaklini River
+135301,Oncorhynchus nerka,Oncorhynchus nerka EASTERN ARCTIC CURRENT (WARM),135301,EASTERN ARCTIC CURRENT (WARM)
+135301,Oncorhynchus nerka,Oncorhynchus nerka EASTERN ARCTIC (COLD),135301,EASTERN ARCTIC (COLD)
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, LOWER: Cultus Lk (late)",135301,"FRASER RIVER, LOWER: Cultus Lk (late)"
+135301,Oncorhynchus nerka,Oncorhynchus nerka NASS-SKEENA ESTUARY: Hugh Smith Lk/Boca de Quadra,135301,NASS-SKEENA ESTUARY: Hugh Smith Lk/Boca de Quadra
+135301,Oncorhynchus nerka,Oncorhynchus nerka KUSKOKWIM RIVER,135301,KUSKOKWIM RIVER
+135301,Oncorhynchus nerka,Oncorhynchus nerka KODIAK ISLAND,135301,KODIAK ISLAND
+135301,Oncorhynchus nerka,Oncorhynchus nerka KOBUK RIVER,135301,KOBUK RIVER
+135301,Oncorhynchus nerka,Oncorhynchus nerka KANCHALAN RIVER,135301,KANCHALAN RIVER
+135301,Oncorhynchus nerka,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Lowe Lk/Granville Ch,135301,HECATE STRAIT-Q.C. SOUND: Lowe Lk/Granville Ch
+135301,Oncorhynchus nerka,"Oncorhynchus nerka SKEENA R, LOWER: Kitsumkalum",135301,"SKEENA R, LOWER: Kitsumkalum"
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Quesnel (summer)",135301,"FRASER RIVER, MIDDLE: Quesnel (summer)"
+135301,Oncorhynchus nerka,"Oncorhynchus nerka ALASKA COASTAL DOWNWELLING, EASTERN GULF OF ALASKA",135301,"ALASKA COASTAL DOWNWELLING, EASTERN GULF OF ALASKA"
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Stuart (summer)",135301,"FRASER RIVER, MIDDLE: Stuart (summer)"
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, LOWER: Weaver (late)",135301,"FRASER RIVER, LOWER: Weaver (late)"
+135301,Oncorhynchus nerka,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Bella Coola R,135301,HECATE STRAIT-Q.C. SOUND: Bella Coola R
+135301,Oncorhynchus nerka,"Oncorhynchus nerka SKEENA R, LOWER: Schulbuckhand",135301,"SKEENA R, LOWER: Schulbuckhand"
+135301,Oncorhynchus nerka,"Oncorhynchus nerka SKEENA R, LOWER: McDonnel Lk/Zymoetz R",135301,"SKEENA R, LOWER: McDonnel Lk/Zymoetz R"
+135301,Oncorhynchus nerka,Oncorhynchus nerka TRANSBOUNDARY FJORDS: Shipley Lk/N Kosciusko Is,135301,TRANSBOUNDARY FJORDS: Shipley Lk/N Kosciusko Is
+135301,Oncorhynchus nerka,"Oncorhynchus nerka FRASER RIVER, LOWER: Upper Pitt R (early summer)",135301,"FRASER RIVER, LOWER: Upper Pitt R (early summer)"
+135301,Oncorhynchus nerka,Oncorhynchus nerka TRANSBOUNDARY FJORDS: Kunk Lk/E Etolin Is,135301,TRANSBOUNDARY FJORDS: Kunk Lk/E Etolin Is
+135301,Oncorhynchus nerka,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Quatse R/N Vancouver I,135301,PUGET SOUND-GEORGIA BASIN: Quatse R/N Vancouver I
+135301,Oncorhynchus nerka,Oncorhynchus nerka COPPER RIVER,135301,COPPER RIVER
+232,Acipenser gueldenstaedtii,Caspian Sea,232,Caspian Sea subpopulation
+232,Acipenser gueldenstaedtii,Black Sea and Sea of Azov,232,Black Sea and Sea of Azov subpopulation
+233,Acipenser medirostris,Southern DPS subpopulation,233,Southern DPS subpopulation
+233,Acipenser medirostris,Northern DPS subpopulation,233,Northern DPS subpopulation
+18175,Pristis pectinata,Eastern Atlantic,18175,Eastern Atlantic subpopulation
+18175,Pristis pectinata,Western Atlantic,18175,Western Atlantic subpopulation
+18584848,Pristis pristis,Eastern Atlantic,18584848,Eastern Atlantic subpopulation
+18584848,Pristis pristis,Western Atlantic,18584848,Western Atlantic subpopulation
+18584848,Pristis pristis,Indo West Pacific,18584848,Indo-West Pacific subpopulation
+18584848,Pristis pristis,Eastern Pacific,18584848,Eastern Pacific subpopulation
+18584848,Pristis pristis,Indo-west Pacific,18584848,Indo-West Pacific subpopulation
+234,Acipenser transmontanus,Snake River subpopulation,234,Snake River subpopulation
+234,Acipenser transmontanus,Fraser River Nechako subpopulation,234,Fraser River Nechako subpopulation
+234,Acipenser transmontanus,Kootenai River subpopulation,234,Kootenai River subpopulation
+234,Acipenser transmontanus,Sacramento and San Joaquin River subpopulation,234,Sacramento and San Joaquin River subpopulation
+6494,Dermochelys coriacea,Northwest Atlantic,6494,Northwest Atlantic Ocean subpopulation
+6494,Dermochelys coriacea,Southwest Indian,6494,Southwest Indian Ocean subpopulation
+6494,Dermochelys coriacea,Southwest Atlantic,6494,Southwest Atlantic Ocean subpopulation
+6494,Dermochelys coriacea,Southeast Atlantic,6494,Southeast Atlantic Ocean subpopulation
+6494,Dermochelys coriacea,East Pacific,6494,East Pacific Ocean subpopulation
+6494,Dermochelys coriacea,Northeast Indian,6494,Northeast Indian Ocean subpopulation
+6494,Dermochelys coriacea,West Pacific,6494,West Pacific Ocean subpopulation
+3897,Caretta caretta,Mediterranean,3897,Mediterranean subpopulation

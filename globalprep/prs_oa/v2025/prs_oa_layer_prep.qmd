@@ -755,7 +755,7 @@ write_csv_by_year <- function(data, year) {
 
 # ----- save yearly data (commented out in case someone runs the whole script) ---------
 ## use map2 (which allows two vectors of the same length) to iterate over the split data and years to write individual csvs for each year
-# map2(yearly_data, years, write_csv_by_year) 
+map2(yearly_data, years, write_csv_by_year)
 ```
 
 # Create 4-year rolling average for scores: 

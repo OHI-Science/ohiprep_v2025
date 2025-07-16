@@ -88,6 +88,9 @@ For *regional* assessments:
 For trends:
 - `iucn_trend_by_spp_2025-1.csv`
 
+As well as the following .csv files, saved in the ... 
+- `spp_info_from_api_2025-1.csv`
+
 ## Marine Species List
 
 First, we need to establish the list of marine species IDs we are interested in. We do this by using rl_systems() to search for all species coded for the marine system ("2").
@@ -119,6 +122,57 @@ write_csv(marine_system, file.path(dir_goal, sprintf('_data/iucn/marine-system-2
 #marine_system <- read_csv(file.path(dir_goal, sprintf('_data/iucn/marine-system-2025.csv')), show_col_types = FALSE)
 
 # 2025: 19,944 species
+```
+
+#### Git-annex/globalprep/spp/v2025/spp_risk_dists/iucn: `sup_pop_spp_info_from_api_2025-1.csv'
+
+The code-chunk below pulls all the subpopulation information for the iucn_sids in the marine_species_list. The subpopulations are then combined with the full species information. The resulting file is used in `3_join_iucn_spatial_data.Rmd`. 
+
+```{r}
+# Download subpopulation information
+# Takes about 2.684539 hours
+sub_pops <- data.frame()
+
+start_time <- Sys.time()
+
+for (i in marine_species_list) {
+  tryCatch({
+    sis_data <- rl_sis(id = i)$taxon
+    
+    # Skip if subpopulation_taxa is not a data.frame
+    if (!is.data.frame(sis_data$subpopulation_taxa)) {
+      next
+    }
+
+    iucn_sid <- sis_data$sis_id
+    sub_pop_spp <- sis_data$subpopulation_taxa %>%
+      mutate(
+        iucn_sid = iucn_sid,
+        sciname = paste(genus_name, species_name)
+      ) %>%
+      select(iucn_sid, sciname, everything())
+
+    sub_pops <- bind_rows(sub_pops, sub_pop_spp)
+
+    Sys.sleep(1)
+    
+    # Error will list species without subpopulations
+  }, error = function(e) {
+    message(paste("Error for species ID:", i, "-", e$message))
+  })
+}
+
+end_time <- Sys.time()
+end_time - start_time  
+
+# Save supbob info
+write_csv(sub_pops, file.path(dir_goal, sprintf('_data/iucn/sup_pop_%s.csv', api_version)))
+
+#### Make comprehensive species list with marine_system
+sub_pops %>%
+  select()
+
+### write_csv(sub_pops, file.path(dir_goal_anx, 'iucn', sprintf('spp_info_from_api_%s.csv', api_version)))
 ```
 
 ## *Global* Assessments
@@ -184,6 +238,8 @@ marine_species_risk_timeseries <- marine_system %>%
 write_csv(marine_species_risk_timeseries, file.path(dir_goal, '_data', 
                                          sprintf('iucn_risk_timeseries_%s.csv', api_version)))
 ```
+
+The two steps above may be able to be combined.
 
 Check out the results for 2025, assess differences from 2024.
 
