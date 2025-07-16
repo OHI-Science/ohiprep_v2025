@@ -631,15 +631,6 @@ readr::write_csv(final_orn_relative_sust_tonnes, here(current_np_dir, "output", 
 Compare ornamental sustainability from previous years
 
 ```{r}
-# Update scenario year, set up programmatic scenario year updates
-scen_year_number <- 2025
-scen_year <- as.character(scen_year_number)
-prev_scen_year <- as.character(scen_year_number - 1)
-data_dir_year <- paste0("d", scen_year)
-prev_data_dir_year <- paste0("d", prev_scen_year, "_new")
-v_scen_year <- paste0("v", scen_year, "_new")
-prev_v_scen_year <- paste0("v", prev_scen_year, "_new")
-
 # Read in previous assessment data
 old_orn <- read_csv(here("globalprep", "np", prev_v_scen_year, "int", "np_relative_sust_tonnes_ornamentals_full.csv"))
 
@@ -649,7 +640,7 @@ new_orn <- read_csv(here("globalprep", "np", v_scen_year, "int", "np_relative_su
 previous_data_year <- 2022
 latest_data_year <- 2023
 
-# ---- Compare mariculture yield data for all countries: ----
+# ---- Compare ornamental sust data for all countries: ----
 # previous data year (2022) vs. current data year (2023) 
 old_orn_1 <- old_orn %>% 
   filter(year == previous_data_year) %>% 
@@ -663,17 +654,27 @@ new_orn_1 <- new_orn %>%
 total <- old_orn_1 %>% 
   full_join(new_orn_1, by = c("rgn_id", "product", "rgn_name"))
 
-# Plot
+# Plot sustainable tonnes
 comp_plot_1 <- ggplot() + 
   geom_jitter(data = total, aes(x = old_sust_tonnes, y = sust_tonnes, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
   labs(x = paste("Previous Value", previous_data_year),
        y = paste("Current Value", latest_data_year),
-       title = paste0(scen_year_number, " (",latest_data_year, " data) vs. ", prev_scen_year, " (",previous_data_year, " data)", " All Countries")) +
+       title = paste0("Sustainable tonnes: ", scen_year_number, " Assessment (",latest_data_year, " data) vs. ", prev_scen_year, " Assessment (",previous_data_year, " data)", " All Countries")) +
   geom_abline(slope = 1, intercept = 0, col = "red") +
   theme_bw(); ggplotly(comp_plot_1)
 
+# Plot sustainability
+comp_plot_2 <- ggplot() + 
+  geom_jitter(data = total, aes(x = old_sust, y = sustainability, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
+  labs(x = paste("Previous Value", previous_data_year),
+       y = paste("Current Value", latest_data_year),
+       title = paste0("Sustainability: ", scen_year_number, " Assessment (",latest_data_year, " data) vs. ", prev_scen_year, " Assessment (",previous_data_year, " data)", " All Countries")) +
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  theme_bw(); ggplotly(comp_plot_2)
+
+
 # ---- Compare ornamental sust data for all countries: ----
-# previous data year (2022) vs. current data year (2023) 
+# previous data year (2022) 
 old_orn_2 <- old_orn %>% 
   filter(year == previous_data_year) %>% 
   dplyr::select(rgn_id, product, rgn_name, old_sust_tonnes = sust_tonnes, old_tonnes = tonnes, old_sust = sustainability, old_rel_sust = rel_sust_tonnes, old_peak = peak_sust_tonnes, old_orig = sust_tonnes_orig)
@@ -686,17 +687,23 @@ new_orn_2 <- new_orn %>%
 total_2 <- old_orn_2 %>% 
   full_join(new_orn_2, by = c("rgn_id", "product", "rgn_name"))
 
-comp_plot_2 <- ggplot() + 
-  geom_jitter(data = total_2, aes(x = old_sust_tonnes, y = sust_tonnes, text = paste("Product:", product, "<br>Region:", rgn_id)), alpha = 0.7) +
+comp_plot_3 <- ggplot() + 
+  geom_jitter(data = total_2, aes(x = old_sust_tonnes, y = sust_tonnes, text = paste("Product:", product, "<br>Region:", rgn_name)), alpha = 0.7) +
   labs(x = paste("Previous Value", previous_data_year), 
        y = paste("Current Value", previous_data_year),
-       title = paste(previous_data_year, "data", prev_scen_year, "assessment vs.", previous_data_year, "data", scen_year_number, "assessment")) +
+       title = paste("Sustainable tonnes:", previous_data_year, "Data", prev_scen_year, "Assessment vs.", previous_data_year, "Data", scen_year_number, "assessment")) +
   geom_abline(slope = 1, intercept = 0, col = "red") +
-  theme_bw();ggplotly(comp_plot_2)
+  theme_bw();ggplotly(comp_plot_3)
 
 
-
-
+# Plot sustainability
+comp_plot_4 <- ggplot() + 
+  geom_jitter(data = total_2, aes(x = old_sust, y = sustainability, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
+  labs(x = paste("Previous Value", previous_data_year),
+       y = paste("Current Value", previous_data_year),
+       title = paste("Sustainability:", previous_data_year, "Data", prev_scen_year, "Assessment vs.", previous_data_year, "Data", scen_year_number, "assessment")) +
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  theme_bw(); ggplotly(comp_plot_4)
 ```
 
 
