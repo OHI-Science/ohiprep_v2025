@@ -24,6 +24,10 @@ This analysis converts FAO commodities data into data layers used to calculate O
 
 # Updates from previous assessment
 
+### v2025
+- New year of FAO data(2023)
+- 
+
 ### v2024
 *   New year of FAO data (2022)\
 *   Updated links to datasets\
@@ -40,14 +44,16 @@ This analysis converts FAO commodities data into data layers used to calculate O
 **Reference**:\
 <https://www.fao.org/fishery/en/statistics/software/fishstatj> App release date: March 2024 FAO raw commodities quantity 1976_2021 FAO raw commodities value 1976_2022 [FAO metadata](http://www.fao.org/fishery/statistics/global-commodities-production/en)
 
+*Note, the above link did not work in the 2025 assessment. Data needed to be downloaded from fishstatj. Instructions can be found on the mazu server in the d2025 directory.*
+
 - Global aquatic trade - All partners aggregated - Quantities and Values - 1976-2022 (Release date: July 2024)
 
 
-**Downloaded**: 2024-08-07
+**Downloaded**: 2025-07-14
 
 **Description**: Quantity (tonnes) and value (USD) of raw commodities (Exports only) for each country, taxa, year. The FAO data is subset to include commodities in these categories: ornamental fish, fish oil, seaweed and plants (see: raw/commodities2products_weighting.csv for details).
 
-**Time range**: 1976-2022
+**Time range**: 1976-2023
 
 Files can be found on Mazu: `home/shares/ohi/git-annex/globalprep/_raw_data/FAO_commodities/d2024` accompanied by README.md with detailed download instructions. 
 
@@ -117,12 +123,10 @@ files_old <- list.files(dir_fao_data_old, pattern = glob2rx('*.csv'), full.names
 
 # ===== loop ================
 # for (f in files) {
-  f <- files[1] # un-comment and update to test individual files # 1 = quant, 2 = usd
+  f <- files[2] # un-comment and update to test individual files # 1 = quant, 2 = usd
   cat(sprintf('\n\n\n====\nfile: %s\n', basename(f)))
   
-  #d <- read.csv(f, check.names = FALSE, strip.white = TRUE, stringsAsFactors = FALSE) # stringsAsFactors=T
   # checks names syntactically, strips leading and trailing whitespace, prevents conversion of characters to factors 
-  
   d <- readr::read_csv(f) # makes this a tibble, not a dataframe (check with is_tibble(d))
   # ignore the warning here -- it's just letting you know about an empty final row (happened quietly in previous read.csv code)
   
