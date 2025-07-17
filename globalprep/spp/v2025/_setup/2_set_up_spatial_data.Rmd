@@ -749,7 +749,9 @@ system.time({
 plot(all_prot_raster, main = 'All protection (any category)')
 ```
 
-## Set up analysis rasters (EEZs, MEOWs, and bathymetry) at Gall-Peters 10 km^2 resolution.
+# Archive
+
+Set up analysis rasters (EEZs, MEOWs, and bathymetry) at Gall-Peters 10 km^2 resolution.
 
 - EEZs will include all EEZs as well as FAO regions and CCAMLR regions, based on the global OHI EEZ map. 
 - MEOWs will include all MEOW provinces, though only some are appropriate for IUCN regional assessments (see `2a_set_up_regional_codes.Rmd`). 
@@ -772,8 +774,8 @@ eez_shp_file  <- file.path(dir_M, 'git-annex/globalprep/spatial/v2017/regions_20
 area_rast <- raster(file.path(dir_goal, '_spatial', 'ocean_area_rast.tif'))
 values(area_rast)[values(area_rast) <= .005] <- NA
 
+#plot(area_rast)
 
-#if(!file.exists(eez_rast_file)) {
 eez_sf <- read_sf(eez_shp_file)
 
 eez_df <- eez_sf %>%
@@ -805,15 +807,15 @@ eez_rast <- fasterize::fasterize(eez_sf_reclass, rast_base,
 eez_rast_ocean <- eez_rast %>%
   mask(area_rast)
 
+# Write raster
 writeRaster(eez_rast_ocean, eez_rast_file, overwrite = TRUE)
 
-# } else {
-#   # git_prov(eez_shp_file, 'input')
-#   # git_prov(eez_rast_file, 'output')
-#   eez_rast_ocean <- raster::raster(eez_rast_file)
-# }
-
+# Plot
 plot(eez_rast_ocean, main = 'EEZ raster 10 km^2 Gall-Peters projection')
+
+# Check against 2024
+# eez_rast_ocean_24 <- rast('globalprep/spp/v2024/_spatial/eez_rast.tif')
+# plot(eez_rast_ocean_24)
 
 ```
 
@@ -825,12 +827,13 @@ Using the MEOW shapefile, we will include all the shapes at the province level a
 meow_rast_file <- file.path(dir_goal, '_spatial', 'meow_rast.tif')
 meow_shp_file  <- file.path(dir_raw_data_anx, 'meow/meow_ecos.shp')
 
-#if(!file.exists(meow_rast_file)) {
-meow_sf <- read_sf(meow_shp_file) %>%
-  clip_to_globe()
+# meow_sf <- read_sf(meow_shp_file) %>%
+#   clip_to_globe()
 ### in common_fxn.R: ensures no coordinates outside +-180, +-90
 
-ext(meow_sf)
+# Read in shpfile and clip 
+meow_sf <- read_sf(meow_shp_file) %>%
+  clip_to_globe_sp() ## clip_to_globe() was failing, so I looked into common_fxn.R and saw clip_to_glob_sp() and that worked much better
 
 meow_sf_reclass <- meow_sf %>%
   dplyr::select(ECO_CODE_X, geometry) %>%
@@ -845,6 +848,8 @@ meow_rast <- fasterize::fasterize(meow_sf_reclass, rast_base,
 
 meow_rast <- meow_rast %>%
   mask(area_rast)
+
+plot(meow_rast)
     
   ### check whether there are shoreline gaps between MEOW maps and EEZ maps
    #x <- eez_rast
@@ -853,15 +858,12 @@ meow_rast <- meow_rast %>%
   ### MEOWs seem to go inland to prevent shoreline gaps! yay
   
 writeRaster(meow_rast, meow_rast_file, overwrite = TRUE)
-# } else {
-#   # git_prov(meow_shp_file, 'input')
-#   # git_prov(meow_rast_file, 'output')
-#   meow_rast <- raster::raster(meow_rast_file)
-# }
 
 plot(meow_rast, main = 'MEOW raster 10 km^2 Gall-Peters')
 
-crs(meow_rast)
+# Check against 2024 raster
+meow_rast_24 <- rast('globalprep/spp/v2024/_spatial/meow_rast.tif')
+plot(meow_rast_24)
 
 ```
 
@@ -873,7 +875,7 @@ crs(meow_rast)
 
 Using [General Bathymetric Chart of the Oceans (GEBCO) bathymetry raster](https://www.gebco.net/data_and_products/historical_data_sets/#gebco_2014), identify min depth of ocean cells.  For neritic and coastal cells, leaving as min depth allows for changing depth thresholds if desired.  We will not clip based on anything below 200 m, so can classify these more coarsely.
 
-NOTE: 1 arcmin and 30 arcsec are available; 30 arcsec is more recent but one arcmin should be sufficient for our purposes.  Resample to 6 arc-minute (0.10°) using min depth in each cell.
+*Note:* 1 arcmin and 30 arcsec are available; 30 arcsec is more recent but one arcmin should be sufficient for our purposes. Resample to 6 arc-minute (0.10°) using min depth in each cell.
 
 Bathymetry is masked to the ocean area raster.
 
@@ -884,7 +886,6 @@ bathy_rast_file <- file.path(dir_goal, '_spatial', 'bathy_rast.tif')
 gebco_rast_file <- file.path(dir_raw_data_anx, 'gebco', 'd2017', 'GRIDONE_1D.nc')
 gebco_rast_raw  <- raster(gebco_rast_file)
 
-#if(!file.exists(bathy_rast_file)) {
   ### The GEBCO raster is elevation, so depth is neg... for min depth, 
   ### aggregate by max (and vice versa)
 bathy_rast_min <- gebco_rast_raw %>%
@@ -929,6 +930,9 @@ bathy_rast <- bathy_rast %>%
 
 plot(bathy_rast)
 
+bathy_rast_24 <- rast('globalprep/spp/v2024/_spatial/bathy_rast.tif')
+plot(bathy_rast_24)
+
 # Min depth bathy raster 10 km^2 Gall-Peters
 writeRaster(bathy_rast, bathy_rast_file, overwrite = TRUE)
 
@@ -939,22 +943,16 @@ values(rast_shallow) <- ifelse(values(bathy_rast) <=  60, 1, NA)
 plot(rast_neritic)
 plot(rast_shallow)
 
+rast_neritic_24 <- rast('globalprep/spp/v2024/_spatial/bathy_rast_neritic.tif')
+plot(rast_neritic_24)
+
+rast_shallow_24 <- rast('globalprep/spp/v2024/_spatial/bathy_rast_shallow.tif')
+plot(rast_shallow_24)
+
 writeRaster(rast_neritic, file.path(dir_goal, '_spatial', 'bathy_rast_neritic.tif'),
             overwrite = TRUE)
 writeRaster(rast_shallow, file.path(dir_goal, '_spatial', 'bathy_rast_shallow.tif'),
             overwrite = TRUE)
-  
-# } else {
-#   # git_prov(bathy_rast_file, 'output')
-#   bathy_rast <- raster::raster(bathy_rast_file)
-# }
-
-
-# library(RColorBrewer)
-# 
-# color_palette <- colorRampPalette(brewer.pal(9, "Oranges"))
-# plot(bathy_rast, main = 'Bathymetry (minimum depth,) raster 10 km^2 Gall-Peters',
-#      col = color_palette(100))
 
 ```
 

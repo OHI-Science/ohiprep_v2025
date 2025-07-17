@@ -118,7 +118,7 @@ marine_species_list <- unique(marine_system$iucn_sid)
 write_csv(marine_system, file.path(dir_goal, sprintf('_data/iucn/marine_system_%s.csv', api_version)))
 
 # Load for time
-#marine_system <- read_csv(file.path(dir_goal, sprintf('_data/iucn/marine-system-2025.csv')), show_col_types = FALSE)
+#marine_system <- read_csv(file.path(dir_goal, sprintf('_data/iucn/marine_system_2025-1.csv')), show_col_types = FALSE)
 
 # 2025: 19,944 species
 ```
@@ -172,11 +172,44 @@ end_time - start_time
 # Save supbob info
 write_csv(sub_pops, file.path(dir_goal, sprintf('_data/iucn/sub_pop_%s.csv', api_version)))
 
-#### Make comprehensive species list with marine_system?
+#sub_pops <- read_csv(file.path(dir_goal, sprintf('_data/iucn/sub_pop_%s.csv', api_version)), show_col_types = FALSE)
 
-#### sub_pops_all <- 
+taxa <- data.frame()
 
-### write_csv(sub_pops_all, file.path(dir_goal_anx, 'iucn', sprintf('spp_info_from_api_%s.csv', api_version)))
+start_time <- Sys.time()
+
+## load taxa for marine spp
+for (i in marine_species_list) {
+  
+  iucn_sid <- rl_sis(i)$taxon$sis_id
+  kingdom <- rl_sis(i)$taxon$kingdom_name
+  phylum <- rl_sis(i)$taxon$phylum_name
+  class <- rl_sis(i)$taxon$class_name
+  order <- rl_sis(i)$taxon$order_name
+  family <- rl_sis(i)$taxon$family_name
+  
+  taxa_info_spp <- data.frame(iucn_sid, kingdom, phylum, class, order, family)
+  
+  taxa <- bind_rows(taxa, taxa_info_spp)
+  
+  Sys.sleep(2)
+}
+
+end_time <- Sys.time()
+end_time - start_time  
+
+# Write csv
+write_csv(taxa, file.path(dir_goal, sprintf('_data/iucn/taxa_%s.csv', api_version)))
+
+# Make comprehensive species list with species and subpops?
+spp_from_api <- marine_system %>%
+  mutate(subpopulation_name = NA) %>%
+  select(iucn_sid, sciname, subpopulation_name) %>%
+  bind_rows(sub_pops %>% select(iucn_sid = sis_id, sciname, subpopulation_name)) %>%
+  distinct()
+
+# Save for use in .rmd 3?
+#write_csv(spp_from_api, file.path(dir_goal_anx, 'iucn', sprintf('spp_info_from_api_%s.csv', api_version)))
 ```
 
 ## *Global* Assessments

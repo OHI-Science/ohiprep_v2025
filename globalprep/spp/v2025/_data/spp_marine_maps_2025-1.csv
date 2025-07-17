@@ -2200,7 +2200,6 @@ shp_iucn_sid,iucn_sid,sciname,presence,subpop,dbf_file,max_depth,comp_assessed
 185096,185096,Eduarctus aesopius,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/LOBSTERS.dbf,< 200 m,TRUE
 195345,195345,Gibbularctus gibberosus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/LOBSTERS.dbf,< 200 m,TRUE
 2055,2055,Arctocephalus australis,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
-2055,2055,Arctocephalus australis,1,Peruvian/Northern Chilean,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
 41664,41664,Arctocephalus forsteri,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
 2057,2057,Arctocephalus galapagoensis,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
 2058,2058,Arctocephalus gazella,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
@@ -2213,7 +2212,6 @@ shp_iucn_sid,iucn_sid,sciname,presence,subpop,dbf_file,max_depth,comp_assessed
 7750,7750,Enhydra lutris,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
 8010,8010,Erignathus barbatus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
 8239,8239,Eumetopias jubatus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
-9660,9660,Halichoerus grypus,1,Baltic sea subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
 9660,9660,Halichoerus grypus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
 10340,10340,Hydrurga leptonyx,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
 11696,11696,Leptonychotes weddellii,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
@@ -2231,10 +2229,7 @@ shp_iucn_sid,iucn_sid,sciname,presence,subpop,dbf_file,max_depth,comp_assessed
 22823,22823,Ursus maritimus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
 41666,41666,Zalophus californianus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
 41668,41668,Zalophus wollebaeki,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_AND_TERRESTRIAL.dbf,200 m +,TRUE
-2467,2467,Balaena mysticetus,1,East Greenland-Svalbard-Barents Sea,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
-2467,2467,Balaena mysticetus,1,Bering-Chukchi-Beaufort Sea,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 2467,2467,Balaena mysticetus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
-2467,2467,Balaena mysticetus,1,Okhotsk Sea,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 2474,2474,Balaenoptera acutorostrata,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 2475,2475,Balaenoptera borealis,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 2476,2476,Balaenoptera edeni,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
@@ -2249,10 +2244,7 @@ shp_iucn_sid,iucn_sid,sciname,presence,subpop,dbf_file,max_depth,comp_assessed
 4161,4161,Cephalorhynchus heavisidii,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 4162,4162,Cephalorhynchus hectori,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,< 200 m,TRUE
 6335,6335,Delphinapterus leucas,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,deep oceanic,TRUE
-6335,6335,Delphinapterus leucas,1,Cook Inlet,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,deep oceanic,TRUE
 6909,6909,Dugong dugon,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,< 200 m,TRUE
-6909,6909,Dugong dugon,1,Nansei,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,< 200 m,TRUE
-8097,8097,Eschrichtius robustus,1,Western,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 8097,8097,Eschrichtius robustus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 8097,8097,Eschrichtius robustus,5,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 8153,8153,Eubalaena australis,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
@@ -2286,12 +2278,10 @@ shp_iucn_sid,iucn_sid,sciname,presence,subpop,dbf_file,max_depth,comp_assessed
 15421,15421,Orcinus orca,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 16564,16564,Peponocephala electra,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,deep oceanic,TRUE
 17027,17027,Phocoena phocoena,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
-17027,17027,Phocoena phocoena,1,Baltic Sea,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 17028,17028,Phocoena sinus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 17029,17029,Phocoena spinipinnis,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 17032,17032,Phocoenoides dalli,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 17978,17978,Pontoporia blainvillei,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
-17978,17978,Pontoporia blainvillei,1,Rio Grande do Sul/Uruguay,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 18596,18596,Pseudorca crassidens,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,deep oceanic,TRUE
 20729,20729,Stenella attenuata,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 20730,20730,Stenella clymene,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
@@ -2301,7 +2291,6 @@ shp_iucn_sid,iucn_sid,sciname,presence,subpop,dbf_file,max_depth,comp_assessed
 20738,20738,Steno bredanensis,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 21500,21500,Tasmacetus shepherdi,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,deep oceanic,TRUE
 22563,22563,Tursiops truncatus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
-22563,22563,Tursiops truncatus,1,Fiordland,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 23211,23211,Ziphius cavirostris,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,deep oceanic,TRUE
 40635,40635,Indopacetus pacificus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,deep oceanic,TRUE
 41670,41670,Histriophoca fasciata,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
@@ -2318,7 +2307,6 @@ shp_iucn_sid,iucn_sid,sciname,presence,subpop,dbf_file,max_depth,comp_assessed
 198920,198920,Neophocaena phocaenoides,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,< 200 m,TRUE
 82031633,82031633,Sousa plumbea,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,< 200 m,TRUE
 82031667,82031667,Sousa sahulensis,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
-134817215,134817215,Delphinus delphis,1,Mediterranean,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 134817215,134817215,Delphinus delphis,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 215823373,215823373,Balaenoptera ricei,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,200 m +,TRUE
 215824818,215824818,Mesoplodon eueu,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/MAMMALS_MARINE_ONLY.dbf,deep oceanic,TRUE
@@ -13331,104 +13319,6 @@ shp_iucn_sid,iucn_sid,sciname,presence,subpop,dbf_file,max_depth,comp_assessed
 61333,61333,Parahucho perryi,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
 62224,62224,Oncorhynchus clarkii,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,< 200 m,FALSE
 62224,62224,Oncorhynchus clarkii,6,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,< 200 m,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Schoen Ck/Davie R,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka TRANSBOUNDARY FJORDS: Kah Sheets Lk/S Kupreanof Is,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka STIKINE RIVER, LOWER",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Gates Ck and Channel (early summer)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Atnarko R,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, LOWER: Chilliwack Lk (early summer)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka WESTERN ARCTIC CURRENT (COLD),/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka NASS-SKEENA ESTUARY: North of Nass,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, S THOMPSON: Shuswap, Kamloops (late)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Chilko (summer)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Hecate Strait,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka SKEENA R, MIDDLE: Babine",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Kitimat to Kitlope R,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,5,"Oncorhynchus nerka COLUMBIA RIVER: Upper, Headwater/Arrow, Whatsan Lk",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka SEA OF OKHOTSK CURRENT (COLD),/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka SKEENA R, MIDDLE: Kispiox R, Club",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka SOUTHEAST BERING SEA INNER SHELF,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka SKEENA R, LOWER: Alastair",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka WESTERN KAMCHATKA CURRENT (WARM),/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka ALSEK RIVER,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka OKHOTSK-OYASHIO MIXING,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka KAMCHATKA RIVER,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka NASS-SKEENA ESTUARY: N Hadai Gwaii,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka TRANSBOUNDARY FJORDS: North,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, LOWER: Widgeon Creek (late)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka COLUMBIA RIVER: Wenatchee,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, UPPER: Bowron (early summer)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: E Hadai Gwaii,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka NASS RIVER: Upper Nass,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka TRANSBOUNDARY FJORDS: South,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka NOATAK RIVER,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Glendale Ck/Knight Inl,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka NASS RIVER: Coastal,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka TRANSBOUNDARY FJORDS: Petersburg Lk/N Kupreanof Is,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, S THOMPSON: Shuswap (early summer)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Chilko (early summer)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, LOWER: Harrison River (late)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka YUKON RIVER INFLUENCE,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Nahatlatch (early summer)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Nadina, Nechako (early summer)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka YUKON RIVER,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka SHELIKHOV GULF (COLD),/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,5,Oncorhynchus nerka COLUMBIA RIVER: Yakima R,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, N THOMPSON: Kamloops (early summer)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka NASS RIVER: Gingit,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Phillips R, Heydon Ck",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, LILLOOET: Birkenhead (late)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka ALASKA COASTAL DOWNWELLING, WESTERN GULF OF ALASKA",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,5,Oncorhynchus nerka COLUMBIA RIVER: Wallowa Lk,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka OUTER ISLANDS: NW Vancouver Island,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Taseko (early summer)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka OUTER ISLANDS: W Hadai Gwaii,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,5,Oncorhynchus nerka COLUMBIA RIVER: Payette R,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Stuart (early Stuart)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Nechako (summer)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka ANADYR CURRENT,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Queen Charlotte Sound,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,5,Oncorhynchus nerka COLUMBIA RIVER: Suttle Lk/Deschutes R,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka PENZHINA INTRACOASTAL,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka PRINCE WILLIAM SOUND,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Village Bay Ck, Sakinaw",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka ANADYR RIVER,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka BERING-ALASKAN MIXING,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka BERING SLOPE/KAMCHATKA CURRENTS,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka COLUMBIA RIVER: Okanogan R/Osoyoos Lk,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka COLUMBIA RIVER: Redfish Lk,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka SKEENA R, MIDDLE: Nanika Lk/Morice R",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Baker Lk/Puget Sound,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Nimpkish, Mackenzie R",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka COOK INLET,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka SEASONAL UPWELLING CLINE,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka SKEENA R, UPPER",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka VANCOUVER ISLAND COASTAL CURRENT,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka VELIKAYA RIVER,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, LOWER: Big Silver (late)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Klinaklini River,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka EASTERN ARCTIC CURRENT (WARM),/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka EASTERN ARCTIC (COLD),/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, LOWER: Cultus Lk (late)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka NASS-SKEENA ESTUARY: Hugh Smith Lk/Boca de Quadra,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka KUSKOKWIM RIVER,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka KODIAK ISLAND,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka KOBUK RIVER,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka KANCHALAN RIVER,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Lowe Lk/Granville Ch,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka SKEENA R, LOWER: Kitsumkalum",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Quesnel (summer)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka ALASKA COASTAL DOWNWELLING, EASTERN GULF OF ALASKA",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Stuart (summer)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, LOWER: Weaver (late)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Bella Coola R,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka SKEENA R, LOWER: Schulbuckhand",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka SKEENA R, LOWER: McDonnel Lk/Zymoetz R",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka TRANSBOUNDARY FJORDS: Shipley Lk/N Kosciusko Is,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,"Oncorhynchus nerka FRASER RIVER, LOWER: Upper Pitt R (early summer)",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka TRANSBOUNDARY FJORDS: Kunk Lk/E Etolin Is,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Quatse R/N Vancouver I,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
-135301,135301,Oncorhynchus nerka,1,Oncorhynchus nerka COPPER RIVER,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,200 m +,FALSE
 135545,135545,Stenodus nelma,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,< 200 m,FALSE
 135612,135612,Coregonus widegreni,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,< 200 m,FALSE
 135658,135658,Salmo labrax,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SALMONIDS.dbf,< 200 m,FALSE
@@ -14046,12 +13936,6 @@ shp_iucn_sid,iucn_sid,sciname,presence,subpop,dbf_file,max_depth,comp_assessed
 6229,6229,Dalatias licha,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,200 m +,TRUE
 10030,10030,Hexanchus griseus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,200 m +,TRUE
 11200,11200,Lamna nasus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,deep oceanic,TRUE
-18175,18175,Pristis pectinata,6,Eastern Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18175,18175,Pristis pectinata,1,Eastern Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18175,18175,Pristis pectinata,4,Western Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18175,18175,Pristis pectinata,4,Eastern Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18175,18175,Pristis pectinata,1,Western Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18175,18175,Pristis pectinata,6,Western Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
 19488,19488,Rhincodon typus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,deep oceanic,TRUE
 39324,39324,Notorynchus cepedianus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,200 m +,TRUE
 39327,39327,Pristiophorus cirratus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,200 m +,TRUE
@@ -15017,21 +14901,7 @@ shp_iucn_sid,iucn_sid,sciname,presence,subpop,dbf_file,max_depth,comp_assessed
 14134315,14134315,Dipturus canutus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,200 m +,TRUE
 14134429,14134429,Gymnura marmorata,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
 14134431,14134431,Gymnura crebripunctata,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18584848,18584848,Pristis pristis,6,Eastern Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18584848,18584848,Pristis pristis,6,Western Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18584848,18584848,Pristis pristis,6,Indo West Pacific,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18584848,18584848,Pristis pristis,1,Eastern Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
 18584848,18584848,Pristis pristis,4,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18584848,18584848,Pristis pristis,6,Eastern Pacific,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18584848,18584848,Pristis pristis,1,Eastern Pacific,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18584848,18584848,Pristis pristis,4,Western Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18584848,18584848,Pristis pristis,3,Eastern Pacific,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18584848,18584848,Pristis pristis,1,Western Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18584848,18584848,Pristis pristis,4,Eastern Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18584848,18584848,Pristis pristis,6,Indo-west Pacific,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18584848,18584848,Pristis pristis,4,Indo West Pacific,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18584848,18584848,Pristis pristis,1,Indo West Pacific,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
-18584848,18584848,Pristis pristis,4,Indo-west Pacific,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
 18901743,18901743,Chimaera opalescens,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,200 m +,TRUE
 18903491,18903491,Dipturus intermedius,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,200 m +,TRUE
 18907453,18907453,Dasyatis tortonesei,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
@@ -15254,48 +15124,16 @@ shp_iucn_sid,iucn_sid,sciname,presence,subpop,dbf_file,max_depth,comp_assessed
 253117160,253117160,Rhynchobatus laevis,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,< 200 m,TRUE
 257332767,257332767,Chimaera supapae,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,200 m +,TRUE
 257333306,257333306,Dichichthys satoi,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SHARKS_RAYS_CHIMAERAS.dbf,200 m +,TRUE
-222,222,Acipenser brevirostrum,1,Gulf of Maine subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-222,222,Acipenser brevirostrum,1,Hudson subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-222,222,Acipenser brevirostrum,1,Southeast subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-222,222,Acipenser brevirostrum,5,Delaware/Chesapeake Bay subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-222,222,Acipenser brevirostrum,1,N to S Carolina subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-222,222,Acipenser brevirostrum,5,Connecticut subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-222,222,Acipenser brevirostrum,1,Connecticut subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-222,222,Acipenser brevirostrum,5,N to S Carolina subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-222,222,Acipenser brevirostrum,1,Canada subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-222,222,Acipenser brevirostrum,1,Delaware/Chesapeake Bay subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
 224,224,Acipenser naccarii,6,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
 224,224,Acipenser naccarii,5,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
 224,224,Acipenser naccarii,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
 224,224,Acipenser naccarii,4,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-225,225,Acipenser nudiventris,1,Caspian Sea subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-225,225,Acipenser nudiventris,5,Black Sea and Sea of Azov subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
 225,225,Acipenser nudiventris,1,Lake Balkhash and River Illi subpopulation (assisted colonisation),/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-225,225,Acipenser nudiventris,5,Caspian Sea subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-225,225,Acipenser nudiventris,1,Black Sea and Sea of Azov subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-225,225,Acipenser nudiventris,5,Aral Sea subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-229,229,Acipenser stellatus,1,Black Sea and Sea of Azov subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-229,229,Acipenser stellatus,1,Caspian Sea subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-229,229,Acipenser stellatus,5,Black Sea and Sea of Azov subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-229,229,Acipenser stellatus,5,Caspian Sea subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
 230,230,Acipenser sturio,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
 230,230,Acipenser sturio,5,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
 230,230,Acipenser sturio,4,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-232,232,Acipenser gueldenstaedtii,1,Caspian Sea,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-232,232,Acipenser gueldenstaedtii,1,Black Sea and Sea of Azov,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-232,232,Acipenser gueldenstaedtii,5,Black Sea and Sea of Azov,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-232,232,Acipenser gueldenstaedtii,5,Caspian Sea,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-233,233,Acipenser medirostris,1,Southern DPS subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-233,233,Acipenser medirostris,1,Northern DPS subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-233,233,Acipenser medirostris,5,Northern DPS subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-233,233,Acipenser medirostris,5,Southern DPS subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
 233,233,Acipenser medirostris,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-234,234,Acipenser transmontanus,5,Sacramento and San Joaquin River subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-234,234,Acipenser transmontanus,1,Sacramento and San Joaquin River subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-234,234,Acipenser transmontanus,1,Kootenai River subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
 234,234,Acipenser transmontanus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-234,234,Acipenser transmontanus,1,Fraser River Nechako subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-234,234,Acipenser transmontanus,1,Snake River subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
 234,234,Acipenser transmontanus,1,"Columbia River Upper, Middle, and Lower subpopulation",/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
 235,235,Acipenser persicus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
 235,235,Acipenser persicus,5,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
@@ -15303,22 +15141,9 @@ shp_iucn_sid,iucn_sid,sciname,presence,subpop,dbf_file,max_depth,comp_assessed
 244,244,Acipenser baerii,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
 244,244,Acipenser baerii,4,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
 245,245,Acipenser oxyrinchus,5,<Null>,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-245,245,Acipenser oxyrinchus,4,Baltic Sea subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
 245,245,Acipenser oxyrinchus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-245,245,Acipenser oxyrinchus,1,Carolina subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-245,245,Acipenser oxyrinchus,1,Chesapeake Bay subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-245,245,Acipenser oxyrinchus,1,Gulf of Maine subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-245,245,Acipenser oxyrinchus,1,Canadian Maritime subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
 245,245,Acipenser oxyrinchus,5,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-245,245,Acipenser oxyrinchus,1,South Atlantic subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-245,245,Acipenser oxyrinchus,4,Baltic Sea,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
-245,245,Acipenser oxyrinchus,1,New York Bight subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,200 m +,TRUE
 10268,10268,Huso dauricus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-10269,10269,Huso huso,5,Adriatic Sea,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-10269,10269,Huso huso,1,Black Sea and Sea of Azov,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-10269,10269,Huso huso,1,Caspian Sea subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-10269,10269,Huso huso,5,Caspian Sea subpopulation,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
-10269,10269,Huso huso,5,Black Sea and Sea of Azov,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/STURGEONS_PADDLEFISHES.dbf,< 200 m,TRUE
 6814,6814,Dunckerocampus dactyliophorus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SYNGNATHIFORM_FISHES.dbf,< 200 m,FALSE
 10056,10056,Hippocampus capensis,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SYNGNATHIFORM_FISHES.dbf,< 200 m,FALSE
 10057,10057,Hippocampus abdominalis,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/SYNGNATHIFORM_FISHES.dbf,200 m +,FALSE
@@ -15648,25 +15473,8 @@ shp_iucn_sid,iucn_sid,sciname,presence,subpop,dbf_file,max_depth,comp_assessed
 170357,170357,Scomber colias,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TUNAS_BILLFISHES_SWORDFISH.dbf,200 m +,TRUE
 170358,170358,Grammatorcynus bilineatus,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TUNAS_BILLFISHES_SWORDFISH.dbf,200 m +,TRUE
 3897,3897,Caretta caretta,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-3897,3897,Caretta caretta,1,Atlantic Southwest,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-3897,3897,Caretta caretta,1,Pacific North,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-3897,3897,Caretta caretta,1,Mediterranean,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-3897,3897,Caretta caretta,1,Pacific South,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-3897,3897,Caretta caretta,1,Indian Northeast,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-3897,3897,Caretta caretta,1,Indian Southeast,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-3897,3897,Caretta caretta,1,Atlantic Northwest,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-3897,3897,Caretta caretta,1,Indian Northwest,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-3897,3897,Caretta caretta,1,Atlantic Notheast,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-3897,3897,Caretta caretta,1,Indian Southwest,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
 3898,3898,Carettochelys insculpta,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,< 200 m,FALSE
 4615,4615,Chelonia mydas,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-6494,6494,Dermochelys coriacea,1,Northwest Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-6494,6494,Dermochelys coriacea,1,Southwest Indian,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-6494,6494,Dermochelys coriacea,1,Southwest Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-6494,6494,Dermochelys coriacea,1,Southeast Atlantic,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-6494,6494,Dermochelys coriacea,1,East Pacific,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-6494,6494,Dermochelys coriacea,1,Northeast Indian,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
-6494,6494,Dermochelys coriacea,1,West Pacific,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
 8005,8005,Eretmochelys imbricata,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
 11533,11533,Lepidochelys kempii,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
 11534,11534,Lepidochelys olivacea,1,NA,/home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp/d2025-1/TURTLES.dbf,200 m +,TRUE
