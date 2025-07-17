@@ -43,9 +43,6 @@ if (!require(librarian)) {
 }
 librarian::shelf(
   ohicore, #devtools::install_github('ohi-science/ohicore@dev') #if relevant: restart session after reinstalling
-  dplyr,
-  stringr,
-  tidyr,
   here,
   tidyverse,
   zoo,
@@ -57,14 +54,15 @@ librarian::shelf(
 
 # ======= Set directories ===========
 # Update scenario year, set up programmatic scenario year updates
-scen_year_number <- 2024 # update this!!
+scen_year_number <- 2025 # update this!!
 scen_year <- as.character(scen_year_number)
 prev_scen_year <- as.character(scen_year_number - 1)
 data_dir_year <- paste0("d", scen_year)
 prev_data_dir_year <- paste0("d", prev_scen_year)
 v_scen_year <- paste0("v", scen_year)
+prev_v_scen_year <- paste0("v", prev_scen_year)
 
-data_years <- c("1950", "2022") # update to correct data years
+data_years <- c("1950", "2023") # update to correct data years
 
 # Natural Products directory on GitHub
 current_np_dir <- here::here("globalprep", "np", paste0(v_scen_year, "_new")) # update this if name changes

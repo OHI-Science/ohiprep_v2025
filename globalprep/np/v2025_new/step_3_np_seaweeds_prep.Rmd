@@ -110,6 +110,9 @@ data_years <- c("1950", "2023") # update to correct data years
 
 # Natural Products directory on GitHub
 current_np_dir <- here::here("globalprep", "np", paste0(v_scen_year, "_new")) # update this if name changes
+previous_np_dir <- here::here("globalprep", "np", paste0(prev_v_scen_year, "_new")) # update this if name changes
+
+
 # Mariculture directory on GitHub
 current_mar_dir <- here::here("globalprep", "mar", v_scen_year)
 rgn_labels <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/refs/heads/draft/eez/layers/rgn_labels.csv")
@@ -207,7 +210,10 @@ mar <- mar %>%
   dplyr::select(-row_id) %>% 
   mutate(FAO_name = ifelse(!is.na(FAO_name), FAO_name, family_scientific)) 
 
-
+view(mar)
+mar %>% 
+  filter(country == "South Africa") %>% 
+  view()
 # # ---- test: using fao_online_portal_clean.R function ----
 # # note: this function drops the "flag" column!
 # source(here("workflow", "R", "fao_online_portal_clean.R"))
@@ -267,8 +273,8 @@ seaweed_np <- seaweeds_sp %>%
 spp_1 <- unique(sort(seaweed_sp$FAO_name))
 length(spp_1) # 62
 spp_2 <- unique(sort(seaweed_np$FAO_name))
-length(spp_2) # 53
-# v2025 went from 62 species to 53 species (9 completely human food species removed)
+length(spp_2) # 58
+# v2025 went from 62 species to 58 species (4 completely human food species removed)
 rgn_1 <- unique(seaweed_np$country)
 length(rgn_1) # 51
 
@@ -284,7 +290,7 @@ length(spp_3) # 32
 rgn_2 <- unique(seaweed_np$country)
 length(rgn_2) # 50
 
-setdiff(spp_2, spp_3) # 25 species lost 
+setdiff(spp_2, spp_3) # 26 species lost 
 # v2024:
 #  [1] "BANGIACEAE"        "Bright green nori"
 #  [3] "CHORDARIACEAE"     "DUNALIELLACEAE"   
@@ -302,12 +308,12 @@ setdiff(spp_2, spp_3) # 25 species lost
 #  [9] "DUNALIELLACEAE"             "Eucheuma seaweeds nei"     
 # [11] "Giant kelps nei"            "GIGARTINACEAE"             
 # [13] "Green sea feather"          "Kelp nei"                  
-# [15] "LESSONIACEAE"               "Mozuku"                    
-# [17] "Nori nei"                   "OSCILLATORIACEAE"          
-# [19] "SARGASSACEAE"               "Sea lettuces nei"          
-# [21] "Seaweeds nei"               "SOLIERIACEAE"              
-# [23] "Spirulina nei"              "ULOTRICHACEAE"             
-# [25] "Wakame nei"     
+# [15] "Kelps nei"                  "LESSONIACEAE"              
+# [17] "Mozuku"                     "Nori nei"                  
+# [19] "OSCILLATORIACEAE"           "SARGASSACEAE"              
+# [21] "Sea lettuces nei"           "Seaweeds nei"              
+# [23] "SOLIERIACEAE"               "Spirulina nei"             
+# [25] "ULOTRICHACEAE"              "Wakame nei" 
 
 setdiff(rgn_1, rgn_2)
 # v2025: NA/50 unique regions?
@@ -319,6 +325,10 @@ seaweed_np <- seaweed_np %>%
   filter(total_value > 0) %>%
   dplyr::select(-total_value) %>%
   ungroup()
+
+seaweed_np %>% 
+  filter(country == "Indonesia") %>% 
+  view()
 
 ```
 
@@ -342,6 +352,10 @@ mar_rgn_all <- name_2_rgn(df_in = seaweed_np,
                        fld_name = 'country', 
                        flds_unique = c('species', 'fao', 'environment', 'Taxon_code', 'year', 'include'))
 
+mar_rgn_all %>% 
+  filter(country == "Indonesia") %>% 
+  view()
+
 # ---- Duplicates ----
 # v2025:
 # 1 United Republic of Tanzania          
@@ -363,6 +377,10 @@ nrow(mar_rgn)
 
 # There was no diff in 2024 or 2025
 setdiff(mar_rgn$rgn_id, mar_rgn_all$rgn_id)
+
+mar_rgn %>% 
+  filter(rgn_id == 216) %>% 
+  view()
 ```
 
 **Take a look at the tidied data for a single year and region**
@@ -389,12 +407,20 @@ mar_rgn_wide <- mar_rgn %>%
 
 dim(mar_rgn_wide)
 
+mar_rgn_wide %>% 
+  filter(rgn_id == 216) %>% 
+  view()
+
 # Turn data frame back into long format
 mar_rgn_gf <- mar_rgn_wide %>% 
   pivot_longer(cols = -(fao:include), 
                names_to = "year", 
                values_to = "value") %>% 
   arrange(rgn_id, species, year, Taxon_code, fao, environment) 
+
+mar_rgn_gf %>% 
+  filter(rgn_id == 216) %>% 
+  view()
 
 # NA values are converted to zero
 mar_rgn_gf <- mar_rgn_gf %>%
@@ -432,6 +458,9 @@ mar_rgn_gf <- mar_rgn_gf %>%
   ungroup() %>% 
   dplyr::select(rgn_id, species, fao, environment, year, include, value, Taxon_code, gap_0_fill) 
 
+mar_rgn_gf %>% 
+  filter(rgn_id == 216) %>% 
+  view()
 ```
 
 Add a unique identifier per cultivated stock that describes each species, fao region, and environment grouping.
@@ -448,6 +477,10 @@ max(identifier$species_code)
 mar_rgn_gf <- left_join(mar_rgn_gf, identifier)
 maric <- mar_rgn_gf
 
+maric %>% 
+  filter(rgn_id == 216) %>% 
+  view()
+
 # Sanity check
 colSums(is.na(maric))
 ```
@@ -463,8 +496,67 @@ Used to estimate total seaweed mariculture yield per country.
 maric <- maric %>% 
   mutate(tonnes = include * value)
 
+maric %>% 
+  filter(rgn_id == 102) %>% 
+  view()
+
 # Save for weighting purposes later on
 write_csv(maric, here(current_np_dir, "int", "np_seaweeds_tonnes_weighting.csv"))
+```
+
+```{r}
+ton_new <- read_csv(here(current_np_dir, "int", "np_seaweeds_tonnes_weighting.csv"))
+
+ton_old <- read_csv(here(previous_np_dir, "int", "np_seaweeds_tonnes_weighting.csv"))
+colnames(ton_new)
+view(ton_new)
+ton_old <- ton_old %>% 
+  # filter(rgn_id == 182) %>% 
+  dplyr::select(rgn_id, species, environment, old_tonnes = tonnes, old_include = include, year, old_gap_0_fill = gap_0_fill, old_value = value)
+
+new_ton <- ton_new %>% 
+  # filter(rgn_id == 182) %>% 
+  dplyr::select(rgn_id, species, tonnes, environment, include, year, gap_0_fill, value)
+
+tonnes <- ton_old %>% 
+  full_join(new_ton, by = c("rgn_id", "species", "year", "environment")) %>% 
+  relocate(year, .after = rgn_id) %>% 
+  relocate(tonnes, .after = year) %>% 
+  relocate(old_tonnes, .after = tonnes)
+
+tonnes <- tonnes %>% 
+  left_join(rgn_labels, by = "rgn_id") %>% 
+  select(-type, rgn_name = label) %>% 
+  relocate(rgn_name, .after = rgn_id)
+view(tonnes)
+
+
+diff_tonnes <- tonnes %>% 
+  filter(tonnes != old_tonnes) %>% 
+  mutate(diff = tonnes - old_tonnes) %>% 
+  relocate(diff, .after = old_tonnes) %>% 
+  dplyr::arrange(diff)
+view(diff_tonnes)
+
+unique(diff$rgn_name) 
+length(unique(diff$rgn_name)) # 14
+length(unique(sw_leb$rgn_name)) # 51
+
+setdiff(sw_leb$tonnes, sw_leb$old_tonnes) # 115
+setdiff(sw_leb$old_tonnes, sw_leb$tonnes) # 202
+nrow(sw_leb) # 821
+
+# belize 162
+# south africa 102
+# spain 182
+
+sw_total1 <- old_sw1 %>% 
+  full_join(new_sw1, by = c("rgn_id", "product"))
+
+# Join region labels for easier viewing
+sw_total1 <- sw_total1 %>% 
+  left_join(rgn_labels, by = "rgn_id") %>% 
+  select(-type, rgn_name = label)
 ```
 
 ----
@@ -607,7 +699,8 @@ max(identifier$species_code)
 mar_rgn_gf <- left_join(maric, identifier) 
 
 maric <- mar_rgn_gf
-setdiff(mar_rgn_gf$species, sw_sus_rgn$species)
+setdiff(mar_rgn_gf$species, sw_sus_rgn$species) # 25, all rows in mar that aren't in sfw
+setdiff(sw_sus_rgn$species, mar_rgn_gf$species) # 75, all rows in sfw that aren't in mar
 
 
 # don't be alarmed by the score column being populated by all NAs after this step!
@@ -866,6 +959,46 @@ old_sw1 <- old_seaweed %>%
 new_sw1 <- new_seaweed %>% 
   filter(year == previous_data_year) %>% 
   dplyr::select(rgn_id, product, rel_sust_tonnes, sustainability, tonnes, sust_tonnes, peak_sust_tonnes)
+
+old_leb <- old_seaweed %>% 
+  # filter(rgn_id == 182) %>% 
+  dplyr::select(rgn_id, product, old_rel_sust_tonnes = rel_sust_tonnes, old_sust = sustainability, old_tonnes = tonnes, old_sust_tonnes = sust_tonnes, old_peak = peak_sust_tonnes, year)
+
+new_leb <- new_seaweed %>% 
+  # filter(rgn_id == 182) %>% 
+  dplyr::select(rgn_id, product, rel_sust_tonnes, sustainability, tonnes, sust_tonnes, peak_sust_tonnes, year)
+
+sw_leb <- old_leb %>% 
+  full_join(new_leb, by = c("rgn_id", "product", "year")) %>% 
+  relocate(year, .after = rgn_id) %>% 
+  relocate(tonnes, .after = year) %>% 
+  relocate(old_tonnes, .after = tonnes)
+
+sw_leb <- sw_leb %>% 
+  left_join(rgn_labels, by = "rgn_id") %>% 
+  select(-type, rgn_name = label) %>% 
+  relocate(rgn_name, .after = rgn_id)
+view(sw_leb)
+
+
+diff <- sw_leb %>% 
+  filter(tonnes != old_tonnes) %>% 
+  mutate(diff = tonnes - old_tonnes) %>% 
+  relocate(diff, .after = old_tonnes) %>% 
+  dplyr::arrange(diff)
+view(diff)
+
+unique(diff$rgn_name) 
+length(unique(diff$rgn_name)) # 14
+length(unique(sw_leb$rgn_name)) # 51
+
+setdiff(sw_leb$tonnes, sw_leb$old_tonnes) # 115
+setdiff(sw_leb$old_tonnes, sw_leb$tonnes) # 202
+nrow(sw_leb) # 821
+
+# belize 162
+# south africa 102
+# spain 182
 
 sw_total1 <- old_sw1 %>% 
   full_join(new_sw1, by = c("rgn_id", "product"))

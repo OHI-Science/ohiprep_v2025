@@ -67,7 +67,7 @@ FAO commodities data -- filter the ornamentals, non-food seaweeds (agar and nonf
 
 Then calculate for each country:
 
-USD per tonne for FOFM and non-food seaweeds (and ornamentals) to use for calculating weights in the new Step 5. Save these data as `np_usd_per_tonne.csv` to the `int` folder.
+USD per tonne for FOFM and non-food seaweeds and ornamentals to use for calculating weights in the new Step 5. Save these data as `np_usd_per_tonne.csv` to the `int` folder.
 
 
 ------------------------------------------------------------------------
@@ -124,6 +124,9 @@ Simultaneously read and process FAO commodities value and quantity data.
 ## list files included in d2020 folder (value and quant datasets)
 dir_fao_data <- here::here(dir_M, "git-annex", "globalprep", "_raw_data", "FAO_commodities", data_dir_year)
 
+raw_quant <- read_csv(here(dir_M, "git-annex", "globalprep", "_raw_data", "FAO_commodities", data_dir_year, "FAO_raw_commodities_quant_1976_2023.csv"))
+view(raw_quant)
+
 files <- list.files(dir_fao_data, pattern = glob2rx('*.csv'), full.names = TRUE)
 
 ## To compare to old data:
@@ -132,8 +135,8 @@ dir_fao_data_old <- here::here(dir_M, "git-annex", "globalprep", "_raw_data", "F
 files_old <- list.files(dir_fao_data_old, pattern = glob2rx('*.csv'), full.names = TRUE)
 
 # ===== loop ================
-for (f in files) {
-  # f <- files[2] # un-comment and update to test individual files # 1 = quant, 2 = usd
+# for (f in files) {
+  f <- files[1] # un-comment and update to test individual files # 1 = quant, 2 = usd
   cat(sprintf('\n\n\n====\nfile: %s\n', basename(f)))
   
   # checks names syntactically, strips leading and trailing whitespace, prevents conversion of characters to factors 
@@ -159,7 +162,9 @@ for (f in files) {
   # ---- Include only the "Exports" data ----
   m <- m %>%
     filter(trade == "Exports")
-
+  leb1 <- m %>% 
+    filter(country == "Palestine") %>% 
+    view()
   # ---- Run fao data cleaning function ----
   # cleans up flags, swaps out FAO-specific codes for analysis
   m <- m %>%
@@ -203,6 +208,9 @@ for (f in files) {
                       fld_name = 'country', 
                       flds_unique = c('commodity', 'product', 'year'))
   
+  leb2 <- m_rgn %>% 
+    filter(country == "Lebanon") %>% 
+    view()
   # v2025 removed: 
   # Yugoslavia SFR  -- this is fine, since it broke up into the six modern countries: Croatia, Montenegro, Serbia, Slovenia, Bosnia and Herzegovina, and Macedonia in 1990-1992, which means the relevant data is still captured.
   # Union of Soviet Socialist Republics -- Also fine since it happened so long ago it isn't relevant to our assessment
@@ -240,9 +248,7 @@ for (f in files) {
   ## output to .csv - should create two csvs (tonnes.csv and usd.csv)
   harvest_out <- here::here(current_np_dir, "int", sprintf("%s.csv", units))
   readr::write_csv(m_rgn, harvest_out, na = '')
-}
-
-
+# }
 
 ```
 
@@ -253,6 +259,11 @@ Combining the quantity and value data and a bit of cleaning to remove data prior
 ```{r}
 # Read in quant dataset from intermediate folder
 h_tonnes <- read_csv(here(current_np_dir, "int", "tonnes.csv"))
+view(h_tonnes)
+
+leb_check <- h_tonnes %>% 
+  filter(rgn_id == 78 & product == "ornamentals") %>% 
+  view()
 
 # Read in value dataset from intermediate folder
 h_usd <- read_csv(here(current_np_dir, "int", "usd.csv"))
