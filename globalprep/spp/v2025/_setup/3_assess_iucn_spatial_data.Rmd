@@ -332,58 +332,6 @@ write_csv(subpops_match,
                                      api_version)))
 ```
 
-Not all maps are for species that are included in comprehensively assessed taxonomic groups. Get info on comprehensive assessment status for species from the API.
-
-#### Data: `iucn_comp_assessed_2025-1.csv`
-
-``` {r get comp assess status}
-comp_file <- file.path(dir_data, 
-                       sprintf('iucn_comp_assessed_%s.csv', api_version))
-
-# Download comp assessment information
-# Takes about 40 minutes
-iucn_assessment_groups <- rl_comp_groups()$comprehensive_group %>%
-  filter(comp == TRUE)
-
-start_time <- Sys.time()
-
-assessment_groups <- list()
-
-for (i in iucn_assessment_groups$name) {
-  
-  group <- i
-  
-  assessment_groups_spp <- rl_comp_groups(name = i)$assessments
-  
-  # Append to list
-  assessment_groups[[group]] <- dplyr::as_tibble(assessment_groups_spp)
-}
-
-end_time <- Sys.time()
-end_time - start_time  # Time difference of 2.684539 hours
-
-# Combine individual habitat species lists into one master list
-comp_spp_full <- bind_rows(assessment_groups) %>%
-  rename(iucn_sid = sis_taxon_id, 
-         sciname = taxon_scientific_name,
-         category = red_list_category_code,
-         year = year_published) 
-
-# Save for time
-write_csv(comp_spp_full, file.path(dir_goal, '_data', 'iucn',
-                                         sprintf('comp_spp_%s.csv', api_version)))
-
-# Read in for time
-comp_spp_full <- read_csv(file.path(dir_goal, '_data', 'iucn',
-                                         sprintf('comp_spp_%s.csv', api_version)), show_col_types = FALSE)
-
-comp_spp <- comp_spp_full %>%
-  select(iucn_sid, sciname) %>%
-  distinct()
-
-write_csv(comp_spp, comp_file)
-```
-
 #### Data: `spp_marine_maps_2025-1.csv`
 
 From the species range map shapefiles, pull map info from the .dbf files.  For species listed in multiple files (e.g. sea snakes and reptiles), remove duplicates.  For species with polygons differentiated by subpopulation, adjust the iucn_sid to match the subpop info.
@@ -396,6 +344,10 @@ iucn_dbfs  <- list.files(dir_shp, pattern = '\\.dbf$', full.names = TRUE)
 bli_dbfs   <- list.files(dir_bli, pattern = '\\.dbf$', full.names = TRUE)
 
 map_files  <- c(iucn_dbfs, bli_dbfs)
+
+# Load comprehensive assessment species
+comp_spp <- read_csv(file.path(dir_data, 
+                       sprintf('iucn_comp_assessed_%s.csv', api_version)), show_col_types = FALSE)
 
 # spp_group_names <- map_files %>%
 #   basename() %>%

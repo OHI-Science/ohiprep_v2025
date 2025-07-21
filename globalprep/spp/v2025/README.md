@@ -12,14 +12,14 @@ Here is an overview of the organization of files and data:
 Most of the data used in this comes from the IUCN API, which is called on in the scripts. **However, you will need to download the new species range maps from these datasources for step 5:** 
 
 * __Reference__: 
-    * IUCN 2024. The IUCN Red List of Threatened Species. Version 2024-1. <http://www.iucnredlist.org>.
+    * IUCN 2024. The IUCN Red List of Threatened Species. Version 2025-1. <http://www.iucnredlist.org>.
         * Shapefiles available from: https://www.iucnredlist.org/resources/spatial-data-download
-        * __Downloaded__: Aug 18, 2024
+        * __Downloaded__: July 15, 2025
         * Mazu locaton: *: /home/shares/ohi/git-annex/globalprep/_raw_data/iucn_spp
  
-    *BirdLife International and Handbook of the Birds of the World (2020) Bird species distribution maps of the world. Version 2020.1. BirdLife International, Cambridge, UK and NatureServe, Arlington, USA. http://datazone.birdlife.org/species/requestdis.
+    *BirdLife International and Handbook of the Birds of the World (2024) Bird species distribution maps of the world. Version 2024.2. Available at http://datazone.birdlife.org/species/requestdis.
         * Zipped shapefile available from BirdLife International.  
-        * __Downloaded__: Feb 26, 2021
+        * __Downloaded__: July 2, 2025
 * __Description__:  Shapefiles containing polygons of assessed species ranges; each shapefile represents all assessed species within a comprehensively-assessed (i.e. >90% assessed) taxonomic group.
 * __Native data resolution__: NA
 * __Time range__: NA
@@ -33,6 +33,64 @@ Most of the data used in this comes from the IUCN API, which is called on in the
 In this directory are a sequence of files used to generate the bits and pieces that are later assembled into the rasters of biodiversity risk.
 
 .Rmd files are sequenced with a prefix number (and letter) to indicate the order of operations.  Briefly:
+
+1. `1_set_up_iucn_species_data.Rmd`
+
+Pull information from the IUCN Red List API to determine...
+
+- Marine Species List
+- Subpopulation Assessments
+- Taxa Info
+- Habitat Info
+- Comprehensive Assessments
+
+...for *global* and *regional* assessments. We are interested in current (latest) and historical assessments for each.
+
+**Note:** Some of these queries take a long time, so the results are saved in the `iucn` folder to avoid having to re-run.
+
+2. `2_set_up_spatial_data.Rmd`
+
+Update geographic scope of IUCN regional assessments (for *MEOW* and *LME* regions) if necessary.
+
+Set up spatial layers in Gall-Peters, 100 km<sup>2</sup> cells. 
+
+Layers copied from previous year:
+
+- Cell ID (cells are sequentially numbered for combining with tabular data)
+- Ocean area
+
+Marine protected area layers generated:
+
+- Classification 
+- Year of protection
+- Proportion of protection
+
+Archived methods (update only if necessary):
+- Exclusive Economic Zones (EEZ)
+- Marine Ecoregions of the World (MEOW)
+- Bathymetry
+
+3. `3_assess_iucn_spatial_data.Rmd`
+
+Convert species range maps to rasters. For maps provided directly by IUCN, aggregate into multispecies files based on family.  There is some cleaning done at this stage to fix problematic extents and attributes.
+
+From the list of all available maps, generate a master list of all mapped, assessed species for inclusion in the study. Rasterize each species to a .csv that includes cell ID and presence.  A .csv format was used for file size and ease of reading and binding into dataframes.
+
+4. `4_process_iucn_spatial_data.Rmd`
+
+Calculate species ranges from rasters.
+
+Calculate species ranges from polygons.
+
+Compare.
+
+Calculate range-rarity to weight IUCN category and trend values.
+
+Aggregate individual species ranges into larger taxonomic groups, and summarize key variables (mean risk, variance of risk, number of species, etc) by group. Technically this is not necessary but makes it easier to quality check the process along the way, and supports mapping at the level of taxonomic group rather than the entire species list level.
+
+This process is done twice: once for uniform weighting and once for range-rarity weighting. Resulting files are saved separately.
+
+DELETE BELOW when confirmed.
 
 1. Pull information from the IUCN Red List API to determine an overall species list, habitat information, and current risk (conservation status).
     * 1_set_up_iucn_habs_and_risk.Rmd
