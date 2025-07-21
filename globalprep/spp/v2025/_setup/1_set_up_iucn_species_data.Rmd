@@ -197,6 +197,7 @@ for (i in marine_species_list) {
 
 end_time <- Sys.time()
 end_time - start_time  
+# 18.36089 hours
 
 # Write csv
 write_csv(taxa, file.path(dir_goal, sprintf('_data/iucn/taxa_%s.csv', api_version)))

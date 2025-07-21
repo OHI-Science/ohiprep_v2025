@@ -540,7 +540,7 @@ marine_map_info <- read_csv(file.path(dir_data,
 
 
 taxa_info <- read_csv(file.path(dir_goal, sprintf('_data/iucn/taxa_%s.csv', api_version)), show_col_types = FALSE) %>%
-  dplyr::select(iucn_sid, kingdom_name:family_name) %>%
+  dplyr::select(iucn_sid, kingdom:family) %>%
   distinct()
 
 #sub_pops <- read_csv(file.path(dir_goal, sprintf('_data/iucn/sub_pop_%s.csv', api_version)), show_col_types = FALSE)
@@ -557,11 +557,11 @@ included_maps <- marine_map_info %>%
   left_join(taxa_info, by = 'iucn_sid') %>%
   mutate(spp_gp = basename(dbf_file),
          spp_gp = spp_gp %>% tolower() %>% str_replace('.dbf|_part.+', '')) %>%
-  mutate(kingdom = tools::toTitleCase(tolower(kingdom_name)),
-         phylum  = tools::toTitleCase(tolower(phylum_name)),
-         order   = tools::toTitleCase(tolower(order_name)),
-         class   = tools::toTitleCase(tolower(class_name)),
-         family  = tools::toTitleCase(tolower(family_name)))
+  mutate(kingdom = tools::toTitleCase(tolower(kingdom)),
+         phylum  = tools::toTitleCase(tolower(phylum)),
+         order   = tools::toTitleCase(tolower(order)),
+         class   = tools::toTitleCase(tolower(class)),
+         family  = tools::toTitleCase(tolower(family)))
 
 all_in_the_fam <- included_maps %>%
   group_by(kingdom, phylum, class, order, family, spp_gp) %>%
@@ -600,8 +600,12 @@ all_sum <- bind_rows(fish_sum, nonfish_sum, basic_sum) %>%
 
 ## 2024: We have the same species, but the setdiff is going to return a list of those that are not matching because the all_sum df has them grouped into "marinefish" as the spp_gp. So I went through and cross-referenced the class, order, and family to make sure that they were all present - they are present 
 
+## 2025: Same, blennies, butterflyfish_angelfish_allies, bonefishes_tarpons_ladyfishes, and pufferfishes_and_relatives have been combined into marinefishes
+
 old_sum <- read_csv(file.path(dir_goal, '_output', 
                              'spp_included_summary.csv'))
+
+old_sum <- spp_included_summary
 
 setdiff(old_sum$spp_gp, all_sum$spp_gp)
 
