@@ -27,6 +27,8 @@ This analysis converts FAO mariculture data into one of the data layers used to 
 # Updates from previous assessment
 
 -   New year of FAO mariculture data (1950-2023).
+-   Explore idiosyncrasies around relative sustainable tonnes of seafood harvest and add context for the strange data check. 
+-   Fix the way rolling mean is calculated (previously was only considering 4 total years of data when we want 5).
 
 
 ------------------------------------------------------------------------
@@ -77,7 +79,6 @@ Obtained upon request of SFW.
 ## Setup
 
 ```{r}
-
 knitr::opts_chunk$set(eval = FALSE)
 
 # ======= Load packages ============
@@ -101,8 +102,12 @@ librarian::shelf(
 scen_year_number <- 2025 # update this!!
 scen_year <- as.character(scen_year_number)
 prev_scen_year <- as.character(scen_year_number - 1)
+
+# Directory years
 data_dir_year <- paste0("d", scen_year)
 prev_data_dir_year <- paste0("d", prev_scen_year)
+
+# Version years
 v_scen_year <- paste0("v", scen_year)
 prev_v_scen_year <- paste0("v", prev_scen_year)
 
@@ -140,9 +145,6 @@ mar_raw <- readr::read_csv(here(
   paste0("FAO_GlobalAquacultureProduction_Quantity_1950_",
          data_years[2], ".csv")))
 
-# mar_raw <- readr::read_csv(here(
-#   dir_M, "git-annex", "globalprep", "_raw_data", "FAO_mariculture", prev_data_dir_year, "FAO_GlobalAquacultureProduction_Quantity_1950_2022.csv"))
-
 head(mar_raw) 
 ```
 
@@ -174,8 +176,6 @@ mar <- mar %>%
 
 # Change to latest *DATA* year
 latest_year <- data_years[2]
-# latest_year <- 2022
-
 
 
 #As of 2023 we no longer need to run the fao_clean_data_new function
@@ -216,19 +216,9 @@ mar <- mar %>%
   dplyr::select(-row_id) %>% 
   mutate(FAO_name = ifelse(!is.na(FAO_name), FAO_name, family_scientific)) 
 
-
 # Change NEI to nei for possible species match fix... This was a new change in the FAO data for v2025
 mar <- mar %>% 
   mutate(FAO_name = str_replace(FAO_name, "NEI", "nei"))
-
-
-# new <- mar %>% 
-#   filter(country == "South Africa") %>% 
-#   distinct(FAO_name) 
-# view(old)
-# view(new)
-
-
 
 # # ---- test: using fao_online_portal_clean.R function ----
 # # note: this function drops the "flag" column!
@@ -255,7 +245,6 @@ Filter out seaweed species from 'raw/species_list.csv' (from 'globalprep/mar/v20
 
 #> Note, this calls out to the mariculture data prep. 
 #> The mariculture data prep for your year should be done before you retrieve this file. 
-
 
 seaweed_sp <- readr::read_csv(here(current_mar_dir, "raw", "species_list.csv")) %>%
   filter(Taxon_code == 'AL') %>%
@@ -292,7 +281,7 @@ spp_2 <- unique(sort(seaweed_np$FAO_name))
 length(spp_2) # 58
 # v2025 went from 62 species to 58 species (4 completely human food species removed)
 rgn_1 <- unique(seaweed_np$country)
-length(rgn_1) # 51 61?
+length(rgn_1) # 61
 
 # Sum production values for each group to account for duplicate rows after name change (remove NA values)
 seaweed_np <- seaweed_np %>%
@@ -304,7 +293,7 @@ seaweed_np <- seaweed_np %>%
 spp_3 <- unique(sort(seaweed_np$FAO_name))
 length(spp_3) # 39
 rgn_2 <- unique(seaweed_np$country)
-length(rgn_2) # 50 60
+length(rgn_2) # 60
 
 setdiff(spp_2, spp_3) # 19 species lost 
 # v2024:
@@ -339,11 +328,8 @@ seaweed_np <- seaweed_np %>%
   dplyr::select(-total_value) %>%
   ungroup()
 
-seaweed_np %>% 
-  filter(country == "South Africa") %>% 
-  view()
-
 ```
+
 
 ## Convert country names to OHI regions
 
@@ -364,10 +350,6 @@ seaweed_np <- seaweed_np %>%
 mar_rgn_all <- name_2_rgn(df_in = seaweed_np, 
                        fld_name = 'country', 
                        flds_unique = c('species', 'fao', 'environment', 'Taxon_code', 'year', 'include'))
-
-mar_rgn_all %>% 
-  filter(country == "Indonesia") %>% 
-  view()
 
 # ---- Duplicates ----
 # v2025:
@@ -390,11 +372,8 @@ nrow(mar_rgn)
 
 # There was no diff in 2024 or 2025
 setdiff(mar_rgn$rgn_id, mar_rgn_all$rgn_id)
-
-mar_rgn %>% 
-  filter(rgn_id == 216) %>% 
-  view()
 ```
+
 
 **Take a look at the tidied data for a single year and region**
 
@@ -419,10 +398,7 @@ mar_rgn_wide <- mar_rgn %>%
   pivot_wider(names_from = year, values_from = value)
 
 dim(mar_rgn_wide)
-
-mar_rgn_wide %>% 
-  filter(rgn_id == 216) %>% 
-  view()
+# 143  81
 
 # Turn data frame back into long format
 mar_rgn_gf <- mar_rgn_wide %>% 
@@ -430,10 +406,6 @@ mar_rgn_gf <- mar_rgn_wide %>%
                names_to = "year", 
                values_to = "value") %>% 
   arrange(rgn_id, species, year, Taxon_code, fao, environment) 
-
-mar_rgn_gf %>% 
-  filter(rgn_id == 216) %>% 
-  view()
 
 # NA values are converted to zero
 mar_rgn_gf <- mar_rgn_gf %>%
@@ -463,7 +435,6 @@ table(mar_rgn_gf$gap_0_fill)
 Remove species-region-environment time series with less than four years of seaweed mariculture production \> 0 tonnes (assume these are not established seaweed mariculture programs).
 
 ```{r}
-
 mar_rgn_gf <- mar_rgn_gf %>% 
   group_by(rgn_id, species, fao, environment) %>%
   mutate(not_0 = length(value[value > 0])) %>% # length of vector of years greater than 0
@@ -471,9 +442,6 @@ mar_rgn_gf <- mar_rgn_gf %>%
   ungroup() %>% 
   dplyr::select(rgn_id, species, fao, environment, year, include, value, Taxon_code, gap_0_fill) 
 
-mar_rgn_gf %>% 
-  filter(rgn_id == 216) %>% 
-  view()
 ```
 
 Add a unique identifier per cultivated stock that describes each species, fao region, and environment grouping.
@@ -487,12 +455,9 @@ identifier <- mar_rgn_gf %>%
 max(identifier$species_code)
 # 113 unique identifiers - v2025
 
+# Join identifier and maric
 mar_rgn_gf <- left_join(mar_rgn_gf, identifier)
 maric <- mar_rgn_gf
-
-maric %>% 
-  filter(rgn_id == 216) %>% 
-  view()
 
 # Sanity check
 colSums(is.na(maric))
@@ -509,67 +474,8 @@ Used to estimate total seaweed mariculture yield per country.
 maric <- maric %>% 
   mutate(tonnes = include * value)
 
-maric %>% 
-  filter(rgn_id == 102) %>% 
-  view()
-
 # Save for weighting purposes later on
 write_csv(maric, here(current_np_dir, "int", "np_seaweeds_tonnes_weighting.csv"))
-```
-
-```{r}
-ton_new <- read_csv(here(current_np_dir, "int", "np_seaweeds_tonnes_weighting.csv"))
-
-ton_old <- read_csv(here(previous_np_dir, "int", "np_seaweeds_tonnes_weighting.csv"))
-colnames(ton_new)
-view(ton_new)
-ton_old <- ton_old %>% 
-  # filter(rgn_id == 182) %>% 
-  dplyr::select(rgn_id, species, environment, old_tonnes = tonnes, old_include = include, year, old_gap_0_fill = gap_0_fill, old_value = value)
-
-new_ton <- ton_new %>% 
-  # filter(rgn_id == 182) %>% 
-  dplyr::select(rgn_id, species, tonnes, environment, include, year, gap_0_fill, value)
-
-tonnes <- ton_old %>% 
-  full_join(new_ton, by = c("rgn_id", "species", "year", "environment")) %>% 
-  relocate(year, .after = rgn_id) %>% 
-  relocate(tonnes, .after = year) %>% 
-  relocate(old_tonnes, .after = tonnes)
-
-tonnes <- tonnes %>% 
-  left_join(rgn_labels, by = "rgn_id") %>% 
-  select(-type, rgn_name = label) %>% 
-  relocate(rgn_name, .after = rgn_id)
-view(tonnes)
-
-
-diff_tonnes <- tonnes %>% 
-  filter(tonnes != old_tonnes) %>% 
-  mutate(diff = tonnes - old_tonnes) %>% 
-  relocate(diff, .after = old_tonnes) %>% 
-  dplyr::arrange(diff)
-view(diff_tonnes)
-
-unique(diff_tonnes$rgn_name) 
-length(unique(diff_tonnes$rgn_name)) # 11
-length(unique(tonnes$rgn_name)) # 52
-
-setdiff(tonnes$tonnes, tonnes$old_tonnes) # 104
-setdiff(tonnes$old_tonnes, tonnes$tonnes) # 40
-nrow(tonnes) # 3351
-
-# belize 162
-# south africa 102
-# spain 182
-
-sw_total1 <- old_sw1 %>% 
-  full_join(new_sw1, by = c("rgn_id", "product"))
-
-# Join region labels for easier viewing
-sw_total1 <- sw_total1 %>% 
-  left_join(rgn_labels, by = "rgn_id") %>% 
-  select(-type, rgn_name = label)
 ```
 
 ----
@@ -723,6 +629,7 @@ mar_sw_sus_join <- maric %>%
             by = c("species", "rgn_id")) %>%
   dplyr::select(rgn_id, rgn_name, year, species, Taxon_code, score, value, gap_0_fill, species_code) %>% ## none of the specific species match
   rename(tonnes = value)
+
 summary(mar_sw_sus_join)
 colSums(is.na(mar_sw_sus_join))
 ```
@@ -767,6 +674,7 @@ mar_sw_sus <- mar_sw_sus_avg %>%
 **Now look at a summary after appending all the Seafood Watch data**
 
 ```{r sw-sus-summary}
+
 summary(mar_sw_sus)
 colSums(is.na(mar_sw_sus))
 # No NAs in sust! (sust_coeff) 
@@ -830,10 +738,9 @@ mar_sw_sus_filter <- mar_sw_sus %>%
 
 # Quick check
 begin_data_year <- min(mar_sw_sus_filter$year)
-begin_data_year
+begin_data_year # 2004
 end_data_year <- max(mar_sw_sus_filter$year)
-end_data_year
-
+end_data_year # 2023
 
 # Group by region and year to get summary (total tonnes) ----
 mar_seaweed_total_tonnes <- mar_sw_sus_filter %>% 
@@ -874,12 +781,13 @@ seaweed_st_rolling <- mar_sw_sust_tonnes %>%
   dplyr::arrange(rgn_id, year) %>%
   dplyr::group_by(rgn_id) %>%
   dplyr::mutate(
-      sust_tonnes_rollmean = zoo::rollapply(sust_tonnes, width = 4,
+      sust_tonnes_rollmean = zoo::rollapply(sust_tonnes, width = 5,
                                             FUN = mean, align = 'right',
                                             partial = TRUE, na.rm = FALSE)) %>%
-  dplyr::rename(sust_tonnes_orig = sust_tonnes) %>% 
+  dplyr::rename(sust_tonnes_orig = sust_tonnes) %>%
   dplyr::mutate(sust_tonnes = ifelse(!is.na(sust_tonnes_rollmean), sust_tonnes_rollmean, sust_tonnes_orig)) %>%
   dplyr::select(rgn_id, year, tonnes, sustainability, sust_tonnes, sust_tonnes_orig)
+
 
 summary(seaweed_st_rolling)
 ```
@@ -896,7 +804,7 @@ Identify max value from rolling average of sustainable tonnes (maybe limit to mo
 
 end_data_year <- max(mar_sw_sus_filter$year)
 seaweed_decade <- c((end_data_year - 10):end_data_year)
-seaweed_decade
+seaweed_decade # 2013-2023
 
 # find peak sustainable tonnes 
 seaweed_st_max <- seaweed_st_rolling %>% 
@@ -918,6 +826,15 @@ head(seaweed_st_max)
 ## Relative sustainable tonnes
 
 Bring max sustainable tonnes value back into sustainable tonnes full dataframe. Use this value to calculate relative sustainable tonnes: if `sust_tonnes > peak_sust_tonnes`, then set to 1. Else, `tonnes_rollmean / peak_sust_tonnes`.  
+
+> NOTE! Because relative sustainability is calculated using a rolling mean and the maximum sustainable tonnes from the previous ten years, the data check for this value will be a little strange. The temperoal reference point means that a change in the `peak_sust_tonnes` will change relative sustainability for everything. 
+
+When `sust_tonnes` is less than or equal to `peak_sust_tonnes`,
+
+$$RelSustTonnes = TonnesRollmean / PeakSustTonnes$$
+As `peak_sust_tonnes` increases, `rel_sust_tonnes` decreases. And as `peak_sust_tonnes` decreases, `rel_sust_tonnes` increases. 
+
+So, if `peak_sust_tonnes` for the current data year is greater than `peak_sust_tonnes` for the previous data year, when comparing scores for the previous data year, it will seem like the score has gone down. And vice verse, if `peak_sust_tonnes` for the current data year is less than `peak_sust_tonnes` for the previous data year, it will seem like the score has increased. 
 
 
 ```{r}
@@ -958,8 +875,8 @@ old_seaweed <- read_csv(here("globalprep", "np", paste0(prev_v_scen_year, "_new"
 
 # Read in current assessment data
 new_seaweed <- read_csv(here("globalprep", "np", paste0(v_scen_year, "_new"), "int", "np_relative_sust_tonnes_seaweeds_full.csv"))
-max(new_seaweed$year)
 
+# In case you want to change to other years easily...
 previous_data_year <- 2022
 current_data_year <- 2023
 
@@ -973,57 +890,7 @@ new_sw1 <- new_seaweed %>%
   filter(year == previous_data_year) %>% 
   dplyr::select(rgn_id, product, rel_sust_tonnes, sustainability, tonnes, sust_tonnes, peak_sust_tonnes)
 
-# old_leb <- old_seaweed %>% 
-#   # filter(rgn_id == 102) %>%
-#   dplyr::select(rgn_id, product, old_rel_sust_tonnes = rel_sust_tonnes, old_sust = sustainability, old_tonnes = tonnes, old_sust_tonnes = sust_tonnes, old_peak = peak_sust_tonnes, year)
-# 
-# new_leb <- new_seaweed %>% 
-#   # filter(rgn_id == 102) %>%
-#   dplyr::select(rgn_id, product, rel_sust_tonnes, sustainability, tonnes, sust_tonnes, peak_sust_tonnes, year)
-# 
-# sw_leb <- old_leb %>% 
-#   full_join(new_leb, by = c("rgn_id", "product", "year")) %>% 
-#   relocate(year, .after = rgn_id) %>% 
-#   relocate(tonnes, .after = year) %>% 
-#   relocate(old_tonnes, .after = tonnes)
-# 
-# sw_leb <- sw_leb %>% 
-#   left_join(rgn_labels, by = "rgn_id") %>% 
-#   select(-type, rgn_name = label) %>% 
-#   relocate(rgn_name, .after = rgn_id)
-# view(sw_leb)
-# 
-# 
-# diff_sw <- sw_leb %>% 
-#   filter(tonnes != old_tonnes) %>% 
-#   mutate(diff = tonnes - old_tonnes) %>% 
-#   relocate(diff, .after = old_tonnes) %>% 
-#   dplyr::arrange(diff)
-# view(diff_sw)
-
-ggplot(diff_sw, aes(x = old_tonnes, y = tonnes)) +
-  geom_point()
-
-comp_plot1 <- ggplot() + 
-  geom_jitter(data = diff_sw, aes(x = old_tonnes, y = tonnes, text = paste("Product:", product, "<br>Region:", rgn_name)), alpha = 0.7) +
-  labs(x = paste("Previous Value", previous_data_year), 
-       y = paste("Current Value", previous_data_year),
-       title = paste("Sustainable tonnes of seaweed", previous_data_year, "Data", prev_scen_year, "Assessment vs.", previous_data_year, "Data", scen_year_number, "assessment")) +
-  geom_abline(slope = 1, intercept = 0, col = "red") +
-  theme_bw();ggplotly(comp_plot1)
-
-unique(diff$rgn_name) 
-length(unique(diff$rgn_name)) # 14
-length(unique(sw_leb$rgn_name)) # 51
-
-setdiff(sw_leb$tonnes, sw_leb$old_tonnes) # 115
-setdiff(sw_leb$old_tonnes, sw_leb$tonnes) # 202
-nrow(sw_leb) # 821
-
-# belize 162
-# south africa 102
-# spain 182
-
+# Join previous assessment and current assessment data
 sw_total1 <- old_sw1 %>% 
   full_join(new_sw1, by = c("rgn_id", "product"))
 
@@ -1031,6 +898,7 @@ sw_total1 <- old_sw1 %>%
 sw_total1 <- sw_total1 %>% 
   left_join(rgn_labels, by = "rgn_id") %>% 
   select(-type, rgn_name = label)
+
 
 ###### Sustainable Tonnes ######
 comp_plot1 <- ggplot() + 
@@ -1042,6 +910,7 @@ comp_plot1 <- ggplot() +
   theme_bw();ggplotly(comp_plot1)
 
 ###### Relative Sustainable tonnes ######
+# REMINDER: this is the data check graph that may look strange. Check the relative sustainable tonnes section for more context about this. 
 comp_plot2 <- ggplot() + 
   geom_jitter(data = sw_total1, aes(x = old_rel_sust_tonnes, y = rel_sust_tonnes, text = paste("Product:", product, "<br>Region:", rgn_name)), alpha = 0.7) +
   labs(x = paste("Previous Value", previous_data_year), 
@@ -1058,7 +927,6 @@ comp_plot3 <- ggplot() +
        title = paste("Seaweed harvest tonnes", previous_data_year, "Data", prev_scen_year, "Assessment vs.", previous_data_year, "Data", scen_year_number, "assessment")) +
   geom_abline(slope = 1, intercept = 0, col = "red") +
   theme_bw();ggplotly(comp_plot3)
-
 
 
 
@@ -1109,6 +977,64 @@ comp_plot7 <- ggplot() +
   geom_abline(slope = 1, intercept = 0, col = "red") +
   theme_bw();ggplotly(comp_plot7)
 
+
+```
+
+
+OLD: Data check for a specific country (mainly for troubleshooting purposes)
+
+```{r eval=FALSE}
+old_county <- old_seaweed %>%
+  filter(rgn_id == 224) %>%
+  dplyr::select(rgn_id, product, old_rel_sust_tonnes = rel_sust_tonnes, old_sust = sustainability, old_tonnes = tonnes, old_sust_tonnes = sust_tonnes, old_peak = peak_sust_tonnes, year)
+
+new_country <- new_seaweed %>%
+  filter(rgn_id == 224) %>%
+  dplyr::select(rgn_id, product, rel_sust_tonnes, sustainability, tonnes, sust_tonnes, peak_sust_tonnes, year)
+
+sw_country <- old_country %>%
+  full_join(new_country, by = c("rgn_id", "product", "year")) %>%
+  relocate(year, .after = rgn_id) %>%
+  relocate(tonnes, .after = year) %>%
+  relocate(old_tonnes, .after = tonnes)
+
+sw_country <- sw_country %>%
+  left_join(rgn_labels, by = "rgn_id") %>%
+  select(-type, rgn_name = label) %>%
+  relocate(rgn_name, .after = rgn_id) %>% 
+  relocate(rel_sust_tonnes, .before = old_rel_sust_tonnes)
+
+
+comp_plot1 <- ggplot() +
+  geom_jitter(data = sw_country, aes(x = old_rel_sust_tonnes, y = rel_sust_tonnes, text = paste("Year:", year, "<br>Region:", rgn_name)), alpha = 0.7) +
+  labs(x = "Old relative sustainable tonnes",
+       y = "New relative sustainable tones",
+       title = "Relative sustainable tonnes: last year vs. this year") +
+  # geom_abline(slope = 1, intercept = 0, col = "red") +
+  theme_bw();ggplotly(comp_plot1)
+
+# Check if there's any actual differences in the tonnes between this year and last year. If it's an empty dataframe, that's good. 
+diff_sw <- sw_country %>%
+  filter(tonnes != old_tonnes) %>%
+  mutate(diff = tonnes - old_tonnes) %>%
+  relocate(diff, .after = old_tonnes) %>%
+  dplyr::arrange(diff)
+
+comp_plot1 <- ggplot() +
+  geom_jitter(data = diff_sw, aes(x = old_tonnes, y = tonnes, text = paste("Product:", product, "<br>Region:", rgn_name)), alpha = 0.7) +
+  labs(x = paste("Previous Value", previous_data_year),
+       y = paste("Current Value", previous_data_year),
+       title = paste("Sustainable tonnes of seaweed", previous_data_year, "Data", prev_scen_year, "Assessment vs.", previous_data_year, "Data", scen_year_number, "assessment")) +
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  theme_bw();ggplotly(comp_plot1)
+
+unique(diff_sw$rgn_name)
+length(unique(diff_sw$rgn_name)) # 14
+length(unique(sw_country$rgn_name)) # 51
+
+setdiff(sw_country$tonnes, sw_country$old_tonnes) # 115
+setdiff(sw_country$old_tonnes, sw_country$tonnes) # 202
+nrow(sw_country) # 821
 
 ```
 
