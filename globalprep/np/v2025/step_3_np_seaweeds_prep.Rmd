@@ -114,7 +114,7 @@ prev_v_scen_year <- paste0("v", prev_scen_year)
 data_years <- c("1950", "2023") # update to correct data years
 
 # Natural Products directory on GitHub
-current_np_dir <- here::here("globalprep", "np", paste0(v_scen_year, "_new")) # update this if name changes
+current_np_dir <- here::here("globalprep", "np", v_scen_year) 
 previous_np_dir <- here::here("globalprep", "np", paste0(prev_v_scen_year, "_new")) # update this if name changes
 
 

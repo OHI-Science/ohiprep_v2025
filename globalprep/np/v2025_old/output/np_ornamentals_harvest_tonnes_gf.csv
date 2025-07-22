@@ -391,6 +391,41 @@ rgn_id,commodity,product,year,gapfill
 14,"Fish liver oils, nei",fish_oil,2021,zerofill
 14,"Fish liver oils, nei",fish_oil,2022,zerofill
 14,"Fish liver oils, nei",fish_oil,2023,r1_t_rgn
+14,"Marine mammal oils, nei",fish_oil,1989,none
+14,"Marine mammal oils, nei",fish_oil,1990,none
+14,"Marine mammal oils, nei",fish_oil,1991,none
+14,"Marine mammal oils, nei",fish_oil,1992,none
+14,"Marine mammal oils, nei",fish_oil,1993,none
+14,"Marine mammal oils, nei",fish_oil,1994,none
+14,"Marine mammal oils, nei",fish_oil,1995,zerofill
+14,"Marine mammal oils, nei",fish_oil,1996,none
+14,"Marine mammal oils, nei",fish_oil,1997,none
+14,"Marine mammal oils, nei",fish_oil,1998,none
+14,"Marine mammal oils, nei",fish_oil,1999,none
+14,"Marine mammal oils, nei",fish_oil,2000,zerofill
+14,"Marine mammal oils, nei",fish_oil,2001,none
+14,"Marine mammal oils, nei",fish_oil,2002,zerofill
+14,"Marine mammal oils, nei",fish_oil,2003,zerofill
+14,"Marine mammal oils, nei",fish_oil,2004,zerofill
+14,"Marine mammal oils, nei",fish_oil,2005,zerofill
+14,"Marine mammal oils, nei",fish_oil,2006,zerofill
+14,"Marine mammal oils, nei",fish_oil,2007,none
+14,"Marine mammal oils, nei",fish_oil,2008,zerofill
+14,"Marine mammal oils, nei",fish_oil,2009,zerofill
+14,"Marine mammal oils, nei",fish_oil,2010,zerofill
+14,"Marine mammal oils, nei",fish_oil,2011,zerofill
+14,"Marine mammal oils, nei",fish_oil,2012,zerofill
+14,"Marine mammal oils, nei",fish_oil,2013,zerofill
+14,"Marine mammal oils, nei",fish_oil,2014,zerofill
+14,"Marine mammal oils, nei",fish_oil,2015,zerofill
+14,"Marine mammal oils, nei",fish_oil,2016,zerofill
+14,"Marine mammal oils, nei",fish_oil,2017,zerofill
+14,"Marine mammal oils, nei",fish_oil,2018,zerofill
+14,"Marine mammal oils, nei",fish_oil,2019,zerofill
+14,"Marine mammal oils, nei",fish_oil,2020,zerofill
+14,"Marine mammal oils, nei",fish_oil,2021,zerofill
+14,"Marine mammal oils, nei",fish_oil,2022,zerofill
+14,"Marine mammal oils, nei",fish_oil,2023,endfill
 14,"Oils and fats of aquatic animals, nei",fish_oil,1976,none
 14,"Oils and fats of aquatic animals, nei",fish_oil,1977,none
 14,"Oils and fats of aquatic animals, nei",fish_oil,1978,none
@@ -798,6 +833,54 @@ rgn_id,commodity,product,year,gapfill
 15,"Fish liver oils, nei",fish_oil,2021,none
 15,"Fish liver oils, nei",fish_oil,2022,none
 15,"Fish liver oils, nei",fish_oil,2023,none
+15,"Marine mammal oils, nei",fish_oil,1976,none
+15,"Marine mammal oils, nei",fish_oil,1977,none
+15,"Marine mammal oils, nei",fish_oil,1978,zerofill
+15,"Marine mammal oils, nei",fish_oil,1979,zerofill
+15,"Marine mammal oils, nei",fish_oil,1980,zerofill
+15,"Marine mammal oils, nei",fish_oil,1981,none
+15,"Marine mammal oils, nei",fish_oil,1982,zerofill
+15,"Marine mammal oils, nei",fish_oil,1983,zerofill
+15,"Marine mammal oils, nei",fish_oil,1984,zerofill
+15,"Marine mammal oils, nei",fish_oil,1985,zerofill
+15,"Marine mammal oils, nei",fish_oil,1986,zerofill
+15,"Marine mammal oils, nei",fish_oil,1987,zerofill
+15,"Marine mammal oils, nei",fish_oil,1988,zerofill
+15,"Marine mammal oils, nei",fish_oil,1989,zerofill
+15,"Marine mammal oils, nei",fish_oil,1990,zerofill
+15,"Marine mammal oils, nei",fish_oil,1991,zerofill
+15,"Marine mammal oils, nei",fish_oil,1992,zerofill
+15,"Marine mammal oils, nei",fish_oil,1993,zerofill
+15,"Marine mammal oils, nei",fish_oil,1994,zerofill
+15,"Marine mammal oils, nei",fish_oil,1995,zerofill
+15,"Marine mammal oils, nei",fish_oil,1996,zerofill
+15,"Marine mammal oils, nei",fish_oil,1997,zerofill
+15,"Marine mammal oils, nei",fish_oil,1998,zerofill
+15,"Marine mammal oils, nei",fish_oil,1999,zerofill
+15,"Marine mammal oils, nei",fish_oil,2000,zerofill
+15,"Marine mammal oils, nei",fish_oil,2001,zerofill
+15,"Marine mammal oils, nei",fish_oil,2002,zerofill
+15,"Marine mammal oils, nei",fish_oil,2003,zerofill
+15,"Marine mammal oils, nei",fish_oil,2004,none
+15,"Marine mammal oils, nei",fish_oil,2005,none
+15,"Marine mammal oils, nei",fish_oil,2006,none
+15,"Marine mammal oils, nei",fish_oil,2007,zerofill
+15,"Marine mammal oils, nei",fish_oil,2008,none
+15,"Marine mammal oils, nei",fish_oil,2009,zerofill
+15,"Marine mammal oils, nei",fish_oil,2010,zerofill
+15,"Marine mammal oils, nei",fish_oil,2011,zerofill
+15,"Marine mammal oils, nei",fish_oil,2012,zerofill
+15,"Marine mammal oils, nei",fish_oil,2013,zerofill
+15,"Marine mammal oils, nei",fish_oil,2014,zerofill
+15,"Marine mammal oils, nei",fish_oil,2015,zerofill
+15,"Marine mammal oils, nei",fish_oil,2016,zerofill
+15,"Marine mammal oils, nei",fish_oil,2017,zerofill
+15,"Marine mammal oils, nei",fish_oil,2018,zerofill
+15,"Marine mammal oils, nei",fish_oil,2019,zerofill
+15,"Marine mammal oils, nei",fish_oil,2020,none
+15,"Marine mammal oils, nei",fish_oil,2021,zerofill
+15,"Marine mammal oils, nei",fish_oil,2022,zerofill
+15,"Marine mammal oils, nei",fish_oil,2023,endfill
 15,Shark liver oil,fish_oil,1991,none
 15,Shark liver oil,fish_oil,1992,none
 15,Shark liver oil,fish_oil,1993,none
@@ -1026,6 +1109,39 @@ rgn_id,commodity,product,year,gapfill
 16,"Fish liver oils, nei",fish_oil,2021,zerofill
 16,"Fish liver oils, nei",fish_oil,2022,zerofill
 16,"Fish liver oils, nei",fish_oil,2023,endfill
+16,"Marine mammal oils, nei",fish_oil,1991,none
+16,"Marine mammal oils, nei",fish_oil,1992,none
+16,"Marine mammal oils, nei",fish_oil,1993,none
+16,"Marine mammal oils, nei",fish_oil,1994,zerofill
+16,"Marine mammal oils, nei",fish_oil,1995,none
+16,"Marine mammal oils, nei",fish_oil,1996,none
+16,"Marine mammal oils, nei",fish_oil,1997,none
+16,"Marine mammal oils, nei",fish_oil,1998,none
+16,"Marine mammal oils, nei",fish_oil,1999,none
+16,"Marine mammal oils, nei",fish_oil,2000,zerofill
+16,"Marine mammal oils, nei",fish_oil,2001,zerofill
+16,"Marine mammal oils, nei",fish_oil,2002,zerofill
+16,"Marine mammal oils, nei",fish_oil,2003,zerofill
+16,"Marine mammal oils, nei",fish_oil,2004,zerofill
+16,"Marine mammal oils, nei",fish_oil,2005,zerofill
+16,"Marine mammal oils, nei",fish_oil,2006,none
+16,"Marine mammal oils, nei",fish_oil,2007,none
+16,"Marine mammal oils, nei",fish_oil,2008,none
+16,"Marine mammal oils, nei",fish_oil,2009,none
+16,"Marine mammal oils, nei",fish_oil,2010,none
+16,"Marine mammal oils, nei",fish_oil,2011,none
+16,"Marine mammal oils, nei",fish_oil,2012,none
+16,"Marine mammal oils, nei",fish_oil,2013,none
+16,"Marine mammal oils, nei",fish_oil,2014,none
+16,"Marine mammal oils, nei",fish_oil,2015,none
+16,"Marine mammal oils, nei",fish_oil,2016,none
+16,"Marine mammal oils, nei",fish_oil,2017,none
+16,"Marine mammal oils, nei",fish_oil,2018,none
+16,"Marine mammal oils, nei",fish_oil,2019,none
+16,"Marine mammal oils, nei",fish_oil,2020,none
+16,"Marine mammal oils, nei",fish_oil,2021,none
+16,"Marine mammal oils, nei",fish_oil,2022,none
+16,"Marine mammal oils, nei",fish_oil,2023,none
 16,Ornamental fish nei,ornamentals,1989,r2_t_gr
 16,Ornamental fish nei,ornamentals,1990,r2_t_gr
 16,Ornamental fish nei,ornamentals,1991,r2_t_gr
@@ -1299,6 +1415,18 @@ rgn_id,commodity,product,year,gapfill
 18,"Fish body oils, nei",fish_oil,2021,zerofill
 18,"Fish body oils, nei",fish_oil,2022,zerofill
 18,"Fish body oils, nei",fish_oil,2023,none
+18,"Marine mammal oils, nei",fish_oil,2012,none
+18,"Marine mammal oils, nei",fish_oil,2013,none
+18,"Marine mammal oils, nei",fish_oil,2014,none
+18,"Marine mammal oils, nei",fish_oil,2015,none
+18,"Marine mammal oils, nei",fish_oil,2016,none
+18,"Marine mammal oils, nei",fish_oil,2017,none
+18,"Marine mammal oils, nei",fish_oil,2018,none
+18,"Marine mammal oils, nei",fish_oil,2019,none
+18,"Marine mammal oils, nei",fish_oil,2020,none
+18,"Marine mammal oils, nei",fish_oil,2021,none
+18,"Marine mammal oils, nei",fish_oil,2022,none
+18,"Marine mammal oils, nei",fish_oil,2023,none
 18,Ornamental fish nei,ornamentals,1989,r2_t_gr
 18,Ornamental fish nei,ornamentals,1990,r2_t_gr
 18,Ornamental fish nei,ornamentals,1991,r2_t_gr
@@ -1477,6 +1605,53 @@ rgn_id,commodity,product,year,gapfill
 20,"Fish liver oils, nei",fish_oil,2021,none
 20,"Fish liver oils, nei",fish_oil,2022,none
 20,"Fish liver oils, nei",fish_oil,2023,none
+20,"Marine mammal oils, nei",fish_oil,1977,none
+20,"Marine mammal oils, nei",fish_oil,1978,none
+20,"Marine mammal oils, nei",fish_oil,1979,zerofill
+20,"Marine mammal oils, nei",fish_oil,1980,zerofill
+20,"Marine mammal oils, nei",fish_oil,1981,zerofill
+20,"Marine mammal oils, nei",fish_oil,1982,zerofill
+20,"Marine mammal oils, nei",fish_oil,1983,zerofill
+20,"Marine mammal oils, nei",fish_oil,1984,zerofill
+20,"Marine mammal oils, nei",fish_oil,1985,zerofill
+20,"Marine mammal oils, nei",fish_oil,1986,zerofill
+20,"Marine mammal oils, nei",fish_oil,1987,zerofill
+20,"Marine mammal oils, nei",fish_oil,1988,none
+20,"Marine mammal oils, nei",fish_oil,1989,zerofill
+20,"Marine mammal oils, nei",fish_oil,1990,zerofill
+20,"Marine mammal oils, nei",fish_oil,1991,zerofill
+20,"Marine mammal oils, nei",fish_oil,1992,zerofill
+20,"Marine mammal oils, nei",fish_oil,1993,zerofill
+20,"Marine mammal oils, nei",fish_oil,1994,none
+20,"Marine mammal oils, nei",fish_oil,1995,zerofill
+20,"Marine mammal oils, nei",fish_oil,1996,none
+20,"Marine mammal oils, nei",fish_oil,1997,none
+20,"Marine mammal oils, nei",fish_oil,1998,zerofill
+20,"Marine mammal oils, nei",fish_oil,1999,none
+20,"Marine mammal oils, nei",fish_oil,2000,none
+20,"Marine mammal oils, nei",fish_oil,2001,zerofill
+20,"Marine mammal oils, nei",fish_oil,2002,zerofill
+20,"Marine mammal oils, nei",fish_oil,2003,none
+20,"Marine mammal oils, nei",fish_oil,2004,zerofill
+20,"Marine mammal oils, nei",fish_oil,2005,none
+20,"Marine mammal oils, nei",fish_oil,2006,zerofill
+20,"Marine mammal oils, nei",fish_oil,2007,zerofill
+20,"Marine mammal oils, nei",fish_oil,2008,zerofill
+20,"Marine mammal oils, nei",fish_oil,2009,zerofill
+20,"Marine mammal oils, nei",fish_oil,2010,none
+20,"Marine mammal oils, nei",fish_oil,2011,zerofill
+20,"Marine mammal oils, nei",fish_oil,2012,zerofill
+20,"Marine mammal oils, nei",fish_oil,2013,zerofill
+20,"Marine mammal oils, nei",fish_oil,2014,zerofill
+20,"Marine mammal oils, nei",fish_oil,2015,zerofill
+20,"Marine mammal oils, nei",fish_oil,2016,zerofill
+20,"Marine mammal oils, nei",fish_oil,2017,none
+20,"Marine mammal oils, nei",fish_oil,2018,zerofill
+20,"Marine mammal oils, nei",fish_oil,2019,none
+20,"Marine mammal oils, nei",fish_oil,2020,zerofill
+20,"Marine mammal oils, nei",fish_oil,2021,zerofill
+20,"Marine mammal oils, nei",fish_oil,2022,zerofill
+20,"Marine mammal oils, nei",fish_oil,2023,endfill
 20,Shark liver oil,fish_oil,1976,none
 20,Shark liver oil,fish_oil,1977,zerofill
 20,Shark liver oil,fish_oil,1978,none
@@ -2093,6 +2268,41 @@ rgn_id,commodity,product,year,gapfill
 25,"Fish liver oils, nei",fish_oil,2021,none
 25,"Fish liver oils, nei",fish_oil,2022,none
 25,"Fish liver oils, nei",fish_oil,2023,none
+25,"Marine mammal oils, nei",fish_oil,1989,none
+25,"Marine mammal oils, nei",fish_oil,1990,zerofill
+25,"Marine mammal oils, nei",fish_oil,1991,zerofill
+25,"Marine mammal oils, nei",fish_oil,1992,zerofill
+25,"Marine mammal oils, nei",fish_oil,1993,zerofill
+25,"Marine mammal oils, nei",fish_oil,1994,none
+25,"Marine mammal oils, nei",fish_oil,1995,none
+25,"Marine mammal oils, nei",fish_oil,1996,none
+25,"Marine mammal oils, nei",fish_oil,1997,none
+25,"Marine mammal oils, nei",fish_oil,1998,zerofill
+25,"Marine mammal oils, nei",fish_oil,1999,none
+25,"Marine mammal oils, nei",fish_oil,2000,none
+25,"Marine mammal oils, nei",fish_oil,2001,none
+25,"Marine mammal oils, nei",fish_oil,2002,none
+25,"Marine mammal oils, nei",fish_oil,2003,none
+25,"Marine mammal oils, nei",fish_oil,2004,none
+25,"Marine mammal oils, nei",fish_oil,2005,zerofill
+25,"Marine mammal oils, nei",fish_oil,2006,none
+25,"Marine mammal oils, nei",fish_oil,2007,zerofill
+25,"Marine mammal oils, nei",fish_oil,2008,none
+25,"Marine mammal oils, nei",fish_oil,2009,zerofill
+25,"Marine mammal oils, nei",fish_oil,2010,none
+25,"Marine mammal oils, nei",fish_oil,2011,none
+25,"Marine mammal oils, nei",fish_oil,2012,none
+25,"Marine mammal oils, nei",fish_oil,2013,none
+25,"Marine mammal oils, nei",fish_oil,2014,zerofill
+25,"Marine mammal oils, nei",fish_oil,2015,zerofill
+25,"Marine mammal oils, nei",fish_oil,2016,none
+25,"Marine mammal oils, nei",fish_oil,2017,zerofill
+25,"Marine mammal oils, nei",fish_oil,2018,none
+25,"Marine mammal oils, nei",fish_oil,2019,zerofill
+25,"Marine mammal oils, nei",fish_oil,2020,zerofill
+25,"Marine mammal oils, nei",fish_oil,2021,zerofill
+25,"Marine mammal oils, nei",fish_oil,2022,zerofill
+25,"Marine mammal oils, nei",fish_oil,2023,none
 25,Ornamental fish nei,ornamentals,1976,none
 25,Ornamental fish nei,ornamentals,1977,none
 25,Ornamental fish nei,ornamentals,1978,none
@@ -2604,6 +2814,45 @@ rgn_id,commodity,product,year,gapfill
 40,"Fish liver oils, nei",fish_oil,2021,none
 40,"Fish liver oils, nei",fish_oil,2022,none
 40,"Fish liver oils, nei",fish_oil,2023,none
+40,"Marine mammal oils, nei",fish_oil,1985,none
+40,"Marine mammal oils, nei",fish_oil,1986,none
+40,"Marine mammal oils, nei",fish_oil,1987,zerofill
+40,"Marine mammal oils, nei",fish_oil,1988,none
+40,"Marine mammal oils, nei",fish_oil,1989,none
+40,"Marine mammal oils, nei",fish_oil,1990,none
+40,"Marine mammal oils, nei",fish_oil,1991,none
+40,"Marine mammal oils, nei",fish_oil,1992,none
+40,"Marine mammal oils, nei",fish_oil,1993,none
+40,"Marine mammal oils, nei",fish_oil,1994,none
+40,"Marine mammal oils, nei",fish_oil,1995,none
+40,"Marine mammal oils, nei",fish_oil,1996,zerofill
+40,"Marine mammal oils, nei",fish_oil,1997,none
+40,"Marine mammal oils, nei",fish_oil,1998,zerofill
+40,"Marine mammal oils, nei",fish_oil,1999,none
+40,"Marine mammal oils, nei",fish_oil,2000,none
+40,"Marine mammal oils, nei",fish_oil,2001,zerofill
+40,"Marine mammal oils, nei",fish_oil,2002,none
+40,"Marine mammal oils, nei",fish_oil,2003,none
+40,"Marine mammal oils, nei",fish_oil,2004,none
+40,"Marine mammal oils, nei",fish_oil,2005,none
+40,"Marine mammal oils, nei",fish_oil,2006,zerofill
+40,"Marine mammal oils, nei",fish_oil,2007,zerofill
+40,"Marine mammal oils, nei",fish_oil,2008,zerofill
+40,"Marine mammal oils, nei",fish_oil,2009,zerofill
+40,"Marine mammal oils, nei",fish_oil,2010,zerofill
+40,"Marine mammal oils, nei",fish_oil,2011,zerofill
+40,"Marine mammal oils, nei",fish_oil,2012,zerofill
+40,"Marine mammal oils, nei",fish_oil,2013,none
+40,"Marine mammal oils, nei",fish_oil,2014,none
+40,"Marine mammal oils, nei",fish_oil,2015,zerofill
+40,"Marine mammal oils, nei",fish_oil,2016,zerofill
+40,"Marine mammal oils, nei",fish_oil,2017,zerofill
+40,"Marine mammal oils, nei",fish_oil,2018,none
+40,"Marine mammal oils, nei",fish_oil,2019,zerofill
+40,"Marine mammal oils, nei",fish_oil,2020,zerofill
+40,"Marine mammal oils, nei",fish_oil,2021,none
+40,"Marine mammal oils, nei",fish_oil,2022,zerofill
+40,"Marine mammal oils, nei",fish_oil,2023,endfill
 40,"Oils and fats of aquatic animals, nei",fish_oil,1981,none
 40,"Oils and fats of aquatic animals, nei",fish_oil,1982,none
 40,"Oils and fats of aquatic animals, nei",fish_oil,1983,none
@@ -3137,6 +3386,51 @@ rgn_id,commodity,product,year,gapfill
 43,"Fish liver oils, nei",fish_oil,2021,none
 43,"Fish liver oils, nei",fish_oil,2022,none
 43,"Fish liver oils, nei",fish_oil,2023,r1_u_rgn
+43,"Marine mammal oils, nei",fish_oil,1979,none
+43,"Marine mammal oils, nei",fish_oil,1980,none
+43,"Marine mammal oils, nei",fish_oil,1981,zerofill
+43,"Marine mammal oils, nei",fish_oil,1982,zerofill
+43,"Marine mammal oils, nei",fish_oil,1983,zerofill
+43,"Marine mammal oils, nei",fish_oil,1984,zerofill
+43,"Marine mammal oils, nei",fish_oil,1985,none
+43,"Marine mammal oils, nei",fish_oil,1986,zerofill
+43,"Marine mammal oils, nei",fish_oil,1987,zerofill
+43,"Marine mammal oils, nei",fish_oil,1988,zerofill
+43,"Marine mammal oils, nei",fish_oil,1989,zerofill
+43,"Marine mammal oils, nei",fish_oil,1990,zerofill
+43,"Marine mammal oils, nei",fish_oil,1991,zerofill
+43,"Marine mammal oils, nei",fish_oil,1992,zerofill
+43,"Marine mammal oils, nei",fish_oil,1993,zerofill
+43,"Marine mammal oils, nei",fish_oil,1994,zerofill
+43,"Marine mammal oils, nei",fish_oil,1995,zerofill
+43,"Marine mammal oils, nei",fish_oil,1996,zerofill
+43,"Marine mammal oils, nei",fish_oil,1997,zerofill
+43,"Marine mammal oils, nei",fish_oil,1998,zerofill
+43,"Marine mammal oils, nei",fish_oil,1999,zerofill
+43,"Marine mammal oils, nei",fish_oil,2000,zerofill
+43,"Marine mammal oils, nei",fish_oil,2001,zerofill
+43,"Marine mammal oils, nei",fish_oil,2002,zerofill
+43,"Marine mammal oils, nei",fish_oil,2003,zerofill
+43,"Marine mammal oils, nei",fish_oil,2004,zerofill
+43,"Marine mammal oils, nei",fish_oil,2005,none
+43,"Marine mammal oils, nei",fish_oil,2006,zerofill
+43,"Marine mammal oils, nei",fish_oil,2007,zerofill
+43,"Marine mammal oils, nei",fish_oil,2008,none
+43,"Marine mammal oils, nei",fish_oil,2009,none
+43,"Marine mammal oils, nei",fish_oil,2010,zerofill
+43,"Marine mammal oils, nei",fish_oil,2011,none
+43,"Marine mammal oils, nei",fish_oil,2012,zerofill
+43,"Marine mammal oils, nei",fish_oil,2013,zerofill
+43,"Marine mammal oils, nei",fish_oil,2014,zerofill
+43,"Marine mammal oils, nei",fish_oil,2015,zerofill
+43,"Marine mammal oils, nei",fish_oil,2016,none
+43,"Marine mammal oils, nei",fish_oil,2017,zerofill
+43,"Marine mammal oils, nei",fish_oil,2018,zerofill
+43,"Marine mammal oils, nei",fish_oil,2019,zerofill
+43,"Marine mammal oils, nei",fish_oil,2020,zerofill
+43,"Marine mammal oils, nei",fish_oil,2021,zerofill
+43,"Marine mammal oils, nei",fish_oil,2022,zerofill
+43,"Marine mammal oils, nei",fish_oil,2023,endfill
 43,Ornamental fish nei,ornamentals,2003,none
 43,Ornamental fish nei,ornamentals,2004,none
 43,Ornamental fish nei,ornamentals,2005,none
@@ -3334,6 +3628,19 @@ rgn_id,commodity,product,year,gapfill
 47,"Fish liver oils, nei",fish_oil,2021,none
 47,"Fish liver oils, nei",fish_oil,2022,none
 47,"Fish liver oils, nei",fish_oil,2023,none
+47,"Marine mammal oils, nei",fish_oil,2011,none
+47,"Marine mammal oils, nei",fish_oil,2012,zerofill
+47,"Marine mammal oils, nei",fish_oil,2013,zerofill
+47,"Marine mammal oils, nei",fish_oil,2014,zerofill
+47,"Marine mammal oils, nei",fish_oil,2015,zerofill
+47,"Marine mammal oils, nei",fish_oil,2016,zerofill
+47,"Marine mammal oils, nei",fish_oil,2017,zerofill
+47,"Marine mammal oils, nei",fish_oil,2018,zerofill
+47,"Marine mammal oils, nei",fish_oil,2019,zerofill
+47,"Marine mammal oils, nei",fish_oil,2020,none
+47,"Marine mammal oils, nei",fish_oil,2021,none
+47,"Marine mammal oils, nei",fish_oil,2022,none
+47,"Marine mammal oils, nei",fish_oil,2023,none
 47,Ornamental fish nei,ornamentals,2004,none
 47,Ornamental fish nei,ornamentals,2005,none
 47,Ornamental fish nei,ornamentals,2006,none
@@ -3915,6 +4222,21 @@ rgn_id,commodity,product,year,gapfill
 54,"Fish liver oils, nei",fish_oil,2021,none
 54,"Fish liver oils, nei",fish_oil,2022,none
 54,"Fish liver oils, nei",fish_oil,2023,none
+54,"Marine mammal oils, nei",fish_oil,2009,none
+54,"Marine mammal oils, nei",fish_oil,2010,none
+54,"Marine mammal oils, nei",fish_oil,2011,none
+54,"Marine mammal oils, nei",fish_oil,2012,zerofill
+54,"Marine mammal oils, nei",fish_oil,2013,zerofill
+54,"Marine mammal oils, nei",fish_oil,2014,none
+54,"Marine mammal oils, nei",fish_oil,2015,zerofill
+54,"Marine mammal oils, nei",fish_oil,2016,zerofill
+54,"Marine mammal oils, nei",fish_oil,2017,zerofill
+54,"Marine mammal oils, nei",fish_oil,2018,none
+54,"Marine mammal oils, nei",fish_oil,2019,none
+54,"Marine mammal oils, nei",fish_oil,2020,zerofill
+54,"Marine mammal oils, nei",fish_oil,2021,none
+54,"Marine mammal oils, nei",fish_oil,2022,none
+54,"Marine mammal oils, nei",fish_oil,2023,none
 54,Ornamental fish nei,ornamentals,1995,r2_t_gr
 54,Ornamental fish nei,ornamentals,1996,r2_t_gr
 54,Ornamental fish nei,ornamentals,1997,r2_t_gr
@@ -4133,6 +4455,54 @@ rgn_id,commodity,product,year,gapfill
 59,"Halibuts, liver oils",fish_oil,2021,none
 59,"Halibuts, liver oils",fish_oil,2022,none
 59,"Halibuts, liver oils",fish_oil,2023,none
+59,"Marine mammal oils, nei",fish_oil,1976,none
+59,"Marine mammal oils, nei",fish_oil,1977,none
+59,"Marine mammal oils, nei",fish_oil,1978,none
+59,"Marine mammal oils, nei",fish_oil,1979,none
+59,"Marine mammal oils, nei",fish_oil,1980,none
+59,"Marine mammal oils, nei",fish_oil,1981,none
+59,"Marine mammal oils, nei",fish_oil,1982,none
+59,"Marine mammal oils, nei",fish_oil,1983,none
+59,"Marine mammal oils, nei",fish_oil,1984,none
+59,"Marine mammal oils, nei",fish_oil,1985,none
+59,"Marine mammal oils, nei",fish_oil,1986,none
+59,"Marine mammal oils, nei",fish_oil,1987,none
+59,"Marine mammal oils, nei",fish_oil,1988,none
+59,"Marine mammal oils, nei",fish_oil,1989,none
+59,"Marine mammal oils, nei",fish_oil,1990,none
+59,"Marine mammal oils, nei",fish_oil,1991,none
+59,"Marine mammal oils, nei",fish_oil,1992,none
+59,"Marine mammal oils, nei",fish_oil,1993,none
+59,"Marine mammal oils, nei",fish_oil,1994,none
+59,"Marine mammal oils, nei",fish_oil,1995,none
+59,"Marine mammal oils, nei",fish_oil,1996,none
+59,"Marine mammal oils, nei",fish_oil,1997,none
+59,"Marine mammal oils, nei",fish_oil,1998,none
+59,"Marine mammal oils, nei",fish_oil,1999,none
+59,"Marine mammal oils, nei",fish_oil,2000,none
+59,"Marine mammal oils, nei",fish_oil,2001,none
+59,"Marine mammal oils, nei",fish_oil,2002,none
+59,"Marine mammal oils, nei",fish_oil,2003,zerofill
+59,"Marine mammal oils, nei",fish_oil,2004,zerofill
+59,"Marine mammal oils, nei",fish_oil,2005,zerofill
+59,"Marine mammal oils, nei",fish_oil,2006,none
+59,"Marine mammal oils, nei",fish_oil,2007,zerofill
+59,"Marine mammal oils, nei",fish_oil,2008,zerofill
+59,"Marine mammal oils, nei",fish_oil,2009,none
+59,"Marine mammal oils, nei",fish_oil,2010,none
+59,"Marine mammal oils, nei",fish_oil,2011,zerofill
+59,"Marine mammal oils, nei",fish_oil,2012,zerofill
+59,"Marine mammal oils, nei",fish_oil,2013,zerofill
+59,"Marine mammal oils, nei",fish_oil,2014,zerofill
+59,"Marine mammal oils, nei",fish_oil,2015,none
+59,"Marine mammal oils, nei",fish_oil,2016,none
+59,"Marine mammal oils, nei",fish_oil,2017,zerofill
+59,"Marine mammal oils, nei",fish_oil,2018,none
+59,"Marine mammal oils, nei",fish_oil,2019,zerofill
+59,"Marine mammal oils, nei",fish_oil,2020,zerofill
+59,"Marine mammal oils, nei",fish_oil,2021,none
+59,"Marine mammal oils, nei",fish_oil,2022,zerofill
+59,"Marine mammal oils, nei",fish_oil,2023,endfill
 59,Ornamental saltwater fish,ornamentals,1988,none
 59,Ornamental saltwater fish,ornamentals,1989,none
 59,Ornamental saltwater fish,ornamentals,1990,none
@@ -4604,6 +4974,17 @@ rgn_id,commodity,product,year,gapfill
 64,"Fish liver oils, nei",fish_oil,2021,none
 64,"Fish liver oils, nei",fish_oil,2022,none
 64,"Fish liver oils, nei",fish_oil,2023,none
+64,"Marine mammal oils, nei",fish_oil,2013,none
+64,"Marine mammal oils, nei",fish_oil,2014,none
+64,"Marine mammal oils, nei",fish_oil,2015,none
+64,"Marine mammal oils, nei",fish_oil,2016,none
+64,"Marine mammal oils, nei",fish_oil,2017,none
+64,"Marine mammal oils, nei",fish_oil,2018,zerofill
+64,"Marine mammal oils, nei",fish_oil,2019,zerofill
+64,"Marine mammal oils, nei",fish_oil,2020,zerofill
+64,"Marine mammal oils, nei",fish_oil,2021,zerofill
+64,"Marine mammal oils, nei",fish_oil,2022,zerofill
+64,"Marine mammal oils, nei",fish_oil,2023,endfill
 65,"Fish body oils, nei",fish_oil,2016,none
 65,"Fish body oils, nei",fish_oil,2017,none
 65,"Fish body oils, nei",fish_oil,2018,none
@@ -4859,6 +5240,35 @@ rgn_id,commodity,product,year,gapfill
 69,"Fish liver oils, nei",fish_oil,2021,none
 69,"Fish liver oils, nei",fish_oil,2022,none
 69,"Fish liver oils, nei",fish_oil,2023,endfill
+69,"Marine mammal oils, nei",fish_oil,1995,none
+69,"Marine mammal oils, nei",fish_oil,1996,zerofill
+69,"Marine mammal oils, nei",fish_oil,1997,zerofill
+69,"Marine mammal oils, nei",fish_oil,1998,zerofill
+69,"Marine mammal oils, nei",fish_oil,1999,zerofill
+69,"Marine mammal oils, nei",fish_oil,2000,zerofill
+69,"Marine mammal oils, nei",fish_oil,2001,zerofill
+69,"Marine mammal oils, nei",fish_oil,2002,zerofill
+69,"Marine mammal oils, nei",fish_oil,2003,zerofill
+69,"Marine mammal oils, nei",fish_oil,2004,zerofill
+69,"Marine mammal oils, nei",fish_oil,2005,none
+69,"Marine mammal oils, nei",fish_oil,2006,zerofill
+69,"Marine mammal oils, nei",fish_oil,2007,zerofill
+69,"Marine mammal oils, nei",fish_oil,2008,zerofill
+69,"Marine mammal oils, nei",fish_oil,2009,zerofill
+69,"Marine mammal oils, nei",fish_oil,2010,zerofill
+69,"Marine mammal oils, nei",fish_oil,2011,none
+69,"Marine mammal oils, nei",fish_oil,2012,zerofill
+69,"Marine mammal oils, nei",fish_oil,2013,none
+69,"Marine mammal oils, nei",fish_oil,2014,zerofill
+69,"Marine mammal oils, nei",fish_oil,2015,none
+69,"Marine mammal oils, nei",fish_oil,2016,none
+69,"Marine mammal oils, nei",fish_oil,2017,zerofill
+69,"Marine mammal oils, nei",fish_oil,2018,zerofill
+69,"Marine mammal oils, nei",fish_oil,2019,zerofill
+69,"Marine mammal oils, nei",fish_oil,2020,zerofill
+69,"Marine mammal oils, nei",fish_oil,2021,zerofill
+69,"Marine mammal oils, nei",fish_oil,2022,zerofill
+69,"Marine mammal oils, nei",fish_oil,2023,endfill
 69,Ornamental fish nei,ornamentals,1994,none
 69,Ornamental fish nei,ornamentals,1995,none
 69,Ornamental fish nei,ornamentals,1996,zerofill
@@ -5434,6 +5844,38 @@ rgn_id,commodity,product,year,gapfill
 73,"Fish liver oils, nei",fish_oil,2021,none
 73,"Fish liver oils, nei",fish_oil,2022,r2_t_gr
 73,"Fish liver oils, nei",fish_oil,2023,r2_t_gr
+73,"Marine mammal oils, nei",fish_oil,1992,none
+73,"Marine mammal oils, nei",fish_oil,1993,none
+73,"Marine mammal oils, nei",fish_oil,1994,none
+73,"Marine mammal oils, nei",fish_oil,1995,none
+73,"Marine mammal oils, nei",fish_oil,1996,none
+73,"Marine mammal oils, nei",fish_oil,1997,none
+73,"Marine mammal oils, nei",fish_oil,1998,none
+73,"Marine mammal oils, nei",fish_oil,1999,zerofill
+73,"Marine mammal oils, nei",fish_oil,2000,zerofill
+73,"Marine mammal oils, nei",fish_oil,2001,zerofill
+73,"Marine mammal oils, nei",fish_oil,2002,none
+73,"Marine mammal oils, nei",fish_oil,2003,zerofill
+73,"Marine mammal oils, nei",fish_oil,2004,none
+73,"Marine mammal oils, nei",fish_oil,2005,none
+73,"Marine mammal oils, nei",fish_oil,2006,zerofill
+73,"Marine mammal oils, nei",fish_oil,2007,none
+73,"Marine mammal oils, nei",fish_oil,2008,zerofill
+73,"Marine mammal oils, nei",fish_oil,2009,zerofill
+73,"Marine mammal oils, nei",fish_oil,2010,zerofill
+73,"Marine mammal oils, nei",fish_oil,2011,none
+73,"Marine mammal oils, nei",fish_oil,2012,none
+73,"Marine mammal oils, nei",fish_oil,2013,none
+73,"Marine mammal oils, nei",fish_oil,2014,none
+73,"Marine mammal oils, nei",fish_oil,2015,none
+73,"Marine mammal oils, nei",fish_oil,2016,none
+73,"Marine mammal oils, nei",fish_oil,2017,none
+73,"Marine mammal oils, nei",fish_oil,2018,zerofill
+73,"Marine mammal oils, nei",fish_oil,2019,zerofill
+73,"Marine mammal oils, nei",fish_oil,2020,r1_t_rgn
+73,"Marine mammal oils, nei",fish_oil,2021,none
+73,"Marine mammal oils, nei",fish_oil,2022,zerofill
+73,"Marine mammal oils, nei",fish_oil,2023,endfill
 73,Agar agar nei,seaweeds,1998,none
 73,Agar agar nei,seaweeds,1999,zerofill
 73,Agar agar nei,seaweeds,2000,none
@@ -5800,6 +6242,43 @@ rgn_id,commodity,product,year,gapfill
 76,"Fish liver oils, nei",fish_oil,2021,none
 76,"Fish liver oils, nei",fish_oil,2022,none
 76,"Fish liver oils, nei",fish_oil,2023,none
+76,"Marine mammal oils, nei",fish_oil,1987,none
+76,"Marine mammal oils, nei",fish_oil,1988,none
+76,"Marine mammal oils, nei",fish_oil,1989,none
+76,"Marine mammal oils, nei",fish_oil,1990,zerofill
+76,"Marine mammal oils, nei",fish_oil,1991,zerofill
+76,"Marine mammal oils, nei",fish_oil,1992,zerofill
+76,"Marine mammal oils, nei",fish_oil,1993,zerofill
+76,"Marine mammal oils, nei",fish_oil,1994,zerofill
+76,"Marine mammal oils, nei",fish_oil,1995,zerofill
+76,"Marine mammal oils, nei",fish_oil,1996,zerofill
+76,"Marine mammal oils, nei",fish_oil,1997,zerofill
+76,"Marine mammal oils, nei",fish_oil,1998,zerofill
+76,"Marine mammal oils, nei",fish_oil,1999,zerofill
+76,"Marine mammal oils, nei",fish_oil,2000,zerofill
+76,"Marine mammal oils, nei",fish_oil,2001,zerofill
+76,"Marine mammal oils, nei",fish_oil,2002,zerofill
+76,"Marine mammal oils, nei",fish_oil,2003,zerofill
+76,"Marine mammal oils, nei",fish_oil,2004,zerofill
+76,"Marine mammal oils, nei",fish_oil,2005,zerofill
+76,"Marine mammal oils, nei",fish_oil,2006,none
+76,"Marine mammal oils, nei",fish_oil,2007,none
+76,"Marine mammal oils, nei",fish_oil,2008,zerofill
+76,"Marine mammal oils, nei",fish_oil,2009,zerofill
+76,"Marine mammal oils, nei",fish_oil,2010,none
+76,"Marine mammal oils, nei",fish_oil,2011,zerofill
+76,"Marine mammal oils, nei",fish_oil,2012,zerofill
+76,"Marine mammal oils, nei",fish_oil,2013,zerofill
+76,"Marine mammal oils, nei",fish_oil,2014,none
+76,"Marine mammal oils, nei",fish_oil,2015,none
+76,"Marine mammal oils, nei",fish_oil,2016,none
+76,"Marine mammal oils, nei",fish_oil,2017,none
+76,"Marine mammal oils, nei",fish_oil,2018,none
+76,"Marine mammal oils, nei",fish_oil,2019,none
+76,"Marine mammal oils, nei",fish_oil,2020,none
+76,"Marine mammal oils, nei",fish_oil,2021,none
+76,"Marine mammal oils, nei",fish_oil,2022,none
+76,"Marine mammal oils, nei",fish_oil,2023,none
 76,Ornamental saltwater fish,ornamentals,2004,none
 76,Ornamental saltwater fish,ornamentals,2005,none
 76,Ornamental saltwater fish,ornamentals,2006,none
@@ -6110,6 +6589,20 @@ rgn_id,commodity,product,year,gapfill
 79,"Fish liver oils, nei",fish_oil,2021,zerofill
 79,"Fish liver oils, nei",fish_oil,2022,zerofill
 79,"Fish liver oils, nei",fish_oil,2023,endfill
+79,"Marine mammal oils, nei",fish_oil,2010,none
+79,"Marine mammal oils, nei",fish_oil,2011,none
+79,"Marine mammal oils, nei",fish_oil,2012,none
+79,"Marine mammal oils, nei",fish_oil,2013,none
+79,"Marine mammal oils, nei",fish_oil,2014,none
+79,"Marine mammal oils, nei",fish_oil,2015,none
+79,"Marine mammal oils, nei",fish_oil,2016,zerofill
+79,"Marine mammal oils, nei",fish_oil,2017,zerofill
+79,"Marine mammal oils, nei",fish_oil,2018,zerofill
+79,"Marine mammal oils, nei",fish_oil,2019,r2_t_gr
+79,"Marine mammal oils, nei",fish_oil,2020,zerofill
+79,"Marine mammal oils, nei",fish_oil,2021,zerofill
+79,"Marine mammal oils, nei",fish_oil,2022,zerofill
+79,"Marine mammal oils, nei",fish_oil,2023,endfill
 79,Ornamental fish nei,ornamentals,1976,r2_t_gr
 79,Ornamental fish nei,ornamentals,1977,r2_t_gr
 79,Ornamental fish nei,ornamentals,1978,zerofill
@@ -6314,6 +6807,25 @@ rgn_id,commodity,product,year,gapfill
 80,"Fish liver oils, nei",fish_oil,2021,none
 80,"Fish liver oils, nei",fish_oil,2022,none
 80,"Fish liver oils, nei",fish_oil,2023,none
+80,"Marine mammal oils, nei",fish_oil,2005,none
+80,"Marine mammal oils, nei",fish_oil,2006,zerofill
+80,"Marine mammal oils, nei",fish_oil,2007,zerofill
+80,"Marine mammal oils, nei",fish_oil,2008,zerofill
+80,"Marine mammal oils, nei",fish_oil,2009,none
+80,"Marine mammal oils, nei",fish_oil,2010,zerofill
+80,"Marine mammal oils, nei",fish_oil,2011,none
+80,"Marine mammal oils, nei",fish_oil,2012,zerofill
+80,"Marine mammal oils, nei",fish_oil,2013,zerofill
+80,"Marine mammal oils, nei",fish_oil,2014,zerofill
+80,"Marine mammal oils, nei",fish_oil,2015,zerofill
+80,"Marine mammal oils, nei",fish_oil,2016,none
+80,"Marine mammal oils, nei",fish_oil,2017,none
+80,"Marine mammal oils, nei",fish_oil,2018,zerofill
+80,"Marine mammal oils, nei",fish_oil,2019,zerofill
+80,"Marine mammal oils, nei",fish_oil,2020,zerofill
+80,"Marine mammal oils, nei",fish_oil,2021,none
+80,"Marine mammal oils, nei",fish_oil,2022,zerofill
+80,"Marine mammal oils, nei",fish_oil,2023,endfill
 80,Ornamental saltwater fish,ornamentals,1991,none
 80,Ornamental saltwater fish,ornamentals,1992,zerofill
 80,Ornamental saltwater fish,ornamentals,1993,none
@@ -6458,6 +6970,37 @@ rgn_id,commodity,product,year,gapfill
 81,"Fish body oils, nei",fish_oil,2021,none
 81,"Fish body oils, nei",fish_oil,2022,zerofill
 81,"Fish body oils, nei",fish_oil,2023,endfill
+81,"Marine mammal oils, nei",fish_oil,1993,none
+81,"Marine mammal oils, nei",fish_oil,1994,zerofill
+81,"Marine mammal oils, nei",fish_oil,1995,zerofill
+81,"Marine mammal oils, nei",fish_oil,1996,zerofill
+81,"Marine mammal oils, nei",fish_oil,1997,zerofill
+81,"Marine mammal oils, nei",fish_oil,1998,zerofill
+81,"Marine mammal oils, nei",fish_oil,1999,zerofill
+81,"Marine mammal oils, nei",fish_oil,2000,zerofill
+81,"Marine mammal oils, nei",fish_oil,2001,zerofill
+81,"Marine mammal oils, nei",fish_oil,2002,zerofill
+81,"Marine mammal oils, nei",fish_oil,2003,zerofill
+81,"Marine mammal oils, nei",fish_oil,2004,zerofill
+81,"Marine mammal oils, nei",fish_oil,2005,zerofill
+81,"Marine mammal oils, nei",fish_oil,2006,zerofill
+81,"Marine mammal oils, nei",fish_oil,2007,zerofill
+81,"Marine mammal oils, nei",fish_oil,2008,zerofill
+81,"Marine mammal oils, nei",fish_oil,2009,zerofill
+81,"Marine mammal oils, nei",fish_oil,2010,zerofill
+81,"Marine mammal oils, nei",fish_oil,2011,zerofill
+81,"Marine mammal oils, nei",fish_oil,2012,none
+81,"Marine mammal oils, nei",fish_oil,2013,none
+81,"Marine mammal oils, nei",fish_oil,2014,none
+81,"Marine mammal oils, nei",fish_oil,2015,none
+81,"Marine mammal oils, nei",fish_oil,2016,none
+81,"Marine mammal oils, nei",fish_oil,2017,none
+81,"Marine mammal oils, nei",fish_oil,2018,none
+81,"Marine mammal oils, nei",fish_oil,2019,none
+81,"Marine mammal oils, nei",fish_oil,2020,none
+81,"Marine mammal oils, nei",fish_oil,2021,none
+81,"Marine mammal oils, nei",fish_oil,2022,none
+81,"Marine mammal oils, nei",fish_oil,2023,endfill
 81,"Seaweeds and other algae, fit for human consumption, nei",seaweeds,2013,none
 81,"Seaweeds and other algae, fit for human consumption, nei",seaweeds,2014,zerofill
 81,"Seaweeds and other algae, fit for human consumption, nei",seaweeds,2015,none
@@ -6783,6 +7326,29 @@ rgn_id,commodity,product,year,gapfill
 101,"Fish liver oils, nei",fish_oil,2021,none
 101,"Fish liver oils, nei",fish_oil,2022,zerofill
 101,"Fish liver oils, nei",fish_oil,2023,endfill
+101,"Marine mammal oils, nei",fish_oil,2001,none
+101,"Marine mammal oils, nei",fish_oil,2002,none
+101,"Marine mammal oils, nei",fish_oil,2003,none
+101,"Marine mammal oils, nei",fish_oil,2004,none
+101,"Marine mammal oils, nei",fish_oil,2005,none
+101,"Marine mammal oils, nei",fish_oil,2006,none
+101,"Marine mammal oils, nei",fish_oil,2007,none
+101,"Marine mammal oils, nei",fish_oil,2008,none
+101,"Marine mammal oils, nei",fish_oil,2009,none
+101,"Marine mammal oils, nei",fish_oil,2010,none
+101,"Marine mammal oils, nei",fish_oil,2011,none
+101,"Marine mammal oils, nei",fish_oil,2012,zerofill
+101,"Marine mammal oils, nei",fish_oil,2013,zerofill
+101,"Marine mammal oils, nei",fish_oil,2014,none
+101,"Marine mammal oils, nei",fish_oil,2015,zerofill
+101,"Marine mammal oils, nei",fish_oil,2016,none
+101,"Marine mammal oils, nei",fish_oil,2017,none
+101,"Marine mammal oils, nei",fish_oil,2018,none
+101,"Marine mammal oils, nei",fish_oil,2019,none
+101,"Marine mammal oils, nei",fish_oil,2020,r1_t_rgn
+101,"Marine mammal oils, nei",fish_oil,2021,zerofill
+101,"Marine mammal oils, nei",fish_oil,2022,zerofill
+101,"Marine mammal oils, nei",fish_oil,2023,none
 101,Ornamental fish nei,ornamentals,2000,none
 101,Ornamental fish nei,ornamentals,2001,zerofill
 101,Ornamental fish nei,ornamentals,2002,none
@@ -6977,6 +7543,40 @@ rgn_id,commodity,product,year,gapfill
 102,"Fish liver oils, nei",fish_oil,2021,none
 102,"Fish liver oils, nei",fish_oil,2022,none
 102,"Fish liver oils, nei",fish_oil,2023,none
+102,"Marine mammal oils, nei",fish_oil,1990,none
+102,"Marine mammal oils, nei",fish_oil,1991,none
+102,"Marine mammal oils, nei",fish_oil,1992,none
+102,"Marine mammal oils, nei",fish_oil,1993,none
+102,"Marine mammal oils, nei",fish_oil,1994,none
+102,"Marine mammal oils, nei",fish_oil,1995,none
+102,"Marine mammal oils, nei",fish_oil,1996,none
+102,"Marine mammal oils, nei",fish_oil,1997,none
+102,"Marine mammal oils, nei",fish_oil,1998,none
+102,"Marine mammal oils, nei",fish_oil,1999,none
+102,"Marine mammal oils, nei",fish_oil,2000,none
+102,"Marine mammal oils, nei",fish_oil,2001,none
+102,"Marine mammal oils, nei",fish_oil,2002,none
+102,"Marine mammal oils, nei",fish_oil,2003,none
+102,"Marine mammal oils, nei",fish_oil,2004,none
+102,"Marine mammal oils, nei",fish_oil,2005,none
+102,"Marine mammal oils, nei",fish_oil,2006,none
+102,"Marine mammal oils, nei",fish_oil,2007,none
+102,"Marine mammal oils, nei",fish_oil,2008,none
+102,"Marine mammal oils, nei",fish_oil,2009,none
+102,"Marine mammal oils, nei",fish_oil,2010,none
+102,"Marine mammal oils, nei",fish_oil,2011,none
+102,"Marine mammal oils, nei",fish_oil,2012,none
+102,"Marine mammal oils, nei",fish_oil,2013,none
+102,"Marine mammal oils, nei",fish_oil,2014,none
+102,"Marine mammal oils, nei",fish_oil,2015,none
+102,"Marine mammal oils, nei",fish_oil,2016,none
+102,"Marine mammal oils, nei",fish_oil,2017,none
+102,"Marine mammal oils, nei",fish_oil,2018,none
+102,"Marine mammal oils, nei",fish_oil,2019,none
+102,"Marine mammal oils, nei",fish_oil,2020,none
+102,"Marine mammal oils, nei",fish_oil,2021,none
+102,"Marine mammal oils, nei",fish_oil,2022,none
+102,"Marine mammal oils, nei",fish_oil,2023,none
 102,Ornamental fish nei,ornamentals,1985,r2_t_gr
 102,Ornamental fish nei,ornamentals,1986,zerofill
 102,Ornamental fish nei,ornamentals,1987,zerofill
@@ -8026,6 +8626,45 @@ rgn_id,commodity,product,year,gapfill
 127,"Fish liver oils, nei",fish_oil,2021,zerofill
 127,"Fish liver oils, nei",fish_oil,2022,none
 127,"Fish liver oils, nei",fish_oil,2023,none
+127,"Marine mammal oils, nei",fish_oil,1985,none
+127,"Marine mammal oils, nei",fish_oil,1986,none
+127,"Marine mammal oils, nei",fish_oil,1987,zerofill
+127,"Marine mammal oils, nei",fish_oil,1988,zerofill
+127,"Marine mammal oils, nei",fish_oil,1989,zerofill
+127,"Marine mammal oils, nei",fish_oil,1990,zerofill
+127,"Marine mammal oils, nei",fish_oil,1991,zerofill
+127,"Marine mammal oils, nei",fish_oil,1992,zerofill
+127,"Marine mammal oils, nei",fish_oil,1993,zerofill
+127,"Marine mammal oils, nei",fish_oil,1994,zerofill
+127,"Marine mammal oils, nei",fish_oil,1995,r2_t_gr
+127,"Marine mammal oils, nei",fish_oil,1996,zerofill
+127,"Marine mammal oils, nei",fish_oil,1997,none
+127,"Marine mammal oils, nei",fish_oil,1998,zerofill
+127,"Marine mammal oils, nei",fish_oil,1999,zerofill
+127,"Marine mammal oils, nei",fish_oil,2000,none
+127,"Marine mammal oils, nei",fish_oil,2001,none
+127,"Marine mammal oils, nei",fish_oil,2002,none
+127,"Marine mammal oils, nei",fish_oil,2003,zerofill
+127,"Marine mammal oils, nei",fish_oil,2004,none
+127,"Marine mammal oils, nei",fish_oil,2005,none
+127,"Marine mammal oils, nei",fish_oil,2006,none
+127,"Marine mammal oils, nei",fish_oil,2007,zerofill
+127,"Marine mammal oils, nei",fish_oil,2008,zerofill
+127,"Marine mammal oils, nei",fish_oil,2009,none
+127,"Marine mammal oils, nei",fish_oil,2010,none
+127,"Marine mammal oils, nei",fish_oil,2011,none
+127,"Marine mammal oils, nei",fish_oil,2012,none
+127,"Marine mammal oils, nei",fish_oil,2013,none
+127,"Marine mammal oils, nei",fish_oil,2014,none
+127,"Marine mammal oils, nei",fish_oil,2015,zerofill
+127,"Marine mammal oils, nei",fish_oil,2016,zerofill
+127,"Marine mammal oils, nei",fish_oil,2017,none
+127,"Marine mammal oils, nei",fish_oil,2018,none
+127,"Marine mammal oils, nei",fish_oil,2019,none
+127,"Marine mammal oils, nei",fish_oil,2020,none
+127,"Marine mammal oils, nei",fish_oil,2021,zerofill
+127,"Marine mammal oils, nei",fish_oil,2022,zerofill
+127,"Marine mammal oils, nei",fish_oil,2023,endfill
 127,Other seaweeds and aquatic plants and products thereof,seaweeds,2012,none
 127,Other seaweeds and aquatic plants and products thereof,seaweeds,2013,none
 127,Other seaweeds and aquatic plants and products thereof,seaweeds,2014,zerofill
@@ -8880,6 +9519,39 @@ rgn_id,commodity,product,year,gapfill
 135,"Fish liver oils, nei",fish_oil,2021,r2_t_gr
 135,"Fish liver oils, nei",fish_oil,2022,r2_t_gr
 135,"Fish liver oils, nei",fish_oil,2023,endfill
+135,"Marine mammal oils, nei",fish_oil,1991,none
+135,"Marine mammal oils, nei",fish_oil,1992,r3_u_gl
+135,"Marine mammal oils, nei",fish_oil,1993,zerofill
+135,"Marine mammal oils, nei",fish_oil,1994,zerofill
+135,"Marine mammal oils, nei",fish_oil,1995,zerofill
+135,"Marine mammal oils, nei",fish_oil,1996,zerofill
+135,"Marine mammal oils, nei",fish_oil,1997,zerofill
+135,"Marine mammal oils, nei",fish_oil,1998,zerofill
+135,"Marine mammal oils, nei",fish_oil,1999,r3_u_gl
+135,"Marine mammal oils, nei",fish_oil,2000,zerofill
+135,"Marine mammal oils, nei",fish_oil,2001,zerofill
+135,"Marine mammal oils, nei",fish_oil,2002,zerofill
+135,"Marine mammal oils, nei",fish_oil,2003,zerofill
+135,"Marine mammal oils, nei",fish_oil,2004,zerofill
+135,"Marine mammal oils, nei",fish_oil,2005,zerofill
+135,"Marine mammal oils, nei",fish_oil,2006,zerofill
+135,"Marine mammal oils, nei",fish_oil,2007,zerofill
+135,"Marine mammal oils, nei",fish_oil,2008,zerofill
+135,"Marine mammal oils, nei",fish_oil,2009,zerofill
+135,"Marine mammal oils, nei",fish_oil,2010,zerofill
+135,"Marine mammal oils, nei",fish_oil,2011,zerofill
+135,"Marine mammal oils, nei",fish_oil,2012,zerofill
+135,"Marine mammal oils, nei",fish_oil,2013,zerofill
+135,"Marine mammal oils, nei",fish_oil,2014,zerofill
+135,"Marine mammal oils, nei",fish_oil,2015,zerofill
+135,"Marine mammal oils, nei",fish_oil,2016,zerofill
+135,"Marine mammal oils, nei",fish_oil,2017,zerofill
+135,"Marine mammal oils, nei",fish_oil,2018,zerofill
+135,"Marine mammal oils, nei",fish_oil,2019,zerofill
+135,"Marine mammal oils, nei",fish_oil,2020,zerofill
+135,"Marine mammal oils, nei",fish_oil,2021,zerofill
+135,"Marine mammal oils, nei",fish_oil,2022,r3_t_gl
+135,"Marine mammal oils, nei",fish_oil,2023,r3_t_gl
 135,Ornamental fish nei,ornamentals,1976,none
 135,Ornamental fish nei,ornamentals,1977,none
 135,Ornamental fish nei,ornamentals,1978,zerofill
@@ -9468,6 +10140,54 @@ rgn_id,commodity,product,year,gapfill
 138,"Fish liver oils, nei",fish_oil,2021,zerofill
 138,"Fish liver oils, nei",fish_oil,2022,zerofill
 138,"Fish liver oils, nei",fish_oil,2023,endfill
+138,"Marine mammal oils, nei",fish_oil,1976,none
+138,"Marine mammal oils, nei",fish_oil,1977,none
+138,"Marine mammal oils, nei",fish_oil,1978,none
+138,"Marine mammal oils, nei",fish_oil,1979,none
+138,"Marine mammal oils, nei",fish_oil,1980,zerofill
+138,"Marine mammal oils, nei",fish_oil,1981,none
+138,"Marine mammal oils, nei",fish_oil,1982,none
+138,"Marine mammal oils, nei",fish_oil,1983,zerofill
+138,"Marine mammal oils, nei",fish_oil,1984,zerofill
+138,"Marine mammal oils, nei",fish_oil,1985,zerofill
+138,"Marine mammal oils, nei",fish_oil,1986,zerofill
+138,"Marine mammal oils, nei",fish_oil,1987,zerofill
+138,"Marine mammal oils, nei",fish_oil,1988,zerofill
+138,"Marine mammal oils, nei",fish_oil,1989,zerofill
+138,"Marine mammal oils, nei",fish_oil,1990,zerofill
+138,"Marine mammal oils, nei",fish_oil,1991,zerofill
+138,"Marine mammal oils, nei",fish_oil,1992,zerofill
+138,"Marine mammal oils, nei",fish_oil,1993,zerofill
+138,"Marine mammal oils, nei",fish_oil,1994,zerofill
+138,"Marine mammal oils, nei",fish_oil,1995,zerofill
+138,"Marine mammal oils, nei",fish_oil,1996,zerofill
+138,"Marine mammal oils, nei",fish_oil,1997,zerofill
+138,"Marine mammal oils, nei",fish_oil,1998,zerofill
+138,"Marine mammal oils, nei",fish_oil,1999,zerofill
+138,"Marine mammal oils, nei",fish_oil,2000,zerofill
+138,"Marine mammal oils, nei",fish_oil,2001,zerofill
+138,"Marine mammal oils, nei",fish_oil,2002,zerofill
+138,"Marine mammal oils, nei",fish_oil,2003,zerofill
+138,"Marine mammal oils, nei",fish_oil,2004,zerofill
+138,"Marine mammal oils, nei",fish_oil,2005,zerofill
+138,"Marine mammal oils, nei",fish_oil,2006,zerofill
+138,"Marine mammal oils, nei",fish_oil,2007,zerofill
+138,"Marine mammal oils, nei",fish_oil,2008,zerofill
+138,"Marine mammal oils, nei",fish_oil,2009,zerofill
+138,"Marine mammal oils, nei",fish_oil,2010,zerofill
+138,"Marine mammal oils, nei",fish_oil,2011,zerofill
+138,"Marine mammal oils, nei",fish_oil,2012,zerofill
+138,"Marine mammal oils, nei",fish_oil,2013,zerofill
+138,"Marine mammal oils, nei",fish_oil,2014,zerofill
+138,"Marine mammal oils, nei",fish_oil,2015,zerofill
+138,"Marine mammal oils, nei",fish_oil,2016,zerofill
+138,"Marine mammal oils, nei",fish_oil,2017,zerofill
+138,"Marine mammal oils, nei",fish_oil,2018,zerofill
+138,"Marine mammal oils, nei",fish_oil,2019,zerofill
+138,"Marine mammal oils, nei",fish_oil,2020,zerofill
+138,"Marine mammal oils, nei",fish_oil,2021,zerofill
+138,"Marine mammal oils, nei",fish_oil,2022,none
+138,"Marine mammal oils, nei",fish_oil,2023,endfill
 138,Ornamental fish nei,ornamentals,1976,none
 138,Ornamental fish nei,ornamentals,1977,none
 138,Ornamental fish nei,ornamentals,1978,none
@@ -10153,6 +10873,42 @@ rgn_id,commodity,product,year,gapfill
 143,Herring oil,fish_oil,2021,none
 143,Herring oil,fish_oil,2022,none
 143,Herring oil,fish_oil,2023,none
+143,"Marine mammal oils, nei",fish_oil,1988,none
+143,"Marine mammal oils, nei",fish_oil,1989,zerofill
+143,"Marine mammal oils, nei",fish_oil,1990,zerofill
+143,"Marine mammal oils, nei",fish_oil,1991,zerofill
+143,"Marine mammal oils, nei",fish_oil,1992,zerofill
+143,"Marine mammal oils, nei",fish_oil,1993,zerofill
+143,"Marine mammal oils, nei",fish_oil,1994,zerofill
+143,"Marine mammal oils, nei",fish_oil,1995,zerofill
+143,"Marine mammal oils, nei",fish_oil,1996,zerofill
+143,"Marine mammal oils, nei",fish_oil,1997,zerofill
+143,"Marine mammal oils, nei",fish_oil,1998,zerofill
+143,"Marine mammal oils, nei",fish_oil,1999,zerofill
+143,"Marine mammal oils, nei",fish_oil,2000,zerofill
+143,"Marine mammal oils, nei",fish_oil,2001,zerofill
+143,"Marine mammal oils, nei",fish_oil,2002,zerofill
+143,"Marine mammal oils, nei",fish_oil,2003,zerofill
+143,"Marine mammal oils, nei",fish_oil,2004,zerofill
+143,"Marine mammal oils, nei",fish_oil,2005,zerofill
+143,"Marine mammal oils, nei",fish_oil,2006,none
+143,"Marine mammal oils, nei",fish_oil,2007,none
+143,"Marine mammal oils, nei",fish_oil,2008,zerofill
+143,"Marine mammal oils, nei",fish_oil,2009,none
+143,"Marine mammal oils, nei",fish_oil,2010,zerofill
+143,"Marine mammal oils, nei",fish_oil,2011,zerofill
+143,"Marine mammal oils, nei",fish_oil,2012,none
+143,"Marine mammal oils, nei",fish_oil,2013,none
+143,"Marine mammal oils, nei",fish_oil,2014,none
+143,"Marine mammal oils, nei",fish_oil,2015,none
+143,"Marine mammal oils, nei",fish_oil,2016,none
+143,"Marine mammal oils, nei",fish_oil,2017,none
+143,"Marine mammal oils, nei",fish_oil,2018,zerofill
+143,"Marine mammal oils, nei",fish_oil,2019,zerofill
+143,"Marine mammal oils, nei",fish_oil,2020,none
+143,"Marine mammal oils, nei",fish_oil,2021,r1_t_rgn
+143,"Marine mammal oils, nei",fish_oil,2022,zerofill
+143,"Marine mammal oils, nei",fish_oil,2023,endfill
 143,Redfish oil,fish_oil,1976,none
 143,Redfish oil,fish_oil,1977,none
 143,Redfish oil,fish_oil,1978,none
@@ -10303,6 +11059,54 @@ rgn_id,commodity,product,year,gapfill
 145,"Fish liver oils, nei",fish_oil,2021,zerofill
 145,"Fish liver oils, nei",fish_oil,2022,none
 145,"Fish liver oils, nei",fish_oil,2023,none
+145,"Marine mammal oils, nei",fish_oil,1976,none
+145,"Marine mammal oils, nei",fish_oil,1977,none
+145,"Marine mammal oils, nei",fish_oil,1978,zerofill
+145,"Marine mammal oils, nei",fish_oil,1979,zerofill
+145,"Marine mammal oils, nei",fish_oil,1980,none
+145,"Marine mammal oils, nei",fish_oil,1981,none
+145,"Marine mammal oils, nei",fish_oil,1982,none
+145,"Marine mammal oils, nei",fish_oil,1983,zerofill
+145,"Marine mammal oils, nei",fish_oil,1984,zerofill
+145,"Marine mammal oils, nei",fish_oil,1985,zerofill
+145,"Marine mammal oils, nei",fish_oil,1986,zerofill
+145,"Marine mammal oils, nei",fish_oil,1987,zerofill
+145,"Marine mammal oils, nei",fish_oil,1988,none
+145,"Marine mammal oils, nei",fish_oil,1989,none
+145,"Marine mammal oils, nei",fish_oil,1990,none
+145,"Marine mammal oils, nei",fish_oil,1991,none
+145,"Marine mammal oils, nei",fish_oil,1992,none
+145,"Marine mammal oils, nei",fish_oil,1993,none
+145,"Marine mammal oils, nei",fish_oil,1994,zerofill
+145,"Marine mammal oils, nei",fish_oil,1995,zerofill
+145,"Marine mammal oils, nei",fish_oil,1996,zerofill
+145,"Marine mammal oils, nei",fish_oil,1997,none
+145,"Marine mammal oils, nei",fish_oil,1998,none
+145,"Marine mammal oils, nei",fish_oil,1999,zerofill
+145,"Marine mammal oils, nei",fish_oil,2000,zerofill
+145,"Marine mammal oils, nei",fish_oil,2001,zerofill
+145,"Marine mammal oils, nei",fish_oil,2002,zerofill
+145,"Marine mammal oils, nei",fish_oil,2003,zerofill
+145,"Marine mammal oils, nei",fish_oil,2004,none
+145,"Marine mammal oils, nei",fish_oil,2005,none
+145,"Marine mammal oils, nei",fish_oil,2006,none
+145,"Marine mammal oils, nei",fish_oil,2007,none
+145,"Marine mammal oils, nei",fish_oil,2008,none
+145,"Marine mammal oils, nei",fish_oil,2009,none
+145,"Marine mammal oils, nei",fish_oil,2010,none
+145,"Marine mammal oils, nei",fish_oil,2011,none
+145,"Marine mammal oils, nei",fish_oil,2012,none
+145,"Marine mammal oils, nei",fish_oil,2013,none
+145,"Marine mammal oils, nei",fish_oil,2014,zerofill
+145,"Marine mammal oils, nei",fish_oil,2015,zerofill
+145,"Marine mammal oils, nei",fish_oil,2016,zerofill
+145,"Marine mammal oils, nei",fish_oil,2017,zerofill
+145,"Marine mammal oils, nei",fish_oil,2018,zerofill
+145,"Marine mammal oils, nei",fish_oil,2019,zerofill
+145,"Marine mammal oils, nei",fish_oil,2020,zerofill
+145,"Marine mammal oils, nei",fish_oil,2021,zerofill
+145,"Marine mammal oils, nei",fish_oil,2022,zerofill
+145,"Marine mammal oils, nei",fish_oil,2023,endfill
 145,"Seaweeds and other algae, fit for human consumption, nei",seaweeds,2012,none
 145,"Seaweeds and other algae, fit for human consumption, nei",seaweeds,2013,zerofill
 145,"Seaweeds and other algae, fit for human consumption, nei",seaweeds,2014,zerofill
@@ -10404,6 +11208,25 @@ rgn_id,commodity,product,year,gapfill
 147,"Seaweeds and other algae, unfit for human consumption, nei",seaweeds,2021,none
 147,"Seaweeds and other algae, unfit for human consumption, nei",seaweeds,2022,none
 147,"Seaweeds and other algae, unfit for human consumption, nei",seaweeds,2023,endfill
+151,Shad oil,fish_oil,2005,none
+151,Shad oil,fish_oil,2006,zerofill
+151,Shad oil,fish_oil,2007,none
+151,Shad oil,fish_oil,2008,none
+151,Shad oil,fish_oil,2009,none
+151,Shad oil,fish_oil,2010,none
+151,Shad oil,fish_oil,2011,none
+151,Shad oil,fish_oil,2012,none
+151,Shad oil,fish_oil,2013,none
+151,Shad oil,fish_oil,2014,none
+151,Shad oil,fish_oil,2015,none
+151,Shad oil,fish_oil,2016,none
+151,Shad oil,fish_oil,2017,none
+151,Shad oil,fish_oil,2018,none
+151,Shad oil,fish_oil,2019,none
+151,Shad oil,fish_oil,2020,none
+151,Shad oil,fish_oil,2021,r1_t_rgn
+151,Shad oil,fish_oil,2022,none
+151,Shad oil,fish_oil,2023,endfill
 152,Ornamental fish nei,ornamentals,1995,r2_t_gr
 152,Ornamental fish nei,ornamentals,1996,r2_t_gr
 152,Ornamental fish nei,ornamentals,1997,r2_t_gr
@@ -10660,6 +11483,43 @@ rgn_id,commodity,product,year,gapfill
 162,"Fish liver oils, nei",fish_oil,2021,zerofill
 162,"Fish liver oils, nei",fish_oil,2022,zerofill
 162,"Fish liver oils, nei",fish_oil,2023,endfill
+162,"Marine mammal oils, nei",fish_oil,1987,none
+162,"Marine mammal oils, nei",fish_oil,1988,none
+162,"Marine mammal oils, nei",fish_oil,1989,none
+162,"Marine mammal oils, nei",fish_oil,1990,none
+162,"Marine mammal oils, nei",fish_oil,1991,none
+162,"Marine mammal oils, nei",fish_oil,1992,none
+162,"Marine mammal oils, nei",fish_oil,1993,none
+162,"Marine mammal oils, nei",fish_oil,1994,zerofill
+162,"Marine mammal oils, nei",fish_oil,1995,none
+162,"Marine mammal oils, nei",fish_oil,1996,none
+162,"Marine mammal oils, nei",fish_oil,1997,none
+162,"Marine mammal oils, nei",fish_oil,1998,zerofill
+162,"Marine mammal oils, nei",fish_oil,1999,zerofill
+162,"Marine mammal oils, nei",fish_oil,2000,none
+162,"Marine mammal oils, nei",fish_oil,2001,zerofill
+162,"Marine mammal oils, nei",fish_oil,2002,none
+162,"Marine mammal oils, nei",fish_oil,2003,zerofill
+162,"Marine mammal oils, nei",fish_oil,2004,zerofill
+162,"Marine mammal oils, nei",fish_oil,2005,zerofill
+162,"Marine mammal oils, nei",fish_oil,2006,zerofill
+162,"Marine mammal oils, nei",fish_oil,2007,zerofill
+162,"Marine mammal oils, nei",fish_oil,2008,zerofill
+162,"Marine mammal oils, nei",fish_oil,2009,zerofill
+162,"Marine mammal oils, nei",fish_oil,2010,zerofill
+162,"Marine mammal oils, nei",fish_oil,2011,zerofill
+162,"Marine mammal oils, nei",fish_oil,2012,zerofill
+162,"Marine mammal oils, nei",fish_oil,2013,zerofill
+162,"Marine mammal oils, nei",fish_oil,2014,zerofill
+162,"Marine mammal oils, nei",fish_oil,2015,zerofill
+162,"Marine mammal oils, nei",fish_oil,2016,zerofill
+162,"Marine mammal oils, nei",fish_oil,2017,zerofill
+162,"Marine mammal oils, nei",fish_oil,2018,zerofill
+162,"Marine mammal oils, nei",fish_oil,2019,zerofill
+162,"Marine mammal oils, nei",fish_oil,2020,zerofill
+162,"Marine mammal oils, nei",fish_oil,2021,zerofill
+162,"Marine mammal oils, nei",fish_oil,2022,none
+162,"Marine mammal oils, nei",fish_oil,2023,none
 162,Ornamental fish nei,ornamentals,1988,none
 162,Ornamental fish nei,ornamentals,1989,zerofill
 162,Ornamental fish nei,ornamentals,1990,zerofill
@@ -10875,6 +11735,53 @@ rgn_id,commodity,product,year,gapfill
 163,"Fish liver oils, nei",fish_oil,2021,none
 163,"Fish liver oils, nei",fish_oil,2022,none
 163,"Fish liver oils, nei",fish_oil,2023,none
+163,"Marine mammal oils, nei",fish_oil,1977,none
+163,"Marine mammal oils, nei",fish_oil,1978,zerofill
+163,"Marine mammal oils, nei",fish_oil,1979,zerofill
+163,"Marine mammal oils, nei",fish_oil,1980,zerofill
+163,"Marine mammal oils, nei",fish_oil,1981,zerofill
+163,"Marine mammal oils, nei",fish_oil,1982,zerofill
+163,"Marine mammal oils, nei",fish_oil,1983,zerofill
+163,"Marine mammal oils, nei",fish_oil,1984,zerofill
+163,"Marine mammal oils, nei",fish_oil,1985,zerofill
+163,"Marine mammal oils, nei",fish_oil,1986,zerofill
+163,"Marine mammal oils, nei",fish_oil,1987,zerofill
+163,"Marine mammal oils, nei",fish_oil,1988,zerofill
+163,"Marine mammal oils, nei",fish_oil,1989,none
+163,"Marine mammal oils, nei",fish_oil,1990,none
+163,"Marine mammal oils, nei",fish_oil,1991,none
+163,"Marine mammal oils, nei",fish_oil,1992,none
+163,"Marine mammal oils, nei",fish_oil,1993,none
+163,"Marine mammal oils, nei",fish_oil,1994,none
+163,"Marine mammal oils, nei",fish_oil,1995,none
+163,"Marine mammal oils, nei",fish_oil,1996,none
+163,"Marine mammal oils, nei",fish_oil,1997,none
+163,"Marine mammal oils, nei",fish_oil,1998,none
+163,"Marine mammal oils, nei",fish_oil,1999,none
+163,"Marine mammal oils, nei",fish_oil,2000,none
+163,"Marine mammal oils, nei",fish_oil,2001,none
+163,"Marine mammal oils, nei",fish_oil,2002,none
+163,"Marine mammal oils, nei",fish_oil,2003,none
+163,"Marine mammal oils, nei",fish_oil,2004,none
+163,"Marine mammal oils, nei",fish_oil,2005,none
+163,"Marine mammal oils, nei",fish_oil,2006,none
+163,"Marine mammal oils, nei",fish_oil,2007,zerofill
+163,"Marine mammal oils, nei",fish_oil,2008,zerofill
+163,"Marine mammal oils, nei",fish_oil,2009,none
+163,"Marine mammal oils, nei",fish_oil,2010,none
+163,"Marine mammal oils, nei",fish_oil,2011,zerofill
+163,"Marine mammal oils, nei",fish_oil,2012,zerofill
+163,"Marine mammal oils, nei",fish_oil,2013,zerofill
+163,"Marine mammal oils, nei",fish_oil,2014,none
+163,"Marine mammal oils, nei",fish_oil,2015,none
+163,"Marine mammal oils, nei",fish_oil,2016,none
+163,"Marine mammal oils, nei",fish_oil,2017,none
+163,"Marine mammal oils, nei",fish_oil,2018,zerofill
+163,"Marine mammal oils, nei",fish_oil,2019,none
+163,"Marine mammal oils, nei",fish_oil,2020,zerofill
+163,"Marine mammal oils, nei",fish_oil,2021,zerofill
+163,"Marine mammal oils, nei",fish_oil,2022,zerofill
+163,"Marine mammal oils, nei",fish_oil,2023,none
 163,Menhaden oil,fish_oil,1976,none
 163,Menhaden oil,fish_oil,1977,none
 163,Menhaden oil,fish_oil,1978,none
@@ -11258,6 +12165,26 @@ rgn_id,commodity,product,year,gapfill
 166,"Seaweeds and other algae, unfit for human consumption, nei",seaweeds,2021,none
 166,"Seaweeds and other algae, unfit for human consumption, nei",seaweeds,2022,none
 166,"Seaweeds and other algae, unfit for human consumption, nei",seaweeds,2023,none
+167,"Marine mammal oils, nei",fish_oil,2004,none
+167,"Marine mammal oils, nei",fish_oil,2005,none
+167,"Marine mammal oils, nei",fish_oil,2006,none
+167,"Marine mammal oils, nei",fish_oil,2007,none
+167,"Marine mammal oils, nei",fish_oil,2008,none
+167,"Marine mammal oils, nei",fish_oil,2009,none
+167,"Marine mammal oils, nei",fish_oil,2010,none
+167,"Marine mammal oils, nei",fish_oil,2011,zerofill
+167,"Marine mammal oils, nei",fish_oil,2012,none
+167,"Marine mammal oils, nei",fish_oil,2013,none
+167,"Marine mammal oils, nei",fish_oil,2014,none
+167,"Marine mammal oils, nei",fish_oil,2015,none
+167,"Marine mammal oils, nei",fish_oil,2016,none
+167,"Marine mammal oils, nei",fish_oil,2017,none
+167,"Marine mammal oils, nei",fish_oil,2018,zerofill
+167,"Marine mammal oils, nei",fish_oil,2019,none
+167,"Marine mammal oils, nei",fish_oil,2020,zerofill
+167,"Marine mammal oils, nei",fish_oil,2021,zerofill
+167,"Marine mammal oils, nei",fish_oil,2022,zerofill
+167,"Marine mammal oils, nei",fish_oil,2023,r1_t_rgn
 167,Ornamental fish nei,ornamentals,1988,r2_t_gr
 167,Ornamental fish nei,ornamentals,1989,r2_t_gr
 167,Ornamental fish nei,ornamentals,1990,r2_t_gr
@@ -11431,6 +12358,50 @@ rgn_id,commodity,product,year,gapfill
 171,"Fish liver oils, nei",fish_oil,2021,zerofill
 171,"Fish liver oils, nei",fish_oil,2022,none
 171,"Fish liver oils, nei",fish_oil,2023,none
+171,"Marine mammal oils, nei",fish_oil,1980,none
+171,"Marine mammal oils, nei",fish_oil,1981,zerofill
+171,"Marine mammal oils, nei",fish_oil,1982,none
+171,"Marine mammal oils, nei",fish_oil,1983,zerofill
+171,"Marine mammal oils, nei",fish_oil,1984,zerofill
+171,"Marine mammal oils, nei",fish_oil,1985,zerofill
+171,"Marine mammal oils, nei",fish_oil,1986,zerofill
+171,"Marine mammal oils, nei",fish_oil,1987,zerofill
+171,"Marine mammal oils, nei",fish_oil,1988,zerofill
+171,"Marine mammal oils, nei",fish_oil,1989,zerofill
+171,"Marine mammal oils, nei",fish_oil,1990,zerofill
+171,"Marine mammal oils, nei",fish_oil,1991,none
+171,"Marine mammal oils, nei",fish_oil,1992,none
+171,"Marine mammal oils, nei",fish_oil,1993,none
+171,"Marine mammal oils, nei",fish_oil,1994,zerofill
+171,"Marine mammal oils, nei",fish_oil,1995,zerofill
+171,"Marine mammal oils, nei",fish_oil,1996,none
+171,"Marine mammal oils, nei",fish_oil,1997,none
+171,"Marine mammal oils, nei",fish_oil,1998,zerofill
+171,"Marine mammal oils, nei",fish_oil,1999,zerofill
+171,"Marine mammal oils, nei",fish_oil,2000,zerofill
+171,"Marine mammal oils, nei",fish_oil,2001,zerofill
+171,"Marine mammal oils, nei",fish_oil,2002,none
+171,"Marine mammal oils, nei",fish_oil,2003,none
+171,"Marine mammal oils, nei",fish_oil,2004,none
+171,"Marine mammal oils, nei",fish_oil,2005,zerofill
+171,"Marine mammal oils, nei",fish_oil,2006,zerofill
+171,"Marine mammal oils, nei",fish_oil,2007,zerofill
+171,"Marine mammal oils, nei",fish_oil,2008,zerofill
+171,"Marine mammal oils, nei",fish_oil,2009,zerofill
+171,"Marine mammal oils, nei",fish_oil,2010,zerofill
+171,"Marine mammal oils, nei",fish_oil,2011,zerofill
+171,"Marine mammal oils, nei",fish_oil,2012,zerofill
+171,"Marine mammal oils, nei",fish_oil,2013,zerofill
+171,"Marine mammal oils, nei",fish_oil,2014,zerofill
+171,"Marine mammal oils, nei",fish_oil,2015,zerofill
+171,"Marine mammal oils, nei",fish_oil,2016,zerofill
+171,"Marine mammal oils, nei",fish_oil,2017,zerofill
+171,"Marine mammal oils, nei",fish_oil,2018,zerofill
+171,"Marine mammal oils, nei",fish_oil,2019,zerofill
+171,"Marine mammal oils, nei",fish_oil,2020,zerofill
+171,"Marine mammal oils, nei",fish_oil,2021,r2_t_gr
+171,"Marine mammal oils, nei",fish_oil,2022,zerofill
+171,"Marine mammal oils, nei",fish_oil,2023,endfill
 171,Ornamental fish nei,ornamentals,1976,none
 171,Ornamental fish nei,ornamentals,1977,none
 171,Ornamental fish nei,ornamentals,1978,none
@@ -11978,6 +12949,36 @@ rgn_id,commodity,product,year,gapfill
 174,"Halibuts, liver oils",fish_oil,2021,zerofill
 174,"Halibuts, liver oils",fish_oil,2022,none
 174,"Halibuts, liver oils",fish_oil,2023,none
+174,"Marine mammal oils, nei",fish_oil,1994,none
+174,"Marine mammal oils, nei",fish_oil,1995,r2_t_gr
+174,"Marine mammal oils, nei",fish_oil,1996,zerofill
+174,"Marine mammal oils, nei",fish_oil,1997,zerofill
+174,"Marine mammal oils, nei",fish_oil,1998,zerofill
+174,"Marine mammal oils, nei",fish_oil,1999,zerofill
+174,"Marine mammal oils, nei",fish_oil,2000,zerofill
+174,"Marine mammal oils, nei",fish_oil,2001,zerofill
+174,"Marine mammal oils, nei",fish_oil,2002,zerofill
+174,"Marine mammal oils, nei",fish_oil,2003,zerofill
+174,"Marine mammal oils, nei",fish_oil,2004,zerofill
+174,"Marine mammal oils, nei",fish_oil,2005,zerofill
+174,"Marine mammal oils, nei",fish_oil,2006,zerofill
+174,"Marine mammal oils, nei",fish_oil,2007,zerofill
+174,"Marine mammal oils, nei",fish_oil,2008,none
+174,"Marine mammal oils, nei",fish_oil,2009,zerofill
+174,"Marine mammal oils, nei",fish_oil,2010,zerofill
+174,"Marine mammal oils, nei",fish_oil,2011,zerofill
+174,"Marine mammal oils, nei",fish_oil,2012,zerofill
+174,"Marine mammal oils, nei",fish_oil,2013,zerofill
+174,"Marine mammal oils, nei",fish_oil,2014,zerofill
+174,"Marine mammal oils, nei",fish_oil,2015,zerofill
+174,"Marine mammal oils, nei",fish_oil,2016,zerofill
+174,"Marine mammal oils, nei",fish_oil,2017,zerofill
+174,"Marine mammal oils, nei",fish_oil,2018,none
+174,"Marine mammal oils, nei",fish_oil,2019,r2_t_gr
+174,"Marine mammal oils, nei",fish_oil,2020,none
+174,"Marine mammal oils, nei",fish_oil,2021,zerofill
+174,"Marine mammal oils, nei",fish_oil,2022,zerofill
+174,"Marine mammal oils, nei",fish_oil,2023,endfill
 174,Agar agar nei,seaweeds,1998,r2_t_gr
 174,Agar agar nei,seaweeds,1999,r2_t_gr
 174,Agar agar nei,seaweeds,2000,none
@@ -12224,6 +13225,54 @@ rgn_id,commodity,product,year,gapfill
 175,Herring oil,fish_oil,2021,zerofill
 175,Herring oil,fish_oil,2022,zerofill
 175,Herring oil,fish_oil,2023,endfill
+175,"Marine mammal oils, nei",fish_oil,1976,none
+175,"Marine mammal oils, nei",fish_oil,1977,none
+175,"Marine mammal oils, nei",fish_oil,1978,none
+175,"Marine mammal oils, nei",fish_oil,1979,none
+175,"Marine mammal oils, nei",fish_oil,1980,none
+175,"Marine mammal oils, nei",fish_oil,1981,none
+175,"Marine mammal oils, nei",fish_oil,1982,none
+175,"Marine mammal oils, nei",fish_oil,1983,none
+175,"Marine mammal oils, nei",fish_oil,1984,none
+175,"Marine mammal oils, nei",fish_oil,1985,zerofill
+175,"Marine mammal oils, nei",fish_oil,1986,zerofill
+175,"Marine mammal oils, nei",fish_oil,1987,zerofill
+175,"Marine mammal oils, nei",fish_oil,1988,none
+175,"Marine mammal oils, nei",fish_oil,1989,none
+175,"Marine mammal oils, nei",fish_oil,1990,none
+175,"Marine mammal oils, nei",fish_oil,1991,none
+175,"Marine mammal oils, nei",fish_oil,1992,none
+175,"Marine mammal oils, nei",fish_oil,1993,zerofill
+175,"Marine mammal oils, nei",fish_oil,1994,none
+175,"Marine mammal oils, nei",fish_oil,1995,zerofill
+175,"Marine mammal oils, nei",fish_oil,1996,zerofill
+175,"Marine mammal oils, nei",fish_oil,1997,zerofill
+175,"Marine mammal oils, nei",fish_oil,1998,none
+175,"Marine mammal oils, nei",fish_oil,1999,zerofill
+175,"Marine mammal oils, nei",fish_oil,2000,none
+175,"Marine mammal oils, nei",fish_oil,2001,none
+175,"Marine mammal oils, nei",fish_oil,2002,zerofill
+175,"Marine mammal oils, nei",fish_oil,2003,none
+175,"Marine mammal oils, nei",fish_oil,2004,none
+175,"Marine mammal oils, nei",fish_oil,2005,none
+175,"Marine mammal oils, nei",fish_oil,2006,none
+175,"Marine mammal oils, nei",fish_oil,2007,none
+175,"Marine mammal oils, nei",fish_oil,2008,none
+175,"Marine mammal oils, nei",fish_oil,2009,none
+175,"Marine mammal oils, nei",fish_oil,2010,none
+175,"Marine mammal oils, nei",fish_oil,2011,none
+175,"Marine mammal oils, nei",fish_oil,2012,none
+175,"Marine mammal oils, nei",fish_oil,2013,none
+175,"Marine mammal oils, nei",fish_oil,2014,none
+175,"Marine mammal oils, nei",fish_oil,2015,none
+175,"Marine mammal oils, nei",fish_oil,2016,none
+175,"Marine mammal oils, nei",fish_oil,2017,none
+175,"Marine mammal oils, nei",fish_oil,2018,zerofill
+175,"Marine mammal oils, nei",fish_oil,2019,none
+175,"Marine mammal oils, nei",fish_oil,2020,zerofill
+175,"Marine mammal oils, nei",fish_oil,2021,zerofill
+175,"Marine mammal oils, nei",fish_oil,2022,none
+175,"Marine mammal oils, nei",fish_oil,2023,endfill
 175,Ornamental saltwater fish,ornamentals,1988,none
 175,Ornamental saltwater fish,ornamentals,1989,zerofill
 175,Ornamental saltwater fish,ornamentals,1990,none
@@ -12486,6 +13535,54 @@ rgn_id,commodity,product,year,gapfill
 176,"Halibuts, liver oils",fish_oil,2021,none
 176,"Halibuts, liver oils",fish_oil,2022,zerofill
 176,"Halibuts, liver oils",fish_oil,2023,endfill
+176,"Marine mammal oils, nei",fish_oil,1976,none
+176,"Marine mammal oils, nei",fish_oil,1977,none
+176,"Marine mammal oils, nei",fish_oil,1978,none
+176,"Marine mammal oils, nei",fish_oil,1979,none
+176,"Marine mammal oils, nei",fish_oil,1980,none
+176,"Marine mammal oils, nei",fish_oil,1981,none
+176,"Marine mammal oils, nei",fish_oil,1982,r2_t_gr
+176,"Marine mammal oils, nei",fish_oil,1983,none
+176,"Marine mammal oils, nei",fish_oil,1984,none
+176,"Marine mammal oils, nei",fish_oil,1985,none
+176,"Marine mammal oils, nei",fish_oil,1986,none
+176,"Marine mammal oils, nei",fish_oil,1987,none
+176,"Marine mammal oils, nei",fish_oil,1988,none
+176,"Marine mammal oils, nei",fish_oil,1989,none
+176,"Marine mammal oils, nei",fish_oil,1990,none
+176,"Marine mammal oils, nei",fish_oil,1991,none
+176,"Marine mammal oils, nei",fish_oil,1992,none
+176,"Marine mammal oils, nei",fish_oil,1993,none
+176,"Marine mammal oils, nei",fish_oil,1994,none
+176,"Marine mammal oils, nei",fish_oil,1995,none
+176,"Marine mammal oils, nei",fish_oil,1996,zerofill
+176,"Marine mammal oils, nei",fish_oil,1997,zerofill
+176,"Marine mammal oils, nei",fish_oil,1998,zerofill
+176,"Marine mammal oils, nei",fish_oil,1999,none
+176,"Marine mammal oils, nei",fish_oil,2000,zerofill
+176,"Marine mammal oils, nei",fish_oil,2001,none
+176,"Marine mammal oils, nei",fish_oil,2002,zerofill
+176,"Marine mammal oils, nei",fish_oil,2003,zerofill
+176,"Marine mammal oils, nei",fish_oil,2004,none
+176,"Marine mammal oils, nei",fish_oil,2005,none
+176,"Marine mammal oils, nei",fish_oil,2006,none
+176,"Marine mammal oils, nei",fish_oil,2007,none
+176,"Marine mammal oils, nei",fish_oil,2008,none
+176,"Marine mammal oils, nei",fish_oil,2009,zerofill
+176,"Marine mammal oils, nei",fish_oil,2010,zerofill
+176,"Marine mammal oils, nei",fish_oil,2011,zerofill
+176,"Marine mammal oils, nei",fish_oil,2012,none
+176,"Marine mammal oils, nei",fish_oil,2013,zerofill
+176,"Marine mammal oils, nei",fish_oil,2014,none
+176,"Marine mammal oils, nei",fish_oil,2015,zerofill
+176,"Marine mammal oils, nei",fish_oil,2016,zerofill
+176,"Marine mammal oils, nei",fish_oil,2017,zerofill
+176,"Marine mammal oils, nei",fish_oil,2018,none
+176,"Marine mammal oils, nei",fish_oil,2019,none
+176,"Marine mammal oils, nei",fish_oil,2020,none
+176,"Marine mammal oils, nei",fish_oil,2021,zerofill
+176,"Marine mammal oils, nei",fish_oil,2022,none
+176,"Marine mammal oils, nei",fish_oil,2023,endfill
 176,"Oils and fats of aquatic animals, nei",fish_oil,1979,none
 176,"Oils and fats of aquatic animals, nei",fish_oil,1980,none
 176,"Oils and fats of aquatic animals, nei",fish_oil,1981,none
@@ -12799,6 +13896,53 @@ rgn_id,commodity,product,year,gapfill
 177,"Halibuts, liver oils",fish_oil,2021,none
 177,"Halibuts, liver oils",fish_oil,2022,none
 177,"Halibuts, liver oils",fish_oil,2023,none
+177,"Marine mammal oils, nei",fish_oil,1977,none
+177,"Marine mammal oils, nei",fish_oil,1978,none
+177,"Marine mammal oils, nei",fish_oil,1979,none
+177,"Marine mammal oils, nei",fish_oil,1980,r2_t_gr
+177,"Marine mammal oils, nei",fish_oil,1981,r2_t_gr
+177,"Marine mammal oils, nei",fish_oil,1982,none
+177,"Marine mammal oils, nei",fish_oil,1983,none
+177,"Marine mammal oils, nei",fish_oil,1984,none
+177,"Marine mammal oils, nei",fish_oil,1985,none
+177,"Marine mammal oils, nei",fish_oil,1986,none
+177,"Marine mammal oils, nei",fish_oil,1987,zerofill
+177,"Marine mammal oils, nei",fish_oil,1988,zerofill
+177,"Marine mammal oils, nei",fish_oil,1989,none
+177,"Marine mammal oils, nei",fish_oil,1990,none
+177,"Marine mammal oils, nei",fish_oil,1991,none
+177,"Marine mammal oils, nei",fish_oil,1992,zerofill
+177,"Marine mammal oils, nei",fish_oil,1993,zerofill
+177,"Marine mammal oils, nei",fish_oil,1994,zerofill
+177,"Marine mammal oils, nei",fish_oil,1995,none
+177,"Marine mammal oils, nei",fish_oil,1996,none
+177,"Marine mammal oils, nei",fish_oil,1997,none
+177,"Marine mammal oils, nei",fish_oil,1998,none
+177,"Marine mammal oils, nei",fish_oil,1999,none
+177,"Marine mammal oils, nei",fish_oil,2000,none
+177,"Marine mammal oils, nei",fish_oil,2001,none
+177,"Marine mammal oils, nei",fish_oil,2002,none
+177,"Marine mammal oils, nei",fish_oil,2003,none
+177,"Marine mammal oils, nei",fish_oil,2004,none
+177,"Marine mammal oils, nei",fish_oil,2005,none
+177,"Marine mammal oils, nei",fish_oil,2006,none
+177,"Marine mammal oils, nei",fish_oil,2007,none
+177,"Marine mammal oils, nei",fish_oil,2008,none
+177,"Marine mammal oils, nei",fish_oil,2009,none
+177,"Marine mammal oils, nei",fish_oil,2010,none
+177,"Marine mammal oils, nei",fish_oil,2011,none
+177,"Marine mammal oils, nei",fish_oil,2012,none
+177,"Marine mammal oils, nei",fish_oil,2013,none
+177,"Marine mammal oils, nei",fish_oil,2014,none
+177,"Marine mammal oils, nei",fish_oil,2015,none
+177,"Marine mammal oils, nei",fish_oil,2016,zerofill
+177,"Marine mammal oils, nei",fish_oil,2017,zerofill
+177,"Marine mammal oils, nei",fish_oil,2018,none
+177,"Marine mammal oils, nei",fish_oil,2019,zerofill
+177,"Marine mammal oils, nei",fish_oil,2020,none
+177,"Marine mammal oils, nei",fish_oil,2021,none
+177,"Marine mammal oils, nei",fish_oil,2022,none
+177,"Marine mammal oils, nei",fish_oil,2023,none
 177,Ornamental fish nei,ornamentals,1977,none
 177,Ornamental fish nei,ornamentals,1978,none
 177,Ornamental fish nei,ornamentals,1979,none
@@ -13069,6 +14213,34 @@ rgn_id,commodity,product,year,gapfill
 178,"Halibuts, liver oils",fish_oil,2021,zerofill
 178,"Halibuts, liver oils",fish_oil,2022,r2_t_gr
 178,"Halibuts, liver oils",fish_oil,2023,r2_t_gr
+178,"Marine mammal oils, nei",fish_oil,1996,none
+178,"Marine mammal oils, nei",fish_oil,1997,none
+178,"Marine mammal oils, nei",fish_oil,1998,none
+178,"Marine mammal oils, nei",fish_oil,1999,none
+178,"Marine mammal oils, nei",fish_oil,2000,zerofill
+178,"Marine mammal oils, nei",fish_oil,2001,none
+178,"Marine mammal oils, nei",fish_oil,2002,none
+178,"Marine mammal oils, nei",fish_oil,2003,zerofill
+178,"Marine mammal oils, nei",fish_oil,2004,zerofill
+178,"Marine mammal oils, nei",fish_oil,2005,zerofill
+178,"Marine mammal oils, nei",fish_oil,2006,none
+178,"Marine mammal oils, nei",fish_oil,2007,none
+178,"Marine mammal oils, nei",fish_oil,2008,zerofill
+178,"Marine mammal oils, nei",fish_oil,2009,zerofill
+178,"Marine mammal oils, nei",fish_oil,2010,none
+178,"Marine mammal oils, nei",fish_oil,2011,none
+178,"Marine mammal oils, nei",fish_oil,2012,none
+178,"Marine mammal oils, nei",fish_oil,2013,none
+178,"Marine mammal oils, nei",fish_oil,2014,none
+178,"Marine mammal oils, nei",fish_oil,2015,none
+178,"Marine mammal oils, nei",fish_oil,2016,zerofill
+178,"Marine mammal oils, nei",fish_oil,2017,zerofill
+178,"Marine mammal oils, nei",fish_oil,2018,none
+178,"Marine mammal oils, nei",fish_oil,2019,zerofill
+178,"Marine mammal oils, nei",fish_oil,2020,none
+178,"Marine mammal oils, nei",fish_oil,2021,none
+178,"Marine mammal oils, nei",fish_oil,2022,none
+178,"Marine mammal oils, nei",fish_oil,2023,none
 178,Ornamental saltwater fish,ornamentals,2002,none
 178,Ornamental saltwater fish,ornamentals,2003,zerofill
 178,Ornamental saltwater fish,ornamentals,2004,zerofill
@@ -13298,6 +14470,54 @@ rgn_id,commodity,product,year,gapfill
 179,"Halibuts, liver oils",fish_oil,2021,none
 179,"Halibuts, liver oils",fish_oil,2022,none
 179,"Halibuts, liver oils",fish_oil,2023,none
+179,"Marine mammal oils, nei",fish_oil,1976,none
+179,"Marine mammal oils, nei",fish_oil,1977,none
+179,"Marine mammal oils, nei",fish_oil,1978,none
+179,"Marine mammal oils, nei",fish_oil,1979,none
+179,"Marine mammal oils, nei",fish_oil,1980,none
+179,"Marine mammal oils, nei",fish_oil,1981,none
+179,"Marine mammal oils, nei",fish_oil,1982,none
+179,"Marine mammal oils, nei",fish_oil,1983,r2_t_gr
+179,"Marine mammal oils, nei",fish_oil,1984,none
+179,"Marine mammal oils, nei",fish_oil,1985,none
+179,"Marine mammal oils, nei",fish_oil,1986,none
+179,"Marine mammal oils, nei",fish_oil,1987,none
+179,"Marine mammal oils, nei",fish_oil,1988,none
+179,"Marine mammal oils, nei",fish_oil,1989,none
+179,"Marine mammal oils, nei",fish_oil,1990,none
+179,"Marine mammal oils, nei",fish_oil,1991,none
+179,"Marine mammal oils, nei",fish_oil,1992,none
+179,"Marine mammal oils, nei",fish_oil,1993,none
+179,"Marine mammal oils, nei",fish_oil,1994,none
+179,"Marine mammal oils, nei",fish_oil,1995,none
+179,"Marine mammal oils, nei",fish_oil,1996,none
+179,"Marine mammal oils, nei",fish_oil,1997,none
+179,"Marine mammal oils, nei",fish_oil,1998,r2_t_gr
+179,"Marine mammal oils, nei",fish_oil,1999,none
+179,"Marine mammal oils, nei",fish_oil,2000,none
+179,"Marine mammal oils, nei",fish_oil,2001,none
+179,"Marine mammal oils, nei",fish_oil,2002,none
+179,"Marine mammal oils, nei",fish_oil,2003,none
+179,"Marine mammal oils, nei",fish_oil,2004,none
+179,"Marine mammal oils, nei",fish_oil,2005,none
+179,"Marine mammal oils, nei",fish_oil,2006,none
+179,"Marine mammal oils, nei",fish_oil,2007,none
+179,"Marine mammal oils, nei",fish_oil,2008,zerofill
+179,"Marine mammal oils, nei",fish_oil,2009,none
+179,"Marine mammal oils, nei",fish_oil,2010,none
+179,"Marine mammal oils, nei",fish_oil,2011,zerofill
+179,"Marine mammal oils, nei",fish_oil,2012,none
+179,"Marine mammal oils, nei",fish_oil,2013,none
+179,"Marine mammal oils, nei",fish_oil,2014,none
+179,"Marine mammal oils, nei",fish_oil,2015,none
+179,"Marine mammal oils, nei",fish_oil,2016,none
+179,"Marine mammal oils, nei",fish_oil,2017,none
+179,"Marine mammal oils, nei",fish_oil,2018,none
+179,"Marine mammal oils, nei",fish_oil,2019,none
+179,"Marine mammal oils, nei",fish_oil,2020,none
+179,"Marine mammal oils, nei",fish_oil,2021,r1_t_rgn
+179,"Marine mammal oils, nei",fish_oil,2022,none
+179,"Marine mammal oils, nei",fish_oil,2023,r1_t_rgn
 179,Ornamental saltwater fish,ornamentals,1988,none
 179,Ornamental saltwater fish,ornamentals,1989,none
 179,Ornamental saltwater fish,ornamentals,1990,none
@@ -13579,6 +14799,54 @@ rgn_id,commodity,product,year,gapfill
 180,"Halibuts, liver oils",fish_oil,2021,none
 180,"Halibuts, liver oils",fish_oil,2022,none
 180,"Halibuts, liver oils",fish_oil,2023,none
+180,"Marine mammal oils, nei",fish_oil,1976,none
+180,"Marine mammal oils, nei",fish_oil,1977,none
+180,"Marine mammal oils, nei",fish_oil,1978,none
+180,"Marine mammal oils, nei",fish_oil,1979,none
+180,"Marine mammal oils, nei",fish_oil,1980,none
+180,"Marine mammal oils, nei",fish_oil,1981,none
+180,"Marine mammal oils, nei",fish_oil,1982,none
+180,"Marine mammal oils, nei",fish_oil,1983,none
+180,"Marine mammal oils, nei",fish_oil,1984,zerofill
+180,"Marine mammal oils, nei",fish_oil,1985,zerofill
+180,"Marine mammal oils, nei",fish_oil,1986,zerofill
+180,"Marine mammal oils, nei",fish_oil,1987,zerofill
+180,"Marine mammal oils, nei",fish_oil,1988,none
+180,"Marine mammal oils, nei",fish_oil,1989,none
+180,"Marine mammal oils, nei",fish_oil,1990,none
+180,"Marine mammal oils, nei",fish_oil,1991,none
+180,"Marine mammal oils, nei",fish_oil,1992,none
+180,"Marine mammal oils, nei",fish_oil,1993,none
+180,"Marine mammal oils, nei",fish_oil,1994,none
+180,"Marine mammal oils, nei",fish_oil,1995,none
+180,"Marine mammal oils, nei",fish_oil,1996,none
+180,"Marine mammal oils, nei",fish_oil,1997,none
+180,"Marine mammal oils, nei",fish_oil,1998,none
+180,"Marine mammal oils, nei",fish_oil,1999,none
+180,"Marine mammal oils, nei",fish_oil,2000,none
+180,"Marine mammal oils, nei",fish_oil,2001,none
+180,"Marine mammal oils, nei",fish_oil,2002,none
+180,"Marine mammal oils, nei",fish_oil,2003,none
+180,"Marine mammal oils, nei",fish_oil,2004,none
+180,"Marine mammal oils, nei",fish_oil,2005,none
+180,"Marine mammal oils, nei",fish_oil,2006,none
+180,"Marine mammal oils, nei",fish_oil,2007,none
+180,"Marine mammal oils, nei",fish_oil,2008,none
+180,"Marine mammal oils, nei",fish_oil,2009,none
+180,"Marine mammal oils, nei",fish_oil,2010,none
+180,"Marine mammal oils, nei",fish_oil,2011,none
+180,"Marine mammal oils, nei",fish_oil,2012,none
+180,"Marine mammal oils, nei",fish_oil,2013,none
+180,"Marine mammal oils, nei",fish_oil,2014,none
+180,"Marine mammal oils, nei",fish_oil,2015,none
+180,"Marine mammal oils, nei",fish_oil,2016,none
+180,"Marine mammal oils, nei",fish_oil,2017,none
+180,"Marine mammal oils, nei",fish_oil,2018,none
+180,"Marine mammal oils, nei",fish_oil,2019,none
+180,"Marine mammal oils, nei",fish_oil,2020,none
+180,"Marine mammal oils, nei",fish_oil,2021,none
+180,"Marine mammal oils, nei",fish_oil,2022,none
+180,"Marine mammal oils, nei",fish_oil,2023,none
 180,Ornamental saltwater fish,ornamentals,1988,none
 180,Ornamental saltwater fish,ornamentals,1989,none
 180,Ornamental saltwater fish,ornamentals,1990,none
@@ -13818,6 +15086,52 @@ rgn_id,commodity,product,year,gapfill
 181,"Fish liver oils, nei",fish_oil,2021,none
 181,"Fish liver oils, nei",fish_oil,2022,none
 181,"Fish liver oils, nei",fish_oil,2023,none
+181,"Marine mammal oils, nei",fish_oil,1978,none
+181,"Marine mammal oils, nei",fish_oil,1979,zerofill
+181,"Marine mammal oils, nei",fish_oil,1980,zerofill
+181,"Marine mammal oils, nei",fish_oil,1981,zerofill
+181,"Marine mammal oils, nei",fish_oil,1982,zerofill
+181,"Marine mammal oils, nei",fish_oil,1983,none
+181,"Marine mammal oils, nei",fish_oil,1984,zerofill
+181,"Marine mammal oils, nei",fish_oil,1985,none
+181,"Marine mammal oils, nei",fish_oil,1986,none
+181,"Marine mammal oils, nei",fish_oil,1987,none
+181,"Marine mammal oils, nei",fish_oil,1988,none
+181,"Marine mammal oils, nei",fish_oil,1989,none
+181,"Marine mammal oils, nei",fish_oil,1990,none
+181,"Marine mammal oils, nei",fish_oil,1991,none
+181,"Marine mammal oils, nei",fish_oil,1992,none
+181,"Marine mammal oils, nei",fish_oil,1993,zerofill
+181,"Marine mammal oils, nei",fish_oil,1994,zerofill
+181,"Marine mammal oils, nei",fish_oil,1995,zerofill
+181,"Marine mammal oils, nei",fish_oil,1996,zerofill
+181,"Marine mammal oils, nei",fish_oil,1997,zerofill
+181,"Marine mammal oils, nei",fish_oil,1998,zerofill
+181,"Marine mammal oils, nei",fish_oil,1999,zerofill
+181,"Marine mammal oils, nei",fish_oil,2000,zerofill
+181,"Marine mammal oils, nei",fish_oil,2001,zerofill
+181,"Marine mammal oils, nei",fish_oil,2002,zerofill
+181,"Marine mammal oils, nei",fish_oil,2003,zerofill
+181,"Marine mammal oils, nei",fish_oil,2004,zerofill
+181,"Marine mammal oils, nei",fish_oil,2005,zerofill
+181,"Marine mammal oils, nei",fish_oil,2006,zerofill
+181,"Marine mammal oils, nei",fish_oil,2007,none
+181,"Marine mammal oils, nei",fish_oil,2008,zerofill
+181,"Marine mammal oils, nei",fish_oil,2009,zerofill
+181,"Marine mammal oils, nei",fish_oil,2010,zerofill
+181,"Marine mammal oils, nei",fish_oil,2011,zerofill
+181,"Marine mammal oils, nei",fish_oil,2012,zerofill
+181,"Marine mammal oils, nei",fish_oil,2013,zerofill
+181,"Marine mammal oils, nei",fish_oil,2014,zerofill
+181,"Marine mammal oils, nei",fish_oil,2015,zerofill
+181,"Marine mammal oils, nei",fish_oil,2016,none
+181,"Marine mammal oils, nei",fish_oil,2017,none
+181,"Marine mammal oils, nei",fish_oil,2018,none
+181,"Marine mammal oils, nei",fish_oil,2019,none
+181,"Marine mammal oils, nei",fish_oil,2020,zerofill
+181,"Marine mammal oils, nei",fish_oil,2021,zerofill
+181,"Marine mammal oils, nei",fish_oil,2022,zerofill
+181,"Marine mammal oils, nei",fish_oil,2023,none
 181,Ornamental saltwater fish,ornamentals,1992,none
 181,Ornamental saltwater fish,ornamentals,1993,zerofill
 181,Ornamental saltwater fish,ornamentals,1994,zerofill
@@ -14050,6 +15364,49 @@ rgn_id,commodity,product,year,gapfill
 182,"Fish liver oils, nei",fish_oil,2021,none
 182,"Fish liver oils, nei",fish_oil,2022,none
 182,"Fish liver oils, nei",fish_oil,2023,none
+182,"Marine mammal oils, nei",fish_oil,1981,none
+182,"Marine mammal oils, nei",fish_oil,1982,none
+182,"Marine mammal oils, nei",fish_oil,1983,zerofill
+182,"Marine mammal oils, nei",fish_oil,1984,none
+182,"Marine mammal oils, nei",fish_oil,1985,zerofill
+182,"Marine mammal oils, nei",fish_oil,1986,zerofill
+182,"Marine mammal oils, nei",fish_oil,1987,r2_t_gr
+182,"Marine mammal oils, nei",fish_oil,1988,zerofill
+182,"Marine mammal oils, nei",fish_oil,1989,zerofill
+182,"Marine mammal oils, nei",fish_oil,1990,zerofill
+182,"Marine mammal oils, nei",fish_oil,1991,none
+182,"Marine mammal oils, nei",fish_oil,1992,none
+182,"Marine mammal oils, nei",fish_oil,1993,none
+182,"Marine mammal oils, nei",fish_oil,1994,none
+182,"Marine mammal oils, nei",fish_oil,1995,zerofill
+182,"Marine mammal oils, nei",fish_oil,1996,zerofill
+182,"Marine mammal oils, nei",fish_oil,1997,zerofill
+182,"Marine mammal oils, nei",fish_oil,1998,none
+182,"Marine mammal oils, nei",fish_oil,1999,none
+182,"Marine mammal oils, nei",fish_oil,2000,none
+182,"Marine mammal oils, nei",fish_oil,2001,none
+182,"Marine mammal oils, nei",fish_oil,2002,none
+182,"Marine mammal oils, nei",fish_oil,2003,none
+182,"Marine mammal oils, nei",fish_oil,2004,none
+182,"Marine mammal oils, nei",fish_oil,2005,zerofill
+182,"Marine mammal oils, nei",fish_oil,2006,none
+182,"Marine mammal oils, nei",fish_oil,2007,none
+182,"Marine mammal oils, nei",fish_oil,2008,none
+182,"Marine mammal oils, nei",fish_oil,2009,none
+182,"Marine mammal oils, nei",fish_oil,2010,none
+182,"Marine mammal oils, nei",fish_oil,2011,none
+182,"Marine mammal oils, nei",fish_oil,2012,none
+182,"Marine mammal oils, nei",fish_oil,2013,none
+182,"Marine mammal oils, nei",fish_oil,2014,none
+182,"Marine mammal oils, nei",fish_oil,2015,none
+182,"Marine mammal oils, nei",fish_oil,2016,none
+182,"Marine mammal oils, nei",fish_oil,2017,none
+182,"Marine mammal oils, nei",fish_oil,2018,zerofill
+182,"Marine mammal oils, nei",fish_oil,2019,none
+182,"Marine mammal oils, nei",fish_oil,2020,none
+182,"Marine mammal oils, nei",fish_oil,2021,r1_t_rgn
+182,"Marine mammal oils, nei",fish_oil,2022,none
+182,"Marine mammal oils, nei",fish_oil,2023,none
 182,Ornamental fish nei,ornamentals,1977,none
 182,Ornamental fish nei,ornamentals,1978,r2_t_gr
 182,Ornamental fish nei,ornamentals,1979,r2_t_gr
@@ -14409,6 +15766,54 @@ rgn_id,commodity,product,year,gapfill
 183,"Halibuts, liver oils",fish_oil,2021,zerofill
 183,"Halibuts, liver oils",fish_oil,2022,zerofill
 183,"Halibuts, liver oils",fish_oil,2023,endfill
+183,"Marine mammal oils, nei",fish_oil,1976,none
+183,"Marine mammal oils, nei",fish_oil,1977,none
+183,"Marine mammal oils, nei",fish_oil,1978,none
+183,"Marine mammal oils, nei",fish_oil,1979,none
+183,"Marine mammal oils, nei",fish_oil,1980,none
+183,"Marine mammal oils, nei",fish_oil,1981,none
+183,"Marine mammal oils, nei",fish_oil,1982,none
+183,"Marine mammal oils, nei",fish_oil,1983,none
+183,"Marine mammal oils, nei",fish_oil,1984,none
+183,"Marine mammal oils, nei",fish_oil,1985,zerofill
+183,"Marine mammal oils, nei",fish_oil,1986,none
+183,"Marine mammal oils, nei",fish_oil,1987,zerofill
+183,"Marine mammal oils, nei",fish_oil,1988,none
+183,"Marine mammal oils, nei",fish_oil,1989,zerofill
+183,"Marine mammal oils, nei",fish_oil,1990,r2_t_gr
+183,"Marine mammal oils, nei",fish_oil,1991,zerofill
+183,"Marine mammal oils, nei",fish_oil,1992,zerofill
+183,"Marine mammal oils, nei",fish_oil,1993,none
+183,"Marine mammal oils, nei",fish_oil,1994,zerofill
+183,"Marine mammal oils, nei",fish_oil,1995,none
+183,"Marine mammal oils, nei",fish_oil,1996,none
+183,"Marine mammal oils, nei",fish_oil,1997,zerofill
+183,"Marine mammal oils, nei",fish_oil,1998,zerofill
+183,"Marine mammal oils, nei",fish_oil,1999,zerofill
+183,"Marine mammal oils, nei",fish_oil,2000,none
+183,"Marine mammal oils, nei",fish_oil,2001,zerofill
+183,"Marine mammal oils, nei",fish_oil,2002,none
+183,"Marine mammal oils, nei",fish_oil,2003,zerofill
+183,"Marine mammal oils, nei",fish_oil,2004,zerofill
+183,"Marine mammal oils, nei",fish_oil,2005,none
+183,"Marine mammal oils, nei",fish_oil,2006,none
+183,"Marine mammal oils, nei",fish_oil,2007,zerofill
+183,"Marine mammal oils, nei",fish_oil,2008,zerofill
+183,"Marine mammal oils, nei",fish_oil,2009,zerofill
+183,"Marine mammal oils, nei",fish_oil,2010,zerofill
+183,"Marine mammal oils, nei",fish_oil,2011,zerofill
+183,"Marine mammal oils, nei",fish_oil,2012,none
+183,"Marine mammal oils, nei",fish_oil,2013,zerofill
+183,"Marine mammal oils, nei",fish_oil,2014,zerofill
+183,"Marine mammal oils, nei",fish_oil,2015,zerofill
+183,"Marine mammal oils, nei",fish_oil,2016,zerofill
+183,"Marine mammal oils, nei",fish_oil,2017,zerofill
+183,"Marine mammal oils, nei",fish_oil,2018,zerofill
+183,"Marine mammal oils, nei",fish_oil,2019,zerofill
+183,"Marine mammal oils, nei",fish_oil,2020,zerofill
+183,"Marine mammal oils, nei",fish_oil,2021,zerofill
+183,"Marine mammal oils, nei",fish_oil,2022,zerofill
+183,"Marine mammal oils, nei",fish_oil,2023,none
 183,Shark liver oil,fish_oil,1983,none
 183,Shark liver oil,fish_oil,1984,none
 183,Shark liver oil,fish_oil,1985,none
@@ -14716,6 +16121,54 @@ rgn_id,commodity,product,year,gapfill
 184,"Halibuts, liver oils",fish_oil,2021,zerofill
 184,"Halibuts, liver oils",fish_oil,2022,zerofill
 184,"Halibuts, liver oils",fish_oil,2023,endfill
+184,"Marine mammal oils, nei",fish_oil,1976,none
+184,"Marine mammal oils, nei",fish_oil,1977,none
+184,"Marine mammal oils, nei",fish_oil,1978,none
+184,"Marine mammal oils, nei",fish_oil,1979,none
+184,"Marine mammal oils, nei",fish_oil,1980,none
+184,"Marine mammal oils, nei",fish_oil,1981,none
+184,"Marine mammal oils, nei",fish_oil,1982,zerofill
+184,"Marine mammal oils, nei",fish_oil,1983,zerofill
+184,"Marine mammal oils, nei",fish_oil,1984,none
+184,"Marine mammal oils, nei",fish_oil,1985,zerofill
+184,"Marine mammal oils, nei",fish_oil,1986,zerofill
+184,"Marine mammal oils, nei",fish_oil,1987,zerofill
+184,"Marine mammal oils, nei",fish_oil,1988,none
+184,"Marine mammal oils, nei",fish_oil,1989,none
+184,"Marine mammal oils, nei",fish_oil,1990,none
+184,"Marine mammal oils, nei",fish_oil,1991,none
+184,"Marine mammal oils, nei",fish_oil,1992,none
+184,"Marine mammal oils, nei",fish_oil,1993,zerofill
+184,"Marine mammal oils, nei",fish_oil,1994,zerofill
+184,"Marine mammal oils, nei",fish_oil,1995,none
+184,"Marine mammal oils, nei",fish_oil,1996,none
+184,"Marine mammal oils, nei",fish_oil,1997,r2_t_gr
+184,"Marine mammal oils, nei",fish_oil,1998,r2_t_gr
+184,"Marine mammal oils, nei",fish_oil,1999,none
+184,"Marine mammal oils, nei",fish_oil,2000,none
+184,"Marine mammal oils, nei",fish_oil,2001,none
+184,"Marine mammal oils, nei",fish_oil,2002,none
+184,"Marine mammal oils, nei",fish_oil,2003,none
+184,"Marine mammal oils, nei",fish_oil,2004,none
+184,"Marine mammal oils, nei",fish_oil,2005,none
+184,"Marine mammal oils, nei",fish_oil,2006,none
+184,"Marine mammal oils, nei",fish_oil,2007,none
+184,"Marine mammal oils, nei",fish_oil,2008,none
+184,"Marine mammal oils, nei",fish_oil,2009,none
+184,"Marine mammal oils, nei",fish_oil,2010,none
+184,"Marine mammal oils, nei",fish_oil,2011,none
+184,"Marine mammal oils, nei",fish_oil,2012,none
+184,"Marine mammal oils, nei",fish_oil,2013,none
+184,"Marine mammal oils, nei",fish_oil,2014,none
+184,"Marine mammal oils, nei",fish_oil,2015,none
+184,"Marine mammal oils, nei",fish_oil,2016,none
+184,"Marine mammal oils, nei",fish_oil,2017,none
+184,"Marine mammal oils, nei",fish_oil,2018,none
+184,"Marine mammal oils, nei",fish_oil,2019,none
+184,"Marine mammal oils, nei",fish_oil,2020,none
+184,"Marine mammal oils, nei",fish_oil,2021,none
+184,"Marine mammal oils, nei",fish_oil,2022,zerofill
+184,"Marine mammal oils, nei",fish_oil,2023,endfill
 184,Ornamental saltwater fish,ornamentals,1988,none
 184,Ornamental saltwater fish,ornamentals,1989,none
 184,Ornamental saltwater fish,ornamentals,1990,none
@@ -14961,6 +16414,28 @@ rgn_id,commodity,product,year,gapfill
 187,"Fish liver oils, nei",fish_oil,2021,none
 187,"Fish liver oils, nei",fish_oil,2022,none
 187,"Fish liver oils, nei",fish_oil,2023,none
+187,"Marine mammal oils, nei",fish_oil,2002,none
+187,"Marine mammal oils, nei",fish_oil,2003,zerofill
+187,"Marine mammal oils, nei",fish_oil,2004,zerofill
+187,"Marine mammal oils, nei",fish_oil,2005,zerofill
+187,"Marine mammal oils, nei",fish_oil,2006,zerofill
+187,"Marine mammal oils, nei",fish_oil,2007,zerofill
+187,"Marine mammal oils, nei",fish_oil,2008,zerofill
+187,"Marine mammal oils, nei",fish_oil,2009,zerofill
+187,"Marine mammal oils, nei",fish_oil,2010,zerofill
+187,"Marine mammal oils, nei",fish_oil,2011,zerofill
+187,"Marine mammal oils, nei",fish_oil,2012,none
+187,"Marine mammal oils, nei",fish_oil,2013,none
+187,"Marine mammal oils, nei",fish_oil,2014,zerofill
+187,"Marine mammal oils, nei",fish_oil,2015,zerofill
+187,"Marine mammal oils, nei",fish_oil,2016,zerofill
+187,"Marine mammal oils, nei",fish_oil,2017,none
+187,"Marine mammal oils, nei",fish_oil,2018,none
+187,"Marine mammal oils, nei",fish_oil,2019,none
+187,"Marine mammal oils, nei",fish_oil,2020,none
+187,"Marine mammal oils, nei",fish_oil,2021,none
+187,"Marine mammal oils, nei",fish_oil,2022,zerofill
+187,"Marine mammal oils, nei",fish_oil,2023,r1_t_rgn
 187,Agar agar nei,seaweeds,2000,none
 187,Agar agar nei,seaweeds,2001,zerofill
 187,Agar agar nei,seaweeds,2002,none
@@ -15556,6 +17031,21 @@ rgn_id,commodity,product,year,gapfill
 195,"Fish liver oils, nei",fish_oil,2021,none
 195,"Fish liver oils, nei",fish_oil,2022,none
 195,"Fish liver oils, nei",fish_oil,2023,none
+195,"Marine mammal oils, nei",fish_oil,2009,none
+195,"Marine mammal oils, nei",fish_oil,2010,zerofill
+195,"Marine mammal oils, nei",fish_oil,2011,none
+195,"Marine mammal oils, nei",fish_oil,2012,none
+195,"Marine mammal oils, nei",fish_oil,2013,none
+195,"Marine mammal oils, nei",fish_oil,2014,none
+195,"Marine mammal oils, nei",fish_oil,2015,none
+195,"Marine mammal oils, nei",fish_oil,2016,none
+195,"Marine mammal oils, nei",fish_oil,2017,none
+195,"Marine mammal oils, nei",fish_oil,2018,none
+195,"Marine mammal oils, nei",fish_oil,2019,none
+195,"Marine mammal oils, nei",fish_oil,2020,none
+195,"Marine mammal oils, nei",fish_oil,2021,zerofill
+195,"Marine mammal oils, nei",fish_oil,2022,zerofill
+195,"Marine mammal oils, nei",fish_oil,2023,endfill
 195,"Oils and fats of aquatic animals, nei",fish_oil,1976,none
 195,"Oils and fats of aquatic animals, nei",fish_oil,1977,none
 195,"Oils and fats of aquatic animals, nei",fish_oil,1978,zerofill
@@ -16033,6 +17523,39 @@ rgn_id,commodity,product,year,gapfill
 203,"Fish liver oils, nei",fish_oil,2021,none
 203,"Fish liver oils, nei",fish_oil,2022,none
 203,"Fish liver oils, nei",fish_oil,2023,none
+203,"Marine mammal oils, nei",fish_oil,1991,none
+203,"Marine mammal oils, nei",fish_oil,1992,none
+203,"Marine mammal oils, nei",fish_oil,1993,none
+203,"Marine mammal oils, nei",fish_oil,1994,none
+203,"Marine mammal oils, nei",fish_oil,1995,zerofill
+203,"Marine mammal oils, nei",fish_oil,1996,zerofill
+203,"Marine mammal oils, nei",fish_oil,1997,zerofill
+203,"Marine mammal oils, nei",fish_oil,1998,zerofill
+203,"Marine mammal oils, nei",fish_oil,1999,none
+203,"Marine mammal oils, nei",fish_oil,2000,zerofill
+203,"Marine mammal oils, nei",fish_oil,2001,none
+203,"Marine mammal oils, nei",fish_oil,2002,none
+203,"Marine mammal oils, nei",fish_oil,2003,zerofill
+203,"Marine mammal oils, nei",fish_oil,2004,zerofill
+203,"Marine mammal oils, nei",fish_oil,2005,zerofill
+203,"Marine mammal oils, nei",fish_oil,2006,zerofill
+203,"Marine mammal oils, nei",fish_oil,2007,none
+203,"Marine mammal oils, nei",fish_oil,2008,zerofill
+203,"Marine mammal oils, nei",fish_oil,2009,zerofill
+203,"Marine mammal oils, nei",fish_oil,2010,none
+203,"Marine mammal oils, nei",fish_oil,2011,none
+203,"Marine mammal oils, nei",fish_oil,2012,none
+203,"Marine mammal oils, nei",fish_oil,2013,none
+203,"Marine mammal oils, nei",fish_oil,2014,zerofill
+203,"Marine mammal oils, nei",fish_oil,2015,zerofill
+203,"Marine mammal oils, nei",fish_oil,2016,zerofill
+203,"Marine mammal oils, nei",fish_oil,2017,zerofill
+203,"Marine mammal oils, nei",fish_oil,2018,zerofill
+203,"Marine mammal oils, nei",fish_oil,2019,zerofill
+203,"Marine mammal oils, nei",fish_oil,2020,none
+203,"Marine mammal oils, nei",fish_oil,2021,zerofill
+203,"Marine mammal oils, nei",fish_oil,2022,none
+203,"Marine mammal oils, nei",fish_oil,2023,endfill
 203,Sardine oil,fish_oil,2000,none
 203,Sardine oil,fish_oil,2001,none
 203,Sardine oil,fish_oil,2002,none
@@ -16400,6 +17923,48 @@ rgn_id,commodity,product,year,gapfill
 206,"Fish liver oils, nei",fish_oil,2021,zerofill
 206,"Fish liver oils, nei",fish_oil,2022,zerofill
 206,"Fish liver oils, nei",fish_oil,2023,endfill
+206,"Marine mammal oils, nei",fish_oil,1982,none
+206,"Marine mammal oils, nei",fish_oil,1983,zerofill
+206,"Marine mammal oils, nei",fish_oil,1984,zerofill
+206,"Marine mammal oils, nei",fish_oil,1985,none
+206,"Marine mammal oils, nei",fish_oil,1986,none
+206,"Marine mammal oils, nei",fish_oil,1987,zerofill
+206,"Marine mammal oils, nei",fish_oil,1988,zerofill
+206,"Marine mammal oils, nei",fish_oil,1989,none
+206,"Marine mammal oils, nei",fish_oil,1990,none
+206,"Marine mammal oils, nei",fish_oil,1991,none
+206,"Marine mammal oils, nei",fish_oil,1992,none
+206,"Marine mammal oils, nei",fish_oil,1993,zerofill
+206,"Marine mammal oils, nei",fish_oil,1994,none
+206,"Marine mammal oils, nei",fish_oil,1995,none
+206,"Marine mammal oils, nei",fish_oil,1996,zerofill
+206,"Marine mammal oils, nei",fish_oil,1997,zerofill
+206,"Marine mammal oils, nei",fish_oil,1998,none
+206,"Marine mammal oils, nei",fish_oil,1999,zerofill
+206,"Marine mammal oils, nei",fish_oil,2000,none
+206,"Marine mammal oils, nei",fish_oil,2001,none
+206,"Marine mammal oils, nei",fish_oil,2002,none
+206,"Marine mammal oils, nei",fish_oil,2003,none
+206,"Marine mammal oils, nei",fish_oil,2004,zerofill
+206,"Marine mammal oils, nei",fish_oil,2005,none
+206,"Marine mammal oils, nei",fish_oil,2006,none
+206,"Marine mammal oils, nei",fish_oil,2007,zerofill
+206,"Marine mammal oils, nei",fish_oil,2008,zerofill
+206,"Marine mammal oils, nei",fish_oil,2009,zerofill
+206,"Marine mammal oils, nei",fish_oil,2010,none
+206,"Marine mammal oils, nei",fish_oil,2011,none
+206,"Marine mammal oils, nei",fish_oil,2012,none
+206,"Marine mammal oils, nei",fish_oil,2013,none
+206,"Marine mammal oils, nei",fish_oil,2014,none
+206,"Marine mammal oils, nei",fish_oil,2015,none
+206,"Marine mammal oils, nei",fish_oil,2016,zerofill
+206,"Marine mammal oils, nei",fish_oil,2017,zerofill
+206,"Marine mammal oils, nei",fish_oil,2018,none
+206,"Marine mammal oils, nei",fish_oil,2019,none
+206,"Marine mammal oils, nei",fish_oil,2020,none
+206,"Marine mammal oils, nei",fish_oil,2021,none
+206,"Marine mammal oils, nei",fish_oil,2022,none
+206,"Marine mammal oils, nei",fish_oil,2023,none
 206,Ornamental fish nei,ornamentals,1976,r2_t_gr
 206,Ornamental fish nei,ornamentals,1977,r2_t_gr
 206,Ornamental fish nei,ornamentals,1978,r2_t_gr
@@ -16607,6 +18172,29 @@ rgn_id,commodity,product,year,gapfill
 207,"Fish liver oils, nei",fish_oil,2021,zerofill
 207,"Fish liver oils, nei",fish_oil,2022,zerofill
 207,"Fish liver oils, nei",fish_oil,2023,endfill
+207,"Marine mammal oils, nei",fish_oil,2001,none
+207,"Marine mammal oils, nei",fish_oil,2002,none
+207,"Marine mammal oils, nei",fish_oil,2003,none
+207,"Marine mammal oils, nei",fish_oil,2004,zerofill
+207,"Marine mammal oils, nei",fish_oil,2005,zerofill
+207,"Marine mammal oils, nei",fish_oil,2006,none
+207,"Marine mammal oils, nei",fish_oil,2007,zerofill
+207,"Marine mammal oils, nei",fish_oil,2008,zerofill
+207,"Marine mammal oils, nei",fish_oil,2009,none
+207,"Marine mammal oils, nei",fish_oil,2010,none
+207,"Marine mammal oils, nei",fish_oil,2011,zerofill
+207,"Marine mammal oils, nei",fish_oil,2012,zerofill
+207,"Marine mammal oils, nei",fish_oil,2013,zerofill
+207,"Marine mammal oils, nei",fish_oil,2014,zerofill
+207,"Marine mammal oils, nei",fish_oil,2015,zerofill
+207,"Marine mammal oils, nei",fish_oil,2016,zerofill
+207,"Marine mammal oils, nei",fish_oil,2017,zerofill
+207,"Marine mammal oils, nei",fish_oil,2018,zerofill
+207,"Marine mammal oils, nei",fish_oil,2019,zerofill
+207,"Marine mammal oils, nei",fish_oil,2020,zerofill
+207,"Marine mammal oils, nei",fish_oil,2021,zerofill
+207,"Marine mammal oils, nei",fish_oil,2022,zerofill
+207,"Marine mammal oils, nei",fish_oil,2023,endfill
 207,Ornamental fish nei,ornamentals,1995,r2_t_gr
 207,Ornamental fish nei,ornamentals,1996,r2_t_gr
 207,Ornamental fish nei,ornamentals,1997,zerofill
@@ -16814,6 +18402,51 @@ rgn_id,commodity,product,year,gapfill
 208,"Fish liver oils, nei",fish_oil,2021,none
 208,"Fish liver oils, nei",fish_oil,2022,none
 208,"Fish liver oils, nei",fish_oil,2023,none
+208,"Marine mammal oils, nei",fish_oil,1979,none
+208,"Marine mammal oils, nei",fish_oil,1980,zerofill
+208,"Marine mammal oils, nei",fish_oil,1981,none
+208,"Marine mammal oils, nei",fish_oil,1982,none
+208,"Marine mammal oils, nei",fish_oil,1983,zerofill
+208,"Marine mammal oils, nei",fish_oil,1984,none
+208,"Marine mammal oils, nei",fish_oil,1985,none
+208,"Marine mammal oils, nei",fish_oil,1986,none
+208,"Marine mammal oils, nei",fish_oil,1987,none
+208,"Marine mammal oils, nei",fish_oil,1988,none
+208,"Marine mammal oils, nei",fish_oil,1989,none
+208,"Marine mammal oils, nei",fish_oil,1990,none
+208,"Marine mammal oils, nei",fish_oil,1991,none
+208,"Marine mammal oils, nei",fish_oil,1992,zerofill
+208,"Marine mammal oils, nei",fish_oil,1993,none
+208,"Marine mammal oils, nei",fish_oil,1994,none
+208,"Marine mammal oils, nei",fish_oil,1995,none
+208,"Marine mammal oils, nei",fish_oil,1996,none
+208,"Marine mammal oils, nei",fish_oil,1997,zerofill
+208,"Marine mammal oils, nei",fish_oil,1998,zerofill
+208,"Marine mammal oils, nei",fish_oil,1999,none
+208,"Marine mammal oils, nei",fish_oil,2000,none
+208,"Marine mammal oils, nei",fish_oil,2001,none
+208,"Marine mammal oils, nei",fish_oil,2002,zerofill
+208,"Marine mammal oils, nei",fish_oil,2003,zerofill
+208,"Marine mammal oils, nei",fish_oil,2004,zerofill
+208,"Marine mammal oils, nei",fish_oil,2005,zerofill
+208,"Marine mammal oils, nei",fish_oil,2006,zerofill
+208,"Marine mammal oils, nei",fish_oil,2007,zerofill
+208,"Marine mammal oils, nei",fish_oil,2008,zerofill
+208,"Marine mammal oils, nei",fish_oil,2009,zerofill
+208,"Marine mammal oils, nei",fish_oil,2010,zerofill
+208,"Marine mammal oils, nei",fish_oil,2011,none
+208,"Marine mammal oils, nei",fish_oil,2012,none
+208,"Marine mammal oils, nei",fish_oil,2013,none
+208,"Marine mammal oils, nei",fish_oil,2014,none
+208,"Marine mammal oils, nei",fish_oil,2015,none
+208,"Marine mammal oils, nei",fish_oil,2016,zerofill
+208,"Marine mammal oils, nei",fish_oil,2017,zerofill
+208,"Marine mammal oils, nei",fish_oil,2018,none
+208,"Marine mammal oils, nei",fish_oil,2019,zerofill
+208,"Marine mammal oils, nei",fish_oil,2020,none
+208,"Marine mammal oils, nei",fish_oil,2021,none
+208,"Marine mammal oils, nei",fish_oil,2022,none
+208,"Marine mammal oils, nei",fish_oil,2023,none
 208,Ornamental fish nei,ornamentals,1976,r2_t_gr
 208,Ornamental fish nei,ornamentals,1977,r2_t_gr
 208,Ornamental fish nei,ornamentals,1978,r2_t_gr
@@ -17039,6 +18672,48 @@ rgn_id,commodity,product,year,gapfill
 209,"Fish liver oils, nei",fish_oil,2021,none
 209,"Fish liver oils, nei",fish_oil,2022,none
 209,"Fish liver oils, nei",fish_oil,2023,none
+209,"Marine mammal oils, nei",fish_oil,1982,none
+209,"Marine mammal oils, nei",fish_oil,1983,zerofill
+209,"Marine mammal oils, nei",fish_oil,1984,none
+209,"Marine mammal oils, nei",fish_oil,1985,none
+209,"Marine mammal oils, nei",fish_oil,1986,none
+209,"Marine mammal oils, nei",fish_oil,1987,zerofill
+209,"Marine mammal oils, nei",fish_oil,1988,none
+209,"Marine mammal oils, nei",fish_oil,1989,zerofill
+209,"Marine mammal oils, nei",fish_oil,1990,zerofill
+209,"Marine mammal oils, nei",fish_oil,1991,zerofill
+209,"Marine mammal oils, nei",fish_oil,1992,none
+209,"Marine mammal oils, nei",fish_oil,1993,none
+209,"Marine mammal oils, nei",fish_oil,1994,zerofill
+209,"Marine mammal oils, nei",fish_oil,1995,none
+209,"Marine mammal oils, nei",fish_oil,1996,zerofill
+209,"Marine mammal oils, nei",fish_oil,1997,zerofill
+209,"Marine mammal oils, nei",fish_oil,1998,none
+209,"Marine mammal oils, nei",fish_oil,1999,zerofill
+209,"Marine mammal oils, nei",fish_oil,2000,none
+209,"Marine mammal oils, nei",fish_oil,2001,none
+209,"Marine mammal oils, nei",fish_oil,2002,zerofill
+209,"Marine mammal oils, nei",fish_oil,2003,zerofill
+209,"Marine mammal oils, nei",fish_oil,2004,zerofill
+209,"Marine mammal oils, nei",fish_oil,2005,zerofill
+209,"Marine mammal oils, nei",fish_oil,2006,zerofill
+209,"Marine mammal oils, nei",fish_oil,2007,zerofill
+209,"Marine mammal oils, nei",fish_oil,2008,zerofill
+209,"Marine mammal oils, nei",fish_oil,2009,none
+209,"Marine mammal oils, nei",fish_oil,2010,none
+209,"Marine mammal oils, nei",fish_oil,2011,none
+209,"Marine mammal oils, nei",fish_oil,2012,none
+209,"Marine mammal oils, nei",fish_oil,2013,zerofill
+209,"Marine mammal oils, nei",fish_oil,2014,none
+209,"Marine mammal oils, nei",fish_oil,2015,zerofill
+209,"Marine mammal oils, nei",fish_oil,2016,zerofill
+209,"Marine mammal oils, nei",fish_oil,2017,none
+209,"Marine mammal oils, nei",fish_oil,2018,none
+209,"Marine mammal oils, nei",fish_oil,2019,none
+209,"Marine mammal oils, nei",fish_oil,2020,zerofill
+209,"Marine mammal oils, nei",fish_oil,2021,zerofill
+209,"Marine mammal oils, nei",fish_oil,2022,r1_t_rgn
+209,"Marine mammal oils, nei",fish_oil,2023,none
 209,Ornamental fish nei,ornamentals,1983,none
 209,Ornamental fish nei,ornamentals,1984,none
 209,Ornamental fish nei,ornamentals,1985,zerofill
@@ -17414,6 +19089,51 @@ rgn_id,commodity,product,year,gapfill
 210,"Fish liver oils, nei",fish_oil,2021,none
 210,"Fish liver oils, nei",fish_oil,2022,none
 210,"Fish liver oils, nei",fish_oil,2023,none
+210,"Marine mammal oils, nei",fish_oil,1979,none
+210,"Marine mammal oils, nei",fish_oil,1980,none
+210,"Marine mammal oils, nei",fish_oil,1981,none
+210,"Marine mammal oils, nei",fish_oil,1982,none
+210,"Marine mammal oils, nei",fish_oil,1983,none
+210,"Marine mammal oils, nei",fish_oil,1984,none
+210,"Marine mammal oils, nei",fish_oil,1985,none
+210,"Marine mammal oils, nei",fish_oil,1986,none
+210,"Marine mammal oils, nei",fish_oil,1987,none
+210,"Marine mammal oils, nei",fish_oil,1988,none
+210,"Marine mammal oils, nei",fish_oil,1989,none
+210,"Marine mammal oils, nei",fish_oil,1990,none
+210,"Marine mammal oils, nei",fish_oil,1991,none
+210,"Marine mammal oils, nei",fish_oil,1992,none
+210,"Marine mammal oils, nei",fish_oil,1993,none
+210,"Marine mammal oils, nei",fish_oil,1994,none
+210,"Marine mammal oils, nei",fish_oil,1995,zerofill
+210,"Marine mammal oils, nei",fish_oil,1996,none
+210,"Marine mammal oils, nei",fish_oil,1997,zerofill
+210,"Marine mammal oils, nei",fish_oil,1998,zerofill
+210,"Marine mammal oils, nei",fish_oil,1999,none
+210,"Marine mammal oils, nei",fish_oil,2000,none
+210,"Marine mammal oils, nei",fish_oil,2001,none
+210,"Marine mammal oils, nei",fish_oil,2002,zerofill
+210,"Marine mammal oils, nei",fish_oil,2003,none
+210,"Marine mammal oils, nei",fish_oil,2004,none
+210,"Marine mammal oils, nei",fish_oil,2005,none
+210,"Marine mammal oils, nei",fish_oil,2006,zerofill
+210,"Marine mammal oils, nei",fish_oil,2007,none
+210,"Marine mammal oils, nei",fish_oil,2008,zerofill
+210,"Marine mammal oils, nei",fish_oil,2009,zerofill
+210,"Marine mammal oils, nei",fish_oil,2010,none
+210,"Marine mammal oils, nei",fish_oil,2011,zerofill
+210,"Marine mammal oils, nei",fish_oil,2012,zerofill
+210,"Marine mammal oils, nei",fish_oil,2013,zerofill
+210,"Marine mammal oils, nei",fish_oil,2014,zerofill
+210,"Marine mammal oils, nei",fish_oil,2015,none
+210,"Marine mammal oils, nei",fish_oil,2016,zerofill
+210,"Marine mammal oils, nei",fish_oil,2017,none
+210,"Marine mammal oils, nei",fish_oil,2018,none
+210,"Marine mammal oils, nei",fish_oil,2019,none
+210,"Marine mammal oils, nei",fish_oil,2020,zerofill
+210,"Marine mammal oils, nei",fish_oil,2021,zerofill
+210,"Marine mammal oils, nei",fish_oil,2022,zerofill
+210,"Marine mammal oils, nei",fish_oil,2023,endfill
 210,Ornamental fish nei,ornamentals,1988,none
 210,Ornamental fish nei,ornamentals,1989,none
 210,Ornamental fish nei,ornamentals,1990,none
@@ -17733,6 +19453,31 @@ rgn_id,commodity,product,year,gapfill
 214,"Fish liver oils, nei",fish_oil,2021,zerofill
 214,"Fish liver oils, nei",fish_oil,2022,zerofill
 214,"Fish liver oils, nei",fish_oil,2023,endfill
+214,"Marine mammal oils, nei",fish_oil,1999,none
+214,"Marine mammal oils, nei",fish_oil,2000,zerofill
+214,"Marine mammal oils, nei",fish_oil,2001,zerofill
+214,"Marine mammal oils, nei",fish_oil,2002,zerofill
+214,"Marine mammal oils, nei",fish_oil,2003,zerofill
+214,"Marine mammal oils, nei",fish_oil,2004,zerofill
+214,"Marine mammal oils, nei",fish_oil,2005,zerofill
+214,"Marine mammal oils, nei",fish_oil,2006,zerofill
+214,"Marine mammal oils, nei",fish_oil,2007,zerofill
+214,"Marine mammal oils, nei",fish_oil,2008,none
+214,"Marine mammal oils, nei",fish_oil,2009,zerofill
+214,"Marine mammal oils, nei",fish_oil,2010,zerofill
+214,"Marine mammal oils, nei",fish_oil,2011,zerofill
+214,"Marine mammal oils, nei",fish_oil,2012,none
+214,"Marine mammal oils, nei",fish_oil,2013,zerofill
+214,"Marine mammal oils, nei",fish_oil,2014,none
+214,"Marine mammal oils, nei",fish_oil,2015,none
+214,"Marine mammal oils, nei",fish_oil,2016,none
+214,"Marine mammal oils, nei",fish_oil,2017,none
+214,"Marine mammal oils, nei",fish_oil,2018,none
+214,"Marine mammal oils, nei",fish_oil,2019,zerofill
+214,"Marine mammal oils, nei",fish_oil,2020,r1_t_rgn
+214,"Marine mammal oils, nei",fish_oil,2021,zerofill
+214,"Marine mammal oils, nei",fish_oil,2022,zerofill
+214,"Marine mammal oils, nei",fish_oil,2023,endfill
 214,Ornamental fish nei,ornamentals,1994,none
 214,Ornamental fish nei,ornamentals,1995,none
 214,Ornamental fish nei,ornamentals,1996,zerofill
@@ -17970,6 +19715,51 @@ rgn_id,commodity,product,year,gapfill
 216,"Fish liver oils, nei",fish_oil,2021,none
 216,"Fish liver oils, nei",fish_oil,2022,none
 216,"Fish liver oils, nei",fish_oil,2023,none
+216,"Marine mammal oils, nei",fish_oil,1979,none
+216,"Marine mammal oils, nei",fish_oil,1980,zerofill
+216,"Marine mammal oils, nei",fish_oil,1981,zerofill
+216,"Marine mammal oils, nei",fish_oil,1982,zerofill
+216,"Marine mammal oils, nei",fish_oil,1983,zerofill
+216,"Marine mammal oils, nei",fish_oil,1984,zerofill
+216,"Marine mammal oils, nei",fish_oil,1985,zerofill
+216,"Marine mammal oils, nei",fish_oil,1986,zerofill
+216,"Marine mammal oils, nei",fish_oil,1987,none
+216,"Marine mammal oils, nei",fish_oil,1988,none
+216,"Marine mammal oils, nei",fish_oil,1989,none
+216,"Marine mammal oils, nei",fish_oil,1990,none
+216,"Marine mammal oils, nei",fish_oil,1991,none
+216,"Marine mammal oils, nei",fish_oil,1992,none
+216,"Marine mammal oils, nei",fish_oil,1993,zerofill
+216,"Marine mammal oils, nei",fish_oil,1994,zerofill
+216,"Marine mammal oils, nei",fish_oil,1995,none
+216,"Marine mammal oils, nei",fish_oil,1996,zerofill
+216,"Marine mammal oils, nei",fish_oil,1997,none
+216,"Marine mammal oils, nei",fish_oil,1998,zerofill
+216,"Marine mammal oils, nei",fish_oil,1999,zerofill
+216,"Marine mammal oils, nei",fish_oil,2000,zerofill
+216,"Marine mammal oils, nei",fish_oil,2001,none
+216,"Marine mammal oils, nei",fish_oil,2002,none
+216,"Marine mammal oils, nei",fish_oil,2003,zerofill
+216,"Marine mammal oils, nei",fish_oil,2004,zerofill
+216,"Marine mammal oils, nei",fish_oil,2005,none
+216,"Marine mammal oils, nei",fish_oil,2006,zerofill
+216,"Marine mammal oils, nei",fish_oil,2007,zerofill
+216,"Marine mammal oils, nei",fish_oil,2008,zerofill
+216,"Marine mammal oils, nei",fish_oil,2009,none
+216,"Marine mammal oils, nei",fish_oil,2010,zerofill
+216,"Marine mammal oils, nei",fish_oil,2011,zerofill
+216,"Marine mammal oils, nei",fish_oil,2012,zerofill
+216,"Marine mammal oils, nei",fish_oil,2013,none
+216,"Marine mammal oils, nei",fish_oil,2014,zerofill
+216,"Marine mammal oils, nei",fish_oil,2015,zerofill
+216,"Marine mammal oils, nei",fish_oil,2016,zerofill
+216,"Marine mammal oils, nei",fish_oil,2017,none
+216,"Marine mammal oils, nei",fish_oil,2018,zerofill
+216,"Marine mammal oils, nei",fish_oil,2019,zerofill
+216,"Marine mammal oils, nei",fish_oil,2020,zerofill
+216,"Marine mammal oils, nei",fish_oil,2021,zerofill
+216,"Marine mammal oils, nei",fish_oil,2022,zerofill
+216,"Marine mammal oils, nei",fish_oil,2023,none
 216,Ornamental saltwater fish,ornamentals,1981,none
 216,Ornamental saltwater fish,ornamentals,1982,none
 216,Ornamental saltwater fish,ornamentals,1983,none
@@ -18293,6 +20083,42 @@ rgn_id,commodity,product,year,gapfill
 218,Herring oil,fish_oil,2021,none
 218,Herring oil,fish_oil,2022,none
 218,Herring oil,fish_oil,2023,none
+218,"Marine mammal oils, nei",fish_oil,1988,none
+218,"Marine mammal oils, nei",fish_oil,1989,zerofill
+218,"Marine mammal oils, nei",fish_oil,1990,none
+218,"Marine mammal oils, nei",fish_oil,1991,none
+218,"Marine mammal oils, nei",fish_oil,1992,none
+218,"Marine mammal oils, nei",fish_oil,1993,none
+218,"Marine mammal oils, nei",fish_oil,1994,none
+218,"Marine mammal oils, nei",fish_oil,1995,zerofill
+218,"Marine mammal oils, nei",fish_oil,1996,none
+218,"Marine mammal oils, nei",fish_oil,1997,none
+218,"Marine mammal oils, nei",fish_oil,1998,none
+218,"Marine mammal oils, nei",fish_oil,1999,none
+218,"Marine mammal oils, nei",fish_oil,2000,none
+218,"Marine mammal oils, nei",fish_oil,2001,none
+218,"Marine mammal oils, nei",fish_oil,2002,none
+218,"Marine mammal oils, nei",fish_oil,2003,none
+218,"Marine mammal oils, nei",fish_oil,2004,none
+218,"Marine mammal oils, nei",fish_oil,2005,none
+218,"Marine mammal oils, nei",fish_oil,2006,none
+218,"Marine mammal oils, nei",fish_oil,2007,none
+218,"Marine mammal oils, nei",fish_oil,2008,none
+218,"Marine mammal oils, nei",fish_oil,2009,none
+218,"Marine mammal oils, nei",fish_oil,2010,none
+218,"Marine mammal oils, nei",fish_oil,2011,none
+218,"Marine mammal oils, nei",fish_oil,2012,none
+218,"Marine mammal oils, nei",fish_oil,2013,none
+218,"Marine mammal oils, nei",fish_oil,2014,none
+218,"Marine mammal oils, nei",fish_oil,2015,none
+218,"Marine mammal oils, nei",fish_oil,2016,none
+218,"Marine mammal oils, nei",fish_oil,2017,none
+218,"Marine mammal oils, nei",fish_oil,2018,none
+218,"Marine mammal oils, nei",fish_oil,2019,none
+218,"Marine mammal oils, nei",fish_oil,2020,none
+218,"Marine mammal oils, nei",fish_oil,2021,none
+218,"Marine mammal oils, nei",fish_oil,2022,none
+218,"Marine mammal oils, nei",fish_oil,2023,none
 218,Ornamental fish nei,ornamentals,1988,none
 218,Ornamental fish nei,ornamentals,1989,zerofill
 218,Ornamental fish nei,ornamentals,1990,none
@@ -18581,6 +20407,54 @@ rgn_id,commodity,product,year,gapfill
 222,"Halibuts, liver oils",fish_oil,2021,none
 222,"Halibuts, liver oils",fish_oil,2022,zerofill
 222,"Halibuts, liver oils",fish_oil,2023,none
+222,"Marine mammal oils, nei",fish_oil,1976,none
+222,"Marine mammal oils, nei",fish_oil,1977,zerofill
+222,"Marine mammal oils, nei",fish_oil,1978,zerofill
+222,"Marine mammal oils, nei",fish_oil,1979,zerofill
+222,"Marine mammal oils, nei",fish_oil,1980,zerofill
+222,"Marine mammal oils, nei",fish_oil,1981,zerofill
+222,"Marine mammal oils, nei",fish_oil,1982,zerofill
+222,"Marine mammal oils, nei",fish_oil,1983,zerofill
+222,"Marine mammal oils, nei",fish_oil,1984,zerofill
+222,"Marine mammal oils, nei",fish_oil,1985,zerofill
+222,"Marine mammal oils, nei",fish_oil,1986,zerofill
+222,"Marine mammal oils, nei",fish_oil,1987,zerofill
+222,"Marine mammal oils, nei",fish_oil,1988,none
+222,"Marine mammal oils, nei",fish_oil,1989,none
+222,"Marine mammal oils, nei",fish_oil,1990,none
+222,"Marine mammal oils, nei",fish_oil,1991,none
+222,"Marine mammal oils, nei",fish_oil,1992,none
+222,"Marine mammal oils, nei",fish_oil,1993,none
+222,"Marine mammal oils, nei",fish_oil,1994,none
+222,"Marine mammal oils, nei",fish_oil,1995,zerofill
+222,"Marine mammal oils, nei",fish_oil,1996,none
+222,"Marine mammal oils, nei",fish_oil,1997,zerofill
+222,"Marine mammal oils, nei",fish_oil,1998,none
+222,"Marine mammal oils, nei",fish_oil,1999,zerofill
+222,"Marine mammal oils, nei",fish_oil,2000,zerofill
+222,"Marine mammal oils, nei",fish_oil,2001,none
+222,"Marine mammal oils, nei",fish_oil,2002,zerofill
+222,"Marine mammal oils, nei",fish_oil,2003,zerofill
+222,"Marine mammal oils, nei",fish_oil,2004,zerofill
+222,"Marine mammal oils, nei",fish_oil,2005,zerofill
+222,"Marine mammal oils, nei",fish_oil,2006,none
+222,"Marine mammal oils, nei",fish_oil,2007,none
+222,"Marine mammal oils, nei",fish_oil,2008,none
+222,"Marine mammal oils, nei",fish_oil,2009,none
+222,"Marine mammal oils, nei",fish_oil,2010,none
+222,"Marine mammal oils, nei",fish_oil,2011,none
+222,"Marine mammal oils, nei",fish_oil,2012,none
+222,"Marine mammal oils, nei",fish_oil,2013,none
+222,"Marine mammal oils, nei",fish_oil,2014,none
+222,"Marine mammal oils, nei",fish_oil,2015,none
+222,"Marine mammal oils, nei",fish_oil,2016,none
+222,"Marine mammal oils, nei",fish_oil,2017,none
+222,"Marine mammal oils, nei",fish_oil,2018,none
+222,"Marine mammal oils, nei",fish_oil,2019,none
+222,"Marine mammal oils, nei",fish_oil,2020,none
+222,"Marine mammal oils, nei",fish_oil,2021,none
+222,"Marine mammal oils, nei",fish_oil,2022,none
+222,"Marine mammal oils, nei",fish_oil,2023,none
 222,Ornamental fish nei,ornamentals,1976,none
 222,Ornamental fish nei,ornamentals,1977,none
 222,Ornamental fish nei,ornamentals,1978,none
@@ -18915,6 +20789,52 @@ rgn_id,commodity,product,year,gapfill
 223,Herring oil,fish_oil,2021,none
 223,Herring oil,fish_oil,2022,none
 223,Herring oil,fish_oil,2023,none
+223,"Marine mammal oils, nei",fish_oil,1978,none
+223,"Marine mammal oils, nei",fish_oil,1979,none
+223,"Marine mammal oils, nei",fish_oil,1980,none
+223,"Marine mammal oils, nei",fish_oil,1981,none
+223,"Marine mammal oils, nei",fish_oil,1982,none
+223,"Marine mammal oils, nei",fish_oil,1983,none
+223,"Marine mammal oils, nei",fish_oil,1984,none
+223,"Marine mammal oils, nei",fish_oil,1985,none
+223,"Marine mammal oils, nei",fish_oil,1986,zerofill
+223,"Marine mammal oils, nei",fish_oil,1987,zerofill
+223,"Marine mammal oils, nei",fish_oil,1988,none
+223,"Marine mammal oils, nei",fish_oil,1989,none
+223,"Marine mammal oils, nei",fish_oil,1990,zerofill
+223,"Marine mammal oils, nei",fish_oil,1991,zerofill
+223,"Marine mammal oils, nei",fish_oil,1992,none
+223,"Marine mammal oils, nei",fish_oil,1993,none
+223,"Marine mammal oils, nei",fish_oil,1994,zerofill
+223,"Marine mammal oils, nei",fish_oil,1995,none
+223,"Marine mammal oils, nei",fish_oil,1996,none
+223,"Marine mammal oils, nei",fish_oil,1997,none
+223,"Marine mammal oils, nei",fish_oil,1998,none
+223,"Marine mammal oils, nei",fish_oil,1999,none
+223,"Marine mammal oils, nei",fish_oil,2000,none
+223,"Marine mammal oils, nei",fish_oil,2001,none
+223,"Marine mammal oils, nei",fish_oil,2002,none
+223,"Marine mammal oils, nei",fish_oil,2003,none
+223,"Marine mammal oils, nei",fish_oil,2004,none
+223,"Marine mammal oils, nei",fish_oil,2005,none
+223,"Marine mammal oils, nei",fish_oil,2006,none
+223,"Marine mammal oils, nei",fish_oil,2007,none
+223,"Marine mammal oils, nei",fish_oil,2008,none
+223,"Marine mammal oils, nei",fish_oil,2009,none
+223,"Marine mammal oils, nei",fish_oil,2010,none
+223,"Marine mammal oils, nei",fish_oil,2011,none
+223,"Marine mammal oils, nei",fish_oil,2012,none
+223,"Marine mammal oils, nei",fish_oil,2013,none
+223,"Marine mammal oils, nei",fish_oil,2014,none
+223,"Marine mammal oils, nei",fish_oil,2015,none
+223,"Marine mammal oils, nei",fish_oil,2016,none
+223,"Marine mammal oils, nei",fish_oil,2017,none
+223,"Marine mammal oils, nei",fish_oil,2018,none
+223,"Marine mammal oils, nei",fish_oil,2019,none
+223,"Marine mammal oils, nei",fish_oil,2020,none
+223,"Marine mammal oils, nei",fish_oil,2021,none
+223,"Marine mammal oils, nei",fish_oil,2022,none
+223,"Marine mammal oils, nei",fish_oil,2023,none
 223,"Oils and fats of aquatic animals, nei",fish_oil,1997,none
 223,"Oils and fats of aquatic animals, nei",fish_oil,1998,none
 223,"Oils and fats of aquatic animals, nei",fish_oil,1999,zerofill
@@ -18942,6 +20862,54 @@ rgn_id,commodity,product,year,gapfill
 223,"Oils and fats of aquatic animals, nei",fish_oil,2021,none
 223,"Oils and fats of aquatic animals, nei",fish_oil,2022,none
 223,"Oils and fats of aquatic animals, nei",fish_oil,2023,none
+223,Seal oil,fish_oil,1976,none
+223,Seal oil,fish_oil,1977,none
+223,Seal oil,fish_oil,1978,none
+223,Seal oil,fish_oil,1979,none
+223,Seal oil,fish_oil,1980,none
+223,Seal oil,fish_oil,1981,none
+223,Seal oil,fish_oil,1982,zerofill
+223,Seal oil,fish_oil,1983,zerofill
+223,Seal oil,fish_oil,1984,zerofill
+223,Seal oil,fish_oil,1985,zerofill
+223,Seal oil,fish_oil,1986,zerofill
+223,Seal oil,fish_oil,1987,zerofill
+223,Seal oil,fish_oil,1988,zerofill
+223,Seal oil,fish_oil,1989,zerofill
+223,Seal oil,fish_oil,1990,zerofill
+223,Seal oil,fish_oil,1991,zerofill
+223,Seal oil,fish_oil,1992,zerofill
+223,Seal oil,fish_oil,1993,zerofill
+223,Seal oil,fish_oil,1994,zerofill
+223,Seal oil,fish_oil,1995,zerofill
+223,Seal oil,fish_oil,1996,zerofill
+223,Seal oil,fish_oil,1997,zerofill
+223,Seal oil,fish_oil,1998,zerofill
+223,Seal oil,fish_oil,1999,zerofill
+223,Seal oil,fish_oil,2000,zerofill
+223,Seal oil,fish_oil,2001,zerofill
+223,Seal oil,fish_oil,2002,zerofill
+223,Seal oil,fish_oil,2003,zerofill
+223,Seal oil,fish_oil,2004,zerofill
+223,Seal oil,fish_oil,2005,zerofill
+223,Seal oil,fish_oil,2006,zerofill
+223,Seal oil,fish_oil,2007,zerofill
+223,Seal oil,fish_oil,2008,zerofill
+223,Seal oil,fish_oil,2009,zerofill
+223,Seal oil,fish_oil,2010,zerofill
+223,Seal oil,fish_oil,2011,zerofill
+223,Seal oil,fish_oil,2012,zerofill
+223,Seal oil,fish_oil,2013,zerofill
+223,Seal oil,fish_oil,2014,zerofill
+223,Seal oil,fish_oil,2015,zerofill
+223,Seal oil,fish_oil,2016,zerofill
+223,Seal oil,fish_oil,2017,zerofill
+223,Seal oil,fish_oil,2018,zerofill
+223,Seal oil,fish_oil,2019,zerofill
+223,Seal oil,fish_oil,2020,zerofill
+223,Seal oil,fish_oil,2021,zerofill
+223,Seal oil,fish_oil,2022,zerofill
+223,Seal oil,fish_oil,2023,endfill
 223,Shark oil,fish_oil,1988,none
 223,Shark oil,fish_oil,1989,none
 223,Shark oil,fish_oil,1990,none

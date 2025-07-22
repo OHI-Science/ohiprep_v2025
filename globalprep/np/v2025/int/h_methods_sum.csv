@@ -759,21 +759,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 10,Nauru,Cod liver oil,fish_oil,2021,NA,NA
 10,Nauru,Cod liver oil,fish_oil,2022,NA,NA
 10,Nauru,Cod liver oil,fish_oil,2023,NA,NA
-10,Nauru,Shad oil,fish_oil,2009,10.71,2
-10,Nauru,Shad oil,fish_oil,2010,NA,NA
-10,Nauru,Shad oil,fish_oil,2011,10.94,0
-10,Nauru,Shad oil,fish_oil,2012,NA,NA
-10,Nauru,Shad oil,fish_oil,2013,NA,NA
-10,Nauru,Shad oil,fish_oil,2014,NA,NA
-10,Nauru,Shad oil,fish_oil,2015,NA,NA
-10,Nauru,Shad oil,fish_oil,2016,NA,NA
-10,Nauru,Shad oil,fish_oil,2017,NA,NA
-10,Nauru,Shad oil,fish_oil,2018,NA,NA
-10,Nauru,Shad oil,fish_oil,2019,NA,NA
-10,Nauru,Shad oil,fish_oil,2020,NA,NA
-10,Nauru,Shad oil,fish_oil,2021,NA,NA
-10,Nauru,Shad oil,fish_oil,2022,NA,NA
-10,Nauru,Shad oil,fish_oil,2023,NA,NA
 10,Nauru,Other seaweeds and aquatic plants and products thereof,seaweeds,1998,11.25,16
 10,Nauru,Other seaweeds and aquatic plants and products thereof,seaweeds,1999,NA,NA
 10,Nauru,Other seaweeds and aquatic plants and products thereof,seaweeds,2000,NA,NA
@@ -1125,41 +1110,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 14,Taiwan,"Fish liver oils, nei",fish_oil,2021,NA,NA
 14,Taiwan,"Fish liver oils, nei",fish_oil,2022,NA,NA
 14,Taiwan,"Fish liver oils, nei",fish_oil,2023,0.13,0
-14,Taiwan,"Marine mammal oils, nei",fish_oil,1989,28,53
-14,Taiwan,"Marine mammal oils, nei",fish_oil,1990,8,15
-14,Taiwan,"Marine mammal oils, nei",fish_oil,1991,1,2
-14,Taiwan,"Marine mammal oils, nei",fish_oil,1992,12,46
-14,Taiwan,"Marine mammal oils, nei",fish_oil,1993,3,0.1
-14,Taiwan,"Marine mammal oils, nei",fish_oil,1994,21,38
-14,Taiwan,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,1996,222,25
-14,Taiwan,"Marine mammal oils, nei",fish_oil,1997,139,21
-14,Taiwan,"Marine mammal oils, nei",fish_oil,1998,137,16
-14,Taiwan,"Marine mammal oils, nei",fish_oil,1999,0.1,1
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2001,4,0.1
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2007,2,0.1
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-14,Taiwan,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 14,Taiwan,"Oils and fats of aquatic animals, nei",fish_oil,1976,233,92
 14,Taiwan,"Oils and fats of aquatic animals, nei",fish_oil,1977,290,110
 14,Taiwan,"Oils and fats of aquatic animals, nei",fish_oil,1978,90,52
@@ -1784,54 +1734,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 15,Philippines,"Fish liver oils, nei",fish_oil,2021,2432.13,573.62
 15,Philippines,"Fish liver oils, nei",fish_oil,2022,28.45,0.71
 15,Philippines,"Fish liver oils, nei",fish_oil,2023,77.29,7.41
-15,Philippines,"Marine mammal oils, nei",fish_oil,1976,1070,479
-15,Philippines,"Marine mammal oils, nei",fish_oil,1977,17,8
-15,Philippines,"Marine mammal oils, nei",fish_oil,1978,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1979,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1980,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1981,17,1
-15,Philippines,"Marine mammal oils, nei",fish_oil,1982,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1984,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1988,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1989,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1991,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1992,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2004,1,1
-15,Philippines,"Marine mammal oils, nei",fish_oil,2005,10,10
-15,Philippines,"Marine mammal oils, nei",fish_oil,2006,1,0.1
-15,Philippines,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2008,15,7
-15,Philippines,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2020,40.8,40.8
-15,Philippines,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-15,Philippines,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 15,Philippines,Shark liver oil,fish_oil,1991,1499,180
 15,Philippines,Shark liver oil,fish_oil,1992,1721,188
 15,Philippines,Shark liver oil,fish_oil,1993,846,104
@@ -2169,39 +2071,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 16,Australia,"Fish liver oils, nei",fish_oil,2021,NA,NA
 16,Australia,"Fish liver oils, nei",fish_oil,2022,NA,NA
 16,Australia,"Fish liver oils, nei",fish_oil,2023,NA,NA
-16,Australia,"Marine mammal oils, nei",fish_oil,1991,241,405
-16,Australia,"Marine mammal oils, nei",fish_oil,1992,404,609
-16,Australia,"Marine mammal oils, nei",fish_oil,1993,318,455
-16,Australia,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-16,Australia,"Marine mammal oils, nei",fish_oil,1995,36,78
-16,Australia,"Marine mammal oils, nei",fish_oil,1996,33,64
-16,Australia,"Marine mammal oils, nei",fish_oil,1997,1,0.1
-16,Australia,"Marine mammal oils, nei",fish_oil,1998,19,2
-16,Australia,"Marine mammal oils, nei",fish_oil,1999,77,7
-16,Australia,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-16,Australia,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-16,Australia,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-16,Australia,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-16,Australia,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-16,Australia,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-16,Australia,"Marine mammal oils, nei",fish_oil,2006,7,0.1
-16,Australia,"Marine mammal oils, nei",fish_oil,2007,1,0.1
-16,Australia,"Marine mammal oils, nei",fish_oil,2008,140,3
-16,Australia,"Marine mammal oils, nei",fish_oil,2009,48,7
-16,Australia,"Marine mammal oils, nei",fish_oil,2010,2,0.1
-16,Australia,"Marine mammal oils, nei",fish_oil,2011,49,5
-16,Australia,"Marine mammal oils, nei",fish_oil,2012,453,88
-16,Australia,"Marine mammal oils, nei",fish_oil,2013,91,3
-16,Australia,"Marine mammal oils, nei",fish_oil,2014,688,22
-16,Australia,"Marine mammal oils, nei",fish_oil,2015,1095,58
-16,Australia,"Marine mammal oils, nei",fish_oil,2016,52,1
-16,Australia,"Marine mammal oils, nei",fish_oil,2017,50,2
-16,Australia,"Marine mammal oils, nei",fish_oil,2018,10,0.1
-16,Australia,"Marine mammal oils, nei",fish_oil,2019,109.2,2.68
-16,Australia,"Marine mammal oils, nei",fish_oil,2020,135.62,5.41
-16,Australia,"Marine mammal oils, nei",fish_oil,2021,263.19,31.43
-16,Australia,"Marine mammal oils, nei",fish_oil,2022,128.52,5.31
-16,Australia,"Marine mammal oils, nei",fish_oil,2023,72.53,4.57
 16,Australia,Ornamental fish nei,ornamentals,1989,357,NA
 16,Australia,Ornamental fish nei,ornamentals,1990,304,NA
 16,Australia,Ornamental fish nei,ornamentals,1991,469,NA
@@ -2926,18 +2795,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 18,Fiji,"Fish body oils, nei",fish_oil,2021,NA,NA
 18,Fiji,"Fish body oils, nei",fish_oil,2022,NA,NA
 18,Fiji,"Fish body oils, nei",fish_oil,2023,40.84,19.2
-18,Fiji,"Marine mammal oils, nei",fish_oil,2012,74,75
-18,Fiji,"Marine mammal oils, nei",fish_oil,2013,80,59
-18,Fiji,"Marine mammal oils, nei",fish_oil,2014,306,192
-18,Fiji,"Marine mammal oils, nei",fish_oil,2015,108,63
-18,Fiji,"Marine mammal oils, nei",fish_oil,2016,108,63
-18,Fiji,"Marine mammal oils, nei",fish_oil,2017,239,140
-18,Fiji,"Marine mammal oils, nei",fish_oil,2018,228,120
-18,Fiji,"Marine mammal oils, nei",fish_oil,2019,180.84,99.21
-18,Fiji,"Marine mammal oils, nei",fish_oil,2020,304.85,160.46
-18,Fiji,"Marine mammal oils, nei",fish_oil,2021,240.08,119.69
-18,Fiji,"Marine mammal oils, nei",fish_oil,2022,326.89,136.62
-18,Fiji,"Marine mammal oils, nei",fish_oil,2023,203.58,90
 18,Fiji,Ornamental fish nei,ornamentals,1989,63,NA
 18,Fiji,Ornamental fish nei,ornamentals,1990,164,NA
 18,Fiji,Ornamental fish nei,ornamentals,1991,218,NA
@@ -3360,53 +3217,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 20,South Korea,"Fish liver oils, nei",fish_oil,2021,1767.77,797.45
 20,South Korea,"Fish liver oils, nei",fish_oil,2022,1471.9,623.2
 20,South Korea,"Fish liver oils, nei",fish_oil,2023,876.12,366.4
-20,South Korea,"Marine mammal oils, nei",fish_oil,1977,39,41
-20,South Korea,"Marine mammal oils, nei",fish_oil,1978,7,4
-20,South Korea,"Marine mammal oils, nei",fish_oil,1979,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1980,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1981,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1982,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1984,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1988,145,403
-20,South Korea,"Marine mammal oils, nei",fish_oil,1989,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1991,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1992,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1994,9,15
-20,South Korea,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1996,127,228
-20,South Korea,"Marine mammal oils, nei",fish_oil,1997,32,61
-20,South Korea,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,1999,33,57
-20,South Korea,"Marine mammal oils, nei",fish_oil,2000,16,29
-20,South Korea,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2003,1,0.1
-20,South Korea,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2005,345,410
-20,South Korea,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2010,28,1
-20,South Korea,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2017,0.1,0.1
-20,South Korea,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2019,95.84,1.5
-20,South Korea,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-20,South Korea,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 20,South Korea,"Oils and fats of aquatic animals, nei",fish_oil,1987,54,160
 20,South Korea,"Oils and fats of aquatic animals, nei",fish_oil,1988,NA,NA
 20,South Korea,"Oils and fats of aquatic animals, nei",fish_oil,1989,NA,NA
@@ -4275,20 +4085,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 21,North Korea,"Fish liver oils, nei",fish_oil,2021,NA,NA
 21,North Korea,"Fish liver oils, nei",fish_oil,2022,NA,NA
 21,North Korea,"Fish liver oils, nei",fish_oil,2023,NA,NA
-21,North Korea,"Marine mammal oils, nei",fish_oil,2010,4,2
-21,North Korea,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-21,North Korea,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-21,North Korea,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-21,North Korea,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-21,North Korea,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-21,North Korea,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-21,North Korea,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-21,North Korea,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-21,North Korea,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-21,North Korea,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-21,North Korea,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-21,North Korea,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-21,North Korea,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 21,North Korea,Ornamental saltwater fish,ornamentals,2015,27,NA
 21,North Korea,Ornamental saltwater fish,ornamentals,2016,53,NA
 21,North Korea,Ornamental saltwater fish,ornamentals,2017,NA,NA
@@ -4658,41 +4454,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 25,Thailand,"Fish liver oils, nei",fish_oil,2021,68.78,6.11
 25,Thailand,"Fish liver oils, nei",fish_oil,2022,15.43,4.19
 25,Thailand,"Fish liver oils, nei",fish_oil,2023,31.57,7.64
-25,Thailand,"Marine mammal oils, nei",fish_oil,1989,1,0.1
-25,Thailand,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,1991,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,1992,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,1994,0.1,0.1
-25,Thailand,"Marine mammal oils, nei",fish_oil,1995,7,1
-25,Thailand,"Marine mammal oils, nei",fish_oil,1996,1,0.1
-25,Thailand,"Marine mammal oils, nei",fish_oil,1997,25,4
-25,Thailand,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,1999,78,63
-25,Thailand,"Marine mammal oils, nei",fish_oil,2000,137,150
-25,Thailand,"Marine mammal oils, nei",fish_oil,2001,40,41
-25,Thailand,"Marine mammal oils, nei",fish_oil,2002,3,1
-25,Thailand,"Marine mammal oils, nei",fish_oil,2003,3,3
-25,Thailand,"Marine mammal oils, nei",fish_oil,2004,1,0.1
-25,Thailand,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,2006,0.1,0.1
-25,Thailand,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,2008,1,1
-25,Thailand,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,2010,0.1,0.1
-25,Thailand,"Marine mammal oils, nei",fish_oil,2011,0.1,0.1
-25,Thailand,"Marine mammal oils, nei",fish_oil,2012,2,1
-25,Thailand,"Marine mammal oils, nei",fish_oil,2013,6,2
-25,Thailand,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,2016,3,0.1
-25,Thailand,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,2018,0.1,0.1
-25,Thailand,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-25,Thailand,"Marine mammal oils, nei",fish_oil,2023,3.38,2.4
 25,Thailand,Ornamental fish nei,ornamentals,1976,492,127
 25,Thailand,Ornamental fish nei,ornamentals,1977,668,169
 25,Thailand,Ornamental fish nei,ornamentals,1978,593,151
@@ -5185,17 +4946,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 31,Seychelles,"Fish liver oils, nei",fish_oil,2021,NA,NA
 31,Seychelles,"Fish liver oils, nei",fish_oil,2022,NA,NA
 31,Seychelles,"Fish liver oils, nei",fish_oil,2023,NA,NA
-31,Seychelles,"Marine mammal oils, nei",fish_oil,2013,360,124
-31,Seychelles,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-31,Seychelles,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-31,Seychelles,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-31,Seychelles,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-31,Seychelles,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-31,Seychelles,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-31,Seychelles,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-31,Seychelles,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-31,Seychelles,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-31,Seychelles,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 31,Seychelles,Other seaweeds and aquatic plants and products thereof,seaweeds,2001,0.1,0.1
 31,Seychelles,Other seaweeds and aquatic plants and products thereof,seaweeds,2002,NA,NA
 31,Seychelles,Other seaweeds and aquatic plants and products thereof,seaweeds,2003,NA,NA
@@ -5343,10 +5093,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 37,Mauritius,"Fish liver oils, nei",fish_oil,2021,NA,NA
 37,Mauritius,"Fish liver oils, nei",fish_oil,2022,NA,NA
 37,Mauritius,"Fish liver oils, nei",fish_oil,2023,98.09,42.44
-37,Mauritius,"Marine mammal oils, nei",fish_oil,2020,34.03,49.47
-37,Mauritius,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-37,Mauritius,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-37,Mauritius,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 37,Mauritius,Ornamental fish nei,ornamentals,1992,69,7
 37,Mauritius,Ornamental fish nei,ornamentals,1993,72,7
 37,Mauritius,Ornamental fish nei,ornamentals,1994,74,7
@@ -5816,45 +5562,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 40,Sri Lanka,"Fish liver oils, nei",fish_oil,2021,178.07,13.39
 40,Sri Lanka,"Fish liver oils, nei",fish_oil,2022,106.03,4.25
 40,Sri Lanka,"Fish liver oils, nei",fish_oil,2023,121.13,4.25
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1985,1,0.1
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1986,28,5
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1988,5,12
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1989,30,6
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1990,79,11
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1991,77,12
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1992,19,3
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1993,21,2
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1994,9,1
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1995,0.1,0.1
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1997,1,0.1
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,1999,22,5
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2000,0.1,0.1
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2002,15,0.1
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2003,0.1,0.1
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2004,1,1
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2005,0.1,0.1
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2013,0.1,0.1
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2014,0.1,0.1
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2018,0.1,0.1
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2021,0.82,0.01
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-40,Sri Lanka,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 40,Sri Lanka,"Oils and fats of aquatic animals, nei",fish_oil,1981,54,19
 40,Sri Lanka,"Oils and fats of aquatic animals, nei",fish_oil,1982,455,112
 40,Sri Lanka,"Oils and fats of aquatic animals, nei",fish_oil,1983,316,77
@@ -6653,51 +6360,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 43,Kenya,"Fish liver oils, nei",fish_oil,2021,1.44,0.05
 43,Kenya,"Fish liver oils, nei",fish_oil,2022,0.04,0.01
 43,Kenya,"Fish liver oils, nei",fish_oil,2023,0,0.01
-43,Kenya,"Marine mammal oils, nei",fish_oil,1979,0.1,0.1
-43,Kenya,"Marine mammal oils, nei",fish_oil,1980,0.1,0.1
-43,Kenya,"Marine mammal oils, nei",fish_oil,1981,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1982,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1984,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1985,0.1,0.1
-43,Kenya,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1988,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1989,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1991,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1992,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2005,4,3
-43,Kenya,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2008,5,9
-43,Kenya,"Marine mammal oils, nei",fish_oil,2009,19,30
-43,Kenya,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2011,2,1
-43,Kenya,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2016,0.1,0.1
-43,Kenya,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-43,Kenya,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 43,Kenya,Ornamental fish nei,ornamentals,2003,141,69
 43,Kenya,Ornamental fish nei,ornamentals,2004,1106,79
 43,Kenya,Ornamental fish nei,ornamentals,2005,50,36
@@ -7282,19 +6944,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 47,Yemen,"Fish liver oils, nei",fish_oil,2021,1900.46,280.98
 47,Yemen,"Fish liver oils, nei",fish_oil,2022,2682.38,729.19
 47,Yemen,"Fish liver oils, nei",fish_oil,2023,2445.49,671.76
-47,Yemen,"Marine mammal oils, nei",fish_oil,2011,9,35
-47,Yemen,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-47,Yemen,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-47,Yemen,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-47,Yemen,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-47,Yemen,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-47,Yemen,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-47,Yemen,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-47,Yemen,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-47,Yemen,"Marine mammal oils, nei",fish_oil,2020,98.4,14.4
-47,Yemen,"Marine mammal oils, nei",fish_oil,2021,46.76,7.2
-47,Yemen,"Marine mammal oils, nei",fish_oil,2022,40.49,7.2
-47,Yemen,"Marine mammal oils, nei",fish_oil,2023,76.72,14.4
 47,Yemen,Ornamental fish nei,ornamentals,2004,8,6
 47,Yemen,Ornamental fish nei,ornamentals,2005,27,24
 47,Yemen,Ornamental fish nei,ornamentals,2006,13,4
@@ -7508,14 +7157,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 48,Oman,"Fish liver oils, nei",fish_oil,2021,9500.42,5708.05
 48,Oman,"Fish liver oils, nei",fish_oil,2022,13617.57,7502.88
 48,Oman,"Fish liver oils, nei",fish_oil,2023,17334.71,6310.99
-48,Oman,"Marine mammal oils, nei",fish_oil,2016,41,14
-48,Oman,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-48,Oman,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-48,Oman,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-48,Oman,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-48,Oman,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-48,Oman,"Marine mammal oils, nei",fish_oil,2022,0.07,0
-48,Oman,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 48,Oman,"Oils and fats of aquatic animals, nei",fish_oil,1981,6,10
 48,Oman,"Oils and fats of aquatic animals, nei",fish_oil,1982,NA,NA
 48,Oman,"Oils and fats of aquatic animals, nei",fish_oil,1983,NA,NA
@@ -8668,21 +8309,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 54,United Arab Emirates,"Fish liver oils, nei",fish_oil,2021,960.48,146.43
 54,United Arab Emirates,"Fish liver oils, nei",fish_oil,2022,496.53,78.17
 54,United Arab Emirates,"Fish liver oils, nei",fish_oil,2023,1522.15,205.21
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2009,6,2
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2010,103,62
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2011,1,3
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2014,23,8
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2018,0.1,0.1
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2019,32.7,27.82
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2021,779.37,796.61
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2022,228.59,169.93
-54,United Arab Emirates,"Marine mammal oils, nei",fish_oil,2023,121.73,20.56
 54,United Arab Emirates,Ornamental fish nei,ornamentals,1995,9,NA
 54,United Arab Emirates,Ornamental fish nei,ornamentals,1996,63,NA
 54,United Arab Emirates,Ornamental fish nei,ornamentals,1997,4,NA
@@ -9027,54 +8653,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 59,Belgium,"Halibuts, liver oils",fish_oil,2021,11.15,1.22
 59,Belgium,"Halibuts, liver oils",fish_oil,2022,4.15,0.2
 59,Belgium,"Halibuts, liver oils",fish_oil,2023,0,0
-59,Belgium,"Marine mammal oils, nei",fish_oil,1976,24,83
-59,Belgium,"Marine mammal oils, nei",fish_oil,1977,76,323
-59,Belgium,"Marine mammal oils, nei",fish_oil,1978,125,440
-59,Belgium,"Marine mammal oils, nei",fish_oil,1979,129,362
-59,Belgium,"Marine mammal oils, nei",fish_oil,1980,106,588
-59,Belgium,"Marine mammal oils, nei",fish_oil,1981,81,282
-59,Belgium,"Marine mammal oils, nei",fish_oil,1982,138,398
-59,Belgium,"Marine mammal oils, nei",fish_oil,1983,106,424
-59,Belgium,"Marine mammal oils, nei",fish_oil,1984,111,478
-59,Belgium,"Marine mammal oils, nei",fish_oil,1985,61,221
-59,Belgium,"Marine mammal oils, nei",fish_oil,1986,1,1
-59,Belgium,"Marine mammal oils, nei",fish_oil,1987,18,12
-59,Belgium,"Marine mammal oils, nei",fish_oil,1988,91,79
-59,Belgium,"Marine mammal oils, nei",fish_oil,1989,19,57
-59,Belgium,"Marine mammal oils, nei",fish_oil,1990,44,4
-59,Belgium,"Marine mammal oils, nei",fish_oil,1991,15,46
-59,Belgium,"Marine mammal oils, nei",fish_oil,1992,18,4
-59,Belgium,"Marine mammal oils, nei",fish_oil,1993,125,71
-59,Belgium,"Marine mammal oils, nei",fish_oil,1994,128,75
-59,Belgium,"Marine mammal oils, nei",fish_oil,1995,208,150
-59,Belgium,"Marine mammal oils, nei",fish_oil,1996,131,81
-59,Belgium,"Marine mammal oils, nei",fish_oil,1997,75,48
-59,Belgium,"Marine mammal oils, nei",fish_oil,1998,90,57
-59,Belgium,"Marine mammal oils, nei",fish_oil,1999,56,73
-59,Belgium,"Marine mammal oils, nei",fish_oil,2000,101,95
-59,Belgium,"Marine mammal oils, nei",fish_oil,2001,58,92
-59,Belgium,"Marine mammal oils, nei",fish_oil,2002,46,33
-59,Belgium,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-59,Belgium,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-59,Belgium,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-59,Belgium,"Marine mammal oils, nei",fish_oil,2006,65,63
-59,Belgium,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-59,Belgium,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-59,Belgium,"Marine mammal oils, nei",fish_oil,2009,26,3
-59,Belgium,"Marine mammal oils, nei",fish_oil,2010,23,7
-59,Belgium,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-59,Belgium,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-59,Belgium,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-59,Belgium,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-59,Belgium,"Marine mammal oils, nei",fish_oil,2015,38,0.1
-59,Belgium,"Marine mammal oils, nei",fish_oil,2016,29,0.1
-59,Belgium,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-59,Belgium,"Marine mammal oils, nei",fish_oil,2018,1,0.1
-59,Belgium,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-59,Belgium,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-59,Belgium,"Marine mammal oils, nei",fish_oil,2021,1605.11,13.39
-59,Belgium,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-59,Belgium,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 59,Belgium,Ornamental saltwater fish,ornamentals,1988,174,20
 59,Belgium,Ornamental saltwater fish,ornamentals,1989,82,7
 59,Belgium,Ornamental saltwater fish,ornamentals,1990,117,7
@@ -9462,18 +9040,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 61,Tunisia,"Fish body oils, nei",fish_oil,2021,NA,NA
 61,Tunisia,"Fish body oils, nei",fish_oil,2022,449.85,210
 61,Tunisia,"Fish body oils, nei",fish_oil,2023,369.03,100
-61,Tunisia,"Marine mammal oils, nei",fish_oil,2012,88,34
-61,Tunisia,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-61,Tunisia,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-61,Tunisia,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-61,Tunisia,"Marine mammal oils, nei",fish_oil,2016,0.1,0.1
-61,Tunisia,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-61,Tunisia,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-61,Tunisia,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-61,Tunisia,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-61,Tunisia,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-61,Tunisia,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-61,Tunisia,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 61,Tunisia,Ornamental fish nei,ornamentals,1990,215,18
 61,Tunisia,Ornamental fish nei,ornamentals,1991,NA,NA
 61,Tunisia,Ornamental fish nei,ornamentals,1992,NA,NA
@@ -9774,49 +9340,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 62,Morocco,"Fish liver oils, nei",fish_oil,2021,NA,NA
 62,Morocco,"Fish liver oils, nei",fish_oil,2022,NA,NA
 62,Morocco,"Fish liver oils, nei",fish_oil,2023,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1981,62,210
-62,Morocco,"Marine mammal oils, nei",fish_oil,1982,177,639
-62,Morocco,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1984,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1988,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1989,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1991,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1992,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-62,Morocco,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 62,Morocco,Ornamental saltwater fish,ornamentals,2002,644,243
 62,Morocco,Ornamental saltwater fish,ornamentals,2003,6475,1725
 62,Morocco,Ornamental saltwater fish,ornamentals,2004,7090,1696
@@ -10023,17 +9546,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 64,Mauritania,"Fish liver oils, nei",fish_oil,2021,23665.83,21549.35
 64,Mauritania,"Fish liver oils, nei",fish_oil,2022,18013.54,15312.59
 64,Mauritania,"Fish liver oils, nei",fish_oil,2023,1381.9,1217.09
-64,Mauritania,"Marine mammal oils, nei",fish_oil,2013,40,40
-64,Mauritania,"Marine mammal oils, nei",fish_oil,2014,66,66
-64,Mauritania,"Marine mammal oils, nei",fish_oil,2015,5.77,4.83
-64,Mauritania,"Marine mammal oils, nei",fish_oil,2016,383,309
-64,Mauritania,"Marine mammal oils, nei",fish_oil,2017,191,159
-64,Mauritania,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-64,Mauritania,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-64,Mauritania,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-64,Mauritania,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-64,Mauritania,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-64,Mauritania,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 64,Mauritania,Ornamental fish nei,ornamentals,2010,66,10
 64,Mauritania,Ornamental fish nei,ornamentals,2011,NA,NA
 64,Mauritania,Ornamental fish nei,ornamentals,2012,NA,NA
@@ -10103,20 +9615,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 65,Gambia,"Fish liver oils, nei",fish_oil,2021,NA,NA
 65,Gambia,"Fish liver oils, nei",fish_oil,2022,15.42,220.32
 65,Gambia,"Fish liver oils, nei",fish_oil,2023,NA,NA
-65,Gambia,"Marine mammal oils, nei",fish_oil,2010,3,26
-65,Gambia,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-65,Gambia,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-65,Gambia,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-65,Gambia,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-65,Gambia,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-65,Gambia,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-65,Gambia,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-65,Gambia,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-65,Gambia,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-65,Gambia,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-65,Gambia,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-65,Gambia,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-65,Gambia,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 65,Gambia,Ornamental fish nei,ornamentals,2008,1,17
 65,Gambia,Ornamental fish nei,ornamentals,2009,1,6
 65,Gambia,Ornamental fish nei,ornamentals,2010,NA,NA
@@ -10283,23 +9781,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 66,Senegal,"Fish liver oils, nei",fish_oil,2021,399.58,282
 66,Senegal,"Fish liver oils, nei",fish_oil,2022,NA,NA
 66,Senegal,"Fish liver oils, nei",fish_oil,2023,524.4,160
-66,Senegal,"Marine mammal oils, nei",fish_oil,2007,26,8
-66,Senegal,"Marine mammal oils, nei",fish_oil,2008,78,11
-66,Senegal,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-66,Senegal,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-66,Senegal,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-66,Senegal,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-66,Senegal,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-66,Senegal,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-66,Senegal,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-66,Senegal,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-66,Senegal,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-66,Senegal,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-66,Senegal,"Marine mammal oils, nei",fish_oil,2019,115.17,245.01
-66,Senegal,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-66,Senegal,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-66,Senegal,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-66,Senegal,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 66,Senegal,Ornamental fish nei,ornamentals,2002,11,NA
 66,Senegal,Ornamental fish nei,ornamentals,2003,NA,NA
 66,Senegal,Ornamental fish nei,ornamentals,2004,NA,NA
@@ -10404,7 +9885,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 67,Libya,"Fish liver oils, nei",fish_oil,2021,NA,NA
 67,Libya,"Fish liver oils, nei",fish_oil,2022,NA,NA
 67,Libya,"Fish liver oils, nei",fish_oil,2023,NA,NA
-67,Libya,"Marine mammal oils, nei",fish_oil,2023,0.26,0
 67,Libya,Ornamental fish nei,ornamentals,1997,6,NA
 67,Libya,Ornamental fish nei,ornamentals,1998,NA,NA
 67,Libya,Ornamental fish nei,ornamentals,1999,14,1
@@ -10653,35 +10133,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 69,Latvia,"Fish liver oils, nei",fish_oil,2021,17.28,0.51
 69,Latvia,"Fish liver oils, nei",fish_oil,2022,22.95,0.7
 69,Latvia,"Fish liver oils, nei",fish_oil,2023,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,1995,4,0.1
-69,Latvia,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2005,1,0.1
-69,Latvia,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2011,8,15
-69,Latvia,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2013,20,0.1
-69,Latvia,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2015,10,0.1
-69,Latvia,"Marine mammal oils, nei",fish_oil,2016,2,0.1
-69,Latvia,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-69,Latvia,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 69,Latvia,Ornamental fish nei,ornamentals,1994,25,83
 69,Latvia,Ornamental fish nei,ornamentals,1995,NA,0.1
 69,Latvia,Ornamental fish nei,ornamentals,1996,NA,NA
@@ -11241,25 +10692,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 71,Bulgaria,"Fish liver oils, nei",fish_oil,2021,NA,NA
 71,Bulgaria,"Fish liver oils, nei",fish_oil,2022,NA,NA
 71,Bulgaria,"Fish liver oils, nei",fish_oil,2023,19.94,2.49
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2005,1,0.1
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-71,Bulgaria,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 71,Bulgaria,Ornamental fish nei,ornamentals,1999,1,NA
 71,Bulgaria,Ornamental fish nei,ornamentals,2000,4,NA
 71,Bulgaria,Ornamental fish nei,ornamentals,2001,3,NA
@@ -11531,24 +10963,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 72,Romania,"Fish liver oils, nei",fish_oil,2021,183.38,5.49
 72,Romania,"Fish liver oils, nei",fish_oil,2022,209.95,7.73
 72,Romania,"Fish liver oils, nei",fish_oil,2023,306.62,10.54
-72,Romania,"Marine mammal oils, nei",fish_oil,2006,207,23
-72,Romania,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-72,Romania,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 72,Romania,Ornamental fish nei,ornamentals,1993,2,NA
 72,Romania,Ornamental fish nei,ornamentals,1994,NA,NA
 72,Romania,Ornamental fish nei,ornamentals,1995,2,NA
@@ -11799,38 +11213,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 73,Russia,"Fish liver oils, nei",fish_oil,2021,201,119
 73,Russia,"Fish liver oils, nei",fish_oil,2022,0.14,0
 73,Russia,"Fish liver oils, nei",fish_oil,2023,0.12,0
-73,Russia,"Marine mammal oils, nei",fish_oil,1992,598,1967
-73,Russia,"Marine mammal oils, nei",fish_oil,1993,245,721
-73,Russia,"Marine mammal oils, nei",fish_oil,1994,825,2420
-73,Russia,"Marine mammal oils, nei",fish_oil,1995,1327,3174
-73,Russia,"Marine mammal oils, nei",fish_oil,1996,709,1279
-73,Russia,"Marine mammal oils, nei",fish_oil,1997,16,15
-73,Russia,"Marine mammal oils, nei",fish_oil,1998,1,1
-73,Russia,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-73,Russia,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-73,Russia,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-73,Russia,"Marine mammal oils, nei",fish_oil,2002,15,12
-73,Russia,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-73,Russia,"Marine mammal oils, nei",fish_oil,2004,10,6
-73,Russia,"Marine mammal oils, nei",fish_oil,2005,0.1,1
-73,Russia,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-73,Russia,"Marine mammal oils, nei",fish_oil,2007,2,1
-73,Russia,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-73,Russia,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-73,Russia,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-73,Russia,"Marine mammal oils, nei",fish_oil,2011,1,0.1
-73,Russia,"Marine mammal oils, nei",fish_oil,2012,4,2
-73,Russia,"Marine mammal oils, nei",fish_oil,2013,10,5
-73,Russia,"Marine mammal oils, nei",fish_oil,2014,2,0.1
-73,Russia,"Marine mammal oils, nei",fish_oil,2015,1,0.1
-73,Russia,"Marine mammal oils, nei",fish_oil,2016,3,1
-73,Russia,"Marine mammal oils, nei",fish_oil,2017,5,1
-73,Russia,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-73,Russia,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-73,Russia,"Marine mammal oils, nei",fish_oil,2020,2,0
-73,Russia,"Marine mammal oils, nei",fish_oil,2021,350,310
-73,Russia,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-73,Russia,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 73,Russia,Ornamental saltwater fish,ornamentals,2019,3,0
 73,Russia,Ornamental saltwater fish,ornamentals,2020,0,0
 73,Russia,Ornamental saltwater fish,ornamentals,2021,NA,NA
@@ -11980,12 +11362,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 74,Georgia,"Fish body oils, nei",fish_oil,2021,9830.85,5405.01
 74,Georgia,"Fish body oils, nei",fish_oil,2022,11526.52,4518.29
 74,Georgia,"Fish body oils, nei",fish_oil,2023,15710.76,3760.51
-74,Georgia,"Marine mammal oils, nei",fish_oil,2018,1342,639
-74,Georgia,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-74,Georgia,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-74,Georgia,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-74,Georgia,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-74,Georgia,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 74,Georgia,Ornamental fish nei,ornamentals,2009,13,6
 74,Georgia,Ornamental fish nei,ornamentals,2010,NA,NA
 74,Georgia,Ornamental fish nei,ornamentals,2011,NA,NA
@@ -12181,27 +11557,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 75,Ukraine,"Fish liver oils, nei",fish_oil,2021,0.01,0
 75,Ukraine,"Fish liver oils, nei",fish_oil,2022,NA,NA
 75,Ukraine,"Fish liver oils, nei",fish_oil,2023,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2003,0.1,0.1
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-75,Ukraine,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 75,Ukraine,Ornamental fish nei,ornamentals,2009,1,0.1
 75,Ukraine,Ornamental fish nei,ornamentals,2010,0.1,0.1
 75,Ukraine,Ornamental fish nei,ornamentals,2011,NA,NA
@@ -12489,43 +11844,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 76,Turkey,"Fish liver oils, nei",fish_oil,2021,33.87,1
 76,Turkey,"Fish liver oils, nei",fish_oil,2022,37.25,1.95
 76,Turkey,"Fish liver oils, nei",fish_oil,2023,27.69,1.49
-76,Turkey,"Marine mammal oils, nei",fish_oil,1987,267,1544
-76,Turkey,"Marine mammal oils, nei",fish_oil,1988,49,79
-76,Turkey,"Marine mammal oils, nei",fish_oil,1989,20,24
-76,Turkey,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,1991,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,1992,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,2006,1,0.1
-76,Turkey,"Marine mammal oils, nei",fish_oil,2007,43,2
-76,Turkey,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,2010,1,0.1
-76,Turkey,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-76,Turkey,"Marine mammal oils, nei",fish_oil,2014,2,0.1
-76,Turkey,"Marine mammal oils, nei",fish_oil,2015,152,15
-76,Turkey,"Marine mammal oils, nei",fish_oil,2016,94,7
-76,Turkey,"Marine mammal oils, nei",fish_oil,2017,46,7
-76,Turkey,"Marine mammal oils, nei",fish_oil,2018,57,10
-76,Turkey,"Marine mammal oils, nei",fish_oil,2019,179.37,32.2
-76,Turkey,"Marine mammal oils, nei",fish_oil,2020,2.47,0.12
-76,Turkey,"Marine mammal oils, nei",fish_oil,2021,3.02,0.14
-76,Turkey,"Marine mammal oils, nei",fish_oil,2022,3.12,0.35
-76,Turkey,"Marine mammal oils, nei",fish_oil,2023,8.47,0.42
 76,Turkey,Ornamental saltwater fish,ornamentals,2004,7,1
 76,Turkey,Ornamental saltwater fish,ornamentals,2005,4,0.1
 76,Turkey,Ornamental saltwater fish,ornamentals,2006,1,0.1
@@ -12855,25 +12173,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 77,Syria,"Fish body oils, nei",fish_oil,2021,NA,NA
 77,Syria,"Fish body oils, nei",fish_oil,2022,NA,NA
 77,Syria,"Fish body oils, nei",fish_oil,2023,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2005,30,27
-77,Syria,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-77,Syria,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 77,Syria,Ornamental fish nei,ornamentals,2001,2,0
 77,Syria,Ornamental fish nei,ornamentals,2002,NA,NA
 77,Syria,Ornamental fish nei,ornamentals,2003,NA,NA
@@ -13294,20 +12593,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 79,Israel,"Fish liver oils, nei",fish_oil,2021,NA,NA
 79,Israel,"Fish liver oils, nei",fish_oil,2022,NA,NA
 79,Israel,"Fish liver oils, nei",fish_oil,2023,NA,NA
-79,Israel,"Marine mammal oils, nei",fish_oil,2010,1,0.1
-79,Israel,"Marine mammal oils, nei",fish_oil,2011,303,121
-79,Israel,"Marine mammal oils, nei",fish_oil,2012,1163,465
-79,Israel,"Marine mammal oils, nei",fish_oil,2013,396,160
-79,Israel,"Marine mammal oils, nei",fish_oil,2014,4332,1730
-79,Israel,"Marine mammal oils, nei",fish_oil,2015,1159,465
-79,Israel,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-79,Israel,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-79,Israel,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-79,Israel,"Marine mammal oils, nei",fish_oil,2019,1,0
-79,Israel,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-79,Israel,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-79,Israel,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-79,Israel,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 79,Israel,"Oils and fats of aquatic animals, nei",fish_oil,1980,8,10
 79,Israel,"Oils and fats of aquatic animals, nei",fish_oil,1981,NA,NA
 79,Israel,"Oils and fats of aquatic animals, nei",fish_oil,1982,NA,NA
@@ -13603,25 +12888,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 80,Greece,"Halibuts, liver oils",fish_oil,2021,39.56,2.3
 80,Greece,"Halibuts, liver oils",fish_oil,2022,NA,NA
 80,Greece,"Halibuts, liver oils",fish_oil,2023,NA,NA
-80,Greece,"Marine mammal oils, nei",fish_oil,2005,2,0.1
-80,Greece,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-80,Greece,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-80,Greece,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-80,Greece,"Marine mammal oils, nei",fish_oil,2009,0.1,0.1
-80,Greece,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-80,Greece,"Marine mammal oils, nei",fish_oil,2011,0.1,0.1
-80,Greece,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-80,Greece,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-80,Greece,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-80,Greece,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-80,Greece,"Marine mammal oils, nei",fish_oil,2016,1,0.1
-80,Greece,"Marine mammal oils, nei",fish_oil,2017,5,1
-80,Greece,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-80,Greece,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-80,Greece,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-80,Greece,"Marine mammal oils, nei",fish_oil,2021,0.4,0.03
-80,Greece,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-80,Greece,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 80,Greece,Ornamental saltwater fish,ornamentals,1991,1,0.1
 80,Greece,Ornamental saltwater fish,ornamentals,1992,NA,NA
 80,Greece,Ornamental saltwater fish,ornamentals,1993,177,43
@@ -14019,37 +13285,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 81,Cyprus,"Fish liver oils, nei",fish_oil,2021,NA,NA
 81,Cyprus,"Fish liver oils, nei",fish_oil,2022,NA,NA
 81,Cyprus,"Fish liver oils, nei",fish_oil,2023,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,1993,24,55
-81,Cyprus,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2012,7,4
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2013,6,4
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2014,162,2
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2015,277,6
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2016,188,3
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2017,210,2
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2018,568,7
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2019,567.15,5.82
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2020,89.02,1.14
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2021,92.08,1.2
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2022,257.71,3.56
-81,Cyprus,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 81,Cyprus,Ornamental saltwater fish,ornamentals,1988,665,78
 81,Cyprus,Ornamental saltwater fish,ornamentals,1989,NA,NA
 81,Cyprus,Ornamental saltwater fish,ornamentals,1990,NA,NA
@@ -14285,8 +13520,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 82,Albania,"Fish liver oils, nei",fish_oil,2021,NA,NA
 82,Albania,"Fish liver oils, nei",fish_oil,2022,NA,NA
 82,Albania,"Fish liver oils, nei",fish_oil,2023,NA,NA
-82,Albania,"Marine mammal oils, nei",fish_oil,2022,0.1,0.09
-82,Albania,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 82,Albania,Ornamental fish nei,ornamentals,2000,1,0.1
 82,Albania,Ornamental fish nei,ornamentals,2001,0.1,0.1
 82,Albania,Ornamental fish nei,ornamentals,2002,NA,NA
@@ -15125,29 +14358,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 101,Namibia,"Fish liver oils, nei",fish_oil,2021,0,0
 101,Namibia,"Fish liver oils, nei",fish_oil,2022,NA,NA
 101,Namibia,"Fish liver oils, nei",fish_oil,2023,NA,NA
-101,Namibia,"Marine mammal oils, nei",fish_oil,2001,0.1,0.1
-101,Namibia,"Marine mammal oils, nei",fish_oil,2002,6,57
-101,Namibia,"Marine mammal oils, nei",fish_oil,2003,10,24
-101,Namibia,"Marine mammal oils, nei",fish_oil,2004,0.1,4
-101,Namibia,"Marine mammal oils, nei",fish_oil,2005,8,14
-101,Namibia,"Marine mammal oils, nei",fish_oil,2006,3,8
-101,Namibia,"Marine mammal oils, nei",fish_oil,2007,29,43
-101,Namibia,"Marine mammal oils, nei",fish_oil,2008,2,2
-101,Namibia,"Marine mammal oils, nei",fish_oil,2009,1,1
-101,Namibia,"Marine mammal oils, nei",fish_oil,2010,0.1,0.1
-101,Namibia,"Marine mammal oils, nei",fish_oil,2011,4,6
-101,Namibia,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-101,Namibia,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-101,Namibia,"Marine mammal oils, nei",fish_oil,2014,1,6
-101,Namibia,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-101,Namibia,"Marine mammal oils, nei",fish_oil,2016,0.1,0.1
-101,Namibia,"Marine mammal oils, nei",fish_oil,2017,2,0.1
-101,Namibia,"Marine mammal oils, nei",fish_oil,2018,0.1,0.1
-101,Namibia,"Marine mammal oils, nei",fish_oil,2019,0.65,0.3
-101,Namibia,"Marine mammal oils, nei",fish_oil,2020,0.01,0
-101,Namibia,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-101,Namibia,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-101,Namibia,"Marine mammal oils, nei",fish_oil,2023,0.1,0.09
 101,Namibia,Ornamental fish nei,ornamentals,2000,5,1
 101,Namibia,Ornamental fish nei,ornamentals,2001,NA,NA
 101,Namibia,Ornamental fish nei,ornamentals,2002,7,22
@@ -15435,40 +14645,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 102,South Africa,"Fish liver oils, nei",fish_oil,2021,132.63,69
 102,South Africa,"Fish liver oils, nei",fish_oil,2022,8.07,1.51
 102,South Africa,"Fish liver oils, nei",fish_oil,2023,109.86,67.03
-102,South Africa,"Marine mammal oils, nei",fish_oil,1990,6,5
-102,South Africa,"Marine mammal oils, nei",fish_oil,1991,1,1
-102,South Africa,"Marine mammal oils, nei",fish_oil,1992,2,2
-102,South Africa,"Marine mammal oils, nei",fish_oil,1993,84,8
-102,South Africa,"Marine mammal oils, nei",fish_oil,1994,NA,0.1
-102,South Africa,"Marine mammal oils, nei",fish_oil,1995,3,3
-102,South Africa,"Marine mammal oils, nei",fish_oil,1996,0.1,0.1
-102,South Africa,"Marine mammal oils, nei",fish_oil,1997,0.1,0.1
-102,South Africa,"Marine mammal oils, nei",fish_oil,1998,1,1
-102,South Africa,"Marine mammal oils, nei",fish_oil,1999,NA,0.1
-102,South Africa,"Marine mammal oils, nei",fish_oil,2000,31,64
-102,South Africa,"Marine mammal oils, nei",fish_oil,2001,22,53
-102,South Africa,"Marine mammal oils, nei",fish_oil,2002,11,20
-102,South Africa,"Marine mammal oils, nei",fish_oil,2003,36,75
-102,South Africa,"Marine mammal oils, nei",fish_oil,2004,22,40
-102,South Africa,"Marine mammal oils, nei",fish_oil,2005,15,55
-102,South Africa,"Marine mammal oils, nei",fish_oil,2006,0.1,0.1
-102,South Africa,"Marine mammal oils, nei",fish_oil,2007,31,20
-102,South Africa,"Marine mammal oils, nei",fish_oil,2008,4,6
-102,South Africa,"Marine mammal oils, nei",fish_oil,2009,0.1,0.1
-102,South Africa,"Marine mammal oils, nei",fish_oil,2010,7,16
-102,South Africa,"Marine mammal oils, nei",fish_oil,2011,39,37
-102,South Africa,"Marine mammal oils, nei",fish_oil,2012,18,17
-102,South Africa,"Marine mammal oils, nei",fish_oil,2013,2,1
-102,South Africa,"Marine mammal oils, nei",fish_oil,2014,534,270
-102,South Africa,"Marine mammal oils, nei",fish_oil,2015,3503,2542
-102,South Africa,"Marine mammal oils, nei",fish_oil,2016,75,34
-102,South Africa,"Marine mammal oils, nei",fish_oil,2017,1089,1035
-102,South Africa,"Marine mammal oils, nei",fish_oil,2018,854,423
-102,South Africa,"Marine mammal oils, nei",fish_oil,2019,13.62,9.62
-102,South Africa,"Marine mammal oils, nei",fish_oil,2020,45.59,49.72
-102,South Africa,"Marine mammal oils, nei",fish_oil,2021,224.21,127.71
-102,South Africa,"Marine mammal oils, nei",fish_oil,2022,7,0.72
-102,South Africa,"Marine mammal oils, nei",fish_oil,2023,0.9,0.3
 102,South Africa,Ornamental fish nei,ornamentals,1985,92,NA
 102,South Africa,Ornamental fish nei,ornamentals,1986,NA,NA
 102,South Africa,Ornamental fish nei,ornamentals,1987,NA,NA
@@ -15827,10 +15003,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 106,Ghana,"Fish liver oils, nei",fish_oil,2021,NA,NA
 106,Ghana,"Fish liver oils, nei",fish_oil,2022,NA,NA
 106,Ghana,"Fish liver oils, nei",fish_oil,2023,NA,NA
-106,Ghana,"Marine mammal oils, nei",fish_oil,2020,0.58,0.08
-106,Ghana,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-106,Ghana,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-106,Ghana,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 106,Ghana,Ornamental fish nei,ornamentals,1986,1,NA
 106,Ghana,Ornamental fish nei,ornamentals,1987,3,NA
 106,Ghana,Ornamental fish nei,ornamentals,1988,2,NA
@@ -16379,48 +15551,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 112,Cuba,"Fish body oils, nei",fish_oil,2021,NA,NA
 112,Cuba,"Fish body oils, nei",fish_oil,2022,NA,NA
 112,Cuba,"Fish body oils, nei",fish_oil,2023,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1982,3,7
-112,Cuba,"Marine mammal oils, nei",fish_oil,1983,5,23
-112,Cuba,"Marine mammal oils, nei",fish_oil,1984,1,8
-112,Cuba,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1988,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1989,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1991,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1992,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-112,Cuba,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 112,Cuba,Ornamental fish nei,ornamentals,1999,74,10
 112,Cuba,Ornamental fish nei,ornamentals,2000,83,14
 112,Cuba,Ornamental fish nei,ornamentals,2001,102,16
@@ -16720,24 +15850,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 114,Haiti,Miscellaneous corals and shells,corals,2021,10.29,12.08
 114,Haiti,Miscellaneous corals and shells,corals,2022,13.53,13.32
 114,Haiti,Miscellaneous corals and shells,corals,2023,15.72,25.14
-114,Haiti,"Marine mammal oils, nei",fish_oil,2006,9,5
-114,Haiti,"Marine mammal oils, nei",fish_oil,2007,11,6
-114,Haiti,"Marine mammal oils, nei",fish_oil,2008,41,17
-114,Haiti,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-114,Haiti,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-114,Haiti,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-114,Haiti,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-114,Haiti,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-114,Haiti,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-114,Haiti,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-114,Haiti,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-114,Haiti,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-114,Haiti,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-114,Haiti,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-114,Haiti,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-114,Haiti,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-114,Haiti,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-114,Haiti,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 114,Haiti,Ornamental fish nei,ornamentals,1996,81,NA
 114,Haiti,Ornamental fish nei,ornamentals,1997,205,NA
 114,Haiti,Ornamental fish nei,ornamentals,1998,1200,NA
@@ -17003,18 +16115,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 115,Dominican Republic,"Fish liver oils, nei",fish_oil,2021,NA,NA
 115,Dominican Republic,"Fish liver oils, nei",fish_oil,2022,NA,NA
 115,Dominican Republic,"Fish liver oils, nei",fish_oil,2023,NA,NA
-115,Dominican Republic,"Marine mammal oils, nei",fish_oil,2012,0.1,0.1
-115,Dominican Republic,"Marine mammal oils, nei",fish_oil,2013,0.1,0.1
-115,Dominican Republic,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-115,Dominican Republic,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-115,Dominican Republic,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-115,Dominican Republic,"Marine mammal oils, nei",fish_oil,2017,0,0.01
-115,Dominican Republic,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-115,Dominican Republic,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-115,Dominican Republic,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-115,Dominican Republic,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-115,Dominican Republic,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-115,Dominican Republic,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 115,Dominican Republic,Ornamental fish nei,ornamentals,1979,1,0.1
 115,Dominican Republic,Ornamental fish nei,ornamentals,1980,NA,NA
 115,Dominican Republic,Ornamental fish nei,ornamentals,1981,NA,NA
@@ -17177,28 +16277,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 120,Antigua and Barbuda,"Fish liver oils, nei",fish_oil,2021,NA,NA
 120,Antigua and Barbuda,"Fish liver oils, nei",fish_oil,2022,NA,NA
 120,Antigua and Barbuda,"Fish liver oils, nei",fish_oil,2023,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2002,57,2
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-120,Antigua and Barbuda,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 120,Antigua and Barbuda,Ornamental fish nei,ornamentals,2002,2,0
 120,Antigua and Barbuda,Ornamental fish nei,ornamentals,2003,2,0
 120,Antigua and Barbuda,Ornamental fish nei,ornamentals,2004,NA,NA
@@ -17240,10 +16318,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 122,Saint Lucia,Miscellaneous corals and shells,corals,2022,NA,NA
 122,Saint Lucia,Miscellaneous corals and shells,corals,2023,NA,NA
 122,Saint Lucia,"Fish liver oils, nei",fish_oil,2023,0.01,0
-122,Saint Lucia,"Marine mammal oils, nei",fish_oil,2020,0.01,0.01
-122,Saint Lucia,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-122,Saint Lucia,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-122,Saint Lucia,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 122,Saint Lucia,Ornamental fish nei,ornamentals,2002,0.1,0.1
 122,Saint Lucia,Ornamental fish nei,ornamentals,2003,NA,NA
 122,Saint Lucia,Ornamental fish nei,ornamentals,2004,NA,NA
@@ -17718,29 +16792,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 126,Trinidad and Tobago,"Fish liver oils, nei",fish_oil,2021,NA,NA
 126,Trinidad and Tobago,"Fish liver oils, nei",fish_oil,2022,NA,NA
 126,Trinidad and Tobago,"Fish liver oils, nei",fish_oil,2023,0.04,0
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2001,0.1,0.1
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2015,0,0
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2022,0.01,0.01
-126,Trinidad and Tobago,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 126,Trinidad and Tobago,Ornamental fish nei,ornamentals,1976,249,NA
 126,Trinidad and Tobago,Ornamental fish nei,ornamentals,1977,151,NA
 126,Trinidad and Tobago,Ornamental fish nei,ornamentals,1978,148,NA
@@ -18037,45 +17088,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 127,Saint Vincent and the Grenadines,"Fish liver oils, nei",fish_oil,2021,NA,NA
 127,Saint Vincent and the Grenadines,"Fish liver oils, nei",fish_oil,2022,0.13,0.05
 127,Saint Vincent and the Grenadines,"Fish liver oils, nei",fish_oil,2023,0.11,0.01
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1985,NA,0.1
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1986,1,0.1
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1988,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1989,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1991,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1992,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1995,1,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1997,2,0.1
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2000,2,3
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2001,1,1
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2002,0.1,0.1
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2004,1,1
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2005,1,0.1
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2006,0.1,0.1
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2009,0.1,0.1
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2010,1,1
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2011,1,1
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2012,1,1
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2013,1,1
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2014,3,2
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2017,1,1
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2018,4,3
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2019,1.39,1.07
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2020,1.45,0.36
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-127,Saint Vincent and the Grenadines,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 127,Saint Vincent and the Grenadines,Ornamental fish nei,ornamentals,2003,0.1,0.1
 127,Saint Vincent and the Grenadines,Ornamental fish nei,ornamentals,2004,NA,NA
 127,Saint Vincent and the Grenadines,Ornamental fish nei,ornamentals,2005,NA,NA
@@ -18416,17 +17428,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 130,Costa Rica,"Fish liver oils, nei",fish_oil,2021,NA,NA
 130,Costa Rica,"Fish liver oils, nei",fish_oil,2022,NA,NA
 130,Costa Rica,"Fish liver oils, nei",fish_oil,2023,NA,NA
-130,Costa Rica,"Marine mammal oils, nei",fish_oil,2013,0.1,0.1
-130,Costa Rica,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-130,Costa Rica,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-130,Costa Rica,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-130,Costa Rica,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-130,Costa Rica,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-130,Costa Rica,"Marine mammal oils, nei",fish_oil,2019,0.01,0
-130,Costa Rica,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-130,Costa Rica,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-130,Costa Rica,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-130,Costa Rica,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 130,Costa Rica,Ornamental fish nei,ornamentals,1984,36,9
 130,Costa Rica,Ornamental fish nei,ornamentals,1985,NA,NA
 130,Costa Rica,Ornamental fish nei,ornamentals,1986,25,7
@@ -18831,28 +17832,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 132,Colombia,"Fish liver oils, nei",fish_oil,2021,NA,NA
 132,Colombia,"Fish liver oils, nei",fish_oil,2022,2.46,0.08
 132,Colombia,"Fish liver oils, nei",fish_oil,2023,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2002,NA,0.1
-132,Colombia,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-132,Colombia,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 132,Colombia,Ornamental fish nei,ornamentals,1976,1209,164
 132,Colombia,Ornamental fish nei,ornamentals,1977,2627,217
 132,Colombia,Ornamental fish nei,ornamentals,1978,6934,346
@@ -19620,39 +18599,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 135,Mexico,"Fish liver oils, nei",fish_oil,2023,NA,NA
 135,Mexico,Herring oil,fish_oil,2022,2594.83,1368.96
 135,Mexico,Herring oil,fish_oil,2023,1308.77,670.12
-135,Mexico,"Marine mammal oils, nei",fish_oil,1991,3,3
-135,Mexico,"Marine mammal oils, nei",fish_oil,1992,NA,0.1
-135,Mexico,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,1999,NA,0.1
-135,Mexico,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-135,Mexico,"Marine mammal oils, nei",fish_oil,2022,0.47,0
-135,Mexico,"Marine mammal oils, nei",fish_oil,2023,0.18,0
 135,Mexico,"Oils and fats of aquatic animals, nei",fish_oil,2022,12014.46,5125.3
 135,Mexico,"Oils and fats of aquatic animals, nei",fish_oil,2023,23619.06,6015.83
 135,Mexico,Ornamental fish nei,ornamentals,1976,1,0.1
@@ -20282,34 +19228,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 137,Ecuador,"Fish liver oils, nei",fish_oil,2021,0.01,0
 137,Ecuador,"Fish liver oils, nei",fish_oil,2022,0.04,0
 137,Ecuador,"Fish liver oils, nei",fish_oil,2023,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,1996,1,0.1
-137,Ecuador,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-137,Ecuador,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 137,Ecuador,Ornamental fish nei,ornamentals,1976,2,1
 137,Ecuador,Ornamental fish nei,ornamentals,1977,5,2
 137,Ecuador,Ornamental fish nei,ornamentals,1978,5,1
@@ -20587,54 +19505,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 138,Peru,"Fish liver oils, nei",fish_oil,2021,NA,NA
 138,Peru,"Fish liver oils, nei",fish_oil,2022,NA,NA
 138,Peru,"Fish liver oils, nei",fish_oil,2023,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1976,956,2880
-138,Peru,"Marine mammal oils, nei",fish_oil,1977,882,1249
-138,Peru,"Marine mammal oils, nei",fish_oil,1978,425,1076
-138,Peru,"Marine mammal oils, nei",fish_oil,1979,96,315
-138,Peru,"Marine mammal oils, nei",fish_oil,1980,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1981,562,1000
-138,Peru,"Marine mammal oils, nei",fish_oil,1982,46,430
-138,Peru,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1984,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1988,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1989,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1991,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1992,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-138,Peru,"Marine mammal oils, nei",fish_oil,2022,0.38,0.32
-138,Peru,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 138,Peru,Ornamental fish nei,ornamentals,1976,973,368
 138,Peru,Ornamental fish nei,ornamentals,1977,1051,346
 138,Peru,Ornamental fish nei,ornamentals,1978,1105,354
@@ -20933,26 +19803,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 139,Venezuela,"Fish liver oils, nei",fish_oil,2021,NA,NA
 139,Venezuela,"Fish liver oils, nei",fish_oil,2022,NA,NA
 139,Venezuela,"Fish liver oils, nei",fish_oil,2023,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2004,0.1,0.1
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-139,Venezuela,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 139,Venezuela,Ornamental fish nei,ornamentals,1976,0.1,0.1
 139,Venezuela,Ornamental fish nei,ornamentals,1977,NA,NA
 139,Venezuela,Ornamental fish nei,ornamentals,1978,NA,NA
@@ -21592,42 +20442,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 143,Iceland,Herring oil,fish_oil,2021,23847.55,12003.88
 143,Iceland,Herring oil,fish_oil,2022,55862.61,22430.94
 143,Iceland,Herring oil,fish_oil,2023,74346.73,18920.13
-143,Iceland,"Marine mammal oils, nei",fish_oil,1988,17,2
-143,Iceland,"Marine mammal oils, nei",fish_oil,1989,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,1991,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,1992,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,2006,7,1
-143,Iceland,"Marine mammal oils, nei",fish_oil,2007,9,0.1
-143,Iceland,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,2009,15,0.1
-143,Iceland,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,2012,2,0.1
-143,Iceland,"Marine mammal oils, nei",fish_oil,2013,34,1
-143,Iceland,"Marine mammal oils, nei",fish_oil,2014,56,1
-143,Iceland,"Marine mammal oils, nei",fish_oil,2015,63,5
-143,Iceland,"Marine mammal oils, nei",fish_oil,2016,44,1
-143,Iceland,"Marine mammal oils, nei",fish_oil,2017,11,0.1
-143,Iceland,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,2020,1.08,0.21
-143,Iceland,"Marine mammal oils, nei",fish_oil,2021,0.2,0
-143,Iceland,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-143,Iceland,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 143,Iceland,Redfish oil,fish_oil,1976,320,1045
 143,Iceland,Redfish oil,fish_oil,1977,156,414
 143,Iceland,Redfish oil,fish_oil,1978,277,716
@@ -21924,54 +20738,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 145,Greenland,Herring oil,fish_oil,2021,NA,NA
 145,Greenland,Herring oil,fish_oil,2022,NA,NA
 145,Greenland,Herring oil,fish_oil,2023,1.02,0.02
-145,Greenland,"Marine mammal oils, nei",fish_oil,1976,0.1,1
-145,Greenland,"Marine mammal oils, nei",fish_oil,1977,4,14
-145,Greenland,"Marine mammal oils, nei",fish_oil,1978,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,1979,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,1980,61,162
-145,Greenland,"Marine mammal oils, nei",fish_oil,1981,9,28
-145,Greenland,"Marine mammal oils, nei",fish_oil,1982,9,28
-145,Greenland,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,1984,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,1988,0.1,0.1
-145,Greenland,"Marine mammal oils, nei",fish_oil,1989,1,0.1
-145,Greenland,"Marine mammal oils, nei",fish_oil,1990,13,1
-145,Greenland,"Marine mammal oils, nei",fish_oil,1991,9,1
-145,Greenland,"Marine mammal oils, nei",fish_oil,1992,22,2
-145,Greenland,"Marine mammal oils, nei",fish_oil,1993,16,3
-145,Greenland,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,1997,1,0.1
-145,Greenland,"Marine mammal oils, nei",fish_oil,1998,1,0.1
-145,Greenland,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,2004,2,5
-145,Greenland,"Marine mammal oils, nei",fish_oil,2005,1,0.1
-145,Greenland,"Marine mammal oils, nei",fish_oil,2006,2,0.1
-145,Greenland,"Marine mammal oils, nei",fish_oil,2007,1,0.1
-145,Greenland,"Marine mammal oils, nei",fish_oil,2008,1,0.1
-145,Greenland,"Marine mammal oils, nei",fish_oil,2009,1,0.1
-145,Greenland,"Marine mammal oils, nei",fish_oil,2010,3,1
-145,Greenland,"Marine mammal oils, nei",fish_oil,2011,2,0.1
-145,Greenland,"Marine mammal oils, nei",fish_oil,2012,2,0.1
-145,Greenland,"Marine mammal oils, nei",fish_oil,2013,1,0.1
-145,Greenland,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-145,Greenland,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 145,Greenland,"Oils and fats of aquatic animals, nei",fish_oil,1976,6,21
 145,Greenland,"Oils and fats of aquatic animals, nei",fish_oil,1977,5,17
 145,Greenland,"Oils and fats of aquatic animals, nei",fish_oil,1978,NA,NA
@@ -22324,25 +21090,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 151,American Samoa,Cod liver oil,fish_oil,2021,NA,NA
 151,American Samoa,Cod liver oil,fish_oil,2022,NA,NA
 151,American Samoa,Cod liver oil,fish_oil,2023,NA,NA
-151,American Samoa,Shad oil,fish_oil,2005,286.08,318
-151,American Samoa,Shad oil,fish_oil,2006,NA,NA
-151,American Samoa,Shad oil,fish_oil,2007,570.49,475
-151,American Samoa,Shad oil,fish_oil,2008,1054.96,586
-151,American Samoa,Shad oil,fish_oil,2009,1180.01,983
-151,American Samoa,Shad oil,fish_oil,2010,931.19,665
-151,American Samoa,Shad oil,fish_oil,2011,1593.75,885
-151,American Samoa,Shad oil,fish_oil,2012,2278.31,1199
-151,American Samoa,Shad oil,fish_oil,2013,1620.59,705
-151,American Samoa,Shad oil,fish_oil,2014,2039.27,926
-151,American Samoa,Shad oil,fish_oil,2015,570.46,340
-151,American Samoa,Shad oil,fish_oil,2016,115.15,47
-151,American Samoa,Shad oil,fish_oil,2017,1282.93,631
-151,American Samoa,Shad oil,fish_oil,2018,371.28,177
-151,American Samoa,Shad oil,fish_oil,2019,1861.51,886
-151,American Samoa,Shad oil,fish_oil,2020,93.95,43
-151,American Samoa,Shad oil,fish_oil,2021,0.15,0
-151,American Samoa,Shad oil,fish_oil,2022,134.75,76
-151,American Samoa,Shad oil,fish_oil,2023,NA,NA
 151,American Samoa,Other seaweeds and aquatic plants and products thereof,seaweeds,2003,0.87,0
 151,American Samoa,Other seaweeds and aquatic plants and products thereof,seaweeds,2004,NA,NA
 151,American Samoa,Other seaweeds and aquatic plants and products thereof,seaweeds,2005,NA,NA
@@ -22430,7 +21177,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 152,Samoa,"Fish liver oils, nei",fish_oil,2021,NA,NA
 152,Samoa,"Fish liver oils, nei",fish_oil,2022,NA,NA
 152,Samoa,"Fish liver oils, nei",fish_oil,2023,NA,NA
-152,Samoa,"Marine mammal oils, nei",fish_oil,2023,1.02,0.46
 152,Samoa,Ornamental fish nei,ornamentals,1995,18,NA
 152,Samoa,Ornamental fish nei,ornamentals,1996,2,NA
 152,Samoa,Ornamental fish nei,ornamentals,1997,6,NA
@@ -22663,35 +21409,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 153,Cook Islands,Mother of pearl shells,shells,2021,NA,NA
 153,Cook Islands,Mother of pearl shells,shells,2022,NA,NA
 153,Cook Islands,Mother of pearl shells,shells,2023,NA,NA
-154,Niue,Shad oil,fish_oil,1995,65.93,14
-154,Niue,Shad oil,fish_oil,1996,NA,NA
-154,Niue,Shad oil,fish_oil,1997,NA,NA
-154,Niue,Shad oil,fish_oil,1998,NA,NA
-154,Niue,Shad oil,fish_oil,1999,NA,NA
-154,Niue,Shad oil,fish_oil,2000,NA,NA
-154,Niue,Shad oil,fish_oil,2001,NA,NA
-154,Niue,Shad oil,fish_oil,2002,NA,NA
-154,Niue,Shad oil,fish_oil,2003,NA,NA
-154,Niue,Shad oil,fish_oil,2004,NA,NA
-154,Niue,Shad oil,fish_oil,2005,NA,NA
-154,Niue,Shad oil,fish_oil,2006,NA,NA
-154,Niue,Shad oil,fish_oil,2007,0.16,0
-154,Niue,Shad oil,fish_oil,2008,NA,NA
-154,Niue,Shad oil,fish_oil,2009,NA,NA
-154,Niue,Shad oil,fish_oil,2010,NA,NA
-154,Niue,Shad oil,fish_oil,2011,NA,NA
-154,Niue,Shad oil,fish_oil,2012,NA,NA
-154,Niue,Shad oil,fish_oil,2013,NA,NA
-154,Niue,Shad oil,fish_oil,2014,NA,NA
-154,Niue,Shad oil,fish_oil,2015,NA,NA
-154,Niue,Shad oil,fish_oil,2016,NA,NA
-154,Niue,Shad oil,fish_oil,2017,NA,NA
-154,Niue,Shad oil,fish_oil,2018,NA,NA
-154,Niue,Shad oil,fish_oil,2019,NA,NA
-154,Niue,Shad oil,fish_oil,2020,NA,NA
-154,Niue,Shad oil,fish_oil,2021,NA,NA
-154,Niue,Shad oil,fish_oil,2022,NA,NA
-154,Niue,Shad oil,fish_oil,2023,NA,NA
 155,Tonga,Coral and the like,corals,2000,1,0.1
 155,Tonga,Coral and the like,corals,2001,NA,NA
 155,Tonga,Coral and the like,corals,2002,51,20
@@ -23014,43 +21731,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 162,New Zealand,"Fish liver oils, nei",fish_oil,2021,NA,NA
 162,New Zealand,"Fish liver oils, nei",fish_oil,2022,NA,NA
 162,New Zealand,"Fish liver oils, nei",fish_oil,2023,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,1987,15,13
-162,New Zealand,"Marine mammal oils, nei",fish_oil,1988,94,111
-162,New Zealand,"Marine mammal oils, nei",fish_oil,1989,1,2
-162,New Zealand,"Marine mammal oils, nei",fish_oil,1990,2,2
-162,New Zealand,"Marine mammal oils, nei",fish_oil,1991,91,282
-162,New Zealand,"Marine mammal oils, nei",fish_oil,1992,10,19
-162,New Zealand,"Marine mammal oils, nei",fish_oil,1993,1,0.1
-162,New Zealand,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,1995,15,4
-162,New Zealand,"Marine mammal oils, nei",fish_oil,1996,14,14
-162,New Zealand,"Marine mammal oils, nei",fish_oil,1997,17,17
-162,New Zealand,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2000,5,0.1
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2002,0.1,0.1
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2022,0.79,0.06
-162,New Zealand,"Marine mammal oils, nei",fish_oil,2023,1.85,0.41
 162,New Zealand,Ornamental fish nei,ornamentals,1988,NA,0.1
 162,New Zealand,Ornamental fish nei,ornamentals,1989,NA,NA
 162,New Zealand,Ornamental fish nei,ornamentals,1990,NA,NA
@@ -23330,53 +22010,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 163,United States,"Fish liver oils, nei",fish_oil,2021,17214.99,1618.44
 163,United States,"Fish liver oils, nei",fish_oil,2022,18945.8,1350.4
 163,United States,"Fish liver oils, nei",fish_oil,2023,27427.35,1959.88
-163,United States,"Marine mammal oils, nei",fish_oil,1977,1672,2496
-163,United States,"Marine mammal oils, nei",fish_oil,1978,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,1979,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,1980,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,1981,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,1982,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,1984,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,1988,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,1989,394,340
-163,United States,"Marine mammal oils, nei",fish_oil,1990,107,61
-163,United States,"Marine mammal oils, nei",fish_oil,1991,69,80
-163,United States,"Marine mammal oils, nei",fish_oil,1992,27,31
-163,United States,"Marine mammal oils, nei",fish_oil,1993,26,9
-163,United States,"Marine mammal oils, nei",fish_oil,1994,113,106
-163,United States,"Marine mammal oils, nei",fish_oil,1995,17,14
-163,United States,"Marine mammal oils, nei",fish_oil,1996,143,233
-163,United States,"Marine mammal oils, nei",fish_oil,1997,406,303
-163,United States,"Marine mammal oils, nei",fish_oil,1998,460,431
-163,United States,"Marine mammal oils, nei",fish_oil,1999,132,119
-163,United States,"Marine mammal oils, nei",fish_oil,2000,77,28
-163,United States,"Marine mammal oils, nei",fish_oil,2001,431,377
-163,United States,"Marine mammal oils, nei",fish_oil,2002,155,83
-163,United States,"Marine mammal oils, nei",fish_oil,2003,673,1368
-163,United States,"Marine mammal oils, nei",fish_oil,2004,1029,677
-163,United States,"Marine mammal oils, nei",fish_oil,2005,742,252
-163,United States,"Marine mammal oils, nei",fish_oil,2006,15,4
-163,United States,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,2009,173,29
-163,United States,"Marine mammal oils, nei",fish_oil,2010,39,3
-163,United States,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,2014,188,85
-163,United States,"Marine mammal oils, nei",fish_oil,2015,2205,319
-163,United States,"Marine mammal oils, nei",fish_oil,2016,285,48
-163,United States,"Marine mammal oils, nei",fish_oil,2017,563,328
-163,United States,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,2019,11.31,39.45
-163,United States,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-163,United States,"Marine mammal oils, nei",fish_oil,2023,15.18,2.87
 163,United States,Menhaden oil,fish_oil,1976,28528,77969
 163,United States,Menhaden oil,fish_oil,1977,17133,39281
 163,United States,Menhaden oil,fish_oil,1978,40481,96750
@@ -23984,26 +22617,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 167,Guyana,"Fish liver oils, nei",fish_oil,2021,0.17,0.02
 167,Guyana,"Fish liver oils, nei",fish_oil,2022,NA,NA
 167,Guyana,"Fish liver oils, nei",fish_oil,2023,NA,NA
-167,Guyana,"Marine mammal oils, nei",fish_oil,2004,0.1,0.1
-167,Guyana,"Marine mammal oils, nei",fish_oil,2005,0.1,0.1
-167,Guyana,"Marine mammal oils, nei",fish_oil,2006,0.1,0.1
-167,Guyana,"Marine mammal oils, nei",fish_oil,2007,0.1,0.1
-167,Guyana,"Marine mammal oils, nei",fish_oil,2008,0.1,0.1
-167,Guyana,"Marine mammal oils, nei",fish_oil,2009,3,0.1
-167,Guyana,"Marine mammal oils, nei",fish_oil,2010,0.1,0.1
-167,Guyana,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-167,Guyana,"Marine mammal oils, nei",fish_oil,2012,0.1,0.1
-167,Guyana,"Marine mammal oils, nei",fish_oil,2013,2,0.1
-167,Guyana,"Marine mammal oils, nei",fish_oil,2014,4,0.1
-167,Guyana,"Marine mammal oils, nei",fish_oil,2015,0.1,0.1
-167,Guyana,"Marine mammal oils, nei",fish_oil,2016,0.1,0.1
-167,Guyana,"Marine mammal oils, nei",fish_oil,2017,0.1,0.1
-167,Guyana,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-167,Guyana,"Marine mammal oils, nei",fish_oil,2019,9.36,1.14
-167,Guyana,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-167,Guyana,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-167,Guyana,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-167,Guyana,"Marine mammal oils, nei",fish_oil,2023,0.06,0
 167,Guyana,Ornamental fish nei,ornamentals,1988,270,NA
 167,Guyana,Ornamental fish nei,ornamentals,1989,220,NA
 167,Guyana,Ornamental fish nei,ornamentals,1990,285,NA
@@ -24371,50 +22984,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 171,Brazil,"Fish liver oils, nei",fish_oil,2021,NA,NA
 171,Brazil,"Fish liver oils, nei",fish_oil,2022,0.25,0.04
 171,Brazil,"Fish liver oils, nei",fish_oil,2023,2.73,0.84
-171,Brazil,"Marine mammal oils, nei",fish_oil,1980,107,58
-171,Brazil,"Marine mammal oils, nei",fish_oil,1981,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,1982,3,5
-171,Brazil,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,1984,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,1988,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,1989,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,1991,1,0.1
-171,Brazil,"Marine mammal oils, nei",fish_oil,1992,0.1,0.1
-171,Brazil,"Marine mammal oils, nei",fish_oil,1993,1,0.1
-171,Brazil,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,1996,0.1,0.1
-171,Brazil,"Marine mammal oils, nei",fish_oil,1997,1,1
-171,Brazil,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2002,1,0.1
-171,Brazil,"Marine mammal oils, nei",fish_oil,2003,2,8
-171,Brazil,"Marine mammal oils, nei",fish_oil,2004,0.1,0.1
-171,Brazil,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2021,0.01,0
-171,Brazil,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-171,Brazil,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 171,Brazil,Ornamental fish nei,ornamentals,1976,625,188
 171,Brazil,Ornamental fish nei,ornamentals,1977,665,194
 171,Brazil,Ornamental fish nei,ornamentals,1978,884,236
@@ -25020,49 +23589,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 173,Uruguay,"Fish liver oils, nei",fish_oil,2021,NA,NA
 173,Uruguay,"Fish liver oils, nei",fish_oil,2022,NA,NA
 173,Uruguay,"Fish liver oils, nei",fish_oil,2023,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1981,NA,0.1
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1982,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1984,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1988,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1989,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1991,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1992,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-173,Uruguay,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 173,Uruguay,Shark liver oil,fish_oil,1983,84,4
 173,Uruguay,Shark liver oil,fish_oil,1984,NA,NA
 173,Uruguay,Shark liver oil,fish_oil,1985,NA,NA
@@ -25324,36 +23850,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 174,Finland,"Halibuts, liver oils",fish_oil,2021,NA,NA
 174,Finland,"Halibuts, liver oils",fish_oil,2022,2.23,0.12
 174,Finland,"Halibuts, liver oils",fish_oil,2023,11.82,0.59
-174,Finland,"Marine mammal oils, nei",fish_oil,1994,1,0.1
-174,Finland,"Marine mammal oils, nei",fish_oil,1995,1,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2008,6,0.1
-174,Finland,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2018,0.1,0.1
-174,Finland,"Marine mammal oils, nei",fish_oil,2019,0.94,0
-174,Finland,"Marine mammal oils, nei",fish_oil,2020,9.93,0.03
-174,Finland,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-174,Finland,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 174,Finland,Ornamental fish nei,ornamentals,1993,NA,0.1
 174,Finland,Ornamental fish nei,ornamentals,1994,28,0.1
 174,Finland,Ornamental fish nei,ornamentals,1995,NA,NA
@@ -25723,54 +24219,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 175,Denmark,Herring oil,fish_oil,2021,NA,NA
 175,Denmark,Herring oil,fish_oil,2022,NA,NA
 175,Denmark,Herring oil,fish_oil,2023,NA,NA
-175,Denmark,"Marine mammal oils, nei",fish_oil,1976,7,25
-175,Denmark,"Marine mammal oils, nei",fish_oil,1977,13,25
-175,Denmark,"Marine mammal oils, nei",fish_oil,1978,7,13
-175,Denmark,"Marine mammal oils, nei",fish_oil,1979,209,454
-175,Denmark,"Marine mammal oils, nei",fish_oil,1980,11,27
-175,Denmark,"Marine mammal oils, nei",fish_oil,1981,9,19
-175,Denmark,"Marine mammal oils, nei",fish_oil,1982,0.1,0.1
-175,Denmark,"Marine mammal oils, nei",fish_oil,1983,6,24
-175,Denmark,"Marine mammal oils, nei",fish_oil,1984,1,0.1
-175,Denmark,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-175,Denmark,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-175,Denmark,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-175,Denmark,"Marine mammal oils, nei",fish_oil,1988,83,211
-175,Denmark,"Marine mammal oils, nei",fish_oil,1989,173,701
-175,Denmark,"Marine mammal oils, nei",fish_oil,1990,87,317
-175,Denmark,"Marine mammal oils, nei",fish_oil,1991,12,27
-175,Denmark,"Marine mammal oils, nei",fish_oil,1992,31,31
-175,Denmark,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-175,Denmark,"Marine mammal oils, nei",fish_oil,1994,44,20
-175,Denmark,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-175,Denmark,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-175,Denmark,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-175,Denmark,"Marine mammal oils, nei",fish_oil,1998,9,0.1
-175,Denmark,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-175,Denmark,"Marine mammal oils, nei",fish_oil,2000,6,0.1
-175,Denmark,"Marine mammal oils, nei",fish_oil,2001,1113,2285
-175,Denmark,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-175,Denmark,"Marine mammal oils, nei",fish_oil,2003,9,0.1
-175,Denmark,"Marine mammal oils, nei",fish_oil,2004,155,35
-175,Denmark,"Marine mammal oils, nei",fish_oil,2005,145,61
-175,Denmark,"Marine mammal oils, nei",fish_oil,2006,29,41
-175,Denmark,"Marine mammal oils, nei",fish_oil,2007,118,16
-175,Denmark,"Marine mammal oils, nei",fish_oil,2008,181,124
-175,Denmark,"Marine mammal oils, nei",fish_oil,2009,11,7
-175,Denmark,"Marine mammal oils, nei",fish_oil,2010,1142,990
-175,Denmark,"Marine mammal oils, nei",fish_oil,2011,266,166
-175,Denmark,"Marine mammal oils, nei",fish_oil,2012,5,1
-175,Denmark,"Marine mammal oils, nei",fish_oil,2013,2501,1506
-175,Denmark,"Marine mammal oils, nei",fish_oil,2014,0,0
-175,Denmark,"Marine mammal oils, nei",fish_oil,2015,0.1,0.1
-175,Denmark,"Marine mammal oils, nei",fish_oil,2016,7,0.1
-175,Denmark,"Marine mammal oils, nei",fish_oil,2017,7,0.1
-175,Denmark,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-175,Denmark,"Marine mammal oils, nei",fish_oil,2019,2.31,0.17
-175,Denmark,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-175,Denmark,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-175,Denmark,"Marine mammal oils, nei",fish_oil,2022,531.09,136.54
-175,Denmark,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 175,Denmark,Ornamental saltwater fish,ornamentals,1988,66,19
 175,Denmark,Ornamental saltwater fish,ornamentals,1989,NA,NA
 175,Denmark,Ornamental saltwater fish,ornamentals,1990,27,8
@@ -26230,54 +24678,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 176,Germany,"Halibuts, liver oils",fish_oil,2021,76.89,7.41
 176,Germany,"Halibuts, liver oils",fish_oil,2022,NA,NA
 176,Germany,"Halibuts, liver oils",fish_oil,2023,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,1976,51,106
-176,Germany,"Marine mammal oils, nei",fish_oil,1977,28,36
-176,Germany,"Marine mammal oils, nei",fish_oil,1978,67,149
-176,Germany,"Marine mammal oils, nei",fish_oil,1979,18,46
-176,Germany,"Marine mammal oils, nei",fish_oil,1980,34,61
-176,Germany,"Marine mammal oils, nei",fish_oil,1981,17,36
-176,Germany,"Marine mammal oils, nei",fish_oil,1982,1,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,1983,1,1
-176,Germany,"Marine mammal oils, nei",fish_oil,1984,1,1
-176,Germany,"Marine mammal oils, nei",fish_oil,1985,2,0.1
-176,Germany,"Marine mammal oils, nei",fish_oil,1986,5,0.1
-176,Germany,"Marine mammal oils, nei",fish_oil,1987,2,5
-176,Germany,"Marine mammal oils, nei",fish_oil,1988,28,43
-176,Germany,"Marine mammal oils, nei",fish_oil,1989,2,2
-176,Germany,"Marine mammal oils, nei",fish_oil,1990,28,73
-176,Germany,"Marine mammal oils, nei",fish_oil,1991,52,78
-176,Germany,"Marine mammal oils, nei",fish_oil,1992,38,37
-176,Germany,"Marine mammal oils, nei",fish_oil,1993,25,9
-176,Germany,"Marine mammal oils, nei",fish_oil,1994,56,65
-176,Germany,"Marine mammal oils, nei",fish_oil,1995,40,24
-176,Germany,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,1999,2,1
-176,Germany,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,2001,5,0.1
-176,Germany,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,2004,5,0.1
-176,Germany,"Marine mammal oils, nei",fish_oil,2005,66,3
-176,Germany,"Marine mammal oils, nei",fish_oil,2006,69,6
-176,Germany,"Marine mammal oils, nei",fish_oil,2007,103,9
-176,Germany,"Marine mammal oils, nei",fish_oil,2008,742,11
-176,Germany,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,2012,31,6
-176,Germany,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,2014,298,250
-176,Germany,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,2018,4,1
-176,Germany,"Marine mammal oils, nei",fish_oil,2019,8.31,6.58
-176,Germany,"Marine mammal oils, nei",fish_oil,2020,31.19,39.51
-176,Germany,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-176,Germany,"Marine mammal oils, nei",fish_oil,2022,0.04,0.01
-176,Germany,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 176,Germany,"Oils and fats of aquatic animals, nei",fish_oil,1979,21,26
 176,Germany,"Oils and fats of aquatic animals, nei",fish_oil,1980,268,398
 176,Germany,"Oils and fats of aquatic animals, nei",fish_oil,1981,11,2
@@ -26788,53 +25188,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 177,Netherlands,"Halibuts, liver oils",fish_oil,2021,21.47,0.78
 177,Netherlands,"Halibuts, liver oils",fish_oil,2022,10.26,0.4
 177,Netherlands,"Halibuts, liver oils",fish_oil,2023,21.25,0.73
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1977,1917,1890
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1978,1047,1211
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1979,245,245
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1980,1,NA
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1981,0.1,NA
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1982,12,20
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1983,50,124
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1984,154,215
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1985,44,80
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1986,30,47
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1988,NA,NA
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1989,239,553
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1990,153,292
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1991,115,187
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1992,NA,NA
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1995,120,154
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1996,948,757
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1997,22,13
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1998,13,0.1
-177,Netherlands,"Marine mammal oils, nei",fish_oil,1999,28,11
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2000,24,24
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2001,21,54
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2002,83,69
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2003,67,13
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2004,56,7
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2005,86,43
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2006,24,4
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2007,12,0.1
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2008,6,2
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2009,26,11
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2010,11,4
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2011,0.1,0.1
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2012,10,3
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2013,11,3
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2014,7,0.1
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2015,0.1,0.1
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2018,1,0.1
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2020,36.85,1.76
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2021,42.28,0.67
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2022,24.14,1.16
-177,Netherlands,"Marine mammal oils, nei",fish_oil,2023,3.94,0.78
 177,Netherlands,Ornamental fish nei,ornamentals,1977,1180,14
 177,Netherlands,Ornamental fish nei,ornamentals,1978,1515,12
 177,Netherlands,Ornamental fish nei,ornamentals,1979,1932,23
@@ -27302,34 +25655,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 178,Poland,"Halibuts, liver oils",fish_oil,2021,NA,NA
 178,Poland,"Halibuts, liver oils",fish_oil,2022,0.08,0
 178,Poland,"Halibuts, liver oils",fish_oil,2023,0.07,0
-178,Poland,"Marine mammal oils, nei",fish_oil,1996,7,1
-178,Poland,"Marine mammal oils, nei",fish_oil,1997,0.1,0.1
-178,Poland,"Marine mammal oils, nei",fish_oil,1998,0.1,0.1
-178,Poland,"Marine mammal oils, nei",fish_oil,1999,10,2
-178,Poland,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-178,Poland,"Marine mammal oils, nei",fish_oil,2001,1,1
-178,Poland,"Marine mammal oils, nei",fish_oil,2002,0.1,0.1
-178,Poland,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-178,Poland,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-178,Poland,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-178,Poland,"Marine mammal oils, nei",fish_oil,2006,59,80
-178,Poland,"Marine mammal oils, nei",fish_oil,2007,7,4
-178,Poland,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-178,Poland,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-178,Poland,"Marine mammal oils, nei",fish_oil,2010,25,24
-178,Poland,"Marine mammal oils, nei",fish_oil,2011,106,3
-178,Poland,"Marine mammal oils, nei",fish_oil,2012,73,3
-178,Poland,"Marine mammal oils, nei",fish_oil,2013,11,0.1
-178,Poland,"Marine mammal oils, nei",fish_oil,2014,3,0.1
-178,Poland,"Marine mammal oils, nei",fish_oil,2015,0.1,0.1
-178,Poland,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-178,Poland,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-178,Poland,"Marine mammal oils, nei",fish_oil,2018,0.1,0.1
-178,Poland,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-178,Poland,"Marine mammal oils, nei",fish_oil,2020,0.34,0.02
-178,Poland,"Marine mammal oils, nei",fish_oil,2021,28.7,23.23
-178,Poland,"Marine mammal oils, nei",fish_oil,2022,0.85,0.04
-178,Poland,"Marine mammal oils, nei",fish_oil,2023,1.31,0.09
 178,Poland,Ornamental fish nei,ornamentals,1995,265,43
 178,Poland,Ornamental fish nei,ornamentals,1996,89,1
 178,Poland,Ornamental fish nei,ornamentals,1997,54,3
@@ -27728,54 +26053,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 179,France,"Halibuts, liver oils",fish_oil,2021,1.01,0.02
 179,France,"Halibuts, liver oils",fish_oil,2022,27.16,5.79
 179,France,"Halibuts, liver oils",fish_oil,2023,78.74,2.6
-179,France,"Marine mammal oils, nei",fish_oil,1976,1260,2692
-179,France,"Marine mammal oils, nei",fish_oil,1977,339,405
-179,France,"Marine mammal oils, nei",fish_oil,1978,569,650
-179,France,"Marine mammal oils, nei",fish_oil,1979,577,601
-179,France,"Marine mammal oils, nei",fish_oil,1980,278,183
-179,France,"Marine mammal oils, nei",fish_oil,1981,282,207
-179,France,"Marine mammal oils, nei",fish_oil,1982,26,71
-179,France,"Marine mammal oils, nei",fish_oil,1983,8,NA
-179,France,"Marine mammal oils, nei",fish_oil,1984,28,71
-179,France,"Marine mammal oils, nei",fish_oil,1985,5,1
-179,France,"Marine mammal oils, nei",fish_oil,1986,7,2
-179,France,"Marine mammal oils, nei",fish_oil,1987,57,207
-179,France,"Marine mammal oils, nei",fish_oil,1988,38,53
-179,France,"Marine mammal oils, nei",fish_oil,1989,43,37
-179,France,"Marine mammal oils, nei",fish_oil,1990,38,11
-179,France,"Marine mammal oils, nei",fish_oil,1991,56,11
-179,France,"Marine mammal oils, nei",fish_oil,1992,34,29
-179,France,"Marine mammal oils, nei",fish_oil,1993,12,0.1
-179,France,"Marine mammal oils, nei",fish_oil,1994,59,57
-179,France,"Marine mammal oils, nei",fish_oil,1995,40,13
-179,France,"Marine mammal oils, nei",fish_oil,1996,28,17
-179,France,"Marine mammal oils, nei",fish_oil,1997,8,0.1
-179,France,"Marine mammal oils, nei",fish_oil,1998,6,NA
-179,France,"Marine mammal oils, nei",fish_oil,1999,121,11
-179,France,"Marine mammal oils, nei",fish_oil,2000,297,46
-179,France,"Marine mammal oils, nei",fish_oil,2001,403,59
-179,France,"Marine mammal oils, nei",fish_oil,2002,419,41
-179,France,"Marine mammal oils, nei",fish_oil,2003,6,3
-179,France,"Marine mammal oils, nei",fish_oil,2004,103,5
-179,France,"Marine mammal oils, nei",fish_oil,2005,274,14
-179,France,"Marine mammal oils, nei",fish_oil,2006,39,35
-179,France,"Marine mammal oils, nei",fish_oil,2007,1,0.1
-179,France,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-179,France,"Marine mammal oils, nei",fish_oil,2009,161,267
-179,France,"Marine mammal oils, nei",fish_oil,2010,188,315
-179,France,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-179,France,"Marine mammal oils, nei",fish_oil,2012,1,0.1
-179,France,"Marine mammal oils, nei",fish_oil,2013,199,58
-179,France,"Marine mammal oils, nei",fish_oil,2014,7,0.1
-179,France,"Marine mammal oils, nei",fish_oil,2015,63,16
-179,France,"Marine mammal oils, nei",fish_oil,2016,47,4
-179,France,"Marine mammal oils, nei",fish_oil,2017,190,16
-179,France,"Marine mammal oils, nei",fish_oil,2018,89,5
-179,France,"Marine mammal oils, nei",fish_oil,2019,27.67,0.57
-179,France,"Marine mammal oils, nei",fish_oil,2020,3.3,0.54
-179,France,"Marine mammal oils, nei",fish_oil,2021,0.96,0
-179,France,"Marine mammal oils, nei",fish_oil,2022,0.7,0.01
-179,France,"Marine mammal oils, nei",fish_oil,2023,0.06,0
 179,France,Ornamental saltwater fish,ornamentals,1988,14,27
 179,France,Ornamental saltwater fish,ornamentals,1989,12,1
 179,France,Ornamental saltwater fish,ornamentals,1990,21,1
@@ -28299,54 +26576,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 180,United Kingdom,Herring oil,fish_oil,2021,NA,NA
 180,United Kingdom,Herring oil,fish_oil,2022,NA,NA
 180,United Kingdom,Herring oil,fish_oil,2023,NA,NA
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1976,1669,3569
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1977,1280,1573
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1978,1452,1849
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1979,677,638
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1980,598,459
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1981,8,5
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1982,2,1
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1983,11,14
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1984,NA,NA
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1988,41,51
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1989,129,262
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1990,501,773
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1991,389,632
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1992,1683,2971
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1993,91,46
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1994,42,22
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1995,36,24
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1996,137,25
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1997,155,102
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1998,134,46
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,1999,547,45
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2000,20,45
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2001,135,44
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2002,63,126
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2003,184,18
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2004,51,1
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2005,40,6
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2006,328,78
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2007,440,15
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2008,308,17
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2009,294,6
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2010,15,3
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2011,68,22
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2012,161,7
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2013,86,8
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2014,314,5
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2015,144,16
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2016,771,57
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2017,767,60
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2018,1143,93
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2019,786.93,70.71
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2020,1472.15,108
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2021,1683.05,67.93
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2022,474.88,26
-180,United Kingdom,"Marine mammal oils, nei",fish_oil,2023,261.49,14.32
 180,United Kingdom,Ornamental saltwater fish,ornamentals,1988,2,0.1
 180,United Kingdom,Ornamental saltwater fish,ornamentals,1989,105,13
 180,United Kingdom,Ornamental saltwater fish,ornamentals,1990,116,24
@@ -28805,52 +27034,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 181,Ireland,"Halibuts, liver oils",fish_oil,2021,NA,NA
 181,Ireland,"Halibuts, liver oils",fish_oil,2022,NA,NA
 181,Ireland,"Halibuts, liver oils",fish_oil,2023,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,1978,4,6
-181,Ireland,"Marine mammal oils, nei",fish_oil,1979,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,1980,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,1981,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,1982,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,1983,4,5
-181,Ireland,"Marine mammal oils, nei",fish_oil,1984,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,1985,5,3
-181,Ireland,"Marine mammal oils, nei",fish_oil,1986,7,23
-181,Ireland,"Marine mammal oils, nei",fish_oil,1987,1,2
-181,Ireland,"Marine mammal oils, nei",fish_oil,1988,50,141
-181,Ireland,"Marine mammal oils, nei",fish_oil,1989,159,369
-181,Ireland,"Marine mammal oils, nei",fish_oil,1990,293,1176
-181,Ireland,"Marine mammal oils, nei",fish_oil,1991,291,1326
-181,Ireland,"Marine mammal oils, nei",fish_oil,1992,179,588
-181,Ireland,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2007,3,0.1
-181,Ireland,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2016,15,1
-181,Ireland,"Marine mammal oils, nei",fish_oil,2017,34,1
-181,Ireland,"Marine mammal oils, nei",fish_oil,2018,20,1
-181,Ireland,"Marine mammal oils, nei",fish_oil,2019,0.67,0.03
-181,Ireland,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-181,Ireland,"Marine mammal oils, nei",fish_oil,2023,1.31,0.55
 181,Ireland,Ornamental saltwater fish,ornamentals,1992,4,1
 181,Ireland,Ornamental saltwater fish,ornamentals,1993,NA,NA
 181,Ireland,Ornamental saltwater fish,ornamentals,1994,NA,NA
@@ -29331,49 +27514,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 182,Spain,"Halibuts, liver oils",fish_oil,2021,NA,NA
 182,Spain,"Halibuts, liver oils",fish_oil,2022,NA,NA
 182,Spain,"Halibuts, liver oils",fish_oil,2023,NA,NA
-182,Spain,"Marine mammal oils, nei",fish_oil,1981,842,2197
-182,Spain,"Marine mammal oils, nei",fish_oil,1982,359,1350
-182,Spain,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-182,Spain,"Marine mammal oils, nei",fish_oil,1984,3,1
-182,Spain,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-182,Spain,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-182,Spain,"Marine mammal oils, nei",fish_oil,1987,17,NA
-182,Spain,"Marine mammal oils, nei",fish_oil,1988,NA,NA
-182,Spain,"Marine mammal oils, nei",fish_oil,1989,NA,NA
-182,Spain,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-182,Spain,"Marine mammal oils, nei",fish_oil,1991,0.1,0.1
-182,Spain,"Marine mammal oils, nei",fish_oil,1992,636,2522
-182,Spain,"Marine mammal oils, nei",fish_oil,1993,444,1390
-182,Spain,"Marine mammal oils, nei",fish_oil,1994,204,673
-182,Spain,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-182,Spain,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-182,Spain,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-182,Spain,"Marine mammal oils, nei",fish_oil,1998,2,2
-182,Spain,"Marine mammal oils, nei",fish_oil,1999,6,5
-182,Spain,"Marine mammal oils, nei",fish_oil,2000,5,5
-182,Spain,"Marine mammal oils, nei",fish_oil,2001,59,16
-182,Spain,"Marine mammal oils, nei",fish_oil,2002,331,197
-182,Spain,"Marine mammal oils, nei",fish_oil,2003,50,16
-182,Spain,"Marine mammal oils, nei",fish_oil,2004,0.1,1
-182,Spain,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-182,Spain,"Marine mammal oils, nei",fish_oil,2006,24,4
-182,Spain,"Marine mammal oils, nei",fish_oil,2007,66,4
-182,Spain,"Marine mammal oils, nei",fish_oil,2008,219,19
-182,Spain,"Marine mammal oils, nei",fish_oil,2009,35,2
-182,Spain,"Marine mammal oils, nei",fish_oil,2010,16,16
-182,Spain,"Marine mammal oils, nei",fish_oil,2011,303,205
-182,Spain,"Marine mammal oils, nei",fish_oil,2012,0.1,0.1
-182,Spain,"Marine mammal oils, nei",fish_oil,2013,211,108
-182,Spain,"Marine mammal oils, nei",fish_oil,2014,3,4
-182,Spain,"Marine mammal oils, nei",fish_oil,2015,7,17
-182,Spain,"Marine mammal oils, nei",fish_oil,2016,0.1,0.1
-182,Spain,"Marine mammal oils, nei",fish_oil,2017,19,1
-182,Spain,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-182,Spain,"Marine mammal oils, nei",fish_oil,2019,55.06,1.82
-182,Spain,"Marine mammal oils, nei",fish_oil,2020,5.65,0.13
-182,Spain,"Marine mammal oils, nei",fish_oil,2021,0.01,0
-182,Spain,"Marine mammal oils, nei",fish_oil,2022,4.39,0.15
-182,Spain,"Marine mammal oils, nei",fish_oil,2023,170.53,3.58
 182,Spain,Ornamental fish nei,ornamentals,1977,51,30
 182,Spain,Ornamental fish nei,ornamentals,1978,2,NA
 182,Spain,Ornamental fish nei,ornamentals,1979,1,NA
@@ -29919,54 +28059,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 183,Portugal,"Halibuts, liver oils",fish_oil,2021,NA,NA
 183,Portugal,"Halibuts, liver oils",fish_oil,2022,NA,NA
 183,Portugal,"Halibuts, liver oils",fish_oil,2023,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,1976,312,608
-183,Portugal,"Marine mammal oils, nei",fish_oil,1977,308,507
-183,Portugal,"Marine mammal oils, nei",fish_oil,1978,91,130
-183,Portugal,"Marine mammal oils, nei",fish_oil,1979,716,1214
-183,Portugal,"Marine mammal oils, nei",fish_oil,1980,842,831
-183,Portugal,"Marine mammal oils, nei",fish_oil,1981,81,75
-183,Portugal,"Marine mammal oils, nei",fish_oil,1982,11,25
-183,Portugal,"Marine mammal oils, nei",fish_oil,1983,70,157
-183,Portugal,"Marine mammal oils, nei",fish_oil,1984,62,163
-183,Portugal,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,1986,11,23
-183,Portugal,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,1988,39,16
-183,Portugal,"Marine mammal oils, nei",fish_oil,1989,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,1990,3,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,1991,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,1992,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,1993,34,14
-183,Portugal,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,1995,9,31
-183,Portugal,"Marine mammal oils, nei",fish_oil,1996,5,1
-183,Portugal,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2000,45,14
-183,Portugal,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2002,0.1,0.1
-183,Portugal,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2005,1,0.1
-183,Portugal,"Marine mammal oils, nei",fish_oil,2006,0.1,0.1
-183,Portugal,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2012,188,79
-183,Portugal,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-183,Portugal,"Marine mammal oils, nei",fish_oil,2023,2.18,0.4
 183,Portugal,Sardine oil,fish_oil,1976,4,15
 183,Portugal,Sardine oil,fish_oil,1977,36,98
 183,Portugal,Sardine oil,fish_oil,1978,6,19
@@ -30513,54 +28605,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 184,Italy,"Halibuts, liver oils",fish_oil,2021,NA,NA
 184,Italy,"Halibuts, liver oils",fish_oil,2022,NA,NA
 184,Italy,"Halibuts, liver oils",fish_oil,2023,NA,NA
-184,Italy,"Marine mammal oils, nei",fish_oil,1976,3,1
-184,Italy,"Marine mammal oils, nei",fish_oil,1977,4,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,1978,2,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,1979,7,1
-184,Italy,"Marine mammal oils, nei",fish_oil,1980,6,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,1981,1,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,1982,NA,NA
-184,Italy,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-184,Italy,"Marine mammal oils, nei",fish_oil,1984,1,2
-184,Italy,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-184,Italy,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-184,Italy,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-184,Italy,"Marine mammal oils, nei",fish_oil,1988,17,15
-184,Italy,"Marine mammal oils, nei",fish_oil,1989,81,40
-184,Italy,"Marine mammal oils, nei",fish_oil,1990,17,13
-184,Italy,"Marine mammal oils, nei",fish_oil,1991,39,17
-184,Italy,"Marine mammal oils, nei",fish_oil,1992,20,15
-184,Italy,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-184,Italy,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-184,Italy,"Marine mammal oils, nei",fish_oil,1995,1,1
-184,Italy,"Marine mammal oils, nei",fish_oil,1996,2,1
-184,Italy,"Marine mammal oils, nei",fish_oil,1997,1,NA
-184,Italy,"Marine mammal oils, nei",fish_oil,1998,8,NA
-184,Italy,"Marine mammal oils, nei",fish_oil,1999,20,17
-184,Italy,"Marine mammal oils, nei",fish_oil,2000,2,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2001,2,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2002,3,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2003,198,15
-184,Italy,"Marine mammal oils, nei",fish_oil,2004,0.1,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2005,0.1,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2006,0.1,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2007,0.1,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2008,0.1,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2009,1,1
-184,Italy,"Marine mammal oils, nei",fish_oil,2010,0.1,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2011,3,1
-184,Italy,"Marine mammal oils, nei",fish_oil,2012,3,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2013,1,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2014,0.1,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2015,0.1,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2016,2,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2017,37,21
-184,Italy,"Marine mammal oils, nei",fish_oil,2018,1,0.1
-184,Italy,"Marine mammal oils, nei",fish_oil,2019,1.73,0.14
-184,Italy,"Marine mammal oils, nei",fish_oil,2020,2.34,0.19
-184,Italy,"Marine mammal oils, nei",fish_oil,2021,490.33,15.94
-184,Italy,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-184,Italy,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 184,Italy,Ornamental saltwater fish,ornamentals,1988,286,56
 184,Italy,Ornamental saltwater fish,ornamentals,1989,175,5
 184,Italy,Ornamental saltwater fish,ornamentals,1990,108,19
@@ -30965,28 +29009,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 186,Montenegro,"Fish liver oils, nei",fish_oil,2021,NA,NA
 186,Montenegro,"Fish liver oils, nei",fish_oil,2022,NA,NA
 186,Montenegro,"Fish liver oils, nei",fish_oil,2023,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2002,NA,0.1
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-186,Montenegro,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 186,Montenegro,Ornamental fish nei,ornamentals,2000,1,NA
 186,Montenegro,Ornamental fish nei,ornamentals,2001,NA,NA
 186,Montenegro,Ornamental fish nei,ornamentals,2002,NA,NA
@@ -31216,28 +29238,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 187,Croatia,"Fish liver oils, nei",fish_oil,2021,3.55,0.3
 187,Croatia,"Fish liver oils, nei",fish_oil,2022,0.33,0.02
 187,Croatia,"Fish liver oils, nei",fish_oil,2023,3.59,0.28
-187,Croatia,"Marine mammal oils, nei",fish_oil,2002,63,1
-187,Croatia,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-187,Croatia,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-187,Croatia,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-187,Croatia,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-187,Croatia,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-187,Croatia,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-187,Croatia,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-187,Croatia,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-187,Croatia,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-187,Croatia,"Marine mammal oils, nei",fish_oil,2012,1,0.1
-187,Croatia,"Marine mammal oils, nei",fish_oil,2013,1,0.1
-187,Croatia,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-187,Croatia,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-187,Croatia,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-187,Croatia,"Marine mammal oils, nei",fish_oil,2017,0.1,0.1
-187,Croatia,"Marine mammal oils, nei",fish_oil,2018,0.1,0.1
-187,Croatia,"Marine mammal oils, nei",fish_oil,2019,25.24,23.54
-187,Croatia,"Marine mammal oils, nei",fish_oil,2020,1.57,0.05
-187,Croatia,"Marine mammal oils, nei",fish_oil,2021,1.14,0.12
-187,Croatia,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-187,Croatia,"Marine mammal oils, nei",fish_oil,2023,0.03,0
 187,Croatia,Agar agar nei,seaweeds,2000,7,2
 187,Croatia,Agar agar nei,seaweeds,2001,NA,NA
 187,Croatia,Agar agar nei,seaweeds,2002,1,0.1
@@ -31501,25 +29501,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 188,Slovenia,"Fish liver oils, nei",fish_oil,2021,0.34,0.03
 188,Slovenia,"Fish liver oils, nei",fish_oil,2022,0.88,0.07
 188,Slovenia,"Fish liver oils, nei",fish_oil,2023,0.86,0.07
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2005,4,1
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2021,0.55,0.01
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-188,Slovenia,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 188,Slovenia,Ornamental fish nei,ornamentals,1999,2,NA
 188,Slovenia,Ornamental fish nei,ornamentals,2000,NA,NA
 188,Slovenia,Ornamental fish nei,ornamentals,2001,NA,NA
@@ -31815,16 +29796,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 189,Lithuania,"Fish liver oils, nei",fish_oil,2021,634.08,26.88
 189,Lithuania,"Fish liver oils, nei",fish_oil,2022,626.81,33.93
 189,Lithuania,"Fish liver oils, nei",fish_oil,2023,962.04,60.7
-189,Lithuania,"Marine mammal oils, nei",fish_oil,2014,663,5
-189,Lithuania,"Marine mammal oils, nei",fish_oil,2015,488,5
-189,Lithuania,"Marine mammal oils, nei",fish_oil,2016,154,1
-189,Lithuania,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-189,Lithuania,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-189,Lithuania,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-189,Lithuania,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-189,Lithuania,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-189,Lithuania,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-189,Lithuania,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 189,Lithuania,Ornamental fish nei,ornamentals,1995,3,2
 189,Lithuania,Ornamental fish nei,ornamentals,1996,NA,NA
 189,Lithuania,Ornamental fish nei,ornamentals,1997,NA,NA
@@ -32177,11 +30148,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 191,Iran,"Fish liver oils, nei",fish_oil,2021,NA,NA
 191,Iran,"Fish liver oils, nei",fish_oil,2022,NA,NA
 191,Iran,"Fish liver oils, nei",fish_oil,2023,NA,NA
-191,Iran,"Marine mammal oils, nei",fish_oil,2019,5.17,3.45
-191,Iran,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-191,Iran,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-191,Iran,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-191,Iran,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 191,Iran,Ornamental fish nei,ornamentals,1996,44,NA
 191,Iran,Ornamental fish nei,ornamentals,1997,38,1
 191,Iran,Ornamental fish nei,ornamentals,1998,31,1
@@ -32349,29 +30315,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 194,Guinea,"Fish body oils, nei",fish_oil,2021,629.57,780
 194,Guinea,"Fish body oils, nei",fish_oil,2022,2152,1020.7
 194,Guinea,"Fish body oils, nei",fish_oil,2023,5571.72,1561.33
-194,Guinea,"Marine mammal oils, nei",fish_oil,2001,2,10
-194,Guinea,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-194,Guinea,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 194,Guinea,Ornamental fish nei,ornamentals,1996,2,2
 194,Guinea,Ornamental fish nei,ornamentals,1997,1,2
 194,Guinea,Ornamental fish nei,ornamentals,1998,NA,NA
@@ -32491,21 +30434,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 195,Ivory Coast,"Fish liver oils, nei",fish_oil,2021,102.5,10.8
 195,Ivory Coast,"Fish liver oils, nei",fish_oil,2022,34.42,4.41
 195,Ivory Coast,"Fish liver oils, nei",fish_oil,2023,40.49,4.68
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2009,50,4
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2011,81,8
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2012,36,4
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2013,99,9
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2014,43,4
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2015,36,4
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2016,43,4
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2017,76,8
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2018,41,4
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2019,69.33,7.74
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2020,47.45,5.04
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-195,Ivory Coast,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 195,Ivory Coast,"Oils and fats of aquatic animals, nei",fish_oil,1976,63,24
 195,Ivory Coast,"Oils and fats of aquatic animals, nei",fish_oil,1977,12,6
 195,Ivory Coast,"Oils and fats of aquatic animals, nei",fish_oil,1978,NA,NA
@@ -33118,9 +31046,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 200,Angola,"Fish liver oils, nei",fish_oil,2021,0.03,0
 200,Angola,"Fish liver oils, nei",fish_oil,2022,NA,NA
 200,Angola,"Fish liver oils, nei",fish_oil,2023,0.03,0.07
-200,Angola,"Marine mammal oils, nei",fish_oil,2021,0.54,6.19
-200,Angola,"Marine mammal oils, nei",fish_oil,2022,0.64,0.01
-200,Angola,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 200,Angola,Ornamental fish nei,ornamentals,2003,1,0
 200,Angola,Ornamental fish nei,ornamentals,2004,NA,NA
 200,Angola,Ornamental fish nei,ornamentals,2005,NA,NA
@@ -33254,19 +31179,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 202,Tanzania,"Fish liver oils, nei",fish_oil,2021,NA,NA
 202,Tanzania,"Fish liver oils, nei",fish_oil,2022,NA,NA
 202,Tanzania,"Fish liver oils, nei",fish_oil,2023,NA,NA
-202,Tanzania,"Marine mammal oils, nei",fish_oil,2011,0.1,0.1
-202,Tanzania,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-202,Tanzania,"Marine mammal oils, nei",fish_oil,2013,3,3
-202,Tanzania,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-202,Tanzania,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-202,Tanzania,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-202,Tanzania,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-202,Tanzania,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-202,Tanzania,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-202,Tanzania,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-202,Tanzania,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-202,Tanzania,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-202,Tanzania,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 202,Tanzania,Ornamental fish nei,ornamentals,1991,30,NA
 202,Tanzania,Ornamental fish nei,ornamentals,1992,26,NA
 202,Tanzania,Ornamental fish nei,ornamentals,1993,72,NA
@@ -33572,39 +31484,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 203,India,"Fish liver oils, nei",fish_oil,2021,8.61,2.46
 203,India,"Fish liver oils, nei",fish_oil,2022,0.84,1.76
 203,India,"Fish liver oils, nei",fish_oil,2023,5.69,2.01
-203,India,"Marine mammal oils, nei",fish_oil,1991,29,14
-203,India,"Marine mammal oils, nei",fish_oil,1992,27,15
-203,India,"Marine mammal oils, nei",fish_oil,1993,6,3
-203,India,"Marine mammal oils, nei",fish_oil,1994,16,16
-203,India,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,1999,12,2
-203,India,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,2001,0.1,0.1
-203,India,"Marine mammal oils, nei",fish_oil,2002,7,2
-203,India,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,2007,13,3
-203,India,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,2010,442,16
-203,India,"Marine mammal oils, nei",fish_oil,2011,52,36
-203,India,"Marine mammal oils, nei",fish_oil,2012,133,31
-203,India,"Marine mammal oils, nei",fish_oil,2013,12,5
-203,India,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,2020,0.23,0.12
-203,India,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-203,India,"Marine mammal oils, nei",fish_oil,2022,2.01,0.5
-203,India,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 203,India,Sardine oil,fish_oil,2000,7,5
 203,India,Sardine oil,fish_oil,2001,7,2
 203,India,Sardine oil,fish_oil,2002,53,15
@@ -33948,10 +31827,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 204,Bangladesh,"Fish liver oils, nei",fish_oil,2021,2.59,0.1
 204,Bangladesh,"Fish liver oils, nei",fish_oil,2022,3.22,0.12
 204,Bangladesh,"Fish liver oils, nei",fish_oil,2023,2.03,0.08
-204,Bangladesh,"Marine mammal oils, nei",fish_oil,2020,1.45,0.24
-204,Bangladesh,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-204,Bangladesh,"Marine mammal oils, nei",fish_oil,2022,0.06,0
-204,Bangladesh,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 204,Bangladesh,Ornamental fish nei,ornamentals,1984,43,32
 204,Bangladesh,Ornamental fish nei,ornamentals,1985,18,10
 204,Bangladesh,Ornamental fish nei,ornamentals,1986,NA,NA
@@ -34329,48 +32204,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 206,Malaysia,"Fish liver oils, nei",fish_oil,2021,NA,NA
 206,Malaysia,"Fish liver oils, nei",fish_oil,2022,NA,NA
 206,Malaysia,"Fish liver oils, nei",fish_oil,2023,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1982,0.1,1
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1984,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1985,0.1,1
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1986,0.1,1
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1988,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1989,0.1,0.1
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1990,316,251
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1991,1135,935
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1992,1,3
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1994,51,125
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1995,2,6
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1998,43,8
-206,Malaysia,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2000,7,4
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2001,9,6
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2002,15,6
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2003,108,211
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2005,18,0.1
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2006,19,1
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2010,51,51
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2011,936,521
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2012,869,484
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2013,618,323
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2014,294,187
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2015,24,15
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2018,289,53
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2019,238.26,40.62
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2020,102.04,14.4
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2021,95.76,14.35
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2022,122.84,21.6
-206,Malaysia,"Marine mammal oils, nei",fish_oil,2023,81.43,14.4
 206,Malaysia,Ornamental fish nei,ornamentals,1976,89,NA
 206,Malaysia,Ornamental fish nei,ornamentals,1977,109,NA
 206,Malaysia,Ornamental fish nei,ornamentals,1978,101,NA
@@ -34703,29 +32536,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 207,Vietnam,"Fish liver oils, nei",fish_oil,2021,NA,NA
 207,Vietnam,"Fish liver oils, nei",fish_oil,2022,NA,NA
 207,Vietnam,"Fish liver oils, nei",fish_oil,2023,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2001,24,2
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2002,44,4
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2003,20,2
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2006,15,2
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2009,2562,169
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2010,127,10
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-207,Vietnam,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 207,Vietnam,Ornamental fish nei,ornamentals,1995,29,NA
 207,Vietnam,Ornamental fish nei,ornamentals,1996,62,NA
 207,Vietnam,Ornamental fish nei,ornamentals,1997,NA,NA
@@ -35020,51 +32830,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 208,Singapore,"Fish liver oils, nei",fish_oil,2021,3.73,0.05
 208,Singapore,"Fish liver oils, nei",fish_oil,2022,76.2,1.77
 208,Singapore,"Fish liver oils, nei",fish_oil,2023,185.15,2.74
-208,Singapore,"Marine mammal oils, nei",fish_oil,1979,24,9
-208,Singapore,"Marine mammal oils, nei",fish_oil,1980,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,1981,0.1,0.1
-208,Singapore,"Marine mammal oils, nei",fish_oil,1982,2,3
-208,Singapore,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,1984,0.1,1
-208,Singapore,"Marine mammal oils, nei",fish_oil,1985,76,33
-208,Singapore,"Marine mammal oils, nei",fish_oil,1986,11,18
-208,Singapore,"Marine mammal oils, nei",fish_oil,1987,21,34
-208,Singapore,"Marine mammal oils, nei",fish_oil,1988,10,14
-208,Singapore,"Marine mammal oils, nei",fish_oil,1989,8,10
-208,Singapore,"Marine mammal oils, nei",fish_oil,1990,4,6
-208,Singapore,"Marine mammal oils, nei",fish_oil,1991,5,7
-208,Singapore,"Marine mammal oils, nei",fish_oil,1992,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,1993,296,103
-208,Singapore,"Marine mammal oils, nei",fish_oil,1994,1,0.1
-208,Singapore,"Marine mammal oils, nei",fish_oil,1995,1,0.1
-208,Singapore,"Marine mammal oils, nei",fish_oil,1996,28,14
-208,Singapore,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,1999,22,15
-208,Singapore,"Marine mammal oils, nei",fish_oil,2000,1,0.1
-208,Singapore,"Marine mammal oils, nei",fish_oil,2001,93,41
-208,Singapore,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,2011,62,54
-208,Singapore,"Marine mammal oils, nei",fish_oil,2012,2,1
-208,Singapore,"Marine mammal oils, nei",fish_oil,2013,3,0.1
-208,Singapore,"Marine mammal oils, nei",fish_oil,2014,21,1
-208,Singapore,"Marine mammal oils, nei",fish_oil,2015,4,0.1
-208,Singapore,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,2018,2,0.1
-208,Singapore,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-208,Singapore,"Marine mammal oils, nei",fish_oil,2020,0.75,0.1
-208,Singapore,"Marine mammal oils, nei",fish_oil,2021,11.88,0.96
-208,Singapore,"Marine mammal oils, nei",fish_oil,2022,6.49,0.25
-208,Singapore,"Marine mammal oils, nei",fish_oil,2023,15.19,0.9
 208,Singapore,"Oils and fats of aquatic animals, nei",fish_oil,1976,11,26
 208,Singapore,"Oils and fats of aquatic animals, nei",fish_oil,1977,34,65
 208,Singapore,"Oils and fats of aquatic animals, nei",fish_oil,1978,493,1604
@@ -35483,48 +33248,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 209,China,"Fish liver oils, nei",fish_oil,2021,3746.51,434.8
 209,China,"Fish liver oils, nei",fish_oil,2022,1228.36,126.82
 209,China,"Fish liver oils, nei",fish_oil,2023,2011.59,147.39
-209,China,"Marine mammal oils, nei",fish_oil,1982,0.1,1
-209,China,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,1984,1,1
-209,China,"Marine mammal oils, nei",fish_oil,1985,0.1,0.1
-209,China,"Marine mammal oils, nei",fish_oil,1986,0.1,0.1
-209,China,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,1988,3,0.1
-209,China,"Marine mammal oils, nei",fish_oil,1989,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,1991,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,1992,77,21
-209,China,"Marine mammal oils, nei",fish_oil,1993,28,26
-209,China,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,1995,2,8
-209,China,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,1998,29,1
-209,China,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,2000,745,71
-209,China,"Marine mammal oils, nei",fish_oil,2001,46,3
-209,China,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,2009,406,125
-209,China,"Marine mammal oils, nei",fish_oil,2010,177,22
-209,China,"Marine mammal oils, nei",fish_oil,2011,649,75
-209,China,"Marine mammal oils, nei",fish_oil,2012,575,20
-209,China,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,2014,23,1
-209,China,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,2017,19,20
-209,China,"Marine mammal oils, nei",fish_oil,2018,41.1,46.1
-209,China,"Marine mammal oils, nei",fish_oil,2019,0,0
-209,China,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-209,China,"Marine mammal oils, nei",fish_oil,2022,0.14,0
-209,China,"Marine mammal oils, nei",fish_oil,2023,23.03,0.12
 209,China,Ornamental fish nei,ornamentals,1983,7,1
 209,China,Ornamental fish nei,ornamentals,1984,3,3
 209,China,Ornamental fish nei,ornamentals,1985,NA,NA
@@ -36072,51 +33795,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 210,Japan,"Fish liver oils, nei",fish_oil,2021,1267.89,21.33
 210,Japan,"Fish liver oils, nei",fish_oil,2022,1802,50.44
 210,Japan,"Fish liver oils, nei",fish_oil,2023,1430.8,44.06
-210,Japan,"Marine mammal oils, nei",fish_oil,1979,454,571
-210,Japan,"Marine mammal oils, nei",fish_oil,1980,68,30
-210,Japan,"Marine mammal oils, nei",fish_oil,1981,39,14
-210,Japan,"Marine mammal oils, nei",fish_oil,1982,35,13
-210,Japan,"Marine mammal oils, nei",fish_oil,1983,35,14
-210,Japan,"Marine mammal oils, nei",fish_oil,1984,41,19
-210,Japan,"Marine mammal oils, nei",fish_oil,1985,36,17
-210,Japan,"Marine mammal oils, nei",fish_oil,1986,53,19
-210,Japan,"Marine mammal oils, nei",fish_oil,1987,32,9
-210,Japan,"Marine mammal oils, nei",fish_oil,1988,44,10
-210,Japan,"Marine mammal oils, nei",fish_oil,1989,6,1
-210,Japan,"Marine mammal oils, nei",fish_oil,1990,11,1
-210,Japan,"Marine mammal oils, nei",fish_oil,1991,11,1
-210,Japan,"Marine mammal oils, nei",fish_oil,1992,43,1
-210,Japan,"Marine mammal oils, nei",fish_oil,1993,25,0.1
-210,Japan,"Marine mammal oils, nei",fish_oil,1994,63,1
-210,Japan,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,1996,10,0.1
-210,Japan,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,1999,16,0.1
-210,Japan,"Marine mammal oils, nei",fish_oil,2000,86,3
-210,Japan,"Marine mammal oils, nei",fish_oil,2001,46,1
-210,Japan,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,2003,7,0.1
-210,Japan,"Marine mammal oils, nei",fish_oil,2004,36,0.1
-210,Japan,"Marine mammal oils, nei",fish_oil,2005,9,0.1
-210,Japan,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,2007,13,0.1
-210,Japan,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,2010,7,0.1
-210,Japan,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,2015,7,0.1
-210,Japan,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,2017,3,0.1
-210,Japan,"Marine mammal oils, nei",fish_oil,2018,4,0.1
-210,Japan,"Marine mammal oils, nei",fish_oil,2019,31.84,0.8
-210,Japan,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-210,Japan,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 210,Japan,Ornamental fish nei,ornamentals,1988,3546,42
 210,Japan,Ornamental fish nei,ornamentals,1989,4138,45
 210,Japan,Ornamental fish nei,ornamentals,1990,5495,59
@@ -36626,31 +34304,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 214,Egypt,"Fish liver oils, nei",fish_oil,2021,NA,NA
 214,Egypt,"Fish liver oils, nei",fish_oil,2022,NA,NA
 214,Egypt,"Fish liver oils, nei",fish_oil,2023,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,1999,17,31
-214,Egypt,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2008,141,98
-214,Egypt,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2012,0.1,0.1
-214,Egypt,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2014,281,278
-214,Egypt,"Marine mammal oils, nei",fish_oil,2015,134,139
-214,Egypt,"Marine mammal oils, nei",fish_oil,2016,63,64
-214,Egypt,"Marine mammal oils, nei",fish_oil,2017,2,0.1
-214,Egypt,"Marine mammal oils, nei",fish_oil,2018,9,0.1
-214,Egypt,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2020,3.71,0
-214,Egypt,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-214,Egypt,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 214,Egypt,"Oils and fats of aquatic animals, nei",fish_oil,1978,38,1
 214,Egypt,"Oils and fats of aquatic animals, nei",fish_oil,1979,NA,NA
 214,Egypt,"Oils and fats of aquatic animals, nei",fish_oil,1980,NA,NA
@@ -37099,51 +34752,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 216,Indonesia,"Fish liver oils, nei",fish_oil,2021,200.08,46.4
 216,Indonesia,"Fish liver oils, nei",fish_oil,2022,58.03,7.2
 216,Indonesia,"Fish liver oils, nei",fish_oil,2023,184.51,19.98
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1979,30,102
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1980,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1981,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1982,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1984,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1987,69,70
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1988,10,2
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1989,164,24
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1990,1351,166
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1991,1567,145
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1992,4,60
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1995,13,0.1
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1997,54,7
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1998,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2001,0.1,0.1
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2002,0.1,0.1
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2005,19,9
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2009,28,2
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2013,1,0.1
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2017,0.1,0.1
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-216,Indonesia,"Marine mammal oils, nei",fish_oil,2023,0,0
 216,Indonesia,Ornamental saltwater fish,ornamentals,1981,61,202
 216,Indonesia,Ornamental saltwater fish,ornamentals,1982,30,84
 216,Indonesia,Ornamental saltwater fish,ornamentals,1983,40,58
@@ -37581,42 +35189,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 218,Canada,Herring oil,fish_oil,2021,1012.99,446.68
 218,Canada,Herring oil,fish_oil,2022,786.32,296.27
 218,Canada,Herring oil,fish_oil,2023,1235.4,531.06
-218,Canada,"Marine mammal oils, nei",fish_oil,1988,365,874
-218,Canada,"Marine mammal oils, nei",fish_oil,1989,NA,NA
-218,Canada,"Marine mammal oils, nei",fish_oil,1990,189,528
-218,Canada,"Marine mammal oils, nei",fish_oil,1991,760,2473
-218,Canada,"Marine mammal oils, nei",fish_oil,1992,190,490
-218,Canada,"Marine mammal oils, nei",fish_oil,1993,48,11
-218,Canada,"Marine mammal oils, nei",fish_oil,1994,6,0.1
-218,Canada,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-218,Canada,"Marine mammal oils, nei",fish_oil,1996,77,71
-218,Canada,"Marine mammal oils, nei",fish_oil,1997,1402,2189
-218,Canada,"Marine mammal oils, nei",fish_oil,1998,259,186
-218,Canada,"Marine mammal oils, nei",fish_oil,1999,1068,2520
-218,Canada,"Marine mammal oils, nei",fish_oil,2000,869,641
-218,Canada,"Marine mammal oils, nei",fish_oil,2001,367,227
-218,Canada,"Marine mammal oils, nei",fish_oil,2002,797,939
-218,Canada,"Marine mammal oils, nei",fish_oil,2003,697,214
-218,Canada,"Marine mammal oils, nei",fish_oil,2004,513,677
-218,Canada,"Marine mammal oils, nei",fish_oil,2005,1441,2377
-218,Canada,"Marine mammal oils, nei",fish_oil,2006,1310,1212
-218,Canada,"Marine mammal oils, nei",fish_oil,2007,4060,5318
-218,Canada,"Marine mammal oils, nei",fish_oil,2008,3176,795
-218,Canada,"Marine mammal oils, nei",fish_oil,2009,2249,740
-218,Canada,"Marine mammal oils, nei",fish_oil,2010,1269,309
-218,Canada,"Marine mammal oils, nei",fish_oil,2011,2389,631
-218,Canada,"Marine mammal oils, nei",fish_oil,2012,1358,365
-218,Canada,"Marine mammal oils, nei",fish_oil,2013,208,11
-218,Canada,"Marine mammal oils, nei",fish_oil,2014,320,46
-218,Canada,"Marine mammal oils, nei",fish_oil,2015,260,35
-218,Canada,"Marine mammal oils, nei",fish_oil,2016,648,114
-218,Canada,"Marine mammal oils, nei",fish_oil,2017,809,68
-218,Canada,"Marine mammal oils, nei",fish_oil,2018,352,21
-218,Canada,"Marine mammal oils, nei",fish_oil,2019,110.6,8.15
-218,Canada,"Marine mammal oils, nei",fish_oil,2020,170.79,13.04
-218,Canada,"Marine mammal oils, nei",fish_oil,2021,177.52,22.61
-218,Canada,"Marine mammal oils, nei",fish_oil,2022,394.05,39.23
-218,Canada,"Marine mammal oils, nei",fish_oil,2023,419.44,58.94
 218,Canada,Ornamental fish nei,ornamentals,1988,7,1
 218,Canada,Ornamental fish nei,ornamentals,1989,NA,NA
 218,Canada,Ornamental fish nei,ornamentals,1990,9,2
@@ -38186,54 +35758,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 222,Sweden,"Halibuts, liver oils",fish_oil,2021,2.79,0.1
 222,Sweden,"Halibuts, liver oils",fish_oil,2022,NA,NA
 222,Sweden,"Halibuts, liver oils",fish_oil,2023,2.01,0.1
-222,Sweden,"Marine mammal oils, nei",fish_oil,1976,0.1,0.1
-222,Sweden,"Marine mammal oils, nei",fish_oil,1977,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,1978,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,1979,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,1980,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,1981,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,1982,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,1983,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,1984,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,1985,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,1988,367,3
-222,Sweden,"Marine mammal oils, nei",fish_oil,1989,396,4
-222,Sweden,"Marine mammal oils, nei",fish_oil,1990,449,5
-222,Sweden,"Marine mammal oils, nei",fish_oil,1991,607,6
-222,Sweden,"Marine mammal oils, nei",fish_oil,1992,641,6
-222,Sweden,"Marine mammal oils, nei",fish_oil,1993,404,8
-222,Sweden,"Marine mammal oils, nei",fish_oil,1994,163,2
-222,Sweden,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,1996,27,29
-222,Sweden,"Marine mammal oils, nei",fish_oil,1997,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,1998,12,23
-222,Sweden,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,2001,0.1,0.1
-222,Sweden,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-222,Sweden,"Marine mammal oils, nei",fish_oil,2006,121,34
-222,Sweden,"Marine mammal oils, nei",fish_oil,2007,152,11
-222,Sweden,"Marine mammal oils, nei",fish_oil,2008,87,23
-222,Sweden,"Marine mammal oils, nei",fish_oil,2009,45,14
-222,Sweden,"Marine mammal oils, nei",fish_oil,2010,23,2
-222,Sweden,"Marine mammal oils, nei",fish_oil,2011,10,0.1
-222,Sweden,"Marine mammal oils, nei",fish_oil,2012,13,1
-222,Sweden,"Marine mammal oils, nei",fish_oil,2013,15,2
-222,Sweden,"Marine mammal oils, nei",fish_oil,2014,47,5
-222,Sweden,"Marine mammal oils, nei",fish_oil,2015,10,2
-222,Sweden,"Marine mammal oils, nei",fish_oil,2016,11,5
-222,Sweden,"Marine mammal oils, nei",fish_oil,2017,26,3
-222,Sweden,"Marine mammal oils, nei",fish_oil,2018,37,4
-222,Sweden,"Marine mammal oils, nei",fish_oil,2019,7.75,0.38
-222,Sweden,"Marine mammal oils, nei",fish_oil,2020,6.37,0.39
-222,Sweden,"Marine mammal oils, nei",fish_oil,2021,4.29,0.25
-222,Sweden,"Marine mammal oils, nei",fish_oil,2022,55.87,3.57
-222,Sweden,"Marine mammal oils, nei",fish_oil,2023,85.43,3.85
 222,Sweden,Ornamental fish nei,ornamentals,1976,86,10
 222,Sweden,Ornamental fish nei,ornamentals,1977,77,9
 222,Sweden,Ornamental fish nei,ornamentals,1978,72,11
@@ -38715,52 +36239,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 223,Norway,Herring oil,fish_oil,2021,102428.11,72804.21
 223,Norway,Herring oil,fish_oil,2022,80663.83,31918.67
 223,Norway,Herring oil,fish_oil,2023,99048.54,32419.39
-223,Norway,"Marine mammal oils, nei",fish_oil,1978,84,72
-223,Norway,"Marine mammal oils, nei",fish_oil,1979,78,36
-223,Norway,"Marine mammal oils, nei",fish_oil,1980,70,43
-223,Norway,"Marine mammal oils, nei",fish_oil,1981,56,26
-223,Norway,"Marine mammal oils, nei",fish_oil,1982,36,14
-223,Norway,"Marine mammal oils, nei",fish_oil,1983,136,47
-223,Norway,"Marine mammal oils, nei",fish_oil,1984,127,66
-223,Norway,"Marine mammal oils, nei",fish_oil,1985,55,25
-223,Norway,"Marine mammal oils, nei",fish_oil,1986,NA,NA
-223,Norway,"Marine mammal oils, nei",fish_oil,1987,NA,NA
-223,Norway,"Marine mammal oils, nei",fish_oil,1988,25,5
-223,Norway,"Marine mammal oils, nei",fish_oil,1989,24,1
-223,Norway,"Marine mammal oils, nei",fish_oil,1990,NA,NA
-223,Norway,"Marine mammal oils, nei",fish_oil,1991,NA,NA
-223,Norway,"Marine mammal oils, nei",fish_oil,1992,36,2
-223,Norway,"Marine mammal oils, nei",fish_oil,1993,7,2
-223,Norway,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-223,Norway,"Marine mammal oils, nei",fish_oil,1995,164,241
-223,Norway,"Marine mammal oils, nei",fish_oil,1996,37,2
-223,Norway,"Marine mammal oils, nei",fish_oil,1997,201,218
-223,Norway,"Marine mammal oils, nei",fish_oil,1998,10,1
-223,Norway,"Marine mammal oils, nei",fish_oil,1999,24,10
-223,Norway,"Marine mammal oils, nei",fish_oil,2000,446,2319
-223,Norway,"Marine mammal oils, nei",fish_oil,2001,28,10
-223,Norway,"Marine mammal oils, nei",fish_oil,2002,3,0.1
-223,Norway,"Marine mammal oils, nei",fish_oil,2003,33,3
-223,Norway,"Marine mammal oils, nei",fish_oil,2004,73,52
-223,Norway,"Marine mammal oils, nei",fish_oil,2005,79,2
-223,Norway,"Marine mammal oils, nei",fish_oil,2006,160,8
-223,Norway,"Marine mammal oils, nei",fish_oil,2007,416,17
-223,Norway,"Marine mammal oils, nei",fish_oil,2008,760,101
-223,Norway,"Marine mammal oils, nei",fish_oil,2009,720,118
-223,Norway,"Marine mammal oils, nei",fish_oil,2010,460,117
-223,Norway,"Marine mammal oils, nei",fish_oil,2011,138,15
-223,Norway,"Marine mammal oils, nei",fish_oil,2012,1596,273
-223,Norway,"Marine mammal oils, nei",fish_oil,2013,755,97
-223,Norway,"Marine mammal oils, nei",fish_oil,2014,622,86
-223,Norway,"Marine mammal oils, nei",fish_oil,2015,489,104
-223,Norway,"Marine mammal oils, nei",fish_oil,2016,568,126
-223,Norway,"Marine mammal oils, nei",fish_oil,2017,141,29
-223,Norway,"Marine mammal oils, nei",fish_oil,2018,43,5
-223,Norway,"Marine mammal oils, nei",fish_oil,2019,50.81,2.12
-223,Norway,"Marine mammal oils, nei",fish_oil,2020,122.19,4.73
-223,Norway,"Marine mammal oils, nei",fish_oil,2021,525.01,7.56
-223,Norway,"Marine mammal oils, nei",fish_oil,2022,2067.04,37.86
-223,Norway,"Marine mammal oils, nei",fish_oil,2023,1374.46,30.38
 223,Norway,"Oils and fats of aquatic animals, nei",fish_oil,1997,6,2
 223,Norway,"Oils and fats of aquatic animals, nei",fish_oil,1998,23,20
 223,Norway,"Oils and fats of aquatic animals, nei",fish_oil,1999,NA,NA
@@ -38788,54 +36266,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 223,Norway,"Oils and fats of aquatic animals, nei",fish_oil,2021,1779.5,213.65
 223,Norway,"Oils and fats of aquatic animals, nei",fish_oil,2022,276.74,17.13
 223,Norway,"Oils and fats of aquatic animals, nei",fish_oil,2023,1378.62,237.25
-223,Norway,Seal oil,fish_oil,1976,3,6
-223,Norway,Seal oil,fish_oil,1977,1,2
-223,Norway,Seal oil,fish_oil,1978,2,3
-223,Norway,Seal oil,fish_oil,1979,1,1
-223,Norway,Seal oil,fish_oil,1980,1,1
-223,Norway,Seal oil,fish_oil,1981,2,8
-223,Norway,Seal oil,fish_oil,1982,NA,NA
-223,Norway,Seal oil,fish_oil,1983,NA,NA
-223,Norway,Seal oil,fish_oil,1984,NA,NA
-223,Norway,Seal oil,fish_oil,1985,NA,NA
-223,Norway,Seal oil,fish_oil,1986,NA,NA
-223,Norway,Seal oil,fish_oil,1987,NA,NA
-223,Norway,Seal oil,fish_oil,1988,NA,NA
-223,Norway,Seal oil,fish_oil,1989,NA,NA
-223,Norway,Seal oil,fish_oil,1990,NA,NA
-223,Norway,Seal oil,fish_oil,1991,NA,NA
-223,Norway,Seal oil,fish_oil,1992,NA,NA
-223,Norway,Seal oil,fish_oil,1993,NA,NA
-223,Norway,Seal oil,fish_oil,1994,NA,NA
-223,Norway,Seal oil,fish_oil,1995,NA,NA
-223,Norway,Seal oil,fish_oil,1996,NA,NA
-223,Norway,Seal oil,fish_oil,1997,NA,NA
-223,Norway,Seal oil,fish_oil,1998,NA,NA
-223,Norway,Seal oil,fish_oil,1999,NA,NA
-223,Norway,Seal oil,fish_oil,2000,NA,NA
-223,Norway,Seal oil,fish_oil,2001,NA,NA
-223,Norway,Seal oil,fish_oil,2002,NA,NA
-223,Norway,Seal oil,fish_oil,2003,NA,NA
-223,Norway,Seal oil,fish_oil,2004,NA,NA
-223,Norway,Seal oil,fish_oil,2005,NA,NA
-223,Norway,Seal oil,fish_oil,2006,NA,NA
-223,Norway,Seal oil,fish_oil,2007,NA,NA
-223,Norway,Seal oil,fish_oil,2008,NA,NA
-223,Norway,Seal oil,fish_oil,2009,NA,NA
-223,Norway,Seal oil,fish_oil,2010,NA,NA
-223,Norway,Seal oil,fish_oil,2011,NA,NA
-223,Norway,Seal oil,fish_oil,2012,NA,NA
-223,Norway,Seal oil,fish_oil,2013,NA,NA
-223,Norway,Seal oil,fish_oil,2014,NA,NA
-223,Norway,Seal oil,fish_oil,2015,NA,NA
-223,Norway,Seal oil,fish_oil,2016,NA,NA
-223,Norway,Seal oil,fish_oil,2017,NA,NA
-223,Norway,Seal oil,fish_oil,2018,NA,NA
-223,Norway,Seal oil,fish_oil,2019,NA,NA
-223,Norway,Seal oil,fish_oil,2020,NA,NA
-223,Norway,Seal oil,fish_oil,2021,NA,NA
-223,Norway,Seal oil,fish_oil,2022,NA,NA
-223,Norway,Seal oil,fish_oil,2023,NA,NA
 223,Norway,Shark oil,fish_oil,1988,51,7
 223,Norway,Shark oil,fish_oil,1989,29,0.1
 223,Norway,Shark oil,fish_oil,1990,90,7
@@ -39167,38 +36597,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 224,Chile,"Fish liver oils, nei",fish_oil,2021,NA,NA
 224,Chile,"Fish liver oils, nei",fish_oil,2022,NA,NA
 224,Chile,"Fish liver oils, nei",fish_oil,2023,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,1992,2,5
-224,Chile,"Marine mammal oils, nei",fish_oil,1993,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,1994,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,1995,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,1996,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,1997,24,1
-224,Chile,"Marine mammal oils, nei",fish_oil,1998,33,1
-224,Chile,"Marine mammal oils, nei",fish_oil,1999,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2000,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2001,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2002,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2003,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2004,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2005,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2006,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2007,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2008,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2009,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2010,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2011,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2012,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2013,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2014,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2020,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-224,Chile,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 224,Chile,Ornamental fish nei,ornamentals,1993,19,1
 224,Chile,Ornamental fish nei,ornamentals,1994,NA,NA
 224,Chile,Ornamental fish nei,ornamentals,1995,NA,NA
@@ -39891,16 +37289,6 @@ rgn_id,rgn_name,commodity,product,year,usd,tonnes
 247,Brunei,"Fish liver oils, nei",fish_oil,2021,236.1,10.3
 247,Brunei,"Fish liver oils, nei",fish_oil,2022,NA,NA
 247,Brunei,"Fish liver oils, nei",fish_oil,2023,NA,NA
-247,Brunei,"Marine mammal oils, nei",fish_oil,2014,0.1,0.1
-247,Brunei,"Marine mammal oils, nei",fish_oil,2015,NA,NA
-247,Brunei,"Marine mammal oils, nei",fish_oil,2016,NA,NA
-247,Brunei,"Marine mammal oils, nei",fish_oil,2017,NA,NA
-247,Brunei,"Marine mammal oils, nei",fish_oil,2018,NA,NA
-247,Brunei,"Marine mammal oils, nei",fish_oil,2019,NA,NA
-247,Brunei,"Marine mammal oils, nei",fish_oil,2020,0.02,0.01
-247,Brunei,"Marine mammal oils, nei",fish_oil,2021,NA,NA
-247,Brunei,"Marine mammal oils, nei",fish_oil,2022,NA,NA
-247,Brunei,"Marine mammal oils, nei",fish_oil,2023,NA,NA
 247,Brunei,Ornamental fish nei,ornamentals,1995,4,0
 247,Brunei,Ornamental fish nei,ornamentals,1996,14,NA
 247,Brunei,Ornamental fish nei,ornamentals,1997,NA,NA

@@ -1,0 +1,339 @@
+---
+title: 'OHI `r format(Sys.time(), "%Y")`: Natural Products, Preparing catch and B/Bmsy data for forage fish species'
+author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
+output: 
+  html_document:
+    code_folding: show
+    toc: true
+    toc_float: yes
+    number_sections: false
+    theme: cerulean
+    highlight: haddock
+    includes: 
+      in_header: '../../../workflow/templates/ohi_hdr.html'
+  pdf_document:
+    toc: true
+editor_options: 
+  chunk_output_type: console
+---
+
+[REFERENCE RMD FILE: <http://ohi-science.org/ohiprep_v2024/globalprep/np/v2024/STEP1c_np_fishfeed_prep.html>]
+
+# Summary
+
+This script takes the SAUP 2023 catch data, a list of fish oil/fish meal (FOFM) species, and B/Bmsy estimates to calculate a score for FOFM species per OHI region. The FIS data prep must be completed prior to this step.
+
+## Updates from previous assessment
+
+- New RAM data v4.66
+- Used the old NP FOFM Rmd to fill out this document under the new framework. See this [google doc](https://docs.google.com/document/d/1ubCTW7ZrvvdckvY2zpBzCLHLgoIlCLW8kDMj-KWda9U/edit?tab=t.0) for reference. 
+- Cut out steps 1-2 of the FOFM workflow. As the SAUP data has not been updated since 2019, we use the old data sources for the forage reference list and start directly at step 3. 
+
+------------------------------------------------------------------------
+
+# Data Source
+
+## Sea Around us
+
+**Reference**: Pauly D., Zeller D., Palomares M.L.D. (Editors), 2020. Sea Around Us Concepts, Design and Data (seaaroundus.org).
+
+**Downloaded**: September 27, 2022
+
+**Description**: Tons per year and SAUP region with information on sector type, industry type, fishing entitity, reporting status and taxonomic information.
+
+**Time range**: 1950 - 2019
+
+**Format**: CSV
+
+**Additional Information**: [Methods](http://www.seaaroundus.org/sea-around-us-methods-index/)
+
+## Avoiding the ecological limits of forage fish
+
+**Reference**: Froehlich, H.E., Jacobsen, N.S., Essington, T.E., Clavelle, T., and Halpern, B.S. (2018). Avoiding the ecological limits of forage fish for fed aquaculture. Nature Sustainability 1, 298.
+
+**Downloaded**: July 7, 2020. Obtained from Melanie Frazier (NCEAS).
+
+**Description**: List of FOFM species from Watson v3 data.
+
+**Native data resolution**:
+
+**Format**: CSV format
+
+## RAM Legacy Data
+
+**Reference**: [RAM Legacy Stock Assessment Database](http://ramlegacy.org) v4.66
+
+**Downloaded**: 06/26/2025
+
+**Description**: B/Bmsy value by stock and year (other data, which we do not use, are also available in the database)
+
+**Native data resolution**: stock (fish stock, species and region specific)
+
+**Time range**: 1800 - 2023
+
+**Format**: CSV format
+
+**Additional Information**: We use the finalized b/bmsy layer from OHI-global for this data prep. We do not actually read in the raw RAM data here.
+
+------------------------------------------------------------------------
+
+# Methods
+
+INCOMPLETE. See this folder's `README.md` for details. 
+
+
+## Setup
+
+```{r}
+knitr::opts_chunk$set(eval = FALSE)
+
+# ======= Load packages ============
+if (!require(librarian)) {
+  install.packages("librarian")
+  library(librarian)
+}
+librarian::shelf(
+  ohicore, #devtools::install_github('ohi-science/ohicore@dev') #if relevant: restart session after reinstalling
+  here,
+  tidyverse,
+  zoo,
+  plotly,
+  tictoc,
+  RColorBrewer
+)
+
+# ======= Set directories ===========
+# Update scenario year, set up programmatic scenario year updates
+current_year <- 2025 # update this!!!
+previous_year <- current_year - 1
+
+# Directories
+data_dir <- paste0("d", current_year)
+prev_data_dir <- paste0("d", previous_year)
+
+# Scenarios
+scen_year <- paste0("v", current_year)
+prev_scen_year <- paste0("v", previous_year)
+
+data_years <- c("1950", "2023") # update to correct data years
+
+# Natural Products directory on GitHub
+current_np_dir <- here::here("globalprep", "np", scen_year) 
+previous_np_dir <- here::here("globalprep", "np", paste0(prev_scen_year, "_new")) # update this if name changes
+
+# Fisheries directory on GitHub
+current_fis_dir <- here::here("globalprep", "fis", scen_year)
+previous_fis_dir <- here::here("globalprep", "fis", prev_scen_year)
+
+# ======== Source functions ===========
+source(here::here("workflow", "R", "common.R")) # directory locations
+# Load FAO-specific user-defined functions
+source(here::here("workflow", "R", "fao_fxn.R")) # function for cleaning FAO files
+# function for handling FAO commodity data specific to NP
+source(here::here(current_np_dir, "R", "np_fxn.R")) 
+# functions specific to mariculture dealing with compound countries
+source(here("globalprep", "mar", scen_year, "mar_fxs.R"))
+```
+
+**v2025 updated steps**
+
+This year's analysis cut steps 1 and 2 and started straight with step 3. We are using the forage fish catch stocks from the previous years analysis (as the data has not been updated since 2019).
+
+1. Join with the final B/Bmsy layer used in the FIS model
+2. Convert the B/Bmsy values to scores (this is done in functions.R)
+3. Apply the underharvest penalty
+4. Take a catch weighted average of B/Bmsy scores for each region/year.
+
+*Old steps to this*
+
+1.  Subset the forage fish catch stocks for each region/year (keep FAO and OHI rgn ids)
+2.  Multiply by 0.70 to reflect the amount going to feed/oils
+3.  Join with the final B/Bmsy layer used in the FIS model
+4.  Convert the B/Bmsy values to scores (this is done in functions.R)
+5.  Apply the underharvest penalty
+6.  Take a catch weighted average of B/Bmsy scores for each region/year.
+
+
+# Steps 3/4/5/6
+
+## Join with the final B/Bmsy layer from the fis model, convert the B/Bmsy values to scores (this is done in functions.R for FIS subgoal, but we do it in the dataprep for NP), apply the underharvest penalty, and take a catch weighted average of B/Bmsy scores for each region/year.
+
+```{r}
+fis_bbmsy <- read_csv(here(current_fis_dir, "output", "fis_bbmsy.csv"))
+
+fis_bbmsy_gf <- read_csv(here(current_fis_dir, "output", "fis_bbmsy_gf.csv"))
+
+# This data comes from the previous year's analysis and has been copied over into the most recent scenario directory
+catch_FOFM <- read_csv(here(current_np_dir, "int", "mean_catch_FOFM.csv"))
+
+b <- fis_bbmsy %>%
+  dplyr::mutate(bbmsy = ifelse(bbmsy > 1 , 1, bbmsy)) # no underharvest penalty anymore! 
+
+c <- catch_FOFM %>%
+    dplyr::mutate(stock_id_taxonkey = as.character(stock_id_taxonkey)) %>%
+    dplyr::mutate(taxon_key = sub('.*_', '', stock_id_taxonkey)) %>%
+    dplyr::mutate(stock_id = sub('_[^_]*$', '', stock_id_taxonkey)) %>%
+    dplyr::mutate(catch = as.numeric(catch)) %>%
+    dplyr::mutate(year = as.numeric(as.character(year))) %>%
+    dplyr::mutate(region_id = as.numeric(as.character(rgn_id))) %>%
+    dplyr::mutate(taxon_key = as.numeric(as.character(taxon_key))) %>%
+    dplyr::select(region_id, year, stock_id, taxon_key, catch)
+
+
+b <- b %>%
+  dplyr::mutate(bbmsy = as.numeric(bbmsy),
+                region_id = as.numeric(as.character(rgn_id)),
+                year = as.numeric(as.character(year)),
+                stock_id = as.character(stock_id))
+
+
+####
+# ==== Calculate scores for Bbmsy values ==== ####
+#  *************NOTE *****************************
+#  These values can be altered
+#  ***********************************************
+
+## The upper limit can be deleted, since we already cap pedscores at 1 anyways. We still want to keep the lower buffer.
+
+alpha <- 0.5
+beta <- 0.25
+lowerBuffer <- 0.95
+upperBuffer <- 1.05
+
+b$score = ifelse(
+  b$bbmsy < lowerBuffer,
+  b$bbmsy,
+  ifelse (b$bbmsy >= lowerBuffer &
+            b$bbmsy <= upperBuffer, 1, NA)
+)
+b$score = ifelse(!is.na(b$score),
+                 b$score,
+                 ifelse(
+                   1 - alpha * (b$bbmsy - upperBuffer) > beta,
+                   1 - alpha * (b$bbmsy - upperBuffer),
+                   beta
+                 ))
+
+
+####
+# Merge the b/bmsy data with catch data ------------------------------
+####
+data_fis <- c %>%
+  dplyr::left_join(b, by = c('region_id' = 'rgn_id', 'stock_id', 'year')) %>%
+  dplyr::select(rgn_id = region_id, stock_id, year, taxon_key, catch, bbmsy, score)
+
+###
+#  Estimate scores for taxa without b/bmsy values --------------------
+# Mean score of other fish in the region is the starting point
+# Then a penalty is applied based on the level the taxa are reported at
+###
+
+## this takes the mean score within each region and year
+data_fis_gf <- data_fis %>%
+  dplyr::group_by(rgn_id, year) %>%
+  dplyr::mutate(mean_score = mean(score, na.rm = TRUE)) %>%
+  dplyr::ungroup()
+
+## this takes the mean score across all regions within a year
+# (when no stocks have scores within a region)
+data_fis_gf <- data_fis_gf %>%
+  dplyr::group_by(year) %>%
+  dplyr::mutate(mean_score_global = mean(score, na.rm = TRUE)) %>%
+  dplyr::ungroup() %>%
+  dplyr::mutate(mean_score = ifelse(is.na(mean_score), mean_score_global, mean_score)) %>%
+  dplyr::select(-mean_score_global)
+
+#  *************NOTE *****************************
+#  In some cases, it may make sense to alter the
+#  penalty for not identifying fisheries catch data to
+#  species level.
+#  ***********************************************
+
+penaltyTable <- data.frame(TaxonPenaltyCode = 1:6,
+                           penalty = c(0.1, 0.25, 0.5, 0.8, 0.9, 1))
+
+data_fis_gf <- data_fis_gf %>%
+  dplyr::mutate(TaxonPenaltyCode = as.numeric(substring(taxon_key, 1, 1))) %>%
+  dplyr::left_join(penaltyTable, by = 'TaxonPenaltyCode') %>%
+  dplyr::mutate(score_gf = mean_score * penalty) %>%
+  dplyr::mutate(method = ifelse(is.na(score), "Mean gapfilled", NA)) %>%
+  dplyr::mutate(gapfilled = ifelse(is.na(score), 1, 0)) %>%
+  dplyr::mutate(score = ifelse(is.na(score), score_gf, score))
+
+
+gap_fill_data <- data_fis_gf %>%
+  dplyr::select(rgn_id,
+         stock_id,
+         taxon_key,
+         year,
+         catch,
+         score,
+         gapfilled,
+         method) 
+
+readr::write_csv(gap_fill_data, here::here(current_np_dir, "output", "NP_bbmsy_summary_gf.csv"))
+
+score_data <- data_fis_gf %>%
+  dplyr::select(rgn_id, stock_id, year, catch, score)
+
+ ###
+# Calculate status for each region
+###
+
+## Take a catch weighted average of B/Bmsy scores for each region/year.
+
+score_data <- score_data %>%
+  dplyr::group_by(year, rgn_id) %>%
+  dplyr::mutate(SumCatch = sum(catch)) %>%
+  dplyr::ungroup()  
+
+score_data <- score_data %>%
+  dplyr::group_by(rgn_id, year) %>%
+  dplyr::summarize(score = weighted.mean(score, catch)) %>%
+  dplyr::ungroup() 
+
+## v2025: add a product column to the final csv
+score_data <- score_data %>% 
+  mutate(product = "FOFM")
+
+summary(score_data)
+
+readr::write_csv(score_data, here(current_np_dir, "output", "np_fofm_scores.csv"))
+
+```
+
+### Testing and comparison
+
+```{r}
+# Read in the old data
+old <- readr::read_csv(here::here("globalprep", "np", prev_scen_year, "output", "np_fofm_scores.csv"))
+summary(old)
+
+# Read in the new data
+new <- readr::read_csv(here::here(current_np_dir, "output", "np_fofm_scores.csv"))
+summary(new)
+
+# load ohi regions
+region_data()
+
+# Investigating changes in data for same year in different data/scenario years
+
+check <- new %>%
+  rename("new_score" = "score") %>%
+  left_join(old, by = c("rgn_id", "year")) %>%
+  left_join(rgns_all, by = "rgn_id") %>%
+  select(rgn_id, year, new_score, score, rgn_name) %>%
+  mutate(diff = new_score - score) %>%
+  filter(year == 2019)
+
+ab_scores <- ggplot() + 
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  geom_point(data = check, aes(x = score, y = new_score, text = paste("Region:", rgn_name), alpha = 0.7)) +
+  labs(x = "Old Score", 
+       y = "New Score",
+       title = "FOFM New score vs old score for 2019") +
+  theme_bw();ggplotly(ab_scores)
+
+```
+
+
