@@ -90,7 +90,7 @@ library(here) # sets working directory to project (ohiprep_v202X) base directory
 source(here("workflow", "R", "common.R"))
  
 ## define paths and variables to use throughout data prep
-scen_year <- 2024 # change to reflect assessment year!
+scen_year <- 2025 # change to reflect assessment year!
 dir_anx_aviso <- file.path(dir_M, "git-annex/globalprep/_raw_data/AVISO_slr") 
 dir_prs_slr <-  sprintf("%s/git-annex/globalprep/prs_slr/v%s", dir_M, scen_year)
 
@@ -124,13 +124,13 @@ If you don't want to go through the trouble of running the download process in R
 
 ## need AVISO username and password, define the following line of code in console (as is), then when prompted, enter the username and password string, don't save the login information here in the script
 ## if either password or username contain the @ symbol, replace with '%40' (percent-encoding for reserved characters)
-userpasswd <- readline("Type AVISO username and password, separated by colon no space:")
+userpasswd <- readline("madisonenda%40gmail.com:EIpGkc")
 ```
 
 Define file paths for data download:
 
 ```{r download_data, eval=FALSE}
-year <- 2022 # data year to download; lags by 2 years. 2023 goes to May as of now, and we need a full year's worth of data for v2024
+year <- 2024 # data year to download; lags by 2 years. 2023 goes to May as of now, and we need a full year's worth of data for v2024
 months <- str_pad(1:12, 2, pad = "0") #if they upload the rest just change the numbers here to reflect rest of months
 
 ## download data from FTP and collect each month/year in raster stack

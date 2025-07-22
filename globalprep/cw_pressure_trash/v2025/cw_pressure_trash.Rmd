@@ -79,19 +79,17 @@ data_dir_version_year <- paste0("d", current_year)
 raw_data_dir <- here::here(dir_M, "git-annex", "globalprep", "_raw_data")
 
 # prs_oa dir
-cw_dir <- here::here(dir_M, "git-annex", "globalprep", "cw_trend_trash", version_year)
-
-# output data dir for intermediate data products
-int_dir <- here::here(cw_dir, "int")
-# dir.create(int_dir) # to create the path on Mazu if it has not already been done
+cw_dir <- here::here(dir_M, "git-annex", "globalprep", "cw_pressure_trash", version_year)
 
 # final output dir
-output_dir <- here::here("globalprep","cw_trend_trash", version_year, "output")
+output_dir <- here::here("globalprep","cw_pressure_trash", version_year, "output")
 
 # set colors
 cols = rev(colorRampPalette(brewer.pal(9, 'Spectral'))(255)) # rainbow color scheme
 ```
 
+
+# The data was manually downloaded and uploaded to the mazu server. In year's after v2025, the NOAA_NEI_Marine_Microplastics can be deleted and replaced to maintain the below code.
 
 # Method 1: Use vector data and intersect for each region
 
@@ -191,7 +189,7 @@ microplastics_bbox <- extend(microplastics_bbox, 0.5)  # adds 0.5 degree padding
 
 # Create a raster with 1-degree resolution
 rast_template <- rast(extent = microplastics_bbox, 
-                   resolution = 1, 
+                   resolution = 1, # use a 1-degree resolution
                    crs = "EPSG:4326")
 
 # Rasterize using mean value per cell (you can also use "sum", "max", etc.)
@@ -257,17 +255,17 @@ landmasses_single <- landmasses[[3]]
 plot(landmasses_single)
 ```
 
-# Mask out the 
+# Mask out the oceans and seas
 
 ```{r}
 # Set values higher than 250 to NA
-landmasses_single[landmasses_single < 250] <- NA
+landmasses_single[landmasses_single <= 250] <- NA # This radiance level was selected based on the third raster layer values. This may have to be updated if the rasters change
 
 # Resample the landmass raster to match the filler raster
-landmasses_r <- resample(landmasses_single, filled_r, method = "near")
+microplastics_re <- resample(filled_r, landmasses_single, method = "near")
 
 # Mask out raster1 where raster2 has non-NA values
-masked_microplastics <- mask(filled_r, landmasses_r)
+masked_microplastics <- mask(microplastics_re, landmasses_single)
 ```
 
 ```{r}
@@ -305,6 +303,10 @@ zonal_stats <- zonal(microplastics_rast, zones_aligned, fun = "mean", na.rm = TR
 ```
 
 ```{r}
+region_data()
+```
+
+```{r}
 # Check for NAs
 sum(is.na(zonal_stats$mean))
 
@@ -315,7 +317,6 @@ missing_countries <- zonal_stats %>%
 ```
 
 # Potential Gapfilling: 
-
 
 ```{r}
 # Rename the columns for ease of use
@@ -339,7 +340,6 @@ zonal_stats_filled <- zonal_stats_clean %>%
 microplastics_eez <- left_join(rgns_all, zonal_stats_filled, by= c("rgn_ant_id" = "region"))
 ```
 
-
 # Plot the results
 
 ```{r}
@@ -352,3 +352,16 @@ y= "Region ID")
 
 ggplotly(plot)
 ```
+# Save the data as a csv
+
+```{r}
+# Create file name for csv
+file_name <- paste0("prs_trash_", current_year, ".csv")
+
+# Create the full path
+output_path <- file.path("output", file_name)
+
+# Save the data frame
+write.csv(microplastics_eez, file = output_path, row.names = FALSE)
+```
+
