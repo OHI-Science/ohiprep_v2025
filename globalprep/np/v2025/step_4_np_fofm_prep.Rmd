@@ -334,33 +334,28 @@ catch_year_zeros <- catch_year_zeros %>%
   ungroup()
 
 # Calculate mean catch for ohi regions (using data from 1980 onward). These data are used to weight the RAM b/bmsy values 
-mean_catch <- catch_year_zeros %>%
-  filter(year >= 1980) %>%
-  group_by(rgn_id, fao_id, TaxonKey, stock_id) %>%
-  summarize(mean_catch_non_human = mean(catch_non_human, na.rm=TRUE)) %>% # mean catch for each stock (in a specific ohi-fao region)
-  filter(mean_catch_non_human != 0)  %>% # some stocks have no reported catch for time period
-  ungroup()
+# mean_catch <- catch_year_zeros %>%
+#   filter(year >= 1980) %>%
+#   group_by(rgn_id, fao_id, TaxonKey, stock_id) %>%
+#   summarize(mean_catch_non_human = mean(catch_non_human, na.rm=TRUE)) %>% # mean catch for each stock (in a specific ohi-fao region)
+#   filter(mean_catch_non_human != 0)  %>% # some stocks have no reported catch for time period
+#   ungroup()
 
-mean_catch1 <- catch_year_zeros %>%
+mean_catch <- catch_year_zeros %>%
   filter(year >= 1980) %>%
   group_by(rgn_id, fao_id, TaxonKey, stock_id) %>%
   mutate(mean_catch_non_human = mean(catch_non_human, na.rm=TRUE)) %>% # mean catch for each stock (in a specific ohi-fao region)
   filter(mean_catch_non_human != 0)  %>% # some stocks have no reported catch for time period
   ungroup()
 
-nrow(mean_catch1) # 123049
-nrow(mean_catch) # 3734
-
-mean_catch2 <- mean_catch1 %>% 
+mean_catch_dist <- mean_catch %>% 
   select(!catch_non_human) %>% 
   dplyr::distinct(rgn_id, fao_id, year, TaxonKey, stock_id, mean_catch_non_human)
-nrow(mean_catch2) # 123049
 
-view(mean_catch2) # 123049
 
 options(scipen = 999) # to prevent taxonkey from turning into scientific notation
 
-mean_catch_FOFM <- mean_catch2 %>%
+mean_catch_FOFM <- mean_catch_dist %>%
   mutate(stock_id_taxonkey = paste(stock_id, TaxonKey, sep="_")) %>%
   dplyr::select(rgn_id, stock_id_taxonkey, mean_catch_non_human, year) %>%
   # filter(year >= 2001) %>%  # filter to include only analysis years
@@ -368,6 +363,17 @@ mean_catch_FOFM <- mean_catch2 %>%
   # rename(catch = mean_catch_non_human)
 
 readr::write_csv(mean_catch_FOFM, here(current_np_dir, "int", "mean_catch_FOFM.csv"))
+
+## Separate file to save the raw data as well as the mean catch data. Used in step 5 weighting
+mean_raw_catch <- mean_catch %>% 
+  mutate(stock_id_taxonkey = paste(stock_id, TaxonKey, sep="_"),
+         product = "fish_oil") %>%
+  dplyr::select(rgn_id, stock_id_taxonkey, mean_catch_non_human, catch_non_human, year, product) %>%
+  filter(year >= 2001) %>%  # filter to include only analysis years
+  data.frame() 
+
+readr::write_csv(mean_raw_catch, here(current_np_dir, "int", "raw_mean_catch_FOFM.csv"))
+
 
 ```
 

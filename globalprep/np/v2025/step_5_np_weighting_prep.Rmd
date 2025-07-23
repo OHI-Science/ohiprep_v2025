@@ -197,7 +197,7 @@ source(here("globalprep", "mar", scen_year, "mar_fxs.R"))
 ```
 
 
-# Combine value and quantity data
+# Commodity value and raw production data
 
 ```{r}
 #### Value data ####
@@ -223,8 +223,7 @@ nrow(seaweed)
 summary(seaweed)
 
 # Fish oil fish meal: Not sure if this is the right file...
-# fofm <- read_csv(here(current_np_dir, "output", "np_fofm_scores.csv")) 
-fofm <- read_csv(here(current_np_dir, "int", "mean_catch_FOFM.csv")) 
+fofm <- read_csv(here(current_np_dir, "int", "raw_mean_catch_FOFM.csv")) 
 colnames(fofm)
 colSums(is.na(fofm))
 nrow(fofm)
@@ -232,7 +231,43 @@ summary(fofm)
 ```
 
 
-# 5 Year Averages
+```{r}
+# Combine value data with commodity data
+# Ornamentals
+orn_val <- orn %>% 
+  left_join(harvest_tonnes_usd, by = join_by(rgn_id, rgn_name, product, year, tonnes)) %>% 
+  view()
+# Tonnes were identical here so we can join by them
+# setdiff(orn_val$tonnes.x, orn_val$tonnes.y)
+
+
+# Seaweed
+seaweed_val <- seaweed %>% 
+  left_join(harvest_tonnes_usd, by = join_by(rgn_id, product, year)) %>% 
+  view()
+
+# Tonnes are NOT identical because we're using FAO data
+setdiff(seaweed_val$tonnes.x, seaweed_val$tonnes.y)
+
+
+# FOFM data
+fofm_val <- fofm %>% 
+  left_join(harvest_tonnes_usd, by = join_by(rgn_id, product, year)) %>% 
+  view()
+
+
+```
+
+# Calculate total USD for each product
+
+FOFM: USD/tonne * tonnes of prod for SAUP
+
+```{r}
+
+```
+
+
+## 5 Year Averages
 
 **ISSUE** Okay, it seems like this 5 year averages step is supposed to come last, according to the NP plan.
 
