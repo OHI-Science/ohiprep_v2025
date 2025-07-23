@@ -117,10 +117,14 @@ marine_system <- marine_system %>%
   rename(iucn_sid = sis_taxon_id, 
          sciname = taxon_scientific_name,
          category = red_list_category_code,
-         year = year_published)
+         year = year_published) %>%
+  # Unnest scopes variable
+  unnest(scopes, names_sep = "_")
 
 # Save list of unique taxon IDs
 marine_species_list <- unique(marine_system$iucn_sid)
+
+marine_system$scopes_description <- marine_system$scopes_description$en
 
 # Save for time
 write_csv(marine_system, file.path(dir_goal, sprintf('_data/iucn/marine_system_%s.csv', api_version)))
@@ -397,8 +401,6 @@ Some species show up over multiple habitats (and thus depth ratings), so I chose
 marine_species_habitats_global <- marine_species_habitats %>%
   # Filter for latest assessments
   filter(latest == TRUE) %>%
-  # Unnest scopes variable
-  unnest(scopes, names_sep = "_") %>%
   # Filter for global
   filter(scopes_code == "1") %>%
   # Filter for marine species
@@ -457,8 +459,6 @@ Save the IUCN categories for all available *global* assessments over time of mar
 ```{r}
 # Create data frame for layer
 marine_species_risk_timeseries <- marine_system %>%
-  # Unnest the scopes variable
-  unnest(scopes, names_sep = "_") %>%
   # Filter for global scopes
   filter (scopes_code == "1") %>%
   # Reclassify codes
@@ -633,6 +633,9 @@ rgn_risk_ts <- rgn_assess %>%
 # Write csv
 write_csv(rgn_risk_ts, file.path(dir_goal, '_data',
                                  sprintf('iucn_risk_ts_rgn_%s.csv', api_version)))
+
+rgn_risk_ts <- read_csv(file.path(dir_goal, '_data',
+                                 sprintf('iucn_risk_ts_rgn_%s.csv', api_version)), show_col_types = FALSE)
 ```
 
 ```{r}
@@ -672,6 +675,8 @@ for (i in iucn_pop_trends$code) {
   
   # Append to list
   pop_trends_spp[[trend_name]] <- as_tibble(pop_assessments)
+  
+  Sys.sleep(1)
 }
 
 # Combine individual habitat species lists into one master list
@@ -679,28 +684,43 @@ pop_trends <- bind_rows(pop_trends_spp) %>%
   rename(iucn_sid = sis_taxon_id, 
          sciname = taxon_scientific_name,
          category = red_list_category_code,
-         year = year_published)
+         year = year_published)  %>%
+  unnest(scopes, names_sep = "_") 
+
+# increasing <- rl_pop_trends("0")$assessments
+# decreasing <- rl_pop_trends("1")$assessments
+# stable <- rl_pop_trends("2")$assessments
+# unknown <- rl_pop_trends("3")$assessments
+# 
+# pop_trends <- bind_rows(increasing, decreasing, stable, unknown) %>%
+#   rename(iucn_sid = sis_taxon_id, 
+#          sciname = taxon_scientific_name,
+#          category = red_list_category_code,
+#          year = year_published)  %>%
+#   unnest(scopes, names_sep = "_") 
+
+pop_trends$scopes_description <- pop_trends$scopes_description$en
 
 # Save for time
 write_csv(pop_trends, file.path(dir_goal, sprintf('_data/iucn/pop_trends_%s.csv', api_version)))
 
 # Load for time
-#pop_trends <- read_csv(file.path(dir_goal, sprintf('_data/iucn/pop_trends_%s.csv', api_version)), show_col_types = FALSE)
+pop_trends <- read_csv(file.path(dir_goal, sprintf('_data/iucn/pop_trends_%s.csv', api_version)), show_col_types = FALSE)
 
 pop_trends_marine <- pop_trends %>% 
   # Filter for marine species
-  filter(iucn_sid %in% marine_species_list) %>%
-  unnest(scopes, names_sep = "_") %>%
+  filter(iucn_sid %in% marine_species_list)%>%
   # Filter for latest assessment
   filter(latest == TRUE) %>%
   left_join(iucn_pop_trends, by = "code")
 
 # Clean up region description
-pop_trends_marine$iucn_rgn <- tolower(str_replace(pop_trends_marine$scopes_description$en, " ", "_"))
+pop_trends_marine$iucn_rgn <- tolower(str_replace(pop_trends_marine$scopes_description, " ", "_"))
 
 # iucn_risk_ts_and_trends_2025-1.csv
 iucn_risk_ts_and_trends <- pop_trends_marine %>%
-  mutate(iucn_version = "2025-1") %>%
+  mutate(iucn_version = "2025-1",
+         description = tolower(description)) %>%
   select(iucn_sid, pop_trend = description, iucn_version, iucn_rgn)
 
 # Save csv
@@ -715,7 +735,7 @@ all_ts <- marine_species_risk_timeseries %>%
                      cat_ts_score = rgn_cat_ts_score))
 ```
 
-### Data: `iucn_trend_by_spp_2025-1.csv` (KEEP?)
+### Data: `iucn_trend_by_spp_2025-1.csv`
 
 Regress species with multiple recent historic assessments against population trends
 
@@ -726,6 +746,10 @@ For this analysis we will focus only on assessments performed since 1991, the ye
 Since 1991:
 
 ``` {r}
+# Read in data
+iucn_risk_ts_and_trends <- read_csv(file.path(dir_setup, 'int/trend_calcs',
+                         sprintf('iucn_risk_ts_and_trends_%s.csv', api_version)))
+
 cat_trend_91 <- iucn_risk_ts_and_trends %>%
   left_join(all_ts, by = c('iucn_sid', 'iucn_version', 'iucn_rgn')) %>%
   distinct() %>%
@@ -766,8 +790,8 @@ trend_91 <- trend_91 %>%
 
 trend_regr_91 <- lm(calc_trend ~ pop_trend, data = trend_91)
 
-# trend_coeffs_91 <- summary(trend_regr_91)
-# 
+trend_coeffs_91 <- summary(trend_regr_91)
+
 # trend_plot_91 <- ggplot(trend_91, aes(x = pop_trend, y = calc_trend, group = pop_trend)) +
 #   geom_violin(color = 'grey60', fill = 'grey80') +
 #   geom_jitter(color = 'blue', alpha = .4) +
@@ -779,8 +803,8 @@ trend_regr_91 <- lm(calc_trend ~ pop_trend, data = trend_91)
 #   labs(x = 'text population trend',
 #        y = 'calculated trend from category time series',
 #        title = 'Pop trend vs change in assessed risk since 1991') +
-#   annotate('text', x = 0.1, y = -.06, 
-#            label = paste0('R^2: ',          round(trend_coeffs_91$r.squared, 5), 
+#   annotate('text', x = 0.1, y = -.06,
+#            label = paste0('R^2: ',          round(trend_coeffs_91$r.squared, 5),
 #                           '\nslope = ',     round(trend_coeffs_91$coefficients[2, 1], 5),
 #                           '\np (slope) = ', signif(trend_coeffs_91$coefficients[2, 4], 5)),
 #            hjust = 0)
@@ -793,6 +817,8 @@ trend_score_lookup <- c('decreasing' = -slope, 'stable' = 0, 'increasing' = slop
 trend_91 <- trend_91 %>%
   dplyr::select(iucn_sid, iucn_rgn, calc_trend) %>%
   distinct()
+
+trend_score_lookup <- c('decreasing' = -slope, 'stable' = 0, 'increasing' = slope)
 
 # iucn_trend_by_spp_2025-1.csv
 trend_df <- iucn_risk_ts_and_trends %>%
