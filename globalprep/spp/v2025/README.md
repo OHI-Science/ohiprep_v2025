@@ -121,7 +121,7 @@ DELETE BELOW when confirmed.
       * 6a_aggregate_spp_ranges.Rmd
       * 6b_aggregate_rr_spp_ranges.Rmd
 
-#### Then run this!  Root directory: `v2021`
+#### Then run this!  Root directory: `v20XX`
 
 At this level there are several scripts, prefixed `1x_biodiversity_maps`, that collate the various taxonomic group level files (generated in `setup` part 6) and summarize to the global level. These need to be run before spp_data_prep.Rmd!
   * 1a_biodiversity_maps_comp_assessed.Rmd

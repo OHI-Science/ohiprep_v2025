@@ -665,8 +665,9 @@ Extract species risk data that corresponds to 3nm regions.
 rgns_3nm <- rast(file.path(dir_M, "git-annex/globalprep/spatial/v2018/rgns_3nm_offshore_mol.tif"))
 plot(rgns_3nm)
 
-trend_3nm_mol <- rast(file.path(dir_M, "git-annex/globalprep/spp/v2024/int/trend_x_n_comp_mol.tif"))
-n_trend_3nm_mol <- rast(file.path(dir_M, "git-annex/globalprep/spp/v2024/int/n_trend_comp_mol.tif"))
+trend_3nm_mol <- rast(file.path(dir_M, "git-annex/globalprep/spp", scenario, "int/trend_x_n_comp_mol.tif"))
+
+n_trend_3nm_mol <- rast(file.path(dir_M, "git-annex/globalprep/spp", scenario, "int/n_trend_comp_mol.tif"))
 
 
 trend_stack <- c(rgns_3nm, trend_3nm_mol, n_trend_3nm_mol)
@@ -691,8 +692,6 @@ rgn_3nm_trend <- trend_df_2 %>%
   dplyr::mutate(rgn_wt_trend = trend_x_n_comp_mol/n_trend_comp_mol) %>%
   dplyr::select(rgn_id = zone, rgn_wt_trend)
 
-
-
 ```
   
 
@@ -700,7 +699,7 @@ rgn_3nm_trend <- trend_df_2 %>%
 We estimate previous risk for each region, using the trend data.  We assume change in risk is linear.  
 
 ```{r, eval = FALSE}
-assess_years <- 2012:2023
+assess_years <- 2012:2024
 years <- expand.grid(rgn_id = unique(rgn_3nm_trend$rgn_id), year=assess_years)
 
 # this is what the trend will be multiplied by to get a risk estimate for each year:
@@ -713,7 +712,6 @@ rgn_risk_3nm <- rgn_3nm_risk %>%
   rowwise() %>%
   mutate(mean_risk_per_year = rgn_wt_risk - rgn_wt_trend*multiplier) %>%
   dplyr::select(rgn_id, year, mean_risk = mean_risk_per_year)
-
 
 ```
 
@@ -728,7 +726,6 @@ rgn_3nm_res <- rgn_risk_3nm %>%
 
 # quick check
 hist(rgn_3nm_res$spp_status)
-
 
 ```
 
@@ -766,19 +763,18 @@ resilience <- res_gf %>%
 
 summary(resilience) # should be no NA values
 
-write.csv(resilience, here("globalprep/spp/v2024/output/sp_status_3nm.csv"), row.names=FALSE)  
+write.csv(resilience, here("globalprep/spp", scenario, "output/sp_status_3nm.csv"), row.names=FALSE)  
 
 ```
 
 ### Resilience: save a record of gapfilling
 ```{r, eval = FALSE}
-res <- read.csv(here("globalprep/spp/v2024/output/sp_status_3nm.csv")) %>%
+res <- read.csv(here("globalprep/spp", scenario, "output/sp_status_3nm.csv")) %>%
   mutate(gapfilled = ifelse(rgn_id == 19, 1, 0)) %>%
   mutate(method = ifelse(rgn_id == 19, "eez scale data used", NA)) %>%
   dplyr::select(rgn_id, year, gapfilled, method)
-write.csv(res, here("globalprep/spp/v2024/output/sp_status_3nm_gf.csv"), row.names=FALSE)          
 
-
+write.csv(res, here("globalprep/spp", scenario, "output/sp_status_3nm_gf.csv"), row.names=FALSE)          
 ```
 
 
@@ -788,11 +784,11 @@ Compared to the entire EEZ, most (but not all) coastal areas have higher species
 ```{r, eval = FALSE}
 
 # compare to eez values
-eez_status <- read.csv(here("globalprep/spp/v2024/output/sp_status_global.csv")) %>%
+eez_status <- read.csv(here("globalprep/spp", scenario, "output/sp_status_global.csv")) %>%
   filter(year == max(year)) %>%
   dplyr::select(rgn_id, eez_score = score)
 
-status <- read.csv(here("globalprep/spp/v2024/output/sp_status_3nm.csv")) %>%
+status <- read.csv(here("globalprep/spp", scenario, "output/sp_status_3nm.csv")) %>%
   dplyr::select(rgn_id, year, nm3_score = score) %>%
   filter(year == max(year)) %>%
   left_join(eez_status, by = "rgn_id")
@@ -806,11 +802,11 @@ ggplot(status, aes(x = nm3_score, y = eez_score)) +
   labs(x = "3nm score", y = "eez score")
 
 # compare to last year's values
-status <- read.csv(here("globalprep/spp/v2024/output/sp_status_3nm.csv")) %>%
+status <- read.csv(here("globalprep/spp", scenario, "output/sp_status_3nm.csv")) %>%
   filter(year == max(year)) %>%
   dplyr::select(-year)
 
-old_spp <- read.csv(here("globalprep/spp/v2022/output/sp_status_3nm.csv")) %>%
+old_spp <- read.csv(here("globalprep/spp/v2024/output/sp_status_3nm.csv")) %>%
   filter(year == max(year)) %>%
   rename(old_score = score) %>%
   # mutate(year = 2020) %>%
@@ -826,7 +822,7 @@ abline(0,1, col="red")
 ggplot(old_spp, aes(x = old_score, y = new_score)) + 
   geom_point() + 
   geom_abline(intercept = 0) +
-  labs(x = "v2022 resilience", y = "v2024 resilience")
+  labs(x = "v2024 resilience", y = "v2025 resilience")
 
 old_spp_gather <- old_spp %>%
   dplyr::select(rgn_id, old_score, new_score) %>%
