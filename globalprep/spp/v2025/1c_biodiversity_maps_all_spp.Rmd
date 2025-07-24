@@ -17,7 +17,6 @@ output:
 ---
 
 
-
 ```{r}
 knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
 ```
@@ -36,7 +35,7 @@ library(sf)
 source(here('workflow/R/common.R'))
 
 goal     <- 'spp'
-scenario <- 'v2024'
+scenario <- 'v2025'
 dir_goal <- here('globalprep', goal, scenario)
 
 ### goal specific folders and info
@@ -211,7 +210,9 @@ if(!file.exists(cell_summary_file) | reload == TRUE) {
 
 ```
 
-### And now, the rasters
+## Rasters
+
+### `mean_risk_raster_all.tif`
 
 ``` {r mean_risk_raster}
 
@@ -241,6 +242,24 @@ if(!file.exists(map_rast_file) | reload == TRUE) {
 
 ```
 
+Compare to last year
+
+```{r}
+mean_rast <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_output/mean_risk_raster_all.tif')
+
+mean_rast_old <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2024/_output/mean_risk_raster_all.tif')
+
+max_new <- minmax(mean_rast)[2]
+max_old <- minmax(mean_rast_old)[2]
+
+colors <- viridis::viridis(100)
+
+plot(mean_rast, col = colors, zlim = c(0, max(max_old, max_new)), main = "Mean New- All (2025)")
+plot(mean_rast_old, col = colors, zlim = c(0, max(max_old, max_new)), main = "Mean Old- All (2024)")
+```
+
+### `var_risk_raster_all.tif`
+
 ``` {r var_risk_raster}
 
 map_rast_file <- file.path(dir_goal, '_output', 'var_risk_raster_all.tif')
@@ -257,6 +276,23 @@ if(!file.exists(map_rast_file) | reload == TRUE) {
 
 ```
 
+Compare to last year
+
+```{r}
+var_rast <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_output/var_risk_raster_all.tif')
+
+var_rast_old <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2024/_output/var_risk_raster_all.tif')
+
+max_new <- minmax(var_rast)[2]
+max_old <- minmax(var_rast_old)[2]
+
+colors <- viridis::viridis(100)
+
+plot(var_rast, col = colors, zlim = c(0, max(max_old, max_new)), main = "Variance New- All (2025)")
+plot(var_rast_old, col = colors, zlim = c(0, max(max_old, max_new)), main = "Variance Old- All (2024)")
+```
+
+### `n_spp_risk_raster_all.tif`
 
 ``` {r n_spp_risk}
 
@@ -273,6 +309,23 @@ if(!file.exists(map_rast_file) | reload == TRUE) {
 }
 ```
 
+Compare to last year
+
+```{r}
+n_spp_risk_rast <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_output/n_spp_risk_raster_all.tif')
+
+n_spp_risk_rast_old <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2024/_output/n_spp_risk_raster_all.tif')
+
+max_new <- minmax(n_spp_risk_rast)[2]
+max_old <- minmax(n_spp_risk_rast_old)[2]
+
+colors <- viridis::viridis(100)
+
+plot(n_spp_risk_rast, col = colors, zlim = c(0, max(max_old, max_new)), main = "N Spp Risk New- All (2025)")
+plot(n_spp_risk_rast_old, col = colors, zlim = c(0, max(max_old, max_new)), main = "N Spp Risk Old- All (2024)")
+```
+
+### `n_threat_raster_all.tif`
 
 ``` {r n_spp_threatened}
 
@@ -296,7 +349,23 @@ if(!file.exists(map_rast_file) | reload == TRUE) {
 
 ```
 
+Compare to last year
 
+```{r}
+n_threat_rast <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_output/n_threat_raster_all.tif')
+
+n_threat_rast_old <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2024/_output/n_threat_raster_all.tif')
+
+max_new <- minmax(n_threat_rast)[2]
+max_old <- minmax(n_threat_rast_old)[2]
+
+colors <- viridis::viridis(100)
+
+plot(n_threat_rast, col = colors, zlim = c(0, max(max_old, max_new)), main = "N Threat New- All (2025)")
+plot(n_threat_rast_old, col = colors, zlim = c(0, max(max_old, max_new)), main = "N Threat Old- All (2024)")
+```
+
+### `trend_raster_all.tif`
 
 ``` {r trend}
 
@@ -314,6 +383,23 @@ if(!file.exists(map_rast_file) | reload == TRUE) {
 
 ```
 
+Compare to last year
+
+```{r}
+trend_rast <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_output/trend_raster_all.tif')
+
+trend_rast_old <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2024/_output/trend_raster_all.tif')
+
+max_new <- minmax(trend_rast)[2]
+max_old <- minmax(trend_rast_old)[2]
+
+colors <- viridis::viridis(100)
+
+plot(trend_rast, col = colors, zlim = c(0, max(max_old, max_new)), main = "Trend New- All (2025)")
+plot(trend_rast_old, col = colors, zlim = c(0, max(max_old, max_new)), main = "Trend Old- All (2024)")
+```
+
+### `n_trend_raster_all.tif`
 
 ``` {r n_trend}
 
@@ -328,6 +414,22 @@ if(!file.exists(map_rast_file) | reload == TRUE) {
 } else {
   message('Map exists: ', map_rast_file)
 }
+```
+
+Compare to last year
+
+```{r}
+n_trend_rast <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_output/n_trend_raster_all.tif')
+
+n_trend_rast_old <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2024/_output/n_trend_raster_all.tif')
+
+max_new <- minmax(n_trend_rast)[2]
+max_old <- minmax(n_trend_rast_old)[2]
+
+colors <- viridis::viridis(100)
+
+plot(n_trend_rast, col = colors, zlim = c(0, max(max_old, max_new)), main = "N Trend New- All (2025)")
+plot(n_trend_rast_old, col = colors, zlim = c(0, max(max_old, max_new)), main = "N Trend Old- All (2024)")
 ```
 
 

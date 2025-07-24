@@ -14,9 +14,9 @@ output:
       in_header: '../../../workflow/templates/ohi_hdr.html'
   pdf_document:
     toc: true
+editor_options: 
+  chunk_output_type: console
 ---
-
-
 
 ```{r}
 knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
@@ -32,12 +32,13 @@ library(data.table)
 library(raster)
 library(sf)
 library(terra)
+library(patchwork)
 
 
 source(here('workflow/R/common.R'))
 
 goal     <- 'spp'
-scenario <- 'v2024'
+scenario <- 'v2025'
 dir_goal <- here('globalprep', goal, scenario)
 
 ### goal specific folders and info
@@ -106,6 +107,9 @@ but reconstructing the variance is more complex.  Here is the derivation startin
 \end{align*}
 Because of file sizes, the intermediate files will be stored outside of GitHub.
 
+
+`cell_summary_unweighted_comp.csv`
+
 ``` {r create_cell_value_df_for_all_spp}
 
 cell_summary_file <- file.path(dir_goal_anx, 'cell_summary_unweighted_comp.csv')
@@ -121,7 +125,7 @@ if(!file.exists(cell_summary_file) | reload == TRUE) {
   message('going into the first mclapply...')
   
   ptm <- system.time({
-    cell_values_all <- parallel::mclapply(comp_files, mc.cores = 12,
+    cell_values_all <- parallel::mclapply(comp_files, mc.cores = 8, # can change back to 12
                                           FUN = function(x) {
                                             read_csv(x, col_types = 'dddiidi')
                                             }) %>%
@@ -139,7 +143,7 @@ if(!file.exists(cell_summary_file) | reload == TRUE) {
   # system.time({ 
     ### mclapply: 28.0570000000007
   ptm <- system.time({
-    cell_vals_list <- parallel::mclapply(1:n_chunks, mc.cores = 12,
+    cell_vals_list <- parallel::mclapply(1:n_chunks, mc.cores = 8,
         FUN = function(x) { ### x <- 1
           btm_i <- (x - 1) * chunksize + 1
           top_i <- min(x * chunksize, length(cell_ids))
@@ -154,7 +158,7 @@ if(!file.exists(cell_summary_file) | reload == TRUE) {
   message('going into the third mclapply...')
   
   ptm <- system.time({ #processing time 18.1529999999912 sec
-    cell_summary_list <- parallel::mclapply(cell_vals_list, mc.cores = 12,
+    cell_summary_list <- parallel::mclapply(cell_vals_list, mc.cores = 8,
                                        FUN = function(x) {
       ### x <- cell_vals_list[[250]]
       y <- x %>%
@@ -208,9 +212,18 @@ if(!file.exists(cell_summary_file) | reload == TRUE) {
 
 }
 
+# Compare to last year
+cell_summary_24 <- read_csv('/home/shares/ohi/git-annex/globalprep/spp/v2024/spp_risk_dists/cell_summary_unweighted_comp.csv', col_types = 'ddiiddid')
+
+summary(cell_summary)
+# min cell_id for 2025 is 8518?
+summary(cell_summary_24)
+# min cell_id for 2024 is 1
 ```
 
-### And now, the rasters
+## Rasters
+
+### `mean_risk_raster_comp.tif`
 
 ``` {r mean_risk_raster}
 
@@ -221,7 +234,7 @@ rast_base <- raster(file.path(dir_spatial, 'cell_id_rast.tif'))
 land_poly <- st_read(file.path(dir_spatial, 'ne_10m_land/ne_10m_land.shp')) %>%
   st_transform(gp_proj4)
 
-
+# Goal file
 map_rast_file <- file.path(dir_output, 'mean_risk_raster_comp.tif')
 
 if(!file.exists(map_rast_file) | reload == TRUE) {
@@ -240,8 +253,27 @@ if(!file.exists(map_rast_file) | reload == TRUE) {
 
 ```
 
+Compare to last year
+
+```{r}
+mean_rast <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_output/mean_risk_raster_comp.tif')
+
+mean_rast_old <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2024/_output/mean_risk_raster_comp.tif')
+
+max_new <- minmax(mean_rast)[2]
+max_old <- minmax(mean_rast_old)[2]
+
+colors <- viridis::viridis(100)
+
+plot(mean_rast, col = colors, zlim = c(0, max(max_old, max_new)), main = "Mean New (2025)")
+plot(mean_rast_old, col = colors, zlim = c(0, max(max_old, max_new)), main = "Mean Old (2024)")
+```
+
+### `var_risk_raster_comp.tif`
+
 ``` {r var_risk_raster}
 
+# Goal file
 map_rast_file <- file.path(dir_output, 'var_risk_raster_comp.tif')
 
 if(!file.exists(map_rast_file) | reload == TRUE) {
@@ -253,12 +285,29 @@ if(!file.exists(map_rast_file) | reload == TRUE) {
 } else {
   message('Map exists: ', map_rast_file)
 }
-
 ```
 
+Compare to last year
+
+```{r}
+var_rast <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_output/var_risk_raster_comp.tif')
+
+var_rast_old <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2024/_output/var_risk_raster_comp.tif')
+
+max_new <- minmax(var_rast)[2]
+max_old <- minmax(var_rast_old)[2]
+
+colors <- viridis::viridis(100)
+
+plot(var_rast, col = colors, zlim = c(0, max(max_old, max_new)), main = "Variance New (2025)")
+plot(var_rast_old, col = colors, zlim = c(0, max(max_old, max_new)), main = "Variance Old (2024)")
+```
+
+### `n_spp_risk_raster_comp.tif`
 
 ``` {r n_spp_risk}
 
+# Goal file
 map_rast_file <- file.path(dir_output, 'n_spp_risk_raster_comp.tif')
 
 if(!file.exists(map_rast_file) | reload == TRUE) {
@@ -272,9 +321,27 @@ if(!file.exists(map_rast_file) | reload == TRUE) {
 }
 ```
 
+Compare to last year 
+
+```{r}
+n_spp_risk_rast <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_output/n_spp_risk_raster_comp.tif')
+
+n_spp_risk_rast_old <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2024/_output/n_spp_risk_raster_comp.tif')
+
+max_new <- minmax(n_spp_risk_rast)[2]
+max_old <- minmax(n_spp_risk_rast_old)[2]
+
+colors <- viridis::viridis(100)
+
+plot(n_spp_risk_rast, col = colors, zlim = c(0, max(max_old, max_new)), main = "N Spp Risk New (2025)")
+plot(n_spp_risk_rast_old, col = colors, zlim = c(0, max(max_old, max_new)), main = "N Spp Risk Old (2024)")
+```
+
+### `n_threat_raster_comp.tif`
 
 ``` {r n_spp_threatened}
 
+# Goal file
 map_rast_file <- file.path(dir_output, 'n_threat_raster_comp.tif')
 
 if(!file.exists(map_rast_file) | reload == TRUE) {
@@ -293,10 +360,26 @@ if(!file.exists(map_rast_file) | reload == TRUE) {
 
 ```
 
+Compare to last year 
 
+```{r}
+n_threat_rast <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_output/n_threat_raster_comp.tif')
+
+n_threat_rast_old <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2024/_output/n_threat_raster_comp.tif')
+
+max_new <- minmax(n_threat_rast)[2]
+max_old <- minmax(n_threat_rast_old)[2]
+
+colors <- viridis::viridis(100)
+
+plot(n_threat_rast, col = colors, zlim = c(0, max(max_old, max_new)), main = "N Threat New (2025)")
+plot(n_threat_rast_old, col = colors, zlim = c(0, max(max_old, max_new)), main = "N Threat Old (2024)")
+```
+
+### `trend_raster_comp.tif`
 
 ``` {r trend}
-
+# Goal file
 map_rast_file <- file.path(dir_output, 'trend_raster_comp.tif')
 
 if(!file.exists(map_rast_file) | reload == TRUE) {
@@ -311,9 +394,26 @@ if(!file.exists(map_rast_file) | reload == TRUE) {
 
 ```
 
+Compare to last year
+
+```{r}
+trend_rast <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_output/trend_raster_comp.tif')
+
+trend_rast_old <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2024/_output/trend_raster_comp.tif')
+
+max_new <- minmax(trend_rast)[2]
+max_old <- minmax(trend_rast_old)[2]
+
+colors <- viridis::viridis(100)
+
+plot(trend_rast, col = colors, zlim = c(0, max(max_old, max_new)), main = "Trend New (2025)")
+plot(trend_rast_old, col = colors, zlim = c(0, max(max_old, max_new)), main = "Trend Old (2024)")
+```
+
+### `n_trend_raster_comp.tif`
 
 ``` {r n_trend}
-
+# Goal file
 map_rast_file <- file.path(dir_output, 'n_trend_raster_comp.tif')
 
 if(!file.exists(map_rast_file) | reload == TRUE) {
@@ -327,4 +427,19 @@ if(!file.exists(map_rast_file) | reload == TRUE) {
 }
 ```
 
+Compare to last year
+
+```{r}
+n_trend_rast <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_output/n_trend_raster_comp.tif')
+
+n_trend_rast_old <- rast('/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2024/_output/n_trend_raster_comp.tif')
+
+max_new <- minmax(n_trend_rast)[2]
+max_old <- minmax(n_trend_rast_old)[2]
+
+colors <- viridis::viridis(100)
+
+plot(n_trend_rast, col = colors, zlim = c(0, max(max_old, max_new)), main = "N Trend New (2025)")
+plot(n_trend_rast_old, col = colors, zlim = c(0, max(max_old, max_new)), main = "N Trend Old (2024)")
+```
 
