@@ -3,7 +3,7 @@
 NOTE: This is code taken from https://github.com/oharac/spp_risk_dists
 
 Written by: Casey C. O'Hara
-
+Updated by: Carmen Hoyt
 
 Here is an overview of the organization of files and data:
 
@@ -80,7 +80,7 @@ From the list of all available maps, generate a master list of all mapped, asses
 
 Calculate species ranges from rasters.
 
-Calculate species ranges from polygons.
+Calculate species ranges from polygons (to check raster calculations).
 
 Compare.
 
