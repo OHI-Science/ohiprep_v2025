@@ -138,7 +138,7 @@ of forage fish for fed aquaculture. Nature Sustainability 1, 298.
 
 ------------------------------------------------------------------------
 
-## Setup
+# Setup
 
 ```{r setup, warning=FALSE, message=FALSE}
 library(formatR) # for wrapping code when rendered
