@@ -277,6 +277,8 @@ harvest_tonnes_usd_geo_rgn <- harvest_tonnes_usd %>%
   dplyr::filter(year %in% years) %>%
   arrange(rgn_id)
 
+summary(harvest_tonnes_usd_geo_rgn)
+
 
 # calculate georgn values (for each region, year, and product)
 geo_rgn_values_df <- harvest_tonnes_usd_geo_rgn %>%
@@ -387,7 +389,55 @@ readr::write_csv(weighting_usd_values_final,
 ## 5 Year Average Tonnes 
 
 ```{r}
+# Subset ornamentals product
+orn_fill_df <- region_product %>% # has years from 2018:2022 in v2024 (proper 5 year range)
+  filter(product == "ornamentals")
 
+# Use the original FAO commodity data to get ornamentals quantities
+orn_tonnes <- harvest_tonnes_usd %>%
+  # filter to 5 year range defined in the beginning of the first methods chunk
+  dplyr::filter(year %in% years, 
+                product == "ornamentals") %>% 
+  # full join to fill in the rest of the regions with 0
+  full_join(orn_fill_df, by = c("rgn_id", "year", "product")) %>% 
+  # gapfill the NAs to be 0
+  mutate(tonnes = ifelse(is.na(tonnes), 0, tonnes),
+         usd = ifelse(is.na(usd), 0, usd)) %>% 
+  dplyr::select(rgn_id, year, product, tonnes) # %>%
+  # group_by(rgn_id, product) %>%
+  # # calculate 5 year mean of catch
+  # summarise(mean_tonnes = mean(tonnes)) %>% 
+  # ungroup()
+
+view(orn_tonnes)
+write_csv(orn_tonnes, here(current_np_dir, "int", "orn_tonnes.csv"))
+
+
+# Subset seaweed products
+sw_fill_df <- region_product %>%
+  filter(product == "seaweeds")
+
+# Read in the seaweed MAR data for tonnes
+sw_tonnes_raw <- read_csv(here(current_np_dir, "int", "np_seaweeds_tonnes_weighting.csv")) 
+
+sw_tonnes <- sw_tonnes_raw %>%
+  mutate(product = "seaweeds") %>%
+  group_by(rgn_id, year, product) %>% # per region, year, and product,
+  summarise(tonnes = sum(tonnes, na.rm = TRUE)) %>% # sum across all species of seaweed
+  dplyr::filter(year %in% years) %>% # filter to 5 year range 
+  full_join(sw_fill_df, by = c("rgn_id", "year", "product")) %>%
+    mutate(tonnes = ifelse(is.na(tonnes), 0, tonnes)) %>% # gapfill the NAs to be 0
+  dplyr::select(rgn_id, year, product, tonnes) # %>%
+  # ungroup() %>%
+  # group_by(rgn_id, product) %>%
+  # summarise(mean_tonnes = mean(tonnes)) %>% ## calculate 5 year average
+  # ungroup()
+
+view(sw_tonnes)
+write_csv(sw_tonnes, here(current_np_dir, "int", "sw_tonnes.csv"))
+
+
+# Subset fofm products
 fofm_fill_df <- region_product %>% 
   filter(product == "fish_oil")
 
@@ -406,82 +456,57 @@ fofm_tonnes <- read_csv(here(current_np_dir, "int", "raw_mean_catch_FOFM.csv")) 
   # calculate 5 year mean of catch -- 
   # summarise(mean_sum_tonnes = mean(sum_tonnes)) %>% 
   # ungroup() %>%
-  # full_join(rgns_eez) %>%
-  # dplyr::select(rgn_id, product, mean_sum_tonnes) %>%
-  # mutate(product = "fish_oil") %>%
   # mutate(mean_sum_tonnes = ifelse(is.na(mean_sum_tonnes), 0, mean_sum_tonnes)) 
-
 view(fofm_tonnes)
-# Use map dfr to create gapfill missing years in SAUP FOFM
+
+
+
+    # tonnes = ifelse(tonnes == 0, ))
+# EXTRA STEP FOR FOFM: gapfill for the missing years 2020-2023
+# Use map dfr to create gapfill data frame
 new_fofm <- map_dfr(2020:2023, function(y) {
   fofm_tonnes %>%
+    filter(year == 2019) %>% 
     mutate(year = y, gapfilled = 1)
 })
 
 # Add gapfilled flag to the original
 fofm_tonnes_gf <- fofm_tonnes %>%
+  filter(year == 2019) %>% 
   mutate(gapfilled = 0)
 
 # Combine original with new rows
 fofm_tonnes <- bind_rows(fofm_tonnes_gf, new_fofm) 
 
-view(fofm_tonnes)
+write_csv(fofm_tonnes, here(current_np_dir, "int", "fofm_tonnes.csv"))
 
-
-## Read in ornamentals tonnes data
-orn_fill_df <- region_product %>% # has years from 2018:2022 in v2024 (proper 5 year range)
-  filter(product == "ornamentals")
-  
-orn_tonnes <- harvest_tonnes_usd %>%
-  # filter to 5 year range defined in the beginning of the first methods chunk
-  dplyr::filter(year %in% years, 
-                product == "ornamentals") %>% 
-  # full join to fill in the rest of the regions with 0
-  full_join(orn_fill_df, by = c("rgn_id", "year", "product")) %>% 
-  # gapfill the NAs to be 0
-  mutate(tonnes = ifelse(is.na(tonnes), 0, tonnes),
-         usd = ifelse(is.na(usd), 0, usd)) %>% 
-  dplyr::select(rgn_id, year, product, tonnes) # %>%
-  # group_by(rgn_id, product) %>%
-  # # calculate 5 year mean of catch
-  # summarise(mean_tonnes = mean(tonnes)) %>% 
-  # ungroup()
-
-view(orn_tonnes)
-
-## Read in seaweed tonnes data
-sw_fill_df <- region_product %>%
-  filter(product == "seaweeds")
-
-sw_tonnes_raw <- read_csv(here(current_np_dir, "int", "np_seaweeds_tonnes_weighting.csv")) 
-view(sw_tonnes_raw)
-
-sw_tonnes <- sw_tonnes_raw %>%
-  mutate(product = "seaweeds") %>%
-  group_by(rgn_id, year, product) %>% # per region, year, and product,
-  summarise(tonnes = sum(tonnes, na.rm = TRUE)) %>% # sum across all species of seaweed
-  dplyr::filter(year %in% years) %>% # filter to 5 year range 
-  full_join(sw_fill_df, by = c("rgn_id", "year", "product")) %>%
-    mutate(tonnes = ifelse(is.na(tonnes), 0, tonnes)) %>% # gapfill the NAs to be 0
-  dplyr::select(rgn_id, year, product, tonnes) # %>%
-  # ungroup() %>%
-  # group_by(rgn_id, product) %>%
-  # summarise(mean_tonnes = mean(tonnes)) %>% ## calculate 5 year average
-  # ungroup()
-
-view(sw_tonnes)
 ```
 
 
 ```{r}
-fofm_tonnes
-sw_tonnes
-orn_tonnes
+# Read in data from previous code chunk
+orn_tonnes <- read_csv(here(current_np_dir, "int", 'orn_tonnes.csv'))
+sw_tonnes <- read_csv(here(current_np_dir, "int", 'sw_tonnes.csv'))
+fofm_tonnes <- read_csv(here(current_np_dir, "int", 'fofm_tonnes.csv')) %>% 
+  select(!gapfilled)
 
+# Read in final usd/tonnes
 usd_tonnes <- read_csv(here(current_np_dir, "int", "harvest_weighting_values_raw.csv"))
 
 colnames(usd_tonnes)
+colnames(sw_tonnes)
+colnames(orn_tonnes)
+colnames(fofm_tonnes)
 
+view(usd_tonnes)
+view(sw_tonnes)
+view(orn_tonnes)
+view(fofm_tonnes)
+
+# Bind the product dfs together
+
+np_tonnes <- bind_rows(orn_tonnes, sw_tonnes, fofm_tonnes) %>% 
+  view()
 
 ```
 
