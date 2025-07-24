@@ -32,7 +32,7 @@ np_commodity_lookup <- function(data, com2prod) {
       subset(com2prod, product == prod, commodity, drop = T))
     
     if (length(d_missing_l) > 0) {
-      cat(sprintf("\nMISSING! Commodities in the data not found in the lookup: the commodites from product='%s' having keyword='%s' in data file %s:\n    %s\n", 
+      cat(sprintf("\nMISSING in the lookup the following commodites in product='%s' having keyword='%s' in data file %s:\n    %s\n", 
                   prod, keyword, basename(f), paste(d_missing_l, collapse='\n    ')))
     }
   }

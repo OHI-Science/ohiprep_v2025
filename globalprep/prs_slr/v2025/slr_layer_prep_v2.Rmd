@@ -21,33 +21,36 @@ editor_options:
 # Summary
 
 This layer preparation script does the following for newly available SLR data.
-
--   Clips all monthly rasters to the coast using a 3 nautical mile offshore buffer
--   Calculates annual mean sea level anomaly rasters from monthly data
--   Rescales values from 0 to 1 using the reference point
--   Sets to zero all negative values, indicating decreases in mean sea level
--   Resamples raster to \~ 1km^2^ and reproject to Molleweide
+  
+- Clips all monthly rasters to the coast using a 3 nautical mile offshore buffer
+- Calculates annual mean sea level anomaly rasters from monthly data
+- Rescales values from 0 to 1 using the reference point
+- Sets to zero all negative values, indicating decreases in mean sea level
+- Resamples raster to ~ 1km^2^ and reproject to Molleweide
 
 This process is completed entirely within this script. The raw data is downloaded externally and held on a server at NCEAS. Although the raw data is not provided, this script can be used on the data downloaded from Aviso [here](https://www.aviso.altimetry.fr/en/data/products/sea-surface-height-products/global/gridded-sea-level-anomalies-mean-and-climatology.html#c10358). You will need to register with Aviso in order to get a username and password for data access.
 
 # Updates from previous assessment
 
--   One additional year of data, 2022, was added.
--   Added new comparative plots, along with a .csv of the 2024 major pressure score changes between v2024 (2022 data) and v2023 (2021 data).
+- One additional year of data, 2022, was added.
+- Added new comparative plots, along with a .csv of the 2024 major pressure score changes between v2024 (2022 data) and v2023 (2021 data).
 
-------------------------------------------------------------------------
+***
 
 # Data
 
 The source data are monthly mean sea level anomalies, in meters. These anomalies are calculated by subtracting the current absolute sea level for each month from the average sea level for that month calculated from 1993 - 2015.
 
-**Reference**: The altimeter products were produced and distributed by Aviso (<http://www.aviso.altimetry.fr/>), as part of the Ssalto ground processing segment. [AVISO MSLA heights, monthly means](https://www.aviso.altimetry.fr/en/data/products/sea-surface-height-products/global/gridded-sea-level-anomalies-mean-and-climatology.html#c10358)\
-**Downloaded**: June 14, 2024\
-**Description**: Monthly mean sea level anomaly (meters above mean sea level) (msla_h) **Native data resolution**: 0.25 degree grid cells\
-**Time range**: January 1993 - December 2022 **Format**: NetCDF\
-**Citation information** The altimeter products were produced and distributed by Aviso (<http://www.aviso.altimetry.fr/>), as part of the Ssalto ground processing segment. [AVISO MSLA heights, monthly means](https://www.aviso.altimetry.fr/en/data/products/sea-surface-height-products/global/gridded-sea-level-anomalies-mean-and-climatology.html#c10358)
+**Reference**: The altimeter products were produced and distributed by Aviso (http://www.aviso.altimetry.fr/), as part of the Ssalto ground processing segment. [AVISO MSLA heights, monthly means](https://www.aviso.altimetry.fr/en/data/products/sea-surface-height-products/global/gridded-sea-level-anomalies-mean-and-climatology.html#c10358)  
+**Downloaded**: June 14, 2024  
+**Description**: Monthly mean sea level anomaly (meters above mean sea level) (msla_h)
+**Native data resolution**: 0.25 degree grid cells   
+**Time range**: January 1993 - December 2022
+**Format**: NetCDF   
+**Citation information**  The altimeter products were produced and distributed by Aviso (http://www.aviso.altimetry.fr/), as part of the Ssalto ground processing segment. [AVISO MSLA heights, monthly means](https://www.aviso.altimetry.fr/en/data/products/sea-surface-height-products/global/gridded-sea-level-anomalies-mean-and-climatology.html#c10358)
 
-------------------------------------------------------------------------
+ 
+***
 
 # Methods
 
@@ -81,6 +84,7 @@ library(terra)
 library(tictoc)
 library(plotly)
 library(ggplot2)
+library(curl)
 setGDALconfig("GDAL_PAM_ENABLED", "FALSE")
 
 # 2024 update: switched to use here() for reproducibility (throughout the document when working from/with products saved in this repository)
@@ -111,26 +115,25 @@ plot(ocean)
 
 These chunks can be used to download the data from AVISO. You will need an AVISO account to do this, it might take a few days for the account to be active, or use the account of a prior fellow.
 
-If you want to view the files to see if a full previous year of data is available to download, go here: <https://tds.aviso.altimetry.fr/thredds/catalog/dataset-duacs-climatology-global/delayed-time/monthly_mean/msla_h/catalog.html>
+If you want to view the files to see if a full previous year of data is available to download, go here: https://tds.aviso.altimetry.fr/thredds/catalog/dataset-duacs-climatology-global/delayed-time/monthly_mean/msla_h/catalog.html
 
-or here: [ftp://yourlogin\@ftp-access.aviso.altimetry.fr/climatology](ftp://yourlogin@ftp-access.aviso.altimetry.fr/climatology){.uri}
+or here: ftp://yourlogin@ftp-access.aviso.altimetry.fr/climatology
 
 And you will be prompted to either open up a FTP application, like Cyberduck, or to just plug in your username and password.
 
-If you don't want to go through the trouble of running the download process in R, you can do it manually by just click-and-drag between two cyberduck-2 browsers.
+If you don't want to go through the trouble of running the download process in R, you can do it manually by just click-and-drag between two cyberduck-2 browsers. 
 
 ```{r login_info, eval=FALSE}
 # This layer lags by 2 years, since we need a full year of data. 
 
 ## need AVISO username and password, define the following line of code in console (as is), then when prompted, enter the username and password string, don't save the login information here in the script
 ## if either password or username contain the @ symbol, replace with '%40' (percent-encoding for reserved characters)
-userpasswd <- readline("madisonenda%40gmail.com:EIpGkc")
+userpasswd <- readline("Type AVISO username and password, separated by colon no space:")
 ```
 
 Define file paths for data download:
-
 ```{r download_data, eval=FALSE}
-year <- 2024 # data year to download; lags by 2 years. 2023 goes to May as of now, and we need a full year's worth of data for v2024
+year <- 2022 # data year to download; lags by 2 years. 2023 goes to May as of now, and we need a full year's worth of data for v2024
 months <- str_pad(1:12, 2, pad = "0") #if they upload the rest just change the numbers here to reflect rest of months
 
 ## download data from FTP and collect each month/year in raster stack
@@ -140,7 +143,6 @@ ub <- sprintf("ftp://%s@%s", userpasswd, substr(url, 7, 87)) # here, substr extr
 ```
 
 Pull monthly files from the source into the data directory:
-
 ```{r, eval=FALSE}
 # within dir_anx_aviso, create new folder for this scenario year of data so the following line runs, name the folder d20?? (scen_year)
 folder_name_anx_aviso <- paste0("d", scen_year)
@@ -160,8 +162,7 @@ for (mo in months){
 closeAllConnections()
 ```
 
-Unzip the files you've just downloaded, if the data is prior to 2020:
-
+Unzip the files you've just downloaded, if the data is prior to 2020:  
 ```{r, eval = FALSE}
 # zipfiles <- list.files(file.path(dir_anx_aviso, paste0("d", scen_year)),
 #                        full.names = TRUE, pattern = "*nc.gz")
@@ -170,8 +171,22 @@ Unzip the files you've just downloaded, if the data is prior to 2020:
 #   R.utils::gunzip(zipfile, remove = TRUE, skip = TRUE)
 # }
 ```
-
 2020 data is stored in the source as unzipped .nc files, so the above code chunk was not necessary. This is likely the case for all years (past and future) since the url data source was updated.
+
+
+# Retrieve data
+
+```{r}
+# Define the new username and password. NOTE: The username and password of the last year will not be saved here, but replace it with your own each version year
+h <- new_handle()
+handle_setopt(h, username = "madisonenda@gmail.com", password = "")
+
+for (mo in months) {
+  u <- sprintf("%s/dt_global_allsat_msla_h_y2022_m%s.nc", ub, mo)
+  u_filename <- file.path(dir_anx_aviso, paste0("d", scen_year), substr(u, 121, 157))
+  curl_download(u, destfile = u_filename, handle = h)
+}
+```
 
 # Data Prep
 
@@ -182,7 +197,9 @@ All NetCDF files for each month are rasterized.
 ```{r clip, eval=FALSE}
 ## d2016/msla_monthly_mean has data for 1993-2015
 ## also include list.files for d2017 through the data folder for current scenario year
-nc_files <- c(list.files(file.path(dir_anx_aviso, "d2024"),
+nc_files <- c(list.files(file.path(dir_anx_aviso, "d2025"),
+                       full.names = TRUE, pattern = ".nc"),
+              list.files(file.path(dir_anx_aviso, "d2024"),
                        full.names = TRUE, pattern = ".nc"),
               list.files(file.path(dir_anx_aviso, "d2023"),
                        full.names = TRUE, pattern = ".nc"),
@@ -201,7 +218,6 @@ nc_files <- c(list.files(file.path(dir_anx_aviso, "d2024"),
 ```
 
 The raw monthly data looks like this:
-
 ```{r test_plot_raw, eval=FALSE}
 # removed axes = F argument
 plot(terra::rast(nc_files[3]), col = cols, 
@@ -210,8 +226,8 @@ plot(terra::rast(nc_files[3]), col = cols,
 
 The following code is used to:
 
-1.  Rasterize each monthly NetCDF file
-2.  Rotate each raster so that the Atlantic Ocean is centered in the raster
+1. Rasterize each monthly NetCDF file
+2. Rotate each raster so that the Atlantic Ocean is centered in the raster
 
 The output is saved in the folder `int/msla_monthly`
 
@@ -253,11 +269,12 @@ for (i in seq_along(nc_files)){
 
 toc()
 # v2024 - 410.867 sec elapsed
+# v2025 - 172.369 sec elapsed 
 ```
 
 ## Annual mean sea level anomalies
 
-Annual mean sea level anomaly rasters are calculated from the monthly data.
+Annual mean sea level anomaly rasters are calculated from the monthly data. 
 
 ```{r msla_monthly_to_annual, eval = F}
 ## create 'msla_annual_mean' folder in 'int'
@@ -282,6 +299,7 @@ foreach(yr = c(1993:maxyr)) %dopar% {
 }
 toc()
 # v2024 - 10.983 sec elapsed
+# v2025 -15.55 sec elapsed
 ```
 
 ## Changing the projection and masking
@@ -314,7 +332,8 @@ annual_means <- list.files(file.path(dir_prs_slr, "int/msla_annual_mean"), full 
 
 # v2022 - tried to use for each with terra: Error in x@ptr$nrow() : external pointer is not valid
 
-# v2024: running annual_means in the console shows that we have msla annual mean tifs from 1993 through 2022 
+# v2024: running annual_means in the console shows that we have msla annual mean tifs from 1993 through 2022
+# v2025: same result as v2024
 ```
 
 ```{r, eval=FALSE}
@@ -339,6 +358,7 @@ for(i in seq_along(annual_means)) {
 }
 toc()
 # v2024 - 2099.743 sec elapsed
+# v2025 - 2000.074 sec elapsed
 ```
 
 ```{r, eval=FALSE}
@@ -444,9 +464,9 @@ ref <- read_csv(here(dir_refpt, "v2024", "reference_points_pressures.csv")) %>%
 #        filter(pressure == "Sea Level Rise") %>%
 #        .$ref_point %>%
 #         as.numeric()
-```
+```     
 
-## Rescale
+## Rescale 
 
 Each annual raster is rescaled from 0 to 1 using the reference point. If a value is greater than the reference point, it is automatically given a value of 1.
 
@@ -681,6 +701,7 @@ plot(raster_diff)
 table(values(raster_diff))
 ```
 
+
 # Gapfill csv
 
 There was no gapfilling for these data. Created gapfill files with values of 0.
@@ -692,3 +713,5 @@ slr_gf <- read.csv(here("globalprep", "prs_slr", "v2024", "output", "slr.csv"))%
 
 write.csv(slr_gf, here("globalprep", "prs_slr", "v2024", "output", "slr_gf.csv"), row.names=FALSE)
 ```
+
+

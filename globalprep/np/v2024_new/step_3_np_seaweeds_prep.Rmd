@@ -441,7 +441,7 @@ Below is the old code for reading in and wrangling Seafood Watch data. Unfortuna
 
 These data describe the sustainability country/species combinations. In cases where these data were not available for a specific county/species, we just used the seafood watch seaweed sustainability score (6.72) (this was all of the seaweed species listed).
 
-```{r sw-scores, eval = FALSE}
+```{r sw-scores}
 # ---- Load in Seafood Watch sustainability scores data from Mazu ----
 # Go look at the file path, the file name changes from year to year
 sw_sus <- read.csv(file.path(dir_M, paste0('git-annex/globalprep/_raw_data/seafood_watch_mar_sustainability/d',
@@ -460,7 +460,7 @@ head(sw_sus)
 
 Rename columns to match with MAR data and fill in species column
 
-```{r tidy_sw-sus, eval = FALSE}
+```{r tidy_sw-sus}
 # ---- Rename columns ----
 sw_sus <- sw_sus %>%
   rename(report_title = 'ReportTitle',
@@ -486,7 +486,7 @@ sw_sus$species <- ifelse(!is.na(sw_sus$fao_species), sw_sus$fao_species, sw_sus$
 
 ### Keep NA countries
 
-```{r keep-na-countries_sw-sus, eval = FALSE}
+```{r keep-na-countries_sw-sus}
 # These need to be re-added later (get cut when associated with region ids)
 sw_sus_no_rgn <- filter(sw_sus, is.na(country)|country == "Worldwide")
   # 118 entries with no country
@@ -498,7 +498,7 @@ sw_sus_no_rgn <- filter(sw_sus, is.na(country)|country == "Worldwide")
 
 ### Convert country names to OHI region IDs.
 
-```{r sw-sus_convert-region, eval = FALSE}
+```{r sw-sus_convert-region}
 # ---- Update country names ----
 # Change country names to match OHI region names
 sw_sus_multiple <- sw_sus %>% 
@@ -530,7 +530,7 @@ sw_sus_rgn <- bind_rows(sw_sus_rgn, sw_sus_no_rgn) %>%
 
 **Join the seaweed sustainability data with the mariculture data**
 
-```{r sw-fao-joining, eval = FALSE}
+```{r sw-fao-joining}
 maric <- readr::read_csv(here(current_np_dir, "int", "np_seaweeds_tonnes_weighting.csv"))
 
 maric <- maric %>%
@@ -575,8 +575,6 @@ mar_sw_sus_join <- maric %>%
 
 
 
-
-
 ```{r}
 # "calculate" (define) sustainability score for all seaweed 
 mar_sw_sus_calc <- mar_sw_sus_join %>%
@@ -590,7 +588,7 @@ Since some regions have multiple sustainability scores for the same species due 
 
 Average sustainability scores within regions with more than score (due to more than one aquaculture method):
 
-```{r sw-sus-avg, eval = FALSE}
+```{r sw-sus-avg}
 # aggregation: average sustainability per species per region
 mar_sw_sus_avg <- mar_sw_sus_calc %>% 
   dplyr::group_by(rgn_id, species) %>% 
@@ -600,7 +598,7 @@ mar_sw_sus_avg <- mar_sw_sus_calc %>%
 
 Get rid of duplicates for region/species/year:
 
-```{r sw-sus-dup, eval = FALSE}
+```{r sw-sus-dup}
 
 mar_sw_sus <- mar_sw_sus_avg %>% 
   # keep only unique rows from the data frame
@@ -612,7 +610,7 @@ mar_sw_sus <- mar_sw_sus_avg %>%
 
 **Now look at a summary after appending all the Seafood Watch data**
 
-```{r sw-sus-summary, eval = FALSE}
+```{r sw-sus-summary}
 summary(mar_sw_sus)
 # No NAs in sust! (sust_coeff) 
 ```
@@ -785,7 +783,7 @@ summary(seaweed_relative_sust_tonnes)
 
 
 # save full df to int folder
-readr::write_csv(orn_relative_sust_tonnes, here(current_np_dir, "int", "np_relative_sust_tonnes_seaweeds_full.csv"))
+readr::write_csv(seaweed_relative_sust_tonnes, here(current_np_dir, "int", "np_relative_sust_tonnes_seaweeds_full.csv"))
 
 
 # save selected columns to output folder

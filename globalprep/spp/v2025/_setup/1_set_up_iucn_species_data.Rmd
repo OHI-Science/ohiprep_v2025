@@ -1,0 +1,811 @@
+---
+title: 'Set up IUCN marine species data'
+author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
+output: 
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_depth: 3
+    toc_float: yes
+    number_sections: true
+    theme: cerulean
+    highlight: haddock
+    includes: 
+      in_header: '../../../../workflow/templates/ohi_hdr.html'
+  pdf_document:
+    toc: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
+```
+
+``` {r setup, echo = TRUE, message = FALSE, warning = FALSE}
+
+knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.path = 'Figs/',
+                      echo = TRUE, message = FALSE, warning = FALSE, eval = FALSE)
+```
+
+```{r}
+#install.packages("rredlist")
+library(rredlist)
+library(dplyr)
+library(tidyr)
+library(tidyverse)
+library(here)
+
+#source('https://raw.githubusercontent.com/oharac/src/master/R/common.R')
+source(here('workflow/R/common.R'))
+
+goal     <- 'spp'
+scenario <- 'v2025'
+
+dir_goal <- here('globalprep', goal, scenario)
+
+### goal specific folders and info
+dir_anx  <- file.path(dir_M, 'git-annex/globalprep')
+dir_setup   <- file.path(dir_goal, '_setup')
+dir_goal_anx <- file.path(dir_anx, goal, scenario, 'spp_risk_dists')
+
+source(file.path(dir_setup, 'common_fxns.R'))
+
+```
+
+# Summary
+
+Get IUCN current risk assessments and historical assessments over time, for all IUCN marine species.  This method is not reliant on any information from AquaMaps.
+
+# Data Sources
+
+## IUCN Red List
+
+To access the API v4, you will need to sign up for a key on the [IUCN website](https://api.iucnredlist.org/). This key can be added to the local .renviron on your machine and retrieved using the code below.
+
+```{r set up API}
+# Save API key
+rl_use_iucn()
+api_version <- rl_version()
+
+# or
+rl_use_api_key("YOUR_API_KEY_HERE")
+```
+
+# Methods
+
+Query IUCN species data from the API. These queries can take many hours, so start this process early and save the outputs to the `_data/iucn` folder to avoid having to re-run the queries. The following data was extracted:
+
+- Marine Species List
+- Subpopulation Assessments
+- Taxa Info
+- Habitat Info
+- Comprehensive Assessments
+
+This .Rmd sets up the following .csv files, saved in the `_data` folder:
+
+For *global* assessments:
+- `iucn_risk_current_2025-1.csv`
+- `iucn_risk_timeseries_2025-1.csv`
+- `spp_marine_from_api_2025-1.csv`
+
+For *regional* assessments:
+- `iucn_risk_rgn_current_2025-1.csv`
+- `iucn_risk_ts_rgn_2025-1.csv`
+
+For trends:
+- `iucn_trend_by_spp_2025-1.csv`
+
+## Query IUCN data from the API
+
+### Marine Species List
+
+First, we need to establish the list of marine species we are interested in. We can do this by using `rl_systems()` to search for all species coded for the marine system ("2").
+
+```{r marine_species_list}
+# Save IUCN systems
+iucn_systems <- rl_systems()$systems
+
+# Unlist description column
+iucn_systems$description <- iucn_systems$description$en
+
+# Search for species by marine system
+marine_system <- rl_systems("2")$assessments 
+
+# Clean up data frame
+marine_system <- marine_system %>%
+  rename(iucn_sid = sis_taxon_id, 
+         sciname = taxon_scientific_name,
+         category = red_list_category_code,
+         year = year_published)
+
+# Save list of unique taxon IDs
+marine_species_list <- unique(marine_system$iucn_sid)
+
+# Save for time
+write_csv(marine_system, file.path(dir_goal, sprintf('_data/iucn/marine_system_%s.csv', api_version)))
+
+# Load for time
+#marine_system <- read_csv(file.path(dir_goal, sprintf('_data/iucn/marine_system_2025-1.csv')), show_col_types = FALSE)
+
+# 2025: 19,944 species
+```
+
+### Subpopulation Assessments
+
+Using `rl_sis()`, the code-chunk below pulls all the subpopulation assessments for the iucn_sids in the marine_species_list.
+
+*This can take up to 2.68 hours.*
+
+```{r}
+# Download subpopulation information
+# Takes about 2.684539 hours
+sub_pops <- data.frame()
+
+start_time <- Sys.time()
+
+for (i in marine_species_list) {
+  tryCatch({
+    
+    # Query taxon info for each species
+    sis_data <- rl_sis(id = i)$taxon
+    
+    # Skip if subpopulation_taxa is not a data.frame (and therefore doesn't exist)
+    if (!is.data.frame(sis_data$subpopulation_taxa)) {
+      next
+    }
+    
+    # Pull ID #
+    iucn_sid <- sis_data$sis_id
+    
+    # Pull subpopulation assessment information
+    sub_pop_spp <- sis_data$subpopulation_taxa %>%
+      mutate(
+        iucn_sid = iucn_sid,
+        sciname = paste(genus_name, species_name)
+      ) %>%
+      select(iucn_sid, sciname, everything())
+    
+    # Add to data frame
+    sub_pops <- bind_rows(sub_pops, sub_pop_spp)
+
+    # Pause between queries
+    Sys.sleep(1)
+    
+    # Error will list species without subpopulations
+  }, error = function(e) {
+    message(paste("Error for species ID:", i, "-", e$message))
+  })
+}
+
+end_time <- Sys.time()
+end_time - start_time  
+
+# Save supbob info
+write_csv(sub_pops, file.path(dir_goal, sprintf('_data/iucn/sub_pop_%s.csv', api_version)))
+
+#sub_pops <- read_csv(file.path(dir_goal, sprintf('_data/iucn/sub_pop_%s.csv', api_version)), show_col_types = FALSE)
+```
+
+### Taxa Info
+
+Using `rl_sis()`, the code-chunk below pulls all the taxa information (Kingdom, Phylum, Class, Order, and Family) for the iucn_sids in the marine_species_list. The resulting file is used in `3_join_iucn_spatial_data.Rmd`. 
+
+*This can take up to 18.36 hours.*
+
+```{r}
+# Download taxa info
+# Takes about 18.36089 hours
+taxa <- data.frame()
+
+start_time <- Sys.time()
+
+## load taxa for marine spp
+for (i in marine_species_list) {
+  
+  iucn_sid <- rl_sis(i)$taxon$sis_id
+  kingdom <- rl_sis(i)$taxon$kingdom_name
+  phylum <- rl_sis(i)$taxon$phylum_name
+  class <- rl_sis(i)$taxon$class_name
+  order <- rl_sis(i)$taxon$order_name
+  family <- rl_sis(i)$taxon$family_name
+  
+  taxa_info_spp <- data.frame(iucn_sid, kingdom, phylum, class, order, family)
+  
+  taxa <- bind_rows(taxa, taxa_info_spp)
+  
+  Sys.sleep(2)
+}
+
+end_time <- Sys.time()
+end_time - start_time  
+
+# Write csv
+write_csv(taxa, file.path(dir_goal, sprintf('_data/iucn/taxa_%s.csv', api_version)))
+
+# Make comprehensive species list with species and subpops?
+spp_from_api <- marine_system %>%
+  mutate(subpopulation_name = NA) %>%
+  select(iucn_sid, sciname, subpopulation_name) %>%
+  bind_rows(sub_pops %>% select(iucn_sid = sis_id, sciname, subpopulation_name)) %>%
+  distinct()
+
+# Save for use in .rmd 3?
+#write_csv(spp_from_api, file.path(dir_goal_anx, 'iucn', sprintf('spp_info_from_api_%s.csv', api_version)))
+```
+
+### Habitat info
+
+Using the `rl_habitats()` function, get the species list for species coded with the following marine habitat codes: 9-12, plus 15.11, 15.12, 15.13.  Note category 13 is Marine Coastal/Supratidal, but includes many species whose "marine" dependence is only incidental. We include seacliffs and offshore islands (13.1) from category 13. If these species do not show up in category 12 (marine intertidal) then they are assumed to not actually depend on marine habitats.
+
+The list can be found here (make sure to compare the webpage to the final df, to make sure it matches up): https://www.iucnredlist.org/resources/habitat-classification-scheme
+
+```{r}
+# Get a list of habitats
+iucn_habitats <- rl_habitats()$habitats
+
+# Unlist the description column
+iucn_habitats$description <- iucn_habitats$description$en
+
+# Select desired marine habitats (noted above)
+marine_habitats <- iucn_habitats %>%
+  filter(str_detect(code, "^(9_|10_|11_|12_)") | 
+           code %in% c("13_1", "15_11", "15_12", "15_13"))
+
+# marine_habitats <- iucn_habitats %>%
+#   dplyr::filter(str_detect(tolower(description), "marine|reef|lagoon") &
+#                   !str_detect(tolower(description), "supratidal")) # change to include 13_1
+
+# Initiate empty list
+marine_habitats_spp <- list()
+
+# Pull species for each marine habitat
+for (i in marine_habitats$code) { 
+  
+  # Save habitat name
+  habitat_name <- marine_habitats$description[marine_habitats$code == i]
+  
+  # Get list of assesments
+  habitat_assessments <- rl_habitats(code = i)$assessments
+  
+  # Append to list
+  marine_habitats_spp[[habitat_name]] <- dplyr::as_tibble(habitat_assessments)
+}
+
+# Combine individual habitat species lists into one master list
+marine_species_habitats <- bind_rows(marine_habitats_spp) %>%
+  rename(iucn_sid = sis_taxon_id, 
+         sciname = taxon_scientific_name,
+         category = red_list_category_code,
+         year = year_published) 
+
+# Save for time
+write_csv(marine_species_habitats, file.path(dir_goal, sprintf('_data/iucn/marine_spp_habitats_%s.csv', api_version)))
+
+# Load for time
+#marine_species_habitats <- read_csv(file.path(dir_goal, ssprintf('_data/iucn/marine_spp_habitats_%s.csv', api_version)), show_col_types = FALSE)
+```
+
+### Comprehensive Assessments
+
+Not all maps are for species that are included in comprehensively assessed taxonomic groups. Get info on comprehensive assessment status for species from the API. The resulting file is used in `3_join_iucn_spatial_data.Rmd`.
+
+#### Data: `iucn_comp_assessed_2025-1.csv`
+
+*This can take up to 40 minutes.*
+
+``` {r get comp assess status}
+# Goal file
+comp_file <- file.path(dir_data, 
+                       sprintf('iucn_comp_assessed_%s.csv', api_version))
+
+# Download comp assessment information
+# Takes about 40 minutes
+iucn_assessment_groups <- rl_comp_groups()$comprehensive_group %>%
+  filter(comp == TRUE)
+
+start_time <- Sys.time()
+
+assessment_groups <- list()
+
+for (i in iucn_assessment_groups$name) {
+  
+  group <- i
+  
+  assessment_groups_spp <- rl_comp_groups(name = i)$assessments
+  
+  # Append to list
+  assessment_groups[[group]] <- dplyr::as_tibble(assessment_groups_spp)
+}
+
+end_time <- Sys.time()
+end_time - start_time 
+
+# Combine individual habitat species lists into one master list
+comp_spp_full <- bind_rows(assessment_groups) %>%
+  rename(iucn_sid = sis_taxon_id, 
+         sciname = taxon_scientific_name,
+         category = red_list_category_code,
+         year = year_published) 
+
+# Save for time
+write_csv(comp_spp_full, file.path(dir_goal, '_data', 'iucn',
+                                         sprintf('comp_spp_%s.csv', api_version)))
+
+# Read in for time
+#comp_spp_full <- read_csv(file.path(dir_goal, '_data', 'iucn',
+                                         sprintf('comp_spp_%s.csv', api_version)), show_col_types = FALSE)
+
+# Save distinct species
+comp_spp <- comp_spp_full %>%
+  select(iucn_sid, sciname) %>%
+  distinct()
+
+# Write csv
+write_csv(comp_spp, comp_file)
+```
+
+## *Global* Assessments
+
+### Data: `iucn_risk_current_2025-1.csv`
+
+Save the IUCN categories for all current *global* assessments of marine species.
+
+```{r}
+# Reclassify old codes to current codes
+cat_lookup <- read_csv(file.path(dir_setup, 'raw', 'risk_code_lookup.csv'), show_col_types = FALSE)
+
+# Create data frame for layer
+marine_species_risk <- marine_system %>%
+  # Get current assessments
+  filter(latest == TRUE) %>%
+  # Unnest the scopes variable
+  unnest(scopes, names_sep = "_") %>%
+  # Filter for global scopes
+  filter (scopes_code == "1") %>%
+  # Reclassify codes
+  left_join(cat_lookup, by = c("category" = "code"), relationship = "many-to-many") %>%
+  rename(old_cat = category,
+         cat = code_current) %>%
+  # Add version column
+  mutate(iucn_version = "2025-1") %>%
+  select(iucn_sid, sciname, year, old_cat, cat, cat_score, iucn_version) #criteria left out for now
+
+# Check that no IDs are repeated (should return 0 rows)
+marine_species_risk %>%
+  group_by(iucn_sid) %>%
+  filter(n > 1)
+
+# Write csv
+write_csv(marine_species_risk, file.path(dir_goal, '_data', 
+                                         sprintf('iucn_risk_current_%s.csv', api_version)))
+```
+
+#### Data: `spp_marine_from_api_2025-1.csv`
+
+Some species show up over multiple habitats (and thus depth ratings), so I chose to assign the deepest rating.
+
+| habitat type   | habitat code   | depth classification  |
+| -------------- | -------------- | --------------------- |
+| deep benthic   | 10_3, 10_4     | "deep oceanic"        |
+| deep oceanic   | 10_ , 11_      | "200 m +"             |
+| neritic        | 9_, 15_        | "< 200 m"             |
+| intertidal     | 12_, 13_       | "<20 m"               |
+
+```{r}
+# Filter for species identified in marine system search, global code
+marine_species_habitats_global <- marine_species_habitats %>%
+  # Filter for latest assessments
+  filter(latest == TRUE) %>%
+  # Unnest scopes variable
+  unnest(scopes, names_sep = "_") %>%
+  # Filter for global
+  filter(scopes_code == "1") %>%
+  # Filter for marine species
+  filter(iucn_sid %in% marine_species_list) %>%
+  separate(code, c('cat', 'subcat1', 'subcat2'),
+           remove = FALSE, convert = TRUE, fill = "right") %>%
+  arrange(cat, subcat1, subcat2) %>%
+  # Assign descriptions to each cat
+  mutate(
+    max_depth = factor(case_when(
+      cat == 10 & subcat1 %in% 3:4         ~ "deep oceanic",
+      cat %in% c(10, 11)                   ~ "200 m +",
+      cat %in% c(9, 15)                    ~ "< 200 m",
+      cat %in% c(12, 13)                   ~ "< 20 m",
+      TRUE                                 ~ "unknown"),
+    # To make it easier to pick the deepest (min) depth rating
+    levels = c("deep oceanic", "200 m +", "< 200 m", "< 20 m", "unknown"))) %>%
+  left_join(iucn_habitats, by = "code")
+
+# Create data frame for layer
+habs <- marine_species_risk %>%
+  # Add depth descriptions
+  left_join(marine_species_habitats_global, by = c("iucn_sid", "sciname")) %>%
+  select(iucn_sid, code, max_depth) %>%
+  group_by(iucn_sid) %>%
+  reframe(
+    habs = paste(unique(code), collapse = ", "),
+    # Pick the deepest rating (the lowest (min) level)
+    max_depth = as.character(max_depth[which.min(as.integer(max_depth))])) %>%
+  ungroup()
+
+# Write csv
+write_csv(habs, file.path(dir_goal, '_data',
+                          sprintf('spp_marine_from_api_%s.csv', api_version)))
+```
+
+Check out the results for 2025, assess differences from 2024.
+
+```{r}
+# nrow(habs) # 19,899
+# nrow(marine_species_risk) # 19,529
+# 
+# # Check species that are in habs but not in global
+# check <- anti_join(habs, marine_species_risk, by = "iucn_sid")
+# 
+# ## Interesting: iucn_sid 155168 appears in marine_species_list and marine_species (obtained from rl_habitats(), but does not appear in global_marine and thus marine_species_risk despite having a scope of 1 (global) listed in marine_species)
+# 
+# habs_2024 <- read_csv(file.path(dir_goal, sprintf('_data/spp_marine_from_api_%s.csv', "2024-1")), show_col_types = FALSE)
+# nrow(habs_2024) # 18,590
+```
+
+### Data: `iucn_risk_timeseries_2025-1.csv`
+
+Save the IUCN categories for all available *global* assessments over time of marine species.
+
+```{r}
+# Create data frame for layer
+marine_species_risk_timeseries <- marine_system %>%
+  # Unnest the scopes variable
+  unnest(scopes, names_sep = "_") %>%
+  # Filter for global scopes
+  filter (scopes_code == "1") %>%
+  # Reclassify codes
+  left_join(cat_lookup, by = c("category" = "code"), relationship = "many-to-many") %>%
+  rename(old_cat = category,
+         cat = code_current) %>%
+  # Add version column
+  mutate(iucn_version = "2025-1") %>%
+  select(iucn_sid, year, cat_ts = cat, cat_ts_score = cat_score, iucn_version) #criteria left out for now
+# filter for more than one assessment?
+  #group_by(iucn_sid) %>%
+  #filter(n() >= 2) %>%
+  #ungroup()
+
+# Write csv
+write_csv(marine_species_risk_timeseries, file.path(dir_goal, '_data', 
+                                         sprintf('iucn_risk_timeseries_%s.csv', api_version)))
+```
+
+Check out the results for 2025, assess differences from 2024.
+
+```{r}
+# # Compare to last year
+# nrow(marine_species_risk) # 19,357
+# 
+# # Import last year (change year as needed)
+# marine_species_risk_2024 <- read_csv(file.path(dir_goal, sprintf('_data/iucn_risk_current_%s.csv', "2024-1")), show_col_types = FALSE)
+# 
+# nrow(marine_species_risk_2024) # 18,599
+# 
+# length(setdiff(unique(marine_species_risk$iucn_sid), unique(marine_species_risk_2024$iucn_sid))) # 2,648 new species
+# 
+# # Look at species added in new OHI assessment
+# new_species <- marine_species_risk %>%
+#   anti_join(marine_species_risk_2024, by = "iucn_sid") %>%
+#   # Check to see if new species are all from same habitat? published year?
+#   left_join(marine_species, by = c("iucn_sid", "year", "sciname"))
+```
+
+## *Regional* Assessments
+
+Using the `rl_scopes()` function, get the species list for species coded with the following regions: Europe (2), Mediterranean (4), Western Africa (8), S. Africa FW (9), Pan-Africa (10), Central Africa (16), Northeastern Africa (17), Eastern Africa (18), Northern Africa (21), Gulf of Mexico (45433062), Caribbean (45433063), Persian Gulf (45433064), Arabian Sea (100765562). 
+
+Essentially all *but* Global (1).
+
+```{r}
+# Get list of scopes (regions)
+iucn_scopes <- rl_scopes()$scopes
+
+# Unlist description
+iucn_scopes$description <- iucn_scopes$description$en
+
+# Remove "Global" (see above)
+scopes <- iucn_scopes %>%
+  filter(!description == "Global")
+
+# Initiate empty list
+scopes_assessments <- list()
+
+# Pull species for each region
+for (i in scopes$code) { 
+  
+  # Save region name
+  scope_name <- scopes$description[scopes$code == i]
+  
+  # Get list of assesments
+  scope_assessments <- rl_scopes(code = i)$assessments 
+  
+  # Append to list
+  scopes_assessments[[scope_name]] <- dplyr::as_tibble(scope_assessments)
+}
+
+# Combine assessments
+rgn_assess <- bind_rows(scopes_assessments) %>%
+  rename(iucn_sid = sis_taxon_id, 
+                sciname = taxon_scientific_name, 
+                category = red_list_category_code,
+                year = year_published)
+
+# Save for time
+write_csv(rgn_assess, file.path(dir_goal, sprintf('_data/iucn/rgn_spp_%s.csv', api_version)))
+
+# Load for time
+#rgn_assess <- read_csv(file.path(dir_goal, sprintf('_data/iucn/rgn_spp_%s.csv', api_version)), show_col_types = FALSE)
+```
+
+### Data: `iucn_risk_rgn_current_2025-1.csv`
+
+Save the IUCN categories for all available *regional* assessments for marine species.
+
+```{r}
+# Create data frame for layer
+rgn_assess_marine <- rgn_assess %>%
+  # Get current assesments
+  filter(latest == TRUE)  %>%
+  # filter for marine species
+  filter(iucn_sid %in% marine_species_list) %>%
+  # Add region descriptions
+  left_join(scopes, by = "code") %>%
+  mutate(iucn_rgn = str_replace_all(tolower(description), " ", '_')) %>%
+  # Reclassify old codes
+  left_join(cat_lookup, by = c("category" = "code"), relationship = "many-to-many") %>%
+  select(iucn_sid, 
+         sciname,
+         old_cat = category,
+         iucn_rgn, 
+         cat_score, 
+         cat_current = code_current) 
+
+# Write csv
+write_csv(rgn_assess_marine, file.path(dir_goal, sprintf('_data/iucn_risk_rgn_current_%s.csv', api_version)))
+```
+
+Check out the results for 2025, assess differences from 2024.
+
+```{r}
+# # Check
+# nrow(rgn_assess_marine) #5032
+# unique(rgn_assess_marine$iucn_rgn)
+# length(unique(rgn_assess_marine$iucn_rgn)) #13
+# 
+# rgn_assess_marine_2024 <- read_csv(file.path(dir_goal, sprintf('_data/iucn_risk_rgn_current_%s.csv', "2024-1")), show_col_types = FALSE)
+# nrow(rgn_assess_marine_2024) #2181
+# unique(rgn_assess_marine_2024$iucn_rgn)
+# length(unique(rgn_assess_marine_2024$iucn_rgn))
+# 
+# print(paste0("The following regions are in v2025 and not v2024: ", setdiff(unique(rgn_assess_marine$iucn_rgn), unique(rgn_assess_marine_2024$iucn_rgn))))
+```
+
+Identify which species have different regional IUCN categories from global categories. (KEEP?)
+
+```{r}
+# Species with different regional categories from global categories
+cat_mismatch <- marine_species_risk %>%
+  rename(global_cat = cat) %>%
+  left_join(rgn_assess_marine, by = c("iucn_sid", "sciname")) %>%
+  select(iucn_sid, sciname, year, global_cat, global_cat_score = cat_score.x, iucn_rgn, rgn_cat = cat_current, rgn_cat_score = cat_score.y) %>%
+  mutate(match = ifelse(global_cat == rgn_cat, TRUE, FALSE)) %>%
+  filter(match == FALSE)
+
+print(paste0("There are ", length(unique(cat_mismatch$iucn_sid)), " species whose regional IUCN category differs from global category.")) #557 species
+```
+
+### Data: `iucn_risk_ts_rgn_2025-1.csv`
+
+Save the IUCN categories for all available *regional* assessments over time for all marine species.
+
+```{r}
+# Create data frame for layer
+rgn_risk_ts <- rgn_assess %>%
+  # Filter for species in the marine species list
+  filter(iucn_sid %in% marine_species_list) %>%
+  rename(old_cat = category) %>%
+  # Add new updated cat codes
+  left_join(cat_lookup, by = c('old_cat' = 'code')) %>%
+  distinct() %>%
+  filter(!is.na(cat_score) & !is.na(year)) %>%
+  # Add region descriptions
+  left_join(scopes, by = "code") %>%
+  arrange(iucn_sid, year) %>%
+  select(iucn_sid, 
+         year, 
+         rgn_cat_ts = code_current, 
+         rgn_cat_ts_score = cat_score, 
+         iucn_rgn = description) %>%
+  mutate(iucn_version = api_version) %>%
+  group_by(iucn_sid, iucn_rgn) %>%
+  filter(n() >= 2) %>%
+  ungroup() %>%
+  mutate(iucn_rgn = str_replace_all(tolower(iucn_rgn), " ", "_"))
+
+# Write csv
+write_csv(rgn_risk_ts, file.path(dir_goal, '_data',
+                                 sprintf('iucn_risk_ts_rgn_%s.csv', api_version)))
+```
+
+```{r}
+# # Check
+# nrow(rgn_risk_ts) #1,330
+# unique(rgn_risk_ts$iucn_rgn)
+# length(unique(rgn_risk_ts$iucn_rgn)) #10
+# 
+# rgn_risk_ts_2024 <- read_csv(file.path(dir_goal, sprintf('_data/iucn_risk_ts_rgn_%s.csv', "2024-1")), show_col_types = FALSE)
+# nrow(rgn_risk_ts_2024) #388
+# unique(rgn_risk_ts_2024$iucn_rgn)
+# length(unique(rgn_risk_ts_2024$iucn_rgn)) #2
+```
+
+## *Trends* assessments
+
+### Int: `int/trend_calcs/iucn_risk_ts_and_trends_2025-1.csv`
+
+```{r}
+# Get pop trends
+iucn_pop_trends <- rl_pop_trends()$population_trends
+
+# Unlist the description column
+iucn_pop_trends$description <- iucn_pop_trends$description$en
+
+# Initiate empty list
+pop_trends_spp <- list()
+
+# Pull species for each marine habitat
+for (i in iucn_pop_trends$code) { 
+  
+  # Save habitat name
+  trend_name <- iucn_pop_trends$description[iucn_pop_trends$code == i]
+  
+  # Get list of assesments
+  pop_assessments <- rl_pop_trends(code = i)$assessments
+  
+  # Append to list
+  pop_trends_spp[[trend_name]] <- as_tibble(pop_assessments)
+}
+
+# Combine individual habitat species lists into one master list
+pop_trends <- bind_rows(pop_trends_spp) %>%
+  rename(iucn_sid = sis_taxon_id, 
+         sciname = taxon_scientific_name,
+         category = red_list_category_code,
+         year = year_published)
+
+# Save for time
+write_csv(pop_trends, file.path(dir_goal, sprintf('_data/iucn/pop_trends_%s.csv', api_version)))
+
+# Load for time
+#pop_trends <- read_csv(file.path(dir_goal, sprintf('_data/iucn/pop_trends_%s.csv', api_version)), show_col_types = FALSE)
+
+pop_trends_marine <- pop_trends %>% 
+  # Filter for marine species
+  filter(iucn_sid %in% marine_species_list) %>%
+  unnest(scopes, names_sep = "_") %>%
+  # Filter for latest assessment
+  filter(latest == TRUE) %>%
+  left_join(iucn_pop_trends, by = "code")
+
+# Clean up region description
+pop_trends_marine$iucn_rgn <- tolower(str_replace(pop_trends_marine$scopes_description$en, " ", "_"))
+
+# iucn_risk_ts_and_trends_2025-1.csv
+iucn_risk_ts_and_trends <- pop_trends_marine %>%
+  mutate(iucn_version = "2025-1") %>%
+  select(iucn_sid, pop_trend = description, iucn_version, iucn_rgn)
+
+# Save csv
+write_csv(iucn_risk_ts_and_trends, file.path(dir_setup, 'int/trend_calcs',
+                         sprintf('iucn_risk_ts_and_trends_%s.csv', api_version)))
+
+# Make one file for both global and regional assessments
+all_ts <- marine_species_risk_timeseries %>%
+  mutate(iucn_rgn = "global") %>%
+  bind_rows(rgn_risk_ts %>%
+              rename(cat_ts = rgn_cat_ts,
+                     cat_ts_score = rgn_cat_ts_score))
+```
+
+### Data: `iucn_trend_by_spp_2025-1.csv` (KEEP?)
+
+Regress species with multiple recent historic assessments against population trends
+
+From data gathered in the execution of SPP v2022, collect species data on past assessments (category) and population trend.  Combine and save.  Note that trend has to be assumed to be related to the most recent assessment only - not included in historical assessment API call.  We will need both a text description of trend (i.e. stable, increasing, or decreasing) and multiple assessments.
+
+For this analysis we will focus only on assessments performed since 1991, the year of v1.0 Red List.
+
+Since 1991:
+
+``` {r}
+cat_trend_91 <- iucn_risk_ts_and_trends %>%
+  left_join(all_ts, by = c('iucn_sid', 'iucn_version', 'iucn_rgn')) %>%
+  distinct() %>%
+  filter(year >= 1991 & !is.na(cat_ts_score) & !is.na(pop_trend)) %>%
+  group_by(iucn_sid, iucn_rgn) %>%
+  mutate(n_assess = n()) %>%
+  ungroup() %>%
+  mutate(year = as.numeric(year))
+
+lm_91 <- cat_trend_91 %>%
+  filter(n_assess >= 2) %>%
+  group_by(iucn_sid, iucn_rgn) %>%
+  do(calc_trend = lm(cat_ts_score ~ year, data = .)[['coefficients']][['year']]) %>%
+  mutate(calc_trend = round(calc_trend, 5))
+
+trend_91 <- cat_trend_91 %>%
+  filter(n_assess > 1) %>%
+  group_by(iucn_sid, iucn_rgn) %>%
+  summarize(years  = paste(year, collapse = ', '),
+            cat_ts = paste(cat_ts, collapse = ', '),
+            scores = paste(cat_ts_score, collapse = ', '),
+            pop_trend_desc = first(pop_trend)) %>%
+  ungroup() %>%
+  left_join(lm_91, by = c('iucn_sid', 'iucn_rgn'))
+
+write_csv(trend_91, file.path(dir_setup, 'int/trend_calcs/trend_lm_vs_pop_91.csv'))
+
+DT::datatable(trend_91)
+
+trend_91 <- trend_91 %>%
+  filter(!is.na(pop_trend_desc)) %>%
+  mutate(pop_trend_desc = tolower(pop_trend_desc)) %>%
+  mutate(pop_trend = case_when(pop_trend_desc == 'decreasing' ~ -1,
+                               pop_trend_desc == 'increasing' ~  1,
+                               pop_trend_desc == 'stable'     ~  0,
+                               TRUE                           ~ NA_real_))
+  ### NOTE: here we're coding the trend in *population* not risk.
+
+trend_regr_91 <- lm(calc_trend ~ pop_trend, data = trend_91)
+
+# trend_coeffs_91 <- summary(trend_regr_91)
+# 
+# trend_plot_91 <- ggplot(trend_91, aes(x = pop_trend, y = calc_trend, group = pop_trend)) +
+#   geom_violin(color = 'grey60', fill = 'grey80') +
+#   geom_jitter(color = 'blue', alpha = .4) +
+#   geom_abline(intercept = trend_regr_91$coefficients[['(Intercept)']],
+#               slope = trend_regr_91$coefficients[['pop_trend']],
+#               color = 'darkred') +
+#   scale_x_continuous(breaks = c(-1, 0, 1), labels = c('decreasing', 'stable', 'increasing')) +
+#   coord_cartesian(ylim = c(-.07, .07)) +
+#   labs(x = 'text population trend',
+#        y = 'calculated trend from category time series',
+#        title = 'Pop trend vs change in assessed risk since 1991') +
+#   annotate('text', x = 0.1, y = -.06, 
+#            label = paste0('R^2: ',          round(trend_coeffs_91$r.squared, 5), 
+#                           '\nslope = ',     round(trend_coeffs_91$coefficients[2, 1], 5),
+#                           '\np (slope) = ', signif(trend_coeffs_91$coefficients[2, 4], 5)),
+#            hjust = 0)
+# 
+# print(trend_plot_91)
+
+slope <- trend_coeffs_91$coefficients[2, 1] %>% round(5)
+trend_score_lookup <- c('decreasing' = -slope, 'stable' = 0, 'increasing' = slope)
+
+trend_91 <- trend_91 %>%
+  dplyr::select(iucn_sid, iucn_rgn, calc_trend) %>%
+  distinct()
+
+# iucn_trend_by_spp_2025-1.csv
+trend_df <- iucn_risk_ts_and_trends %>%
+  left_join(all_ts, by = c('iucn_sid', 'iucn_rgn', 'iucn_version')) %>%
+  distinct() %>%
+  left_join(trend_91, by = c('iucn_sid', 'iucn_rgn')) %>%
+  mutate(trend_score  = ifelse(is.na(calc_trend), trend_score_lookup[pop_trend], calc_trend),
+         trend_source = case_when(!is.na(calc_trend)  ~ 'lm', 
+                                  !is.na(trend_score) ~ 'regr',
+                                  TRUE ~ NA_character_)) %>%
+  select(iucn_sid, iucn_rgn, pop_trend, trend_score, trend_source) %>%
+  distinct()
+
+# Write csv
+write_csv(trend_df, file.path(dir_data, sprintf('iucn_trend_by_spp_%s.csv', api_version)))
+```

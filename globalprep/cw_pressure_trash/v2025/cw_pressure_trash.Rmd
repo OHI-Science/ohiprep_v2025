@@ -355,13 +355,21 @@ ggplotly(plot)
 # Save the data as a csv
 
 ```{r}
+# Filter and rename the microplastics_eez data
+microplastics_save <- microplastics_eez %>%
+  rename(pressure_score = score) %>%
+  select(rgn_id, year, pressure_score)
+```
+
+
+```{r}
 # Create file name for csv
-file_name <- paste0("prs_trash_", current_year, ".csv")
+file_name <- paste0("trash_pressure.csv")
 
 # Create the full path
 output_path <- file.path("output", file_name)
 
 # Save the data frame
-write.csv(microplastics_eez, file = output_path, row.names = FALSE)
+write.csv(microplastics_save, file = output_path, row.names = FALSE)
 ```
 
