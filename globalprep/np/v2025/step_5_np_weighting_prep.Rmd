@@ -271,14 +271,17 @@ region_product <- rgns_eez %>%
   cross_join(years_df) 
 
 # Calculate $/tonne for each OHI region and product and gapfill based on UN geopolitical region ----
+nrow(harvest_tonnes_usd) # 10860
+view(harvest_tonnes_usd)
+
 harvest_tonnes_usd_geo_rgn <- harvest_tonnes_usd %>%
   full_join(region_product, by = join_by("rgn_id", "product", "year")) %>%
   add_georegion_id() %>%
   dplyr::filter(year %in% years) %>%
   arrange(rgn_id)
 
-summary(harvest_tonnes_usd_geo_rgn)
-
+view(harvest_tonnes_usd_geo_rgn)
+nrow(harvest_tonnes_usd_geo_rgn) # 3300
 
 # calculate georgn values (for each region, year, and product)
 geo_rgn_values_df <- harvest_tonnes_usd_geo_rgn %>%
@@ -292,6 +295,7 @@ geo_rgn_values_df <- harvest_tonnes_usd_geo_rgn %>%
   select(georgn_id, year, product, georgn_usd_per_tonne)
 
 view(geo_rgn_values_df)
+nrow(geo_rgn_values_df) # 3300
 
 # calculate global values (for each product across all regions for each year)
 global_values_df <- harvest_tonnes_usd_geo_rgn %>%
@@ -303,36 +307,46 @@ global_values_df <- harvest_tonnes_usd_geo_rgn %>%
   select(product, year, global_usd_per_tonne)
 
 view(global_values_df)
+nrow(global_values_df) # 3300
 
+view(harvest_tonnes_usd_geo_rgn)
+view(geo_rgn_values_df)
+view(global_values_df)
 view(harvest_tonnes_usd_values_gf)
+
+colnames(harvest_tonnes_usd_geo_rgn)
+colnames(geo_rgn_values_df)
+colnames(global_values_df)
+colnames(harvest_tonnes_usd_values_gf)
+
 # Create final gapfilled data frame
 harvest_tonnes_usd_values_gf <- harvest_tonnes_usd_geo_rgn %>%
   
   # Join the georegion and global dfs
-  left_join(geo_rgn_values_df, by = join_by("georgn_id", "product", "year")) %>%
-  left_join(global_values_df, by = join_by("product", "year")) %>%
+  left_join(geo_rgn_values_df, by = join_by("georgn_id", "product", "year")) # %>%
+  # left_join(global_values_df, by = join_by("product", "year")) # %>%
 
-  # Calculate the final usd/tonne
-  mutate(usd_per_tonne = usd/tonnes) %>%
-
-   # Assign Inf (n/0) and NaNs (0/0) as NA
-  mutate(usd_per_tonne = ifelse(usd_per_tonne == "Inf", NA,
-                                ifelse(usd_per_tonne == "NaN", NA, usd_per_tonne))) %>%
-
-  # Gapfill so that when there is no regional value, take the geo regional value,
-  mutate(usd_per_tonne = ifelse(is.na(usd_per_tonne) & georgn_usd_per_tonne != "NaN",
-                                georgn_usd_per_tonne,
-                                ifelse(is.na(usd_per_tonne) & georgn_usd_per_tonne == "NaN",
-                                       global_usd_per_tonne, usd_per_tonne))) %>%
-  # and if there is no geo regional value, take the global value; else, keep original values.
-
-  # Note if gapfilling occurred in the previous step
-  mutate(values_gf_description = ifelse(is.na(usd_per_tonne) & georgn_usd_per_tonne != "NaN",
-                                        "geo_region",
-                                        ifelse(is.na(usd_per_tonne) & georgn_usd_per_tonne == "NaN",
-                                               "global", "none"))) %>%
-  mutate(values_gf = ifelse(is.na(usd_per_tonne) & georgn_usd_per_tonne != "NaN", 1,
-                            ifelse(is.na(usd_per_tonne) & georgn_usd_per_tonne == "NaN", 1, 0)))
+  # # Calculate the final usd/tonne
+  # mutate(usd_per_tonne = usd/tonnes) %>%
+  # 
+  #  # Assign Inf (n/0) and NaNs (0/0) as NA
+  # mutate(usd_per_tonne = ifelse(usd_per_tonne == "Inf", NA,
+  #                               ifelse(usd_per_tonne == "NaN", NA, usd_per_tonne))) %>%
+  # 
+  # # Gapfill so that when there is no regional value, take the geo regional value,
+  # mutate(usd_per_tonne = ifelse(is.na(usd_per_tonne) & georgn_usd_per_tonne != "NaN",
+  #                               georgn_usd_per_tonne,
+  #                               ifelse(is.na(usd_per_tonne) & georgn_usd_per_tonne == "NaN",
+  #                                      global_usd_per_tonne, usd_per_tonne))) %>%
+  # # and if there is no geo regional value, take the global value; else, keep original values.
+  # 
+  # # Note if gapfilling occurred in the previous step
+  # mutate(values_gf_description = ifelse(is.na(usd_per_tonne) & georgn_usd_per_tonne != "NaN",
+  #                                       "geo_region",
+  #                                       ifelse(is.na(usd_per_tonne) & georgn_usd_per_tonne == "NaN",
+  #                                              "global", "none"))) %>%
+  # mutate(values_gf = ifelse(is.na(usd_per_tonne) & georgn_usd_per_tonne != "NaN", 1,
+  #                           ifelse(is.na(usd_per_tonne) & georgn_usd_per_tonne == "NaN", 1, 0)))
 # now we have a dataset with gap-filled average values and calculated yearly values... 
 # we will save this and then calculate the 5 year averages
 
@@ -344,7 +358,10 @@ readr::write_csv(harvest_tonnes_usd_values_gf,
 
 # v2025: Save a version without the 5 year averages
 weighting_usd_values_raw <- harvest_tonnes_usd_values_gf %>%
-  dplyr::select(rgn_id, product, year, usd_per_tonne) 
+  dplyr::select(rgn_id, product, year, usd_per_tonne) %>% 
+  distinct(rgn_id, product, year, usd_per_tonne)
+nrow(weighting_usd_values_raw)
+view(weighting_usd_values_raw)
 
 readr::write_csv(weighting_usd_values_raw,
                  here(current_np_dir, "int", "harvest_weighting_values_raw.csv"))
@@ -363,30 +380,7 @@ readr::write_csv(weighting_usd_values_final,
 ```
 
 
-```{r}
-# Combine value data with commodity data
-# Ornamentals
-# orn_val <- orn %>% 
-#   left_join(harvest_tonnes_usd, by = join_by(rgn_id, rgn_name, product, year, tonnes)) %>% 
-#   view()
-# # Tonnes were identical here so we can join by them
-# # setdiff(orn_val$tonnes.x, orn_val$tonnes.y)
-# 
-# # Seaweed
-# seaweed_val <- seaweed %>% 
-#   left_join(harvest_tonnes_usd, by = join_by(rgn_id, product, year)) %>% 
-#   view()
-# # Tonnes are NOT identical because we're using FAO data
-# setdiff(seaweed_val$tonnes.x, seaweed_val$tonnes.y)
-# 
-# # FOFM data
-# fofm_val <- fofm %>% 
-#   left_join(harvest_tonnes_usd, by = join_by(rgn_id, product, year)) %>% 
-#   view()
-
-```
-
-## 5 Year Average Tonnes 
+## Individual commodities data prep
 
 ```{r}
 # Subset ornamentals product
@@ -504,8 +498,13 @@ view(orn_tonnes)
 view(fofm_tonnes)
 
 # Bind the product dfs together
+np_tonnes <- bind_rows(orn_tonnes, sw_tonnes, fofm_tonnes) 
+nrow(np_tonnes)
 
-np_tonnes <- bind_rows(orn_tonnes, sw_tonnes, fofm_tonnes) %>% 
+nrow(usd_tonnes)
+# Join the usd/tonne data to the full NP dataframe
+np_value <- np_tonnes %>% 
+  left_join(usd_tonnes, by = join_by(year, product, rgn_id)) %>% 
   view()
 
 ```
