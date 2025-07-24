@@ -173,6 +173,9 @@ rgns_eez[duplicated(rgns_eez$rgn_name_standard),] # some duplicates, the Kiribat
 rgns_eez <- rgns_eez %>%
   mutate(rgn_name_standard = ifelse(rgn_id==34, "Bassas da India", rgn_name_standard))
 
+# Run UNgeorgn to get the ungeorgn data
+UNgeorgn()
+
 # join to UN region designations for gapfilling (these match the UN georegions, with the exception of the Southern Islands, 
 # which all are uninhabited)
 rgns_eez <- left_join(rgns_eez, UNgeorgn, by= "rgn_id") %>%
@@ -240,7 +243,6 @@ low_pop <- low_pop()
 
 rgns_eez_gf3 <- rgns_eez_gf2 %>%
   mutate(score = ifelse(rgn_id %in% low_pop$rgn_id, NA, score))
-
 ```
 
 
@@ -256,6 +258,7 @@ final_data <- rgns_eez_gf3 %>%
   dplyr::select(rgn_id, year, value=score) %>% 
   readr::write_csv(here::here("globalprep", "ao", version_year, "output", "sdg_14_b_1_ao.csv"))
 ```
+
 
 
 ##### I did not do anything after this!!!
