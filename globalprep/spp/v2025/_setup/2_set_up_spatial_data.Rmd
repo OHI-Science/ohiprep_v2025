@@ -1,5 +1,5 @@
 ---
-title: 'Set up IUCN marine species ranges by regional assessment'
+title: 'Set up IUCN spatial data'
 author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
 output: 
   html_document:
@@ -23,7 +23,6 @@ editor_options:
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.path = 'Figs/',
                       echo = TRUE, message = FALSE, warning = FALSE)
 
-
 library(dplyr)
 library(raster)
 library(here)
@@ -36,9 +35,6 @@ library(terra)
 
 source(here('workflow/R/common.R'))
 
-### provenance tracking
-#library(provRmd); prov_setup()
-
 goal     <- 'spp'
 scenario <- 'v2025'
 dir_goal <- here('globalprep', goal, scenario)
@@ -50,7 +46,6 @@ dir_goal_anx <- file.path(dir_anx, goal, scenario, 'spp_risk_dists')
 dir_raw_data_anx <- file.path(dir_anx, '_raw_data')
 
 source(file.path(dir_setup, 'common_fxns.R'))
-
 ```
 
 # Summary
@@ -63,10 +58,16 @@ To define spatial areas more accurately, create rasters of WDPA and ocean area a
 
 # Data Sources
 
-## Geographic scope of regional assessments
+## MEOW
+**Reference**: Spalding, Mark D. et al. 2007. “Marine Ecoregions of the World: A Bioregionalization of Coastal and Shelf Areas.” BioScience 57(7): 573–83. [URL](https://www.worldwildlife.org/publications/marine-ecoregions-of-the-world-a-bioregionalization-of-coastal-and-shelf-areas)
 
-[MEOW Regions](https://www.worldwildlife.org/publications/marine-ecoregions-of-the-world-a-bioregionalization-of-coastal-and-shelf-areas)
-[LME Regions](https://upload.wikimedia.org/wikipedia/commons/4/4d/Global_map_of_large_marine_ecosystems.jpg)
+**Downloaded**: May 08, 2019
+
+**Description**:  Shapefile of Marine Ecoregions
+
+**Format**:  Shapefile
+
+**File location**: `Mazu:git-annex/globalprep/_raw_data/wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/`
 
 ## WDPA
 **Reference**: IUCN and UNEP-WCMC (2025), The World Database on Protected Areas (WDPA) [On-line], June 2025. Cambridge, UK: UNEP-WCMC. Available at: www.protectedplanet.net.
@@ -81,19 +82,7 @@ To define spatial areas more accurately, create rasters of WDPA and ocean area a
 
 **File location**: `Mazu:git-annex/globalprep/_raw_data/wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/`
 
-## Marine Ecoregions of the World (MEOW)
-
-**Reference**: Spalding, Mark D. et al. 2007. “Marine Ecoregions of the World: A Bioregionalization of Coastal and Shelf Areas.” BioScience 57(7): 573–83. [URL](https://www.worldwildlife.org/publications/marine-ecoregions-of-the-world-a-bioregionalization-of-coastal-and-shelf-areas)
-
-**Downloaded**: May 08, 2019
-
-**Description**:  Shapefile of Marine Ecoregions
-
-**Format**:  Shapefile
-
-**File location**: `Mazu:git-annex/globalprep/_raw_data/wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/`
-
-# Methods: 
+# Methods
 
 ## Update geographic scope of regional assessments
 
@@ -222,48 +211,7 @@ if(setdiff(unique(rgn_to_meow_df$iucn_rgn), unique(rgn_risk_ts$iucn_rgn)) != "gl
 }
 ```
 
-### Spatial: `iucn_rgn_to_lme.csv`
-
-Where an LME is assigned to multiple regions, use a prioritization then averaging method:
-
-* Prioritize by the region comprising the smallest number of LMEs; e.g. Mediterranean has 1 LME, North Africa has 3, Europe has 8; they all overlap in LME 26.  So for the score for LME 26 for a species assessed in all three regions, keep the score for the Mediterranean.
-* If after prioritizing, multiple regions still overlap in an LME, take the average score of the overlapping regional assessments for that LME.
-
-``` {r code LMEs}
-# View regions
-unique(rgn_risk_ts$iucn_rgn)
-
-# Assign LMEs to regions
-rgn_to_lme <- c('europe'              = '20,21,22,23,24,25,26,59',
-                'gulf_of_mexico'      = '5',
-                'pan-africa'          = '26,27,28,29,30,31,32,33',
-                'mediterranean'       = '26,62',
-                'arabian_sea'         = '32',
-                'caribbean'           = '12',
-                'western_africa'      = '28', 
-                'central_africa'      = '28,29',
-                'persian_gulf'        = '32',
-                'global'              = paste0(1:66, collapse = ','))
-
-# Create data frame for layer
-rgn_to_lme_df <- data.frame(iucn_rgn = names(rgn_to_lme),
-                            lme_id = rgn_to_lme) %>%
-  mutate(lme_id = str_split(lme_id, ',')) %>%
-  unnest(lme_id) %>%
-  group_by(iucn_rgn) %>%
-  mutate(lme_id = as.integer(lme_id),
-         priority = n()) %>%
-  arrange(priority)
-
-# Write csv
-write_csv(rgn_to_lme_df, file.path(dir_goal, sprintf('_spatial/iucn_rgn_to_lme.csv')))
-
-if(setdiff(unique(rgn_to_lme_df$iucn_rgn), unique(rgn_risk_ts$iucn_rgn)) != "global") {
-  warning("Extra regions not accounted for in LME assignments.")
-}
-```
- 
-## WDPA Marine Protected Area Rasters
+## WDPA
 
 - Classification 
 - Year of protection
@@ -746,212 +694,4 @@ system.time({
   })
 plot(all_prot_raster, main = 'All protection (any category)')
 ```
-
-# Archive
-
-Set up analysis rasters (EEZs, MEOWs, and bathymetry) at Gall-Peters 10 km^2 resolution.
-
-- EEZs will include all EEZs as well as FAO regions and CCAMLR regions, based on the global OHI EEZ map. 
-- MEOWs will include all MEOW provinces, though only some are appropriate for IUCN regional assessments (see `2a_set_up_regional_codes.Rmd`). 
-- Bathymetry will include regions for 200m+, 20-200m, and <20m.  
-- All will be clipped to the same ocean presence using the area raster.
-
-*Note:* This likely won't be updated (since the data isn't updated on a yearly basis, but you should still check)
-        
-### Spatial: `eez_rast.tif`
-
-Using the OHI global EEZ shapefile, we will include all EEZs by OHI region code, as well as FAO regions and Antarctica, using unique identifiers.  This will allow for separation by high seas vs. EEZ, or different takes on IUCN regional assessments using FAO or EEZ identifiers.
-
-EEZ is rasterized for both land and sea, and then clipped to cells with non-NA values in the ocean_area raster. This ensures presence of more coastal cells with fractional ocean area coverage.
-
-``` {r set up EEZ raster}
-
-eez_rast_file <- file.path(dir_goal, '_spatial', 'eez_rast.tif')
-eez_shp_file  <- file.path(dir_M, 'git-annex/globalprep/spatial/v2017/regions_2017_update.shp')
-
-area_rast <- raster(file.path(dir_goal, '_spatial', 'ocean_area_rast.tif'))
-values(area_rast)[values(area_rast) <= .005] <- NA
-
-#plot(area_rast)
-
-eez_sf <- read_sf(eez_shp_file)
-
-eez_df <- eez_sf %>%
-  as.data.frame() %>%
-  dplyr::select(-geometry)
-
-eez_ids <- eez_df %>%
-  dplyr::select(rgn_id, rgn_name, rgn_ant_id) %>%
-  distinct()
-### rgn_ant_id is same as rgn_id except for Antarctica.  We don't really
-### need to chunk out Antarctica at this point so just use rgn_id.
-### Filter out all land polygons and project to Gall-Peters
-### EDIT: don't filter out land; leave it in, then later mask using the 
-### area raster.  This should ensure more partial-ocean coastal cells are included.
-
-eez_sf_reclass <- eez_sf %>%
-  clip_to_globe() %>%
-  ### in common_fxn.R: ensures no coordinates outside +-180, +-90
-  dplyr::select(rgn_id, geometry) %>%
-  st_transform(gp_proj4)
-
-#plot(eez_sf_reclass)
-
-rast_base <- area_rast
-
-eez_rast <- fasterize::fasterize(eez_sf_reclass, rast_base, 
-                                 field = 'rgn_id', fun = 'min')
-
-eez_rast_ocean <- eez_rast %>%
-  mask(area_rast)
-
-# Write raster
-writeRaster(eez_rast_ocean, eez_rast_file, overwrite = TRUE)
-
-# Plot
-plot(eez_rast_ocean, main = 'EEZ raster 10 km^2 Gall-Peters projection')
-
-# Check against 2024
-# eez_rast_ocean_24 <- rast('globalprep/spp/v2024/_spatial/eez_rast.tif')
-# plot(eez_rast_ocean_24)
-
-```
-
-### Spatial: `meow_rast.tif`
-
-Using the MEOW shapefile, we will include all the shapes at the province level and then mask out land using the area raster (for consistency).
-
-``` {r set up MEOW raster}
-meow_rast_file <- file.path(dir_goal, '_spatial', 'meow_rast.tif')
-meow_shp_file  <- file.path(dir_raw_data_anx, 'meow/meow_ecos.shp')
-
-# meow_sf <- read_sf(meow_shp_file) %>%
-#   clip_to_globe()
-### in common_fxn.R: ensures no coordinates outside +-180, +-90
-
-# Read in shpfile and clip 
-meow_sf <- read_sf(meow_shp_file) %>%
-  clip_to_globe_sp() ## clip_to_globe() was failing, so I looked into common_fxn.R and saw clip_to_glob_sp() and that worked much better
-
-meow_sf_reclass <- meow_sf %>%
-  dplyr::select(ECO_CODE_X, geometry) %>%
-  st_transform(gp_proj4)
-
-#plot(meow_sf_reclass)
-
-rast_base <- area_rast
-
-meow_rast <- fasterize::fasterize(meow_sf_reclass, rast_base, 
-                                  field = 'ECO_CODE_X', fun = 'min')
-
-meow_rast <- meow_rast %>%
-  mask(area_rast)
-
-plot(meow_rast)
-    
-  ### check whether there are shoreline gaps between MEOW maps and EEZ maps
-   #x <- eez_rast
-   #x[!is.na(values(meow_rast))] <- NA
-   #plot(x)
-  ### MEOWs seem to go inland to prevent shoreline gaps! yay
-  
-writeRaster(meow_rast, meow_rast_file, overwrite = TRUE)
-
-plot(meow_rast, main = 'MEOW raster 10 km^2 Gall-Peters')
-
-# Check against 2024 raster
-meow_rast_24 <- rast('globalprep/spp/v2024/_spatial/meow_rast.tif')
-plot(meow_rast_24)
-
-```
-
-### Spatial: bathymetry
-
-- `bathy_rast.tif`
-- `bathy_rast_neritic.tif`
-- `bathy_rast_shallow.tif`
-
-Using [General Bathymetric Chart of the Oceans (GEBCO) bathymetry raster](https://www.gebco.net/data_and_products/historical_data_sets/#gebco_2014), identify min depth of ocean cells.  For neritic and coastal cells, leaving as min depth allows for changing depth thresholds if desired.  We will not clip based on anything below 200 m, so can classify these more coarsely.
-
-*Note:* 1 arcmin and 30 arcsec are available; 30 arcsec is more recent but one arcmin should be sufficient for our purposes. Resample to 6 arc-minute (0.10°) using min depth in each cell.
-
-Bathymetry is masked to the ocean area raster.
-
-``` {r set up bathymetry raster}
-
-bathy_rast_file <- file.path(dir_goal, '_spatial', 'bathy_rast.tif')
-
-gebco_rast_file <- file.path(dir_raw_data_anx, 'gebco', 'd2017', 'GRIDONE_1D.nc')
-gebco_rast_raw  <- raster(gebco_rast_file)
-
-  ### The GEBCO raster is elevation, so depth is neg... for min depth, 
-  ### aggregate by max (and vice versa)
-bathy_rast_min <- gebco_rast_raw %>%
-  raster::aggregate(fact = 6, fun = max)
-
-bathy_rast_min <- -1 * bathy_rast_min ### depth is positive
-
-rast_base <- area_rast
-
-crs(bathy_rast_min)
-ext(bathy_rast_min)
-
-# The project step kept returning errors, so chatGPT recommended cutting the polar latitudes ("CEA projections often can't handle polar regions")
-bathy_rast_min <- crop(bathy_rast_min, extent(-180, 180, -85, 85))
-
-# bathy_rast_raw <- bathy_rast_min %>%
-#   projectRaster(rast_base, 
-#                 progress = 'text',
-#                 method = 'ngb')
-
-bathy_rast_raw <- terra::project(
-  rast(bathy_rast_min), 
-  rast(rast_base), 
-  method = "near")
-
-### reclassify:
-### compress cells above zero to sea level;
-### compress cells below 200 m to rough depth clips
-bathy_rast <- bathy_rast_raw
-values(bathy_rast)[values(bathy_rast_raw) < 0] <- 0
-values(bathy_rast)[values(bathy_rast_raw) > 200] <- 1000
-values(bathy_rast)[values(bathy_rast_raw) > 1000] <- 2000
-values(bathy_rast)[values(bathy_rast_raw) > 2000] <- 3000
-values(bathy_rast)[values(bathy_rast_raw) > 3000] <- 4000
-values(bathy_rast)[values(bathy_rast_raw) > 4000] <- 5000
-values(bathy_rast)[values(bathy_rast_raw) > 5000] <- 6000
-values(bathy_rast)[values(bathy_rast_raw) > 6000] <- 7000
-values(bathy_rast)[values(bathy_rast_raw) > 7000] <- 8000
-
-bathy_rast <- bathy_rast %>%
-  terra::mask(rast(area_rast))
-
-plot(bathy_rast)
-
-bathy_rast_24 <- rast('globalprep/spp/v2024/_spatial/bathy_rast.tif')
-plot(bathy_rast_24)
-
-# Min depth bathy raster 10 km^2 Gall-Peters
-writeRaster(bathy_rast, bathy_rast_file, overwrite = TRUE)
-
-rast_neritic <- rast_shallow <- bathy_rast
-values(rast_neritic) <- ifelse(values(bathy_rast) <= 200, 1, NA)
-values(rast_shallow) <- ifelse(values(bathy_rast) <=  60, 1, NA)
-
-plot(rast_neritic)
-plot(rast_shallow)
-
-rast_neritic_24 <- rast('globalprep/spp/v2024/_spatial/bathy_rast_neritic.tif')
-plot(rast_neritic_24)
-
-rast_shallow_24 <- rast('globalprep/spp/v2024/_spatial/bathy_rast_shallow.tif')
-plot(rast_shallow_24)
-
-writeRaster(rast_neritic, file.path(dir_goal, '_spatial', 'bathy_rast_neritic.tif'),
-            overwrite = TRUE)
-writeRaster(rast_shallow, file.path(dir_goal, '_spatial', 'bathy_rast_shallow.tif'),
-            overwrite = TRUE)
-
-```
-
 
