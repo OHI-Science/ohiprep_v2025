@@ -13,6 +13,7 @@ output:
   pdf_document:
     toc: true
 editor_options: 
+  chunk_output_type: console
 #  chunk_output_type: inline
   markdown: 
     wrap: 72
@@ -259,7 +260,7 @@ harvest_tonnes_usd_values_gf <- harvest_tonnes_usd_geo_rgn %>%
 
 # Save this data frame to int
 readr::write_csv(harvest_tonnes_usd_values_gf,
-                 here(current_np_dir, "int", "harvest_tonnes_usd_weighting_gf.csv"))
+                 here(current_np_dir, "int", "old_harvest_tonnes_usd_weighting_gf.csv"))
 
 # Now calculate 5 year averages (and assign year = 2020 <- legacy comment, no longer what the code does)
 weighting_usd_values_final <- harvest_tonnes_usd_values_gf %>%
@@ -270,7 +271,7 @@ weighting_usd_values_final <- harvest_tonnes_usd_values_gf %>%
 
 #save this df
 readr::write_csv(weighting_usd_values_final,
-                 here(current_np_dir, "int", "harvest_weighting_values.csv"))
+                 here(current_np_dir, "int", "old_harvest_weighting_values.csv"))
 
 ```
 
@@ -363,7 +364,7 @@ assign year = (YYYY, e.g., 2022) so that this can be read into OHI-global (YYYY
 corresponds to the year that these weights were calculated).
 
 ```{r}
-harvest_weighting_values <- read_csv(here(current_np_dir, "int", "harvest_weighting_values.csv")) %>%
+harvest_weighting_values <- read_csv(here(current_np_dir, "int", "old_harvest_weighting_values.csv")) %>%
   dplyr::select(rgn_id, product, value_per_tonne)
 
 prod_weights <- orn_tonnes %>%
@@ -377,13 +378,16 @@ prod_weights <- orn_tonnes %>%
   ungroup() %>%
   # calculate weight: proportion that each product contributes to that region's NP
   mutate(weight = usd_product/total_usd) %>%
-  dplyr::select(-3, -4, -5, -6) %>%
+  # dplyr::select(-3, -4, -5, -6) %>%
   mutate(year = scen_year_number) %>%
-  dplyr::select(rgn_id, year, product, weight) %>%
+  # dplyr::select(rgn_id, year, product, weight) %>%
   filter(rgn_id != 213)
 
+prod_weights %>% 
+  filter(rgn_id == 80) %>% 
+  view()
 #write.csv(prod_weights, file.path(prep, "output/np_product_weights.csv"), row.names = FALSE)
-readr::write_csv(prod_weights, here(current_np_dir, "output", "np_product_weights.csv"))
+readr::write_csv(prod_weights, here(current_np_dir, "output", "old_np_product_weights.csv"))
 
 ```
 
@@ -733,12 +737,13 @@ test_comp
 # Read in packages necessary for visualization (in case you cleared your environment)
 library(ggplot2)
 library(plotly)
+library(plotly)
 library(dplyr)
 library(tidyr)
 library(here)
 
 # Set scenario year, reproducible file paths
-scen_year_number <- 2024 # update this!!
+scen_year_number <- 2025 # update this!!
 scenario_year <- as.character(scen_year_number)
 v_scen_year <- paste0("v", scenario_year)
 
@@ -753,7 +758,7 @@ previous_np_dir <- here::here("globalprep", "np", paste0("v", scen_year_number -
 # ----- Read in NP weights data  -----
 # Read in current, previous, and 2 years previous data
 old_prod_weights <- read_csv(here(previous_np_dir, "output", "np_product_weights.csv"))
-prod_weights <- read_csv(here(current_np_dir, "output", "np_product_weights.csv"))
+prod_weights <- read_csv(here(current_np_dir, "output", "old_np_product_weights.csv"))
 
 check <- prod_weights %>%
   rename("new_weight" = "weight") %>%
@@ -763,22 +768,22 @@ check <- prod_weights %>%
 
 
 #old_prod_weights <- read_csv(here(previous_np_dir, "output", "np_product_weights.csv"))
-older_prod_weights <- read_csv(here("globalprep", "np",
-                                    paste0("v", scen_year_number - 2),
-                                    "output", "np_product_weights.csv"))
-
-check_older <- older_prod_weights %>%
-  rename("older_weight" = "weight") %>%
-  left_join(old_prod_weights, by = c("rgn_id", "product")) %>%
-  mutate(diff = weight - older_weight) %>%
-  left_join(rgns_eez)
+# older_prod_weights <- read_csv(here("globalprep", "np",
+#                                     paste0("v", scen_year_number - 2),
+#                                     "output", "np_product_weights.csv"))
+# 
+# check_older <- older_prod_weights %>%
+#   rename("older_weight" = "weight") %>%
+#   left_join(old_prod_weights, by = c("rgn_id", "product")) %>%
+#   mutate(diff = weight - older_weight) %>%
+#   left_join(rgns_eez)
 
 
 # ======== Plot new NP weights data vs. previous year's data ==================
 
 
 # ---- Create ggplot object with `text` aes argument to prep for plotly ----- #
-g_new <- ggplot(check, aes(x = weight, y = new_weight, color = product,
+g_new1 <- ggplot(check, aes(x = weight, y = new_weight, color = product,
                              text = paste("<b>Region ID:</b>", rgn_id,
                                           "<br><b>Product:</b>", product #,
                                           #"<br>Old weight:", older_weight,
@@ -790,14 +795,14 @@ g_new <- ggplot(check, aes(x = weight, y = new_weight, color = product,
   scale_color_manual(values = c("fish_oil" = "#edae49",
                                 "seaweeds" = "#386641",
                                 "ornamentals" = "#83c5be")) +
-  labs(title = paste(v_scen_year, "vs", v_prev_year, "Natural Product Weights by Product"),
+  labs(title = paste("OLD", v_scen_year, "vs", v_prev_year, "Natural Product Weights by Product"),
        x = paste(v_prev_year, "Weights"),
        y = paste(v_scen_year, "Weights"),
        color = "Product") +
   theme_minimal()
 
 # ---- Convert to plotly ------------------------------ #
-p_new <- ggplotly(g_new, tooltip = "text") %>%
+p_new1 <- ggplotly(g_new1, tooltip = "text") %>%
   layout(
     hovermode = "closest",
     xaxis = list(hoverformat = ".4f"), # customize number formatting 
@@ -805,7 +810,7 @@ p_new <- ggplotly(g_new, tooltip = "text") %>%
   )
 
 # ------- Create custom hover template ---------------- #
-p_new$x$data <- lapply(p_new$x$data, function(trace) {
+p_new1$x$data <- lapply(p_new1$x$data, function(trace) {
   if (trace$mode == "markers") {
     trace$hovertemplate <- paste(
       "%{text}<br>",
@@ -817,7 +822,7 @@ p_new$x$data <- lapply(p_new$x$data, function(trace) {
 })
 
 # Display customized plot
-p_new
+p_new1
 
 
 # ========= Plot old vs. older NP weights data ================================
