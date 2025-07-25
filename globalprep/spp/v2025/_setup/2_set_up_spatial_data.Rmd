@@ -18,20 +18,21 @@ editor_options:
   chunk_output_type: console
 ---
 
+```{r}
+knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
+```
+
 ``` {r setup, echo = TRUE, message = FALSE, warning = FALSE}
 
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.path = 'Figs/',
                       echo = TRUE, message = FALSE, warning = FALSE)
 
-library(dplyr)
 library(raster)
-library(here)
-library(ggplot2)
 library(sf)
 library(fasterize)
-library(stringr)
-library(mapview)
-library(terra)
+library(dplyr)
+library(here)
+library(ggplot2)
 
 source(here('workflow/R/common.R'))
 
@@ -40,125 +41,61 @@ scenario <- 'v2025'
 dir_goal <- here('globalprep', goal, scenario)
 
 ### goal specific folders and info
+dir_data  <- file.path(dir_goal, '_data')
+dir_setup <- file.path(dir_goal, '_setup')
 dir_anx  <- file.path(dir_M, 'git-annex/globalprep')
-dir_setup   <- file.path(dir_goal, '_setup')
 dir_goal_anx <- file.path(dir_anx, goal, scenario, 'spp_risk_dists')
 dir_raw_data_anx <- file.path(dir_anx, '_raw_data')
 
 source(file.path(dir_setup, 'common_fxns.R'))
+
+dir_bli <- file.path(dir_M, 'git-annex/globalprep/_raw_data/birdlife_intl/d2025')
+dir_shp <- file.path(dir_M, 'git-annex/globalprep/_raw_data/iucn_spp/d2025-1')
+  ### in this folder are shapefiles at a taxonomic level, both from
+  ### IUCN spatial data download (version 2025-1)
+
 ```
 
 # Summary
 
-Examine IUCN Red List regional assessments for extinction risk categories.
+Filter BirdLife International for marine species, saved in the git-annex:
 
-To define spatial areas more accurately, create rasters of WDPA and ocean area at Gall-Peters resolution of 0.25 km^2. These can then be aggregated back to Gall Peters 10 km^2 working rasters, summing the total ocean area and total protected area within each working cell.
+- `bli_marine_v2025.shp`
 
-* Ocean area - use Natural Earth 10 m land polygons; mask over cell ID raster to exclude land.
+Assign MEOW codes to IUCN regions, saved in the `_spatial` folder:
 
-# Data Sources
+- `iucn_rgn_to_meow.csv`
 
-## MEOW
-**Reference**: Spalding, Mark D. et al. 2007. “Marine Ecoregions of the World: A Bioregionalization of Coastal and Shelf Areas.” BioScience 57(7): 573–83. [URL](https://www.worldwildlife.org/publications/marine-ecoregions-of-the-world-a-bioregionalization-of-coastal-and-shelf-areas)
+Set up species ranges for all populations and subpopulations, saved in the `_data` folder:
 
-**Downloaded**: May 08, 2019
+- `spp_marine_maps_2025-1.csv`
 
-**Description**:  Shapefile of Marine Ecoregions
+# Data sources
 
-**Format**:  Shapefile
+[MEOW Regions](https://www.worldwildlife.org/publications/marine-ecoregions-of-the-world-a-bioregionalization-of-coastal-and-shelf-areas)
 
-**File location**: `Mazu:git-annex/globalprep/_raw_data/wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/`
+[IUCN Red List: Spatial Data Download](https://www.iucnredlist.org/resources/spatial-data-download)
 
-## WDPA
-**Reference**: IUCN and UNEP-WCMC (2025), The World Database on Protected Areas (WDPA) [On-line], June 2025. Cambridge, UK: UNEP-WCMC. Available at: www.protectedplanet.net.
-
-**Downloaded**: June 22, 2025
-
-**Description**:  Shapefile of World Database on Protected Areas
-
-**Time range**: 1800 - 2025; some protected areas do not have an associated "status year" and are reported as year 0.
-
-**Format**:  Shapefile
-
-**File location**: `Mazu:git-annex/globalprep/_raw_data/wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/`
+[BirdLife International](https://datazone.birdlife.org/contact-us/request-our-data) 
 
 # Methods
 
 ## Update geographic scope of regional assessments
 
-The following descriptions may be useful for assigning MEOW and LME regions:
+The following descriptions may be useful for assigning MEOW regions:
 
-**Europe ('europe'):**
-
-from European marine fishes: 
-
-> The geographic scope of the European Red List assessment
-encompasses the Mediterranean Sea, the Black Sea, the
-Baltic Sea, the North Sea and/or the European part of
-the Atlantic Ocean (i.e., the territorial waters and the
-Exclusive Economic Zones (EEZs) of all European
-countries in the eastern part of the Atlantic Ocean,
-also including the EEZs of the Macaronesian islands
-belonging to Portugal and Spain), the North Sea and
-the Northeastern Atlantic Ocean, excluding the EEZs of
-Greenland, Morocco and Western Sahara.
-
-Options: 
-
-* LME 20-26 (26 = Mediterranean) and 59 (Iceland)?
-* MEOW 2 (Northern Iceland/Svalbard), [21:27, 30:31, 34:36] (Mediterranean), 44 (Black Sea)
-* Alternately: Use EEZs for all countries listed as Europe by UN classification
-
-**Northern Africa**
-
-* LME 33 (Red Sea), 26 (Mediterranean), 27 (West Coast of North Africa)
-* MEOW 87-88 (Red Sea), [32, 33, 35, 36] (Mediterranean), 28, 29 (Lusitanean upwelling)
-
-**Southern Africa**
-
-* LME 29 (Western Southern Africa) and 30 (Madagascar)
-* MEOW 192:194 (Temperate southern Africa)
-
-**Eastern Africa** 
-
-* LME 30 (Madagascar) and 31 (Horn of Africa)
-* MEOW 94:102 (Western Indian Ocean)
-
-**Western Africa**   
-
-* LME 28
-* MEOW 79:86 (West African Transition, Gulf of Guinea)
-
-**Central Africa**  
-
-* LME 28, 29
-* If this is truly "Central" then no marine anyway! ignore
-
-**Northeastern Africa** 
-
-* LME 32, 33
-* MEOW 87:93 (Red Sea, Gulf of Aden, Somali/Arabian)
-
-**Pan-Africa** 
-
-* LME 26-33
-* MEOW 28, 29, 32, 33, 35, 36 (Med and N), 
-    79:86 (West), 87:89, 93 (NE), 94:102 (E), 192:194 (S)
-
-**Gulf of Mexico** 
-
-* LME 5
-* MEOW 43 (N Gulf), 68:70 (S Gulf)
-
-**Mediterranean**
-
-* LME 26 and 62 for Mediterranean and Black Seas
-* MEOW 30:36, 44
-
-**Persian Gulf**
-
-* LME 32 (NOTE: this encompasses the entire Arabian Sea)
-* MEOW 90:91
+| Region              | MEOW                                                   |
+| ------------------- | ------------------------------------------------------ |
+| Northern Africa     | 87-88, 32-33, 35-36, 28-29                             |
+| Southern Africa     | 192-194                                                |
+| Eastern Africa      | 94-102                                                 |
+| Western Africa      | 79-86                                                  |
+| Central Africa      | no marine                                              |
+| Northeastern Africa | 87-93                                                  |
+| Pan-Africa          | 28-29, 32-33, 35-36, 79-86, 87-89, 93, 94-102, 192-194 |
+| Gulf of Mexico      | 43, 68-70                                              |
+| Mediterranean       | 30-36, 44                                              |
+| Persian Gulf        | 90-91                                                  |
 
 ### Spatial: `iucn_rgn_to_meow.csv`
 
@@ -211,487 +148,480 @@ if(setdiff(unique(rgn_to_meow_df$iucn_rgn), unique(rgn_risk_ts$iucn_rgn)) != "gl
 }
 ```
 
-## WDPA
+## Generate species map list with subpops
 
-- Classification 
-- Year of protection
-- Proportion of protection
+Filter the BirdLife Int'l data for marine species.
 
-Copy over the following 10 km^2 Gall Peters projections from last year:
-- ocean area raster
-- cell ID raster
-- ocean 500m raster
+**Note:** there appear to be no subpopulation polygons within the BirdLife International map set; there is no "subpop" column in that attribute table.  It appears that the individual files may not have "subpop" column either.
 
-General steps:
+``` {r convert BLI to shp-dbf-etc}
 
-1. Project Natural Earth 10M ocean polygons into Gall-Peters equal area projection
-2. Rasterize at 500 m resolution
-3. Aggregate up to 10 km resolution
-
-### MPA Classification
-
-Marine regions are any protected area with MARINE flag of 1 or 2, or non-zero GIS_M_AREA.  Classify by IUCN category (I-VI -> 1-6; non-classified get 8).  Include only designated, adopted, and established parks.  Omit non-MPA management plans from U.S.  Rasterize to CHI resolution, calculate protected cells vs total cells to get percent of protection for each IUCN protection category.
-
-Because we are rasterizing the protected areas down to 500 m resolution, we risk dropping MPAs smaller than about 1 km^2. We assume these are not likely to have a significant impact on biodiversity protection, but see the sensitivity analysis.
-
-#### Git-annex: `wdpa_mar_by_cat_Jun2025_500m.tif`
-
-```{r}
-# Copy from last year (already in _spatial folder if copied previous folder)
-ocean_area_file <- file.path(dir_spatial, 'ocean_area_rast.tif')
-cell_id_file <- file.path(dir_spatial, 'cell_id_rast.tif')
-ocean_500m_file  <- file.path(dir_anx, 'spp', 'v2024', 'spp_risk_dists', 'spatial', 'ocean_500m.tif')
-
-# Read in rasters
-rast_cell_id <- rast(cell_id_file)
-rast_ocean_500m <- rast(ocean_500m_file)
-
-# Goal files
-wdpa_marine_file <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/wdpa_mar_by_cat_Jun2025_500m.tif')
-wdpa_marine_file_int <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/wdpa_mar_by_cat_Jun2025_500m_int.tif')
-
-# File paths to WDPA files (change to current year)
-wdpa_poly_file_0   <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/WDPA_Jun2025_Public_shp_0', 
-                              'WDPA_Jun2025_Public_shp-polygons.shp')
-wdpa_poly_file_1   <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/WDPA_Jun2025_Public_shp_1', 
-                              'WDPA_Jun2025_Public_shp-polygons.shp')
-wdpa_poly_file_2   <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/WDPA_Jun2025_Public_shp_2', 
-                              'WDPA_Jun2025_Public_shp-polygons.shp')
-
-# Read in WDPA files
-wdpa_poly_0 <- sf::st_read(wdpa_poly_file_0)
-wdpa_poly_1 <- sf::st_read(wdpa_poly_file_1)
-wdpa_poly_2 <- sf::st_read(wdpa_poly_file_2)
-
-wdpa_poly <- rbind(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)
-
-#wdpa_poly$IUCN_CAT %>% unique() 
-##only grab ones that are reported/assigned/applicable
-iucn_cats <- c('Ia'  = 1,
-               'Ib'  = 1,
-               'II'  = 2,
-               'III' = 3,
-               'IV'  = 4,
-               'V'   = 5,
-               'VI'  = 6)
-wdpa_poly$STATUS %>% table()
-# Adopted   Designated  Established    Inscribed Not Reported     Proposed 
-#      34       254937         2401          250           34         1219 
-# wdpa_poly$NO_TAKE %>% unique()
-# x <- wdpa_poly %>% filter(NO_TAKE %in% c('All', 'Part'))
-# x <- wdpa_poly %>% filter(WDPAID == 309888)
-
-wdpa_marine <- wdpa_poly %>%
-  filter(MARINE > 0 | GIS_M_AREA > 0) %>%
-  filter(STATUS %in% c('Designated', 'Adopted', 'Established')) %>%
-  ### no paper parks!
-  filter(!str_detect(tolower(MANG_PLAN), 'non-mpa')) %>%
-  ### omit non-MPA fisheries or species management plans!
-  mutate(NO_TAKE = ifelse(WDPAID == 309888, TRUE, NO_TAKE),
-         ### patch PIPA to be no take - currently "not reported"
-         no_take = (NO_TAKE == 'All') | (NO_TAKE == 'Part' & NO_TK_AREA > 0.75 * GIS_M_AREA),
-         ### if NO_TK_AREA is 75% or more of GIS area, count it...
-         cat = iucn_cats[IUCN_CAT],
-         cat = ifelse(no_take & !cat %in% 1:2, -1, cat), ### use -1 as a "no take" flag
-         cat = ifelse(is.na(cat), 8, cat)) %>%           ### use 8 as an "other protected" flag
-  arrange(cat) %>%
-  st_transform(crs = gp_proj4)
-
-wdpa_marine_vect <- vect(wdpa_marine)
-
-# Free up space
-rm(wdpa_marine)
-rm(wdpa_poly_0)
-rm(wdpa_poly_1)
-rm(wdpa_poly_2)
-rm(wdpa_poly)
-
-# Rasterize all protected areas to 500m global raster;
-# Use min value: will prioritize no-take and higher levels of protection
-terra::rasterize(x = wdpa_marine_vect, 
-                 y = rast_ocean_500m,
-                 field  = 'cat', 
-                 fun    = 'min', 
-                 filename = wdpa_marine_file_int,
-                 overwrite = TRUE)   
-
-wdpa_all_rast_500m <- rast(wdpa_marine_file_int)
-
-#plot(wdpa_all_rast_500m)
-
-# Free up space
-rm(wdpa_marine_vect)
-
-rast_ocean_500m <- terra::classify(rast_ocean_500m ,cbind(-Inf, 0.005, NA), right=FALSE)
-
-# plot(rast_ocean_500m)
-
-wdpa_marine_rast_500m <- terra::mask(wdpa_all_rast_500m, rast_ocean_500m)
-
-# plot(wdpa_marine_rast_500m)
-# plot(rast(file.path(dir_raw_data_anx, 'wdpa_mpa/d2021/wdpa_mar_by_cat_Feb2021_500m.tif')))
-
-writeRaster(wdpa_marine_rast_500m, wdpa_marine_file, 
-            overwrite = TRUE)
-```
-
-#### Git-annex: `wdpa_mar_by_prot_yr_Jun2025_500m.tif`
-
-```{r}
-# Read in 500m raster
-rast_ocean_500m <- rast(ocean_500m_file)
-#plot(rast_ocean_500m) #check to see if loaded properly 
+# Convert BirdLife Int'l .gdb to shapefile, after filtering to species in the "marine" list.
+# Here we also standardize the column names to match the IUCN column names.
 
 # Goal file
-wdpa_prot_yr_file <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025', 
-                               'wdpa_mar_by_prot_yr_Jun2025_500m.tif')
+bli_marine_shp <- file.path(dir_bli, 'bli_marine_v2025.shp')
 
-wdpa_prot_yr_file_int <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/wdpa_mar_by_prot_yr_Jun2025_500m_int.tif')
+# List bli files
+bli_gpkg <- list.files(path = dir_bli, pattern = "\\.gpkg$", full.names = TRUE)
 
-# Existing files
-wdpa_poly_file_0   <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/WDPA_Jun2025_Public_shp_0', 
-                              'WDPA_Jun2025_Public_shp-polygons.shp')
-wdpa_poly_file_1   <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/WDPA_Jun2025_Public_shp_1', 
-                              'WDPA_Jun2025_Public_shp-polygons.shp')
-wdpa_poly_file_2   <- file.path(dir_raw_data_anx, 'wdpa_mpa/d2025/WDPA_Jun2025_Public_shp/WDPA_Jun2025_Public_shp_2',
-                                'WDPA_Jun2025_Public_shp-polygons.shp')
+bli_sf <- st_read(bli_gpkg)
 
-wdpa_poly_0 <- sf::st_read(wdpa_poly_file_0)
-wdpa_poly_1 <- sf::st_read(wdpa_poly_file_1)
-wdpa_poly_2 <- sf::st_read(wdpa_poly_file_2)
+marine_spp <- read_csv(file.path(dir_data, sprintf('spp_marine_from_api_%s.csv', api_version)),
+                       col_types = 'dcc')
 
-wdpa_poly <- rbind(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)
+names(bli_sf)
 
-#wdpa_poly$IUCN_CAT %>% unique()
-iucn_cats <- c('Ia'  = 1,
-               'Ib'  = 1,
-               'II'  = 2,
-               'III' = 3,
-               'IV'  = 4,
-               'V'   = 5,
-               'VI'  = 6)
-#wdpa_poly$STATUS %>% table()
-# Adopted   Designated  Established    Inscribed Not Reported     Proposed 
-#  34       242940         1148          249           34         1201 
-# wdpa_poly$NO_TAKE %>% unique()
-# x <- wdpa_poly %>% filter(NO_TAKE %in% c('All', 'Part'))
+# Filter for marine species
+bli_marine_sf <- bli_sf %>%
+  filter(sisid %in% marine_spp$iucn_sid) %>%
+  clean_df_names()
 
-wdpa_no_take <- wdpa_poly %>%
-  filter(MARINE > 0 | GIS_M_AREA > 0) %>%
-  filter(STATUS %in% c('Designated', 'Adopted', 'Established')) %>%
-  ### no paper parks!
-  filter(!str_detect(tolower(MANG_PLAN), 'non-mpa')) %>%
-  ### omit non-MPA fisheries or species management plans!
-  mutate(NO_TAKE = ifelse(WDPAID == 309888, TRUE, NO_TAKE),
-         ### patch PIPA to be no take - currently "not reported"
-         no_take = (NO_TAKE == 'All') | (NO_TAKE == 'Part' & NO_TK_AREA > 0.75 * GIS_M_AREA),
-         ### if NO_TK_AREA is 75% or more of GIS area, count it...
-         cat = iucn_cats[IUCN_CAT],
-         cat = ifelse(no_take & !cat %in% 1:2, -1, cat), ### use -1 as a "no take" flag
-         cat = ifelse(is.na(cat), 8, cat)) %>%           ### use 8 as an "other protected" flag
-  arrange(cat) %>%
-  filter(cat <= 2) %>% ### this limits to categories Ia, Ib, II, and no-take
-  st_transform(crs = gp_proj4)
+names(bli_marine_sf)
 
-rm(wdpa_poly_0 , wdpa_poly_1, wdpa_poly_2, wdpa_poly)
+#if the above code ^^ does not work, use this. It functions the same way, just more tedious. 
+#marine_colnames <- colnames(marine_spp[2:3])
+#bli_marine_sf_check <- bli_sf %>%
+#  inner_join(marine_spp, by = c("SISID" = "iucn_sid")) %>%
+#  dplyr::select(-marine_colnames) %>%
+#    clean_df_names() 
 
-wdpa_no_take_vect <- vect(wdpa_no_take)
+#st_geometry(bli_marine_sf) <- NULL #gets rid of "Shape" column. Since geometry is sticky, clean_df_names() retains the original geometry column "Shape". Now lets rename it to "shape" and retain the geometry format.
 
-rm(wdpa_no_take, wdpa_marine_rast_500m)
+#st_geometry(bli_marine_sf) <- bli_marine_sf$shape  #have to reestablish that "shape" is the geometry column. For some reason renaming the geometry column results in r not recognizing the column as the geometry column. 
 
-# Rasterize all protected areas to 500 m global raster;
-# use min value: will prioritize no-take and higher levels of protection
-wdpa_all_rast_500m <-   terra::rasterize(x = wdpa_no_take_vect, 
-                                         y = rast_ocean_500m,
-                                         field  = 'STATUS_YR', 
-                                         fun    = 'min',
-                                         overwrite = TRUE)
+#class(bli_marine_sf)
 
-writeRaster(wdpa_all_rast_500m, wdpa_prot_yr_file_int, overwrite = TRUE)
+st_geometry(bli_marine_sf) <- "geom"
 
-rm(wdpa_no_take_vect)
+# Save shapefile
+st_write(bli_marine_sf, bli_marine_shp)
 
-rast_ocean_500m <- terra::classify(rast_ocean_500m ,cbind(-Inf, 0.005, NA), right=FALSE)
+# Load shapefile
+#bli_marine_sf <- st_read(bli_marine_shp)
+```
 
-### in case of floating point not-quite-zeros...
+Create subpopulation lookup to match maps with IUCN SIDs for subpops. From available shapefiles, reclassify subpopulation polygons into subpop ID numbers for matching to risk and trend. 
 
-wdpa_all_rast_500m <- rast(wdpa_prot_yr_file_int)
+``` {r create_subpop_lookup}
+iucn_dbfs <- list.files(dir_shp, pattern = '\\.dbf$', full.names = TRUE)
+bli_dbfs  <- list.files(dir_bli, pattern = '\\.dbf$', full.names = TRUE)
+shps_dbfs <- c(iucn_dbfs, bli_dbfs)
 
-terra::mask(wdpa_all_rast_500m, 
-            rast_ocean_500m, 
-            filename = wdpa_prot_yr_file,
-            overwrite = TRUE)
+# This is all marine species with habitat info
+marine_spp <- read_csv(file.path(dir_data, 
+                                 sprintf('spp_marine_from_api_%s.csv', 
+                                         api_version)), col_types = 'dcc')
 
+### Define helper function to cleanly get the info from DBF files,
+### including colname checks
+get_dbf <- function(x) {
+  
+  spp_dbf_info <- foreign::read.dbf(x, as.is = TRUE) %>%
+    clean_df_names()
+  
+  ### Individual files call the id number 'iucn_sid'; bli has been fixed to
+  ### 'iucn_sid' as well; Red List Data Download files are 'id_no'... So:
+  ### fix that here!
+  names(spp_dbf_info)[names(spp_dbf_info) == 'id_no'] <- 'iucn_sid'
 
-# wdpa_yr_rast_500m <- rast(wdpa_prot_yr_file)
-#plot(wdpa_yr_rast_500m)
-#plot(raster(file.path(dir_raw_data_anx, 'wdpa_mpa/d2020/wdpa_mar_by_prot_yr_Apr2020_500m.tif')))
+  ### if 'binomial', set to 'sciname'
+  if(!'sciname' %in% names(spp_dbf_info)) {
+    names(spp_dbf_info)[names(spp_dbf_info) == 'binomial'] <- 'sciname'
+  }
+  
+  ### Some files (e.g. bli and individual files) don't have 'subpop':
+  ### add it in as NAs.
+  if(!'subpop' %in% names(spp_dbf_info)) spp_dbf_info$subpop <- NA
+  
+  ### some files don't have 'presence' field: if not present or NA,
+  ### set to presence = 1.  Some have presence = 0?
+  if(!'presence' %in% names(spp_dbf_info)) spp_dbf_info$presence <- 1
+  
+  spp_dbf_info <- spp_dbf_info %>%
+    mutate(presence = ifelse(presence == 0, 1, presence))
+  
+  return(spp_dbf_info)
+}
 
-# writeRaster(wdpa_yr_rast_500m, wdpa_prot_yr_file, 
-#             overwrite = TRUE)
+# IUCN data df
+shps_df <- lapply(iucn_dbfs, get_dbf) %>%
+  setNames(iucn_dbfs) %>%
+  bind_rows(.id = 'dbf_file') %>%
+  dplyr::select(dbf_file, iucn_sid, sciname = sci_name, presence, subpop) %>%
+  # Filter for marine species
+  filter(iucn_sid %in% marine_spp$iucn_sid)
+
+# bli data, change column names to match
+spp_dbf_info <- foreign::read.dbf(bli_dbfs, as.is = TRUE) %>%
+  clean_df_names()
+  
+colnames(spp_dbf_info)
+#  [1] "objectid"   "sisid"      "sci_name"   "presence"   "origin"     "seasonal"   "source"     "compiler"  
+#  [9] "data_sens"  "sens_comm"  "dist_comm"  "tax_comm"   "generalisd" "citation"   "yrcompiled" "yrmodified"
+# [17] "version"  
+
+# Rename 'ssid' in bli to 'iucn_sid' to match
+names(spp_dbf_info)[names(spp_dbf_info) == 'sisid'] <- 'iucn_sid'
+
+# If 'sciname' isn't detected, rename 'sci_name' to match
+if(!'sciname' %in% names(spp_dbf_info)) {
+  names(spp_dbf_info)[names(spp_dbf_info) == 'sci_name'] <- 'sciname'
+}
+  
+### Some files (e.g. bli and individual files) don't have 'subpop':
+### add it in as NAs.
+if(!'subpop' %in% names(spp_dbf_info)) spp_dbf_info$subpop <- NA
+
+# Some files don't have 'presence' field: if not present or NA, set to presence = 1.
+if(!'presence' %in% names(spp_dbf_info)) spp_dbf_info$presence <- 1
+
+# unique(spp_dbf_info$presence)
+# spp_dbf_info <- spp_dbf_info %>%
+#   mutate(presence = ifelse(presence == 0, 1, presence))
+
+# bli data df
+shps_bli_df <- spp_dbf_info %>%
+  cbind(bli_dbfs) %>%
+  dplyr::select("dbf_file" = "bli_dbfs", iucn_sid, sciname, presence, subpop) %>%
+  filter(iucn_sid %in% marine_spp$iucn_sid)  
+  
+# Combine IUCN and bli data dfs
+shps_df <- rbind(shps_df, shps_bli_df)
+
+# Isolate subpopulations from shapes
+shp_subpops <- shps_df %>%
+  dplyr::select(shp_iucn_sid = iucn_sid, sciname, shp_subpop = subpop) %>%
+  # remove lines with no subpops
+  filter(!is.na(shp_subpop)) %>%
+  filter(shp_subpop != "0") %>%
+  filter(shp_subpop != "<Null>") %>%
+  distinct() %>%
+  mutate(shp_subpop_clean = str_replace(tolower(shp_subpop), ' subpopulation| ocean', ''),
+         shp_subpop_clean = str_replace_all(shp_subpop_clean, '[^a-z]', ' '),
+         shp_subpop_clean = str_trim(shp_subpop_clean),
+         # Fix typo
+         shp_subpop_clean = str_replace(shp_subpop_clean, 'noth', 'north'))
+
+# Load IUCN subpop information
+sub_pops <- read_csv(file.path(dir_goal, sprintf('_data/iucn/sub_pop_%s.csv', api_version)), show_col_types = FALSE)
+
+# Clean up IUCN subpops
+api_subpops <- sub_pops %>%
+  dplyr::select(api_iucn_sid = sis_id,
+                sciname,
+         api_subpop = subpopulation_name) %>%
+  filter(!is.na(api_subpop)) %>%
+  filter(sciname %in% shp_subpops$sciname) %>%
+  distinct() %>%
+  mutate(api_subpop_clean = str_replace_all(tolower(api_subpop), ' subpopulation| ocean', ''),
+         api_subpop_clean = str_replace_all(api_subpop_clean, '[^a-z]', ' ') %>% str_trim)
+
+# Find IUCN subpops that overlap with shapes
+subpops_match_raw <- shp_subpops %>%
+  full_join(api_subpops, by = 'sciname') %>%
+  group_by(api_iucn_sid) %>%
+  mutate(subpop_match = str_detect(shp_subpop_clean, api_subpop_clean),
+         n_match = sum(subpop_match)) %>%
+  filter(subpop_match | sum(subpop_match) == 0) %>%
+  ungroup()
+
+caretta_subpops <- subpops_match_raw %>%
+  filter(shp_iucn_sid == 3897) %>%
+  mutate(api_subpop_single = str_split(api_subpop_clean, ' ')) %>%
+  unnest(api_subpop_single) %>%
+  group_by(api_subpop_clean, shp_subpop_clean) %>%
+  mutate(match = str_detect(shp_subpop_clean, api_subpop_single),
+         n_match = sum(match),
+         n_words = n()) %>%
+  filter(sum(match) == n()) %>%
+  ungroup() %>%
+  dplyr::select(shp_iucn_sid, sciname, shp_subpop, api_iucn_sid, api_subpop) %>%
+  distinct()
+
+subpops_match <- subpops_match_raw %>%
+  filter(shp_iucn_sid != 3897 & subpop_match == TRUE) %>%
+  dplyr::select(shp_iucn_sid, sciname, shp_subpop, api_iucn_sid, api_subpop) %>%
+  bind_rows(caretta_subpops)
+
+### Check for missed matches:
+api_subpops$api_iucn_sid[!api_subpops$api_iucn_sid %in% subpops_match$api_iucn_sid]
+
+# 2025:
+# 103290570 Acipenser transmontanus - columbia river upper  middle and lower
+
+# Previous:
+### API subpop, not matched: 16369383 Tursiops truncatus 
+###                                   Mediterranean subpopulation
+### * OK - no polygon for this subpopulation.  Regional assessment?
+
+### API subpop, not matched: 44187 Orcaella brevirostris 
+###                                Malampaya Sound subpopulation
+### * Doesn't look like there is a shape for this subpop... Sorry dude!
+
+### API subpop, not matched: 123095978 Orcaella brevirostris
+###                                    loilo-Guimaras Subpopulation  
+### * Doesn't look like there is a shape for this subpop... Sorry dude!
+
+### API subpop, not matched: 156206333, 189865869  Delphinus delphis
+###                                    Gulf of Corinth subpopulation,
+###                                    Inner Mediterranean
+### * It does look like there is a shape for this one... the medittarean sea.. but it seems like it is already accounted for in the matched subpops... so i think it is ok. 
+
+### API subpop, not matched: 181208820 Tursiops truncatus
+###                                    Gulf of Ambracia subpopulation
+### * It doesn't look like there is a shape for this subpopulation...
+
+### API subpop, not matched: 218582754 Dugong dugon 
+###                                    New Caledonia subpopulation
+### It doesn't look like there is a shape for this subpop ... 
+
+### API subpop, not matched: 218582764 Dugong dugon 
+###                                    Eastern Africa subpopulation
+### It doesn't look like there is a shape for this subpop
+
+shp_subpops[!shp_subpops$shp_subpop %in% subpops_match$shp_subpop, ]
+# all matched
+# 2025:
+# 2476 Balaenoptera edeni - gulf of mexico
+# rl_sis(2476) subpopulation = FALSE *so listed as a subpop in the shapefiles but not in the IUCN api?
+# 225 Acipenser nudiventris - lake?
+# 234 Acipenser transmontanus - river?
+ 
+write_csv(subpops_match, 
+          file.path(dir_setup, sprintf('int/subpops_match_api_to_shp_%s.csv', 
+                                     api_version)))
+```
+
+#### Data: `spp_marine_maps_2025-1.csv`
+
+From the species range map shapefiles, pull map info from the .dbf files.  For species listed in multiple files (e.g. sea snakes and reptiles), remove duplicates.  For species with polygons differentiated by subpopulation, adjust the iucn_sid to match the subpop info.
+
+Add a flag for comprehensively-assessed spp - fix BONEFISH_TARPONS to all be assessed - either it's comprehensive or not - and add sea turtle species (6 of 7 assessed).
+
+``` {r generate map list from dbfs}
+
+iucn_dbfs  <- list.files(dir_shp, pattern = '\\.dbf$', full.names = TRUE)
+bli_dbfs   <- list.files(dir_bli, pattern = '\\.dbf$', full.names = TRUE)
+
+map_files  <- c(iucn_dbfs, bli_dbfs)
+
+# Load comprehensive assessment species
+comp_spp <- read_csv(file.path(dir_data, 
+                       sprintf('iucn_comp_assessed_%s.csv', api_version)), show_col_types = FALSE)
+
+# spp_group_names <- map_files %>%
+#   basename() %>%
+#   str_replace_all('\\.dbf$|_PART_.+', '') %>%
+#   unique()
+
+# IUCN files
+map_info_raw_iucn <- lapply(iucn_dbfs, get_dbf) %>%
+  setNames(iucn_dbfs) %>%
+  bind_rows(.id = 'dbf_file') %>%
+  dplyr::select(shp_iucn_sid = iucn_sid, sciname=sci_name, presence, subpop, dbf_file)
+
+# bli files
+## now run on birdlife data here, and change column names to match
+spp_dbf_info <- foreign::read.dbf(bli_dbfs, as.is = TRUE) %>%
+  clean_df_names()
+
+colnames(spp_dbf_info)
+# [1] "objectid"   "sisid"      "sci_name"   "presence"   "origin"     "seasonal"   "source"     "compiler"   "data_sens"  "sens_comm" 
+# [11] "dist_comm"  "tax_comm"   "generalisd" "citation"   "yrcompiled" "yrmodified" "version"  
+  
+# Rename to match iucn data
+names(spp_dbf_info)[names(spp_dbf_info) == 'sisid'] <- 'iucn_sid'
+
+if(!'sciname' %in% names(spp_dbf_info)) {
+  names(spp_dbf_info)[names(spp_dbf_info) == 'sci_name'] <- 'sciname'
+}
+
+# Some files (e.g. bli and individual files) don't have 'subpop', add it in as NAs.
+if(!'subpop' %in% names(spp_dbf_info)) spp_dbf_info$subpop <- NA
+
+# Some files don't have 'presence' field: if not present or NA, set to presence = 1. 
+if(!'presence' %in% names(spp_dbf_info)) spp_dbf_info$presence <- 1
+
+spp_dbf_info <- spp_dbf_info %>%
+  mutate(presence = ifelse(presence == 0, 1, presence))
+
+# Bind IUCN and bli dfs
+map_info_raw_bli <- spp_dbf_info %>%
+  cbind(bli_dbfs) %>%
+  dplyr::select(shp_iucn_sid = iucn_sid, sciname, presence, subpop, "dbf_file" = "bli_dbfs")
+
+map_info_raw <- rbind(map_info_raw_iucn, map_info_raw_bli)
+
+### Notes on presence, origin, seasonal fields:
+### * presence = 5 is extinct; 4 = probably extinct; others are extant-ish or 
+###   uncertain. We will drop field and include all polygons for now.
+### * origin is native, introduced, etc.  We will drop this field and not
+###   worry about origin.
+### * seasonal is breeding/non-breeding/passage.  We will drop this field
+###   and not worry about seasonality.
+
+# subspp <- map_info_raw %>%
+#   filter(!is.na(subpop)) %>%
+#   dplyr::select(shp_iucn_sid, presence) %>%
+#   distinct()
+
+# No subspecies vary by IUCN code; drop field for simplicity and include all at species level
+map_info_sans_dupes <- map_info_raw %>%
+  group_by(shp_iucn_sid) %>%
+  filter(!(str_detect(dbf_file, 'MARINEFISH|REPTILE|REEF_FORMING_CORALS_PART2|REEF_FORMING_CORALS_PART1|MANGROVES') & 
+             length(unique(dbf_file)) > 1)) %>%
+  filter(!(shp_iucn_sid == 196026 & str_detect(dbf_file, 'SEASNAKE'))) %>%
+    ### in REPTILES, SEASNAKES, and HAGFISH - ditch any dupes
+  ungroup() %>%
+  distinct()
+
+subpops_match <- read_csv(file.path(dir_setup, 'int',
+                                    sprintf('subpops_match_api_to_shp_%s.csv', 
+                                            api_version)),
+                          col_types = 'dccdc')
+
+map_info_add_subpops <- map_info_sans_dupes %>%
+  full_join(subpops_match, by = c('shp_iucn_sid', 'sciname', 'subpop' = 'shp_subpop')) %>%
+  mutate(iucn_sid = ifelse(is.na(api_iucn_sid), shp_iucn_sid, api_iucn_sid)) %>%
+  dplyr::select(shp_iucn_sid, iucn_sid, sciname, presence, subpop, dbf_file) %>%
+  distinct()
+
+# Filter to marine habitat species (to drop terrestrial reptiles e.g.)
+marine_spp_ids <- read_csv(file.path(dir_data,
+                                     sprintf('spp_marine_from_api_%s.csv', 
+                                             api_version)),
+                           col_types = 'dcc') %>%
+  dplyr::select(iucn_sid, max_depth)
+
+marine_map_info <- map_info_add_subpops %>%
+  inner_join(marine_spp_ids, by = 'iucn_sid') %>%
+  mutate(comp_assessed = iucn_sid %in% comp_spp$iucn_sid)
+  
+comp_assess_check <- marine_map_info %>%
+  mutate(dbf_short = basename(dbf_file)) %>%
+  group_by(dbf_short, comp_assessed) %>%
+  summarize(n_in_gp = n()) %>%
+ group_by(dbf_short) %>%
+  mutate(both = n() == 2)
+
+### at this point, fix a few "comprehensively assessed" issues:
+### * add turtles as comprehensive
+### * some species from Spatial Data Download groups do not
+###   show up as comprehensively assessed despite text on the IUCN site
+turtles <- c('Dermochelys', 'Caretta', 'Lepidochelys', 
+             'Natator', 'Chelonia', 'Eretmochelys') %>%
+  paste0(collapse = '|')
+assessed_gps <- c('BONEFISH', 'CORALS', 'SEACUCUMBERS') %>%
+  paste0(collapse = '|')
+  ### NOTE: Damselfish removed at recommendation of Gina Ralph
+  ### Others, assume that availability of maps on Spatial Data Download Page
+  ### is indication of comprehensive assessment despite API call
+
+marine_map_info <- marine_map_info %>%
+  mutate(comp_assessed = ifelse(str_detect(dbf_file, assessed_gps), 
+                                TRUE, comp_assessed),
+         comp_assessed = ifelse(str_detect(sciname, turtles), 
+                                TRUE, comp_assessed))
+# Save layer
+write_csv(marine_map_info, 
+          file.path(dir_data,
+                    sprintf('spp_marine_maps_%s.csv', api_version)))
+```
+
+#### Output: 
+
+Not essential.
+
+- `spp_included_summary.csv`
+- `spp_included_by_family.csv`
+
+``` {r generate table of species}
+
+# marine_map_info <- read_csv(file.path(dir_data,
+#   sprintf('spp_marine_maps_%s.csv', api_version)), show_col_types = FALSE) %>%
+#   dplyr::select(-presence) %>%
+#   distinct()
 # 
-#}
-
-# View
-plot(wdpa_all_rast_500m)
-```
-
-### MPA Protected Area
-
-Crosstab WDPA map to cell IDs
-
-Be cautious when using `raster::crosstab()` as it returns factors that need to be coerced into integers... This code results in a file of cell IDs, IUCN protected area categories (1 = Ia and Ib, 2-6 = II - VI, 7 = no take, -1 = other), and proportion of cell protected by that category.
-
-We can't simply aggregate upwards here, since we need to keep track of different protection levels (for the first) and year (for the second).
-
-#### Spatial: `wdpa_mpa_area.csv`
-
-Area of protection (to calculate proportion of protection).
-
-``` {r crosstab mpa areas}
-
-wdpa_marine_rast_500m <- rast(wdpa_marine_file)
-rast_cell_id    <- rast(cell_id_file)    ### cell IDs at 10 km^2
-rast_ocean_500m <- rast(ocean_500m_file)  ### ocean presence at 1 km^2
-rast_ocean_area <- rast(ocean_area_file) ### ocean proportional area at 10 km^2
-
-cell_id_500m_file <- file.path(dir_goal_anx, 'spatial/cell_id_500m.tif')
-
-### Need a 500 m raster of cell IDs for crosstabbing...
-rast_cell_id_500m <- terra::resample(x = rast_cell_id, y = rast_ocean_500m,
-                                     filename = cell_id_500m_file,
-                                     method = 'near',
-                                     overwrite = TRUE)
-
-#plot(rast_cell_id_500m)
-#plot(raster(file.path("/home/shares/ohi/git-annex/globalprep/spp/v2020/spp_risk_dists/spatial/cell_id_500m.tif")))
-
-# Goal file
-wdpa_cell_area_file <- file.path(dir_spatial, 'wdpa_mpa_area.csv')
-
-### now break into chunks and mclapply across them to crosstab WDPA categories to cell IDs
-
-### Break into smaller chunks for faster processing and eventual parallelizing
-n_chunks <- 60
-
-crosstab_chunk <- function(rast1, rast2, chunk, n_chunks) {
-  ## chunk <- 2
-  # rast1 = wdpa_marine_rast_500m
-  # rast2 = rast_cell_id_500m
-  
-  rast1 <- raster(rast1)
-  rast2 <- raster(rast2)
-  
-  chunk_size <- ceiling(ncol(rast1) / n_chunks)
-  left_bound <- (chunk - 1) * chunk_size + 1
-  right_bound <- min(left_bound + chunk_size - 1, ncol(rast1))
-  
-  # chunk_ext <- terra::ext(xFromCol(rast1, left_bound), xFromCol(rast1, right_bound), yFromRow(rast1, nrow(rast1)), yFromRow(rast1, 1))
-  
-  chunk_ext <- extent(rast1, 1, nrow(rast1), left_bound, right_bound)
-  
-  message('Processing ', chunk, ': ', paste0(as.character(round(chunk_ext)), collapse = ', '))
-  wdpa_chunk    <- raster::crop(rast1, chunk_ext)
-  cell_id_chunk <- raster::crop(rast2, chunk_ext)
-  
-  wdpa_cells <- raster::crosstab(wdpa_chunk, cell_id_chunk, 
-                                 long = TRUE) %>%
-    setNames(c('wdpa_category', 'cell_id', 'n_prot')) %>%
-    mutate(wdpa_category = as.integer(as.character(wdpa_category)),
-           cell_id       = as.integer(as.character(cell_id)))
-  ### wdpa_category and cell_id are crosstabbed as factors - first
-  ### convert to character (to unfactorize it) then to integer.  Otherwise
-  ### you end up with factor index, not actual cell ID or category.
-  
-  return(wdpa_cells)
-}
-
-### Use the function in an mclapply call
-system.time({
-  wdpa_cells_list <- parallel::mclapply(1:n_chunks, mc.cores = 12,
-                                        FUN = function(x) crosstab_chunk(wdpa_marine_rast_500m, 
-                                                                         rast_cell_id_500m, 
-                                                                         chunk = x, n_chunks))
-  
-#    user   system  elapsed 
-# 5041.803  971.565  553.962 
-})
-
-wdpa_cells_df <- bind_rows(wdpa_cells_list)
-
-area_df <- data.frame(cell_id  = values(rast_cell_id),
-                      area_km2 = values(rast_ocean_area)) %>%
-  rename(cell_id = 1, area_km2 = 2)
-
-wdpa_area_df <- wdpa_cells_df %>%
-  full_join(area_df, by = 'cell_id') %>%
-  filter(!is.na(wdpa_category)) %>%
-  mutate(prot_area_km2 = n_prot / 4, ### count of cells in 500 x 500 m raster, div by 4
-         mpa_pct = prot_area_km2 / area_km2) %>%
-  dplyr::select(wdpa_category, cell_id, mpa_pct, prot_area_km2) %>%
-  ### mpa pct is relative to *ocean* area - not *total cell* area
-  group_by(wdpa_category, cell_id) %>%
-  summarize(mpa_pct = sum(mpa_pct), prot_area_km2 = sum(prot_area_km2)) %>%
-  ungroup()
-
-# Last year's file
-old <- read_csv(file.path(here(), "globalprep/spp/v2024/_spatial/wdpa_mpa_area.csv"), show_col_types = FALSE)
-
-sum(old$prot_area_km2) 
-# 2023: 26841457
-# 2024: 24690672
-
-sum(wdpa_area_df$prot_area_km2) 
-# 2024: 24690672 
-# 2025: 30000565
-
-# Write csv
-write_csv(wdpa_area_df, wdpa_cell_area_file) 
-```
-
-### MPA Year of Protection
-
-#### Spatial: `wdpa_mpa_year.csv` 
-
-Year of protection. 
-
-``` {r crosstab mpa years}
-wdpa_yr_rast_500m <- raster(wdpa_prot_yr_file)
-rast_cell_id    <- raster(cell_id_file)    ### cell IDs at 10 km^2
-rast_ocean_500m  <- raster(ocean_500m_file)  ### ocean presence at 1 km^2
-rast_ocean_area <- raster(ocean_area_file) ### ocean proportional area at 10 km^2
-
-cell_id_500m_file <- file.path(dir_goal_anx, 'spatial/cell_id_500m.tif')
-rast_cell_id_500m <- raster(cell_id_500m_file)
-
-# Goal file
-wdpa_cell_year_file <- file.path(dir_spatial, 'wdpa_mpa_year.csv')
-
-### now break into chunks and mclapply across them to crosstab WDPA categories to cell IDs
-### Break into smaller chunks for faster processing and eventual parallelizing
-n_chunks <- 60
-
-crosstab_chunk2 <- function(rast1, rast2, chunk, n_chunks) {
-  ### chunk <- 30
-  chunk_size <- ceiling(ncol(rast1) / n_chunks)
-  left_bound <- (chunk - 1) * chunk_size + 1
-  right_bound <- min(left_bound + chunk_size - 1, ncol(rast1))
-  
-  chunk_ext <- extent(rast1, 1, nrow(rast1), left_bound, right_bound)
-  message('Processing ', chunk, ': ', paste0(as.character(round(chunk_ext)), collapse = ', '))
-  wdpa_chunk    <- crop(rast1, chunk_ext)
-  cell_id_chunk <- crop(rast2, chunk_ext)
-  
-  wdpa_cells <- crosstab(wdpa_chunk, cell_id_chunk, 
-                         progress = 'text',
-                         long = TRUE) %>%
-    setNames(c('mpa_year', 'cell_id', 'n_prot')) %>%
-    mutate(mpa_year = as.integer(as.character(mpa_year)),
-           cell_id  = as.integer(as.character(cell_id)))
-  ### mpa_year and cell_id are crosstabbed as factors - first
-  ### convert to character (to unfactorize it) then to integer.  Otherwise
-  ### you end up with factor index, not actual cell ID or category.
-  
-  return(wdpa_cells)
-}
-
-### Use the function in an mclapply call
-system.time({
-  wdpa_cells_list <- parallel::mclapply(1:n_chunks, mc.cores = 12,
-                                          FUN = function(x) crosstab_chunk2(wdpa_yr_rast_500m, 
-                                                                            rast_cell_id_500m, 
-                                                                            chunk = x, n_chunks))
-#     user   system  elapsed 
-# 5015.587 1036.650  571.401 
-})
-  
-  
-wdpa_cells_df <- bind_rows(wdpa_cells_list)
-
-area_df <- data.frame(cell_id  = raster::values(rast_cell_id),
-                      area_km2 = raster::values(rast_ocean_area))
-
-wdpa_year_df <- wdpa_cells_df %>%
-  full_join(area_df, by = 'cell_id') %>%
-  filter(!is.na(mpa_year)) %>%
-  mutate(prot_area_km2 = n_prot / 4, 
-         ### count of cells in 500 x 500 m^2 raster, times .25 km^2 area per cell
-         mpa_pct = prot_area_km2 / area_km2) %>%
-  dplyr::select(mpa_year, cell_id, mpa_pct, prot_area_km2) %>%
-  ### mpa pct is relative to *ocean* area - not *total cell* area
-  group_by(mpa_year, cell_id) %>%
-  summarize(mpa_pct = sum(mpa_pct), prot_area_km2 = sum(prot_area_km2)) %>%
-  ungroup()
-
-# Write csv
-write_csv(wdpa_year_df, wdpa_cell_year_file)
-```
-
-### Plot WDPA protected area proportions as raster
-
-Proportional protection can be multiplied by ocean area raster to get area of protection.  Collect by category (to avoid duplicate "by" values):
-
-* No Take (categories 1 & 2 and specifically designated "no take")
-    * classified as 1, 2, and -1 respectively
-* Conservation (categories 1-4 plus no take)
-    * classified as 1, 2, 3, 4, and -1 (no take)
-* All protection (non-NA)
-    * classified as 1-6, -1 (no take), and 8 (other protection)
-
-**Note:** these are not saved as separate rasters at this point... they are easily created from the dataframe of cell ID to protected proportion.
-
-``` {r}
-
-wdpa_cell_area_file <- file.path(dir_spatial, 'wdpa_mpa_area.csv')
-
-# Load ocean cell area
-wdpa_area_df <- read_csv(wdpa_cell_area_file, show_col_types = FALSE)
-
-notake_df <- wdpa_area_df %>%
-  filter(wdpa_category <= 2) %>%
-  group_by(cell_id) %>%
-  summarize(mpa_pct = sum(mpa_pct)) %>%
-  rename(from = cell_id, to = mpa_pct)
-
-conservation_df <- wdpa_area_df %>%
-  filter(wdpa_category <= 4) %>%
-  group_by(cell_id) %>%
-  summarize(mpa_pct = sum(mpa_pct)) %>%
-  rename(from = cell_id, to = mpa_pct)
-
-all_prot_df <- wdpa_area_df %>%
-  group_by(cell_id) %>%
-  summarize(mpa_pct = sum(mpa_pct)) %>%
-  rename(from = cell_id, to = mpa_pct)
-
-# notake_raster <- classify(x = rast(rast_cell_id), notake_df, others = NA)
-# plot(notake_raster, main = 'No take protection (Ia, Ib, II + no take)')
-
-system.time({
-    notake_raster <- classify(x = rast(rast_cell_id), notake_df, others = NA)
-#     user   system  elapsed 
-# 5304.982 1057.941  597.739 
-  })
-plot(notake_raster, main = 'No take protection (Ia, Ib, II + no take)')
-
-# conservation_raster <- classify(rast(rast_cell_id), conservation_df, others = NA)
-# plot(conservation_raster, main = 'Conservation protection (Ia - IV + no take)')
-
-system.time({
-    conservation_raster <- classify(rast(rast_cell_id), conservation_df, others = NA)
-#    user  system elapsed 
-# 561.630   7.179 551.211 
-  })
-plot(conservation_raster, main = 'Conservation protection (Ia - IV + no take)')
-
-# all_prot_raster <- classify(rast(rast_cell_id), all_prot_df, others = NA)
-# plot(all_prot_raster, main = 'All protection (any category)')
-
-system.time({
-    all_prot_raster <- classify(rast(rast_cell_id), all_prot_df, others = NA)
-#     user   system  elapsed 
-# 1070.091   13.821 1051.193
-  })
-plot(all_prot_raster, main = 'All protection (any category)')
+# ## 2025: problems with 2236, 15131, 15137, and 15143 (?)
+# 
+# taxa_info <- read_csv(file.path(dir_goal, sprintf('_data/iucn/taxa_%s.csv', api_version)), show_col_types = FALSE) %>%
+#   dplyr::select(iucn_sid, kingdom:family) %>%
+#   distinct()
+# 
+# #sub_pops <- read_csv(file.path(dir_goal, sprintf('_data/iucn/sub_pop_%s.csv', api_version)), show_col_types = FALSE)
+# 
+# cat_info <- read_csv(file.path(dir_data, 
+#                                sprintf('iucn_risk_current_%s.csv', api_version)),
+#                      show_col_types = FALSE) %>%
+#   dplyr::select(iucn_sid, cat_score) %>%
+#   filter(!is.na(cat_score))
+# 
+# included_maps <- marine_map_info %>%
+#   filter(comp_assessed) %>%
+#   filter(iucn_sid %in% cat_info$iucn_sid) %>%
+#   dplyr::select(iucn_sid, shp_iucn_sid, subpop, sciname, dbf_file) %>%
+#   left_join(taxa_info, by = 'iucn_sid') %>%
+#   mutate(spp_gp = basename(dbf_file),
+#          spp_gp = spp_gp %>% tolower() %>% str_replace('.dbf|_part.+', '')) %>%
+#   mutate(kingdom = tools::toTitleCase(tolower(kingdom)),
+#          phylum  = tools::toTitleCase(tolower(phylum)),
+#          order   = tools::toTitleCase(tolower(order)),
+#          class   = tools::toTitleCase(tolower(class)),
+#          family  = tools::toTitleCase(tolower(family)))
+# 
+# all_in_the_fam <- included_maps %>%
+#   group_by(kingdom, phylum, class, order, family, spp_gp) %>%
+#   summarize(species = length(unique(shp_iucn_sid)),
+#             subpops = sum(!is.na(subpop)))  
+# 
+# basic_sum <- included_maps %>%
+#   filter(!str_detect(tolower(class), 'actinopt|mammal|aves|rept')) %>%
+#   group_by(kingdom, phylum, class, spp_gp) %>%
+#   summarize(species = length(unique(shp_iucn_sid)),
+#             subpops = sum(!is.na(subpop)))
+# 
+# nonfish_sum <- included_maps %>%
+#   filter(str_detect(tolower(class), 'mammal|aves|rept')) %>%
+#   group_by(kingdom, phylum, class, order, spp_gp) %>%
+#   summarize(species = length(unique(shp_iucn_sid)),
+#             subpops = sum(!is.na(subpop)))
+# 
+# fish_sum <- included_maps %>%
+#   filter(str_detect(tolower(class), 'actinopt')) %>%
+#   group_by(kingdom, phylum, class, order, family, spp_gp) %>%
+#   summarize(species = length(unique(shp_iucn_sid)),
+#             subpops = sum(!is.na(subpop)))
+# 
+# all_sum <- bind_rows(fish_sum, nonfish_sum, basic_sum) %>%
+#   group_by(spp_gp, kingdom, phylum, class, order) %>%
+#   summarize(family = paste(unique(family), collapse = ', '),
+#             species = sum(species),
+#             subpops = sum(subpops)) %>%
+#   ungroup() %>%
+#   mutate(family = ifelse(family == 'NA', NA, family),
+#          subpops = ifelse(subpops == 0, NA, subpops),
+#          spp_gp = ifelse(spp_gp == "cone_snails", "conus", spp_gp))
+# 
+# ## Check against last year to see if you have all of the same species. 
+# 
+# ## 2024: We have the same species, but the setdiff is going to return a list of those that are not matching because the all_sum df has them grouped into "marinefish" as the spp_gp. So I went through and cross-referenced the class, order, and family to make sure that they were all present - they are present 
+# 
+# ## 2025: Same, blennies, butterflyfish_angelfish_allies, bonefishes_tarpons_ladyfishes, and pufferfishes_and_relatives have been combined into marinefishes
+# 
+# old_sum <- read_csv(file.path(dir_goal, '_output', 
+#                              'spp_included_summary.csv'))
+# 
+# old_sum <- spp_included_summary
+# 
+# setdiff(old_sum$spp_gp, all_sum$spp_gp)
+# 
+# ## end check
+# 
+# # Save layers
+# write_csv(all_sum, file.path(dir_goal, '_output', 
+#                              'spp_included_summary.csv'))
+# write_csv(all_in_the_fam, file.path(dir_goal, '_output', 
+#                                     'spp_included_by_family.csv'))
 ```
 

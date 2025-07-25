@@ -98,19 +98,6 @@ Trend is calculated using time series of risk categories based on current and pa
 * __Time range__: NA
 * __Format__:  Shapefile
 
-
-**Reference**: IUCN and UNEP-WCMC (2025), The World Database on Protected Areas (WDPA) [On-line], June 2025. Cambridge, UK: UNEP-WCMC. Available at: www.protectedplanet.net.
-
-**Downloaded**: June 6, 2025
-
-**Description**:  Shapefile of World Database on Protected Areas
-
-**Time range**: 1819 - 2025; some protected areas do not have an associated "status year" and are reported as year 0.
-
-**Format**:  Shapefile
-
-**File location**: `Mazu:git-annex/globalprep/_raw_data/wdpa_mpa/d2025/WDPA_WDOECM_wdpa_shp/`
-
 ***
 
 # Methods
@@ -123,111 +110,25 @@ Here is an overview of the organization of files and data that are run prior to 
 
 #### Run this first! Setup directory: `spp/v20XX/_setup`
 
-In this directory are a sequence of files used to generate the bits and pieces that are later assembled into the rasters of biodiversity risk.
-
-.Rmd files are sequenced with a prefix number (and letter) to indicate the order of operations.  Briefly:
-
 1. `1_query_iucn_species_data.Rmd`
-
-Pull information from the IUCN Red List API to determine...
-
-- Marine Species List
-- Subpopulation Assessments
-- Taxa Info
-- Habitat Info
-- Comprehensive Assessments
-
-...for *global* and *regional* assessments. We are interested in current (latest) and historical assessments for each.
-
-**Note:** Some of these queries take a long time, so the results are saved in the `iucn` folder to avoid having to re-run.
-
-Also calculate global and regional population trends.
 
 2. `2_set_up_spatial_data.Rmd`
 
-Update geographic scope of IUCN regional assessments (for *MEOW* regions), if necessary.
+3. `3_process_iucn_spatial_data.Rmd`
 
-Set up spatial layers in Gall-Peters, 100 km<sup>2</sup> cells. (necessary?)
-
-Layers copied from previous year:
-
-- Cell ID (cells are sequentially numbered for combining with tabular data)
-- Ocean area
-
-Marine protected area layers generated: (necessary?)
-
-- Classification 
-- Year of protection
-- Proportion of protection
-
-3. `3_assess_iucn_spatial_data.Rmd`
-
-Convert species range maps to rasters. For maps provided directly by IUCN, aggregate into multispecies files based on family.  There is some cleaning done at this stage to fix problematic extents and attributes.
-
-From the list of all available maps, generate a master list of all mapped, assessed species for inclusion in the study. Rasterize each species to a .csv that includes cell ID and presence.  A .csv format was used for file size and ease of reading and binding into dataframes.
-
-4. `4_process_iucn_spatial_data.Rmd`
-
-Calculate species ranges from rasters.
-
-Aggregate individual species ranges into larger taxonomic groups, and summarize key variables (mean risk, variance of risk, number of species, etc) by group. Technically this is not necessary but makes it easier to quality check the process along the way, and supports mapping at the level of taxonomic group rather than the entire species list level.
-
-1. Pull information from the IUCN Red List API to determine an overall species list, habitat information, and current risk (conservation status).
-    * 1_set_up_iucn_habs_and_risk.Rmd
-2. Pull information from API on risk from regional assessments; also recode the regions according to Marine Ecoregions (Spalding et al, 2007) for later spatialization.
-    * 2_set_up_iucn_risk_regional.Rmd
-    * 2a_set_up_regional_codes.Rmd
-3. Pull historical assessment information from API for possible trend analysis.
-  * 3_set_up_iucn_trends.Rmd
-4. Set up spatial layers in Gall-Peters, 100 km<sup>2</sup> cells.  Layers include:
-    * cell ID (cells are sequentially numbered for combining with tabular data)
-    * ocean area
-    * marine protected area (classification, year of protection, proportion of protection)
-    * Exclusive Economic Zones (EEZ) and FAO fishing regions
-    * Marine Ecoregions of the World
-    * bathymetry
-    * NOTE: these layers are all saved in the `spp_risk_dists/_spatial` directory.
-      * 4a_set_up_ocean_area_and_mpa_pct.Rmd
-      * 4b_set_up_eez_meow_rasts.Rmd: You can skip this one. 
-5. Convert species range maps to rasters. 
-    * For maps provided directly by IUCN, aggregate into multispecies files based on family. There is some cleaning done at this stage to fix problematic extents and attributes.
-    * From the list of all available maps, generate a master list of all mapped, assessed species for inclusion in the study.
-    * Rasterize each species to a .csv that includes cell ID and presence.  A .csv format was used for file size and ease of reading and binding into dataframes.
-      * 5b_generate_spp_map_list.Rmd
-      * 5c_rasterize_spp_shps.Rmd
-6. Aggregate individual species ranges into larger taxonomic groups, and summarize key variables (mean risk, variance of risk, number of species, etc) by group.  
-    * Technically this is not necessary but makes it easier to quality check the process along the way, and supports mapping at the level of taxonomic group rather than the entire species list level.
-    * This process is done twice: once for uniform weighting and once for range-rarity weighting.  Resulting files are saved separately.
-      * 6a_aggregate_spp_ranges.Rmd
-      * 6b_aggregate_rr_spp_ranges.Rmd
 
 #### Then run this!  Root directory: `v2025`
 
-At this level there are several scripts, prefixed `1x_biodiversity_maps`, that collate the various taxonomic group level files (generated in `setup` part 6) and summarize to the global level. These need to be run before spp_data_prep.Rmd!
-  * 1a_biodiversity_maps_comp_assessed.Rmd
-  * 1c_biodiversity_maps_all_spp.Rmd
-  * spp_data_prep.Rmd
-
-* Note each creates a specific aggregation - comprehensively assessed species vs all available species; uniform vs range-rarity weighting.
-* The rasters generated in these scripts are saved in the `_output` folder.
-
-
-### Data and output files
-
-The `spp_risk_dists/_data` folder contains tabular data about IUCN species used throughout the processing of this analysis.  These files are generated by scripts in the setup directory.
-
-The `spp_risk_dists/_spatial` folder contains general spatial data generated and/or used in the `setup` scripts.  These include:
-
-* rasters for cell ID, EEZ ID, marine ecoregion ID, ocean area, and bathymetry masks.   
-* tabular data of region names and lookups for IUCN regional assessment to marine ecoregion.
-* tabular data of marine protected area level/year/coverage to cell ID.
-* shapefiles used for map plotting from Natural Earth.
-
-The `spp_risk_dists/_output` folder contains the rasters of biodiversity risk, species richness, variance of risk, etc generated from the scripts in the base directory.
+1. `1a_biodiversity_maps_comp_assessed.Rmd`
+2. `1c_biodiversity_maps_all_spp.Rmd`
 
 ***
 ## Compare all vs. comprehensively assessed species
-In the past, we have used all species with IUCN risk assessments to calculate the species subgoal.  However, some of Casey's work suggests it is better to use the taxa groups that have been comprehensively assessed by IUCN (> 90% of species assessed).  The general concern is that IUCN tends to oversample species in the Atlantic portion of the ocean, relative to other regions.  This is indicated by the larger number of species with IUCN status in this region.  However, the Atlantic falls in line with the other regions when looking at the comprehensively assessed species.  
+
+- Comprehensively-assessed species analyzed in `1a_biodiversity_maps_comp_assessed.Rmd`
+- All species analyzed in `1c_biodiversity_maps_all_spp.Rmd`
+
+In the past, we have used all species with IUCN risk assessments to calculate the species subgoal.  However, some of Casey's work suggests it is better to use the taxa groups that have been comprehensively assessed by IUCN (> 90% of species assessed). The general concern is that IUCN tends to oversample species in the Atlantic portion of the ocean, relative to other regions. This is indicated by the larger number of species with IUCN status in this region.  However, the Atlantic falls in line with the other regions when looking at the comprehensively assessed species.  
 
 ```{r, eval=FALSE}
 #devtools::install_github("dill/beyonce")
@@ -286,7 +187,9 @@ plot(prop_comp, col=rev(cols))
 ## SPP: Status
 
 ### Status: Extract average species risk for each region
+
 For each cell, we multiply the average species risk by the number of species in order to weight each cells contribution by the number of species.  We sum these values for each region and calculate:
+
 (average species risk * number species)/number of species
 
 ```{r, eval = FALSE}
@@ -322,11 +225,12 @@ rgn_risk_comp <- rgn_risk_comp %>%
 
 ```
 
-
 ### Status: estimate for previous years
+
 We use the trend data to estimate risk values for previous years (vs. using the same values for all assessment years).  The change in species status across years is based on a linear model.
 
 Trend is calculated using the same method as the risk calculation. For each cell, we multiply the average species trend by the number of species in order to weight each cell's contribution by the number of species in the cell.  We sum these values for each OHI region and calculate for each region:
+
 (average species trend * number species)/number of species
 
 ```{r, eval = FALSE}
@@ -363,6 +267,7 @@ rgn_trend_comp <- rgn_trend_comp %>%
 ```
 
 ### Status: Get yearly risk scores based on trend
+
 We estimate previous risk for each region, using the trend data.  We assume change in risk is linear.  
 
 ```{r, eval = FALSE}
@@ -382,9 +287,10 @@ rgn_risk_comp_yrs <- rgn_risk_comp %>%
 
 ```
 
-
 ### Status: Converting regional mean risk to status
+
 We rescale the data so a risk factor of 0.75 is equal to zero.
+
 ```{r, eval = FALSE}
 rgn_status <- rgn_risk_comp_yrs %>%
   mutate(spp_status = (0.75 - mean_risk)/0.75)
@@ -418,6 +324,8 @@ status_gf <- status_gf %>%
 ```
 
 ### Status: Final formatting for ohi-global
+
+`sp_status_global.csv`
 
 ```{r, eval = FALSE}
 status <- status_gf %>%
@@ -464,6 +372,7 @@ ggplot(old_spp, aes(x = old_score, y = new_score)) +
 ## SPP: Trend
 
 ### Trend: calculating
+
 Getting proportional trend requires the status data (trend/status). Proportional trend is multiplied by 5 to get estimated change in five years.
 
 ```{r, eval = FALSE}
@@ -481,6 +390,7 @@ rgn_trend_score <- rgn_trend_comp %>%
 ```
 
 ### Trend: Gapfilling missing data
+
 Check there are data for every region.  Region 232 (Bosnia) does not have a value which is not surprising because their coast is super small and results are erratic for this region.  We estimate this using the mean of the 2 surrounding regions.  
 
 ```{r, eval = FALSE}
@@ -501,6 +411,8 @@ trend$trend_score[trend$rgn_id == 232] <- bosnia
 
 ## Trend: Final formatting for ohi-global
 
+`sp_trend_global.csv`
+
 ```{r, eval = FALSE}
 trend <- trend %>%
   dplyr::select(rgn_id, score = trend_score)
@@ -511,7 +423,9 @@ write.csv(trend, here("globalprep/spp/", scenario, "/output/sp_trend_global.csv"
 ```
 
 ### Trend: Compare to last year
+
 Previously we used proxy data rather than actual change in IUCN status over time.  Our previous method overestimated the magnitude of the trend.  It is not surprising there is poor correlation with trend estimates in previous years (before 2019), but it is reassuring the the values mainly fall in the same quadrant, and trends are largely the same now (2019 - present)
+
 ```{r, eval = FALSE}
 
 trend <- read.csv(here("globalprep/spp/", scenario, "/output/sp_trend_global.csv"))  
@@ -536,8 +450,8 @@ ggplot(old_spp, aes(x = old_score, y = score)) +
        y = "2025 Trend Assessment")
 ```
 
-
 ### Status/trend: save a record of gapfilling
+
 ```{r, eval = FALSE}
 status <- read.csv(here("globalprep/spp/", scenario, "/output/sp_status_global.csv")) %>%
   mutate(gapfilled = ifelse(rgn_id == 232, 1, 0)) %>%
@@ -554,14 +468,15 @@ trend <- read.csv(here("globalprep/spp/", scenario, "/output/sp_trend_global.csv
 write.csv(trend, here("globalprep/spp/", scenario, "/output/sp_trend_global_gf.csv"), row.names=FALSE)          
 ```
 
-
 ## Resilience data
+
 We use species condition data as a resilience measure as well.  We also calculate species condition at 3nm of shoreline, because for some goals, nearshore species condition is the relevant metric.   
 
 ### Resilience: Prepare rasters for 3nm extraction
 We reproject the data to have higher resolution in order to more easily extract the data at the 3nm scale.  
 
 We modify the method a bit from above due to size of the rasters.  
+
 ```{r, eval=FALSE}
 #3nm raster file
 rgns <- raster(file.path(dir_M, "git-annex/globalprep/spatial/v2018/rgns_3nm_offshore_mol.tif"))
@@ -607,8 +522,8 @@ n_comp_old <- rast(file.path(dir_M, "git-annex/globalprep/spp", "v2024", "int/n_
 plot(n_comp_old)
 ```
 
-
 ### Resilience: Extract data
+
 Extract species risk data that corresponds to 3nm regions.
 
 ```{r, eval = FALSE}
@@ -645,14 +560,17 @@ rgn_3nm_risk <- risk_df_2 %>%
 ```
 
 ### Resilience: estimate for previous years
+
 We use the trend data to estimate risk values for previous years (vs. using the same values for all assessment years).  The change in species status across years is based on a linear model.
 
 Trend is calculated using the same method as the risk calculation. For each cell, we multiply the average species trend by the number of species in order to weight each cell's contribution by the number of species in the cell.  We sum these values for each OHI region and calculate for each region:
+
 (average species trend * number species)/number of species
 
-
 #### Resilience: Prepare rasters for 3nm extraction (trend to estimate previous years' data)
+
 We reproject the data to have higher resolution in order to more easily extract the data at the 3nm scale.  
+
 ```{r, eval=FALSE}
 rgns <- raster(file.path(dir_M, "git-annex/globalprep/spatial/v2018/rgns_3nm_offshore_mol.tif"))
 
@@ -690,6 +608,7 @@ plot(n_trend_comp_old)
 ```
 
 ### Resilience: Extract trend data (used to estimate previous years' data)
+
 Extract species risk data that corresponds to 3nm regions.
 
 ```{r, eval = FALSE}
@@ -726,8 +645,8 @@ rgn_3nm_trend <- trend_df_2 %>%
 
 ```
   
-
 ### Resilience: Calculate yearly risk scores based on trend
+
 We estimate previous risk for each region, using the trend data.  We assume change in risk is linear.  
 
 ```{r, eval = FALSE}
@@ -789,6 +708,8 @@ summary(res_gf)
 
 ### Resilience: Final formatting for ohi-global
 
+`sp_status_3nm.csv`
+
 ```{r, eval = FALSE}
 resilience <- res_gf %>%
   dplyr::select(rgn_id, year, score = spp_status)
@@ -800,6 +721,7 @@ write.csv(resilience, here("globalprep/spp", scenario, "output/sp_status_3nm.csv
 ```
 
 ### Resilience: save a record of gapfilling
+
 ```{r, eval = FALSE}
 res <- read.csv(here("globalprep/spp", scenario, "output/sp_status_3nm.csv")) %>%
   mutate(gapfilled = ifelse(rgn_id == 19, 1, 0)) %>%

@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Fri Jul 25 18:52:18 2025 by hoyt" />
+<meta name="author" content="Compiled on Fri Jul 25 19:46:10 2025 by hoyt" />
 
 
-<title>Query IUCN marine species data</title>
+<title>Process IUCN Spatial Data</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1645,8 +1645,8 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">Query IUCN marine species data</h1>
-<h4 class="author"><em>Compiled on Fri Jul 25 18:52:18 2025 by
+<h1 class="title toc-ignore">Process IUCN Spatial Data</h1>
+<h4 class="author"><em>Compiled on Fri Jul 25 19:46:10 2025 by
 hoyt</em></h4>
 
 </div>
@@ -1654,816 +1654,719 @@ hoyt</em></h4>
 
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">eval=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">fig.width =</span> <span class="dv">6</span>, <span class="at">fig.height =</span> <span class="dv">4</span>, <span class="at">fig.path =</span> <span class="st">&#39;Figs/&#39;</span>,</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>                      <span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">warning =</span> <span class="cn">FALSE</span>, <span class="at">eval =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">#install.packages(&quot;rredlist&quot;)</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">library</span>(rredlist)</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#source(&#39;https://raw.githubusercontent.com/oharac/src/master/R/common.R&#39;)</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&#39;workflow/R/common.R&#39;</span>))</span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>goal     <span class="ot">&lt;-</span> <span class="st">&#39;spp&#39;</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>scenario <span class="ot">&lt;-</span> <span class="st">&#39;v2025&#39;</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>dir_goal <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">&#39;globalprep&#39;</span>, goal, scenario)</span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="do">### goal specific folders and info</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>dir_anx  <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_M, <span class="st">&#39;git-annex/globalprep&#39;</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>dir_setup   <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;_setup&#39;</span>)</span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>dir_goal_anx <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_anx, goal, scenario, <span class="st">&#39;spp_risk_dists&#39;</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">file.path</span>(dir_setup, <span class="st">&#39;common_fxns.R&#39;</span>))</span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>                      <span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">warning =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">library</span>(fasterize)</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="fu">library</span>(doParallel)</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&#39;workflow/R/common.R&#39;</span>))</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>goal     <span class="ot">&lt;-</span> <span class="st">&#39;spp&#39;</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>scenario <span class="ot">&lt;-</span> <span class="st">&#39;v2025&#39;</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>dir_goal <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">&#39;globalprep&#39;</span>, goal, scenario)</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="do">### goal specific folders and info</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>dir_data  <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;_data&#39;</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>dir_setup <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;_setup&#39;</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>dir_anx  <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_M, <span class="st">&#39;git-annex/globalprep&#39;</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>dir_goal_anx <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_anx, goal, scenario, <span class="st">&#39;spp_risk_dists&#39;</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>dir_raw_data_anx <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_anx, <span class="st">&#39;_raw_data&#39;</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>dir_spatial <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;_spatial&#39;</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">file.path</span>(dir_setup, <span class="st">&#39;common_fxns.R&#39;</span>))</span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>dir_bli <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_M, <span class="st">&#39;git-annex/globalprep/_raw_data/birdlife_intl/d2025&#39;</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>dir_shp <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_M, <span class="st">&#39;git-annex/globalprep/_raw_data/iucn_spp/d2025-1&#39;</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>  <span class="do">### in this folder are shapefiles at a taxonomic level, both from</span></span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>  <span class="do">### IUCN spatial data download (version 2025-1)</span></span></code></pre></div>
 <div id="summary" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Summary</h1>
-<p>This .Rmd sets up the following .csv files, saved in the
-<code>_data</code> folder:</p>
-<p>For <em>global</em> assessments:</p>
+<p>Rasterize each species to a 10 km x 10 km raster, saved to the
+git-annex <code>spp-rasters</code> folder.</p>
+<p>For comprehensively-assessed and non-comprehensively-assessed
+species, calculate the following by cell, saved to the git-annex
+<code>taxa-summaries</code> folder:</p>
 <ul>
-<li><code>iucn_risk_current_2025-1.csv</code></li>
-<li><code>iucn_risk_timeseries_2025-1.csv</code></li>
-<li><code>spp_marine_from_api_2025-1.csv</code></li>
-</ul>
-<p>For <em>regional</em> assessments:</p>
-<ul>
-<li><code>iucn_risk_rgn_current_2025-1.csv</code></li>
-<li><code>iucn_risk_ts_rgn_2025-1.csv</code></li>
-</ul>
-<p>For trends:</p>
-<ul>
-<li><code>iucn_trend_by_spp_2025-1.csv</code></li>
+<li>mean extinction risk</li>
+<li>variance of extinction risk</li>
+<li>trend</li>
+<li>threatened species count</li>
+<li>n_spp</li>
+<li>n_spp_trend</li>
 </ul>
 </div>
-<div id="data-sources" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Data Sources</h1>
-<div id="iucn-red-list" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> IUCN Red List</h2>
-<p>To access the API v4, you will need to sign up for a key on the <a href="https://api.iucnredlist.org/">IUCN website</a>. This key can be
-added to the local .renviron on your machine and retrieved using the
-code below.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Save API key</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">rl_use_iucn</span>()</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>api_version <span class="ot">&lt;-</span> <span class="fu">rl_version</span>()</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># or</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="fu">rl_use_api_key</span>(<span class="st">&quot;YOUR_API_KEY_HERE&quot;</span>)</span></code></pre></div>
-</div>
-</div>
-<div id="methods" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Methods</h1>
-<p>Query IUCN species data from the API. These queries can take many
-hours, so start this process early and save the outputs to the
-<code>_data/iucn</code> folder to avoid having to re-run the queries.
-The following data was extracted:</p>
+<div id="methods" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Methods</h1>
+<div id="read-spp-shapes-correct-subpop-ids-fasterize-depth-clip-save-to-csv" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Read spp shapes,
+correct subpop IDs, <code>fasterize()</code>, depth clip, save to
+csv</h2>
+<p>We will loop over each species in each shapefile and rasterize
+separately, using <code>sf</code> and <code>fasterize</code>
+packages.</p>
 <ul>
-<li>Marine species list</li>
-<li>Subpopulation assessments</li>
-<li>Taxa info</li>
-<li>Habitat info</li>
-<li>Comprehensive assessments</li>
+<li>From the full map list, filter to a single shapefile</li>
+<li>Load shapefile using <code>st_read</code>, and correct subpop IDs
+from <code>shp_iucn_sid</code> to <code>iucn_sid</code></li>
+<li>Loop over each <code>iucn_sid</code> in the shapefile, rasterizing
+(<code>fasterize()</code>) to 10 km^2 resolution, using “presence”
+field.
+<ul>
+<li>clip to neritic (&lt;=200 m) and shallow (&lt;=60 m) depth raster if
+appropriate. Otherwise mask to bathy raster. Since bathy raster was
+created by masking to area raster, cells with any marine presence will
+be kept but any non-marine cells will be dropped.</li>
+<li>Save as .csv</li>
+<li>use <code>mclapply()</code> to speed this up.</li>
+</ul></li>
 </ul>
-<div id="query-iucn-data-from-the-api" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Query IUCN data from
-the API</h2>
-<div id="marine-species-list" class="section level3" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Marine Species
-List</h3>
-<p>First, we need to establish the list of marine species we are
-interested in. We can do this by using <code>rl_systems()</code> to
-search for all species coded for the marine system (“2”).</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Save IUCN systems</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>iucn_systems <span class="ot">&lt;-</span> <span class="fu">rl_systems</span>()<span class="sc">$</span>systems</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># Unlist description column</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>iucn_systems<span class="sc">$</span>description <span class="ot">&lt;-</span> iucn_systems<span class="sc">$</span>description<span class="sc">$</span>en</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co"># Search for species by marine system</span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>marine_system <span class="ot">&lt;-</span> <span class="fu">rl_systems</span>(<span class="st">&quot;2&quot;</span>)<span class="sc">$</span>assessments </span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co"># Clean up data frame</span></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>marine_system <span class="ot">&lt;-</span> marine_system <span class="sc">%&gt;%</span></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">iucn_sid =</span> sis_taxon_id, </span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>         <span class="at">sciname =</span> taxon_scientific_name,</span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>         <span class="at">category =</span> red_list_category_code,</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>         <span class="at">year =</span> year_published) <span class="sc">%&gt;%</span></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>  <span class="co"># Unnest scopes variable</span></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>  <span class="fu">unnest</span>(scopes, <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>)</span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co"># Save list of unique taxon IDs</span></span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>marine_species_list <span class="ot">&lt;-</span> <span class="fu">unique</span>(marine_system<span class="sc">$</span>iucn_sid)</span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a></span>
-<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a><span class="co"># Unlist the description column</span></span>
-<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>marine_system<span class="sc">$</span>scopes_description <span class="ot">&lt;-</span> marine_system<span class="sc">$</span>scopes_description<span class="sc">$</span>en</span>
-<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a><span class="co"># Save for time</span></span>
-<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a><span class="fu">write_csv</span>(marine_system, <span class="fu">file.path</span>(dir_goal, <span class="fu">sprintf</span>(<span class="st">&#39;_data/iucn/marine_system_%s.csv&#39;</span>, api_version)))</span>
-<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a></span>
-<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a><span class="co"># Load for time</span></span>
-<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a><span class="co">#marine_system &lt;- read_csv(file.path(dir_goal, sprintf(&#39;_data/iucn/marine_system_2025-1.csv&#39;)), show_col_types = FALSE)</span></span>
-<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a></span>
-<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a><span class="co"># 2025: 19,944 species</span></span></code></pre></div>
+<div id="annex-spp_risk_distsspp_rastersiucn_sid_s.csv" class="section level4" number="2.1.0.1">
+<h4><span class="header-section-number">2.1.0.1</span> Annex:
+<code>spp_risk_dists/spp_rasters/iucn_sid_%s.csv</code></h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>reload <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>maps_to_rasterize <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(dir_data,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>                                        <span class="fu">sprintf</span>(<span class="st">&#39;spp_marine_maps_%s.csv&#39;</span>, api_version)),</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>                              <span class="at">col_types =</span> <span class="st">&#39;ddcicccl&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">shp_file =</span> <span class="fu">str_replace</span>(dbf_file, <span class="st">&#39;dbf$&#39;</span>, <span class="st">&#39;shp&#39;</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co"># Rast_base for cell IDs (import from v2025 unless updated)</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>rast_base <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="st">&#39;/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_spatial/cell_id_rast.tif&#39;</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="do">### If some species already processed, remove from the list to process.</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="cf">if</span>(reload <span class="sc">==</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>  maps_already_rasterized <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;spp_rasters&#39;</span>),</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>                                        <span class="at">pattern =</span> <span class="st">&#39;.csv&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>    <span class="fu">str_replace_all</span>(<span class="st">&#39;iucn_sid_|.csv$&#39;</span>, <span class="st">&#39;&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>    <span class="fu">as.integer</span>()</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>  maps_to_rasterize <span class="ot">&lt;-</span> maps_to_rasterize <span class="sc">%&gt;%</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span>iucn_sid <span class="sc">%in%</span> maps_already_rasterized)</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>}</span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="do">### for selectively rerunning taxonomic groups</span></span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="co"># maps_to_rasterize &lt;- maps_to_rasterize %&gt;%</span></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="co">#   filter(str_detect(dbf_file, &#39;birdlife&#39;))</span></span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="co"># These will be used as masks (import from v2025 unless updated)</span></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>rast_bathy <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="st">&#39;/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_spatial/bathy_rast.tif&#39;</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>rast_neritic <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="st">&#39;/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_spatial/bathy_rast_neritic.tif&#39;</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>rast_shallow <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="st">&#39;/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_spatial/bathy_rast_shallow.tif&#39;</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">nrow</span>(maps_to_rasterize) <span class="sc">==</span> <span class="dv">0</span>) { <span class="do">### all maps accounted for as .csvs</span></span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>  </span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>  <span class="fu">cat_msg</span>(<span class="st">&#39;reload == &#39;</span>, reload, <span class="st">&#39;... No maps to process...&#39;</span>)</span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>  </span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>  </span>
+<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>  <span class="fu">cat_msg</span>(<span class="st">&#39;reload == &#39;</span>, reload, <span class="st">&#39;... Maps to process: &#39;</span>, <span class="fu">nrow</span>(maps_to_rasterize))</span>
+<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>  </span>
+<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>  <span class="do">################################################################.</span></span>
+<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>  <span class="do">### Loop over each distinct shapefile with species range maps</span></span>
+<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a>  <span class="do">################################################################.</span></span>
+<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a>  <span class="co"># bli_already_done &lt;- read_csv(file.path(&quot;globalprep/spp/v2025/_setup&quot;, &quot;int/bli_already_done.csv&quot;))  </span></span>
+<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a>  <span class="co"># bli_done_vec &lt;- bli_already_done$iucn_sid</span></span>
+<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a>  <span class="co"># </span></span>
+<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a>  <span class="co"># maps_to_rasterize &lt;- maps_to_rasterize %&gt;%</span></span>
+<span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a>  <span class="co">#   filter((iucn_sid %in% bli_done_vec))</span></span>
+<span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a>  </span>
+<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a>  shps <span class="ot">&lt;-</span> maps_to_rasterize<span class="sc">$</span>shp_file <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span>
+<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a>  <span class="co"># shps &lt;- shps[1]</span></span>
+<span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(shps)) {</span>
+<span id="cb3-52"><a href="#cb3-52" tabindex="-1"></a>    <span class="co"># i &lt;- 1</span></span>
+<span id="cb3-53"><a href="#cb3-53" tabindex="-1"></a>    </span>
+<span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a>    shp <span class="ot">&lt;-</span> shps[i]</span>
+<span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a>    </span>
+<span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a>    maps_in_shp <span class="ot">&lt;-</span> maps_to_rasterize <span class="sc">%&gt;%</span></span>
+<span id="cb3-57"><a href="#cb3-57" tabindex="-1"></a>      <span class="fu">filter</span>(shp_file <span class="sc">==</span> shp)</span>
+<span id="cb3-58"><a href="#cb3-58" tabindex="-1"></a>    </span>
+<span id="cb3-59"><a href="#cb3-59" tabindex="-1"></a>    id_fix <span class="ot">&lt;-</span> maps_in_shp <span class="sc">%&gt;%</span></span>
+<span id="cb3-60"><a href="#cb3-60" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">select</span>(shp_iucn_sid, iucn_sid, subpop, max_depth) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-61"><a href="#cb3-61" tabindex="-1"></a>      <span class="fu">distinct</span>()</span>
+<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a>    </span>
+<span id="cb3-63"><a href="#cb3-63" tabindex="-1"></a>    <span class="fu">cat_msg</span>(i, <span class="st">&#39; of &#39;</span>, <span class="fu">length</span>(shps), <span class="st">&#39;: reading &#39;</span>, <span class="fu">basename</span>(shp), <span class="st">&#39; from: </span><span class="sc">\n</span><span class="st">  &#39;</span>, shp)</span>
+<span id="cb3-64"><a href="#cb3-64" tabindex="-1"></a>    </span>
+<span id="cb3-65"><a href="#cb3-65" tabindex="-1"></a>    polys_all_geometry <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(shp, <span class="at">type =</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-66"><a href="#cb3-66" tabindex="-1"></a>      <span class="fu">clean_df_names</span>()</span>
+<span id="cb3-67"><a href="#cb3-67" tabindex="-1"></a>    </span>
+<span id="cb3-68"><a href="#cb3-68" tabindex="-1"></a>    polys_all <span class="ot">&lt;-</span> polys_all_geometry <span class="sc">%&gt;%</span> </span>
+<span id="cb3-69"><a href="#cb3-69" tabindex="-1"></a>      <span class="fu">st_set_geometry</span>(<span class="cn">NULL</span>)</span>
+<span id="cb3-70"><a href="#cb3-70" tabindex="-1"></a>    </span>
+<span id="cb3-71"><a href="#cb3-71" tabindex="-1"></a>      <span class="do">### we will check geoms and fix them inside the mclapply, </span></span>
+<span id="cb3-72"><a href="#cb3-72" tabindex="-1"></a>      <span class="do">### and then reproject, one species at a time</span></span>
+<span id="cb3-73"><a href="#cb3-73" tabindex="-1"></a>    </span>
+<span id="cb3-74"><a href="#cb3-74" tabindex="-1"></a>    <span class="cf">if</span>(<span class="st">&#39;sci_name&#39;</span> <span class="sc">%in%</span> <span class="fu">names</span>(polys_all)) {</span>
+<span id="cb3-75"><a href="#cb3-75" tabindex="-1"></a>      polys_all <span class="ot">&lt;-</span> polys_all <span class="sc">%&gt;%</span> </span>
+<span id="cb3-76"><a href="#cb3-76" tabindex="-1"></a>        <span class="fu">rename</span>(<span class="at">sciname =</span> sci_name) </span>
+<span id="cb3-77"><a href="#cb3-77" tabindex="-1"></a>    } </span>
+<span id="cb3-78"><a href="#cb3-78" tabindex="-1"></a></span>
+<span id="cb3-79"><a href="#cb3-79" tabindex="-1"></a>    <span class="cf">if</span>(<span class="st">&#39;binomial&#39;</span> <span class="sc">%in%</span> <span class="fu">names</span>(polys_all)) {</span>
+<span id="cb3-80"><a href="#cb3-80" tabindex="-1"></a>      polys_all <span class="ot">&lt;-</span> polys_all <span class="sc">%&gt;%</span></span>
+<span id="cb3-81"><a href="#cb3-81" tabindex="-1"></a>        <span class="fu">rename</span>(<span class="at">sciname =</span> binomial)</span>
+<span id="cb3-82"><a href="#cb3-82" tabindex="-1"></a>    }</span>
+<span id="cb3-83"><a href="#cb3-83" tabindex="-1"></a>    </span>
+<span id="cb3-84"><a href="#cb3-84" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span><span class="st">&#39;subpop&#39;</span> <span class="sc">%in%</span> <span class="fu">names</span>(polys_all)) {</span>
+<span id="cb3-85"><a href="#cb3-85" tabindex="-1"></a>      polys_all<span class="sc">$</span>subpop <span class="ot">&lt;-</span> <span class="cn">NA_character_</span></span>
+<span id="cb3-86"><a href="#cb3-86" tabindex="-1"></a>      <span class="do">### if shape doesn&#39;t have subpop column, add it as NA</span></span>
+<span id="cb3-87"><a href="#cb3-87" tabindex="-1"></a>    }</span>
+<span id="cb3-88"><a href="#cb3-88" tabindex="-1"></a>    <span class="cf">if</span>(<span class="st">&#39;id_no&#39;</span> <span class="sc">%in%</span> <span class="fu">names</span>(polys_all)) {</span>
+<span id="cb3-89"><a href="#cb3-89" tabindex="-1"></a>      polys_all <span class="ot">&lt;-</span> polys_all <span class="sc">%&gt;%</span></span>
+<span id="cb3-90"><a href="#cb3-90" tabindex="-1"></a>        <span class="fu">rename</span>(<span class="at">iucn_sid =</span> id_no)</span>
+<span id="cb3-91"><a href="#cb3-91" tabindex="-1"></a>    }</span>
+<span id="cb3-92"><a href="#cb3-92" tabindex="-1"></a>    </span>
+<span id="cb3-93"><a href="#cb3-93" tabindex="-1"></a>    <span class="cf">if</span>(<span class="st">&#39;sisid&#39;</span> <span class="sc">%in%</span> <span class="fu">names</span>(polys_all)){</span>
+<span id="cb3-94"><a href="#cb3-94" tabindex="-1"></a>      polys_all <span class="ot">&lt;-</span> polys_all <span class="sc">%&gt;%</span></span>
+<span id="cb3-95"><a href="#cb3-95" tabindex="-1"></a>        <span class="fu">rename</span>(<span class="at">iucn_sid =</span> sisid)</span>
+<span id="cb3-96"><a href="#cb3-96" tabindex="-1"></a>    }</span>
+<span id="cb3-97"><a href="#cb3-97" tabindex="-1"></a>    </span>
+<span id="cb3-98"><a href="#cb3-98" tabindex="-1"></a>    <span class="cf">if</span>(<span class="st">&#39;presenc&#39;</span> <span class="sc">%in%</span> <span class="fu">names</span>(polys_all)){</span>
+<span id="cb3-99"><a href="#cb3-99" tabindex="-1"></a>      polys_all <span class="ot">&lt;-</span> polys_all <span class="sc">%&gt;%</span></span>
+<span id="cb3-100"><a href="#cb3-100" tabindex="-1"></a>        <span class="fu">rename</span>(<span class="at">presence =</span> presenc) </span>
+<span id="cb3-101"><a href="#cb3-101" tabindex="-1"></a>    }</span>
+<span id="cb3-102"><a href="#cb3-102" tabindex="-1"></a>    </span>
+<span id="cb3-103"><a href="#cb3-103" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span><span class="st">&#39;presence&#39;</span> <span class="sc">%in%</span> <span class="fu">names</span>(polys_all)) {</span>
+<span id="cb3-104"><a href="#cb3-104" tabindex="-1"></a>      polys_all <span class="ot">&lt;-</span> polys_all <span class="sc">%&gt;%</span></span>
+<span id="cb3-105"><a href="#cb3-105" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">presence =</span> <span class="dv">1</span>) </span>
+<span id="cb3-106"><a href="#cb3-106" tabindex="-1"></a>    }</span>
+<span id="cb3-107"><a href="#cb3-107" tabindex="-1"></a>    </span>
+<span id="cb3-108"><a href="#cb3-108" tabindex="-1"></a>    polys_all <span class="ot">&lt;-</span> polys_all <span class="sc">%&gt;%</span></span>
+<span id="cb3-109"><a href="#cb3-109" tabindex="-1"></a>        <span class="fu">st_sf</span>(<span class="at">geometry =</span> <span class="fu">st_geometry</span>(polys_all_geometry))</span>
+<span id="cb3-110"><a href="#cb3-110" tabindex="-1"></a>    </span>
+<span id="cb3-111"><a href="#cb3-111" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">identical</span>(<span class="fu">st_geometry</span>(polys_all), <span class="fu">st_geometry</span>(polys_all_geometry)) <span class="sc">==</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb3-112"><a href="#cb3-112" tabindex="-1"></a>      <span class="fu">cat_msg</span>(<span class="st">&quot;HALT: GEOMETRIES DO NOT MATCH FOR&quot;</span>, i, <span class="st">&#39; of &#39;</span>, <span class="fu">length</span>(shps), <span class="st">&#39;in&#39;</span>, <span class="fu">basename</span>(shp), <span class="st">&#39; from: </span><span class="sc">\n</span><span class="st">  &#39;</span>, shp)</span>
+<span id="cb3-113"><a href="#cb3-113" tabindex="-1"></a>    }</span>
+<span id="cb3-114"><a href="#cb3-114" tabindex="-1"></a>    </span>
+<span id="cb3-115"><a href="#cb3-115" tabindex="-1"></a>    polys_match <span class="ot">&lt;-</span> polys_all <span class="sc">%&gt;%</span></span>
+<span id="cb3-116"><a href="#cb3-116" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="at">shp_iucn_sid =</span> iucn_sid, sciname, subpop, presence, geometry) <span class="sc">%&gt;%</span></span>
+<span id="cb3-117"><a href="#cb3-117" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">presence =</span> <span class="fu">ifelse</span>(presence <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">1</span>, presence),</span>
+<span id="cb3-118"><a href="#cb3-118" tabindex="-1"></a>             <span class="at">subpop   =</span> <span class="fu">as.character</span>(subpop)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-119"><a href="#cb3-119" tabindex="-1"></a>      <span class="fu">inner_join</span>(id_fix, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&#39;shp_iucn_sid&#39;</span>, <span class="st">&#39;subpop&#39;</span>)) </span>
+<span id="cb3-120"><a href="#cb3-120" tabindex="-1"></a>    </span>
+<span id="cb3-121"><a href="#cb3-121" tabindex="-1"></a>    spp_ids <span class="ot">&lt;-</span> maps_in_shp<span class="sc">$</span>iucn_sid <span class="sc">%&gt;%</span> </span>
+<span id="cb3-122"><a href="#cb3-122" tabindex="-1"></a>      <span class="fu">sort</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-123"><a href="#cb3-123" tabindex="-1"></a>      <span class="fu">unique</span>()</span>
+<span id="cb3-124"><a href="#cb3-124" tabindex="-1"></a>    </span>
+<span id="cb3-125"><a href="#cb3-125" tabindex="-1"></a>  </span>
+<span id="cb3-126"><a href="#cb3-126" tabindex="-1"></a>    <span class="do">####################################################################.</span></span>
+<span id="cb3-127"><a href="#cb3-127" tabindex="-1"></a>    <span class="do">### In each shapefile, loop over each species ID using mclapply().</span></span>
+<span id="cb3-128"><a href="#cb3-128" tabindex="-1"></a>    <span class="do">####################################################################.</span></span>
+<span id="cb3-129"><a href="#cb3-129" tabindex="-1"></a>    </span>
+<span id="cb3-130"><a href="#cb3-130" tabindex="-1"></a>    <span class="fu">cat_msg</span>(<span class="st">&#39;Processing &#39;</span>, <span class="fu">basename</span>(shp), <span class="st">&#39; with &#39;</span>, <span class="fu">length</span>(spp_ids), <span class="st">&#39; species...&#39;</span>)</span>
+<span id="cb3-131"><a href="#cb3-131" tabindex="-1"></a>    </span>
+<span id="cb3-132"><a href="#cb3-132" tabindex="-1"></a>    <span class="co"># system.time({</span></span>
+<span id="cb3-133"><a href="#cb3-133" tabindex="-1"></a>      tmp <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">mclapply</span>(<span class="fu">seq_along</span>(spp_ids),</span>
+<span id="cb3-134"><a href="#cb3-134" tabindex="-1"></a>                                <span class="at">mc.cores =</span> <span class="dv">12</span>, </span>
+<span id="cb3-135"><a href="#cb3-135" tabindex="-1"></a>                                <span class="at">FUN =</span> <span class="cf">function</span>(x) {</span>
+<span id="cb3-136"><a href="#cb3-136" tabindex="-1"></a>         <span class="co">#x &lt;- 81:128</span></span>
+<span id="cb3-137"><a href="#cb3-137" tabindex="-1"></a>        spp <span class="ot">&lt;-</span> spp_ids[x]</span>
+<span id="cb3-138"><a href="#cb3-138" tabindex="-1"></a>        </span>
+<span id="cb3-139"><a href="#cb3-139" tabindex="-1"></a>        <span class="fu">cat_msg</span>(x, <span class="st">&#39; of &#39;</span>, <span class="fu">length</span>(spp_ids), <span class="st">&#39;: Processing &#39;</span>, spp, <span class="st">&#39; in &#39;</span>, <span class="fu">basename</span>(shp),</span>
+<span id="cb3-140"><a href="#cb3-140" tabindex="-1"></a>                <span class="st">&#39; (group &#39;</span>, i, <span class="st">&#39; of &#39;</span>, <span class="fu">length</span>(shps), <span class="st">&#39;)...</span><span class="sc">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb3-141"><a href="#cb3-141" tabindex="-1"></a>        </span>
+<span id="cb3-142"><a href="#cb3-142" tabindex="-1"></a>        spp_shp <span class="ot">&lt;-</span> polys_match <span class="sc">%&gt;%</span></span>
+<span id="cb3-143"><a href="#cb3-143" tabindex="-1"></a>          <span class="fu">filter</span>(iucn_sid <span class="sc">==</span> spp)</span>
+<span id="cb3-144"><a href="#cb3-144" tabindex="-1"></a>        </span>
+<span id="cb3-145"><a href="#cb3-145" tabindex="-1"></a>        spp_shp <span class="ot">&lt;-</span> <span class="fu">valid_check</span>(spp_shp)</span>
+<span id="cb3-146"><a href="#cb3-146" tabindex="-1"></a>          <span class="do">### if invalid geom, and bounds exceeded, buffer to 0</span></span>
+<span id="cb3-147"><a href="#cb3-147" tabindex="-1"></a>        spp_shp <span class="ot">&lt;-</span> spp_shp <span class="sc">%&gt;%</span></span>
+<span id="cb3-148"><a href="#cb3-148" tabindex="-1"></a>          <span class="fu">clip_to_globe</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-149"><a href="#cb3-149" tabindex="-1"></a>            <span class="do">### indiv files should have adjusted boundaries already; only </span></span>
+<span id="cb3-150"><a href="#cb3-150" tabindex="-1"></a>            <span class="do">### files from Spatial Data Download should run into this</span></span>
+<span id="cb3-151"><a href="#cb3-151" tabindex="-1"></a>          <span class="fu">st_transform</span>(gp_proj4)</span>
+<span id="cb3-152"><a href="#cb3-152" tabindex="-1"></a>        </span>
+<span id="cb3-153"><a href="#cb3-153" tabindex="-1"></a>        spp_rast <span class="ot">&lt;-</span> fasterize<span class="sc">::</span><span class="fu">fasterize</span>(spp_shp, rast_base, <span class="at">field =</span> <span class="st">&#39;presence&#39;</span>, <span class="at">fun =</span> <span class="st">&#39;min&#39;</span>)</span>
+<span id="cb3-154"><a href="#cb3-154" tabindex="-1"></a>        </span>
+<span id="cb3-155"><a href="#cb3-155" tabindex="-1"></a>        <span class="do">### depth clip if necessary; otherwise clip to bathy raster (which previously</span></span>
+<span id="cb3-156"><a href="#cb3-156" tabindex="-1"></a>        <span class="do">### was clipped to area raster - so cells with any marine area will be kept,</span></span>
+<span id="cb3-157"><a href="#cb3-157" tabindex="-1"></a>        <span class="do">### and non-marine cells will be dropped)</span></span>
+<span id="cb3-158"><a href="#cb3-158" tabindex="-1"></a>        <span class="cf">if</span>(<span class="fu">unique</span>(spp_shp<span class="sc">$</span>max_depth) <span class="sc">==</span> <span class="st">&#39;&lt; 20 m&#39;</span>) {</span>
+<span id="cb3-159"><a href="#cb3-159" tabindex="-1"></a>          spp_rast <span class="ot">&lt;-</span> <span class="fu">mask</span>(spp_rast, rast_shallow)</span>
+<span id="cb3-160"><a href="#cb3-160" tabindex="-1"></a>        } <span class="cf">else</span> <span class="cf">if</span>(<span class="fu">unique</span>(spp_shp<span class="sc">$</span>max_depth) <span class="sc">==</span> <span class="st">&#39;&lt; 200 m&#39;</span>) {</span>
+<span id="cb3-161"><a href="#cb3-161" tabindex="-1"></a>          spp_rast <span class="ot">&lt;-</span> <span class="fu">mask</span>(spp_rast, rast_neritic)</span>
+<span id="cb3-162"><a href="#cb3-162" tabindex="-1"></a>        } <span class="cf">else</span> {</span>
+<span id="cb3-163"><a href="#cb3-163" tabindex="-1"></a>          spp_rast <span class="ot">&lt;-</span> <span class="fu">mask</span>(spp_rast, rast_bathy)</span>
+<span id="cb3-164"><a href="#cb3-164" tabindex="-1"></a>        }</span>
+<span id="cb3-165"><a href="#cb3-165" tabindex="-1"></a>        <span class="do">### write out as a raster:</span></span>
+<span id="cb3-166"><a href="#cb3-166" tabindex="-1"></a>        <span class="co"># rast_file &lt;- file.path(dir_o_anx, sprintf(&#39;spp_rasters/iucn_sid_%s.tif&#39;, spp))</span></span>
+<span id="cb3-167"><a href="#cb3-167" tabindex="-1"></a>        <span class="co"># raster::writeRaster(spp_rast, rast_file, overwrite = TRUE)</span></span>
+<span id="cb3-168"><a href="#cb3-168" tabindex="-1"></a>        <span class="do">### See note below about file size; rasters are larger than csvs in general</span></span>
+<span id="cb3-169"><a href="#cb3-169" tabindex="-1"></a>        </span>
+<span id="cb3-170"><a href="#cb3-170" tabindex="-1"></a>        <span class="do">### convert to dataframe and write out as a csv:</span></span>
+<span id="cb3-171"><a href="#cb3-171" tabindex="-1"></a>        spp_present <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">cell_id  =</span> <span class="fu">values</span>(rast_base),</span>
+<span id="cb3-172"><a href="#cb3-172" tabindex="-1"></a>                                  <span class="at">presence =</span> <span class="fu">values</span>(spp_rast)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-173"><a href="#cb3-173" tabindex="-1"></a>          <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(presence))</span>
+<span id="cb3-174"><a href="#cb3-174" tabindex="-1"></a>        </span>
+<span id="cb3-175"><a href="#cb3-175" tabindex="-1"></a>        <span class="cf">if</span>(<span class="fu">nrow</span>(spp_present) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb3-176"><a href="#cb3-176" tabindex="-1"></a>    <span class="fu">cat_msg</span>(<span class="st">&#39;Species ID &#39;</span>, spp, <span class="st">&#39; resulted in a zero-length dataframe.&#39;</span>)</span>
+<span id="cb3-177"><a href="#cb3-177" tabindex="-1"></a>        }</span>
+<span id="cb3-178"><a href="#cb3-178" tabindex="-1"></a>        </span>
+<span id="cb3-179"><a href="#cb3-179" tabindex="-1"></a>        <span class="fu">write_csv</span>(spp_present, <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;spp_rasters&#39;</span>,</span>
+<span id="cb3-180"><a href="#cb3-180" tabindex="-1"></a>                                         <span class="fu">sprintf</span>(<span class="st">&#39;iucn_sid_%s.csv&#39;</span>, spp)))</span>
+<span id="cb3-181"><a href="#cb3-181" tabindex="-1"></a>        </span>
+<span id="cb3-182"><a href="#cb3-182" tabindex="-1"></a>        <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb3-183"><a href="#cb3-183" tabindex="-1"></a>      }) <span class="do">### end of mclapply FUN definition</span></span>
+<span id="cb3-184"><a href="#cb3-184" tabindex="-1"></a>    <span class="co"># }) </span><span class="al">###</span><span class="co"> end of system.time call</span></span>
+<span id="cb3-185"><a href="#cb3-185" tabindex="-1"></a>  } <span class="do">### end of for loop over each species group</span></span>
+<span id="cb3-186"><a href="#cb3-186" tabindex="-1"></a>} <span class="do">### end of &quot;if&quot; check to make sure there are any maps to rasterize</span></span>
+<span id="cb3-187"><a href="#cb3-187" tabindex="-1"></a></span>
+<span id="cb3-188"><a href="#cb3-188" tabindex="-1"></a><span class="do">## Note: v2020: This got to the end and didn&#39;t indicate it was finished. I only knew because I periodically stopped the loop and checked after it got to the last couple of sfs and then looked at maps_to_rasterize that it was finished. </span></span>
+<span id="cb3-189"><a href="#cb3-189" tabindex="-1"></a><span class="do">## v2021: I had to add some extra if statements to fix column name issues with the new bli data.</span></span></code></pre></div>
 </div>
-<div id="subpopulation-assessments" class="section level3" number="3.1.2">
-<h3><span class="header-section-number">3.1.2</span> Subpopulation
-Assessments</h3>
-<p>Using <code>rl_sis()</code>, the code-chunk below pulls all the
-subpopulation assessments for the iucn_sids in the
-marine_species_list.</p>
-<p><em>This can take up to 2.68 hours.</em></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Query subpopulation information</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co"># Takes about 2.684539 hours</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>sub_pops <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> marine_species_list) {</span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>  <span class="fu">tryCatch</span>({</span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>    </span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>    <span class="co"># Query taxon info for each species</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>    sis_data <span class="ot">&lt;-</span> <span class="fu">rl_sis</span>(<span class="at">id =</span> i)<span class="sc">$</span>taxon</span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>    </span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>    <span class="co"># Skip if subpopulation_taxa is not a data.frame (and therefore doesn&#39;t exist)</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.data.frame</span>(sis_data<span class="sc">$</span>subpopulation_taxa)) {</span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>      <span class="cf">next</span></span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>    }</span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>    </span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>    <span class="co"># Pull ID #</span></span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>    iucn_sid <span class="ot">&lt;-</span> sis_data<span class="sc">$</span>sis_id</span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>    </span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a>    <span class="co"># Pull subpopulation assessment information</span></span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>    sub_pop_spp <span class="ot">&lt;-</span> sis_data<span class="sc">$</span>subpopulation_taxa <span class="sc">%&gt;%</span></span>
-<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>      <span class="fu">mutate</span>(</span>
-<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a>        <span class="at">iucn_sid =</span> iucn_sid,</span>
-<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>        <span class="at">sciname =</span> <span class="fu">paste</span>(genus_name, species_name)</span>
-<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>      ) <span class="sc">%&gt;%</span></span>
-<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>      <span class="fu">select</span>(iucn_sid, sciname, <span class="fu">everything</span>())</span>
-<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>    </span>
-<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>    <span class="co"># Add to data frame</span></span>
-<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a>    sub_pops <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(sub_pops, sub_pop_spp)</span>
-<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a></span>
-<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a>    <span class="co"># Pause between queries to avoid timeout</span></span>
-<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a>    <span class="fu">Sys.sleep</span>(<span class="dv">1</span>)</span>
-<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a>    </span>
-<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a>    <span class="co"># Error will list species without subpopulations (ok to ignore)</span></span>
-<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a>  }, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a>    <span class="fu">message</span>(<span class="fu">paste</span>(<span class="st">&quot;Error for species ID:&quot;</span>, i, <span class="st">&quot;-&quot;</span>, e<span class="sc">$</span>message))</span>
-<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a>  })</span>
-<span id="cb6-39"><a href="#cb6-39" tabindex="-1"></a>}</span>
-<span id="cb6-40"><a href="#cb6-40" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="#cb6-41" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb6-42"><a href="#cb6-42" tabindex="-1"></a>end_time <span class="sc">-</span> start_time  </span>
-<span id="cb6-43"><a href="#cb6-43" tabindex="-1"></a></span>
-<span id="cb6-44"><a href="#cb6-44" tabindex="-1"></a><span class="co"># Save for time</span></span>
-<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a><span class="fu">write_csv</span>(sub_pops, <span class="fu">file.path</span>(dir_goal, <span class="fu">sprintf</span>(<span class="st">&#39;_data/iucn/sub_pop_%s.csv&#39;</span>, api_version)))</span>
+</div>
+<div id="generate-species-group-maps---equal-weighting-per-cell" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Generate species
+group maps - equal weighting per cell</h2>
+<p>From species maps data.frame, identify the IDs of species within each
+taxon. For each taxon:</p>
+<p><strong>NOTE:</strong> Because the summary files are likely to be
+very large for globe-spanning taxa (e.g. MARINE_MAMMALS is 275 MB), save
+these outputs outside of GitHub.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Read in lots of data</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>spp_maps <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(dir_data, </span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>                               <span class="fu">sprintf</span>(<span class="st">&#39;spp_marine_maps_%s.csv&#39;</span>, api_version)),</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>                     <span class="at">col_types =</span> <span class="st">&#39;ddcicccl&#39;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>spp_risk <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(dir_data, </span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>                               <span class="fu">sprintf</span>(<span class="st">&#39;iucn_risk_current_%s.csv&#39;</span>, api_version)), <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>spp_risk_rgn <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(dir_data, </span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>                                   <span class="fu">sprintf</span>(<span class="st">&#39;iucn_risk_rgn_current_%s.csv&#39;</span>, api_version)),</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>                         <span class="at">col_types =</span> <span class="st">&#39;dcccdc&#39;</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>spp_trend <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(dir_data, <span class="fu">sprintf</span>(<span class="st">&#39;iucn_trend_by_spp_%s.csv&#39;</span>, api_version)),</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>                      <span class="at">col_types =</span> <span class="st">&#39;dccdc&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(iucn_sid, trend_score, iucn_rgn)</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co"># Make a dataframe of species risk, trend, and regional risk</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>spp_risk_trend <span class="ot">&lt;-</span> spp_risk <span class="sc">%&gt;%</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">iucn_rgn =</span> <span class="st">&#39;global&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>  <span class="fu">bind_rows</span>(spp_risk_rgn) <span class="sc">%&gt;%</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(iucn_sid, iucn_rgn, cat_score) <span class="sc">%&gt;%</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>  <span class="fu">left_join</span>(spp_trend, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&#39;iucn_sid&#39;</span>, <span class="st">&#39;iucn_rgn&#39;</span>))</span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co"># Raster for cell IDs (import from v2025 unless updated)</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>rast_cell_ids <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="st">&#39;/home/hoyt/OHI/ohiprep_v2025/globalprep/spp/v2025/_spatial/cell_id_rast.tif&#39;</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="co"># Make a dataframe of cell ID to MEOW for regional assessments... also </span></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="co"># make a lookup of MEOW to region</span></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>meow_rgns_rast <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="fu">file.path</span>(dir_spatial, <span class="st">&#39;meow_rast.tif&#39;</span>))</span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>meow_cells_all <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">cell_id =</span> terra<span class="sc">::</span><span class="fu">values</span>(rast_cell_ids),</span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a>                             <span class="at">meow_id =</span> terra<span class="sc">::</span><span class="fu">values</span>(meow_rgns_rast)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">cell_id =</span> cell_id_rast, <span class="at">meow_id =</span> meow_rast) <span class="sc">%&gt;%</span></span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(meow_id))</span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a>meow_to_rgn <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(dir_spatial, <span class="st">&#39;iucn_rgn_to_meow.csv&#39;</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div id="loop-over-comprehensively-assessed-species" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Loop over
+comprehensively assessed species</h3>
+<p>For <code>1a_biodiversity_maps_comp_assessed.Rmd</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Make a list of taxonomic groups to loop over:</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>taxa <span class="ot">&lt;-</span> spp_maps <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="fu">filter</span>(comp_assessed) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  .<span class="sc">$</span>dbf_file <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="fu">basename</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  <span class="fu">str_replace</span>(<span class="st">&#39;</span><span class="sc">\\</span><span class="st">.dbf$&#39;</span>, <span class="st">&#39;&#39;</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#taxa &lt;- taxa[str_detect(taxa, &#39;SEAGRASS&#39;)]</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>reload <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="do">##########################################################.</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="do">### Looping over taxonomic groups -----</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="do">##########################################################.</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="fu">registerDoParallel</span>(<span class="at">cores =</span> <span class="dv">4</span>) <span class="do">## parallelize this so it will go quicker</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="fu">foreach</span>(<span class="at">taxon =</span> taxa) <span class="sc">%dopar%</span> {</span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>   <span class="co">#taxon &lt;- taxa[2]</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>  </span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>  taxon_sum_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;taxa_summaries&#39;</span>,</span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>                                   <span class="fu">sprintf</span>(<span class="st">&#39;%s_cell_sum_comp_%s.csv&#39;</span>, <span class="fu">tolower</span>(taxon),</span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>                                           api_version))</span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a>  </span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(taxon_sum_file) <span class="sc">|</span> reload <span class="sc">==</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a>    </span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>    <span class="do">### Filter to just this taxon, and only assessed within this taxon</span></span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>    taxon_maps <span class="ot">&lt;-</span> spp_maps <span class="sc">%&gt;%</span></span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a>      <span class="fu">filter</span>(<span class="fu">str_detect</span>(dbf_file, taxon)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a>      <span class="fu">filter</span>(comp_assessed <span class="sc">==</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a>    </span>
+<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a>    taxon_risk_trend <span class="ot">&lt;-</span> spp_risk_trend <span class="sc">%&gt;%</span></span>
+<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a>      <span class="fu">filter</span>(iucn_sid <span class="sc">%in%</span> taxon_maps<span class="sc">$</span>iucn_sid) <span class="sc">%&gt;%</span></span>
+<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a>      <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(cat_score)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a>      <span class="fu">arrange</span>(iucn_sid)</span>
+<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a>    </span>
+<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a>    <span class="do">### Using the iucn_sid field, generate a vector of all species range files for</span></span>
+<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a>    <span class="do">### this taxon.</span></span>
+<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a>    taxon_ids <span class="ot">&lt;-</span> taxon_risk_trend<span class="sc">$</span>iucn_sid <span class="sc">%&gt;%</span></span>
+<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a>      <span class="fu">unique</span>()</span>
+<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a>    </span>
+<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a>    <span class="fu">cat_msg</span>(<span class="st">&#39;Processing &#39;</span>, <span class="fu">length</span>(taxon_ids),</span>
+<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a>            <span class="st">&#39; comp-assessed species maps in &#39;</span>, taxon, <span class="st">&#39;...&#39;</span>)</span>
+<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a></span>
+<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a>    <span class="do">##########################################################.</span></span>
+<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a>    <span class="do">### Looping over species within group -----</span></span>
+<span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a>    <span class="do">##########################################################.</span></span>
+<span id="cb5-48"><a href="#cb5-48" tabindex="-1"></a></span>
+<span id="cb5-49"><a href="#cb5-49" tabindex="-1"></a>  taxon_cells_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb5-50"><a href="#cb5-50" tabindex="-1"></a>    </span>
+<span id="cb5-51"><a href="#cb5-51" tabindex="-1"></a>    <span class="co">#x &lt;- 45433088</span></span>
+<span id="cb5-52"><a href="#cb5-52" tabindex="-1"></a>                                          </span>
+<span id="cb5-53"><a href="#cb5-53" tabindex="-1"></a>      <span class="cf">for</span>(x <span class="cf">in</span> taxon_ids){</span>
+<span id="cb5-54"><a href="#cb5-54" tabindex="-1"></a>        </span>
+<span id="cb5-55"><a href="#cb5-55" tabindex="-1"></a>        csv_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;spp_rasters&#39;</span>, </span>
+<span id="cb5-56"><a href="#cb5-56" tabindex="-1"></a>                              <span class="fu">sprintf</span>(<span class="st">&#39;iucn_sid_%s.csv&#39;</span>, x))</span>
+<span id="cb5-57"><a href="#cb5-57" tabindex="-1"></a>        </span>
+<span id="cb5-58"><a href="#cb5-58" tabindex="-1"></a>        spp_risk_map <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csv_file, <span class="at">col_types =</span> <span class="st">&#39;di&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-59"><a href="#cb5-59" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">iucn_sid =</span> x) <span class="sc">%&gt;%</span></span>
+<span id="cb5-60"><a href="#cb5-60" tabindex="-1"></a>          <span class="fu">left_join</span>(taxon_risk_trend, <span class="at">by =</span> <span class="st">&#39;iucn_sid&#39;</span>) </span>
+<span id="cb5-61"><a href="#cb5-61" tabindex="-1"></a>        </span>
+<span id="cb5-62"><a href="#cb5-62" tabindex="-1"></a>        <span class="do">### Identify regional assessments if any</span></span>
+<span id="cb5-63"><a href="#cb5-63" tabindex="-1"></a>        meow_rgns <span class="ot">&lt;-</span> meow_to_rgn <span class="sc">%&gt;%</span></span>
+<span id="cb5-64"><a href="#cb5-64" tabindex="-1"></a>          <span class="fu">filter</span>(iucn_rgn <span class="sc">%in%</span> spp_risk_map<span class="sc">$</span>iucn_rgn)</span>
+<span id="cb5-65"><a href="#cb5-65" tabindex="-1"></a>        </span>
+<span id="cb5-66"><a href="#cb5-66" tabindex="-1"></a>        non_global_rgns <span class="ot">&lt;-</span> meow_rgns <span class="sc">%&gt;%</span></span>
+<span id="cb5-67"><a href="#cb5-67" tabindex="-1"></a>          <span class="fu">filter</span>(iucn_rgn <span class="sc">!=</span> <span class="st">&#39;global&#39;</span>)</span>
+<span id="cb5-68"><a href="#cb5-68" tabindex="-1"></a>  </span>
+<span id="cb5-69"><a href="#cb5-69" tabindex="-1"></a>        <span class="cf">if</span>(<span class="fu">nrow</span>(non_global_rgns) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb5-70"><a href="#cb5-70" tabindex="-1"></a>          <span class="do">### If any regional assessments, clip the MEOW cells down to the appropriate region...</span></span>
+<span id="cb5-71"><a href="#cb5-71" tabindex="-1"></a>          meow_cells <span class="ot">&lt;-</span> meow_cells_all <span class="sc">%&gt;%</span></span>
+<span id="cb5-72"><a href="#cb5-72" tabindex="-1"></a>            <span class="fu">inner_join</span>(meow_rgns, <span class="at">by =</span> <span class="st">&#39;meow_id&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-73"><a href="#cb5-73" tabindex="-1"></a>            <span class="fu">rename</span>(<span class="at">rgn_name =</span> iucn_rgn)</span>
+<span id="cb5-74"><a href="#cb5-74" tabindex="-1"></a>          <span class="do">### ... then filter out non-matching overlapped cells</span></span>
+<span id="cb5-75"><a href="#cb5-75" tabindex="-1"></a>          spp_risk_map <span class="ot">&lt;-</span> spp_risk_map <span class="sc">%&gt;%</span></span>
+<span id="cb5-76"><a href="#cb5-76" tabindex="-1"></a>            <span class="fu">left_join</span>(meow_cells, <span class="at">by =</span> <span class="st">&#39;cell_id&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-77"><a href="#cb5-77" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">rgn_name =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(meow_id), <span class="st">&#39;global&#39;</span>, rgn_name),</span>
+<span id="cb5-78"><a href="#cb5-78" tabindex="-1"></a>                   <span class="at">priority =</span> <span class="fu">ifelse</span>(rgn_name <span class="sc">==</span> <span class="st">&#39;global&#39;</span>, <span class="dv">100</span>, priority)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-79"><a href="#cb5-79" tabindex="-1"></a>            <span class="fu">filter</span>(iucn_rgn <span class="sc">==</span> rgn_name) <span class="sc">%&gt;%</span></span>
+<span id="cb5-80"><a href="#cb5-80" tabindex="-1"></a>            <span class="fu">group_by</span>(cell_id) <span class="sc">%&gt;%</span></span>
+<span id="cb5-81"><a href="#cb5-81" tabindex="-1"></a>            <span class="fu">filter</span>(priority <span class="sc">==</span> <span class="fu">min</span>(priority)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-82"><a href="#cb5-82" tabindex="-1"></a>            <span class="fu">ungroup</span>()</span>
+<span id="cb5-83"><a href="#cb5-83" tabindex="-1"></a>          <span class="do">### </span><span class="al">NOTE</span><span class="do">: at this point, still possible to have multiple regional</span></span>
+<span id="cb5-84"><a href="#cb5-84" tabindex="-1"></a>          <span class="do">### assessments, if priorities are the same (e.g. Europe and Pan Africa,</span></span>
+<span id="cb5-85"><a href="#cb5-85" tabindex="-1"></a>          <span class="do">### or overlaps around Africa).  Those values will be averaged in</span></span>
+<span id="cb5-86"><a href="#cb5-86" tabindex="-1"></a>          <span class="do">### the group_by() below.</span></span>
+<span id="cb5-87"><a href="#cb5-87" tabindex="-1"></a>        }</span>
+<span id="cb5-88"><a href="#cb5-88" tabindex="-1"></a>        </span>
+<span id="cb5-89"><a href="#cb5-89" tabindex="-1"></a>        <span class="do">### select down to main columns; also, if presence == 5 (extinct), </span></span>
+<span id="cb5-90"><a href="#cb5-90" tabindex="-1"></a>        <span class="do">### adjust category and trend scores.</span></span>
+<span id="cb5-91"><a href="#cb5-91" tabindex="-1"></a>        spp_risk_sum <span class="ot">&lt;-</span> spp_risk_map <span class="sc">%&gt;%</span></span>
+<span id="cb5-92"><a href="#cb5-92" tabindex="-1"></a>          dplyr<span class="sc">::</span><span class="fu">select</span>(cell_id, presence, iucn_sid, iucn_rgn, cat_score, trend_score) <span class="sc">%&gt;%</span></span>
+<span id="cb5-93"><a href="#cb5-93" tabindex="-1"></a>          <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-94"><a href="#cb5-94" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">cat_score   =</span> <span class="fu">ifelse</span>(presence <span class="sc">==</span> <span class="dv">5</span>, <span class="dv">1</span>, cat_score),        </span>
+<span id="cb5-95"><a href="#cb5-95" tabindex="-1"></a>                   <span class="do">### fix local extinctions</span></span>
+<span id="cb5-96"><a href="#cb5-96" tabindex="-1"></a>                 <span class="at">trend_score =</span> <span class="fu">ifelse</span>(presence <span class="sc">==</span> <span class="dv">5</span>, <span class="cn">NA</span>, trend_score)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-97"><a href="#cb5-97" tabindex="-1"></a>                   <span class="do">### fix local extinctions</span></span>
+<span id="cb5-98"><a href="#cb5-98" tabindex="-1"></a>          <span class="fu">group_by</span>(cell_id, iucn_sid) <span class="sc">%&gt;%</span></span>
+<span id="cb5-99"><a href="#cb5-99" tabindex="-1"></a>          <span class="fu">summarize</span>(<span class="at">cat_score   =</span> <span class="fu">mean</span>(cat_score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-100"><a href="#cb5-100" tabindex="-1"></a>                    <span class="at">trend_score =</span> <span class="fu">mean</span>(trend_score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-101"><a href="#cb5-101" tabindex="-1"></a>          <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-102"><a href="#cb5-102" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">trend_score =</span> <span class="fu">ifelse</span>(<span class="fu">is.nan</span>(trend_score), <span class="cn">NA</span>, trend_score))</span>
+<span id="cb5-103"><a href="#cb5-103" tabindex="-1"></a>       </span>
+<span id="cb5-104"><a href="#cb5-104" tabindex="-1"></a>       taxon_cells_list[[<span class="fu">length</span>(taxon_cells_list)<span class="sc">+</span><span class="dv">1</span>]] <span class="ot">=</span> spp_risk_sum</span>
+<span id="cb5-105"><a href="#cb5-105" tabindex="-1"></a>       </span>
+<span id="cb5-106"><a href="#cb5-106" tabindex="-1"></a>      } <span class="do">### end of loop over all species in taxonomic group</span></span>
+<span id="cb5-107"><a href="#cb5-107" tabindex="-1"></a>    </span>
+<span id="cb5-108"><a href="#cb5-108" tabindex="-1"></a>    <span class="do">##########################################################.</span></span>
+<span id="cb5-109"><a href="#cb5-109" tabindex="-1"></a>    <span class="do">### Processing cell calculations for group -----</span></span>
+<span id="cb5-110"><a href="#cb5-110" tabindex="-1"></a>    <span class="do">##########################################################.</span></span>
+<span id="cb5-111"><a href="#cb5-111" tabindex="-1"></a>  </span>
+<span id="cb5-112"><a href="#cb5-112" tabindex="-1"></a>    <span class="do">### Set up for keyed data.table merging: key for iucn_sid, cell_id</span></span>
+<span id="cb5-113"><a href="#cb5-113" tabindex="-1"></a>    <span class="fu">cat_msg</span>(<span class="st">&#39;...binding rows to data.frame...&#39;</span>)</span>
+<span id="cb5-114"><a href="#cb5-114" tabindex="-1"></a></span>
+<span id="cb5-115"><a href="#cb5-115" tabindex="-1"></a>    taxon_risk_map <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(taxon_cells_list) <span class="do">### this is pretty fast!</span></span>
+<span id="cb5-116"><a href="#cb5-116" tabindex="-1"></a>    </span>
+<span id="cb5-117"><a href="#cb5-117" tabindex="-1"></a>    <span class="fu">cat_msg</span>(<span class="st">&#39;...summarizing...&#39;</span>)</span>
+<span id="cb5-118"><a href="#cb5-118" tabindex="-1"></a>    taxon_risk_summary <span class="ot">&lt;-</span> taxon_risk_map <span class="sc">%&gt;%</span></span>
+<span id="cb5-119"><a href="#cb5-119" tabindex="-1"></a>      <span class="fu">group_by</span>(cell_id) <span class="sc">%&gt;%</span></span>
+<span id="cb5-120"><a href="#cb5-120" tabindex="-1"></a>      <span class="fu">summarize</span>(<span class="at">mean_risk   =</span> <span class="fu">mean</span>(cat_score), </span>
+<span id="cb5-121"><a href="#cb5-121" tabindex="-1"></a>                  <span class="do">### NA categories already filtered out</span></span>
+<span id="cb5-122"><a href="#cb5-122" tabindex="-1"></a>                <span class="at">var_risk    =</span> <span class="fu">var</span>(cat_score),</span>
+<span id="cb5-123"><a href="#cb5-123" tabindex="-1"></a>                <span class="at">n_spp_threatened =</span> <span class="fu">sum</span>(cat_score <span class="sc">&gt;=</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> cat_score <span class="sc">&lt;</span> <span class="dv">1</span>),  </span>
+<span id="cb5-124"><a href="#cb5-124" tabindex="-1"></a>                <span class="at">n_spp_risk  =</span> <span class="fu">n</span>(),</span>
+<span id="cb5-125"><a href="#cb5-125" tabindex="-1"></a>                <span class="at">mean_trend  =</span> <span class="fu">mean</span>(trend_score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb5-126"><a href="#cb5-126" tabindex="-1"></a>                  <span class="do">### not every species has a trend; na.rm = TRUE</span></span>
+<span id="cb5-127"><a href="#cb5-127" tabindex="-1"></a>                <span class="at">mean_trend  =</span> <span class="fu">ifelse</span>(<span class="fu">is.nan</span>(mean_trend), <span class="cn">NA</span>, mean_trend),</span>
+<span id="cb5-128"><a href="#cb5-128" tabindex="-1"></a>                <span class="at">n_spp_trend =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(trend_score)))</span>
+<span id="cb5-129"><a href="#cb5-129" tabindex="-1"></a>    </span>
+<span id="cb5-130"><a href="#cb5-130" tabindex="-1"></a>    <span class="fu">cat_msg</span>(<span class="st">&#39;...writing file&#39;</span>, taxon_sum_file, <span class="st">&#39;...&#39;</span>)</span>
+<span id="cb5-131"><a href="#cb5-131" tabindex="-1"></a>    <span class="fu">write_csv</span>(taxon_risk_summary, taxon_sum_file)</span>
+<span id="cb5-132"><a href="#cb5-132" tabindex="-1"></a></span>
+<span id="cb5-133"><a href="#cb5-133" tabindex="-1"></a>  } <span class="cf">else</span> { <span class="do">### end of if statement checking whether file exists for this taxon</span></span>
+<span id="cb5-134"><a href="#cb5-134" tabindex="-1"></a>    <span class="fu">cat_msg</span>(<span class="st">&#39;Found file &#39;</span>, taxon_sum_file, <span class="st">&#39;... skipping process...&#39;</span>)</span>
+<span id="cb5-135"><a href="#cb5-135" tabindex="-1"></a>  }</span>
+<span id="cb5-136"><a href="#cb5-136" tabindex="-1"></a>  </span>
+<span id="cb5-137"><a href="#cb5-137" tabindex="-1"></a>} <span class="do">### end of taxonomic group loop</span></span></code></pre></div>
+</div>
+<div id="loop-over-non-comprehensively-assessed-species" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Loop over
+non-comprehensively-assessed species</h3>
+<p>For <code>1c_biodiversity_maps_all_spp.Rmd</code>.</p>
+<p>Could potentially be skipped to save time. You will need this data to
+analyze in <code>1c_biodiversity_maps_all_spp.Rmd</code> and to run the
+comparison in <code>spp_data_prep.Rmd</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">### Make a list of taxonomic groups to loop over:</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>taxa <span class="ot">&lt;-</span> spp_maps <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>comp_assessed) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  .<span class="sc">$</span>dbf_file <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>  <span class="fu">basename</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>  <span class="fu">str_replace</span>(<span class="st">&#39;</span><span class="sc">\\</span><span class="st">.dbf$&#39;</span>, <span class="st">&#39;&#39;</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="do">##########################################################.</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="do">### Looping over taxonomic groups -----</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="do">##########################################################.</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="cf">for</span>(taxon <span class="cf">in</span> taxa) {</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>  <span class="do">### taxon &lt;- taxa[6]</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>  taxon_sum_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;taxa_summaries&#39;</span>,</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>                                   <span class="fu">sprintf</span>(<span class="st">&#39;%s_cell_sum_noncomp_%s.csv&#39;</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>                                           <span class="fu">tolower</span>(taxon), api_version))</span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>  reload <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(taxon_sum_file) <span class="sc">|</span> reload <span class="sc">==</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>    <span class="do">### Filter to just this taxon, and only non-assessed within this taxon</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>    taxon_maps <span class="ot">&lt;-</span> spp_maps <span class="sc">%&gt;%</span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a>      <span class="fu">filter</span>(<span class="fu">str_detect</span>(dbf_file, taxon)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>      <span class="fu">filter</span>(comp_assessed <span class="sc">==</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>      <span class="fu">filter</span>(max_depth <span class="sc">!=</span> <span class="st">&#39;deep oceanic&#39;</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>    taxon_risk_trend <span class="ot">&lt;-</span> spp_risk_trend <span class="sc">%&gt;%</span></span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>      <span class="fu">filter</span>(iucn_sid <span class="sc">%in%</span> taxon_maps<span class="sc">$</span>iucn_sid) <span class="sc">%&gt;%</span></span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a>      <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(cat_score)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>      <span class="fu">arrange</span>(iucn_sid)</span>
+<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">nrow</span>(taxon_risk_trend) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a>      <span class="do">### if empty set, create a dummy data frame so there</span></span>
+<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a>      <span class="do">### will at least be a file...</span></span>
+<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a>      <span class="fu">cat_msg</span>(<span class="st">&#39;Creating dummy data frame for empty spp set &#39;</span>, taxon)</span>
+<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a>      taxon_risk_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a>        <span class="at">cell_id =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb6-39"><a href="#cb6-39" tabindex="-1"></a>        <span class="at">mean_risk =</span> <span class="cn">NA</span>)</span>
+<span id="cb6-40"><a href="#cb6-40" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb6-41"><a href="#cb6-41" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="#cb6-42" tabindex="-1"></a>      <span class="do">### Using the iucn_sid field, generate a vector of all species range files for</span></span>
+<span id="cb6-43"><a href="#cb6-43" tabindex="-1"></a>      <span class="do">### this taxon.</span></span>
+<span id="cb6-44"><a href="#cb6-44" tabindex="-1"></a>      taxon_ids <span class="ot">&lt;-</span> taxon_risk_trend<span class="sc">$</span>iucn_sid <span class="sc">%&gt;%</span></span>
+<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a>        <span class="fu">unique</span>()</span>
 <span id="cb6-46"><a href="#cb6-46" tabindex="-1"></a></span>
-<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a><span class="co"># Load for time</span></span>
-<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a><span class="co">#sub_pops &lt;- read_csv(file.path(dir_goal, sprintf(&#39;_data/iucn/sub_pop_%s.csv&#39;, api_version)), show_col_types = FALSE)</span></span></code></pre></div>
+<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a>      <span class="fu">cat_msg</span>(<span class="st">&#39;Processing &#39;</span>, <span class="fu">length</span>(taxon_ids),</span>
+<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a>              <span class="st">&#39; non-comp-assessed species maps in &#39;</span>, taxon, <span class="st">&#39;...&#39;</span>)</span>
+<span id="cb6-49"><a href="#cb6-49" tabindex="-1"></a></span>
+<span id="cb6-50"><a href="#cb6-50" tabindex="-1"></a>      <span class="do">##########################################################.</span></span>
+<span id="cb6-51"><a href="#cb6-51" tabindex="-1"></a>      <span class="do">### Looping over species within group -----</span></span>
+<span id="cb6-52"><a href="#cb6-52" tabindex="-1"></a>      <span class="do">##########################################################.</span></span>
+<span id="cb6-53"><a href="#cb6-53" tabindex="-1"></a>      <span class="do">### Collect all species ranges for this taxon into a single data.frame.</span></span>
+<span id="cb6-54"><a href="#cb6-54" tabindex="-1"></a>      <span class="do">### Use mclapply since we&#39;re reading many large-ish files.  For MARINE_MAMMALS (85 assessed spp)</span></span>
+<span id="cb6-55"><a href="#cb6-55" tabindex="-1"></a>      <span class="do">### this takes about 30-40 seconds</span></span>
+<span id="cb6-56"><a href="#cb6-56" tabindex="-1"></a>      taxon_cells_list <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">mclapply</span>(taxon_ids, <span class="at">mc.cores =</span> <span class="dv">12</span>,</span>
+<span id="cb6-57"><a href="#cb6-57" tabindex="-1"></a>                                          <span class="at">FUN =</span> <span class="cf">function</span>(x) {</span>
+<span id="cb6-58"><a href="#cb6-58" tabindex="-1"></a>          <span class="do">### x &lt;- taxon_ids[16]</span></span>
+<span id="cb6-59"><a href="#cb6-59" tabindex="-1"></a>          <span class="do">### x &lt;- 6336</span></span>
+<span id="cb6-60"><a href="#cb6-60" tabindex="-1"></a>          csv_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;spp_rasters&#39;</span>,</span>
+<span id="cb6-61"><a href="#cb6-61" tabindex="-1"></a>                                <span class="fu">sprintf</span>(<span class="st">&#39;iucn_sid_%s.csv&#39;</span>, x))</span>
+<span id="cb6-62"><a href="#cb6-62" tabindex="-1"></a></span>
+<span id="cb6-63"><a href="#cb6-63" tabindex="-1"></a>          spp_risk_map <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(csv_file, <span class="at">col_types =</span> <span class="st">&#39;di&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-64"><a href="#cb6-64" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">iucn_sid =</span> x) <span class="sc">%&gt;%</span></span>
+<span id="cb6-65"><a href="#cb6-65" tabindex="-1"></a>            <span class="fu">left_join</span>(taxon_risk_trend, <span class="at">by =</span> <span class="st">&#39;iucn_sid&#39;</span>)</span>
+<span id="cb6-66"><a href="#cb6-66" tabindex="-1"></a></span>
+<span id="cb6-67"><a href="#cb6-67" tabindex="-1"></a>          <span class="do">### Identify regional assessments if any</span></span>
+<span id="cb6-68"><a href="#cb6-68" tabindex="-1"></a>          meow_rgns <span class="ot">&lt;-</span> meow_to_rgn <span class="sc">%&gt;%</span></span>
+<span id="cb6-69"><a href="#cb6-69" tabindex="-1"></a>            <span class="fu">filter</span>(iucn_rgn <span class="sc">%in%</span> spp_risk_map<span class="sc">$</span>iucn_rgn)</span>
+<span id="cb6-70"><a href="#cb6-70" tabindex="-1"></a></span>
+<span id="cb6-71"><a href="#cb6-71" tabindex="-1"></a>          non_global_rgns <span class="ot">&lt;-</span> meow_rgns <span class="sc">%&gt;%</span></span>
+<span id="cb6-72"><a href="#cb6-72" tabindex="-1"></a>            <span class="fu">filter</span>(iucn_rgn <span class="sc">!=</span> <span class="st">&#39;global&#39;</span>)</span>
+<span id="cb6-73"><a href="#cb6-73" tabindex="-1"></a></span>
+<span id="cb6-74"><a href="#cb6-74" tabindex="-1"></a>          <span class="cf">if</span>(<span class="fu">nrow</span>(non_global_rgns) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb6-75"><a href="#cb6-75" tabindex="-1"></a>            <span class="do">### If any regional assessments, clip the MEOW cells down to the appropriate region...</span></span>
+<span id="cb6-76"><a href="#cb6-76" tabindex="-1"></a>            meow_cells <span class="ot">&lt;-</span> meow_cells_all <span class="sc">%&gt;%</span></span>
+<span id="cb6-77"><a href="#cb6-77" tabindex="-1"></a>              <span class="fu">inner_join</span>(meow_rgns, <span class="at">by =</span> <span class="st">&#39;meow_id&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-78"><a href="#cb6-78" tabindex="-1"></a>              <span class="fu">rename</span>(<span class="at">rgn_name =</span> iucn_rgn)</span>
+<span id="cb6-79"><a href="#cb6-79" tabindex="-1"></a>            <span class="do">### ... then filter out non-matching overlapped cells</span></span>
+<span id="cb6-80"><a href="#cb6-80" tabindex="-1"></a>            spp_risk_map <span class="ot">&lt;-</span> spp_risk_map <span class="sc">%&gt;%</span></span>
+<span id="cb6-81"><a href="#cb6-81" tabindex="-1"></a>              <span class="fu">left_join</span>(meow_cells, <span class="at">by =</span> <span class="st">&#39;cell_id&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-82"><a href="#cb6-82" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="at">rgn_name =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(meow_id), <span class="st">&#39;global&#39;</span>, rgn_name),</span>
+<span id="cb6-83"><a href="#cb6-83" tabindex="-1"></a>                     <span class="at">priority =</span> <span class="fu">ifelse</span>(rgn_name <span class="sc">==</span> <span class="st">&#39;global&#39;</span>, <span class="dv">100</span>, priority)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-84"><a href="#cb6-84" tabindex="-1"></a>              <span class="fu">filter</span>(iucn_rgn <span class="sc">==</span> rgn_name) <span class="sc">%&gt;%</span></span>
+<span id="cb6-85"><a href="#cb6-85" tabindex="-1"></a>              <span class="fu">group_by</span>(cell_id) <span class="sc">%&gt;%</span></span>
+<span id="cb6-86"><a href="#cb6-86" tabindex="-1"></a>              <span class="fu">filter</span>(priority <span class="sc">==</span> <span class="fu">min</span>(priority)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-87"><a href="#cb6-87" tabindex="-1"></a>              <span class="fu">ungroup</span>()</span>
+<span id="cb6-88"><a href="#cb6-88" tabindex="-1"></a>            <span class="do">### </span><span class="al">NOTE</span><span class="do">: at this point, still possible to have multiple regional</span></span>
+<span id="cb6-89"><a href="#cb6-89" tabindex="-1"></a>            <span class="do">### assessments, if priorities are the same (e.g. Europe and Pan Africa,</span></span>
+<span id="cb6-90"><a href="#cb6-90" tabindex="-1"></a>            <span class="do">### or overlaps around Africa).  Those values will be averaged in</span></span>
+<span id="cb6-91"><a href="#cb6-91" tabindex="-1"></a>            <span class="do">### the group_by() below.</span></span>
+<span id="cb6-92"><a href="#cb6-92" tabindex="-1"></a>          }</span>
+<span id="cb6-93"><a href="#cb6-93" tabindex="-1"></a></span>
+<span id="cb6-94"><a href="#cb6-94" tabindex="-1"></a>          <span class="do">### select down to main columns; also, if presence == 5 (extinct),</span></span>
+<span id="cb6-95"><a href="#cb6-95" tabindex="-1"></a>          <span class="do">### adjust category and trend scores.</span></span>
+<span id="cb6-96"><a href="#cb6-96" tabindex="-1"></a>          spp_risk_sum <span class="ot">&lt;-</span> spp_risk_map <span class="sc">%&gt;%</span></span>
+<span id="cb6-97"><a href="#cb6-97" tabindex="-1"></a>            dplyr<span class="sc">::</span><span class="fu">select</span>(cell_id, presence, iucn_sid, iucn_rgn, cat_score, trend_score) <span class="sc">%&gt;%</span></span>
+<span id="cb6-98"><a href="#cb6-98" tabindex="-1"></a>            <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-99"><a href="#cb6-99" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">cat_score   =</span> <span class="fu">ifelse</span>(presence <span class="sc">==</span> <span class="dv">5</span>, <span class="dv">1</span>, cat_score),</span>
+<span id="cb6-100"><a href="#cb6-100" tabindex="-1"></a>                     <span class="do">### fix local extinctions</span></span>
+<span id="cb6-101"><a href="#cb6-101" tabindex="-1"></a>                   <span class="at">trend_score =</span> <span class="fu">ifelse</span>(presence <span class="sc">==</span> <span class="dv">5</span>, <span class="cn">NA</span>, trend_score)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-102"><a href="#cb6-102" tabindex="-1"></a>                     <span class="do">### fix local extinctions</span></span>
+<span id="cb6-103"><a href="#cb6-103" tabindex="-1"></a>            <span class="fu">group_by</span>(cell_id, iucn_sid) <span class="sc">%&gt;%</span></span>
+<span id="cb6-104"><a href="#cb6-104" tabindex="-1"></a>            <span class="fu">summarize</span>(<span class="at">cat_score   =</span> <span class="fu">mean</span>(cat_score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-105"><a href="#cb6-105" tabindex="-1"></a>                      <span class="at">trend_score =</span> <span class="fu">mean</span>(trend_score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-106"><a href="#cb6-106" tabindex="-1"></a>            <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-107"><a href="#cb6-107" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">trend_score =</span> <span class="fu">ifelse</span>(<span class="fu">is.nan</span>(trend_score), <span class="cn">NA</span>, trend_score))</span>
+<span id="cb6-108"><a href="#cb6-108" tabindex="-1"></a></span>
+<span id="cb6-109"><a href="#cb6-109" tabindex="-1"></a>          <span class="fu">return</span>(spp_risk_sum)</span>
+<span id="cb6-110"><a href="#cb6-110" tabindex="-1"></a>        }) <span class="do">### end of mclapply over all species in taxonomic group</span></span>
+<span id="cb6-111"><a href="#cb6-111" tabindex="-1"></a></span>
+<span id="cb6-112"><a href="#cb6-112" tabindex="-1"></a>      <span class="do">##########################################################.</span></span>
+<span id="cb6-113"><a href="#cb6-113" tabindex="-1"></a>      <span class="do">### Processing cell calculations for group -----</span></span>
+<span id="cb6-114"><a href="#cb6-114" tabindex="-1"></a>      <span class="do">##########################################################.</span></span>
+<span id="cb6-115"><a href="#cb6-115" tabindex="-1"></a></span>
+<span id="cb6-116"><a href="#cb6-116" tabindex="-1"></a>      <span class="do">### Set up for keyed data.table merging: key for iucn_sid, cell_id</span></span>
+<span id="cb6-117"><a href="#cb6-117" tabindex="-1"></a>      <span class="fu">cat_msg</span>(<span class="st">&#39;...binding rows to data.frame...&#39;</span>)</span>
+<span id="cb6-118"><a href="#cb6-118" tabindex="-1"></a></span>
+<span id="cb6-119"><a href="#cb6-119" tabindex="-1"></a>      taxon_risk_map <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(taxon_cells_list) <span class="do">### this is pretty fast!</span></span>
+<span id="cb6-120"><a href="#cb6-120" tabindex="-1"></a></span>
+<span id="cb6-121"><a href="#cb6-121" tabindex="-1"></a>      <span class="fu">cat_msg</span>(<span class="st">&#39;...summarizing...&#39;</span>)</span>
+<span id="cb6-122"><a href="#cb6-122" tabindex="-1"></a>      taxon_risk_summary <span class="ot">&lt;-</span> taxon_risk_map <span class="sc">%&gt;%</span></span>
+<span id="cb6-123"><a href="#cb6-123" tabindex="-1"></a>        <span class="fu">group_by</span>(cell_id) <span class="sc">%&gt;%</span></span>
+<span id="cb6-124"><a href="#cb6-124" tabindex="-1"></a>        <span class="fu">summarize</span>(<span class="at">mean_risk   =</span> <span class="fu">mean</span>(cat_score),</span>
+<span id="cb6-125"><a href="#cb6-125" tabindex="-1"></a>                    <span class="do">### NA categories already filtered out</span></span>
+<span id="cb6-126"><a href="#cb6-126" tabindex="-1"></a>                  <span class="at">var_risk    =</span> <span class="fu">var</span>(cat_score),</span>
+<span id="cb6-127"><a href="#cb6-127" tabindex="-1"></a>                  <span class="at">n_spp_threatened =</span> <span class="fu">sum</span>(cat_score <span class="sc">&gt;=</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> cat_score <span class="sc">&lt;</span> <span class="dv">1</span>),</span>
+<span id="cb6-128"><a href="#cb6-128" tabindex="-1"></a>                  <span class="at">n_spp_risk  =</span> <span class="fu">n</span>(),</span>
+<span id="cb6-129"><a href="#cb6-129" tabindex="-1"></a>                  <span class="at">mean_trend  =</span> <span class="fu">mean</span>(trend_score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-130"><a href="#cb6-130" tabindex="-1"></a>                    <span class="do">### not every species has a trend; na.rm = TRUE</span></span>
+<span id="cb6-131"><a href="#cb6-131" tabindex="-1"></a>                  <span class="at">mean_trend  =</span> <span class="fu">ifelse</span>(<span class="fu">is.nan</span>(mean_trend), <span class="cn">NA</span>, mean_trend),</span>
+<span id="cb6-132"><a href="#cb6-132" tabindex="-1"></a>                  <span class="at">n_spp_trend =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(trend_score)))</span>
+<span id="cb6-133"><a href="#cb6-133" tabindex="-1"></a>    } <span class="do">### end of empty set check</span></span>
+<span id="cb6-134"><a href="#cb6-134" tabindex="-1"></a>    <span class="fu">cat_msg</span>(<span class="st">&#39;...writing file&#39;</span>, taxon_sum_file, <span class="st">&#39;...&#39;</span>)</span>
+<span id="cb6-135"><a href="#cb6-135" tabindex="-1"></a>    <span class="fu">write_csv</span>(taxon_risk_summary, taxon_sum_file)</span>
+<span id="cb6-136"><a href="#cb6-136" tabindex="-1"></a></span>
+<span id="cb6-137"><a href="#cb6-137" tabindex="-1"></a>  } <span class="cf">else</span> { <span class="do">### end of if statement checking whether file exists for this taxon</span></span>
+<span id="cb6-138"><a href="#cb6-138" tabindex="-1"></a>    <span class="fu">cat_msg</span>(<span class="st">&#39;Found file &#39;</span>, taxon_sum_file, <span class="st">&#39;... skipping process...&#39;</span>)</span>
+<span id="cb6-139"><a href="#cb6-139" tabindex="-1"></a>  }</span>
+<span id="cb6-140"><a href="#cb6-140" tabindex="-1"></a></span>
+<span id="cb6-141"><a href="#cb6-141" tabindex="-1"></a>} <span class="do">### end of taxonomic group loop</span></span></code></pre></div>
 </div>
-<div id="taxa-info" class="section level3" number="3.1.3">
-<h3><span class="header-section-number">3.1.3</span> Taxa Info</h3>
-<p>Using <code>rl_sis()</code>, the code-chunk below pulls all the taxa
-information (Kingdom, Phylum, Class, Order, and Family) for the
-iucn_sids in the marine_species_list.</p>
-<p><em>This can take up to 18.36 hours.</em></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Query taxa info</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co"># Takes about 18.36089 hours</span></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>taxa <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co"># Query taxa info for marine species</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> marine_species_list) {</span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>  </span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>  <span class="co"># Pull desired taxonomic info</span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>  iucn_sid <span class="ot">&lt;-</span> <span class="fu">rl_sis</span>(i)<span class="sc">$</span>taxon<span class="sc">$</span>sis_id</span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>  kingdom <span class="ot">&lt;-</span> <span class="fu">rl_sis</span>(i)<span class="sc">$</span>taxon<span class="sc">$</span>kingdom_name</span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>  phylum <span class="ot">&lt;-</span> <span class="fu">rl_sis</span>(i)<span class="sc">$</span>taxon<span class="sc">$</span>phylum_name</span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>  class <span class="ot">&lt;-</span> <span class="fu">rl_sis</span>(i)<span class="sc">$</span>taxon<span class="sc">$</span>class_name</span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>  order <span class="ot">&lt;-</span> <span class="fu">rl_sis</span>(i)<span class="sc">$</span>taxon<span class="sc">$</span>order_name</span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>  family <span class="ot">&lt;-</span> <span class="fu">rl_sis</span>(i)<span class="sc">$</span>taxon<span class="sc">$</span>family_name</span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>  </span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>  <span class="co"># Save to new df</span></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>  taxa_info_spp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(iucn_sid, kingdom, phylum, class, order, family)</span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>  </span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>  <span class="co"># Bind new df to existing df</span></span>
-<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>  taxa <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(taxa, taxa_info_spp)</span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a>  </span>
-<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a>  <span class="co"># Pause between queries to avoid timeout</span></span>
-<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">2</span>)</span>
-<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a>}</span>
-<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a></span>
-<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a>end_time <span class="sc">-</span> start_time  </span>
-<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a></span>
-<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a><span class="co"># Save for time</span></span>
-<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a><span class="fu">write_csv</span>(taxa, <span class="fu">file.path</span>(dir_goal, <span class="fu">sprintf</span>(<span class="st">&#39;_data/iucn/taxa_%s.csv&#39;</span>, api_version)))</span>
-<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a></span>
-<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a><span class="co"># Load for time </span></span>
-<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a><span class="co">#taxa &lt;- read.csv(file.path(dir_goal, sprintf(&#39;_data/iucn/taxa_%s.csv&#39;, api_version)), show_col_types = FALSE)</span></span>
-<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a></span>
-<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a><span class="co"># Make comprehensive species list with species and subpops?</span></span>
-<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a><span class="co"># spp_from_api &lt;- marine_system %&gt;%</span></span>
-<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a><span class="co">#   mutate(subpopulation_name = NA) %&gt;%</span></span>
-<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a><span class="co">#   select(iucn_sid, sciname, subpopulation_name) %&gt;%</span></span>
-<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a><span class="co">#   bind_rows(sub_pops %&gt;% select(iucn_sid = sis_id, sciname, subpopulation_name)) %&gt;%</span></span>
-<span id="cb7-42"><a href="#cb7-42" tabindex="-1"></a><span class="co">#   distinct()</span></span>
-<span id="cb7-43"><a href="#cb7-43" tabindex="-1"></a></span>
-<span id="cb7-44"><a href="#cb7-44" tabindex="-1"></a><span class="co"># Save for use in .rmd 3?</span></span>
-<span id="cb7-45"><a href="#cb7-45" tabindex="-1"></a><span class="co">#write_csv(spp_from_api, file.path(dir_goal_anx, &#39;iucn&#39;, sprintf(&#39;spp_info_from_api_%s.csv&#39;, api_version)))</span></span></code></pre></div>
+<div id="setup-intpolygon_areas_2025-1.csv" class="section level3" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Setup:
+<code>&#39;int/polygon_areas_2025-1.csv</code></h3>
+<p><em>This is just a sanity-check for raster-calculated
+ranges!</em></p>
+<p>This may <em>over</em> predict range for many species whose range is
+limited by depth, due to polygon buffering.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co"># spp_maps &lt;- read_csv(file.path(dir_data, sprintf(&#39;spp_marine_maps_%s.csv&#39;, api_version)),</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#                      col_types = &#39;ddcicccl&#39;) </span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># # %&gt;% dplyr::filter(!shp_iucn_sid %in% c(246014055))</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co"># spp_dbfs &lt;- spp_maps$dbf_file %&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#   unique()</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co"># spp_shps &lt;- spp_dbfs %&gt;%</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#   str_replace(&#39;\\.dbf$&#39;, &#39;.shp&#39;)</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co"># # Goal file</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co"># polygon_areas_file &lt;- file.path(dir_setup, sprintf(&#39;int/polygon_areas_%s.csv&#39;, api_version))</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="co"># reload &lt;- FALSE</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="co"># if(!file.exists(polygon_areas_file) | reload) {</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co">#   </span></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co">#   poly_range_list &lt;- list()</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co">#   for(i in seq_along(spp_shps)){</span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="co">#      x &lt;- spp_shps[i]</span></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co">#                             cat_msg(i, &#39;: Processing &#39;, x)</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="co">#                             shp &lt;- st_read(x)</span></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="co">#                             if(&#39;id_no&#39; %in% names(shp)) {</span></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="co">#                               shp &lt;- shp %&gt;%</span></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="co">#                                 rename(iucn_sid = id_no)</span></span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a><span class="co">#                             }</span></span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a><span class="co">#                             if(&#39;sisid&#39; %in% names(shp)){</span></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a><span class="co">#                               shp &lt;- shp %&gt;%</span></span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a><span class="co">#                                 rename(iucn_sid = sisid)</span></span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a><span class="co">#                             }</span></span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a><span class="co">#                             shp &lt;- shp %&gt;%</span></span>
+<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a><span class="co">#                               filter(iucn_sid %in% spp_maps$iucn_sid)</span></span>
+<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a><span class="co">#                                 </span><span class="al">###</span><span class="co"> </span><span class="al">NOTE</span><span class="co">: this will miss subpops</span></span>
+<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a><span class="co">#                             </span></span>
+<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a><span class="co">#                             ## Checking and attempting to fix invalid geometries</span></span>
+<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a><span class="co">#                             if(any(!st_is_valid(shp))) {</span></span>
+<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a><span class="co">#                               invalid &lt;- which(!st_is_valid(shp))</span></span>
+<span id="cb7-42"><a href="#cb7-42" tabindex="-1"></a><span class="co">#                               </span></span>
+<span id="cb7-43"><a href="#cb7-43" tabindex="-1"></a><span class="co">#                               shp[invalid,] &lt;- st_make_valid(shp[invalid,])</span></span>
+<span id="cb7-44"><a href="#cb7-44" tabindex="-1"></a><span class="co">#                             }</span></span>
+<span id="cb7-45"><a href="#cb7-45" tabindex="-1"></a><span class="co">#                             ## If any are still invalid after using st_make_valid, don&#39;t use s2 and</span></span>
+<span id="cb7-46"><a href="#cb7-46" tabindex="-1"></a><span class="co">#                             ## hopefully it will work</span></span>
+<span id="cb7-47"><a href="#cb7-47" tabindex="-1"></a><span class="co">#                             if(any(!st_is_valid(shp))) {</span></span>
+<span id="cb7-48"><a href="#cb7-48" tabindex="-1"></a><span class="co">#                               sf_use_s2(FALSE)</span></span>
+<span id="cb7-49"><a href="#cb7-49" tabindex="-1"></a><span class="co">#                               invalid &lt;- which(!st_is_valid(shp))</span></span>
+<span id="cb7-50"><a href="#cb7-50" tabindex="-1"></a><span class="co">#                               </span></span>
+<span id="cb7-51"><a href="#cb7-51" tabindex="-1"></a><span class="co">#                               shp[invalid,] &lt;- st_make_valid(shp[invalid,])</span></span>
+<span id="cb7-52"><a href="#cb7-52" tabindex="-1"></a><span class="co">#                             }</span></span>
+<span id="cb7-53"><a href="#cb7-53" tabindex="-1"></a><span class="co">#                             </span></span>
+<span id="cb7-54"><a href="#cb7-54" tabindex="-1"></a><span class="co">#                             range_df &lt;- data.frame(iucn_sid = shp$iucn_sid,</span></span>
+<span id="cb7-55"><a href="#cb7-55" tabindex="-1"></a><span class="co">#                                                    poly_range_km2 = st_area(shp)) %&gt;%</span></span>
+<span id="cb7-56"><a href="#cb7-56" tabindex="-1"></a><span class="co">#                               mutate(poly_range_km2 = as.numeric(poly_range_km2 / 1e6))</span></span>
+<span id="cb7-57"><a href="#cb7-57" tabindex="-1"></a><span class="co">#                             cat_msg(i, &#39;: Finished &#39;, x)</span></span>
+<span id="cb7-58"><a href="#cb7-58" tabindex="-1"></a><span class="co">#                             </span></span>
+<span id="cb7-59"><a href="#cb7-59" tabindex="-1"></a><span class="co">#                       poly_range_list[[length(poly_range_list)+1]] = range_df     </span></span>
+<span id="cb7-60"><a href="#cb7-60" tabindex="-1"></a><span class="co">#     </span></span>
+<span id="cb7-61"><a href="#cb7-61" tabindex="-1"></a><span class="co">#   }</span></span>
+<span id="cb7-62"><a href="#cb7-62" tabindex="-1"></a><span class="co">#   </span></span>
+<span id="cb7-63"><a href="#cb7-63" tabindex="-1"></a><span class="co">#   </span></span>
+<span id="cb7-64"><a href="#cb7-64" tabindex="-1"></a><span class="co">#   poly_range_df &lt;- poly_range_list %&gt;%</span></span>
+<span id="cb7-65"><a href="#cb7-65" tabindex="-1"></a><span class="co">#     setNames(basename(spp_shps)) %&gt;%</span></span>
+<span id="cb7-66"><a href="#cb7-66" tabindex="-1"></a><span class="co">#     bind_rows(.id = &#39;shp_file&#39;) %&gt;%</span></span>
+<span id="cb7-67"><a href="#cb7-67" tabindex="-1"></a><span class="co">#     group_by(iucn_sid) %&gt;%</span></span>
+<span id="cb7-68"><a href="#cb7-68" tabindex="-1"></a><span class="co">#     summarize(poly_range_km2 = round(max(poly_range_km2), 3))</span></span>
+<span id="cb7-69"><a href="#cb7-69" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-70"><a href="#cb7-70" tabindex="-1"></a><span class="co">#   write_csv(poly_range_df, polygon_areas_file)</span></span>
+<span id="cb7-71"><a href="#cb7-71" tabindex="-1"></a><span class="co"># }</span></span>
+<span id="cb7-72"><a href="#cb7-72" tabindex="-1"></a><span class="co">#     </span></span></code></pre></div>
 </div>
-<div id="habitat-info" class="section level3" number="3.1.4">
-<h3><span class="header-section-number">3.1.4</span> Habitat info</h3>
-<p>Using the <code>rl_habitats()</code> function, get the species list
-for species coded with the following marine habitat codes: 9-12, plus
-15.11, 15.12, 15.13. Note category 13 is Marine Coastal/Supratidal, but
-includes many species whose “marine” dependence is only incidental. We
-include seacliffs and offshore islands (13.1) from category 13. If these
-species do not show up in category 12 (marine intertidal) then they are
-assumed to not actually depend on marine habitats.</p>
-<p>The list can be found here (make sure to compare the webpage to the
-final df, to make sure it matches up): <a href="https://www.iucnredlist.org/resources/habitat-classification-scheme" class="uri">https://www.iucnredlist.org/resources/habitat-classification-scheme</a></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Get a list of habitats</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>iucn_habitats <span class="ot">&lt;-</span> <span class="fu">rl_habitats</span>()<span class="sc">$</span>habitats</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Unlist the description column</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>iucn_habitats<span class="sc">$</span>description <span class="ot">&lt;-</span> iucn_habitats<span class="sc">$</span>description<span class="sc">$</span>en</span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co"># Select desired marine habitats (noted above)</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>marine_habitats <span class="ot">&lt;-</span> iucn_habitats <span class="sc">%&gt;%</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(code, <span class="st">&quot;^(9_|10_|11_|12_)&quot;</span>) <span class="sc">|</span> </span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>           code <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;13_1&quot;</span>, <span class="st">&quot;15_11&quot;</span>, <span class="st">&quot;15_12&quot;</span>, <span class="st">&quot;15_13&quot;</span>))</span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a></span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co"># Select desired marine habitats by description</span></span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co"># marine_habitats &lt;- iucn_habitats %&gt;%</span></span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#   dplyr::filter(str_detect(tolower(description), &quot;marine|reef|lagoon&quot;) &amp;</span></span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#                   !str_detect(tolower(description), &quot;supratidal&quot;)) # change to include 13_1</span></span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co"># Initiate empty list</span></span>
-<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>marine_habitats_spp <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co"># Query species for each marine habitat</span></span>
-<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> marine_habitats<span class="sc">$</span>code) { </span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>  </span>
-<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a>  <span class="co"># Save habitat name</span></span>
-<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a>  habitat_name <span class="ot">&lt;-</span> marine_habitats<span class="sc">$</span>description[marine_habitats<span class="sc">$</span>code <span class="sc">==</span> i]</span>
-<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a>  </span>
-<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a>  <span class="co"># Get list of assessments</span></span>
-<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>  habitat_assessments <span class="ot">&lt;-</span> <span class="fu">rl_habitats</span>(<span class="at">code =</span> i)<span class="sc">$</span>assessments</span>
-<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a>  </span>
-<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a>  <span class="co"># Append to list</span></span>
-<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a>  marine_habitats_spp[[habitat_name]] <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">as_tibble</span>(habitat_assessments)</span>
-<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a>}</span>
-<span id="cb8-32"><a href="#cb8-32" tabindex="-1"></a></span>
-<span id="cb8-33"><a href="#cb8-33" tabindex="-1"></a><span class="co"># Combine individual habitat species lists into one master list</span></span>
-<span id="cb8-34"><a href="#cb8-34" tabindex="-1"></a>marine_species_habitats <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(marine_habitats_spp) <span class="sc">%&gt;%</span></span>
-<span id="cb8-35"><a href="#cb8-35" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">iucn_sid =</span> sis_taxon_id, </span>
-<span id="cb8-36"><a href="#cb8-36" tabindex="-1"></a>         <span class="at">sciname =</span> taxon_scientific_name,</span>
-<span id="cb8-37"><a href="#cb8-37" tabindex="-1"></a>         <span class="at">category =</span> red_list_category_code,</span>
-<span id="cb8-38"><a href="#cb8-38" tabindex="-1"></a>         <span class="at">year =</span> year_published) </span>
-<span id="cb8-39"><a href="#cb8-39" tabindex="-1"></a></span>
-<span id="cb8-40"><a href="#cb8-40" tabindex="-1"></a><span class="co"># Save for time</span></span>
-<span id="cb8-41"><a href="#cb8-41" tabindex="-1"></a><span class="fu">write_csv</span>(marine_species_habitats, <span class="fu">file.path</span>(dir_goal, <span class="fu">sprintf</span>(<span class="st">&#39;_data/iucn/marine_spp_habitats_%s.csv&#39;</span>, api_version)))</span>
-<span id="cb8-42"><a href="#cb8-42" tabindex="-1"></a></span>
-<span id="cb8-43"><a href="#cb8-43" tabindex="-1"></a><span class="co"># Load for time</span></span>
-<span id="cb8-44"><a href="#cb8-44" tabindex="-1"></a><span class="co">#marine_species_habitats &lt;- read_csv(file.path(dir_goal, ssprintf(&#39;_data/iucn/marine_spp_habitats_%s.csv&#39;, api_version)), show_col_types = FALSE)</span></span></code></pre></div>
-</div>
-<div id="comprehensive-assessments" class="section level3" number="3.1.5">
-<h3><span class="header-section-number">3.1.5</span> Comprehensive
-Assessments</h3>
-<p>Not all maps are for species that are included in comprehensively
-assessed taxonomic groups. Get info on comprehensive assessment status
-for species from the API.</p>
-<div id="data-iucn_comp_assessed_2025-1.csv" class="section level4" number="3.1.5.1">
-<h4><span class="header-section-number">3.1.5.1</span> Data:
-<code>iucn_comp_assessed_2025-1.csv</code></h4>
-<p><em>This can take up to 40 minutes.</em></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Goal file</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>comp_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, </span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>                       <span class="fu">sprintf</span>(<span class="st">&#39;iucn_comp_assessed_%s.csv&#39;</span>, api_version))</span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co"># Query comp assessment information</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co"># Takes about 40 minutes</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>iucn_assessment_groups <span class="ot">&lt;-</span> <span class="fu">rl_comp_groups</span>()<span class="sc">$</span>comprehensive_group <span class="sc">%&gt;%</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>  <span class="fu">filter</span>(comp <span class="sc">==</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>assessment_groups <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="co"># Query for all assessments</span></span>
-<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> iucn_assessment_groups<span class="sc">$</span>name) {</span>
-<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>  </span>
-<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>  group <span class="ot">&lt;-</span> i</span>
-<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>  </span>
-<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>  assessment_groups_spp <span class="ot">&lt;-</span> <span class="fu">rl_comp_groups</span>(<span class="at">name =</span> i)<span class="sc">$</span>assessments</span>
-<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>  </span>
-<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>  <span class="co"># Append to list</span></span>
-<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>  assessment_groups[[group]] <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">as_tibble</span>(assessment_groups_spp)</span>
-<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>}</span>
-<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>end_time <span class="sc">-</span> start_time </span>
-<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a></span>
-<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a><span class="co"># Combine individual assessment types into one master list</span></span>
-<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>comp_spp_full <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(assessment_groups) <span class="sc">%&gt;%</span></span>
-<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">iucn_sid =</span> sis_taxon_id, </span>
-<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a>         <span class="at">sciname =</span> taxon_scientific_name,</span>
-<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a>         <span class="at">category =</span> red_list_category_code,</span>
-<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a>         <span class="at">year =</span> year_published) </span>
-<span id="cb9-34"><a href="#cb9-34" tabindex="-1"></a></span>
-<span id="cb9-35"><a href="#cb9-35" tabindex="-1"></a><span class="co"># Save for time</span></span>
-<span id="cb9-36"><a href="#cb9-36" tabindex="-1"></a><span class="fu">write_csv</span>(comp_spp_full, <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;_data&#39;</span>, <span class="st">&#39;iucn&#39;</span>,</span>
-<span id="cb9-37"><a href="#cb9-37" tabindex="-1"></a>                                         <span class="fu">sprintf</span>(<span class="st">&#39;comp_spp_%s.csv&#39;</span>, api_version)))</span>
-<span id="cb9-38"><a href="#cb9-38" tabindex="-1"></a></span>
-<span id="cb9-39"><a href="#cb9-39" tabindex="-1"></a><span class="co"># Read in for time</span></span>
-<span id="cb9-40"><a href="#cb9-40" tabindex="-1"></a><span class="co">#comp_spp_full &lt;- read_csv(file.path(dir_goal, &#39;_data&#39;, &#39;iucn&#39;, sprintf(&#39;comp_spp_%s.csv&#39;, api_version)), show_col_types = FALSE)</span></span>
-<span id="cb9-41"><a href="#cb9-41" tabindex="-1"></a></span>
-<span id="cb9-42"><a href="#cb9-42" tabindex="-1"></a><span class="co"># Save distinct species</span></span>
-<span id="cb9-43"><a href="#cb9-43" tabindex="-1"></a>comp_spp <span class="ot">&lt;-</span> comp_spp_full <span class="sc">%&gt;%</span></span>
-<span id="cb9-44"><a href="#cb9-44" tabindex="-1"></a>  <span class="fu">select</span>(iucn_sid, sciname) <span class="sc">%&gt;%</span></span>
-<span id="cb9-45"><a href="#cb9-45" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
-<span id="cb9-46"><a href="#cb9-46" tabindex="-1"></a></span>
-<span id="cb9-47"><a href="#cb9-47" tabindex="-1"></a><span class="co"># Write csv</span></span>
-<span id="cb9-48"><a href="#cb9-48" tabindex="-1"></a><span class="fu">write_csv</span>(comp_spp, comp_file)</span></code></pre></div>
-</div>
-</div>
-</div>
-<div id="global-assessments" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> <em>Global</em>
-Assessments</h2>
-<div id="data-iucn_risk_current_2025-1.csv" class="section level3" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Data:
-<code>iucn_risk_current_2025-1.csv</code></h3>
-<p>Save the IUCN categories for all current <em>global</em> assessments
-of marine species.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Reclassify old codes to current codes</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>cat_lookup <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(dir_setup, <span class="st">&#39;raw&#39;</span>, <span class="st">&#39;risk_code_lookup.csv&#39;</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># Load if necessary</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#marine_system &lt;- read_csv(file.path(dir_goal, sprintf(&#39;_data/iucn/marine_system_2025-1.csv&#39;)), show_col_types = FALSE)</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co"># Create data frame for layer</span></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>marine_species_risk <span class="ot">&lt;-</span> marine_system <span class="sc">%&gt;%</span></span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>  <span class="co"># Get current assessments</span></span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>  <span class="fu">filter</span>(latest <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>  <span class="co"># Unnest the scopes variable</span></span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>  <span class="fu">unnest</span>(scopes, <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>  <span class="co"># Filter for global scopes</span></span>
-<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>  <span class="fu">filter</span> (scopes_code <span class="sc">==</span> <span class="st">&quot;1&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>  <span class="co"># Reclassify codes</span></span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>  <span class="fu">left_join</span>(cat_lookup, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;category&quot;</span> <span class="ot">=</span> <span class="st">&quot;code&quot;</span>), <span class="at">relationship =</span> <span class="st">&quot;many-to-many&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">old_cat =</span> category,</span>
-<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>         <span class="at">cat =</span> code_current) <span class="sc">%&gt;%</span></span>
-<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>  <span class="co"># Add version column</span></span>
-<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">iucn_version =</span> <span class="st">&quot;2025-1&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a>  <span class="fu">select</span>(iucn_sid, sciname, year, old_cat, cat, cat_score, iucn_version) <span class="co">#criteria left out</span></span>
-<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a></span>
-<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a><span class="co"># Check that no IDs are repeated (should return 0 rows)</span></span>
-<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a>marine_species_risk <span class="sc">%&gt;%</span></span>
-<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a>  <span class="fu">group_by</span>(iucn_sid) <span class="sc">%&gt;%</span></span>
-<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
-<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a></span>
-<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a><span class="co"># Write csv</span></span>
-<span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a><span class="fu">write_csv</span>(marine_species_risk, <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;_data&#39;</span>, </span>
-<span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a>                                         <span class="fu">sprintf</span>(<span class="st">&#39;iucn_risk_current_%s.csv&#39;</span>, api_version)))</span></code></pre></div>
-<div id="data-spp_marine_from_api_2025-1.csv" class="section level4" number="3.2.1.1">
-<h4><span class="header-section-number">3.2.1.1</span> Data:
-<code>spp_marine_from_api_2025-1.csv</code></h4>
-<p>Some species show up over multiple habitats (and thus depth ratings),
-so I chose to assign the deepest rating.</p>
-<table>
-<thead>
-<tr class="header">
-<th>habitat type</th>
-<th>habitat code</th>
-<th>depth classification</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>deep benthic</td>
-<td>10_3, 10_4</td>
-<td>“deep oceanic”</td>
-</tr>
-<tr class="even">
-<td>deep oceanic</td>
-<td>10_ , 11_</td>
-<td>“200 m +”</td>
-</tr>
-<tr class="odd">
-<td>neritic</td>
-<td>9_, 15_</td>
-<td>“&lt; 200 m”</td>
-</tr>
-<tr class="even">
-<td>intertidal</td>
-<td>12_, 13_</td>
-<td>“&lt;20 m”</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Load if necessary</span></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#marine_species_habitats &lt;- read_csv(file.path(dir_goal, sprintf(&#39;_data/iucn/marine_spp_habitats_%s.csv&#39;, api_version)), show_col_types = FALSE)</span></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># Filter for species identified in marine system search, global code</span></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>marine_species_habitats_global <span class="ot">&lt;-</span> marine_species_habitats <span class="sc">%&gt;%</span></span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>  <span class="co"># Filter for latest assessments</span></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>  <span class="fu">filter</span>(latest <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>  <span class="co"># Filter for global</span></span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>  <span class="fu">filter</span>(scopes_code <span class="sc">==</span> <span class="st">&quot;1&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>  <span class="co"># Filter for marine species</span></span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>  <span class="fu">filter</span>(iucn_sid <span class="sc">%in%</span> marine_species_list) <span class="sc">%&gt;%</span></span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>  <span class="fu">separate</span>(code, <span class="fu">c</span>(<span class="st">&#39;cat&#39;</span>, <span class="st">&#39;subcat1&#39;</span>, <span class="st">&#39;subcat2&#39;</span>),</span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>           <span class="at">remove =</span> <span class="cn">FALSE</span>, <span class="at">convert =</span> <span class="cn">TRUE</span>, <span class="at">fill =</span> <span class="st">&quot;right&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>  <span class="fu">arrange</span>(cat, subcat1, subcat2) <span class="sc">%&gt;%</span></span>
-<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>  <span class="co"># Assign descriptions to each cat</span></span>
-<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>    <span class="at">max_depth =</span> <span class="fu">factor</span>(<span class="fu">case_when</span>(</span>
-<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a>      cat <span class="sc">==</span> <span class="dv">10</span> <span class="sc">&amp;</span> subcat1 <span class="sc">%in%</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>         <span class="sc">~</span> <span class="st">&quot;deep oceanic&quot;</span>,</span>
-<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a>      cat <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">11</span>)                   <span class="sc">~</span> <span class="st">&quot;200 m +&quot;</span>,</span>
-<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a>      cat <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">15</span>)                    <span class="sc">~</span> <span class="st">&quot;&lt; 200 m&quot;</span>,</span>
-<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a>      cat <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">13</span>)                   <span class="sc">~</span> <span class="st">&quot;&lt; 20 m&quot;</span>,</span>
-<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a>      <span class="cn">TRUE</span>                                 <span class="sc">~</span> <span class="st">&quot;unknown&quot;</span>),</span>
-<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a>    <span class="co"># To make it easier to pick the deepest (min) depth rating</span></span>
-<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;deep oceanic&quot;</span>, <span class="st">&quot;200 m +&quot;</span>, <span class="st">&quot;&lt; 200 m&quot;</span>, <span class="st">&quot;&lt; 20 m&quot;</span>, <span class="st">&quot;unknown&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a>  <span class="fu">left_join</span>(iucn_habitats, <span class="at">by =</span> <span class="st">&quot;code&quot;</span>)</span>
-<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a></span>
-<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a><span class="co"># Create data frame for layer</span></span>
-<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a>habs <span class="ot">&lt;-</span> marine_species_risk <span class="sc">%&gt;%</span></span>
-<span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a>  <span class="co"># Add depth descriptions</span></span>
-<span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a>  <span class="fu">left_join</span>(marine_species_habitats_global, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;iucn_sid&quot;</span>, <span class="st">&quot;sciname&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a>  <span class="fu">select</span>(iucn_sid, code, max_depth) <span class="sc">%&gt;%</span></span>
-<span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a>  <span class="fu">group_by</span>(iucn_sid) <span class="sc">%&gt;%</span></span>
-<span id="cb11-33"><a href="#cb11-33" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
-<span id="cb11-34"><a href="#cb11-34" tabindex="-1"></a>    <span class="at">habs =</span> <span class="fu">paste</span>(<span class="fu">unique</span>(code), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>),</span>
-<span id="cb11-35"><a href="#cb11-35" tabindex="-1"></a>    <span class="co"># Pick the deepest rating (the lowest (min) level)</span></span>
-<span id="cb11-36"><a href="#cb11-36" tabindex="-1"></a>    <span class="at">max_depth =</span> <span class="fu">as.character</span>(max_depth[<span class="fu">which.min</span>(<span class="fu">as.integer</span>(max_depth))])) <span class="sc">%&gt;%</span></span>
-<span id="cb11-37"><a href="#cb11-37" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb11-38"><a href="#cb11-38" tabindex="-1"></a></span>
-<span id="cb11-39"><a href="#cb11-39" tabindex="-1"></a><span class="co"># Write csv</span></span>
-<span id="cb11-40"><a href="#cb11-40" tabindex="-1"></a><span class="fu">write_csv</span>(habs, <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;_data&#39;</span>,</span>
-<span id="cb11-41"><a href="#cb11-41" tabindex="-1"></a>                          <span class="fu">sprintf</span>(<span class="st">&#39;spp_marine_from_api_%s.csv&#39;</span>, api_version)))</span></code></pre></div>
-<p>Check out the results for 2025, assess differences from 2024.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># nrow(habs) # 19,899</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co"># nrow(marine_species_risk) # 19,529</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co"># # Check species that are in habs but not in global</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co"># check &lt;- anti_join(habs, marine_species_risk, by = &quot;iucn_sid&quot;)</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co"># ## Interesting: iucn_sid 155168 appears in marine_species_list and marine_species (obtained from rl_habitats(), but does not appear in global_marine and thus marine_species_risk despite having a scope of 1 (global) listed in marine_species)</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="co"># habs_2024 &lt;- read_csv(file.path(dir_goal, sprintf(&#39;_data/spp_marine_from_api_%s.csv&#39;, &quot;2024-1&quot;)), show_col_types = FALSE)</span></span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co"># nrow(habs_2024) # 18,590</span></span></code></pre></div>
-</div>
-</div>
-<div id="data-iucn_risk_timeseries_2025-1.csv" class="section level3" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> Data:
-<code>iucn_risk_timeseries_2025-1.csv</code></h3>
-<p>Save the IUCN categories for all available <em>global</em>
-assessments over time of marine species.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Create data frame for layer</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>marine_species_risk_timeseries <span class="ot">&lt;-</span> marine_system <span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  <span class="co"># Filter for global scopes</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  <span class="fu">filter</span> (scopes_code <span class="sc">==</span> <span class="st">&quot;1&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  <span class="co"># Reclassify codes</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  <span class="fu">left_join</span>(cat_lookup, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;category&quot;</span> <span class="ot">=</span> <span class="st">&quot;code&quot;</span>), <span class="at">relationship =</span> <span class="st">&quot;many-to-many&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">old_cat =</span> category,</span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>         <span class="at">cat =</span> code_current) <span class="sc">%&gt;%</span></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>  <span class="co"># Add version column</span></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">iucn_version =</span> <span class="st">&quot;2025-1&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>  <span class="fu">select</span>(iucn_sid, year, <span class="at">cat_ts =</span> cat, <span class="at">cat_ts_score =</span> cat_score, iucn_version)</span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="co"># Write csv</span></span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="fu">write_csv</span>(marine_species_risk_timeseries, <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;_data&#39;</span>, </span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>                                                    <span class="fu">sprintf</span>(<span class="st">&#39;iucn_risk_timeseries_%s.csv&#39;</span>,</span>
-<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>                                                            api_version)))</span></code></pre></div>
-<p>Check out the results for 2025, assess differences from 2024.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># # Compare to last year</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co"># nrow(marine_species_risk) # 19,357</span></span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co"># # Import last year (change year as needed)</span></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co"># marine_species_risk_2024 &lt;- read_csv(file.path(dir_goal, sprintf(&#39;_data/iucn_risk_current_%s.csv&#39;, &quot;2024-1&quot;)), show_col_types = FALSE)</span></span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co"># nrow(marine_species_risk_2024) # 18,599</span></span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="co"># length(setdiff(unique(marine_species_risk$iucn_sid), unique(marine_species_risk_2024$iucn_sid))) # 2,648 new species</span></span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="co"># # Look at species added in new OHI assessment</span></span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co"># new_species &lt;- marine_species_risk %&gt;%</span></span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="co">#   anti_join(marine_species_risk_2024, by = &quot;iucn_sid&quot;) %&gt;%</span></span>
-<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="co">#   # Check to see if new species are all from same habitat? published year?</span></span>
-<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="co">#   left_join(marine_species, by = c(&quot;iucn_sid&quot;, &quot;year&quot;, &quot;sciname&quot;))</span></span></code></pre></div>
-</div>
-</div>
-<div id="regional-assessments" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> <em>Regional</em>
-Assessments</h2>
-<p>Using the <code>rl_scopes()</code> function, get the species list for
-species coded with the following regions: Europe (2), Mediterranean (4),
-Western Africa (8), S. Africa FW (9), Pan-Africa (10), Central Africa
-(16), Northeastern Africa (17), Eastern Africa (18), Northern Africa
-(21), Gulf of Mexico (45433062), Caribbean (45433063), Persian Gulf
-(45433064), Arabian Sea (100765562).</p>
-<p>Essentially all <em>but</em> Global (1).</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Get list of scopes (regions)</span></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>iucn_scopes <span class="ot">&lt;-</span> <span class="fu">rl_scopes</span>()<span class="sc">$</span>scopes</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># Unlist description</span></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>iucn_scopes<span class="sc">$</span>description <span class="ot">&lt;-</span> iucn_scopes<span class="sc">$</span>description<span class="sc">$</span>en</span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co"># Remove &quot;Global&quot; (see above)</span></span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>scopes <span class="ot">&lt;-</span> iucn_scopes <span class="sc">%&gt;%</span></span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>description <span class="sc">==</span> <span class="st">&quot;Global&quot;</span>)</span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a></span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="co"># Initiate empty list</span></span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>scopes_assessments <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a><span class="co"># Query species for each region</span></span>
-<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> scopes<span class="sc">$</span>code) { </span>
-<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a>  </span>
-<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a>  <span class="co"># Save region name</span></span>
-<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a>  scope_name <span class="ot">&lt;-</span> scopes<span class="sc">$</span>description[scopes<span class="sc">$</span>code <span class="sc">==</span> i]</span>
-<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a>  </span>
-<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a>  <span class="co"># Get list of assesments</span></span>
-<span id="cb15-21"><a href="#cb15-21" tabindex="-1"></a>  scope_assessments <span class="ot">&lt;-</span> <span class="fu">rl_scopes</span>(<span class="at">code =</span> i)<span class="sc">$</span>assessments </span>
-<span id="cb15-22"><a href="#cb15-22" tabindex="-1"></a>  </span>
-<span id="cb15-23"><a href="#cb15-23" tabindex="-1"></a>  <span class="co"># Append to list</span></span>
-<span id="cb15-24"><a href="#cb15-24" tabindex="-1"></a>  scopes_assessments[[scope_name]] <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">as_tibble</span>(scope_assessments)</span>
-<span id="cb15-25"><a href="#cb15-25" tabindex="-1"></a>}</span>
-<span id="cb15-26"><a href="#cb15-26" tabindex="-1"></a></span>
-<span id="cb15-27"><a href="#cb15-27" tabindex="-1"></a><span class="co"># Combine assessments</span></span>
-<span id="cb15-28"><a href="#cb15-28" tabindex="-1"></a>rgn_assess <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(scopes_assessments) <span class="sc">%&gt;%</span></span>
-<span id="cb15-29"><a href="#cb15-29" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">iucn_sid =</span> sis_taxon_id, </span>
-<span id="cb15-30"><a href="#cb15-30" tabindex="-1"></a>                <span class="at">sciname =</span> taxon_scientific_name, </span>
-<span id="cb15-31"><a href="#cb15-31" tabindex="-1"></a>                <span class="at">category =</span> red_list_category_code,</span>
-<span id="cb15-32"><a href="#cb15-32" tabindex="-1"></a>                <span class="at">year =</span> year_published)</span>
-<span id="cb15-33"><a href="#cb15-33" tabindex="-1"></a></span>
-<span id="cb15-34"><a href="#cb15-34" tabindex="-1"></a><span class="co"># Save for time</span></span>
-<span id="cb15-35"><a href="#cb15-35" tabindex="-1"></a><span class="fu">write_csv</span>(rgn_assess, <span class="fu">file.path</span>(dir_goal, <span class="fu">sprintf</span>(<span class="st">&#39;_data/iucn/rgn_spp_%s.csv&#39;</span>, api_version)))</span>
-<span id="cb15-36"><a href="#cb15-36" tabindex="-1"></a></span>
-<span id="cb15-37"><a href="#cb15-37" tabindex="-1"></a><span class="co"># Load for time</span></span>
-<span id="cb15-38"><a href="#cb15-38" tabindex="-1"></a><span class="co">#rgn_assess &lt;- read_csv(file.path(dir_goal, sprintf(&#39;_data/iucn/rgn_spp_%s.csv&#39;, api_version)), show_col_types = FALSE)</span></span></code></pre></div>
-<div id="data-iucn_risk_rgn_current_2025-1.csv" class="section level3" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> Data:
-<code>iucn_risk_rgn_current_2025-1.csv</code></h3>
-<p>Save the IUCN categories for all available <em>regional</em>
-assessments for marine species.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Load if necessary</span></span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="co">#rgn_assess &lt;- read_csv(file.path(dir_goal, sprintf(&#39;_data/iucn/rgn_spp_%s.csv&#39;, api_version)), show_col_types = FALSE)</span></span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co"># Create data frame for layer</span></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>rgn_assess_marine <span class="ot">&lt;-</span> rgn_assess <span class="sc">%&gt;%</span></span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>  <span class="co"># Get current assesments</span></span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>  <span class="fu">filter</span>(latest <span class="sc">==</span> <span class="cn">TRUE</span>)  <span class="sc">%&gt;%</span></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>  <span class="co"># filter for marine species</span></span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a>  <span class="fu">filter</span>(iucn_sid <span class="sc">%in%</span> marine_species_list) <span class="sc">%&gt;%</span></span>
-<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>  <span class="co"># Add region descriptions</span></span>
-<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a>  <span class="fu">left_join</span>(scopes, <span class="at">by =</span> <span class="st">&quot;code&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">iucn_rgn =</span> <span class="fu">str_replace_all</span>(<span class="fu">tolower</span>(description), <span class="st">&quot; &quot;</span>, <span class="st">&#39;_&#39;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a>  <span class="co"># Reclassify old codes</span></span>
-<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a>  <span class="fu">left_join</span>(cat_lookup, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;category&quot;</span> <span class="ot">=</span> <span class="st">&quot;code&quot;</span>), <span class="at">relationship =</span> <span class="st">&quot;many-to-many&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a>  <span class="fu">select</span>(iucn_sid, </span>
-<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a>         sciname,</span>
-<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a>         <span class="at">old_cat =</span> category,</span>
-<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a>         iucn_rgn, </span>
-<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a>         cat_score, </span>
-<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a>         <span class="at">cat_current =</span> code_current) </span>
-<span id="cb16-21"><a href="#cb16-21" tabindex="-1"></a></span>
-<span id="cb16-22"><a href="#cb16-22" tabindex="-1"></a><span class="co"># Write csv</span></span>
-<span id="cb16-23"><a href="#cb16-23" tabindex="-1"></a><span class="fu">write_csv</span>(rgn_assess_marine, <span class="fu">file.path</span>(dir_goal, <span class="fu">sprintf</span>(<span class="st">&#39;_data/iucn_risk_rgn_current_%s.csv&#39;</span>, api_version)))</span></code></pre></div>
-<p>Check out the results for 2025, assess differences from 2024.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># # Check</span></span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="co"># nrow(rgn_assess_marine) #5032</span></span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="co"># unique(rgn_assess_marine$iucn_rgn)</span></span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co"># length(unique(rgn_assess_marine$iucn_rgn)) #13</span></span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="co"># rgn_assess_marine_2024 &lt;- read_csv(file.path(dir_goal, sprintf(&#39;_data/iucn_risk_rgn_current_%s.csv&#39;, &quot;2024-1&quot;)), show_col_types = FALSE)</span></span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="co"># nrow(rgn_assess_marine_2024) #2181</span></span>
-<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co"># unique(rgn_assess_marine_2024$iucn_rgn)</span></span>
-<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="co"># length(unique(rgn_assess_marine_2024$iucn_rgn))</span></span>
-<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="co"># print(paste0(&quot;The following regions are in v2025 and not v2024: &quot;, setdiff(unique(rgn_assess_marine$iucn_rgn), unique(rgn_assess_marine_2024$iucn_rgn))))</span></span></code></pre></div>
-</div>
-<div id="data-iucn_risk_ts_rgn_2025-1.csv" class="section level3" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> Data:
-<code>iucn_risk_ts_rgn_2025-1.csv</code></h3>
-<p>Save the IUCN categories for all available <em>regional</em>
-assessments over time for all marine species.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Create data frame for layer</span></span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>rgn_risk_ts <span class="ot">&lt;-</span> rgn_assess <span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>  <span class="co"># Filter for species in the marine species list</span></span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>  <span class="fu">filter</span>(iucn_sid <span class="sc">%in%</span> marine_species_list) <span class="sc">%&gt;%</span></span>
-<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">old_cat =</span> category) <span class="sc">%&gt;%</span></span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>  <span class="co"># Add new updated cat codes</span></span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>  <span class="fu">left_join</span>(cat_lookup, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&#39;old_cat&#39;</span> <span class="ot">=</span> <span class="st">&#39;code&#39;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(cat_score) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(year)) <span class="sc">%&gt;%</span></span>
-<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a>  <span class="co"># Add region descriptions</span></span>
-<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a>  <span class="fu">left_join</span>(scopes, <span class="at">by =</span> <span class="st">&quot;code&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a>  <span class="fu">arrange</span>(iucn_sid, year) <span class="sc">%&gt;%</span></span>
-<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a>  <span class="fu">select</span>(iucn_sid, </span>
-<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a>         year, </span>
-<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a>         <span class="at">rgn_cat_ts =</span> code_current, </span>
-<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a>         <span class="at">rgn_cat_ts_score =</span> cat_score, </span>
-<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a>         <span class="at">iucn_rgn =</span> description) <span class="sc">%&gt;%</span></span>
-<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">iucn_version =</span> api_version) <span class="sc">%&gt;%</span></span>
-<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a>  <span class="fu">group_by</span>(iucn_sid, iucn_rgn) <span class="sc">%&gt;%</span></span>
-<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb18-21"><a href="#cb18-21" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb18-22"><a href="#cb18-22" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">iucn_rgn =</span> <span class="fu">str_replace_all</span>(<span class="fu">tolower</span>(iucn_rgn), <span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>))</span>
-<span id="cb18-23"><a href="#cb18-23" tabindex="-1"></a></span>
-<span id="cb18-24"><a href="#cb18-24" tabindex="-1"></a><span class="co"># Write csv</span></span>
-<span id="cb18-25"><a href="#cb18-25" tabindex="-1"></a><span class="fu">write_csv</span>(rgn_risk_ts, <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;_data&#39;</span>,</span>
-<span id="cb18-26"><a href="#cb18-26" tabindex="-1"></a>                                 <span class="fu">sprintf</span>(<span class="st">&#39;iucn_risk_ts_rgn_%s.csv&#39;</span>, api_version)))</span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># # Check</span></span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="co"># nrow(rgn_risk_ts) #1,330</span></span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co"># unique(rgn_risk_ts$iucn_rgn)</span></span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co"># length(unique(rgn_risk_ts$iucn_rgn)) #10</span></span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co"># rgn_risk_ts_2024 &lt;- read_csv(file.path(dir_goal, sprintf(&#39;_data/iucn_risk_ts_rgn_%s.csv&#39;, &quot;2024-1&quot;)), show_col_types = FALSE)</span></span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co"># nrow(rgn_risk_ts_2024) #388</span></span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="co"># unique(rgn_risk_ts_2024$iucn_rgn)</span></span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co"># length(unique(rgn_risk_ts_2024$iucn_rgn)) #2</span></span></code></pre></div>
-</div>
-</div>
-<div id="trends-assessments" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> <em>Trends</em>
-assessments</h2>
-<div id="int-inttrend_calcsiucn_risk_ts_and_trends_2025-1.csv" class="section level3" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> Int:
-<code>int/trend_calcs/iucn_risk_ts_and_trends_2025-1.csv</code></h3>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Get pop trends</span></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>iucn_pop_trends <span class="ot">&lt;-</span> <span class="fu">rl_pop_trends</span>()<span class="sc">$</span>population_trends</span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="co"># Unlist the description column</span></span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>iucn_pop_trends<span class="sc">$</span>description <span class="ot">&lt;-</span> iucn_pop_trends<span class="sc">$</span>description<span class="sc">$</span>en</span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="co"># Initiate empty list</span></span>
-<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>pop_trends_spp <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a></span>
-<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a><span class="co"># Query species for each population trend</span></span>
-<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> iucn_pop_trends<span class="sc">$</span>code) { </span>
-<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>  </span>
-<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a>  <span class="co"># Save trend name</span></span>
-<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a>  trend_name <span class="ot">&lt;-</span> iucn_pop_trends<span class="sc">$</span>description[iucn_pop_trends<span class="sc">$</span>code <span class="sc">==</span> i]</span>
-<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a>  </span>
-<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a>  <span class="co"># Get list of assessments</span></span>
-<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a>  pop_assessments <span class="ot">&lt;-</span> <span class="fu">rl_pop_trends</span>(<span class="at">code =</span> i)<span class="sc">$</span>assessments</span>
-<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a>  </span>
-<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a>  <span class="co"># Append to list</span></span>
-<span id="cb20-20"><a href="#cb20-20" tabindex="-1"></a>  pop_trends_spp[[trend_name]] <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(pop_assessments)</span>
-<span id="cb20-21"><a href="#cb20-21" tabindex="-1"></a>  </span>
-<span id="cb20-22"><a href="#cb20-22" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">1</span>)</span>
-<span id="cb20-23"><a href="#cb20-23" tabindex="-1"></a>}</span>
-<span id="cb20-24"><a href="#cb20-24" tabindex="-1"></a></span>
-<span id="cb20-25"><a href="#cb20-25" tabindex="-1"></a><span class="co"># Combine individual population trend lists into one master list</span></span>
-<span id="cb20-26"><a href="#cb20-26" tabindex="-1"></a>pop_trends <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(pop_trends_spp) <span class="sc">%&gt;%</span></span>
-<span id="cb20-27"><a href="#cb20-27" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">iucn_sid =</span> sis_taxon_id, </span>
-<span id="cb20-28"><a href="#cb20-28" tabindex="-1"></a>         <span class="at">sciname =</span> taxon_scientific_name,</span>
-<span id="cb20-29"><a href="#cb20-29" tabindex="-1"></a>         <span class="at">category =</span> red_list_category_code,</span>
-<span id="cb20-30"><a href="#cb20-30" tabindex="-1"></a>         <span class="at">year =</span> year_published)  <span class="sc">%&gt;%</span></span>
-<span id="cb20-31"><a href="#cb20-31" tabindex="-1"></a>  <span class="fu">unnest</span>(scopes, <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>) </span>
-<span id="cb20-32"><a href="#cb20-32" tabindex="-1"></a></span>
-<span id="cb20-33"><a href="#cb20-33" tabindex="-1"></a>pop_trends<span class="sc">$</span>scopes_description <span class="ot">&lt;-</span> pop_trends<span class="sc">$</span>scopes_description<span class="sc">$</span>en</span>
-<span id="cb20-34"><a href="#cb20-34" tabindex="-1"></a></span>
-<span id="cb20-35"><a href="#cb20-35" tabindex="-1"></a><span class="co"># Save for time</span></span>
-<span id="cb20-36"><a href="#cb20-36" tabindex="-1"></a><span class="fu">write_csv</span>(pop_trends, <span class="fu">file.path</span>(dir_goal, <span class="fu">sprintf</span>(<span class="st">&#39;_data/iucn/pop_trends_%s.csv&#39;</span>, api_version)))</span>
-<span id="cb20-37"><a href="#cb20-37" tabindex="-1"></a></span>
-<span id="cb20-38"><a href="#cb20-38" tabindex="-1"></a><span class="co"># Load for time</span></span>
-<span id="cb20-39"><a href="#cb20-39" tabindex="-1"></a><span class="co">#pop_trends &lt;- read_csv(file.path(dir_goal, sprintf(&#39;_data/iucn/pop_trends_%s.csv&#39;, api_version)), show_col_types = FALSE)</span></span>
-<span id="cb20-40"><a href="#cb20-40" tabindex="-1"></a></span>
-<span id="cb20-41"><a href="#cb20-41" tabindex="-1"></a><span class="co"># Add trend description</span></span>
-<span id="cb20-42"><a href="#cb20-42" tabindex="-1"></a>pop_trends_marine <span class="ot">&lt;-</span> pop_trends <span class="sc">%&gt;%</span> </span>
-<span id="cb20-43"><a href="#cb20-43" tabindex="-1"></a>  <span class="co"># Filter for marine species</span></span>
-<span id="cb20-44"><a href="#cb20-44" tabindex="-1"></a>  <span class="fu">filter</span>(iucn_sid <span class="sc">%in%</span> marine_species_list)<span class="sc">%&gt;%</span></span>
-<span id="cb20-45"><a href="#cb20-45" tabindex="-1"></a>  <span class="co"># Filter for latest assessment</span></span>
-<span id="cb20-46"><a href="#cb20-46" tabindex="-1"></a>  <span class="fu">filter</span>(latest <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-47"><a href="#cb20-47" tabindex="-1"></a>  <span class="fu">left_join</span>(iucn_pop_trends, <span class="at">by =</span> <span class="st">&quot;code&quot;</span>)</span>
-<span id="cb20-48"><a href="#cb20-48" tabindex="-1"></a></span>
-<span id="cb20-49"><a href="#cb20-49" tabindex="-1"></a><span class="co"># Clean up region description</span></span>
-<span id="cb20-50"><a href="#cb20-50" tabindex="-1"></a>pop_trends_marine<span class="sc">$</span>iucn_rgn <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">str_replace</span>(pop_trends_marine<span class="sc">$</span>scopes_description, <span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>))</span>
-<span id="cb20-51"><a href="#cb20-51" tabindex="-1"></a></span>
-<span id="cb20-52"><a href="#cb20-52" tabindex="-1"></a><span class="co"># Create df for layer</span></span>
-<span id="cb20-53"><a href="#cb20-53" tabindex="-1"></a>iucn_risk_ts_and_trends <span class="ot">&lt;-</span> pop_trends_marine <span class="sc">%&gt;%</span></span>
-<span id="cb20-54"><a href="#cb20-54" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">iucn_version =</span> <span class="st">&quot;2025-1&quot;</span>,</span>
-<span id="cb20-55"><a href="#cb20-55" tabindex="-1"></a>         <span class="at">description =</span> <span class="fu">tolower</span>(description)) <span class="sc">%&gt;%</span></span>
-<span id="cb20-56"><a href="#cb20-56" tabindex="-1"></a>  <span class="fu">select</span>(iucn_sid, <span class="at">pop_trend =</span> description, iucn_version, iucn_rgn)</span>
-<span id="cb20-57"><a href="#cb20-57" tabindex="-1"></a></span>
-<span id="cb20-58"><a href="#cb20-58" tabindex="-1"></a><span class="co"># Save csv</span></span>
-<span id="cb20-59"><a href="#cb20-59" tabindex="-1"></a><span class="fu">write_csv</span>(iucn_risk_ts_and_trends, <span class="fu">file.path</span>(dir_setup, <span class="st">&#39;int/trend_calcs&#39;</span>,</span>
-<span id="cb20-60"><a href="#cb20-60" tabindex="-1"></a>                         <span class="fu">sprintf</span>(<span class="st">&#39;iucn_risk_ts_and_trends_%s.csv&#39;</span>, api_version)))</span>
-<span id="cb20-61"><a href="#cb20-61" tabindex="-1"></a></span>
-<span id="cb20-62"><a href="#cb20-62" tabindex="-1"></a><span class="co"># Make one file for both global and regional assessments?</span></span>
-<span id="cb20-63"><a href="#cb20-63" tabindex="-1"></a><span class="co"># all_ts &lt;- marine_species_risk_timeseries %&gt;%</span></span>
-<span id="cb20-64"><a href="#cb20-64" tabindex="-1"></a><span class="co">#   mutate(iucn_rgn = &quot;global&quot;) %&gt;%</span></span>
-<span id="cb20-65"><a href="#cb20-65" tabindex="-1"></a><span class="co">#   bind_rows(rgn_risk_ts %&gt;%</span></span>
-<span id="cb20-66"><a href="#cb20-66" tabindex="-1"></a><span class="co">#               rename(cat_ts = rgn_cat_ts,</span></span>
-<span id="cb20-67"><a href="#cb20-67" tabindex="-1"></a><span class="co">#                      cat_ts_score = rgn_cat_ts_score))</span></span></code></pre></div>
-</div>
-<div id="data-iucn_trend_by_spp_2025-1.csv" class="section level3" number="3.4.2">
-<h3><span class="header-section-number">3.4.2</span> Data:
-<code>iucn_trend_by_spp_2025-1.csv</code></h3>
-<p>Regress species with multiple recent historic assessments against
-population trends</p>
-<p>Collect species data on past assessments (don’t filter for latest)
-and population trend. Combine and save. Note that trend has to be
-assumed to be related to the most recent assessment only - not included
-in historical assessment API call. We will need both a text description
-of trend (i.e. stable, increasing, or decreasing) and multiple
-assessments.</p>
-<p>For this analysis we will focus only on assessments performed since
-1991, the year of v1.0 Red List.</p>
-<p>Since 1991:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Read in data</span></span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>iucn_risk_ts_and_trends <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(dir_setup, <span class="st">&#39;int/trend_calcs&#39;</span>,</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>                         <span class="fu">sprintf</span>(<span class="st">&#39;iucn_risk_ts_and_trends_%s.csv&#39;</span>, api_version)))</span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>cat_trend_91 <span class="ot">&lt;-</span> iucn_risk_ts_and_trends <span class="sc">%&gt;%</span></span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>  <span class="fu">left_join</span>(all_ts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&#39;iucn_sid&#39;</span>, <span class="st">&#39;iucn_version&#39;</span>, <span class="st">&#39;iucn_rgn&#39;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1991</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(cat_ts_score) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(pop_trend)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a>  <span class="fu">group_by</span>(iucn_sid, iucn_rgn) <span class="sc">%&gt;%</span></span>
-<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_assess =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year))</span>
-<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a></span>
-<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a>lm_91 <span class="ot">&lt;-</span> cat_trend_91 <span class="sc">%&gt;%</span></span>
-<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a>  <span class="fu">filter</span>(n_assess <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a>  <span class="fu">group_by</span>(iucn_sid, iucn_rgn) <span class="sc">%&gt;%</span></span>
-<span id="cb21-17"><a href="#cb21-17" tabindex="-1"></a>  <span class="fu">do</span>(<span class="at">calc_trend =</span> <span class="fu">lm</span>(cat_ts_score <span class="sc">~</span> year, <span class="at">data =</span> .)[[<span class="st">&#39;coefficients&#39;</span>]][[<span class="st">&#39;year&#39;</span>]]) <span class="sc">%&gt;%</span></span>
-<span id="cb21-18"><a href="#cb21-18" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">calc_trend =</span> <span class="fu">round</span>(calc_trend, <span class="dv">5</span>))</span>
-<span id="cb21-19"><a href="#cb21-19" tabindex="-1"></a></span>
-<span id="cb21-20"><a href="#cb21-20" tabindex="-1"></a>trend_91 <span class="ot">&lt;-</span> cat_trend_91 <span class="sc">%&gt;%</span></span>
-<span id="cb21-21"><a href="#cb21-21" tabindex="-1"></a>  <span class="fu">filter</span>(n_assess <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb21-22"><a href="#cb21-22" tabindex="-1"></a>  <span class="fu">group_by</span>(iucn_sid, iucn_rgn) <span class="sc">%&gt;%</span></span>
-<span id="cb21-23"><a href="#cb21-23" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">years  =</span> <span class="fu">paste</span>(year, <span class="at">collapse =</span> <span class="st">&#39;, &#39;</span>),</span>
-<span id="cb21-24"><a href="#cb21-24" tabindex="-1"></a>            <span class="at">cat_ts =</span> <span class="fu">paste</span>(cat_ts, <span class="at">collapse =</span> <span class="st">&#39;, &#39;</span>),</span>
-<span id="cb21-25"><a href="#cb21-25" tabindex="-1"></a>            <span class="at">scores =</span> <span class="fu">paste</span>(cat_ts_score, <span class="at">collapse =</span> <span class="st">&#39;, &#39;</span>),</span>
-<span id="cb21-26"><a href="#cb21-26" tabindex="-1"></a>            <span class="at">pop_trend_desc =</span> <span class="fu">first</span>(pop_trend)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-27"><a href="#cb21-27" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb21-28"><a href="#cb21-28" tabindex="-1"></a>  <span class="fu">left_join</span>(lm_91, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&#39;iucn_sid&#39;</span>, <span class="st">&#39;iucn_rgn&#39;</span>))</span>
-<span id="cb21-29"><a href="#cb21-29" tabindex="-1"></a></span>
-<span id="cb21-30"><a href="#cb21-30" tabindex="-1"></a><span class="fu">write_csv</span>(trend_91, <span class="fu">file.path</span>(dir_setup, <span class="st">&#39;int/trend_calcs/trend_lm_vs_pop_91.csv&#39;</span>))</span>
-<span id="cb21-31"><a href="#cb21-31" tabindex="-1"></a></span>
-<span id="cb21-32"><a href="#cb21-32" tabindex="-1"></a><span class="co">#DT::datatable(trend_91)</span></span>
-<span id="cb21-33"><a href="#cb21-33" tabindex="-1"></a></span>
-<span id="cb21-34"><a href="#cb21-34" tabindex="-1"></a>trend_91 <span class="ot">&lt;-</span> trend_91 <span class="sc">%&gt;%</span></span>
-<span id="cb21-35"><a href="#cb21-35" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(pop_trend_desc)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-36"><a href="#cb21-36" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pop_trend_desc =</span> <span class="fu">tolower</span>(pop_trend_desc)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-37"><a href="#cb21-37" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pop_trend =</span> <span class="fu">case_when</span>(pop_trend_desc <span class="sc">==</span> <span class="st">&#39;decreasing&#39;</span> <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span>,</span>
-<span id="cb21-38"><a href="#cb21-38" tabindex="-1"></a>                               pop_trend_desc <span class="sc">==</span> <span class="st">&#39;increasing&#39;</span> <span class="sc">~</span>  <span class="dv">1</span>,</span>
-<span id="cb21-39"><a href="#cb21-39" tabindex="-1"></a>                               pop_trend_desc <span class="sc">==</span> <span class="st">&#39;stable&#39;</span>     <span class="sc">~</span>  <span class="dv">0</span>,</span>
-<span id="cb21-40"><a href="#cb21-40" tabindex="-1"></a>                               <span class="cn">TRUE</span>                           <span class="sc">~</span> <span class="cn">NA_real_</span>))</span>
-<span id="cb21-41"><a href="#cb21-41" tabindex="-1"></a>  <span class="do">### </span><span class="al">NOTE</span><span class="do">: here we&#39;re coding the trend in *population* not risk.</span></span>
-<span id="cb21-42"><a href="#cb21-42" tabindex="-1"></a></span>
-<span id="cb21-43"><a href="#cb21-43" tabindex="-1"></a>trend_regr_91 <span class="ot">&lt;-</span> <span class="fu">lm</span>(calc_trend <span class="sc">~</span> pop_trend, <span class="at">data =</span> trend_91)</span>
-<span id="cb21-44"><a href="#cb21-44" tabindex="-1"></a></span>
-<span id="cb21-45"><a href="#cb21-45" tabindex="-1"></a>trend_coeffs_91 <span class="ot">&lt;-</span> <span class="fu">summary</span>(trend_regr_91)</span>
-<span id="cb21-46"><a href="#cb21-46" tabindex="-1"></a></span>
-<span id="cb21-47"><a href="#cb21-47" tabindex="-1"></a><span class="co"># trend_plot_91 &lt;- ggplot(trend_91, aes(x = pop_trend, y = calc_trend, group = pop_trend)) +</span></span>
-<span id="cb21-48"><a href="#cb21-48" tabindex="-1"></a><span class="co">#   geom_violin(color = &#39;grey60&#39;, fill = &#39;grey80&#39;) +</span></span>
-<span id="cb21-49"><a href="#cb21-49" tabindex="-1"></a><span class="co">#   geom_jitter(color = &#39;blue&#39;, alpha = .4) +</span></span>
-<span id="cb21-50"><a href="#cb21-50" tabindex="-1"></a><span class="co">#   geom_abline(intercept = trend_regr_91$coefficients[[&#39;(Intercept)&#39;]],</span></span>
-<span id="cb21-51"><a href="#cb21-51" tabindex="-1"></a><span class="co">#               slope = trend_regr_91$coefficients[[&#39;pop_trend&#39;]],</span></span>
-<span id="cb21-52"><a href="#cb21-52" tabindex="-1"></a><span class="co">#               color = &#39;darkred&#39;) +</span></span>
-<span id="cb21-53"><a href="#cb21-53" tabindex="-1"></a><span class="co">#   scale_x_continuous(breaks = c(-1, 0, 1), labels = c(&#39;decreasing&#39;, &#39;stable&#39;, &#39;increasing&#39;)) +</span></span>
-<span id="cb21-54"><a href="#cb21-54" tabindex="-1"></a><span class="co">#   coord_cartesian(ylim = c(-.07, .07)) +</span></span>
-<span id="cb21-55"><a href="#cb21-55" tabindex="-1"></a><span class="co">#   labs(x = &#39;text population trend&#39;,</span></span>
-<span id="cb21-56"><a href="#cb21-56" tabindex="-1"></a><span class="co">#        y = &#39;calculated trend from category time series&#39;,</span></span>
-<span id="cb21-57"><a href="#cb21-57" tabindex="-1"></a><span class="co">#        title = &#39;Pop trend vs change in assessed risk since 1991&#39;) +</span></span>
-<span id="cb21-58"><a href="#cb21-58" tabindex="-1"></a><span class="co">#   annotate(&#39;text&#39;, x = 0.1, y = -.06,</span></span>
-<span id="cb21-59"><a href="#cb21-59" tabindex="-1"></a><span class="co">#            label = paste0(&#39;R^2: &#39;,          round(trend_coeffs_91$r.squared, 5),</span></span>
-<span id="cb21-60"><a href="#cb21-60" tabindex="-1"></a><span class="co">#                           &#39;\nslope = &#39;,     round(trend_coeffs_91$coefficients[2, 1], 5),</span></span>
-<span id="cb21-61"><a href="#cb21-61" tabindex="-1"></a><span class="co">#                           &#39;\np (slope) = &#39;, signif(trend_coeffs_91$coefficients[2, 4], 5)),</span></span>
-<span id="cb21-62"><a href="#cb21-62" tabindex="-1"></a><span class="co">#            hjust = 0)</span></span>
-<span id="cb21-63"><a href="#cb21-63" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb21-64"><a href="#cb21-64" tabindex="-1"></a><span class="co"># print(trend_plot_91)</span></span>
-<span id="cb21-65"><a href="#cb21-65" tabindex="-1"></a></span>
-<span id="cb21-66"><a href="#cb21-66" tabindex="-1"></a>slope <span class="ot">&lt;-</span> trend_coeffs_91<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">1</span>] <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">5</span>)</span>
-<span id="cb21-67"><a href="#cb21-67" tabindex="-1"></a>trend_score_lookup <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;decreasing&#39;</span> <span class="ot">=</span> <span class="sc">-</span>slope, <span class="st">&#39;stable&#39;</span> <span class="ot">=</span> <span class="dv">0</span>, <span class="st">&#39;increasing&#39;</span> <span class="ot">=</span> slope)</span>
-<span id="cb21-68"><a href="#cb21-68" tabindex="-1"></a></span>
-<span id="cb21-69"><a href="#cb21-69" tabindex="-1"></a>trend_91 <span class="ot">&lt;-</span> trend_91 <span class="sc">%&gt;%</span></span>
-<span id="cb21-70"><a href="#cb21-70" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(iucn_sid, iucn_rgn, calc_trend) <span class="sc">%&gt;%</span></span>
-<span id="cb21-71"><a href="#cb21-71" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
-<span id="cb21-72"><a href="#cb21-72" tabindex="-1"></a></span>
-<span id="cb21-73"><a href="#cb21-73" tabindex="-1"></a>trend_score_lookup <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;decreasing&#39;</span> <span class="ot">=</span> <span class="sc">-</span>slope, <span class="st">&#39;stable&#39;</span> <span class="ot">=</span> <span class="dv">0</span>, <span class="st">&#39;increasing&#39;</span> <span class="ot">=</span> slope)</span>
-<span id="cb21-74"><a href="#cb21-74" tabindex="-1"></a></span>
-<span id="cb21-75"><a href="#cb21-75" tabindex="-1"></a><span class="co"># Create df for layer</span></span>
-<span id="cb21-76"><a href="#cb21-76" tabindex="-1"></a>trend_df <span class="ot">&lt;-</span> iucn_risk_ts_and_trends <span class="sc">%&gt;%</span></span>
-<span id="cb21-77"><a href="#cb21-77" tabindex="-1"></a>  <span class="fu">left_join</span>(all_ts, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&#39;iucn_sid&#39;</span>, <span class="st">&#39;iucn_rgn&#39;</span>, <span class="st">&#39;iucn_version&#39;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-78"><a href="#cb21-78" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb21-79"><a href="#cb21-79" tabindex="-1"></a>  <span class="fu">left_join</span>(trend_91, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&#39;iucn_sid&#39;</span>, <span class="st">&#39;iucn_rgn&#39;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-80"><a href="#cb21-80" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trend_score  =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(calc_trend), trend_score_lookup[pop_trend], calc_trend),</span>
-<span id="cb21-81"><a href="#cb21-81" tabindex="-1"></a>         <span class="at">trend_source =</span> <span class="fu">case_when</span>(<span class="sc">!</span><span class="fu">is.na</span>(calc_trend)  <span class="sc">~</span> <span class="st">&#39;lm&#39;</span>, </span>
-<span id="cb21-82"><a href="#cb21-82" tabindex="-1"></a>                                  <span class="sc">!</span><span class="fu">is.na</span>(trend_score) <span class="sc">~</span> <span class="st">&#39;regr&#39;</span>,</span>
-<span id="cb21-83"><a href="#cb21-83" tabindex="-1"></a>                                  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-84"><a href="#cb21-84" tabindex="-1"></a>  <span class="fu">select</span>(iucn_sid, iucn_rgn, pop_trend, trend_score, trend_source) <span class="sc">%&gt;%</span></span>
-<span id="cb21-85"><a href="#cb21-85" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
-<span id="cb21-86"><a href="#cb21-86" tabindex="-1"></a></span>
-<span id="cb21-87"><a href="#cb21-87" tabindex="-1"></a><span class="co"># Write csv</span></span>
-<span id="cb21-88"><a href="#cb21-88" tabindex="-1"></a><span class="fu">write_csv</span>(trend_df, <span class="fu">file.path</span>(dir_data, <span class="fu">sprintf</span>(<span class="st">&#39;iucn_trend_by_spp_%s.csv&#39;</span>, api_version)))</span></code></pre></div>
+<div id="check-plot-raster-calculated-ranges-vs-polygon-calculated-ranges" class="section level3" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> Check: plot
+raster-calculated ranges vs polygon-calculated ranges</h3>
+<p>Where dots fall on the line, species ranges by raster and by polygon
+agree. Where dots fall above the line, polygon range is larger than
+raster range - likely due to clipping of land-based ranges, and mostly
+birds. Where dots fall below the line, polygon range is smaller than the
+raster range - in these cases, the polygon range may be a combination of
+multiple polygons, e.g. subpops or seasonal areas; the code above simply
+takes the largest polygon per ID as a rough check.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co"># polygon_areas_file &lt;- file.path(dir_setup, sprintf(&#39;int/polygon_areas_%s.csv&#39;, api_version))</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># range_df &lt;- read_csv(polygon_areas_file, col_types = &#39;dd&#39;) %&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#   full_join(read_csv(spp_range_file, col_types = &#39;ddcc&#39;) %&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#               mutate(shp_file = str_replace(dbf_file, &#39;dbf&#39;, &#39;shp&#39;)), </span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#             by = &#39;iucn_sid&#39;) %&gt;%</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#   mutate(birds = str_detect(shp_file, &#39;bli&#39;))</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co"># raster_zeros &lt;- range_df %&gt;% </span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#   filter(range_km2 %in% c(0))</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co"># zeros_ids &lt;- data.frame(iucn_sid = raster_zeros$iucn_sid, poly_range_km2 = raster_zeros$poly_range_km2, rast_range_km2 = raster_zeros$range_km2)</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co"># ######## Here I left off with adding my polygon range estimates to a dataframe for the species that had &#39;0&#39; ranges when calculated as rasters. I am going to use the polygon range estimates for the raster range estimates and potentially </span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co"># write that out or see how the scores change when it is added versus not added back to the original raster dataframe. </span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co"># range_compare_scatter &lt;- ggplot(range_df, aes(x = range_km2, y = poly_range_km2)) +</span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co">#   ggtheme_plot() +</span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#   geom_abline(slope = 1, intercept = 0, color = &#39;green4&#39;) + </span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co">#   geom_point(aes(color = birds, label = shp_file, label2 = iucn_sid), alpha = .6)</span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="co"># print(range_compare_scatter)</span></span></code></pre></div>
 </div>
 </div>
 </div>
