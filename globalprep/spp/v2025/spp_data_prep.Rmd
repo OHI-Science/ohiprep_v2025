@@ -44,15 +44,13 @@ rgns_global <- rgns_eez  %>%
 ```
 
 # Source
+
 We use the methods and code from Casey O'Hara: https://github.com/oharac/spp_risk_dists
 to prepare the data for the species subgoal.
-
-Reference:
 
 # Summary
 
 Spatial species range data and extinction risk data from IUCN is used to generate regional scores for the Species subgoal (part of the Biodiversity goal) and resilience layers.
-
 
 **Mean risk status per cell:**
 Species ranges are converted to a global spatial raster of 10 km resolution.  
@@ -86,15 +84,7 @@ where:
 
 Trend is calculated using time series of risk categories based on current and past assessments.
 
-# Updates from previous assessment
-
-Additional year of data 
-
-
-***
-
 # Data Sources
-
 
 * __Reference__: 
     * IUCN 2025. The IUCN Red List of Threatened Species. Version 2025-1. <http://www.iucnredlist.org>.
@@ -121,8 +111,6 @@ Additional year of data
 
 **File location**: `Mazu:git-annex/globalprep/_raw_data/wdpa_mpa/d2025/WDPA_WDOECM_wdpa_shp/`
 
-
-
 ***
 
 # Methods
@@ -138,6 +126,51 @@ Here is an overview of the organization of files and data that are run prior to 
 In this directory are a sequence of files used to generate the bits and pieces that are later assembled into the rasters of biodiversity risk.
 
 .Rmd files are sequenced with a prefix number (and letter) to indicate the order of operations.  Briefly:
+
+1. `1_query_iucn_species_data.Rmd`
+
+Pull information from the IUCN Red List API to determine...
+
+- Marine Species List
+- Subpopulation Assessments
+- Taxa Info
+- Habitat Info
+- Comprehensive Assessments
+
+...for *global* and *regional* assessments. We are interested in current (latest) and historical assessments for each.
+
+**Note:** Some of these queries take a long time, so the results are saved in the `iucn` folder to avoid having to re-run.
+
+Also calculate global and regional population trends.
+
+2. `2_set_up_spatial_data.Rmd`
+
+Update geographic scope of IUCN regional assessments (for *MEOW* regions), if necessary.
+
+Set up spatial layers in Gall-Peters, 100 km<sup>2</sup> cells. (necessary?)
+
+Layers copied from previous year:
+
+- Cell ID (cells are sequentially numbered for combining with tabular data)
+- Ocean area
+
+Marine protected area layers generated: (necessary?)
+
+- Classification 
+- Year of protection
+- Proportion of protection
+
+3. `3_assess_iucn_spatial_data.Rmd`
+
+Convert species range maps to rasters. For maps provided directly by IUCN, aggregate into multispecies files based on family.  There is some cleaning done at this stage to fix problematic extents and attributes.
+
+From the list of all available maps, generate a master list of all mapped, assessed species for inclusion in the study. Rasterize each species to a .csv that includes cell ID and presence.  A .csv format was used for file size and ease of reading and binding into dataframes.
+
+4. `4_process_iucn_spatial_data.Rmd`
+
+Calculate species ranges from rasters.
+
+Aggregate individual species ranges into larger taxonomic groups, and summarize key variables (mean risk, variance of risk, number of species, etc) by group. Technically this is not necessary but makes it easier to quality check the process along the way, and supports mapping at the level of taxonomic group rather than the entire species list level.
 
 1. Pull information from the IUCN Red List API to determine an overall species list, habitat information, and current risk (conservation status).
     * 1_set_up_iucn_habs_and_risk.Rmd
@@ -656,7 +689,6 @@ n_trend_comp_old <- rast(file.path(dir_M, "git-annex/globalprep/spp", "v2024", "
 plot(n_trend_comp_old)
 ```
 
-
 ### Resilience: Extract trend data (used to estimate previous years' data)
 Extract species risk data that corresponds to 3nm regions.
 
@@ -715,10 +747,10 @@ rgn_risk_3nm <- rgn_3nm_risk %>%
 
 ```
 
-
-
 ### Resilience: Converting regional mean risk to status
+
 We rescale the data so a risk factor of 0.75 is equal to zero.
+
 ```{r, eval = FALSE}
 
 rgn_3nm_res <- rgn_risk_3nm %>%
@@ -777,8 +809,8 @@ res <- read.csv(here("globalprep/spp", scenario, "output/sp_status_3nm.csv")) %>
 write.csv(res, here("globalprep/spp", scenario, "output/sp_status_3nm_gf.csv"), row.names=FALSE)          
 ```
 
-
 ### Resilience: Compare
+
 Compared to the entire EEZ, most (but not all) coastal areas have higher species condition scores. The correlation with last year is better than it was last year. 
 
 ```{r, eval = FALSE}

@@ -3,13 +3,13 @@
 NOTE: This is code taken from https://github.com/oharac/spp_risk_dists
 
 Written by: Casey C. O'Hara
-Updated by: Carmen Hoyt
+Updated by: Carmen Hoyt (2025)
 
 Here is an overview of the organization of files and data:
 
 ### Data
 
-Most of the data used in this comes from the IUCN API, which is called on in the scripts. **However, you will need to download the new species range maps from these datasources for step 5:** 
+Most of the data used in this comes from the IUCN API, which is called on in the scripts. The API may change from year to year, so it is important to stay up to date on the documentation (see [rredlist](https://cran.r-project.org/web/packages/rredlist/rredlist.pdf)).  **However, you will need to download the new species range maps from these datasources for step 5:** 
 
 * __Reference__: 
     * IUCN 2024. The IUCN Red List of Threatened Species. Version 2025-1. <http://www.iucnredlist.org>.
@@ -26,15 +26,17 @@ Most of the data used in this comes from the IUCN API, which is called on in the
 * __Format__:  Shapefile
 * Mazu locaton: *: /home/shares/ohi/git-annex/globalprep/_raw_data/birdlife_intl/
 
+[MEOW Regions](https://www.worldwildlife.org/publications/marine-ecoregions-of-the-world-a-bioregionalization-of-coastal-and-shelf-areas)
+
 ### Code
 
-#### Run this first! Setup directory: `spp/v20XX/_setup`
+#### **Run this first!** Setup directory: `spp/v20XX/_setup`
 
 In this directory are a sequence of files used to generate the bits and pieces that are later assembled into the rasters of biodiversity risk.
 
-.Rmd files are sequenced with a prefix number (and letter) to indicate the order of operations.  Briefly:
+.Rmd files are sequenced with a prefix number to indicate the order of operations. Briefly:
 
-1. `1_set_up_iucn_species_data.Rmd`
+1. `1_query_iucn_species_data.Rmd`
 
 Pull information from the IUCN Red List API to determine...
 
@@ -48,27 +50,24 @@ Pull information from the IUCN Red List API to determine...
 
 **Note:** Some of these queries take a long time, so the results are saved in the `iucn` folder to avoid having to re-run.
 
+Also calculate global and regional population trends.
+
 2. `2_set_up_spatial_data.Rmd`
 
-Update geographic scope of IUCN regional assessments (for *MEOW* and *LME* regions) if necessary.
+Update geographic scope of IUCN regional assessments (for *MEOW* regions), if necessary.
 
-Set up spatial layers in Gall-Peters, 100 km<sup>2</sup> cells. 
+Set up spatial layers in Gall-Peters, 100 km<sup>2</sup> cells. (necessary?)
 
 Layers copied from previous year:
 
 - Cell ID (cells are sequentially numbered for combining with tabular data)
 - Ocean area
 
-Marine protected area layers generated:
+Marine protected area layers generated: (necessary?)
 
 - Classification 
 - Year of protection
 - Proportion of protection
-
-Archived methods (update only if necessary):
-- Exclusive Economic Zones (EEZ)
-- Marine Ecoregions of the World (MEOW)
-- Bathymetry
 
 3. `3_assess_iucn_spatial_data.Rmd`
 
@@ -80,15 +79,14 @@ From the list of all available maps, generate a master list of all mapped, asses
 
 Calculate species ranges from rasters.
 
-Calculate species ranges from polygons (to check raster calculations).
-
-Compare.
-
-Calculate range-rarity to weight IUCN category and trend values.
-
 Aggregate individual species ranges into larger taxonomic groups, and summarize key variables (mean risk, variance of risk, number of species, etc) by group. Technically this is not necessary but makes it easier to quality check the process along the way, and supports mapping at the level of taxonomic group rather than the entire species list level.
 
-This process is done twice: once for uniform weighting and once for range-rarity weighting. Resulting files are saved separately.
+Archived methods (update only if necessary):
+- Exclusive Economic Zones (EEZ)
+- Marine Ecoregions of the World (MEOW)
+- Bathymetry
+
+range-rarity
 
 DELETE BELOW when confirmed.
 
@@ -144,3 +142,10 @@ The `spp_risk_dists/_spatial` folder contains general spatial data generated and
 * shapefiles used for map plotting from Natural Earth.
 
 The `spp_risk_dists/_output` folder contains the rasters of biodiversity risk, species richness, variance of risk, etc generated from the scripts in the base directory.
+
+
+Future iterations may include:
+
+* Range-rarity-weighted mean and variance of risk
+* Range rarity-weighted species richness
+

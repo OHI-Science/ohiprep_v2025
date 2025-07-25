@@ -77,8 +77,8 @@ Filter the BirdLife Int'l data for marine species.
 
 ``` {r convert BLI to shp-dbf-etc}
 
-### convert BirdLife Int'l .gdb to shapefile, after filtering to species in the "marine" list.
-### Here we also standardize the column names to match the IUCN column names.
+# Convert BirdLife Int'l .gdb to shapefile, after filtering to species in the "marine" list.
+# Here we also standardize the column names to match the IUCN column names.
 
 # Goal file
 bli_marine_shp <- file.path(dir_bli, 'bli_marine_v2025.shp')
@@ -115,8 +115,10 @@ names(bli_marine_sf)
 
 st_geometry(bli_marine_sf) <- "geom"
 
+# Save shapefile
 st_write(bli_marine_sf, bli_marine_shp)
 
+# Load shapefile
 #bli_marine_sf <- st_read(bli_marine_shp)
 ```
 
@@ -127,25 +129,15 @@ iucn_dbfs <- list.files(dir_shp, pattern = '\\.dbf$', full.names = TRUE)
 bli_dbfs  <- list.files(dir_bli, pattern = '\\.dbf$', full.names = TRUE)
 shps_dbfs <- c(iucn_dbfs, bli_dbfs)
 
-### This is all "marine" species by habitat and system:
+# This is all marine species with habitat info
 marine_spp <- read_csv(file.path(dir_data, 
                                  sprintf('spp_marine_from_api_%s.csv', 
-                                         api_version)),
-                       col_types = 'dcc')
-
-# ### This is *all* spp from the API, filtered down to those in marine_spp: 
-# api_spp <- read_csv(file.path(dir_goal_anx, 'iucn', 
-#                               sprintf('spp_info_from_api_%s.csv', api_version)),
-#                     col_types = 'dccccccccc') %>%
-#   filter(iucn_sid %in% marine_spp$iucn_sid)
-
-#2025 uodate
-#api_spp <- read_csv(file.path(dir_goal, sprintf('_data/iucn/marine-system-2025.csv')), show_col_types = FALSE)
-
+                                         api_version)), col_types = 'dcc')
 
 ### Define helper function to cleanly get the info from DBF files,
 ### including colname checks
-get_dbf <- function(x) { ###x <- shps_dbfs[1]
+get_dbf <- function(x) {
+  
   spp_dbf_info <- foreign::read.dbf(x, as.is = TRUE) %>%
     clean_df_names()
   
@@ -178,9 +170,10 @@ shps_df <- lapply(iucn_dbfs, get_dbf) %>%
   setNames(iucn_dbfs) %>%
   bind_rows(.id = 'dbf_file') %>%
   dplyr::select(dbf_file, iucn_sid, sciname = sci_name, presence, subpop) %>%
+  # Filter for marine species
   filter(iucn_sid %in% marine_spp$iucn_sid)
 
-# birdlife data, change column names to match
+# bli data, change column names to match
 spp_dbf_info <- foreign::read.dbf(bli_dbfs, as.is = TRUE) %>%
   clean_df_names()
   
@@ -217,7 +210,7 @@ shps_bli_df <- spp_dbf_info %>%
 # Combine IUCN and bli data dfs
 shps_df <- rbind(shps_df, shps_bli_df)
 
-# Isolate subpopulations
+# Isolate subpopulations from shapes
 shp_subpops <- shps_df %>%
   dplyr::select(shp_iucn_sid = iucn_sid, sciname, shp_subpop = subpop) %>%
   # remove lines with no subpops
@@ -231,23 +224,10 @@ shp_subpops <- shps_df %>%
          # Fix typo
          shp_subpop_clean = str_replace(shp_subpop_clean, 'noth', 'north'))
 
-# This is *all* spp from the API, already filtered down to those in marine_spp
-# api_spp <- read_csv(file.path(dir_goal_anx, 'iucn',
-#                               sprintf('spp_info_from_api_%s.csv', api_version)),
-#                     col_types = 'dccccccccc') 
-
+# Load IUCN subpop information
 sub_pops <- read_csv(file.path(dir_goal, sprintf('_data/iucn/sub_pop_%s.csv', api_version)), show_col_types = FALSE)
 
-# Filter for subpopulations in the API
-# api_subpops <- api_spp %>%
-#   rename(api_iucn_sid = iucn_sid, 
-#          api_subpop = subpopulation_name) %>%
-#   filter(!is.na(api_subpop)) %>%
-#   filter(sciname %in% shp_subpops$sciname) %>%
-#   distinct() %>%
-#   mutate(api_subpop_clean = str_replace_all(tolower(api_subpop), ' subpopulation| ocean', ''),
-#          api_subpop_clean = str_replace_all(api_subpop_clean, '[^a-z]', ' ') %>% str_trim)
-
+# Clean up IUCN subpops
 api_subpops <- sub_pops %>%
   dplyr::select(api_iucn_sid = sis_id,
                 sciname,
@@ -258,6 +238,7 @@ api_subpops <- sub_pops %>%
   mutate(api_subpop_clean = str_replace_all(tolower(api_subpop), ' subpopulation| ocean', ''),
          api_subpop_clean = str_replace_all(api_subpop_clean, '[^a-z]', ' ') %>% str_trim)
 
+# Find IUCN subpops that overlap with shapes
 subpops_match_raw <- shp_subpops %>%
   full_join(api_subpops, by = 'sciname') %>%
   group_by(api_iucn_sid) %>%
@@ -286,6 +267,7 @@ subpops_match <- subpops_match_raw %>%
 
 ### Check for missed matches:
 api_subpops$api_iucn_sid[!api_subpops$api_iucn_sid %in% subpops_match$api_iucn_sid]
+
 # 2025:
 # 103290570 Acipenser transmontanus - columbia river upper  middle and lower
 
@@ -414,7 +396,6 @@ map_info_sans_dupes <- map_info_raw %>%
     ### in REPTILES, SEASNAKES, and HAGFISH - ditch any dupes
   ungroup() %>%
   distinct()
-### NOTE: still has terrestrial mammals and reptiles in it...
 
 subpops_match <- read_csv(file.path(dir_setup, 'int',
                                     sprintf('subpops_match_api_to_shp_%s.csv', 
@@ -427,7 +408,7 @@ map_info_add_subpops <- map_info_sans_dupes %>%
   dplyr::select(shp_iucn_sid, iucn_sid, sciname, presence, subpop, dbf_file) %>%
   distinct()
 
-### filter to marine habitat species (to drop terrestrial reptiles e.g.)
+# Filter to marine habitat species (to drop terrestrial reptiles e.g.)
 marine_spp_ids <- read_csv(file.path(dir_data,
                                      sprintf('spp_marine_from_api_%s.csv', 
                                              api_version)),
@@ -463,7 +444,7 @@ marine_map_info <- marine_map_info %>%
                                 TRUE, comp_assessed),
          comp_assessed = ifelse(str_detect(sciname, turtles), 
                                 TRUE, comp_assessed))
-
+# Save layer
 write_csv(marine_map_info, 
           file.path(dir_data,
                     sprintf('spp_marine_maps_%s.csv', api_version)))
@@ -483,14 +464,6 @@ marine_map_info <- read_csv(file.path(dir_data,
 
 ## 2025: problems with 2236, 15131, 15137, and 15143 (?)
 
-
-# CHANGE below to read in taxa info saved from rmd1
-# taxa_info <- read_csv(file.path(dir_goal_anx, 'iucn', 
-#                                 sprintf('sup_pop_spp_info_from_api_%s.csv', api_version)), show_col_types = FALSE) %>%
-#   dplyr::select(iucn_sid, kingdom_name:family_name) %>%
-#   distinct()
-
-
 taxa_info <- read_csv(file.path(dir_goal, sprintf('_data/iucn/taxa_%s.csv', api_version)), show_col_types = FALSE) %>%
   dplyr::select(iucn_sid, kingdom:family) %>%
   distinct()
@@ -498,7 +471,8 @@ taxa_info <- read_csv(file.path(dir_goal, sprintf('_data/iucn/taxa_%s.csv', api_
 #sub_pops <- read_csv(file.path(dir_goal, sprintf('_data/iucn/sub_pop_%s.csv', api_version)), show_col_types = FALSE)
 
 cat_info <- read_csv(file.path(dir_data, 
-                               sprintf('iucn_risk_current_%s.csv', api_version)), show_col_types = FALSE) %>%
+                               sprintf('iucn_risk_current_%s.csv', api_version)),
+                     show_col_types = FALSE) %>%
   dplyr::select(iucn_sid, cat_score) %>%
   filter(!is.na(cat_score))
 
@@ -563,7 +537,7 @@ setdiff(old_sum$spp_gp, all_sum$spp_gp)
 
 ## end check
 
-## write to github
+# Save layers
 write_csv(all_sum, file.path(dir_goal, '_output', 
                              'spp_included_summary.csv'))
 write_csv(all_in_the_fam, file.path(dir_goal, '_output', 
