@@ -649,6 +649,31 @@ v_prev_2_year <- paste0("v", prev_2_year_num)
 current_np_dir <- here::here("globalprep", "np", v_scen_year)
 previous_np_dir <- here::here("globalprep", "np", paste0("v", scen_year_number - 1))
 
+# Read in current, previous, and 2 years previous data
+old_prod_weights <- read_csv(here(previous_np_dir, "test", "harvest_weighting_values.csv")) %>% 
+  select(!c(georgn_id, level))
+prod_weights <- read_csv(here(current_np_dir, "int", "harvest_weighting_values.csv"))  %>% 
+  select(!c(georgn_id, level))
+
+view(prod_weights)
+colnames(prod_weights)
+colnames(old_prod_weights)
+
+old_prod_weights <- old_prod_weights %>% 
+  rename(old_mean_usd = mean_usd_per_tonne, old_tonnes = tonnes, old_usd = usd, old_georgn = georgn_usd_per_tonne, old_global = global_usd_per_tonne, old_usd_per_tonne = usd_per_tonne, old_values_desc = values_gf_description, old_values_gf = values_gf)
+
+
+check <- prod_weights %>%
+  # rename("new_weight" = "weight") %>%
+  left_join(old_prod_weights, by = c("rgn_id", "product", "year")) %>%
+  # mutate(diff = new_weight - weight) %>%
+  left_join(rgns_eez) %>% 
+  select(!c(eez_iso3, territory, admin_rgn_id, admin_country_name, Notes)) %>% 
+  # filter(year == 2021) %>% 
+  # select(rgn_id, rgn_name, year, product, new_weight, weight, diff, tonnes.x, tonnes.y, usd_product.x, usd_product.y, overall_usd_value.x, overall_usd_value.y) %>% 
+  view()
+
+
 # ----- Read in NP weights data  -----
 # Read in current, previous, and 2 years previous data
 old_prod_weights <- read_csv(here(previous_np_dir, "test", "np_product_weights.csv"))
@@ -660,7 +685,44 @@ check <- prod_weights %>%
   left_join(old_prod_weights, by = c("rgn_id", "product", "year")) %>%
   mutate(diff = new_weight - weight) %>%
   left_join(rgns_eez) %>% 
-  filter(year == 2021)
+  # filter(year == 2021) %>% 
+  select(rgn_id, rgn_name, year, product, new_weight, weight, diff, tonnes.x, tonnes.y, usd_product.x, usd_product.y, overall_usd_value.x, overall_usd_value.y) %>% 
+  view()
+
+different <- check %>% 
+  filter(diff != 0) %>% 
+  mutate(diff_tonnes = tonnes.x - tonnes.y,
+         diff_usd = usd_product.x - usd_product.y,
+         diff_total = overall_usd_value.x - overall_usd_value.y) %>% 
+  view()
+
+# 385 entries with different tonnes
+diff_tonnes <- different %>% 
+  filter(diff_tonnes != 0) %>% 
+  view()
+
+# 903 entries with different tonnes
+diff_usd <- different %>% 
+  filter(diff_usd != 0) %>% 
+  view()
+
+# 903
+diff_total  <- different %>% 
+  filter(diff_total != 0) %>% 
+  view()
+
+
+different %>% 
+  filter(product == "ornamentals") %>% 
+  view()
+
+# 1737 rows where there is no difference in weight
+nrow(filter(check, diff == 0)) # 1737
+nrow(filter(check, diff != 0)) # 903
+nrow(check) # 3300
+# 27% different...
+
+## It looks like most of the difference is coming from a difference in USD. 
 
 # view(check)
 
