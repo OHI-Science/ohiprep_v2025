@@ -54,22 +54,20 @@ source(file.path(dir_setup, 'common_fxns.R'))
 
 # Summary
 
-Create a set of maps of the distribution of biodiversity intactness - all species assessed and mapped by IUCN.  These maps are generated at 10 km^2^ resolution in a Gall-Peters projection.  These maps will be generated using all comprehensively assessed species:
+For **comprehensively-assessed** species:
 
-* Mean risk
-* Variance of risk
-* Number of species for mean/var calculations
-* Number of species categorized as "threatened" (i.e. VU, EN, CR)
-* Mean trend
-* Number of species for trend calculations
+Aggregate mean risk and variance by cell, saved to the git-annex: `cell_summary_unweighted_comp.csv`
+
+Create the following maps, saved to the `_output` folder:
+
+- Mean risk: `mean_risk_raster_comp.tif`
+- Variance of risk: `var_risk_raster_comp.tif`
+- Number of species for mean/var calculations: `n_spp_risk_raster_comp.tif`
+- Number of species categorized as "threatened" (i.e. VU, EN, CR): `n_threat_raster_comp.tif`
+- Mean trend: `trend_raster_comp.tif`
+- Number of species for trend calculations: `n_trend_raster_comp.tif`
     
 A selection of these maps will be generated for taxonomic groups and range sizes in a separate Rmd.
-
-# Data Sources
-
-IUCN Red List spatial data download
-IUCN Red List API
-Gina Ralph (IUCN)
 
 # Methods
 

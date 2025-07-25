@@ -49,27 +49,18 @@ source(file.path(dir_setup, 'common_fxns.R'))
 
 # Summary
 
-Create a set of maps of the distribution of biodiversity intactness - all species assessed and mapped by IUCN, with the exception of deep oceanic species as these are unlikely to suffer direct human impact or to benefit from typical conservation efforts. These maps are generated at 10 km^2^ resolution in a Gall-Peters projection.
+For **comprehensively-assessed** *and* **non-comprehensively-assessed** species:
 
-* Mean risk
-* Variance of risk
-* Number of species for mean/var calculations
-* Number of species categorized as "threatened" (i.e. VU, EN, CR)
-* Mean trend
-* Number of species for trend calculations
-    
-A selection of these maps will be generated for taxonomic groups and range sizes in a separate Rmd.
+Aggregate mean risk and variance by cell, saved to the git-annex: `cell_summary_unweighted_all.csv`
 
-Future iterations may include (see Archive):
+Create the following maps, saved to the `_output` folder:
 
-* Range-rarity-weighted mean and variance of risk
-* Range rarity-weighted species richness
-
-# Data Sources
-
-IUCN Red List spatial data download
-IUCN Red List API
-Gina Ralph (IUCN)
+- Mean risk: `mean_risk_raster_all.tif`
+- Variance of risk: `var_risk_raster_all.tif`
+- Number of species for mean/var calculations: `n_spp_risk_raster_all.tif`
+- Number of species categorized as "threatened" (i.e. VU, EN, CR): `n_threat_raster_all.tif`
+- Mean trend: `trend_raster_all.tif`
+- Number of species for trend calculations: `n_trend_raster_all.tif`
 
 # Methods
 
@@ -77,7 +68,7 @@ Gina Ralph (IUCN)
 
 ### Aggregate mean risk and variance by cell
 
-In data_setup we have calculated, for each taxonomic group, cell values for mean risk, var risk, n_spp risk, n threatened, mean trend, n_spp trend.  Here we bring those data frames all together to calculate these values across all assessed species.
+In data_setup we have calculated, for each taxonomic group, cell values for mean risk, var risk, n_spp risk, n threatened, mean trend, n_spp trend. Here we bring those data frames all together to calculate these values across *all* assessed species.
 
 Note: reconstructing the total mean per cell from the group means is straightforward:
 $$\bar x_T = \frac{1}{\sum_{g=1}^G n_g} \sum_{g=1}^G (n_g \bar x_g)$$

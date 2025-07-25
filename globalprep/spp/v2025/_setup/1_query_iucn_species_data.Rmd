@@ -55,7 +55,22 @@ source(file.path(dir_setup, 'common_fxns.R'))
 
 # Summary
 
-This document queries the necessary IUCN data using API v4. 
+This .Rmd sets up the following .csv files, saved in the `_data` folder:
+
+For *global* assessments:
+
+- `iucn_risk_current_2025-1.csv`
+- `iucn_risk_timeseries_2025-1.csv`
+- `spp_marine_from_api_2025-1.csv`
+
+For *regional* assessments:
+
+- `iucn_risk_rgn_current_2025-1.csv`
+- `iucn_risk_ts_rgn_2025-1.csv`
+
+For trends:
+
+- `iucn_trend_by_spp_2025-1.csv`
 
 # Data Sources
 
@@ -81,23 +96,6 @@ Query IUCN species data from the API. These queries can take many hours, so star
 * Taxa info
 * Habitat info
 * Comprehensive assessments
-
-This .Rmd sets up the following .csv files, saved in the `_data` folder:
-
-For *global* assessments:
-
-- `iucn_risk_current_2025-1.csv`
-- `iucn_risk_timeseries_2025-1.csv`
-- `spp_marine_from_api_2025-1.csv`
-
-For *regional* assessments:
-
-- `iucn_risk_rgn_current_2025-1.csv`
-- `iucn_risk_ts_rgn_2025-1.csv`
-
-For trends:
-
-- `iucn_trend_by_spp_2025-1.csv`
 
 ## Query IUCN data from the API
 
