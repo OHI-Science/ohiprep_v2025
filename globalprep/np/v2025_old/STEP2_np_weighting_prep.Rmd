@@ -379,7 +379,7 @@ prod_weights <- orn_tonnes %>%
   # calculate weight: proportion that each product contributes to that region's NP
   mutate(weight = usd_product/total_usd) %>%
   # dplyr::select(-3, -4, -5, -6) %>%
-  mutate(year = scen_year_number) %>%
+  # mutate(year = scen_year_number) %>%
   # dplyr::select(rgn_id, year, product, weight) %>%
   filter(rgn_id != 213)
 
