@@ -14,7 +14,7 @@ output:
   pdf_document:
     toc: true
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 
 [REFERENCE RMD FILE](http://ohi-science.org/ohiprep_v2022/globalprep/ico/v2022/ico_data_prep.Rmd)
@@ -113,13 +113,13 @@ dir_here <- here::here(goal, version_year)
 source(here::here(dir_here, 'ico_fxn.R'))
 ```
 
-Using the IUCN API, we accessed the full IUCN species list at <http://apiv3.iucnredlist.org/api/v3/speciescount?token=><token>. With some minor formatting, this list contains the following variables:
+Using the IUCN API, we accessed the full IUCN species list. With some minor formatting, this list contains the following variables:
 
-iucn_sid \| kingdom \| phylum \| class \| order \| family \| genus \| sciname \| population \| category
+iucn_sid \| kingdom \| phylum \| class \| order \| family \| genus \| sciname \| subpopulation \| category
 
 ## Download Species List from IUCN
 
-Get all pages and bind into total species list, using the IUCN API.
+Get total species list, using the IUCN API.
 
 To access the API v4, you will need to sign up for a key on the [IUCN website](https://api.iucnredlist.org/). This key can be added to the local .renviron on your machine and retrieved using the code below.
 
@@ -152,13 +152,12 @@ DT::datatable(ico_list_raw, caption = 'Iconic Species List')
 ```{r}
 # Query taxa info
 # Takes about a minute
+
 spp_ico <- data.frame()
 
 start_time <- Sys.time()
 
-
-
-# Query taxa info for marine species
+# Query taxa info for iconic species
 for (i in unique(ico_list_raw$sciname)) {
   
   #i <- "Dugong dugon"
@@ -195,6 +194,7 @@ for (i in unique(ico_list_raw$sciname)) {
       select(iucn_sid = sis_id, sciname = scientific_name, subpop = subpopulation_name, cat)
   }
   
+  # Species info
   main_row <- data.frame(
     iucn_sid = iucn_sid,
     sciname = sciname,
@@ -202,7 +202,7 @@ for (i in unique(ico_list_raw$sciname)) {
     cat = cat,
     stringsAsFactors = FALSE)
   
-  # Combine species row and subpopulations (if any)
+  # Combine species info and subpopulations (if any)
   spp_info <- bind_rows(main_row, subpop_df)
   
   # Bind new df to existing df
@@ -215,14 +215,9 @@ end_time - start_time
 
 # Save for time
 write_csv(spp_ico, file.path(dir_here, sprintf('raw/spp_list_from_api_ico_only.csv')))
-
 ```
 
-------------------------------------------------------------------------
-
-## Identify countries with extant ICO species populations
-
-Filtering the complete IUCN species list to include only the identified Iconic Species, we then use the IUCN API to access the list of countries in which each species occurs, from <http://apiv3.iucnredlist.org/api/v3/species/countries/id/><species ID>?token=<token>. The country list identifies whether the species' presence in that country is "Extant", "Extinct Post-1500", or "Possibly Extinct"; the "Extinct Post-1500" presence will be used later to identify locally extinct populations.
+Check for missing species.
 
 ```{r combine_iucn_spp_info_with_ico_list, eval= F}
 
@@ -309,24 +304,32 @@ readr::write_csv(ico_list, here::here(dir_here, 'int', 'ico_list_prepped.csv'))
 # v2025: 7518 observations, 127 unique species by sciname
 ```
 
-For each of these species, use the IUCN API to gather a list of countries in which it is present.
+------------------------------------------------------------------------
+
+## Identify countries with extant ICO species populations
+
+For each of these species, use the IUCN API to gather a list of countries in which it is present. We will have to do this by querying for all the assessments for all countries and then filtering by species of interest.
+
+**This takes a long time (and failed multiple times) so get started early or run overnight!**
 
 ```{r get_country_list, eval= F}
 
-## saves each species as a temp file in a new tmp folder then binds them together to form the full species list
+# Get species of interest
 ico_list <- read_csv(file.path(dir_here, 'int', 'ico_list_prepped.csv'), show_col_types = FALSE)
 
 spp_ids <- unique(ico_list$iucn_sid)
 
+# Get df of countries
 countries <- rl_countries()$countries
 
 countries$description <- countries$description$en
 
+# Generate empty list
 country_assessments <- list()
 
 start_time <- Sys.time()
 
-for (i in countries$code[174:250]) {
+for (i in countries$code) {
   
   country <- countries$description[countries$code == i]
   
@@ -346,25 +349,35 @@ country_assessments <- bind_rows(country_assessments))  %>%
     filter(description$en == "Global") %>%
     left_join(countries, by = "code") 
 
+# Save for time
 write_csv(country_assessments, file.path(dir_data, 'v2025', 'iucn_countries_api.csv'))
 
+# Check to make sure all countries were queried
 setdiff(countries$code, unique(country_assessments_filtered$code))
 
 country_assessments_filtered <- country_assessments %>%
-   filter(latest == TRUE) %>%
-    unnest(scopes, names_sep = "_") %>%
-    filter(scopes_description$en == "Global") %>%
-    left_join(countries, by = "code") %>%
-  select(iucn_sid = sis_taxon_id, year = year_published, possibly_extinct, possibly_extinct_in_the_wild, sciname = taxon_scientific_name, cat = red_list_category_code, code, country = description)
+  filter(latest == TRUE) %>%
+  unnest(scopes, names_sep = "_") %>%
+  filter(scopes_description$en == "Global") %>%
+  left_join(countries, by = "code") %>%
+  select(iucn_sid = sis_taxon_id, 
+         year = year_published, 
+         possibly_extinct, 
+         possibly_extinct_in_the_wild, 
+         sciname = taxon_scientific_name, 
+         cat = red_list_category_code, 
+         code, 
+         country = description)
 
 spp_countries_df <- country_assessments_filtered %>%
   filter(iucn_sid %in% spp_ids) %>%
   group_by(country) %>%
   mutate(count = n(),
+         # Using the `possibly_extinct` column instead of the `possibly_extinct_in_the_wild`
          presence = ifelse(possibly_extinct == TRUE, "Possibly Extinct", "Extant")) %>%
   select(iucn_sid, count, code, country, presence)
 
-### save this as an intermediate data file since it takes so long to create the df
+# Save this as an intermediate data file since it takes so long to create the df
 readr::write_csv(spp_countries_df, here::here(dir_here, 'int', 'ico_spp_countries.csv')) 
 ```
 
@@ -377,15 +390,15 @@ ico_spp_countries <- read_csv(here::here(dir_here, 'int', 'ico_spp_countries.csv
 # Report these regions at higher spatial resolution:
 ico_spp_countries_final <- ico_spp_countries %>% 
   mutate(split_id = case_when(country == 
-                              "Bonaire, Sint Eustatius and Saba" ~ 
-                                    "Bonaire, Saba, Sint Eustatius",
+                                "Bonaire, Sint Eustatius and Saba" ~ 
+                                "Bonaire, Saba, Sint Eustatius",
                               country == "French Southern Territories" ~ 
                                 "Glorioso Islands, Juan de Nova Island, Bassas da India, Ile Europa, Ile Tromelin, Crozet Islands, Amsterdam Island and Saint Paul Island, Kerguelen Islands",
                               country ==  "United States Minor Outlying Islands" ~ "Wake Island, Jarvis Island, Palmyra Atoll, Howland Island and Baker Island, Johnston Atoll",
-                                country == ("Saint Helena, Ascension and Tristan da Cunha") ~ "Saint Helena, Ascension, Tristan da Cunha")) %>% 
+                              country == ("Saint Helena, Ascension and Tristan da Cunha") ~ "Saint Helena, Ascension, Tristan da Cunha")) %>% 
   separate_longer_delim(cols = split_id, delim = ", ") %>% 
   mutate(country= case_when(is.na(split_id) ~ country,
-                                   TRUE ~ split_id)) %>% 
+                            TRUE ~ split_id)) %>% 
   select(-split_id)
 
 # change this back to align with ico_list for next step
@@ -462,6 +475,7 @@ ico_spp_rgn_raw <- ico_spp_rgn_raw %>%
 ############
 
 summary(ico_spp_rgn_raw) # Make sure there are no NAs!
+
 readr::write_csv(ico_spp_rgn_raw, here::here(dir_here, 'raw', 'ico_spp_rgn_raw.csv'))
 ```
 
@@ -512,16 +526,18 @@ We accessed the IUCN API to determine past IUCN assessments for each of the iden
 Each assessment includes a year and an extinction risk, along with additional information on the assessment.
 
 ```{r}
+# Get species list
 ico_list <- read_csv(here::here(dir_here, 'int', 'ico_list_prepped.csv'), show_col_types = FALSE)
 
 spp_ids <- unique(ico_list$iucn_sid)
 
-# Reclassify old codes to current codes
-cat_lookup <- read_csv(file.path(dir_setup, 'raw', 'risk_code_lookup.csv'), show_col_types = FALSE)
-
+# Initiate data frame
 spp_assessments <- data.frame()
 
-i <- 2467
+# Save categories
+categories <- rl_categories()$red_list_categories
+
+categories$description <- categories$description$en
 
 for (i in spp_ids) {
   
@@ -531,19 +547,20 @@ assessment <- result$assessments %>%
   unnest(scopes, names_sep = "_") %>%
   filter(scopes_description$en == "Global") %>%
   select(iucn_sid = sis_taxon_id, year = year_published, code = red_list_category_code, sciname = taxon_scientific_name, latest) %>%
-  left_join(cat_lookup, by = "code") %>%
+  left_join(categories, by = "code", relationship = "many-to-many") %>%
   group_by(iucn_sid) %>%
   mutate(assess_year = year[latest == TRUE][1]) %>%
   ungroup() %>%
-  select(iucn_sid, year, assess_year, code = code_current, category, sciname) %>%
+  select(iucn_sid, year, assess_year, code, category = description, sciname) %>%
   distinct()
 
 spp_assessments <- bind_rows(spp_assessments, assessment)
 
+Sys.sleep(2)
+
 }
 
-ico_assess_raw <- spp_assessments %>%
-  filter(!is.na(code))
+ico_assess_raw <- spp_assessments
 
 # 705 in v2018, 743 in v2019, 463 in v2020, 480 in v2021, 496 in v2022, #783 in v2023, #828 in v2024, #530 in v2025
 
@@ -562,58 +579,58 @@ readr::write_csv(ico_assess_raw, here(dir_here, 'raw', 'ico_assessments_raw.csv'
 
 ```{r get_category_list, eval=F}
 # get ready to access the extinction risk
-ico_past_assess_url <- 'http://apiv3.iucnredlist.org/api/v3/species/history/id/%s?token=%s'
-ico_list <- here::here(dir_here, 'int', 'ico_list_prepped.csv') %>% 
-  readr::read_csv()
-
-spp_ids <- unique(ico_list$iucn_sid)
-n_chunks <- length(spp_ids)
-
-cat_msg <- function(x, ...) {
-  if(is.null(knitr:::.knitEnv$input.dir)) {
-    ### not in knitr environment, so use cat()
-    cat(x, ..., '\n')
-  } else {
-    ### in knitr env, so use message()
-    message(x, ...)
-  }
-  return(invisible(NULL))
-}
-
-## for each species ID, get past assessments
-for(j in 1:n_chunks){
-  # j = 2
-  
-  chunk_file <- here::here(
-    dir_here, 'tmp', sprintf('spp_past_assess_chunk_%s.csv', spp_ids[j])
-  )
-  
-  if(!file.exists(chunk_file)) {
-    cat_msg('Getting assessment info for species ', min(spp_ids[j]), ' row number ', j, ' out of ', n_chunks)
-    
-    ico_spp_past_assess_chunk <- mc_get_from_api(
-      url = ico_past_assess_url, param_vec = spp_ids[j], api_key = api_key, delay = 0.5)
-    cat_msg('... found ', nrow(ico_spp_past_assess_chunk), ' past assessments for this species')
-    
-    readr::write_csv(ico_spp_past_assess_chunk, chunk_file)
-  }else {
-    
-    cat_msg('Chunk file ', chunk_file, ' already exists; skipping these spp')
-    
-  }
-}
-
-# Read in all the files and bind together to make the ico_assess_raw file
-spp_past_assess_chunk_files <- list.files(
-  here::here(dir_here, 'tmp'), 
-  pattern = 'spp_past_assess_chunk', 
-  full.names = TRUE
-)
-
-ico_assess_raw <- lapply(spp_past_assess_chunk_files, FUN = function(x) {
-  read.csv(x) %>%
-    dplyr::mutate(code = as.character(code))}) %>%
-  dplyr::bind_rows()
+# ico_past_assess_url <- 'http://apiv3.iucnredlist.org/api/v3/species/history/id/%s?token=%s'
+# ico_list <- here::here(dir_here, 'int', 'ico_list_prepped.csv') %>% 
+#   readr::read_csv()
+# 
+# spp_ids <- unique(ico_list$iucn_sid)
+# n_chunks <- length(spp_ids)
+# 
+# cat_msg <- function(x, ...) {
+#   if(is.null(knitr:::.knitEnv$input.dir)) {
+#     ### not in knitr environment, so use cat()
+#     cat(x, ..., '\n')
+#   } else {
+#     ### in knitr env, so use message()
+#     message(x, ...)
+#   }
+#   return(invisible(NULL))
+# }
+# 
+# ## for each species ID, get past assessments
+# for(j in 1:n_chunks){
+#   # j = 2
+#   
+#   chunk_file <- here::here(
+#     dir_here, 'tmp', sprintf('spp_past_assess_chunk_%s.csv', spp_ids[j])
+#   )
+#   
+#   if(!file.exists(chunk_file)) {
+#     cat_msg('Getting assessment info for species ', min(spp_ids[j]), ' row number ', j, ' out of ', n_chunks)
+#     
+#     ico_spp_past_assess_chunk <- mc_get_from_api(
+#       url = ico_past_assess_url, param_vec = spp_ids[j], api_key = api_key, delay = 0.5)
+#     cat_msg('... found ', nrow(ico_spp_past_assess_chunk), ' past assessments for this species')
+#     
+#     readr::write_csv(ico_spp_past_assess_chunk, chunk_file)
+#   }else {
+#     
+#     cat_msg('Chunk file ', chunk_file, ' already exists; skipping these spp')
+#     
+#   }
+# }
+# 
+# # Read in all the files and bind together to make the ico_assess_raw file
+# spp_past_assess_chunk_files <- list.files(
+#   here::here(dir_here, 'tmp'), 
+#   pattern = 'spp_past_assess_chunk', 
+#   full.names = TRUE
+# )
+# 
+# ico_assess_raw <- lapply(spp_past_assess_chunk_files, FUN = function(x) {
+#   read.csv(x) %>%
+#     dplyr::mutate(code = as.character(code))}) %>%
+#   dplyr::bind_rows()
 
 ###############
 # prep the dataframe and join by the iucn id and scientific name
@@ -744,7 +761,6 @@ NE & & \longleftarrow \text{"Not recognized ($NR$)"}
 # classification_table
 ```
 
-
 ------------------------------------------------------------------------
 
 ## Clean up the time series
@@ -758,20 +774,35 @@ ico_assess_raw <- here::here(dir_here, 'raw', 'ico_assessments_raw.csv') %>%
 
 #used cat_lookup
 
-# ico_assess <- ico_assess_raw %>%
-#   dplyr::rename(cat = code, cat_txt = category) %>%
-#   dplyr::mutate(
-#     cat = toupper(cat),
-#     cat = str_replace(cat, 'LR/', ''),
-#     cat = case_when(
-#       cat %in% c('K', 'I') ~ 'DD',
-#       cat == 'NR' ~ 'NE',
-#       cat == 'V' ~ 'VU',
-#       cat == 'E' ~ 'EN',
-#       str_detect(toupper(cat_txt), 'VERY RARE') ~ 'CR',
-#       str_detect(toupper(cat_txt), 'LESS RARE') ~ 'T',
-#       str_detect(toupper(cat_txt), 'STATUS INADEQUATELY KNOWN') ~ 'DD',
-#       T ~ cat))
+ico_assess <- ico_assess_raw %>%
+  dplyr::rename(cat = code, cat_txt = category) %>%
+  dplyr::mutate(
+    cat = toupper(cat),
+    cat = str_replace(cat, 'LR/', ''),
+    cat = case_when(
+      cat %in% c('K', 'I') ~ 'DD',
+      cat == 'NR' ~ 'NE',
+      cat == 'V' ~ 'VU',
+      cat == 'E' ~ 'EN',
+      str_detect(toupper(cat_txt), 'VERY RARE') ~ 'CR',
+      str_detect(toupper(cat_txt), 'LESS RARE') ~ 'T',
+      str_detect(toupper(cat_txt), 'STATUS INADEQUATELY KNOWN') ~ 'DD',
+      T ~ cat))
+
+ico_assess <- spp_assessments_2 %>%
+  dplyr::rename(cat = code, cat_txt = category) %>%
+  dplyr::mutate(
+    cat = toupper(cat),
+    cat = str_replace(cat, 'LR/', ''),
+    cat = case_when(
+      cat %in% c('K', 'I') ~ 'DD',
+      cat == 'NR' ~ 'NE',
+      cat == 'V' ~ 'VU',
+      cat == 'E' ~ 'EN',
+      str_detect(toupper(cat_txt), 'VERY RARE') ~ 'CR',
+      str_detect(toupper(cat_txt), 'LESS RARE') ~ 'T',
+      str_detect(toupper(cat_txt), 'STATUS INADEQUATELY KNOWN') ~ 'DD',
+      T ~ cat))
 
 pop_cat <- tibble::tribble(
   ~cat, ~cat_score,
@@ -858,7 +889,7 @@ ico_spp_cat <- ico_spp_cat %>%
   dplyr::distinct() #added in v2023
 
 
-# missing subpop data
+# missing subpop data?
 
 summary(ico_spp_cat)
 # v2025: 2365-38493-2451 NAs for cat_score, eval_yr, cat_2024_score
@@ -940,6 +971,7 @@ ico_status_calc <- ico_status_raw %>%
   dplyr::ungroup()
 
 ico_trend <- data.frame()
+
 for (i in 1993:max(ico_status_calc$year, na.rm = TRUE)) { # i <- 2013
   tmp_status <- ico_status_calc %>%
     dplyr::filter(year <= i & year > (i - 10)) # trend based on 10-year average since assessments are sporadic
@@ -977,6 +1009,10 @@ table(ico_status_raw1$category)
   #  CD    CR    DD    EN    EX    LC    NT    VU 
   # 536  9513  9291 24544   800 25109 22677 30955
 
+# v2025:
+ #   CR    EN    LC    NT    VU 
+ # 4715 24450 22087 22260 36873 .... hmmm?
+
 ico_status_raw1_prev <- read_csv(here::here("globalprep","ico", previous_scen, "output","ico_spp_iucn_status.csv"))
 table(ico_status_raw1_prev$category)
 # v2023:
@@ -994,11 +1030,11 @@ DT::datatable(filter(ico_status_raw, year == 2020))
 
 ```{r, eval=FALSE}
 ico_status_calc %>% 
-  dplyr::filter(year == 2022) %>%
+  dplyr::filter(year == 2024) %>%
   DT::datatable(caption = 'ICO status')
 
 ico_trend %>%
-  dplyr::filter(year == 2022) %>% 
+  dplyr::filter(year == 2024) %>% 
   dplyr::select(-trend_lm) %>% 
   DT::datatable(, caption = 'ICO trend')
 ```
@@ -1119,16 +1155,16 @@ Let's check rgn id 215
 ```{r outliers, include=FALSE, eval=F}
 ico_spp_rgn_prepped <- here::here(goal, version_year, 'int', 'ico_spp_rgn_prepped.csv') %>% 
   readr::read_csv(col_types = "ddcccccdcccldcc") %>% 
-  dplyr::mutate(year = 2021)
+  dplyr::mutate(year = 2025)
 
 # Read in ico_spp_countries from v2018
-ico_spp_rgn_prepped_v2020 <- here::here(goal, previous_scen, 'int', 'ico_spp_rgn_prepped.csv') %>%
+ico_spp_rgn_prepped_v2024 <- here::here(goal, previous_scen, 'int', 'ico_spp_rgn_prepped.csv') %>%
   readr::read_csv() %>%
-  dplyr::mutate(year = 2020)
+  dplyr::mutate(year = 2024)
 
 # only one duplicate species; must be something else causing the issue
 
-jordan1 <- ico_spp_rgn_prepped_v2020 %>% 
+jordan1 <- ico_spp_rgn_prepped_v2024 %>% 
   dplyr::filter(rgn_name == "Jordan") %>% 
   dplyr::select(iucn_sid, presence, rgn_id, rgn_name, comname, sciname, cat, year)
 
