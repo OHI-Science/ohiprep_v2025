@@ -352,15 +352,16 @@ y= "Region ID")
 
 ggplotly(plot)
 ```
+
 # Save the data as a csv
 
 ```{r}
 # Filter and rename the microplastics_eez data
 microplastics_save <- microplastics_eez %>%
-  rename(pressure_score = score) %>%
+  mutate(year = 2025) %>%
+  rename(pressure_score = avg_concentration) %>%
   select(rgn_id, year, pressure_score)
 ```
-
 
 ```{r}
 # Create file name for csv
@@ -371,5 +372,59 @@ output_path <- file.path("output", file_name)
 
 # Save the data frame
 write.csv(microplastics_save, file = output_path, row.names = FALSE)
+```
+
+
+# Plotting our results
+
+```{r}
+# Rename the 2025 scores
+trash_pressure <- trash_pressure %>%
+  rename(pressure_score_2025 = pressure_score)
+
+# Rename the 2015 scores
+trash_eez_2015_updated <- trash_eez_2015_updated %>%
+  rename(pressure_score_2015 = pressure_score)
+
+# Retreive region names from region_data()
+region_data()
+region_names <- rgns_eez %>%
+  select(rgn_id, rgn_name)
+  
+# Join the datasets to one another, then add region names
+trash_compare <- full_join(trash_pressure_filtered, trash_eez_2015_updated, by= "rgn_id")
+trash_compare <- full_join(trash_compare, region_names, by= "rgn_id")
+```
+
+
+# Plot the scores between 2025 and 2015 (different metrics of recording trash pressure)
+
+```{r}
+plot <- ggplot(trash_compare, aes(x= pressure_score_2015, y= pressure_score_2025, color= as.factor(rgn_name))) + 
+geom_point() +
+  geom_smooth() +
+  labs(color= "Region Name",
+       title= "Comparison of Trash Pressures from 2015 to 2025")
+
+ggplotly(plot)
+```
+
+
+# Find the difference between scores and plot
+
+```{r}
+trash_compare <- trash_compare %>%
+  mutate(diff = pressure_score_2025 - pressure_score_2015)
+```
+
+```{r}
+plot <- ggplot(trash_compare, aes(x= diff, y= rgn_name, color= as.factor(rgn_name))) + 
+geom_col() +
+  labs(color= "Region Name",
+       title= "Comparison of Trash Pressures from 2015 to 2025")+
+  theme(axis.text.y= element_blank(),
+        legend.position= "none")
+
+ggplotly(plot)
 ```
 
