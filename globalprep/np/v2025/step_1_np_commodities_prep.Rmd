@@ -124,8 +124,8 @@ Simultaneously read and process FAO commodities value and quantity data.
 ## list files included in d2020 folder (value and quant datasets)
 dir_fao_data <- here::here(dir_M, "git-annex", "globalprep", "_raw_data", "FAO_commodities", data_dir_year)
 
-raw_quant <- read_csv(here(dir_M, "git-annex", "globalprep", "_raw_data", "FAO_commodities", data_dir_year, "FAO_raw_commodities_quant_1976_2023.csv"))
-view(raw_quant)
+# raw_quant <- read_csv(here(dir_M, "git-annex", "globalprep", "_raw_data", "FAO_commodities", data_dir_year, "FAO_raw_commodities_quant_1976_2023.csv"))
+# view(raw_quant)
 
 files <- list.files(dir_fao_data, pattern = glob2rx('*.csv'), full.names = TRUE)
 
@@ -136,7 +136,7 @@ files_old <- list.files(dir_fao_data_old, pattern = glob2rx('*.csv'), full.names
 
 # ===== loop ================
 # for (f in files) {
-  f <- files[1] # un-comment and update to test individual files # 1 = quant, 2 = usd
+  f <- files_old[2] # un-comment and update to test individual files # 1 = quant, 2 = usd
   cat(sprintf('\n\n\n====\nfile: %s\n', basename(f)))
   
   # checks names syntactically, strips leading and trailing whitespace, prevents conversion of characters to factors 
@@ -162,9 +162,7 @@ files_old <- list.files(dir_fao_data_old, pattern = glob2rx('*.csv'), full.names
   # ---- Include only the "Exports" data ----
   m <- m %>%
     filter(trade == "Exports")
-  leb1 <- m %>% 
-    filter(country == "Palestine") %>% 
-    view()
+
   # ---- Run fao data cleaning function ----
   # cleans up flags, swaps out FAO-specific codes for analysis
   m <- m %>%
@@ -207,10 +205,7 @@ files_old <- list.files(dir_fao_data_old, pattern = glob2rx('*.csv'), full.names
   m_rgn <- ohicore::name_2_rgn(df_in = m,
                       fld_name = 'country', 
                       flds_unique = c('commodity', 'product', 'year'))
-  
-  leb2 <- m_rgn %>% 
-    filter(country == "Lebanon") %>% 
-    view()
+
   # v2025 removed: 
   # Yugoslavia SFR  -- this is fine, since it broke up into the six modern countries: Croatia, Montenegro, Serbia, Slovenia, Bosnia and Herzegovina, and Macedonia in 1990-1992, which means the relevant data is still captured.
   # Union of Soviet Socialist Republics -- Also fine since it happened so long ago it isn't relevant to our assessment
@@ -249,6 +244,51 @@ files_old <- list.files(dir_fao_data_old, pattern = glob2rx('*.csv'), full.names
   harvest_out <- here::here(current_np_dir, "int", sprintf("%s.csv", units))
   readr::write_csv(m_rgn, harvest_out, na = '')
 # }
+  
+# new_tonnes <- m_rgn
+# new_usd <- m_rgn
+# old_tonnes <- m_rgn
+# old_usd <- m_rgn
+```
+
+```{r}
+colnames(new_tonnes)
+view(new_tonnes)
+
+tonnes_comb <- new_tonnes %>% 
+  rename(new_tonnes = tonnes) %>% 
+  left_join(old_tonnes, by = join_by(rgn_id, rgn_name, commodity, product, year)) %>% 
+  mutate(diff_tonnes = new_tonnes - tonnes) %>% 
+  view()
+
+write_csv(tonnes_comb, here("globalprep", "np", "v2024", "test", "tonnes_comb_step1.csv"))
+read_csv(tonnes_comb, here("globalprep", "np", "v2024", "test", "tonnes_comb_step1.csv"))
+
+usd_comb <- new_usd %>% 
+  rename(new_usd = usd) %>% 
+  left_join(old_usd, by = join_by(rgn_id, rgn_name, commodity, product, year)) %>% 
+  mutate(diff_usd = new_usd - usd) %>% 
+  view()
+
+write_csv(usd_comb, here("globalprep", "np", "v2024", "test", "usd_comb_step1.csv"))
+
+
+# Plot sustainable tonnes
+comp_plot_1 <- ggplot() + 
+  geom_jitter(data = tonnes_comb, aes(x = tonnes, y = new_tonnes, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
+  # labs(x = paste("Previous Value", previous_data_year),
+  #      y = paste("Current Value", latest_data_year),
+  #      title = paste0("Sustainable tonnes: ", scen_year_number, " Assessment (",latest_data_year, " data) vs. ", prev_scen_year, " Assessment (",previous_data_year, " data)", " All Countries")) +
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  theme_bw(); ggplotly(comp_plot_1)
+
+comp_plot_2 <- ggplot() + 
+  geom_jitter(data = usd_comb, aes(x = usd, y = new_usd, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
+  # labs(x = paste("Previous Value", previous_data_year),
+  #      y = paste("Current Value", latest_data_year),
+  #      title = paste0("Sustainable tonnes: ", scen_year_number, " Assessment (",latest_data_year, " data) vs. ", prev_scen_year, " Assessment (",previous_data_year, " data)", " All Countries")) +
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  theme_bw(); ggplotly(comp_plot_2)
 
 ```
 
@@ -261,9 +301,6 @@ Combining the quantity and value data and a bit of cleaning to remove data prior
 h_tonnes <- read_csv(here(current_np_dir, "int", "tonnes.csv"))
 view(h_tonnes)
 
-leb_check <- h_tonnes %>% 
-  filter(rgn_id == 78 & product == "ornamentals") %>% 
-  view()
 
 # Read in value dataset from intermediate folder
 h_usd <- read_csv(here(current_np_dir, "int", "usd.csv"))
@@ -281,11 +318,6 @@ h <- h %>% np_harvest_preclip()
 
 # save a file to use in our methods document 
 readr::write_csv(h, here(current_np_dir, "int", "h_methods_sum.csv"))
-
-# test <- h %>%
-#   group_by(product) %>%
-#   summarise(sum_tonnes = sum(tonnes, na.rm = TRUE),
-#             sum_usd = sum(usd, na.rm = TRUE)) ## we will show this table in the methods doc
 
 # ---- filter for our commodities of interest ----
 h <- h %>%
@@ -448,6 +480,49 @@ usd_per_tonne <- h_prod %>%
 
 # save data to int dir
 readr::write_csv(usd_per_tonne, here(current_np_dir, "int", "np_usd_per_tonne.csv"))
+
+```
+
+```{r}
+usd_per_tonne <- read_csv(here(current_np_dir, "int", "np_usd_per_tonne.csv"))
+usd_per_tonne_old <- read_csv(here("globalprep", "np", "v2024", "int", "np_usd_per_tonne.csv"))
+colnames(usd_per_tonne_old)
+
+usd_comb <- usd_per_tonne %>% 
+  rename(new_usd = usd, new_tonnes = tonnes, new_usd_per_tonne = usd_per_tonne) %>% 
+  left_join(usd_per_tonne_old, by = join_by(rgn_id, rgn_name, product, year)) %>% 
+  mutate(diff_per = new_usd_per_tonne - usd_per_tonne,
+         diff_tonnes = new_tonnes - tonnes,
+         diff_usd = new_usd - usd) %>% 
+  view()
+
+write_csv(usd_comb, here("globalprep", "np", "v2024", "test", "usd_comb_step1.csv"))
+
+
+# Plot sustainable tonnes
+comp_plot_1 <- ggplot() + 
+  geom_jitter(data = usd_comb, aes(x = usd_per_tonne, y = new_usd_per_tonne, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
+  # labs(x = paste("Previous Value", previous_data_year),
+  #      y = paste("Current Value", latest_data_year),
+  #      title = paste0("Sustainable tonnes: ", scen_year_number, " Assessment (",latest_data_year, " data) vs. ", prev_scen_year, " Assessment (",previous_data_year, " data)", " All Countries")) +
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  theme_bw(); ggplotly(comp_plot_1)
+
+comp_plot_2 <- ggplot() + 
+  geom_jitter(data = usd_comb, aes(x = tonnes, y = new_tonnes, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
+  # labs(x = paste("Previous Value", previous_data_year),
+  #      y = paste("Current Value", latest_data_year),
+  #      title = paste0("Sustainable tonnes: ", scen_year_number, " Assessment (",latest_data_year, " data) vs. ", prev_scen_year, " Assessment (",previous_data_year, " data)", " All Countries")) +
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  theme_bw(); ggplotly(comp_plot_2)
+
+comp_plot_3 <- ggplot() + 
+  geom_jitter(data = usd_comb, aes(x = usd, y = new_usd, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
+  # labs(x = paste("Previous Value", previous_data_year),
+  #      y = paste("Current Value", latest_data_year),
+  #      title = paste0("Sustainable tonnes: ", scen_year_number, " Assessment (",latest_data_year, " data) vs. ", prev_scen_year, " Assessment (",previous_data_year, " data)", " All Countries")) +
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  theme_bw(); ggplotly(comp_plot_3)
 
 ```
 

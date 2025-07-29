@@ -305,7 +305,7 @@ new_fofm <- map_dfr(2020:2022, function(y) {
 
 # Add gapfilled flag to the original
 fofm_tonnes_gf <- fofm_tonnes %>%
-  filter(year == 2019) %>% 
+  filter(year %in% c(2018, 2019)) %>% 
   mutate(gapfilled = 0)
 
 # Combine original with new rows
@@ -319,7 +319,7 @@ write_csv(fofm_tonnes, here(current_np_dir, "test", "fofm_tonnes.csv"))
 
 ```{r gapfill-value-data}
 # All commodities
-harvest_tonnes_usd <- read_csv(here(current_np_dir, "int", "np_harvest_usd_tonnes.csv")) %>% 
+harvest_tonnes_usd <- read_csv(here(current_np_dir, "int", "np_harvest_tonnes_usd.csv")) %>% 
   filter(rgn_id != 213)
 
 
@@ -381,7 +381,6 @@ harvest_tonnes_usd_values_gf <- harvest_tonnes_usd_geo_rgn %>%
                             ifelse(is.na(usd_per_tonne) & georgn_usd_per_tonne == "NaN", 
                                    1, 0))) 
   
-view(harvest_tonnes_usd_values_gf)
 nrow(harvest_tonnes_usd_values_gf) # 3300
 colnames(harvest_tonnes_usd_values_gf)
 colSums(is.na(harvest_tonnes_usd_values_gf))
