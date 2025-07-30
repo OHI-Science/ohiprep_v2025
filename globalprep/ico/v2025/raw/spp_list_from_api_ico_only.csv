@@ -1,0 +1,345 @@
+iucn_sid,sciname,subpop,cat
+197461,Bitis arietans,NA,LC
+22696495,Falco cherrug,NA,EN
+15955,Panthera tigris,NA,EN
+12427,Lutrogale perspicillata,NA,VU
+41772,Sus barbatus,NA,VU
+178800,Nypa fruticans,NA,LC
+187752,Coris julis,NA,LC
+176528,Asparagus albus,NA,LC
+176528,Asparagus albus,NA,LC
+190710,Sparisoma cretense,NA,LC
+198568,Engraulis encrasicolus,NA,LC
+22692146,Grus grus,NA,LC
+41672,Pusa hispida,NA,LC
+98471199,Clupea pallasii,NA,DD
+202415,Thaleichthys pacificus,NA,LC
+158625941,Hippoglossus stenolepis,NA,LC
+19855,Salmo salar,NA,NT
+229537556,Salmo salar Allier subpopulation,Allier subpopulation,EN
+196580086,Salmo salar Anticosti Island subpopulation,Anticosti Island subpopulation,EN
+196579269,Salmo salar Baltic subpopulation,Baltic subpopulation,EN
+196579366,Salmo salar Bann subpopulation,Bann subpopulation,LC
+196580049,Salmo salar Central New England subpopulation,Central New England subpopulation,EX
+196579550,Salmo salar Denmark subpopulation,Denmark subpopulation,LC
+196580090,Salmo salar Eastern Cape Breton subpopulation,Eastern Cape Breton subpopulation,EN
+196579553,Salmo salar English Chalkstream subpopulation,English Chalkstream subpopulation,VU
+196579578,Salmo salar Finnmark subpopulation,Finnmark subpopulation,LC
+196579750,Salmo salar France/Spain subpopulation,France/Spain subpopulation,LC
+196580094,Salmo salar Gaspe-Southern Gulf of St. Lawrence subpopulation,Gaspe-Southern Gulf of St. Lawrence subpopulation,NT
+213546282,Salmo salar Great Britain subpopulation,Great Britain subpopulation,EN
+196580052,Salmo salar Gulf of Maine subpopulation,Gulf of Maine subpopulation,NA
+196580166,Salmo salar Inner Bay of Fundy subpopulation,Inner Bay of Fundy subpopulation,CR
+196580170,Salmo salar Inner St. Lawrence subpopulation,Inner St. Lawrence subpopulation,LC
+214416825,Salmo salar Ireland subpopulation,Ireland subpopulation,VU
+196579964,Salmo salar Kola subpopulation,Kola subpopulation,DD
+196579990,Salmo salar Kola (Tuloma basin) subpopulation,Kola (Tuloma basin) subpopulation,VU
+196580181,Salmo salar Labrador subpopulation,Labrador subpopulation,LC
+196580263,Salmo salar Lake Ontario subpopulation,Lake Ontario subpopulation,EX
+196579685,Salmo salar Leven subpopulation,Leven subpopulation,LC
+196580041,Salmo salar Long Island Sound subpopulation,Long Island Sound subpopulation,EX
+196579697,Salmo salar Mid and Southwest Norway subpopulation,Mid and Southwest Norway subpopulation,LC
+196580272,Salmo salar Northeast Newfoundland subpopulation,Northeast Newfoundland subpopulation,LC
+196579726,Salmo salar North Iceland subpopulation,North Iceland subpopulation,NT
+196580326,Salmo salar Northwest Newfoundland subpopulation,Northwest Newfoundland subpopulation,LC
+196580379,Salmo salar Nova Scotia Southern Upland subpopulation,Nova Scotia Southern Upland subpopulation,EN
+196580055,Salmo salar Nunavik subpopulation,Nunavik subpopulation,DD
+196580388,Salmo salar Outer Bay of Fundy subpopulation,Outer Bay of Fundy subpopulation,EN
+196580391,Salmo salar Quebec Eastern North Shore subpopulation,Quebec Eastern North Shore subpopulation,VU
+196580426,Salmo salar Quebec Western North Shore subpopulation,Quebec Western North Shore subpopulation,NT
+218709807,Salmo salar Southeastern Barents Sea subpopulation,Southeastern Barents Sea subpopulation,DD
+196580441,Salmo salar South Newfoundland subpopulation,South Newfoundland subpopulation,VU
+196579767,Salmo salar South Norway subpopulation,South Norway subpopulation,LC
+196580462,Salmo salar Southwest Newfoundland subpopulation,Southwest Newfoundland subpopulation,LC
+196579912,Salmo salar Teno/Tana subpopulation,Teno/Tana subpopulation,VU
+196579892,Salmo salar West coast Sweden and Enningdalselva subpopulation,West coast Sweden and Enningdalselva subpopulation,EN
+216299894,Salmo salar West Greenland subpopulation,West Greenland subpopulation,VU
+196579957,Salmo salar West Iceland subpopulation,West Iceland subpopulation,VU
+196580032,Salmo salar White Sea subpopulation,White Sea subpopulation,DD
+61743,Haliotis kamtschatkana,NA,EN
+62225,Entosphenus tridentatus,NA,LC
+135301,Oncorhynchus nerka,NA,LC
+135322,"Oncorhynchus nerka ALASKA COASTAL DOWNWELLING, EASTERN GULF OF ALASKA","ALASKA COASTAL DOWNWELLING, EASTERN GULF OF ALASKA",VU
+135361,"Oncorhynchus nerka ALASKA COASTAL DOWNWELLING, WESTERN GULF OF ALASKA","ALASKA COASTAL DOWNWELLING, WESTERN GULF OF ALASKA",LC
+135374,Oncorhynchus nerka ALSEK RIVER,ALSEK RIVER,LC
+135318,Oncorhynchus nerka ANADYR CURRENT,ANADYR CURRENT,DD
+135377,Oncorhynchus nerka ANADYR RIVER,ANADYR RIVER,DD
+135320,Oncorhynchus nerka BERING-ALASKAN MIXING,BERING-ALASKAN MIXING,LC
+135331,Oncorhynchus nerka BERING SLOPE/KAMCHATKA CURRENTS,BERING SLOPE/KAMCHATKA CURRENTS,DD
+135317,Oncorhynchus nerka COLUMBIA RIVER: Okanogan R/Osoyoos Lk,COLUMBIA RIVER: Okanogan R/Osoyoos Lk,NT
+135339,Oncorhynchus nerka COLUMBIA RIVER: Payette R,COLUMBIA RIVER: Payette R,EX
+135309,Oncorhynchus nerka COLUMBIA RIVER: Redfish Lk,COLUMBIA RIVER: Redfish Lk,CR
+135341,Oncorhynchus nerka COLUMBIA RIVER: Suttle Lk/Deschutes R,COLUMBIA RIVER: Suttle Lk/Deschutes R,EX
+135368,"Oncorhynchus nerka COLUMBIA RIVER: Upper, Headwater/Arrow, Whatsan Lk","COLUMBIA RIVER: Upper, Headwater/Arrow, Whatsan Lk",EX
+135326,Oncorhynchus nerka COLUMBIA RIVER: Wallowa Lk,COLUMBIA RIVER: Wallowa Lk,EX
+135363,Oncorhynchus nerka COLUMBIA RIVER: Wenatchee,COLUMBIA RIVER: Wenatchee,NT
+135316,Oncorhynchus nerka COLUMBIA RIVER: Yakima R,COLUMBIA RIVER: Yakima R,EX
+135348,Oncorhynchus nerka COOK INLET,COOK INLET,LC
+135347,Oncorhynchus nerka COPPER RIVER,COPPER RIVER,LC
+135379,Oncorhynchus nerka EASTERN ARCTIC (COLD),EASTERN ARCTIC (COLD),DD
+135306,Oncorhynchus nerka EASTERN ARCTIC CURRENT (WARM),EASTERN ARCTIC CURRENT (WARM),DD
+135310,"Oncorhynchus nerka FRASER RIVER, LILLOOET: Birkenhead (late)","FRASER RIVER, LILLOOET: Birkenhead (late)",LC
+201444,"Oncorhynchus nerka FRASER RIVER, LOWER: Big Silver (late)","FRASER RIVER, LOWER: Big Silver (late)",LC
+201439,"Oncorhynchus nerka FRASER RIVER, LOWER: Chilliwack Lk (early summer)","FRASER RIVER, LOWER: Chilliwack Lk (early summer)",DD
+201440,"Oncorhynchus nerka FRASER RIVER, LOWER: Cultus Lk (late)","FRASER RIVER, LOWER: Cultus Lk (late)",EN
+201441,"Oncorhynchus nerka FRASER RIVER, LOWER: Harrison River (late)","FRASER RIVER, LOWER: Harrison River (late)",LC
+135369,"Oncorhynchus nerka FRASER RIVER, LOWER: Upper Pitt R (early summer)","FRASER RIVER, LOWER: Upper Pitt R (early summer)",LC
+201442,"Oncorhynchus nerka FRASER RIVER, LOWER: Weaver (late)","FRASER RIVER, LOWER: Weaver (late)",LC
+135372,"Oncorhynchus nerka FRASER RIVER, LOWER: Widgeon Creek (late)","FRASER RIVER, LOWER: Widgeon Creek (late)",DD
+201449,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Chilko (early summer)","FRASER RIVER, MIDDLE: Chilko (early summer)",DD
+201450,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Chilko (summer)","FRASER RIVER, MIDDLE: Chilko (summer)",EN
+135315,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Gates Ck and Channel (early summer)","FRASER RIVER, MIDDLE: Gates Ck and Channel (early summer)",EN
+135303,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Nadina, Nechako (early summer)","FRASER RIVER, MIDDLE: Nadina, Nechako (early summer)",LC
+201447,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Nahatlatch (early summer)","FRASER RIVER, MIDDLE: Nahatlatch (early summer)",EN
+201452,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Nechako (summer)","FRASER RIVER, MIDDLE: Nechako (summer)",LC
+201451,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Quesnel (summer)","FRASER RIVER, MIDDLE: Quesnel (summer)",LC
+201453,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Stuart (early Stuart)","FRASER RIVER, MIDDLE: Stuart (early Stuart)",EN
+201454,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Stuart (summer)","FRASER RIVER, MIDDLE: Stuart (summer)",EN
+201448,"Oncorhynchus nerka FRASER RIVER, MIDDLE: Taseko (early summer)","FRASER RIVER, MIDDLE: Taseko (early summer)",DD
+135332,"Oncorhynchus nerka FRASER RIVER, N THOMPSON: Kamloops (early summer)","FRASER RIVER, N THOMPSON: Kamloops (early summer)",LC
+201445,"Oncorhynchus nerka FRASER RIVER, S THOMPSON: Shuswap (early summer)","FRASER RIVER, S THOMPSON: Shuswap (early summer)",LC
+201446,"Oncorhynchus nerka FRASER RIVER, S THOMPSON: Shuswap, Kamloops (late)","FRASER RIVER, S THOMPSON: Shuswap, Kamloops (late)",LC
+135336,"Oncorhynchus nerka FRASER RIVER, UPPER: Bowron (early summer)","FRASER RIVER, UPPER: Bowron (early summer)",EN
+135354,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Atnarko R,HECATE STRAIT-Q.C. SOUND: Atnarko R,LC
+135360,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Bella Coola R,HECATE STRAIT-Q.C. SOUND: Bella Coola R,DD
+201438,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: E Hadai Gwaii,HECATE STRAIT-Q.C. SOUND: E Hadai Gwaii,LC
+201437,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Hecate Strait,HECATE STRAIT-Q.C. SOUND: Hecate Strait,LC
+135376,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Kitimat to Kitlope R,HECATE STRAIT-Q.C. SOUND: Kitimat to Kitlope R,LC
+135338,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Lowe Lk/Granville Ch,HECATE STRAIT-Q.C. SOUND: Lowe Lk/Granville Ch,LC
+135381,Oncorhynchus nerka HECATE STRAIT-Q.C. SOUND: Queen Charlotte Sound,HECATE STRAIT-Q.C. SOUND: Queen Charlotte Sound,EN
+135351,Oncorhynchus nerka KAMCHATKA RIVER,KAMCHATKA RIVER,EN
+135375,Oncorhynchus nerka KANCHALAN RIVER,KANCHALAN RIVER,DD
+135355,Oncorhynchus nerka KOBUK RIVER,KOBUK RIVER,DD
+135365,Oncorhynchus nerka KODIAK ISLAND,KODIAK ISLAND,LC
+135343,Oncorhynchus nerka KUSKOKWIM RIVER,KUSKOKWIM RIVER,LC
+201431,Oncorhynchus nerka NASS RIVER: Coastal,NASS RIVER: Coastal,LC
+201430,Oncorhynchus nerka NASS RIVER: Gingit,NASS RIVER: Gingit,LC
+201429,Oncorhynchus nerka NASS RIVER: Upper Nass,NASS RIVER: Upper Nass,VU
+135328,Oncorhynchus nerka NASS-SKEENA ESTUARY: Hugh Smith Lk/Boca de Quadra,NASS-SKEENA ESTUARY: Hugh Smith Lk/Boca de Quadra,EN
+135333,Oncorhynchus nerka NASS-SKEENA ESTUARY: N Hadai Gwaii,NASS-SKEENA ESTUARY: N Hadai Gwaii,LC
+135352,Oncorhynchus nerka NASS-SKEENA ESTUARY: North of Nass,NASS-SKEENA ESTUARY: North of Nass,VU
+135324,Oncorhynchus nerka NOATAK RIVER,NOATAK RIVER,DD
+135327,Oncorhynchus nerka OKHOTSK-OYASHIO MIXING,OKHOTSK-OYASHIO MIXING,DD
+201499,Oncorhynchus nerka OUTER ISLANDS: NW Vancouver Island,OUTER ISLANDS: NW Vancouver Island,NA
+201500,Oncorhynchus nerka OUTER ISLANDS: W Hadai Gwaii,OUTER ISLANDS: W Hadai Gwaii,LC
+135345,Oncorhynchus nerka PENZHINA INTRACOASTAL,PENZHINA INTRACOASTAL,DD
+135334,Oncorhynchus nerka PRINCE WILLIAM SOUND,PRINCE WILLIAM SOUND,LC
+135319,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Baker Lk/Puget Sound,PUGET SOUND-GEORGIA BASIN: Baker Lk/Puget Sound,LC
+135344,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Glendale Ck/Knight Inl,PUGET SOUND-GEORGIA BASIN: Glendale Ck/Knight Inl,DD
+135366,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Klinaklini River,PUGET SOUND-GEORGIA BASIN: Klinaklini River,DD
+135337,"Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Nimpkish, Mackenzie R","PUGET SOUND-GEORGIA BASIN: Nimpkish, Mackenzie R",LC
+135356,"Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Phillips R, Heydon Ck","PUGET SOUND-GEORGIA BASIN: Phillips R, Heydon Ck",DD
+135380,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Quatse R/N Vancouver I,PUGET SOUND-GEORGIA BASIN: Quatse R/N Vancouver I,LC
+135323,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Schoen Ck/Davie R,PUGET SOUND-GEORGIA BASIN: Schoen Ck/Davie R,DD
+135330,"Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Village Bay Ck, Sakinaw","PUGET SOUND-GEORGIA BASIN: Village Bay Ck, Sakinaw",CR
+135302,Oncorhynchus nerka SEA OF OKHOTSK CURRENT (COLD),SEA OF OKHOTSK CURRENT (COLD),DD
+135311,Oncorhynchus nerka SEASONAL UPWELLING CLINE,SEASONAL UPWELLING CLINE,LC
+135359,Oncorhynchus nerka SHELIKHOV GULF (COLD),SHELIKHOV GULF (COLD),DD
+201432,"Oncorhynchus nerka SKEENA R, LOWER: Alastair","SKEENA R, LOWER: Alastair",EN
+201434,"Oncorhynchus nerka SKEENA R, LOWER: Kitsumkalum","SKEENA R, LOWER: Kitsumkalum",LC
+135353,"Oncorhynchus nerka SKEENA R, LOWER: McDonnel Lk/Zymoetz R","SKEENA R, LOWER: McDonnel Lk/Zymoetz R",DD
+201433,"Oncorhynchus nerka SKEENA R, LOWER: Schulbuckhand","SKEENA R, LOWER: Schulbuckhand",CR
+201436,"Oncorhynchus nerka SKEENA R, MIDDLE: Babine","SKEENA R, MIDDLE: Babine",LC
+201435,"Oncorhynchus nerka SKEENA R, MIDDLE: Kispiox R, Club","SKEENA R, MIDDLE: Kispiox R, Club",LC
+135373,"Oncorhynchus nerka SKEENA R, MIDDLE: Nanika Lk/Morice R","SKEENA R, MIDDLE: Nanika Lk/Morice R",CR
+135321,"Oncorhynchus nerka SKEENA R, UPPER","SKEENA R, UPPER",EN
+135340,Oncorhynchus nerka SOUTHEAST BERING SEA INNER SHELF,SOUTHEAST BERING SEA INNER SHELF,LC
+135325,"Oncorhynchus nerka STIKINE RIVER, LOWER","STIKINE RIVER, LOWER",LC
+135357,Oncorhynchus nerka TRANSBOUNDARY FJORDS: Kah Sheets Lk/S Kupreanof Is,TRANSBOUNDARY FJORDS: Kah Sheets Lk/S Kupreanof Is,DD
+135362,Oncorhynchus nerka TRANSBOUNDARY FJORDS: Kunk Lk/E Etolin Is,TRANSBOUNDARY FJORDS: Kunk Lk/E Etolin Is,DD
+135312,Oncorhynchus nerka TRANSBOUNDARY FJORDS: North,TRANSBOUNDARY FJORDS: North,LC
+135308,Oncorhynchus nerka TRANSBOUNDARY FJORDS: Petersburg Lk/N Kupreanof Is,TRANSBOUNDARY FJORDS: Petersburg Lk/N Kupreanof Is,DD
+135358,Oncorhynchus nerka TRANSBOUNDARY FJORDS: Shipley Lk/N Kosciusko Is,TRANSBOUNDARY FJORDS: Shipley Lk/N Kosciusko Is,DD
+135342,Oncorhynchus nerka TRANSBOUNDARY FJORDS: South,TRANSBOUNDARY FJORDS: South,DD
+135371,Oncorhynchus nerka VANCOUVER ISLAND COASTAL CURRENT,VANCOUVER ISLAND COASTAL CURRENT,LC
+135346,Oncorhynchus nerka VELIKAYA RIVER,VELIKAYA RIVER,DD
+135313,Oncorhynchus nerka WESTERN ARCTIC CURRENT (COLD),WESTERN ARCTIC CURRENT (COLD),DD
+135370,Oncorhynchus nerka WESTERN KAMCHATKA CURRENT (WARM),WESTERN KAMCHATKA CURRENT (WARM),LC
+135335,Oncorhynchus nerka YUKON RIVER,YUKON RIVER,DD
+135329,Oncorhynchus nerka YUKON RIVER INFLUENCE,YUKON RIVER INFLUENCE,LC
+22694334,Larus glaucescens,NA,LC
+191108,Anguilla rostrata,NA,EN
+181500967,Ardea herodias,NA,LC
+42394,Odocoileus virginianus,NA,LC
+6335,Delphinapterus leucas,NA,LC
+61442,Delphinapterus leucas Cook Inlet subpopulation,Cook Inlet subpopulation,CR
+13704,Monodon monoceros,NA,LC
+78769001,Haliotis iris,NA,LC
+170025,Jasus edwardsii,NA,LC
+22698209,Ardenna grisea,NA,NT
+197276,Anguilla dieffenbachii,NA,EN
+196303,Anguilla reinhardtii,NA,LC
+61339,Epinephelus polyphekadion,NA,VU
+6909,Dugong dugon,NA,VU
+218582764,Dugong dugon Eastern Africa subpopulation,Eastern Africa subpopulation,CR
+157011948,Dugong dugon Nansei subpopulation,Nansei subpopulation,CR
+218582754,Dugong dugon New Caledonia subpopulation,New Caledonia subpopulation,EN
+195502,Anguilla australis,NA,NT
+193989455,Santalum acuminatum,NA,LC
+49278407,Melaleuca quinquenervia,NA,LC
+190409,Mugil liza,NA,DD
+39381,Prionace glauca,NA,NT
+19488,Rhincodon typus,NA,EN
+126671962,Rhincodon typus Atlantic Subpopulation,Atlantic Subpopulation,NA
+126671910,Rhincodon typus Indo-Pacific Subpopulation,Indo-Pacific Subpopulation,NA
+39341,Isurus oxyrinchus,NA,EN
+161749,Isurus oxyrinchus Atlantic subpopulation,Atlantic subpopulation,VU
+161751,Isurus oxyrinchus Eastern North Pacific subpopulation,Eastern North Pacific subpopulation,NT
+161750,Isurus oxyrinchus Indo-west Pacific subpopulation,Indo-west Pacific subpopulation,VU
+11534,Lepidochelys olivacea,NA,VU
+15419,Orcaella brevirostris,NA,EN
+44556,Orcaella brevirostris Ayeyarwady River subpopulation,Ayeyarwady River subpopulation,CR
+123095978,Orcaella brevirostris Iloilo-Guimaras subpopulation,Iloilo-Guimaras subpopulation,CR
+39428,Orcaella brevirostris Mahakam River subpopulation,Mahakam River subpopulation,CR
+44187,Orcaella brevirostris Malampaya Sound subpopulation,Malampaya Sound subpopulation,CR
+44555,Orcaella brevirostris Mekong River subpopulation,Mekong River subpopulation,CR
+44557,Orcaella brevirostris Songkhla Lake subpopulation,Songkhla Lake subpopulation,CR
+4592,Cheilinus undulatus,NA,EN
+3855,Carcharodon carcharias,NA,VU
+4292,Cetorhinus maximus,NA,EN
+2477,Balaenoptera musculus,NA,EN
+2483,Balaenoptera musculus musculus North Atlantic stock,North Atlantic stock,NA
+2482,Balaenoptera musculus musculus North Pacific stock,North Pacific stock,NA
+4615,Chelonia mydas,NA,EN
+220353080,Chelonia mydas Central South Pacific subpopulation,Central South Pacific subpopulation,EN
+220970168,Chelonia mydas East Indian–West Pacific subpopulation,East Indian–West Pacific subpopulation,NA
+220970302,Chelonia mydas East Pacific subpopulation,East Pacific subpopulation,VU
+16285718,Chelonia mydas Hawaiian subpopulation,Hawaiian subpopulation,LC
+4616,Chelonia mydas Mediterranean subpopulation,Mediterranean subpopulation,NT
+142121108,Chelonia mydas North Indian Ocean subpopulation,North Indian Ocean subpopulation,VU
+142121866,Chelonia mydas South Atlantic subpopulation,South Atlantic subpopulation,LC
+220970396,Chelonia mydas Southwest Indian Ocean subpopulation,Southwest Indian Ocean subpopulation,LC
+39378,Galeocerdo cuvier,NA,NT
+13006,Megaptera novaeangliae,NA,LC
+132835,Megaptera novaeangliae Arabian Sea subpopulation,Arabian Sea subpopulation,EN
+132832,Megaptera novaeangliae Oceania subpopulation,Oceania subpopulation,EN
+39339,Alopias vulpinus,NA,VU
+2474,Balaenoptera acutorostrata,NA,LC
+2475,Balaenoptera borealis,NA,EN
+2478,Balaenoptera physalus,NA,VU
+16208224,Balaenoptera physalus Mediterranean subpopulation,Mediterranean subpopulation,EN
+11200,Lamna nasus,NA,VU
+61420,Lamna nasus Mediterranean subpopulation,Mediterranean subpopulation,NA
+39343,Lamna nasus Northeast Atlantic subpopulation,Northeast Atlantic subpopulation,NA
+39344,Lamna nasus Northwest Atlantic subpopulation,Northwest Atlantic subpopulation,NA
+71847689,Lamna nasus Southern Hemisphere subpopulation,Southern Hemisphere subpopulation,NA
+2467,Balaena mysticetus,NA,LC
+2468,Balaena mysticetus Bering-Chukchi-Beaufort Sea subpopulation,Bering-Chukchi-Beaufort Sea subpopulation,LR/cd
+2472,Balaena mysticetus East Greenland-Svalbard-Barents Sea subpopulation,East Greenland-Svalbard-Barents Sea subpopulation,EN
+2469,Balaena mysticetus Okhotsk Sea subpopulation,Okhotsk Sea subpopulation,EN
+41712,Eubalaena glacialis,NA,CR
+22823,Ursus maritimus,NA,VU
+8097,Eschrichtius robustus,NA,LC
+8099,Eschrichtius robustus western subpopulation,western subpopulation,EN
+41711,Eubalaena japonica,NA,EN
+133706,Eubalaena japonica Northeast Pacific subpopulation,Northeast Pacific subpopulation,CR
+39365,Carcharhinus amblyrhynchos,NA,EN
+3897,Caretta caretta,NA,VU
+83644804,Caretta caretta Mediterranean subpopulation,Mediterranean subpopulation,LC
+83776383,Caretta caretta North East Atlantic subpopulation,North East Atlantic subpopulation,EN
+84126444,Caretta caretta North East Indian Ocean subpopulation,North East Indian Ocean subpopulation,CR
+83652278,Caretta caretta North Pacific subpopulation,North Pacific subpopulation,LC
+84131194,Caretta caretta North West Atlantic subpopulation,North West Atlantic subpopulation,LC
+84127873,Caretta caretta North West Indian Ocean subpopulation,North West Indian Ocean subpopulation,CR
+84189617,Caretta caretta South East Indian Ocean subpopulation,South East Indian Ocean subpopulation,NA
+84156809,Caretta caretta South Pacific subpopulation,South Pacific subpopulation,NA
+84191235,Caretta caretta South West Atlantic subpopulation,South West Atlantic subpopulation,LC
+84199475,Caretta caretta South West Indian Ocean subpopulation,South West Indian Ocean subpopulation,NT
+6494,Dermochelys coriacea,NA,VU
+46967807,Dermochelys coriacea East Pacific Ocean subpopulation,East Pacific Ocean subpopulation,CR
+46967873,Dermochelys coriacea Northeast Indian Ocean subpopulation,Northeast Indian Ocean subpopulation,DD
+46967827,Dermochelys coriacea Northwest Atlantic Ocean subpopulation,Northwest Atlantic Ocean subpopulation,EN
+46967848,Dermochelys coriacea Southeast Atlantic Ocean subpopulation,Southeast Atlantic Ocean subpopulation,DD
+46967838,Dermochelys coriacea Southwest Atlantic Ocean subpopulation,Southwest Atlantic Ocean subpopulation,CR
+46967863,Dermochelys coriacea Southwest Indian Ocean subpopulation,Southwest Indian Ocean subpopulation,CR
+46967817,Dermochelys coriacea West Pacific Ocean subpopulation,West Pacific Ocean subpopulation,CR
+8005,Eretmochelys imbricata,NA,CR
+39338,Megachasma pelagios,NA,LC
+39384,Triaenodon obesus,NA,VU
+39375,Carcharhinus melanopterus,NA,VU
+60225,Isurus paucus,NA,EN
+169473392,Glyphis gangeticus,NA,CR
+13653,Monachus monachus,NA,VU
+120868933,Monachus monachus Cabo Blanco subpopulation,Cabo Blanco subpopulation,NA
+120868935,Monachus monachus Eastern Mediterranean subpopulation,Eastern Mediterranean subpopulation,EN
+120868931,Monachus monachus Madeira Islands subpopulation,Madeira Islands subpopulation,NA
+17978,Pontoporia blainvillei,NA,VU
+41761,Pontoporia blainvillei Rio Grande do Sul/Uruguay subpopulation,Rio Grande do Sul/Uruguay subpopulation,VU
+60217,Carcharhinus perezi,NA,EN
+11533,Lepidochelys kempii,NA,CR
+4162,Cephalorhynchus hectori,NA,EN
+4162,Cephalorhynchus hectori,NA,EN
+183775,Engraulis ringens,NA,LC
+17028,Phocoena sinus,NA,CR
+20738,Steno bredanensis,NA,LC
+160158217,Steno bredanensis Mediterranean subpopulation,Mediterranean subpopulation,NT
+22563,Tursiops truncatus,NA,LC
+194300,Tursiops truncatus Fiordland subpopulation,Fiordland subpopulation,CR
+181208820,Tursiops truncatus Gulf of Ambracia subpopulation,Gulf of Ambracia subpopulation,CR
+16369383,Tursiops truncatus Mediterranean subpopulation,Mediterranean subpopulation,LC
+2480,Balaenoptera bonaerensis,NA,NT
+2476,Balaenoptera edeni,NA,LC
+2762,Berardius arnuxii,NA,LC
+3778,Caperea marginata,NA,LC
+134817215,Delphinus delphis,NA,LC
+156206333,Delphinus delphis Gulf of Corinth subpopulation,Gulf of Corinth subpopulation,CR
+189865869,Delphinus delphis Inner Mediterranean subpopulation,Inner Mediterranean subpopulation,EN
+41762,Delphinus delphis Mediterranean subpopulation,Mediterranean subpopulation,EN
+8153,Eubalaena australis,NA,LC
+133704,Eubalaena australis Chile-Peru subpopulation,Chile-Peru subpopulation,CR
+8551,Feresa attenuata,NA,LC
+9249,Globicephala macrorhynchus,NA,LC
+9250,Globicephala melas,NA,LC
+198785664,Globicephala melas Inner Mediterranean subpopulation,Inner Mediterranean subpopulation,EN
+198787290,Globicephala melas Strait of Gibraltar subpopulation,Strait of Gibraltar subpopulation,CR
+9461,Grampus griseus,NA,LC
+16378423,Grampus griseus Mediterranean subpopulation,Mediterranean subpopulation,EN
+10708,Hyperoodon planifrons,NA,LC
+40635,Indopacetus pacificus,NA,LC
+11047,Kogia breviceps,NA,LC
+11048,Kogia sima,NA,LC
+11140,Lagenodelphis hosei,NA,LC
+11144,Lagenorhynchus cruciger,NA,LC
+11146,Lagenorhynchus obscurus,NA,LC
+12126,Lissodelphis peronii,NA,LC
+13242,Mesoplodon bowdoini,NA,DD
+13244,Mesoplodon densirostris,NA,LC
+127827012,Mesoplodon ginkgodens,NA,DD
+13247,Mesoplodon grayi,NA,LC
+13248,Mesoplodon hectori,NA,DD
+13249,Mesoplodon layardii,NA,LC
+13250,Mesoplodon mirus,NA,LC
+14363,Natator depressus,NA,DD
+136315,Orcaella heinsohni,NA,VU
+15421,Orcinus orca,NA,DD
+132948040,Orcinus orca Strait of Gibraltar subpopulation,Strait of Gibraltar subpopulation,CR
+16564,Peponocephala electra,NA,LC
+41715,Phocoena dioptrica,NA,LC
+41755,Physeter macrocephalus,NA,VU
+16370739,Physeter macrocephalus Mediterranean subpopulation,Mediterranean subpopulation,EN
+18596,Pseudorca crassidens,NA,NT
+82031425,Sousa chinensis,NA,VU
+20729,Stenella attenuata,NA,LC
+20731,Stenella coeruleoalba,NA,LC
+210188066,Stenella coeruleoalba Gulf of Corinth subpopulation,Gulf of Corinth subpopulation,EN
+16674437,Stenella coeruleoalba Mediterranean subpopulation,Mediterranean subpopulation,LC
+20733,Stenella longirostris,NA,LC
+21500,Tasmacetus shepherdi,NA,DD
+41714,Tursiops aduncus,NA,NT
+23211,Ziphius cavirostris,NA,LC
+16381144,Ziphius cavirostris Mediterranean subpopulation,Mediterranean subpopulation,VU
+8784,Gadus morhua,NA,VU
+170759990,Platichthys flesus,NA,LC
+170759990,Platichthys flesus,NA,LC
+155123,Clupea harengus,NA,LC
+16580,Perca fluviatilis,NA,LC
+135631,Esox lucius,NA,LC
+19861,Salmo trutta,NA,LC
+39463,Salmo trutta aralensis Aral Sea and Amu Darya River stock,Aral Sea and Amu Darya River stock,CR
+198583,Sprattus sprattus,NA,LC
+9660,Halichoerus grypus,NA,LC
+74491261,Halichoerus grypus Baltic Sea subpopulation,Baltic Sea subpopulation,LC
+12419,Lutra lutra,NA,NT
+17013,Phoca vitulina,NA,LC
+17027,Phocoena phocoena,NA,LC
+17031,Phocoena phocoena Baltic Sea subpopulation,Baltic Sea subpopulation,CR
