@@ -117,6 +117,7 @@ indicators <-  data.frame(WDI_data[[1]])
 
 ind_names <- list("VA.EST", "PV.EST", "GE.EST", "RQ.EST", "RL.EST", "CC.EST")
 
+# View indicator names and descriptions
 for (ind_name in ind_names){
   
   name <- indicators[grep(ind_name, indicators$indicator), 2] 
@@ -127,27 +128,7 @@ for (ind_name in ind_names){
 
 }
 
-# Voice and Accountability: Estimate
-indicators[grep("VA.EST", indicators$indicator), 2:3] 
-
-# Political Stability and Absence of Violence/Terrorism: Estimate
-indicators[grep("PV.EST", indicators$indicator), ] 
-
-# Government Effectiveness: Estimate
-indicators[grep("GE.EST", indicators$indicator), ] 
-
-# Regulatory Quality: Estimate
-indicators[grep("RQ.EST", indicators$indicator), ] 
-
-# Rule of Law: Estimate
-indicators[grep("RL.EST", indicators$indicator), ] 
-
-# Control of Corruption: Estimate
-indicators[grep("CC.EST", indicators$indicator), ] 
-
-# identify the six indicators
-# WDIsearch('violence')# general search
-
+# Extract data for the 6 broad indicators
 ind_dict <- list(
   "key_va" = "Voice and Accountability: Estimate",
   "key_pv" = "Political Stability and Absence of Violence/Terrorism: Estimate",
@@ -156,14 +137,6 @@ ind_dict <- list(
   "key_rl" = "Rule of Law: Estimate",
   "key_cc" = "Control of Corruption: Estimate"
 )
-
-# for (key, value in ind_dict){
-#   key_va = WDI(
-#   indicator = WDIsearch("Voice and Accountability: Estimate", field='name')['indicator'],
-#   country = 'all', 
-#   start = yr_start, end=yr_end
-#   )
-# }
 
 
 # Create an empty list to store results
@@ -213,10 +186,68 @@ key_corrp = WDI(
 
 ```
 
+```{r}
+
+# Step 1: Define the indicator dictionary
+# ind_dict <- list(
+#   "Voice_and_Accountability" = "Voice and Accountability: Estimate",
+#   "Political_Stability" = "Political Stability and Absence of Violence/Terrorism: Estimate",
+#   "Government_Effectiveness" = "Government Effectiveness: Estimate",
+#   "Regulatory_Quality" = "Regulatory Quality: Estimate",
+#   "Rule_of_Law" = "Rule of Law: Estimate",
+#   "Control_of_Corruption" = "Control of Corruption: Estimate"
+# )
+
+ind_dict <- list(
+  "voice_acct" = "Voice and Accountability: Estimate",
+  "pol_stb" = "Political Stability and Absence of Violence/Terrorism: Estimate",
+  "govt_eff" = "Government Effectiveness: Estimate",
+  "reg_qual" = "Regulatory Quality: Estimate",
+  "rule_law" = "Rule of Law: Estimate",
+  "cont_corr" = "Control of Corruption: Estimate"
+)
+
+# Step 3: Download data and store in list
+indicator_data <- list()
+
+for (key in names(ind_dict)) {
+  value <- ind_dict[[key]]
+  
+  indicator_code <- WDIsearch(value, field = 'name')[1, 'indicator']
+  
+  df <- WDI(
+    indicator = indicator_code,
+    country = 'all',
+    start = start_year,
+    end = end_year
+  )
+  
+  # Rename the indicator column to the key
+  colnames(df)[which(names(df) == indicator_code)] <- key
+  
+  # Keep relevant columns only
+  df <- df %>%
+    select(country, iso3c, year, all_of(key))
+  
+  indicator_data[[key]] <- df
+}
+
+# Step 4: Join all indicator dataframes
+final_data <- Reduce(function(x, y) {
+  left_join(x, y, by = c("country", "iso3c", "year"))
+}, indicator_data)
+
+# View result
+view(final_data)
+colSums(is.na(final_data))
+nrow(final_data)
+
+```
+
 Combine the indicators into a single table, with a column for each indicator, and rows for each country-year pair.
 
 ```{r}
-wgi_raw <- read_csv(here::here(curren)
+wgi_raw <- read_csv(here::here(current_wgi_dir, "v2025", "P_Data_Extract_From_Worldwide_Governance_Indicators_2025"))
 
 d <- wgi_raw %>%
   clean_names() %>%
@@ -250,9 +281,11 @@ colnames(d) <- c("country", "year", "iso3c", "VA.EST", "PV.EST", "GE.EST",	"RQ.E
 Uncomment the code chunk lines when updating WGI data, this will most likely occur when calculating for new assessment year:
 
 ```{r}
+# Update file name and pathing
+write_csv(final_data, here(current_wgi_dir, "raw", paste0("worldbank_wgi_from_api_", current_year, ".csv")))
 
-date <- Sys.Date()
-write.csv(d, here(sprintf('globalprep/prs_res_wgi/v%s/raw/worldbank_wgi_from_wdi_api_%s.csv', scen_year, date)), row.names=FALSE)
+# date <- Sys.Date()
+# write.csv(d, here(sprintf('globalprep/prs_res_wgi/v%s/raw/worldbank_wgi_from_wdi_api_%s.csv', scen_year, date)), row.names=FALSE)
 
 
 # This dataset currently has non-OHI regions included
@@ -266,18 +299,20 @@ The first gapfilling occurs when we use the average of previous years data withi
 **Read in WGI data - change appended date in file name to reflect the most recent version of the saved WGI data:**
 ```{r}
 
-d <- read.csv(here(paste0('globalprep/prs_res_wgi/v', scen_year, '/raw/worldbank_wgi_from_wdi_api_2024-05-24.csv'))) # change appended date to most recent version
+# d <- read.csv(here(paste0('globalprep/prs_res_wgi/v', scen_year, '/raw/worldbank_wgi_from_wdi_api_2024-05-24.csv'))) # change appended date to most recent version
 
+d <- read_csv(here(current_wgi_dir, "raw", "worldbank_wgi_from_api_2025.csv"))
+colnames(d)
 ```
 
 
 ```{r}
-d <- d %>% 
-  pivot_longer(cols = CC.EST:VA.EST, names_to = "indicator", values_to = "value")
+d_long <- d %>% 
+  pivot_longer(cols = voice_acct:cont_corr, names_to = "indicator", values_to = "value")
 
 
 ## each country has 20 years of data
-d_gap_fill  <- d %>%
+d_gap_fill  <- d_long %>%
   group_by(country, iso3c, year) %>%
   mutate(NA_count_c_y = sum(is.na(value))) %>% # gf record: NA values within a region/year prior to gapfilling, max value is 6 (meaning that a country has no data)
   ungroup() %>%
@@ -302,7 +337,7 @@ countries_no_data <- d_gap_fill %>%
   filter(NA_count_post_gf1 > 3)
 
 countries_no_data <- unique(countries_no_data$country)
-countries_no_data
+countries_no_data # 61 countries... a lot compared to 2024
 
 ## In this case, the countries with minimal data (< 4 indicators ever calculated) are deleted.  
 ## These will be gap-filled later on if they are deleted now.
