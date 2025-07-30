@@ -94,7 +94,8 @@ previous_wgi_dir <- here::here("globalprep", "prs_res_wgi", prev_scen_year)
 
 # ======== Source functions ===========
 source(here::here("workflow", "R", "common.R")) # directory locations
-# Load FAO-specific user-defined functions
+# functions specific to mariculture dealing with compound countries, updated in 2024
+source(here::here("globalprep", "mar", scen_year, "mar_fxs.R"))
 
 # Avoid scientific notation for numbers with many sig figs
 options(scipen = 999)
@@ -104,7 +105,7 @@ options(scipen = 999)
 # Obtain the WGI data
 Download each of the 6 WGI indicators. Note: This didn't work in 2023 for some reason. For the 2024 assessment, check to see if it will work again. Instead. I manually downlaoded the data from here: https://databank.worldbank.org/source/worldwide-governance-indicators#. Use the uncommented chunk below for this. 
 
-```{r}
+```{r indicator-decsription}
 # Import WDI data via WDI package
 indicators <-  data.frame(WDI_data[[1]])
 
@@ -120,67 +121,10 @@ for (ind_name in ind_names){
   cat("\n") # space between each indicator
 
 }
-
-# Extract data for the 6 broad indicators
-ind_dict <- list(
-  "key_va" = "Voice and Accountability: Estimate",
-  "key_pv" = "Political Stability and Absence of Violence/Terrorism: Estimate",
-  "key_ge" = "Government Effectiveness: Estimate",
-  "key_rq" = "Regulatory Quality: Estimate",
-  "key_rl" = "Rule of Law: Estimate",
-  "key_cc" = "Control of Corruption: Estimate"
-)
-
-
-# Create an empty list to store results
-indicator_data <- list()
-
-# Loop correctly over names
-for (key in names(ind_dict)) {
-  
-  value <- ind_dict[[key]]
-  
-  # Get the indicator code by searching the name
-  indicator_code <- WDIsearch(value, field = 'name')[1, 'indicator']
-  
-  # Download the data
-  indicator_data[[key]] <- WDI(
-    indicator = indicator_code,
-    country = 'all',
-    start = start_year,
-    end = end_year,
-  )
-}
-
-
-key_voice = WDI(
-  indicator = WDIsearch('Voice and Accountability: Estimate', field='name')['indicator'],
-  country = 'all', start = yr_start, end=yr_end)
-
-key_polst = WDI(
-  WDIsearch('Political Stability and Absence of Violence/Terrorism: Estimate', field='name')['indicator'],
-  country='all',start = yr_start, end=yr_end)
-
-key_gvtef = WDI(
-  WDIsearch('Government Effectiveness: Estimate', field='name')['indicator'],
-  country='all',start = yr_start, end=yr_end)
-
-key_regqt = WDI(
-  WDIsearch('Regulatory Quality: Estimate', field='name')['indicator'],
-  country='all',start = yr_start, end=yr_end)
-
-key_rolaw = WDI(
-  WDIsearch('Rule of Law: Estimate', field='name')['indicator'],
-  country='all',start = yr_start, end=yr_end)
-
-key_corrp = WDI(
-  WDIsearch('Control of Corruption: Estimate', field='name')['indicator'],
-  country='all',start = yr_start, end=yr_end)
-
 ```
 
-```{r}
 
+```{r extract-data}
 # Create list of indicator names and short names
 ind_dict <- list(
   "voice_acct" = "Voice and Accountability: Estimate",
@@ -213,14 +157,13 @@ for (key in names(ind_dict)) {
   
 }
 
-
 # Join the individual dfs together
 final_data <- Reduce(function(x, y) {
   left_join(x, y, by = c("country", "iso3c", "year"))
 }, indicator_data)
 
 # Check
-view(final_data)
+# view(final_data)
 colSums(is.na(final_data))
 nrow(final_data)
 
@@ -231,7 +174,7 @@ Combine the indicators into a single table, with a column for each indicator, an
 ```{r access-data-without-api}
 wgi_raw <- read_csv(here::here(current_wgi_dir, "raw", "P_Data_Extract_From_Worldwide_Governance_Indicators_2025.csv"))
 
-d <- wgi_raw %>%
+d_web <- wgi_raw %>%
   clean_names() %>%
   rename(iso3c = country_code, country = country_name) %>%
   filter(str_detect(series_code, "EST")) %>%
@@ -239,25 +182,15 @@ d <- wgi_raw %>%
   pivot_longer(cols = starts_with("x"), values_to = "est", names_to = "year") %>%
   mutate(year = as.numeric(str_after_last(year, "yr"))) %>%
   mutate(est = ifelse(est == "..", NA, est)) %>%
-  pivot_wider(values_from = "est", names_from = "series_code") 
+  pivot_wider(values_from = "est", names_from = "series_code")
 
-view(d)
+view(d_web)
+
+write_csv(d_web, here(current_wgi_dir, "raw", paste0("worldbank_wgi_from_web_", current_year, ".csv")))
 ```
 
 
 Combine the indicators into a single table, with a column for each indicator, and rows for each country-year pair.
-
-```{r OLD}
-d = key_voice %>%
-  select(country, year, iso3c, indicator) %>%
-  left_join(key_polst %>% select(-iso2c), by=(c('country', 'iso3c', 'year'))) %>%
-  left_join(key_gvtef %>% select(-iso2c), by=(c('country', 'iso3c', 'year'))) %>%
-  left_join(key_regqt %>% select(-iso2c), by=(c('country', 'iso3c', 'year'))) %>%
-  left_join(key_rolaw %>% select(-iso2c), by=(c('country', 'iso3c', 'year'))) %>%
-  left_join(key_corrp %>% select(-iso2c), by=(c('country', 'iso3c', 'year'))); head(d); summary(d); sapply(d, class)
-
-colnames(d) <- c("country", "year", "iso3c", "VA.EST", "PV.EST", "GE.EST",	"RQ.EST",	"RL.EST", "CC.EST")
-```
 
 ## Save a record of any new raw data for archival purposes
 
@@ -266,11 +199,6 @@ Uncomment the code chunk lines when updating WGI data, this will most likely occ
 ```{r}
 # Update file name and pathing
 write_csv(final_data, here(current_wgi_dir, "raw", paste0("worldbank_wgi_from_api_", current_year, ".csv")))
-
-# date <- Sys.Date()
-# write.csv(d, here(sprintf('globalprep/prs_res_wgi/v%s/raw/worldbank_wgi_from_wdi_api_%s.csv', scen_year, date)), row.names=FALSE)
-
-
 # This dataset currently has non-OHI regions included
 ```
 
@@ -281,40 +209,77 @@ The first gapfilling occurs when we use the average of previous years data withi
 
 **Read in WGI data - change appended date in file name to reflect the most recent version of the saved WGI data:**
 ```{r}
+d_api <- read_csv(here(current_wgi_dir, "raw", paste0("worldbank_wgi_from_api_", current_year, ".csv")))
+colnames(d_api)
 
-# d <- read.csv(here(paste0('globalprep/prs_res_wgi/v', scen_year, '/raw/worldbank_wgi_from_wdi_api_2024-05-24.csv'))) # change appended date to most recent version
+d_web <- write_csv(d_web, here(current_wgi_dir, "raw", paste0("worldbank_wgi_from_web_", current_year, ".csv")))
+colnames(d_web)
 
-d_api <- read_csv(here(current_wgi_dir, "raw", "worldbank_wgi_from_api_2025.csv"))
-colnames(d)
+
+
 ```
 
 ```{r}
 # Comparing the API data and the web download data
-colSums(is.na(d)) # 117-231 NAs across all 6 inds
-nrow(d) # 530
+colSums(is.na(d_web)) # 117-231 NAs across all 6 inds
+nrow(d_web) # 530
 # ~ 38% NA
-view(d)
+view(d_web)
 
 colSums(is.na(d_api)) # 2370 - 2482 NAs across all 6 inds
 nrow(d_api) # 7448
 # ~ 32% NA
 view(d_api)
 
-diff_countries <- setdiff(d_api$country, d$country)
+diff_countries <- setdiff(d_api$country, d_web$country)
 
 diff_df <- filter(d_api, country %in% diff_countries) %>% 
   view()
 
 length(unique(diff_df$country))
 # Puerto Rico (US) is the only country different between the API and website data that actually has data for all 6 indicators. 
+
+d_web <- d_web %>% 
+  rename(voice_acct = VA.EST, pol_stb = PV.EST, govt_eff = GE.EST, 
+         reg_qual = RQ.EST, rule_law = RL.EST, cont_corr = CC.EST)
+
+list(
+  "voice_acct" = "Voice and Accountability: Estimate",
+  "pol_stb" = "Political Stability and Absence of Violence/Terrorism: Estimate",
+  "govt_eff" = "Government Effectiveness: Estimate",
+  "reg_qual" = "Regulatory Quality: Estimate",
+  "rule_law" = "Rule of Law: Estimate",
+  "cont_corr" = "Control of Corruption: Estimate"
+)
+ind_names <- list("VA.EST", "PV.EST", "GE.EST", "RQ.EST", "RL.EST", "CC.EST")
+
+setdiff(d_api$voice_acct, d_web$voice_acct) # 0
+setdiff(d_api$pol_stb, d_web$pol_stb) # 0 
+setdiff(d_api$govt_eff, d_web$govt_eff) # 0 
+setdiff(d_api$reg_qual, d_web$reg_qual) # 0
+setdiff(d_api$rule_law, d_web$rule_law) # 0
+setdiff(d_api$cont_corr, d_web$cont_corr) # 0
+
+columns <- d_api[,4:9]
+
+for (col in columns){
+  # print(paste("Indicator:", col))
+  print(setdiff(d_api$col, d_web$col))
+}
+diff_scores <- setdiff(d_api$country, d_web$country)
+
+diff_df <- filter(d_api, country %in% diff_countries) %>% 
+  view()
+
+length(unique(diff_df$country))
 ```
 
 
 ```{r}
 # CC.EST:VA.EST
 # voice_acct:cont_corr
-d_long <- d_api %>% 
-  pivot_longer(cols = voice_acct:cont_corr, names_to = "indicator", values_to = "value") %>% 
+d_long <- d_web %>% 
+  pivot_longer(cols = CC.EST:VA.EST, names_to = "indicator", values_to = "value") %>% 
   mutate(value = as.numeric(value))
 
 
@@ -432,14 +397,18 @@ v2025: we alreayd have an `ohicore` function that splits the names of countries 
 
 ```{r}
 
-## Special case: user-defined function deals with 
-  ##   breaking up Antilles into separate reported rgns
-  d_split <- ohicore::split_regions(d_calcs, country_column = 'country', value_column = 
-                                      'value')
+# Special case: user-defined function deals with 
+# Breaking up Antilles into separate reported rgns
+d_test <- d_calcs %>% 
+  rename(value = score)
 
-  d_rgn <- ohicore::name_2_rgn(df_in = d_split,
-                      fld_name = 'country', 
-                      flds_unique = c('year'))
+d_split <- ohicore::split_regions(d_test, 
+                                  country_column = 'country', 
+                                  value_column = 'score')
+
+d_rgn <- ohicore::name_2_rgn(df_in = d_split,
+                    fld_name = 'country', 
+                    flds_unique = c('year'))
 
 ## We report these regions at a greater spatial resolution:
 
@@ -603,12 +572,6 @@ new_2022_scores <- d_gf2 %>% # rename variable with respective year for clarity
   filter(year == 2023) %>% 
   select(rgn_id, score)
 
-old_2022_scores <- read.csv(here(paste0('globalprep/prs_res_wgi/v', prev_assessment_year, '/output/wgi_res.csv'))) %>% # rename variable
-  filter(year == 2023) %>%
-  select(rgn_id, old_score=resilience_score)
-
-score_compare_2022 <- old_2022_scores %>% 
-  full_join(new_2022_scores)
 
 old_wgi <- read_csv(here(previous_wgi_dir, "output", "wgi_res.csv")) %>% # rename variable
   filter(year == 2022) %>%
@@ -621,6 +584,13 @@ score_compare_2022 <- d_gf2 %>%
   filter(year == 2022) %>% 
   left_join(old_wgi, by = join_by('rgn_id'))
 
+ab_scores <- ggplot() + 
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  geom_point(data = score_compare_2022, aes(x = old_score, y = score, text = paste("Region:", rgn_name))) +
+  labs(x = "Old Score", 
+       y = "New Score",
+       title = "WGI 2025 score vs. 2024 score data year 2022") +
+  theme_bw();ggplotly(ab_scores)
 
 score_compare_plot <- ggplot(score_compare_2022, aes(x = old_score, y = score, text = rgn_id)) +
   geom_point() +
@@ -674,8 +644,8 @@ tmp <- d_gf2 %>%
   select(rgn_id, score) %>%
   left_join(regions)
 
-tmp[1:10, ] # makes sense.. mostly African countries or countries with authoritarian regimes
-tmp[211:220, ] # makes sense... mostly countries with democratic socialist policies or small islands. No surprise Nordic countries are the best
+tmp[1:10, ] # mostly countires with politcal instability 
+tmp[211:220, ] # makes sense... mostly countries with democratic socialist policies or small islands
 
 hist(tmp$score)
 
@@ -699,12 +669,12 @@ Save gapfilling and data for this assessment year.
 
 tmp_data_res <- d_gf2 %>%
   select(rgn_id, year, resilience_score = score)
-write.csv(tmp_data_res, here(paste0("globalprep/prs_res_wgi/v", scen_year, "/output/wgi_res.csv")), row.names=FALSE)
+write.csv(tmp_data_res, here(paste0("globalprep/prs_res_wgi/", scen_year, "/output/wgi_res.csv")), row.names=FALSE)
 
 tmp_data_prs <- d_gf2 %>%
   mutate(score = 1 - score) %>%
   select(rgn_id, year, pressure_score = score)
-write.csv(tmp_data_prs, here(paste0("globalprep/prs_res_wgi/v", scen_year, "/output/wgi_prs.csv")), row.names=FALSE)
+write.csv(tmp_data_prs, here(paste0("globalprep/prs_res_wgi/", scen_year, "/output/wgi_prs.csv")), row.names=FALSE)
 
 # gapfilled data
 tmp_gf <- d_gf2 %>%
@@ -721,7 +691,7 @@ tmp_gf <- d_gf2 %>%
   select(rgn_id, year, gapfilled, method)
 
 
-write.csv(tmp_gf, here(paste0("globalprep/prs_res_wgi/v", scen_year, "/output/wgi_gf.csv")), row.names=FALSE)
+write.csv(tmp_gf, here(paste0("globalprep/prs_res_wgi/", scen_year, "/output/wgi_gf.csv")), row.names=FALSE)
 
 
 ```
