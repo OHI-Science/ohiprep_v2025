@@ -18,22 +18,24 @@ editor_options:
   chunk_output_type: console
 ---
 
-[REFERENCE RMD FILE](http://ohi-science.org/ohiprep_v2024/globalprep/prs_res_wgi/v2024/WGI_dataprep.html)
+[REFERENCE RMD FILE](http://ohi-science.org/ohiprep_v2025/globalprep/prs_res_wgi/v2025/WGI_dataprep.html)
 
 # Summary
 This script downloads WGI data and prepares it for a pressures (1 - WGI) and resilience data layer.  
 
-# Updates from previous assessment
+## Updates from previous assessment
+- New data download
+- Added `librarian` to handle package imports
+- Added directory, scenario, and year variables to make the script more reproducible
+- Updated the exploratory code and data import at the top to be less redundant
 
 
-***
-
-# Data Source 
+## Data Source 
 **Reference**:  http://info.worldbank.org/governance/wgi/index.aspx#home    
 
 **Downloaded**: 
 
-August 28, 2024 (source data updated Sep 2023)
+July 29, 2025 (source data updated Sep 2023)
 
 **Description**:  
 The Worldwide Governance Indicators (WGI) project reports aggregate and individual governance indicators for 215 economies over the period 1996–2022, for six dimensions of governance:
@@ -45,9 +47,8 @@ The Worldwide Governance Indicators (WGI) project reports aggregate and individu
 * Rule of Law
 * Control of Corruption
 
-**Time range**: 1996-2022
+**Time range**: 1996-2023
 
-***
 
 ```{r}
 knitr::opts_chunk$set(eval = FALSE)
@@ -69,10 +70,7 @@ librarian::shelf(
 )
 
 # check website to see what years are available: http://info.worldbank.org/governance/wgi/index.aspx#home
-# yr_start = 1996
-# yr_end   = 2023
-# 
-# scen_year <- "2025"
+
 
 # ======= Set directories ===========
 # Update scenario year, set up programmatic scenario year updates
@@ -88,11 +86,9 @@ scen_year <- paste0("v", current_year)
 prev_scen_year <- paste0("v", previous_year)
 
 start_year <- 1996
-end_year <- 2023
+end_year <- 2023 # Update depending on available data from Worldbank website
 
-data_years <- c("1996", "2023") # update to correct data years
-
-# Natural Products directory on GitHub
+# WGI directory on GitHub
 current_wgi_dir <- here::here("globalprep", "prs_res_wgi", scen_year) 
 previous_wgi_dir <- here::here("globalprep", "prs_res_wgi", prev_scen_year) 
 
@@ -109,10 +105,7 @@ options(scipen = 999)
 Download each of the 6 WGI indicators. Note: This didn't work in 2023 for some reason. For the 2024 assessment, check to see if it will work again. Instead. I manually downlaoded the data from here: https://databank.worldbank.org/source/worldwide-governance-indicators#. Use the uncommented chunk below for this. 
 
 ```{r}
-
-## access data through the WDI package
-
-## get description of variables:
+# Import WDI data via WDI package
 indicators <-  data.frame(WDI_data[[1]])
 
 ind_names <- list("VA.EST", "PV.EST", "GE.EST", "RQ.EST", "RL.EST", "CC.EST")
@@ -188,16 +181,7 @@ key_corrp = WDI(
 
 ```{r}
 
-# Step 1: Define the indicator dictionary
-# ind_dict <- list(
-#   "Voice_and_Accountability" = "Voice and Accountability: Estimate",
-#   "Political_Stability" = "Political Stability and Absence of Violence/Terrorism: Estimate",
-#   "Government_Effectiveness" = "Government Effectiveness: Estimate",
-#   "Regulatory_Quality" = "Regulatory Quality: Estimate",
-#   "Rule_of_Law" = "Rule of Law: Estimate",
-#   "Control_of_Corruption" = "Control of Corruption: Estimate"
-# )
-
+# Create list of indicator names and short names
 ind_dict <- list(
   "voice_acct" = "Voice and Accountability: Estimate",
   "pol_stb" = "Political Stability and Absence of Violence/Terrorism: Estimate",
@@ -207,7 +191,7 @@ ind_dict <- list(
   "cont_corr" = "Control of Corruption: Estimate"
 )
 
-# Step 3: Download data and store in list
+# Query the catalog for each of the 6 indicators
 indicator_data <- list()
 
 for (key in names(ind_dict)) {
@@ -215,12 +199,8 @@ for (key in names(ind_dict)) {
   
   indicator_code <- WDIsearch(value, field = 'name')[1, 'indicator']
   
-  df <- WDI(
-    indicator = indicator_code,
-    country = 'all',
-    start = start_year,
-    end = end_year
-  )
+  df <- WDI(indicator = indicator_code,country = 'all',
+            start = start_year, end = end_year)
   
   # Rename the indicator column to the key
   colnames(df)[which(names(df) == indicator_code)] <- key
@@ -230,14 +210,16 @@ for (key in names(ind_dict)) {
     select(country, iso3c, year, all_of(key))
   
   indicator_data[[key]] <- df
+  
 }
 
-# Step 4: Join all indicator dataframes
+
+# Join the individual dfs together
 final_data <- Reduce(function(x, y) {
   left_join(x, y, by = c("country", "iso3c", "year"))
 }, indicator_data)
 
-# View result
+# Check
 view(final_data)
 colSums(is.na(final_data))
 nrow(final_data)
@@ -246,8 +228,8 @@ nrow(final_data)
 
 Combine the indicators into a single table, with a column for each indicator, and rows for each country-year pair.
 
-```{r}
-wgi_raw <- read_csv(here::here(current_wgi_dir, "v2025", "P_Data_Extract_From_Worldwide_Governance_Indicators_2025"))
+```{r access-data-without-api}
+wgi_raw <- read_csv(here::here(current_wgi_dir, "raw", "P_Data_Extract_From_Worldwide_Governance_Indicators_2025.csv"))
 
 d <- wgi_raw %>%
   clean_names() %>%
@@ -259,12 +241,13 @@ d <- wgi_raw %>%
   mutate(est = ifelse(est == "..", NA, est)) %>%
   pivot_wider(values_from = "est", names_from = "series_code") 
 
+view(d)
 ```
 
 
 Combine the indicators into a single table, with a column for each indicator, and rows for each country-year pair.
 
-```{r}
+```{r OLD}
 d = key_voice %>%
   select(country, year, iso3c, indicator) %>%
   left_join(key_polst %>% select(-iso2c), by=(c('country', 'iso3c', 'year'))) %>%
@@ -301,14 +284,38 @@ The first gapfilling occurs when we use the average of previous years data withi
 
 # d <- read.csv(here(paste0('globalprep/prs_res_wgi/v', scen_year, '/raw/worldbank_wgi_from_wdi_api_2024-05-24.csv'))) # change appended date to most recent version
 
-d <- read_csv(here(current_wgi_dir, "raw", "worldbank_wgi_from_api_2025.csv"))
+d_api <- read_csv(here(current_wgi_dir, "raw", "worldbank_wgi_from_api_2025.csv"))
 colnames(d)
+```
+
+```{r}
+# Comparing the API data and the web download data
+colSums(is.na(d)) # 117-231 NAs across all 6 inds
+nrow(d) # 530
+# ~ 38% NA
+view(d)
+
+colSums(is.na(d_api)) # 2370 - 2482 NAs across all 6 inds
+nrow(d_api) # 7448
+# ~ 32% NA
+view(d_api)
+
+diff_countries <- setdiff(d_api$country, d$country)
+
+diff_df <- filter(d_api, country %in% diff_countries) %>% 
+  view()
+
+length(unique(diff_df$country))
+# Puerto Rico (US) is the only country different between the API and website data that actually has data for all 6 indicators. 
 ```
 
 
 ```{r}
-d_long <- d %>% 
-  pivot_longer(cols = voice_acct:cont_corr, names_to = "indicator", values_to = "value")
+# CC.EST:VA.EST
+# voice_acct:cont_corr
+d_long <- d_api %>% 
+  pivot_longer(cols = voice_acct:cont_corr, names_to = "indicator", values_to = "value") %>% 
+  mutate(value = as.numeric(value))
 
 
 ## each country has 20 years of data
@@ -337,7 +344,8 @@ countries_no_data <- d_gap_fill %>%
   filter(NA_count_post_gf1 > 3)
 
 countries_no_data <- unique(countries_no_data$country)
-countries_no_data # 61 countries... a lot compared to 2024
+countries_no_data # API data: 61 countries... a lot compared to 2024
+# Hmm, when I pull the data from the website and not the API, there are no countries with more than 3 NA columns
 
 ## In this case, the countries with minimal data (< 4 indicators ever calculated) are deleted.  
 ## These will be gap-filled later on if they are deleted now.
@@ -368,9 +376,9 @@ d_calcs <- d_gap_fill %>%
 ```{r}
 
 summary(d_calcs) # checking to make sure NA values make sense
-  ## v2024: NA_start max = 6, NA_post_gf_1 max = 0
+  ## v2025: NA_start max = 6, NA_post_gf_1 max = 0
 
-## v2024: score_wgi_scale min = -2.409, max = 1.947... perfect
+## v2025: score_wgi_scale min = -2.409, max = 1.947... perfect
 wgi_range = c(-2.5, 2.5) # historic values have been between -2.5 and 2.5
 
 ```
@@ -395,6 +403,7 @@ d_calcs <- d_calcs %>%
 ```{r}
 
 d_calcs[d_calcs$gap_fill>0, ] %>% View()
+# No "Niue" in this data...
 d_calcs[d_calcs$country == "Niue", ] %>% View() # should have gap-fill values between 0-6
 d_calcs[d_calcs$country == "American Samoa",] %>% View() # should have gap-fill values between 0-6
 
@@ -405,17 +414,32 @@ d_calcs[d_calcs$country == "American Samoa",] %>% View() # should have gap-fill 
 ```{r}
 
 ## save intermediate file of wgi scores pre-gapfilling (for OHI+ use)
-write.csv(d_calcs %>%
-            select(country, iso3c, year, score_wgi_scale, score_ohi_scale = score, gap_fill), 
-          here(paste0('globalprep/prs_res_wgi/v', scen_year, '/intermediate/wgi_combined_scores_by_country.csv')),
-          row.names = FALSE)
+# write.csv(d_calcs %>%
+#             select(country, iso3c, year, score_wgi_scale, score_ohi_scale = score, gap_fill), 
+#           here(paste0('globalprep/prs_res_wgi/v', scen_year, '/intermediate/wgi_combined_scores_by_country.csv')),
+#           row.names = FALSE)
+# Write out gapfill data
+d_gf_final <- d_calcs %>% 
+  select(country, iso3c, year, score_wgi_scale, score_ohi_scale = score, gap_fill)
+
+write_csv(d_gf_final, here(current_wgi_dir, "int", "wgi_combined_scores_by_country.csv"))
 
 ```
 
 
 # Convert country names to ohi regions
+v2025: we alreayd have an `ohicore` function that splits the names of countries that get reported as a group. I've removed the manual version of this and instead added the `split_regions()` function
 
 ```{r}
+
+## Special case: user-defined function deals with 
+  ##   breaking up Antilles into separate reported rgns
+  d_split <- ohicore::split_regions(d_calcs, country_column = 'country', value_column = 
+                                      'value')
+
+  d_rgn <- ohicore::name_2_rgn(df_in = d_split,
+                      fld_name = 'country', 
+                      flds_unique = c('year'))
 
 ## We report these regions at a greater spatial resolution:
 
@@ -451,9 +475,9 @@ d_calcs_rgn <- name_2_rgn(df_in = d_calcs,
 ## In this case, we take the weighted average
 population_weights <- data.frame(country = c("Virgin Islands (U.S.)", "Puerto Rico",
                                              "China", "Hong Kong SAR, China", "Macao SAR, China"),
-                                 population = c(104917, 3205691,
-                                         1410710000, 7356100, 704149))
-# updated population values on 30 August 2024 (source: World Bank website, 2023 values); https://databank.worldbank.org/source/population-estimates-and-projections
+                                 population = c(104337, 3203295, 
+                                                1408975000, 7524100, 687000))
+# updated population values on 30 July 2025 (source: World Bank website, 2024 values); https://databank.worldbank.org/source/population-estimates-and-projections
 
 
 d_calcs_rgn <- d_calcs_rgn %>%
@@ -486,7 +510,7 @@ territory = rgn_master %>%
 
 	
 ## expand to include all years of data
-territory <- data.frame(year=yr_start:yr_end) %>% 
+territory <- data.frame(year = start_year:end_year) %>% 
   merge(territory, by=NULL) 
 
 
@@ -540,9 +564,10 @@ d_gf2 <- regions %>%
 
 head(d_sovs)
 summary(d_sovs) 
-  ## v2021: score has 1029 NAs
-  ## v2022: 1127 NAs
-  ## v2024: 1176 NAs
+# v2021: score has 1029 NAs
+# v2022: 1127 NAs
+# v2024: 1176 NAs
+# v2025: 1736 NAs Hmm, more here than expected
 
 ```
 
@@ -554,10 +579,11 @@ summary(d_sovs)
 ## if so, need to gapfill using UN geopolitical regions
 summary(d_gf2) 
 d_gf2[is.na(d_gf2$score), ]
-  ## v2021: score has 0 NAs
-  ## v2022: 0 NAs
-  ## v2023: 0 NAs
-  ## v2024: 0 NAs! 
+# v2021: score has 0 NAs
+# v2022: 0 NAs
+# v2023: 0 NAs
+# v2024: 0 NAs! 
+# v2025: Taiwan oof
 
 ```
 
@@ -574,15 +600,26 @@ recent_shared_year <- as.numeric(scen_year) - 2
 prev_assessment_year <- as.numeric(scen_year) - 1
 
 new_2022_scores <- d_gf2 %>% # rename variable with respective year for clarity
-  filter(year == recent_shared_year) %>% 
+  filter(year == 2023) %>% 
   select(rgn_id, score)
 
 old_2022_scores <- read.csv(here(paste0('globalprep/prs_res_wgi/v', prev_assessment_year, '/output/wgi_res.csv'))) %>% # rename variable
-  filter(year == recent_shared_year) %>%
+  filter(year == 2023) %>%
   select(rgn_id, old_score=resilience_score)
 
 score_compare_2022 <- old_2022_scores %>% 
   full_join(new_2022_scores)
+
+old_wgi <- read_csv(here(previous_wgi_dir, "output", "wgi_res.csv")) %>% # rename variable
+  filter(year == 2022) %>%
+  select(rgn_id, old_score=resilience_score)
+
+colnames(d_gf2)
+colnames(old_wgi)
+
+score_compare_2022 <- d_gf2 %>% 
+  filter(year == 2022) %>% 
+  left_join(old_wgi, by = join_by('rgn_id'))
 
 
 score_compare_plot <- ggplot(score_compare_2022, aes(x = old_score, y = score, text = rgn_id)) +
@@ -592,6 +629,36 @@ score_compare_plot <- ggplot(score_compare_2022, aes(x = old_score, y = score, t
 score_compare_plot
 # v2024: looks good
 
+```
+
+```{r}
+# Read in the old data
+old <- readr::read_csv(here::here("globalprep", "np", prev_scen_year, "output", "np_fofm_scores.csv"))
+summary(old)
+
+# Read in the new data
+new <- readr::read_csv(here::here(current_np_dir, "output", "np_fofm_scores.csv"))
+summary(new)
+
+# load ohi regions
+region_data()
+
+# Investigating changes in data for same year in different data/scenario years
+check <- new %>%
+  rename("new_score" = "score") %>%
+  left_join(old, by = c("rgn_id", "year")) %>%
+  left_join(rgns_all, by = "rgn_id") %>%
+  select(rgn_id, year, new_score, score, rgn_name) %>%
+  mutate(diff = new_score - score) %>%
+  filter(year == 2019)
+
+ab_scores <- ggplot() + 
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  geom_point(data = check, aes(x = score, y = new_score, text = paste("Region:", rgn_name), alpha = 0.7)) +
+  labs(x = "Old Score", 
+       y = "New Score",
+       title = "FOFM New score vs old score for 2019") +
+  theme_bw();ggplotly(ab_scores)
 ```
 
 
