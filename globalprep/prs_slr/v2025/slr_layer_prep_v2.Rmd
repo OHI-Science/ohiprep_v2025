@@ -179,7 +179,7 @@ Unzip the files you've just downloaded, if the data is prior to 2020:
 ```{r}
 # Define the new username and password. NOTE: The username and password of the last year will not be saved here, but replace it with your own each version year
 h <- new_handle()
-handle_setopt(h, username = "madisonenda@gmail.com", password = "")
+handle_setopt(h, username = "", password = "")
 
 for (mo in months) {
   u <- sprintf("%s/dt_global_allsat_msla_h_y2022_m%s.nc", ub, mo)
@@ -269,7 +269,7 @@ for (i in seq_along(nc_files)){
 
 toc()
 # v2024 - 410.867 sec elapsed
-# v2025 - 172.369 sec elapsed 
+# v2025 - 300.369 sec elapsed 
 ```
 
 ## Annual mean sea level anomalies
@@ -358,7 +358,7 @@ for(i in seq_along(annual_means)) {
 }
 toc()
 # v2024 - 2099.743 sec elapsed
-# v2025 - 2000.074 sec elapsed
+# v2025 - 2082.074 sec elapsed
 ```
 
 ```{r, eval=FALSE}
@@ -378,6 +378,7 @@ foreach(file = annual_mol) %dopar% { # file = annual_mol[2]
 }
 toc()
 # v2024 - 1800.464 sec elapsed
+# v2025 - 1970.066 sec elapsed
 
 plot(terra::rast(file.path(dir_prs_slr, "int/msla_annual_mol_coastal/msla_annual_mol_coastal_2010.tif")))
 ```
@@ -451,11 +452,11 @@ ref_tab$ref_point[ref_tab$pressure == "Sea Level Rise"] <- ref_point_slr # set s
 
 # write to reference_points_pressures.csv
 write.csv(ref_tab,
-          here(dir_refpt, scen_year, "reference_points_pressures.csv"),
+          here(dir_refpt, "v2025", "reference_points_pressures.csv"),
           row.names = FALSE)
 
 ## grab reference value from the supp_info csv
-ref <- read_csv(here(dir_refpt, "v2024", "reference_points_pressures.csv")) %>%
+ref <- read_csv(here(dir_refpt, "v2025", "reference_points_pressures.csv")) %>%
        filter(pressure == "Sea Level Rise") %>%
        .$ref_point %>%
         as.numeric()
@@ -482,20 +483,27 @@ neg_vals <- function(x){ifelse(x < 0, 0, x)}
 greater_vals <- function(x){ifelse(x > ref, 1, x/ref)}
 
 tic()
-for(i in seq_along(coastal_rasts)) { # i = coastal_rasts[26]
-  yr <- str_sub(coastal_rasts[i], -8,-5)
+
+for (i in seq_along(coastal_rasts)) {
+  yr <- stringr::str_sub(coastal_rasts[i], -8, -5)
+  out_file <- sprintf("%s/output/slr_%s.tif", dir_prs_slr, yr)
   
-  if(file.exists(sprintf("%s/output/slr_%s.tif", dir_prs_slr, yr))){
-    
-    message("skipping")
-  }else{
-    
-    terra::rast(coastal_rasts[i]) %>%
-    terra::app(fun = neg_vals) %>% # set all negative values to 0
-    terra::app(fun = greater_vals, # set equal to one if greater than ref, otherwise scale
-         filename = sprintf("%s/output/slr_%s.tif", dir_prs_slr, yr), overwrite = TRUE) 
+  if (file.exists(out_file)) {
+    message("Skipping ", yr)
+    next
   }
+  
+  r <- try(terra::rast(coastal_rasts[i]), silent = TRUE)
+  
+  if (inherits(r, "try-error")) {
+    message("Failed to read raster: ", coastal_rasts[i])
+    next
+  }
+
+  r2 <- terra::app(r, fun = neg_vals)
+  terra::app(r2, fun = greater_vals, filename = out_file, overwrite = TRUE)
 }
+
 toc()
 # v2024 - 4259.81 sec elapsed
 ```

@@ -24,7 +24,7 @@ This script takes prepped non-industrial v2022 SAUP data which goes up to 2019 (
 
 ## Updates from previous assessment
 
-For v2023 and v2024 the Sea Around us Project (SAUP) data used in the ao_catch_prep_saup had not been updated, only the RAM data was updated for the FIS layers. Data files that were not newly updated and were stored in the repository were copied from the v2023 to v2024 folder for consistency. 
+For v2023, v2024, and v2025 the Sea Around us Project (SAUP) data used in the ao_catch_prep_saup had not been updated, only the RAM data was updated for the FIS layers. Data files that were not newly updated and were stored in the repository were copied from the v2023 to v2024 folder for consistency. 
 
 ***
 
@@ -81,8 +81,8 @@ source(here("workflow", "R", "common.R"))
 
 ```{r, eval = FALSE}
 #update these!! 
-version_year <- "v2024"
-previous_version_year <- "v2023"
+version_year <- "v2025"
+previous_version_year <- "v2024"
 
 fis_bbmsy <- read_csv(here::here("globalprep","fis", version_year, "output","fis_bbmsy.csv"))
 
@@ -141,7 +141,7 @@ c <- catch_AO %>%
 
 
 ## read in fisheries mean catch so we can use to gapfill missing regions
-fis_mean_catch <- read_csv(here::here("globalprep","fis", version_year, "int","mean_catch.csv")) %>% 
+fis_mean_catch <- read_csv(here::here("globalprep","fis", "v2024", "int","mean_catch.csv")) %>% 
   dplyr::mutate(stock_id_taxonkey = as.character(stock_id_taxonkey)) %>%
   dplyr::mutate(taxon_key = sub('.*_', '', stock_id_taxonkey)) %>%
   dplyr::mutate(stock_id = sub('_[^_]*$', '', stock_id_taxonkey)) %>%
@@ -298,7 +298,7 @@ compare_plot <- ggplot(data = compare) + geom_point(aes(x = old_score, y = score
 compare_plotly <- ggplotly(compare_plot, tooltip = c("text", "score", "old_score"))
 compare_plotly
 
-htmlwidgets::saveWidget(compare_plotly, here::here("globalprep","ao", version_year, "figs","v2023_v2024_compare_plot.html"))
+htmlwidgets::saveWidget(compare_plotly, here::here("globalprep","ao", version_year, "figs","v2024_v2025_compare_plot.html"))
 
 #look at the difference between this year and last
 new <- read_csv(here::here("globalprep","ao",version_year, "output","ao_nind_scores.csv")) %>%
@@ -319,9 +319,9 @@ diff_plot <- compare_diff %>%
           type = "scatter", mode = "lines") %>%
   layout(title = "AO Sustainability Score Percent Change by Region",
          xaxis = list(title = "Region ID"),
-         yaxis = list(title = "Percent change v2023 vs v2024"))
+         yaxis = list(title = "Percent change v2024 vs v2025"))
 diff_plot
-# saveWidget(diff_plot, here::here("globalprep","ao", version_year, "figs","ao_sust_percent_change.html"))
+saveWidget(diff_plot, here::here("globalprep","ao", version_year, "figs","ao_sust_percent_change.html"))
 
 # looking more into region 3, which had a large percent change in 2019
 compare_diff_rgn_3 <- new %>% 
@@ -337,7 +337,7 @@ rgn_3_plot <- compare_diff_rgn_3 %>%
          xaxis = list(title = "Year"),
          yaxis = list(title = "Percent change v2023 vs v2024"))
 rgn_3_plot
-# saveWidget(rgn_3_plot, here::here("globalprep","ao", version_year, "figs","rgn_3_percent_change.html"))
+saveWidget(rgn_3_plot, here::here("globalprep","ao", version_year, "figs","rgn_3_percent_change.html"))
 
 # plot of region 3's v2024 ao_sust score over time
 rgn_3_scores_plot <- compare_diff_rgn_3 %>%
@@ -361,7 +361,7 @@ rgn_3_oldscores_plot
 patch_rgn_3 <- subplot(rgn_3_scores_plot, rgn_3_oldscores_plot, nrows = 2, shareX = TRUE, titleX = TRUE, shareY = FALSE, titleY = TRUE)
 patch_rgn_3
 
-# saveWidget(patch_rgn_3, here::here("globalprep","ao", version_year, "figs","rgn_3_score_comparison.html"))
+saveWidget(patch_rgn_3, here::here("globalprep","ao", version_year, "figs","rgn_3_score_comparison.html"))
 ```
 
 ```{r, eval = FALSE}
