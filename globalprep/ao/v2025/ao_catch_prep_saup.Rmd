@@ -22,7 +22,7 @@ editor_options:
 
 This script takes the SAUP 2022 catch data and creates 1 data layer:
 
-1. An average non-industrial catch dataset used to weight B/Bmsy values in the fisheries model. For this dataset, the catch is assigned to FAO and OHI regions.
+1. An average non-industrial catch dataset used to weight B/Bmsy (biomass/biomass of maximum sustainable yield) values in the fisheries model. For this dataset, the catch is assigned to FAO and OHI regions.
 
 **IMPORTANT NOTE: the fisheries subgoal data preps will need to be run first before this can be completed. That is where the RAM stock status dataprep and the fisheries catch download occurs.**
 
@@ -74,7 +74,7 @@ library(readxl)
 source(here("workflow", "R", "common.R"))
 
 #update as needed
-version_year <- "v2024"
+version_year <- "v2025"
 raw_data_version_year <- "v2022"
 
 ## Paths for data in Mazu
