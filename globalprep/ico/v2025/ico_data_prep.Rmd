@@ -47,7 +47,7 @@ ICO trend is calculated in a similar manner, but weightings are assigned accordi
 
 # v2025 updates:
 
-The new v4 API has been introduced and the necessary revisions have been made.
+The new v4 API has been introduced and the necessary revisions have been made. The introduction of the new API made it difficult to tie subpopulations to specific regions.. see issue #351. 
 
 # v2024 updates:
 
