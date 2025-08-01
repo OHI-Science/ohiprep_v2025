@@ -47,7 +47,7 @@ ICO trend is calculated in a similar manner, but weightings are assigned accordi
 
 # v2025 updates:
 
-The new v4 API has been introduced and the necessary revisions have been made. The introduction of the new API made it difficult to tie subpopulations to specific regions.. see issue #351. 
+The new v4 API has been introduced and the necessary revisions have been made. The introduction of the new API made it difficult to tie subpopulations to specific regions, as there is no longer a way to query a list of countries for a species or subpopulation (see issue #351). However, there also may no longer be assessments associated with subpopulations. I emailed the IUCN to inquire further. The current methods don't include subpopulations in the final outputs, but the data didn't dramatically change between 2024 and 2025, so we went ahead with the score check. 
 
 # v2024 updates:
 
