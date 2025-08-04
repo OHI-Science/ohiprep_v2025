@@ -24,7 +24,7 @@ This script takes prepped non-industrial v2022 SAUP data which goes up to 2019 (
 
 ## Updates from previous assessment
 
-For v2023, v2024, and v2025 the Sea Around us Project (SAUP) data used in the ao_catch_prep_saup had not been updated, only the RAM data was updated for the FIS layers. Data files that were not newly updated and were stored in the repository were copied from the v2023 to v2024 folder for consistency. 
+For v2023 and v2024 the Sea Around us Project (SAUP) data used in the ao_catch_prep_saup had not been updated, only the RAM data was updated for the FIS layers. Data files that were not newly updated and were stored in the repository were copied from the v2023 to v2024 folder for consistency. 
 
 ***
 
@@ -86,6 +86,10 @@ previous_version_year <- "v2024"
 
 fis_bbmsy <- read_csv(here::here("globalprep","fis", version_year, "output","fis_bbmsy.csv"))
 
+fis_bbmsy <- fis_bbmsy %>%
+  filter(year <= 2019) %>%
+  filter(rgn_id <= 250)
+
 
 catch_AO <- read_csv(here::here("globalprep","ao", version_year, "intermediate","mean_catch.csv")) 
 
@@ -141,6 +145,7 @@ c <- catch_AO %>%
 
 
 ## read in fisheries mean catch so we can use to gapfill missing regions
+## NOTE v2025: There was no new data for mean_catch this year, so previous year is used
 fis_mean_catch <- read_csv(here::here("globalprep","fis", "v2024", "int","mean_catch.csv")) %>% 
   dplyr::mutate(stock_id_taxonkey = as.character(stock_id_taxonkey)) %>%
   dplyr::mutate(taxon_key = sub('.*_', '', stock_id_taxonkey)) %>%
@@ -175,15 +180,76 @@ gapfill_missing <- b %>%
   left_join(fis_mean_catch, by = c("rgn_id", "stock_id", "year")) %>%
   dplyr::select(rgn_id, stock_id, year, taxon_key, mean_catch = catch, bbmsy) 
 
+# NOTE v2025: Since the FAO Fish bbmsy data was updated this year, there are a few species that have not been included in years past. Let's check and see what they are!
+gapfill_NAs <- gapfill_missing %>%
+  filter(is.na(mean_catch) == TRUE)
+
+length(unique(gapfill_NAs$stock_id)) # There are 38 new species
+sort(unique(gapfill_NAs$stock_id)) 
+
+# # The new species that have been added are:
+
+# Clupea_harengus-27 (Atlantic Herring) 
+# Istiompax_indica-(51,57) (Sailfish)
+# Istiophorus_albicans-(27,48) (Sailfish)
+# Istiophorus_platypterus-51 (Sailfish) 
+# Katsuwonus_pelamis-(27,48,51) (Skipjack Tuna) 
+# Makaira_mazara-(51,57) (Blue Marlin)
+# Makaira_nigricans-(27,48,61,71,77) (Blue Marlin)
+# Pandalus_borealis-27 (Atlantic Shrimp)
+# Pollachius_virens-27 (Atlantic Pollock), 
+# Prionace_glauca-(61,71,77) (Greenland Halibut)
+# Tetrapturus_albidus-(27,37,48) (White Marlin)
+# Thunnus_alalunga-(27,48,51) (Albacore Tuna) 
+# Thunnus_albacares-(27,48) (Yellowfin Tuna)
+# Thunnus_maccoyii-(57,81) (Pacific Bluefin Tuna)
+# Thunnus_obesus-(27,48) (Bigeye Tuna)
+# Thunnus_thynnus-(27,48) (Atlantic Bluefin Tuna)
+# Xiphias_gladius-(27,48) (Broadbill Swordfish)
+
+# We will have to gapfill these values, or drop them
+
+# First, let us test gap filling them with average of Genus
+tuna_data <- c %>%
+  filter(grepl("Thunnus|Katsuwonus", stock_id))
+
+sailfish_data <- c %>%
+  filter(grepl("Istiompax|Istiophorus", stock_id))
+
+marlin_data <- c %>%
+  filter(grepl("Makaira|Tetrapturus",stock_id))
+
+herring_data <- c %>%
+  filter(grepl("Makaira|Tetrapturus",stock_id))
+
+pollock_data <- c %>%
+  filter(grepl("Makaira|Tetrapturus",stock_id))
+
+halibut_data <- c %>%
+  filter(grepl("Makaira|Tetrapturus",stock_id))
+
+```
+
+```{r}
+# Let's try finding our result without adding new species
+gapfill_no_na <- gapfill_missing %>%
+  filter(is.na(mean_catch) == FALSE)
+```
+
+
+
+
+```{r}
 fix_bouvet <- fis_mean_catch %>%
   filter(rgn_id == 105) %>%
   dplyr::select(rgn_id, stock_id, year, taxon_key, mean_catch = catch) %>%
   mutate(bbmsy = NA)
 
-data_fis_final <- rbind(data_fis, gapfill_missing, fix_bouvet)
+data_fis_final <- rbind(data_fis, gapfill_no_na, fix_bouvet)
 
 length(unique(data_fis_final$rgn_id)) # 220 regions ; perfect
 ```
+
 
 
 ```{r, eval = FALSE}
@@ -321,7 +387,7 @@ diff_plot <- compare_diff %>%
          xaxis = list(title = "Region ID"),
          yaxis = list(title = "Percent change v2024 vs v2025"))
 diff_plot
-saveWidget(diff_plot, here::here("globalprep","ao", version_year, "figs","ao_sust_percent_change.html"))
+# saveWidget(diff_plot, here::here("globalprep","ao", version_year, "figs","ao_sust_percent_change.html"))
 
 # looking more into region 3, which had a large percent change in 2019
 compare_diff_rgn_3 <- new %>% 
@@ -335,9 +401,9 @@ rgn_3_plot <- compare_diff_rgn_3 %>%
           type = "scatter", mode = "lines") %>%
   layout(title = "AO Sustainability Score Percent Change for Norfolk Island",
          xaxis = list(title = "Year"),
-         yaxis = list(title = "Percent change v2023 vs v2024"))
+         yaxis = list(title = "Percent change v2024 vs v2025"))
 rgn_3_plot
-saveWidget(rgn_3_plot, here::here("globalprep","ao", version_year, "figs","rgn_3_percent_change.html"))
+# saveWidget(rgn_3_plot, here::here("globalprep","ao", version_year, "figs","rgn_3_percent_change.html"))
 
 # plot of region 3's v2024 ao_sust score over time
 rgn_3_scores_plot <- compare_diff_rgn_3 %>%
@@ -345,7 +411,7 @@ rgn_3_scores_plot <- compare_diff_rgn_3 %>%
           type = "scatter", mode = "lines") %>%
   layout(title = "AO Sustainability Scores v2024 for Norfolk Island",
          xaxis = list(title = "Year"),
-         yaxis = list(title = "Scores over time v2024"))
+         yaxis = list(title = "Scores over time v2025"))
 rgn_3_scores_plot
 
 # plot of region 3's v2023 ao_sust score over time
@@ -354,14 +420,14 @@ rgn_3_oldscores_plot <- compare_diff_rgn_3 %>%
           type = "scatter", mode = "lines") %>%
   layout(title = "AO Sustainability Scores for Norfolk Island",
          xaxis = list(title = "Year"),
-         yaxis = list(title = "Scores over time v2023"))
+         yaxis = list(title = "Scores over time v2024"))
 rgn_3_oldscores_plot
 
 # patched interactive plot of v2023 and v2024 ao_sust scores
 patch_rgn_3 <- subplot(rgn_3_scores_plot, rgn_3_oldscores_plot, nrows = 2, shareX = TRUE, titleX = TRUE, shareY = FALSE, titleY = TRUE)
 patch_rgn_3
 
-saveWidget(patch_rgn_3, here::here("globalprep","ao", version_year, "figs","rgn_3_score_comparison.html"))
+# saveWidget(patch_rgn_3, here::here("globalprep","ao", version_year, "figs","rgn_3_score_comparison.html"))
 ```
 
 ```{r, eval = FALSE}
