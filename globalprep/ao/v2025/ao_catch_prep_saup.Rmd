@@ -129,8 +129,8 @@ output_df <- catch %>%
     dplyr::group_by(year, rgn_id, fao_rgn, TaxonName, CommonName, stock_id, TaxonKey) %>%
     dplyr::summarise(tons = sum(tons)) %>% 
     dplyr::ungroup()
-
-write_csv(output_df, file = here(dir_M,"git-annex","globalprep","ao","v2024","int","ao_stock_catch_by_rgn_taxa.csv"))
+# Note: We are writing the output to the server, so if folder does not exist, it must be created
+write_csv(output_df, file = here(dir_M,"git-annex","globalprep","ao","v2025","int","ao_stock_catch_by_rgn_taxa.csv")) # Update year
 
 test <- output_df %>%
   group_by(year) %>%
@@ -144,7 +144,7 @@ Take a look at catch data with missing ohi and fao regions in **stock_catch_by_r
 ```{r, eval=FALSE}
 region_data()
 
-df <- read_csv(here::here(dir_M,'git-annex', 'globalprep', 'ao','v2024','int','ao_stock_catch_by_rgn_taxa.csv')) %>%
+df <- read_csv(here::here(dir_M,'git-annex', 'globalprep', 'ao','v2025','int','ao_stock_catch_by_rgn_taxa.csv')) %>%
   left_join(rgns_eez)
 
 # they all have ohi or fao regions; however there are only 197 regions with artisanal or subsistence catch in the SAUP data.
@@ -165,7 +165,7 @@ Mean catch data is used to weight the B/Bmsy values in the fishery subgoal.
 
 ```{r mean catch, eval=F}
 
-file <- here::here(dir_M,'git-annex', 'globalprep', 'ao','v2024','int','ao_stock_catch_by_rgn_taxa.csv')
+file <- here::here(dir_M,'git-annex', 'globalprep', 'ao','v2025','int','ao_stock_catch_by_rgn_taxa.csv')
 
 catch <- read_csv(file) %>%
   rename(common = CommonName, fao_id = fao_rgn, species=TaxonName)
