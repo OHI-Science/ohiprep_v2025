@@ -141,11 +141,11 @@ raw_data_dir <- here::here(dir_M, "git-annex", "globalprep", "_raw_data")
 
 # UNWTO (UN World Tourism) raw data directory
 current_unwto_dir <- here(raw_data_dir, "UNWTO", current_data_dir)
-previous_current_unwto_dir <- here(raw_data_dir, "UNWTO", previous_data_dir)
+previous_unwto_dir <- here(raw_data_dir, "UNWTO", previous_data_dir)
 
 # Tourism and recreation directory
-current_tr_dir <- here("globalprep", "np", version_year)
-previous_tr_dir <- here("globalprep", "np", previous_vyear)
+current_tr_dir <- here("globalprep", "tr", version_year)
+previous_tr_dir <- here("globalprep", "tr", previous_vyear)
 ```
 
 # UNWTO Tourism Arrivals
@@ -161,15 +161,15 @@ unwto_arrivals_int <- read_xlsx(here(current_unwto_dir, "UN_Tourism_inbound_arri
                                         skip = 2) # number of rows to skip before reading in data. check how many by opening the sheet in excel
 
 # Clean arrivals data
-unwto_clean <- unwto_arrivals_int %>% 
-  select(country = `Basic data and indicators`, total_arrivals = `...6`, subdivision_1 = `...7`, subdivision_2 = `...8`, `1995`:`2022`) %>% # UPDATE MAX DATA YEAR WITH NEW DATA !!
+int_arrivals_clean <- unwto_arrivals_int %>% 
+  select(country = `Basic data and indicators`, total_arrivals = `...6`, subdivision_1 = `...7`, subdivision_2 = `...8`, `1995`:as.character(max(data_years))) %>% 
   
   # add country name to all data associated with that country
   fill(country, .direction = "down") %>% 
   pivot_longer(cols = c("total_arrivals", "subdivision_1", "subdivision_2"),
                values_to = "metric",
                values_drop_na = TRUE) %>% # make the metrics into one column
-  select(-name) %>% # get rid of the name column since it's reduncant
+  select(-name) %>% # get rid of the name column since it's redundant
   select(country, metric, everything()) %>% # reorder things
   
   # swap .. with NAs
@@ -178,45 +178,61 @@ unwto_clean <- unwto_arrivals_int %>%
                values_to = "tourism_arrivals_ct") %>% # make the years not columns anymore
   pivot_wider(names_from = metric, values_from = tourism_arrivals_ct) %>%
   
-  # rename metrics so easier to work with and fix types
+  # rename metrics so easier to work with and fix types and add a new column to fill with the new calculated values later
   mutate(overnights = as.numeric(`Overnights visitors (tourists)`), 
          same_day = as.numeric(`Same-day visitors (excursionists)`), 
          total_arrivals = as.numeric(`Total arrivals`),
          tourism_arrivals_ct = as.numeric(NA)) %>% 
   select(country, year, overnights, same_day, total_arrivals, tourism_arrivals_ct) %>% # select columns needed for analysis (cruise passengers seem to be included in same-day)
-  group_by(country, year) %>% # group by county and year
+  group_by(country, year) # group by county and year
   
+
+int_arrivals_gf <- int_arrivals_clean %>% 
   # Gapfill
   mutate(
     tourism_arrivals_ct = case_when(
       # if there is a value, dont gapfill
       !is.na(overnights) ~ overnights, 
-      # gapfill, when there is no data on overnights, fill with total_arrivals - same day
+      # gapfill when there is no data on overnights, fill with total_arrivals - same day
       is.na(overnights) & !is.na(same_day) & !is.na(total_arrivals) ~ total_arrivals - same_day,
       # otherwise, NA
       TRUE ~ tourism_arrivals_ct 
     ), 
-    # there were 0 situations like this in v2024
-    # total_arrivals = case_when(
-    #   !is.na(total_arrivals) ~ total_arrivals, 
-    #   is.na(total_arrivals) & !is.na(same_day) & !is.na(overnights) ~ overnights + same_day,
-    #   TRUE ~ total_arrivals
-    # )
+    # there were 0 situations like this in v2024 or v2025
+    total_arrivals = case_when(
+      !is.na(total_arrivals) ~ total_arrivals,
+      is.na(total_arrivals) & !is.na(same_day) & !is.na(overnights) ~ overnights + same_day,
+      TRUE ~ total_arrivals
+    )
   ) %>% 
-  # v2024: overnights has 1036 NAs out of 6021
-  # v2024: same_day has 3131 NAs out of 6021
-  # v2024: total_arrivals has 2363 NAs
-  
-  mutate(arrivals_method = ifelse(is.na(overnights) & !is.na(same_day) & !is.na(total_arrivals), "UNWTO - subtraction", NA)) %>%
-  mutate(arrivals_gapfilled = ifelse(arrivals_method == "UNWTO - subtraction", "gapfilled", NA)) %>% # prepare a "gapfilled" column to indicate "gapfilled" or NA
-  ungroup() %>%
-  
+  mutate(arrivals_method = ifelse(is.na(overnights) & !is.na(same_day) & !is.na(total_arrivals), "arrivals minus same day", NA),
+         arrivals_method = ifelse(is.na(total_arrivals) & !is.na(same_day) & !is.na(overnights), "overnights plus same day", arrivals_method)) %>%
+  mutate(arrivals_gapfilled = ifelse(arrivals_method == "arrivals minus same day", "gapfilled", NA),
+         arrivals_gapfilled = ifelse(arrivals_method == "overnights plus same day", "gapfilled", arrivals_gapfilled)) %>% # prepare a "gapfilled" column to indicate "gapfilled" or NA
+  ungroup()
+
+# ----- Quick data check -----
+# v2024: overnights has 1036 NAs out of 6021
+# v2024: same_day has 3131 NAs out of 6021
+# v2024: total_arrivals has 2363 NAs
+view(int_arrivals_gf)
+colSums(is.na(int_arrivals_gf))
+# v2025: 
+#          overnights            same_day 
+#                1131                3276 
+#      total_arrivals tourism_arrivals_ct 
+#                2612                1099 
+# Pretty similar to the v2024 numbers
+
+
+# Select desired columns for further processing
+int_arrivals_gf <- int_arrivals_gf %>% 
   # select only needed columns
-  select(country, year, tourism_arrivals_ct, total_arrivals, 
+  select(country, year, tourism_arrivals_ct, total_arrivals,
          arrivals_method, arrivals_gapfilled) %>%
-  mutate(country = str_to_title(country), 
+  mutate(country = str_to_title(country),
          tourism_arrivals_ct = round(as.numeric(tourism_arrivals_ct) * 1000),
-         total_arrivals = round(as.numeric(total_arrivals) * 1000)) # since the units were in thousands
+         total_arrivals = round(as.numeric(total_arrivals) * 1000)) # fix units
 ```
 
 
@@ -224,21 +240,21 @@ Now, run `ohicore::name_2_rgn()` so that we can move forward with OHI regions! E
 
 ```{r}
 # Run name_2_rgn() to ensure the UNWTO data has OHI region names
-unwto_clean_names_int <- name_2_rgn(df_in = unwto_clean, # do this just for Bonaire since it is the only region not matching above
+int_arrivals_rgn_names <- name_2_rgn(df_in = int_arrivals_gf, # do this just for Bonaire since it is the only region not matching above
                                         fld_name = 'country',
                                         # flds_unique = c('year'),
                                         keep_fld_name = TRUE) %>%
   dplyr::select(rgn_id, rgn_name, year, tourism_arrivals_ct, arrivals_method, arrivals_gapfilled) # v2024: not losing the USA!! Yay (compare to v2023).  Also, total_arrivals was dropped at this point because tourism_arrivals_ct has already been gapfilled using totals if same-day was present (Overnights = total - same-day), and it feels like if total was used to gapfill places that don't have any same-day data, it may be overinflating the arrivals for that region.  This can be revisited.
 
-length(unique(unwto_clean$country)) # 223 
+length(unique(int_arrivals_gf$country)) # 223 
 
 # ---- determine if there were any duplicates due to name_2_rgn ----
 
-colSums(is.na(unwto_clean_names_int)) # v2025: 861 NAs in tourism_arrivals_ct
-length(unwto_clean_names_int$tourism_arrivals_ct) # within 5012 observations for `tourism_arrivals_ct`
+colSums(is.na(int_arrivals_rgn_names)) # v2025: 861 NAs in tourism_arrivals_ct
+length(int_arrivals_rgn_names$tourism_arrivals_ct) # within 5012 observations for `tourism_arrivals_ct`
 
 # this shows rows that have at least one duplicate, including both the first and subsequent occurrences of each duplicated row. using the tidyverse allows us to see all instances of duplicated data, not just the second and subsequent occurrences (which is what just a duplicated() call would give you).
-duplicates_int <- unwto_clean_names_int %>% 
+duplicates_int <- int_arrivals_rgn_names %>% 
   group_by(rgn_id, rgn_name, year) %>% 
   filter(n() > 1) %>%
   ungroup()
@@ -261,7 +277,7 @@ sum_with_na <- function(x) {
 }
 
 # use the function within a summarize to aggregate for all regions that have duplicate years
-international_clean_names_agg <- unwto_clean_names_int %>% 
+int_arrivals_agg <- int_arrivals_rgn_names %>% 
   group_by(rgn_id, rgn_name, year) %>% 
   summarize(
     tourism_arrivals_ct = sum_with_na(tourism_arrivals_ct), # put each column in the function, so no NAs are lost
@@ -270,53 +286,57 @@ international_clean_names_agg <- unwto_clean_names_int %>%
     .groups = "drop" # to ungroup, fixes warning from summarise to use reframe (when it is not applicable here because we want to reduce each group down to a single row)
   ) %>% 
   mutate(
-    arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "UNWTO", arrivals_method) # so that if there is data from UNWTO that was not gapfilled, the arrivals_method is accurate
+    arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "UNWTO", arrivals_method), # so that if there is data from UNWTO that was not gapfilled, the arrivals_method is accurate
+    year = as.numeric(year)
   )
 
 # double check to test
-duplicates_int_2 <- international_clean_names_agg %>%
+duplicates_int_2 <- int_arrivals_agg %>%
   group_by(rgn_id, year) %>% 
   filter(n() > 1) %>%
   ungroup()
-unique(duplicates_int_2$rgn_name) # v2024: 0! yay -- and China/other duplicates are preserved here!!
+unique(duplicates_int_2$rgn_name) # v2025: 0! yay -- and China/other duplicates are preserved here!!
 
 # check out things so far
-summary(international_clean_names_agg) 
+summary(int_arrivals_agg) 
 # v2023: 828 NAs in arrivals (before filtering the years down and gapfilling), 1708 in `total_arrivals`
 # v2024: 757 NAs in `tourism_arrivals_ct` (before filtering the years down and gapfilling)
 # v2025: 825 NAs in `tourism_arrivals_ct` (before filtering the years down and gapfilling)
 
-
-international_clean_names_agg <- international_clean_names_agg %>% # year is a character, let's fix that quickly
-  mutate(year = as.numeric(year))
-
 # see how many regions have values
-check_international <- international_clean_names_agg %>% 
+check_international <- int_arrivals_agg %>% 
   filter(!is.na(tourism_arrivals_ct))
 length(unique(check_international$rgn_id)) # v2025: 161 regions present!
+
+rm(duplicates_int, duplicates_int_2, check_international)
 ```
 
 ### Filter years and regions without enough data
 
 ```{r}
-# filter international data for usable years to be used in the future. Ensure that it is between 2005 - 2021, and that there are at least three raw data values!
-international_arrivals_rgns <- international_clean_names_agg %>% 
-  filter(year %in% data_years) %>% 
+# filter international data for usable years to be used in the future
+int_arrivals_counts <- int_arrivals_agg %>% 
+  filter(year %in% data_years) %>% # This should be 2005 to whatever the max data year is for your assessment 
   group_by(rgn_id) %>% 
   summarize(count_values = sum(!is.na(tourism_arrivals_ct))) %>% # for each region, how many values in tourism_arrivals_ct did it have
-  filter(count_values >= 3) # keep only the regions that have greater than or equal to three values
+  filter(count_values >= 3) %>% # keep only the regions that have greater than or equal to three values
+  ungroup()
 
-length(unique(international_arrivals_rgns$rgn_id)) # v2025: 156 regions!
+length(unique(int_arrivals_counts$rgn_id)) # v2025: 156 regions
 
-international_arrivals <- international_clean_names_agg %>% 
-  filter(rgn_id %in% international_arrivals_rgns$rgn_id) %>% 
+# Filter down final data frame to desired regions and years
+international_arrivals <- int_arrivals_agg %>% 
+  filter(rgn_id %in% int_arrivals_counts$rgn_id) %>% 
   filter(year %in% data_years) # filter for regions we want in the right timeframe
 
-length(unique(international_arrivals$rgn_id)) # v2025: 156 regions! great
+length(unique(international_arrivals$rgn_id)) # 156, matches above
 
 colSums(is.na(international_arrivals)) # 263 NAs in tourism_arrivals_ct
 nrow(international_arrivals) # 2808
 # Only ~9% of the data to gapfill 
+
+# Export intermediate df for future use
+write_csv(international_arrivals, here(current_tr_dir, "int", "international_arrivals_gf.csv"))
 ```
 
 ## Domestic Inbound Tourism Accomodation and Trips - UNWTO
@@ -334,7 +354,7 @@ unwto_arrivals_dom_acc <- read_xlsx(here(current_unwto_dir, "UN_Tourism_inbound_
 
 # clean up the raw xlsx! We want to have the country, the source (Total:Guests, Total:Overnights, Hotel:Guests, Hotel:Overnights), then the values
 unwto_clean_dom <- unwto_arrivals_dom_acc %>% 
-  select(country = `Basic data and indicators`, source_arrivals = `...6`, subdivision_1 = `...7`, subdivision_2 = `...8`, `1995`:`2022`) %>% # UPDATE MAX DATA YEAR WITH NEW DATA !!
+  select(country = `Basic data and indicators`, source_arrivals = `...6`, subdivision_1 = `...7`, subdivision_2 = `...8`, `1995`:as.character(max(data_years))) %>% 
   fill(country, .direction = "down") %>% # add country name to all data associated with that country
   fill(source_arrivals, .direction = "down") %>% 
   filter(subdivision_1 %in% "Overnights" | subdivision_1 %in% "Guests") %>% 
@@ -363,42 +383,20 @@ Now let's take a look at the raw data for Accomodations!
 
 ```{r}
 # see how many NAs are within the raw data for Total:Guests
+colSums(is.na(dom_acc_guests))
 summary(dom_acc_guests)
-                                      
- #  total_guests      total_overnights
- # Min.   :     1.0   Min.   :     2  
- # 1st Qu.:   753.8   1st Qu.:  1532  
- # Median :  5226.0   Median : 13165  
- # Mean   : 19478.2   Mean   : 53824  
- # 3rd Qu.: 15603.5   3rd Qu.: 39173  
- # Max.   :371590.0   Max.   :576370  
- # NA's   :4947       NA's   :4614    
- #  hotel_guests      hotel_overnights  
- # Min.   :     0.2   Min.   :     0.2  
- # 1st Qu.:   160.0   1st Qu.:   412.2  
- # Median :  1326.0   Median :  2981.5  
- # Mean   : 11091.4   Mean   : 21297.9  
- # 3rd Qu.:  7737.2   3rd Qu.: 13999.5  
- # Max.   :342883.0   Max.   :440121.0  
- # NA's   :4129       NA's   :3835 
+# v2024                                
+#  total_guests      total_overnights
+# NA's   :4947       NA's   :4614    
+#  hotel_guests      hotel_overnights  
+# NA's   :4129       NA's   :3835 
 
 # v2025
-# total_guests     total_overnights  
-#  Min.   :    2.6   Min.   :    23.1  
-#  1st Qu.:  441.0   1st Qu.:  1761.0  
-#  Median : 1532.0   Median :  6682.5  
-#  Mean   : 6012.3   Mean   : 25975.7  
-#  3rd Qu.: 5560.0   3rd Qu.: 19467.5  
-#  Max.   :72370.0   Max.   :355059.0  
-#  NA's   :4539      NA's   :4108      
-#   hotel_guests      hotel_overnights  
-#  Min.   :     0.3   Min.   :     0.1  
-#  1st Qu.:   191.0   1st Qu.:   655.0  
-#  Median :   785.0   Median :  2646.0  
-#  Mean   :  4187.6   Mean   : 13713.0  
-#  3rd Qu.:  3389.0   3rd Qu.: 10139.0  
-#  Max.   :116266.0   Max.   :330080.0  
-#  NA's   :3281       NA's   :3087 
+#        total_guests    total_overnights 
+#                4539                4108 
+#        hotel_guests    hotel_overnights 
+#                3281                3087 
+ 
 
 length(unique(dom_acc_guests$country)) # 223, which includes regions that have all NA values (UNWTO always has datasets with those 223 countries)
 
@@ -410,16 +408,48 @@ length(unique(dom_acc_guests_noNA$country)) # 57 (83 now) unique countries, not 
 summary(lm(total_guests ~ as.numeric(year), data = dom_acc_guests)) # significant model and slope, but very low Multiple R-squared:  0.01165.  Not the best...
 
 #### come back to this!! maybe we can add one more raw gapfilling using this data!
-summary(lm(total_guests ~ hotel_overnights, data = dom_acc_guests)) # p-value: < 0.00000000000000022, multiple R squared is 0.9013, not bad!! slope is significant, 0.692837.
+summary(lm(total_guests ~ hotel_overnights, data = dom_acc_guests)) # p-value: < 0.00000000000000022, multiple R squared is 0.7702, not bad!! slope is significant, 0.692837.
 
 mod <- lm(total_guests ~ hotel_overnights, data = dom_acc_guests)
+summary(mod)
 
 plot(dom_acc_guests$hotel_overnights, dom_acc_guests$total_guests)
-abline(mod, col="red") # not a linear fit, would be better to do nonlinear, but this is good for now. we can use the slope and intercept from this model to estimate total_guests
+abline(log_mod, col="red") # not a linear fit, would be better to do nonlinear, but this is good for now. we can use the slope and intercept from this model to estimate total_guests
 
-ggplot(dom_acc_guests, aes(x = total_guests, y = hotel_overnights)) +
+log_mod <- lm(log(total_guests) ~ log(hotel_overnights), data = dom_acc_guests)
+
+plot(log(dom_acc_guests$hotel_overnights), log(dom_acc_guests$total_guests))
+abline(log_mod, col="red") 
+# Log transforming the data improves the fit here
+summary(log_mod)
+# Significance of the intercept drops from the 0th sig level to the 0.05 sig level.
+# But. R2 goes from 0.77 to 0.87
+mod$coefficients['hotel_overnights']
+log_mod$coefficients['(Intercept)']
+log_mod$coefficients['log(hotel_overnights)']
+
+
+### ggplot version of the above plots
+# Regular plot
+ggplot(dom_acc_guests, aes(y = total_guests, x = hotel_overnights)) +
   geom_point(alpha = 0.5) +  # Add some transparency to points
-  geom_abline(intercept = 0, slope = 1, color = "red", linetype = "dashed") +
+  geom_abline(intercept = mod$coefficients['(Intercept)'], slope = mod$coefficients['hotel_overnights']
+, color = "red", linetype = "dashed") +
+  labs(title = "Domestic Accomodations: total guests and hotel overnights",
+       x = "Hotel overnights",
+       y = "Total guests") +
+  theme_minimal()
+log_mod$coefficients
+
+# Log plot
+ggplot(dom_acc_guests, aes(y = log(total_guests), x = log(hotel_overnights))) +
+  geom_point(alpha = 0.5) +  
+  geom_abline(intercept = log_mod$coefficients['(Intercept)'], 
+              slope = log_mod$coefficients['log(hotel_overnights)'], 
+              color = "red", linetype = "dashed") +
+  labs(title = "Domestic Accomodations: log-transformed total guests and hotel overnights",
+       x = "log(Hotel overnights)",
+       y = "log(Total guests)") +
   theme_minimal()
 ```
 
@@ -499,7 +529,7 @@ unwto_arrivals_dom_trips <- read_xlsx(here(current_unwto_dir, "UN_Tourism_domest
 
 # clean up the Trips data!
 unwto_dom_trips_clean <- unwto_arrivals_dom_trips %>% 
-  select(country = `Basic data and indicators`, total_trips = `...6`, subdivision_1 = `...7`, subdivision_2 = `...8`, `1995`:`2022`) %>% # UPDATE MAX DATA YEAR WITH NEW DATA !!
+  select(country = `Basic data and indicators`, total_trips = `...6`, subdivision_1 = `...7`, subdivision_2 = `...8`, `1995`:as.character(max(data_years))) %>% 
   fill(country, .direction = "down") %>% # add country name to all data associated with that country
   pivot_longer(cols = c("total_trips", "subdivision_1", "subdivision_2"),
                values_to = "metric",
@@ -610,7 +640,7 @@ nrow(dom_trips_agg) # 4732
 
 ### Raw Gapfilling
 
-#### Accommodations:Hotel: Guests used to fill in data for Accommodations:Total:Guests
+#### Accommodations: Hotel Guests used to fill in data for Accommodations: Total Guests
 
 Hotel guests are registered individuals that stayed overnight at a hotel or similar establishment. Total guests includes dwellings or places one might stay in that region that is not considered a hotel, but would still be associated with tourism. Let's use hotel_guests to estimate total_guests.
 
