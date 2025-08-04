@@ -120,7 +120,7 @@ iucn_sid,sciname,subpop,cat
 135352,Oncorhynchus nerka NASS-SKEENA ESTUARY: North of Nass,NASS-SKEENA ESTUARY: North of Nass,VU
 135324,Oncorhynchus nerka NOATAK RIVER,NOATAK RIVER,DD
 135327,Oncorhynchus nerka OKHOTSK-OYASHIO MIXING,OKHOTSK-OYASHIO MIXING,DD
-201499,Oncorhynchus nerka OUTER ISLANDS: NW Vancouver Island,OUTER ISLANDS: NW Vancouver Island,NA
+201499,Oncorhynchus nerka OUTER ISLANDS: NW Vancouver Island,OUTER ISLANDS: NW Vancouver Island,DD
 201500,Oncorhynchus nerka OUTER ISLANDS: W Hadai Gwaii,OUTER ISLANDS: W Hadai Gwaii,LC
 135345,Oncorhynchus nerka PENZHINA INTRACOASTAL,PENZHINA INTRACOASTAL,DD
 135334,Oncorhynchus nerka PRINCE WILLIAM SOUND,PRINCE WILLIAM SOUND,LC
@@ -133,8 +133,8 @@ iucn_sid,sciname,subpop,cat
 135323,Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Schoen Ck/Davie R,PUGET SOUND-GEORGIA BASIN: Schoen Ck/Davie R,DD
 135330,"Oncorhynchus nerka PUGET SOUND-GEORGIA BASIN: Village Bay Ck, Sakinaw","PUGET SOUND-GEORGIA BASIN: Village Bay Ck, Sakinaw",CR
 135302,Oncorhynchus nerka SEA OF OKHOTSK CURRENT (COLD),SEA OF OKHOTSK CURRENT (COLD),DD
-135311,Oncorhynchus nerka SEASONAL UPWELLING CLINE,SEASONAL UPWELLING CLINE,LC
-135359,Oncorhynchus nerka SHELIKHOV GULF (COLD),SHELIKHOV GULF (COLD),DD
+135311,Oncorhynchus nerka SEASONAL UPWELLING CLINE,SEASONAL UPWELLING CLINE,NA
+135359,Oncorhynchus nerka SHELIKHOV GULF (COLD),SHELIKHOV GULF (COLD),NA
 201432,"Oncorhynchus nerka SKEENA R, LOWER: Alastair","SKEENA R, LOWER: Alastair",EN
 201434,"Oncorhynchus nerka SKEENA R, LOWER: Kitsumkalum","SKEENA R, LOWER: Kitsumkalum",LC
 135353,"Oncorhynchus nerka SKEENA R, LOWER: McDonnel Lk/Zymoetz R","SKEENA R, LOWER: McDonnel Lk/Zymoetz R",DD
@@ -241,8 +241,8 @@ iucn_sid,sciname,subpop,cat
 83652278,Caretta caretta North Pacific subpopulation,North Pacific subpopulation,LC
 84131194,Caretta caretta North West Atlantic subpopulation,North West Atlantic subpopulation,LC
 84127873,Caretta caretta North West Indian Ocean subpopulation,North West Indian Ocean subpopulation,CR
-84189617,Caretta caretta South East Indian Ocean subpopulation,South East Indian Ocean subpopulation,NA
-84156809,Caretta caretta South Pacific subpopulation,South Pacific subpopulation,NA
+84189617,Caretta caretta South East Indian Ocean subpopulation,South East Indian Ocean subpopulation,NT
+84156809,Caretta caretta South Pacific subpopulation,South Pacific subpopulation,CR
 84191235,Caretta caretta South West Atlantic subpopulation,South West Atlantic subpopulation,LC
 84199475,Caretta caretta South West Indian Ocean subpopulation,South West Indian Ocean subpopulation,NT
 6494,Dermochelys coriacea,NA,VU
