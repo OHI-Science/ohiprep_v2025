@@ -107,7 +107,6 @@ librarian::shelf(
   countrycode,
   pdftools,
   plotly,
-  tictoc,
 )
 
 # ---- sources! ----
@@ -121,6 +120,7 @@ regions_shape() # returns spatial shape object named 'regions' which includes la
 
 # ---- set year and file path info ----
 current_year <- 2025 # Update this in the future!!
+previous_year <- 2024
 
 version_year <- paste0("v",current_year)
 previous_vyear <- paste0("v", current_year - 1)
@@ -128,7 +128,7 @@ previous_vyear <- paste0("v", current_year - 1)
 current_data_dir <- paste0("d", current_year)
 previous_data_dir <- paste0("d", (current_year - 1))
 
-data_years <- 2005:2022 # update with latest data year
+data_years <- 2005:2022 # update with latest data year (probably just add 1)
 
 # ---- data directories ----
 
@@ -306,7 +306,6 @@ length(unique(check_international$rgn_id)) # v2025: 161 regions present!
 rm(duplicates_int, duplicates_int_2, check_international)
 ```
 
-### Filter years and regions without enough data
 
 ```{r}
 # filter international data for usable years to be used in the future
@@ -378,7 +377,6 @@ Now let's take a look at the raw data for Accomodations!
 ```{r}
 # see how many NAs are within the raw data for Total:Guests
 colSums(is.na(dom_acc_guests))
-summary(dom_acc_guests)
 # v2024                                
 #  total_guests      total_overnights
 # NA's   :4947       NA's   :4614    
@@ -394,53 +392,11 @@ summary(dom_acc_guests)
 
 length(unique(dom_acc_guests$country)) # 223, which includes regions that have all NA values (UNWTO always has datasets with those 223 countries)
 
+# remove NAs to see how many regions have total_guests values
 dom_acc_guests_noNA <- dom_acc_guests %>% 
-  filter(!is.na(total_guests)) # remove NAs to see how many regions have total_guests values
+  filter(!is.na(total_guests)) 
 
-length(unique(dom_acc_guests_noNA$country)) # 57 (83 now) unique countries, not that many. let's move on to raw gapfilling and see if we can increase those numbers using other columns.
-
-summary(lm(total_guests ~ as.numeric(year), data = dom_acc_guests)) # significant model and slope, but very low Multiple R-squared:  0.01165.  Not the best...
-
-#### come back to this!! maybe we can add one more raw gapfilling using this data!
-summary(lm(total_guests ~ hotel_overnights, data = dom_acc_guests)) # p-value: < 0.00000000000000022, multiple R squared is 0.7702, not bad!! slope is significant, 0.692837.
-
-mod <- lm(total_guests ~ hotel_overnights, data = dom_acc_guests)
-summary(mod)
-
-plot(dom_acc_guests$hotel_overnights, dom_acc_guests$total_guests)
-abline(log_mod, col="red") # not a linear fit, would be better to do nonlinear, but this is good for now. we can use the slope and intercept from this model to estimate total_guests
-
-log_mod <- lm(log(total_guests) ~ log(hotel_overnights), data = dom_acc_guests)
-
-plot(log(dom_acc_guests$hotel_overnights), log(dom_acc_guests$total_guests))
-abline(log_mod, col="red") 
-# Log transforming the data improves the fit here
-summary(log_mod)
-# Significance of the intercept drops from the 0th sig level to the 0.05 sig level.
-# But, R2 goes from 0.77 to 0.87
-
-### ggplot version of the above plots
-# Regular plot
-ggplot(dom_acc_guests, aes(y = total_guests, x = hotel_overnights)) +
-  geom_point(alpha = 0.5) +  # Add some transparency to points
-  geom_abline(intercept = mod$coefficients['(Intercept)'], slope = mod$coefficients['hotel_overnights']
-, color = "red", linetype = "dashed") +
-  labs(title = "Domestic Accomodations: total guests and hotel overnights",
-       x = "Hotel overnights",
-       y = "Total guests") +
-  theme_minimal()
-log_mod$coefficients
-
-# Log plot
-ggplot(dom_acc_guests, aes(y = log(total_guests), x = log(hotel_overnights))) +
-  geom_point(alpha = 0.5) +  
-  geom_abline(intercept = log_mod$coefficients['(Intercept)'], 
-              slope = log_mod$coefficients['log(hotel_overnights)'], 
-              color = "red", linetype = "dashed") +
-  labs(title = "Domestic Accomodations: log-transformed total guests and hotel overnights",
-       x = "log(Hotel overnights)",
-       y = "log(Total guests)") +
-  theme_minimal()
+length(unique(dom_acc_guests_noNA$country)) # 83 unique countries
 ```
 
 So, it looks like there are about 4947 NAs within the Total:Guests column. However, we want to preserve guests/individuals as the unit (rather than overnights), so in the Raw Gapfilling section, let's see if we can gapfill with either other columns (hotel_guests) or the "Trips" data.
@@ -542,6 +498,7 @@ unwto_dom_trips_clean <- unwto_arrivals_dom_trips %>%
   select(country, year, trips_overnights, trips_same_day, trips_total) # select only the columns we will be working with
 ```
 
+
 ```{r}
 # see how many NAs are within the raw data for Trips:Overnights
 colSums(is.na(unwto_dom_trips_clean))
@@ -635,6 +592,8 @@ Hotel guests are registered individuals that stayed overnight at a hotel or simi
 # Read in the data we cleaned earlier
 dom_acc_guests_agg <- read_csv(here(current_tr_dir, "int", "domestic_accommodations_int.csv"))
 
+colSums(is.na(dom_acc_guests_agg))
+
 # ------- total_guests ~ hotel_guests ---------
 mod1 <- lm(total_guests ~ hotel_guests, data = dom_acc_guests_agg)
 summary(mod1)
@@ -647,15 +606,15 @@ summary(mod1)
 # total_guests = 426.79148 + 1.22071*hotel_guests
 
 # plot the data to compare
-ggplot(dom_acc_guests_agg, aes(x = hotel_guests, y = total_guests)) +
+mod_plot1 <- ggplot(dom_acc_guests_agg, aes(x = hotel_guests, y = total_guests)) +
   geom_point(alpha = 0.5) + 
   geom_abline(intercept = mod1$coefficients[1], 
               slope = mod1$coefficients[2], 
               color = "red", linetype = "dashed") +
   theme_minimal() + 
-  labs(title = "Hotel:Guests vs Total:Guests within Accommodation",
+  labs(title = "Hotel Guests vs Total Guests, Accomodations data",
        x = "Hotel Guests",
-       y = "Total Guests") 
+       y = "Total Guests");ggplotly(mod_plot1) 
 
 # log scale
 ggplot(dom_acc_guests_agg, aes(x = log(hotel_guests + 1), y = log(total_guests + 1))) +
@@ -704,10 +663,6 @@ Let's move on to gapfilling. Since it is slightly more than 1, let's use the slo
 # ------- find coefficients for gapfilling using hotel_guests when total_guests = NA ------------------
 # reminder: total_guests = 4014.424577 + 1.136106*hotel_guests
 # total_guests = 426.79148 + 1.22071*hotel_guests
-
-
-plot(dom_acc_guests_agg$hotel_guests, dom_acc_guests_agg$total_guests)
-abline(mod1, col="red") # looks pretty good! let's move forward using this mode that we explored in the last chunk.
 
 # will need to gapfill these slopes and intercepts for regions that have hotel_guests data but no total_guests data. join with georegions, group by r2, and later r1 and take the mean for those regions. Otherwise, use regional level.
 georegions <- ohicore::georegions %>% 
@@ -778,11 +733,14 @@ dom_acc_guests_gf1 <- dom_acc_guests_agg %>%
 ```{r}
 # take a look at how that changed the number of NAs after our first dom gf step:
 summary(dom_acc_guests_gf1) # now, `tourism_arrivals_ct` has 2419 NAs, versus 3454 NAs in `total_guests` from the raw clean accommodation data
+colSums(is.na(dom_acc_guests_gf1))
 
 dom_acc_guests_gf1_noNA <- dom_acc_guests_gf1 %>% 
   filter(!is.na(tourism_arrivals_ct)) # remove NAs to see how many regions have total_guests values
 
 length(unique(dom_acc_guests_gf1_noNA$rgn_name)) # we now have 111 unique countries, thats okay. Let's move on and see if we can gapfill further.
+
+# write_csv(dom_acc_guests_gf1, here(current_tr_dir, "int", "dom_acc_guest_gf1.csv"))
 ```
 
 ## Trips:Overnights used to fill in data for Accommodations:Total:Guests
@@ -807,9 +765,9 @@ summary(mod2)
 
 # plot the data to compare
 ggplot(dom_acc_trips_join, aes(x = total_guests, y = trips_overnights)) +
-  geom_point(alpha = 0.5) +  # Add some transparency to points
+  geom_point(alpha = 0.5) +  
   geom_abline(intercept = 0, slope = 1, color = "red", linetype = "dashed") +
-  theme_minimal() +  # Use a minimal theme
+  theme_minimal() + 
   labs(title = "Accomodation:Total:Guests vs Trips:Overnight",
        x = "Trips Overnight Visitors (from Trips)",
        y = "Total Guests (from Accomodation)") # does not look that bad, the slope is slightly less than 1
@@ -843,6 +801,7 @@ sd(clean_dom_acc_trips_join$trips_overnights) # 73703.34 guests, larger standard
 # go ahead and do raw gapfilling in the next chunk using this data.
 ```
 
+The above analysis has shown that there's not a strong enough relationship to use a linear model to gapfill here. We'll instead gapfill with the raw values. 
 Let's gf!
 
 ```{r}
@@ -1610,9 +1569,9 @@ Now, lets bring in the $$km^2$$ of coastal area for all OHI regions by aggregati
 ```{r, eval=FALSE}
 # ------- coastal area data -----------
 # read in area of coastline data
-inland_filepath <- here::here("globalprep", "lsp", version_year, "int", "area_protected_1km.csv")
+inland_filepath <- here::here("globalprep", "lsp", version_year, "int", "rgn_area_inland1km.csv")
 inland_data <- read_csv(inland_filepath)
-offshore_filepath <- here::here("globalprep", "lsp", version_year, "int", "area_protected_3nm.csv")
+offshore_filepath <- here::here("globalprep", "lsp", version_year, "int", "rgn_area_offshore3nm.csv")
 offshore_data <- read_csv(offshore_filepath)
 
 # get combined value of inland and offshore for each ohi region
@@ -2039,11 +1998,29 @@ colnames(old_tr)
 colSums(is.na(new_tr)) # 133 NAs
 colSums(is.na(old_tr)) # 133 NAs
 
+current_data_year <- max(new_tr$year)
+current_data_year
+previous_data_year <- max(old_tr$year)
+previous_data_year
+
+rgn_name <- rgns_eez %>% 
+  select(rgn_name, rgn_id)
+
 comb_tr <- new_tr %>% 
   rename(new_S_score = S_score) %>% 
-  left_join(old_tr, by = join_by(rgn_id, year))
+  left_join(old_tr, by = join_by(rgn_id, year)) %>% 
+  left_join(rgn_name, by = join_by(rgn_id))
+
 
 ggplot(comb_tr, aes(x = S_score, y = new_S_score)) +
   geom_point()
+
+comp_plot1 <- ggplot() + 
+  geom_jitter(data = filter(comb_tr, year == previous_data_year), aes(x = S_score, y = new_S_score, text = paste("Year:", year, "<br>Region:", rgn_name)), alpha = 0.7) +
+  labs(x = paste("Previous Value", previous_data_year),
+       y = paste("Current Value", previous_data_year),
+       title = paste("Sustainable tourism and recreation", previous_data_year, "Data", previous_year, "Assessment vs.", previous_data_year, "Data", current_year, "assessment")) +
+  geom_abline(slope = 1, intercept = 0, col = "red") +
+  theme_bw();ggplotly(comp_plot1)
 ```
 
