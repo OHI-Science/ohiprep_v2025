@@ -403,7 +403,6 @@ extent <- data %>%
   dplyr::select(rgn_id, habitat, year, km2)
 
 write.csv(extent, "globalprep/hab_seaice/v2025/output/hab_ice_extent_eez.csv", row.names = FALSE) # save sea ice extent data
-
 ```
 
 ## Data Checks
