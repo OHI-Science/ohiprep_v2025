@@ -11,8 +11,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 5,New Caledonia,2017,UNWTO,NA
 5,New Caledonia,2018,UNWTO,NA
 5,New Caledonia,2019,UNWTO,NA
+5,NA,2020,2020:2022 gapfill,gapfilled
 5,New Caledonia,2020,UNWTO,NA
+5,NA,2021,2020:2022 gapfill,gapfilled
 5,New Caledonia,2021,UNWTO,NA
+5,NA,2022,2020:2022 gapfill,gapfilled
 5,New Caledonia,2022,UNWTO,NA
 6,Vanuatu,2008,UNWTO,NA
 6,Vanuatu,2009,UNWTO,NA
@@ -26,8 +29,9 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 6,Vanuatu,2017,UNWTO,NA
 6,Vanuatu,2018,UNWTO,NA
 6,Vanuatu,2019,UNWTO,NA
+6,NA,2020,2020:2022 gapfill,gapfilled
 6,Vanuatu,2020,UNWTO,NA
-6,Vanuatu,2021,UNWTO - 2020:2022 gapfill method,gapfilled
+6,NA,2021,2020:2022 gapfill,gapfilled
 6,Vanuatu,2022,UNWTO,NA
 7,Solomon Islands,2008,UNWTO,NA
 7,Solomon Islands,2009,UNWTO,NA
@@ -41,9 +45,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 7,Solomon Islands,2017,UNWTO,NA
 7,Solomon Islands,2018,UNWTO,NA
 7,Solomon Islands,2019,UNWTO,NA
+7,NA,2020,2020:2022 gapfill,gapfilled
 7,Solomon Islands,2020,UNWTO,NA
+7,NA,2021,2020:2022 gapfill,gapfilled
 7,Solomon Islands,2021,UNWTO,NA
-7,Solomon Islands,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+7,NA,2022,2020:2022 gapfill,gapfilled
 8,Palau,2008,UNWTO,NA
 8,Palau,2009,UNWTO,NA
 8,Palau,2010,UNWTO,NA
@@ -56,9 +62,10 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 8,Palau,2017,UNWTO,NA
 8,Palau,2018,UNWTO,NA
 8,Palau,2019,UNWTO,NA
+8,NA,2020,2020:2022 gapfill,gapfilled
 8,Palau,2020,UNWTO,NA
-8,Palau,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-8,Palau,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+8,NA,2021,2020:2022 gapfill,gapfilled
+8,NA,2022,NA,NA
 9,Micronesia,2008,UNWTO,NA
 9,Micronesia,2009,UNWTO,NA
 9,Micronesia,2010,UNWTO,NA
@@ -68,27 +75,29 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 9,Micronesia,2014,UNWTO,NA
 9,Micronesia,2015,UNWTO,NA
 9,Micronesia,2016,UNWTO,NA
-9,Micronesia,2017,UNWTO - nearby year,gapfilled
+9,Micronesia,2017,Interpolation,gapfilled
 9,Micronesia,2018,UNWTO,NA
 9,Micronesia,2019,UNWTO,NA
-9,Micronesia,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-9,Micronesia,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-9,Micronesia,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+9,NA,2020,2020:2022 gapfill,gapfilled
+9,NA,2021,NA,NA
+9,NA,2022,NA,NA
 11,Marshall Islands,2008,UNWTO,NA
 11,Marshall Islands,2009,UNWTO,NA
 11,Marshall Islands,2010,UNWTO,NA
 11,Marshall Islands,2011,UNWTO,NA
 11,Marshall Islands,2012,UNWTO,NA
-11,Marshall Islands,2013,UNWTO - nearby year,gapfilled
+11,Marshall Islands,2013,Interpolation,gapfilled
 11,Marshall Islands,2014,UNWTO,NA
 11,Marshall Islands,2015,UNWTO,NA
 11,Marshall Islands,2016,UNWTO,NA
 11,Marshall Islands,2017,UNWTO,NA
 11,Marshall Islands,2018,UNWTO,NA
 11,Marshall Islands,2019,UNWTO,NA
+11,NA,2020,2020:2022 gapfill,gapfilled
 11,Marshall Islands,2020,UNWTO,NA
+11,NA,2021,2020:2022 gapfill,gapfilled
 11,Marshall Islands,2021,UNWTO,NA
-11,Marshall Islands,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+11,NA,2022,2020:2022 gapfill,gapfilled
 13,Northern Mariana Islands and Guam,2008,UNWTO,NA
 13,Northern Mariana Islands and Guam,2009,UNWTO,NA
 13,Northern Mariana Islands and Guam,2010,UNWTO,NA
@@ -101,8 +110,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 13,Northern Mariana Islands and Guam,2017,UNWTO,NA
 13,Northern Mariana Islands and Guam,2018,UNWTO,NA
 13,Northern Mariana Islands and Guam,2019,UNWTO,NA
+13,NA,2020,2020:2022 gapfill,gapfilled
 13,Northern Mariana Islands and Guam,2020,UNWTO,NA
+13,NA,2021,2020:2022 gapfill,gapfilled
 13,Northern Mariana Islands and Guam,2021,UNWTO,NA
+13,NA,2022,2020:2022 gapfill,gapfilled
 13,Northern Mariana Islands and Guam,2022,UNWTO,NA
 15,Philippines,2008,UNWTO,NA
 15,Philippines,2009,UNWTO,NA
@@ -116,8 +128,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 15,Philippines,2017,UNWTO,NA
 15,Philippines,2018,UNWTO,NA
 15,Philippines,2019,UNWTO,NA
+15,NA,2020,2020:2022 gapfill,gapfilled
 15,Philippines,2020,UNWTO,NA
+15,NA,2021,2020:2022 gapfill,gapfilled
 15,Philippines,2021,UNWTO,NA
+15,NA,2022,2020:2022 gapfill,gapfilled
 15,Philippines,2022,UNWTO,NA
 17,Papua New Guinea,2008,UNWTO,NA
 17,Papua New Guinea,2009,UNWTO,NA
@@ -131,8 +146,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 17,Papua New Guinea,2017,UNWTO,NA
 17,Papua New Guinea,2018,UNWTO,NA
 17,Papua New Guinea,2019,UNWTO,NA
+17,NA,2020,2020:2022 gapfill,gapfilled
 17,Papua New Guinea,2020,UNWTO,NA
+17,NA,2021,2020:2022 gapfill,gapfilled
 17,Papua New Guinea,2021,UNWTO,NA
+17,NA,2022,2020:2022 gapfill,gapfilled
 17,Papua New Guinea,2022,UNWTO,NA
 18,Fiji,2008,UNWTO,NA
 18,Fiji,2009,UNWTO,NA
@@ -146,8 +164,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 18,Fiji,2017,UNWTO,NA
 18,Fiji,2018,UNWTO,NA
 18,Fiji,2019,UNWTO,NA
+18,NA,2020,2020:2022 gapfill,gapfilled
 18,Fiji,2020,UNWTO,NA
+18,NA,2021,2020:2022 gapfill,gapfilled
 18,Fiji,2021,UNWTO,NA
+18,NA,2022,2020:2022 gapfill,gapfilled
 18,Fiji,2022,UNWTO,NA
 19,Tuvalu,2008,UNWTO,NA
 19,Tuvalu,2009,UNWTO,NA
@@ -161,24 +182,30 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 19,Tuvalu,2017,UNWTO,NA
 19,Tuvalu,2018,UNWTO,NA
 19,Tuvalu,2019,UNWTO,NA
+19,NA,2020,2020:2022 gapfill,gapfilled
 19,Tuvalu,2020,UNWTO,NA
+19,NA,2021,2020:2022 gapfill,gapfilled
 19,Tuvalu,2021,UNWTO,NA
+19,NA,2022,2020:2022 gapfill,gapfilled
 19,Tuvalu,2022,UNWTO,NA
-20,South Korea,2008,UNWTO - nearby year,gapfilled
-20,South Korea,2009,UNWTO - nearby year,gapfilled
-20,South Korea,2010,UNWTO - nearby year,gapfilled
-20,South Korea,2011,UNWTO - nearby year,gapfilled
-20,South Korea,2012,UNWTO - nearby year,gapfilled
-20,South Korea,2013,arrivals minus same day,gapfilled
-20,South Korea,2014,arrivals minus same day,gapfilled
-20,South Korea,2015,arrivals minus same day,gapfilled
-20,South Korea,2016,arrivals minus same day,gapfilled
-20,South Korea,2017,arrivals minus same day,gapfilled
-20,South Korea,2018,arrivals minus same day,gapfilled
-20,South Korea,2019,arrivals minus same day,gapfilled
-20,South Korea,2020,arrivals minus same day,gapfilled
-20,South Korea,2021,arrivals minus same day,gapfilled
-20,South Korea,2022,arrivals minus same day,gapfilled
+20,South Korea,2008,Upfilling,gapfilled
+20,South Korea,2009,Upfilling,gapfilled
+20,South Korea,2010,Upfilling,gapfilled
+20,South Korea,2011,Upfilling,gapfilled
+20,South Korea,2012,Upfilling,gapfilled
+20,South Korea,2013,Arrivals minus same day,gapfilled
+20,South Korea,2014,Arrivals minus same day,gapfilled
+20,South Korea,2015,Arrivals minus same day,gapfilled
+20,South Korea,2016,Arrivals minus same day,gapfilled
+20,South Korea,2017,Arrivals minus same day,gapfilled
+20,South Korea,2018,Arrivals minus same day,gapfilled
+20,South Korea,2019,Arrivals minus same day,gapfilled
+20,NA,2020,2020:2022 gapfill,gapfilled
+20,South Korea,2020,Arrivals minus same day,gapfilled
+20,NA,2021,2020:2022 gapfill,gapfilled
+20,South Korea,2021,Arrivals minus same day,gapfilled
+20,NA,2022,2020:2022 gapfill,gapfilled
+20,South Korea,2022,Arrivals minus same day,gapfilled
 24,Cambodia,2008,UNWTO,NA
 24,Cambodia,2009,UNWTO,NA
 24,Cambodia,2010,UNWTO,NA
@@ -191,8 +218,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 24,Cambodia,2017,UNWTO,NA
 24,Cambodia,2018,UNWTO,NA
 24,Cambodia,2019,UNWTO,NA
+24,NA,2020,2020:2022 gapfill,gapfilled
 24,Cambodia,2020,UNWTO,NA
+24,NA,2021,2020:2022 gapfill,gapfilled
 24,Cambodia,2021,UNWTO,NA
+24,NA,2022,2020:2022 gapfill,gapfilled
 24,Cambodia,2022,UNWTO,NA
 25,Thailand,2008,UNWTO,NA
 25,Thailand,2009,UNWTO,NA
@@ -206,9 +236,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 25,Thailand,2017,UNWTO,NA
 25,Thailand,2018,UNWTO,NA
 25,Thailand,2019,UNWTO,NA
+25,NA,2020,2020:2022 gapfill,gapfilled
 25,Thailand,2020,UNWTO,NA
+25,NA,2021,2020:2022 gapfill,gapfilled
 25,Thailand,2021,UNWTO,NA
-25,Thailand,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+25,NA,2022,2020:2022 gapfill,gapfilled
 28,Comoro Islands,2008,UNWTO,NA
 28,Comoro Islands,2009,UNWTO,NA
 28,Comoro Islands,2010,UNWTO,NA
@@ -221,9 +253,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 28,Comoro Islands,2017,UNWTO,NA
 28,Comoro Islands,2018,UNWTO,NA
 28,Comoro Islands,2019,UNWTO,NA
+28,NA,2020,2020:2022 gapfill,gapfilled
 28,Comoro Islands,2020,UNWTO,NA
+28,NA,2021,2020:2022 gapfill,gapfilled
 28,Comoro Islands,2021,UNWTO,NA
-28,Comoro Islands,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+28,NA,2022,2020:2022 gapfill,gapfilled
 31,Seychelles,2008,UNWTO,NA
 31,Seychelles,2009,UNWTO,NA
 31,Seychelles,2010,UNWTO,NA
@@ -236,8 +270,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 31,Seychelles,2017,UNWTO,NA
 31,Seychelles,2018,UNWTO,NA
 31,Seychelles,2019,UNWTO,NA
+31,NA,2020,2020:2022 gapfill,gapfilled
 31,Seychelles,2020,UNWTO,NA
+31,NA,2021,2020:2022 gapfill,gapfilled
 31,Seychelles,2021,UNWTO,NA
+31,NA,2022,2020:2022 gapfill,gapfilled
 31,Seychelles,2022,UNWTO,NA
 32,Reunion,2008,UNWTO,NA
 32,Reunion,2009,UNWTO,NA
@@ -251,8 +288,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 32,Reunion,2017,UNWTO,NA
 32,Reunion,2018,UNWTO,NA
 32,Reunion,2019,UNWTO,NA
+32,NA,2020,2020:2022 gapfill,gapfilled
 32,Reunion,2020,UNWTO,NA
+32,NA,2021,2020:2022 gapfill,gapfilled
 32,Reunion,2021,UNWTO,NA
+32,NA,2022,2020:2022 gapfill,gapfilled
 32,Reunion,2022,UNWTO,NA
 37,Mauritius,2008,UNWTO,NA
 37,Mauritius,2009,UNWTO,NA
@@ -266,8 +306,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 37,Mauritius,2017,UNWTO,NA
 37,Mauritius,2018,UNWTO,NA
 37,Mauritius,2019,UNWTO,NA
+37,NA,2020,2020:2022 gapfill,gapfilled
 37,Mauritius,2020,UNWTO,NA
+37,NA,2021,2020:2022 gapfill,gapfilled
 37,Mauritius,2021,UNWTO,NA
+37,NA,2022,2020:2022 gapfill,gapfilled
 37,Mauritius,2022,UNWTO,NA
 39,Maldives,2008,UNWTO,NA
 39,Maldives,2009,UNWTO,NA
@@ -281,8 +324,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 39,Maldives,2017,UNWTO,NA
 39,Maldives,2018,UNWTO,NA
 39,Maldives,2019,UNWTO,NA
+39,NA,2020,2020:2022 gapfill,gapfilled
 39,Maldives,2020,UNWTO,NA
+39,NA,2021,2020:2022 gapfill,gapfilled
 39,Maldives,2021,UNWTO,NA
+39,NA,2022,2020:2022 gapfill,gapfilled
 39,Maldives,2022,UNWTO,NA
 40,Sri Lanka,2008,UNWTO,NA
 40,Sri Lanka,2009,UNWTO,NA
@@ -296,8 +342,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 40,Sri Lanka,2017,UNWTO,NA
 40,Sri Lanka,2018,UNWTO,NA
 40,Sri Lanka,2019,UNWTO,NA
+40,NA,2020,2020:2022 gapfill,gapfilled
 40,Sri Lanka,2020,UNWTO,NA
+40,NA,2021,2020:2022 gapfill,gapfilled
 40,Sri Lanka,2021,UNWTO,NA
+40,NA,2022,2020:2022 gapfill,gapfilled
 40,Sri Lanka,2022,UNWTO,NA
 41,Mozambique,2008,UNWTO,NA
 41,Mozambique,2009,UNWTO,NA
@@ -311,9 +360,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 41,Mozambique,2017,UNWTO,NA
 41,Mozambique,2018,UNWTO,NA
 41,Mozambique,2019,UNWTO,NA
+41,NA,2020,2020:2022 gapfill,gapfilled
 41,Mozambique,2020,UNWTO,NA
+41,NA,2021,2020:2022 gapfill,gapfilled
 41,Mozambique,2021,UNWTO,NA
-41,Mozambique,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+41,NA,2022,2020:2022 gapfill,gapfilled
 42,Madagascar,2008,UNWTO,NA
 42,Madagascar,2009,UNWTO,NA
 42,Madagascar,2010,UNWTO,NA
@@ -326,9 +377,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 42,Madagascar,2017,UNWTO,NA
 42,Madagascar,2018,UNWTO,NA
 42,Madagascar,2019,UNWTO,NA
+42,NA,2020,2020:2022 gapfill,gapfilled
 42,Madagascar,2020,UNWTO,NA
+42,NA,2021,2020:2022 gapfill,gapfilled
 42,Madagascar,2021,UNWTO,NA
-42,Madagascar,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+42,NA,2022,2020:2022 gapfill,gapfilled
 43,Kenya,2008,UNWTO,NA
 43,Kenya,2009,UNWTO,NA
 43,Kenya,2010,UNWTO,NA
@@ -339,25 +392,28 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 43,Kenya,2015,UNWTO,NA
 43,Kenya,2016,UNWTO,NA
 43,Kenya,2017,UNWTO,NA
-43,Kenya,2018,UNWTO - linear model,gapfilled
-43,Kenya,2019,UNWTO - linear model,gapfilled
-43,Kenya,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-43,Kenya,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-43,Kenya,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+43,NA,2018,NA,NA
+43,NA,2019,NA,NA
+43,NA,2020,NA,NA
+43,NA,2021,NA,NA
+43,NA,2022,NA,NA
 46,Djibouti,2008,UNWTO,NA
 46,Djibouti,2009,UNWTO,NA
 46,Djibouti,2010,UNWTO,NA
 46,Djibouti,2011,UNWTO,NA
 46,Djibouti,2012,UNWTO,NA
 46,Djibouti,2013,UNWTO,NA
-46,Djibouti,2014,UNWTO - nearby year,gapfilled
-46,Djibouti,2015,UNWTO - nearby year,gapfilled
-46,Djibouti,2016,UNWTO - nearby year,gapfilled
+46,Djibouti,2014,Interpolation,gapfilled
+46,Djibouti,2015,Interpolation,gapfilled
+46,Djibouti,2016,Interpolation,gapfilled
 46,Djibouti,2017,UNWTO,NA
 46,Djibouti,2018,UNWTO,NA
 46,Djibouti,2019,UNWTO,NA
+46,NA,2020,2020:2022 gapfill,gapfilled
 46,Djibouti,2020,UNWTO,NA
+46,NA,2021,2020:2022 gapfill,gapfilled
 46,Djibouti,2021,UNWTO,NA
+46,NA,2022,2020:2022 gapfill,gapfilled
 46,Djibouti,2022,UNWTO,NA
 47,Yemen,2008,UNWTO,NA
 47,Yemen,2009,UNWTO,NA
@@ -367,13 +423,13 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 47,Yemen,2013,UNWTO,NA
 47,Yemen,2014,UNWTO,NA
 47,Yemen,2015,UNWTO,NA
-47,Yemen,2016,UNWTO - linear model,gapfilled
-47,Yemen,2017,UNWTO - linear model,gapfilled
-47,Yemen,2018,UNWTO - linear model,gapfilled
-47,Yemen,2019,UNWTO - linear model,gapfilled
-47,Yemen,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-47,Yemen,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-47,Yemen,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+47,NA,2016,NA,NA
+47,NA,2017,NA,NA
+47,NA,2018,NA,NA
+47,NA,2019,NA,NA
+47,NA,2020,NA,NA
+47,NA,2021,NA,NA
+47,NA,2022,NA,NA
 48,Oman,2008,UNWTO,NA
 48,Oman,2009,UNWTO,NA
 48,Oman,2010,UNWTO,NA
@@ -386,8 +442,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 48,Oman,2017,UNWTO,NA
 48,Oman,2018,UNWTO,NA
 48,Oman,2019,UNWTO,NA
+48,NA,2020,2020:2022 gapfill,gapfilled
 48,Oman,2020,UNWTO,NA
+48,NA,2021,2020:2022 gapfill,gapfilled
 48,Oman,2021,UNWTO,NA
+48,NA,2022,2020:2022 gapfill,gapfilled
 48,Oman,2022,UNWTO,NA
 49,Sudan,2008,UNWTO,NA
 49,Sudan,2009,UNWTO,NA
@@ -400,10 +459,10 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 49,Sudan,2016,UNWTO,NA
 49,Sudan,2017,UNWTO,NA
 49,Sudan,2018,UNWTO,NA
-49,Sudan,2019,UNWTO - linear model,gapfilled
-49,Sudan,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-49,Sudan,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-49,Sudan,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+49,NA,2019,NA,NA
+49,NA,2020,NA,NA
+49,NA,2021,NA,NA
+49,NA,2022,NA,NA
 50,Saudi Arabia,2008,UNWTO,NA
 50,Saudi Arabia,2009,UNWTO,NA
 50,Saudi Arabia,2010,UNWTO,NA
@@ -416,8 +475,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 50,Saudi Arabia,2017,UNWTO,NA
 50,Saudi Arabia,2018,UNWTO,NA
 50,Saudi Arabia,2019,UNWTO,NA
+50,NA,2020,2020:2022 gapfill,gapfilled
 50,Saudi Arabia,2020,UNWTO,NA
+50,NA,2021,2020:2022 gapfill,gapfilled
 50,Saudi Arabia,2021,UNWTO,NA
+50,NA,2022,2020:2022 gapfill,gapfilled
 50,Saudi Arabia,2022,UNWTO,NA
 51,Kuwait,2008,UNWTO,NA
 51,Kuwait,2009,UNWTO,NA
@@ -431,54 +493,61 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 51,Kuwait,2017,UNWTO,NA
 51,Kuwait,2018,UNWTO,NA
 51,Kuwait,2019,UNWTO,NA
+51,NA,2020,2020:2022 gapfill,gapfilled
 51,Kuwait,2020,UNWTO,NA
+51,NA,2021,2020:2022 gapfill,gapfilled
 51,Kuwait,2021,UNWTO,NA
-51,Kuwait,2022,UNWTO - 2020:2022 gapfill method,gapfilled
-52,Bahrain,2008,UNWTO - nearby year,gapfilled
-52,Bahrain,2009,UNWTO - nearby year,gapfilled
-52,Bahrain,2010,UNWTO - nearby year,gapfilled
-52,Bahrain,2011,UNWTO - nearby year,gapfilled
-52,Bahrain,2012,UNWTO - nearby year,gapfilled
-52,Bahrain,2013,UNWTO - nearby year,gapfilled
-52,Bahrain,2014,UNWTO - nearby year,gapfilled
+51,NA,2022,2020:2022 gapfill,gapfilled
+52,Bahrain,2008,Interpolation,gapfilled
+52,Bahrain,2009,Interpolation,gapfilled
+52,Bahrain,2010,Interpolation,gapfilled
+52,Bahrain,2011,Interpolation,gapfilled
+52,Bahrain,2012,Interpolation,gapfilled
+52,Bahrain,2013,Interpolation,gapfilled
+52,Bahrain,2014,Interpolation,gapfilled
 52,Bahrain,2015,UNWTO,NA
 52,Bahrain,2016,UNWTO,NA
 52,Bahrain,2017,UNWTO,NA
 52,Bahrain,2018,UNWTO,NA
 52,Bahrain,2019,UNWTO,NA
+52,NA,2020,2020:2022 gapfill,gapfilled
 52,Bahrain,2020,UNWTO,NA
+52,NA,2021,2020:2022 gapfill,gapfilled
 52,Bahrain,2021,UNWTO,NA
+52,NA,2022,2020:2022 gapfill,gapfilled
 52,Bahrain,2022,UNWTO,NA
 53,Pakistan,2008,UNWTO,NA
 53,Pakistan,2009,UNWTO,NA
 53,Pakistan,2010,UNWTO,NA
 53,Pakistan,2011,UNWTO,NA
 53,Pakistan,2012,UNWTO,NA
-53,Pakistan,2013,UNWTO - linear model,gapfilled
-53,Pakistan,2014,UNWTO - linear model,gapfilled
-53,Pakistan,2015,UNWTO - linear model,gapfilled
-53,Pakistan,2016,UNWTO - linear model,gapfilled
-53,Pakistan,2017,UNWTO - linear model,gapfilled
-53,Pakistan,2018,UNWTO - linear model,gapfilled
-53,Pakistan,2019,UNWTO - linear model,gapfilled
-53,Pakistan,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-53,Pakistan,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-53,Pakistan,2022,UNWTO - 2020:2022 gapfill method,gapfilled
-54,United Arab Emirates,2008,UNWTO - nearby year,gapfilled
-54,United Arab Emirates,2009,UNWTO - nearby year,gapfilled
-54,United Arab Emirates,2010,UNWTO - nearby year,gapfilled
-54,United Arab Emirates,2011,UNWTO - nearby year,gapfilled
-54,United Arab Emirates,2012,UNWTO - nearby year,gapfilled
-54,United Arab Emirates,2013,UNWTO - nearby year,gapfilled
+53,NA,2013,NA,NA
+53,NA,2014,NA,NA
+53,NA,2015,NA,NA
+53,NA,2016,NA,NA
+53,NA,2017,NA,NA
+53,NA,2018,NA,NA
+53,NA,2019,NA,NA
+53,NA,2020,NA,NA
+53,NA,2021,NA,NA
+53,NA,2022,NA,NA
+54,United Arab Emirates,2008,Interpolation,gapfilled
+54,United Arab Emirates,2009,Interpolation,gapfilled
+54,United Arab Emirates,2010,Interpolation,gapfilled
+54,United Arab Emirates,2011,Interpolation,gapfilled
+54,United Arab Emirates,2012,Interpolation,gapfilled
+54,United Arab Emirates,2013,Interpolation,gapfilled
 54,United Arab Emirates,2014,UNWTO,NA
 54,United Arab Emirates,2015,UNWTO,NA
 54,United Arab Emirates,2016,UNWTO,NA
 54,United Arab Emirates,2017,UNWTO,NA
 54,United Arab Emirates,2018,UNWTO,NA
 54,United Arab Emirates,2019,UNWTO,NA
+54,NA,2020,2020:2022 gapfill,gapfilled
 54,United Arab Emirates,2020,UNWTO,NA
+54,NA,2021,2020:2022 gapfill,gapfilled
 54,United Arab Emirates,2021,UNWTO,NA
-54,United Arab Emirates,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+54,NA,2022,2020:2022 gapfill,gapfilled
 56,Cape Verde,2008,UNWTO,NA
 56,Cape Verde,2009,UNWTO,NA
 56,Cape Verde,2010,UNWTO,NA
@@ -491,8 +560,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 56,Cape Verde,2017,UNWTO,NA
 56,Cape Verde,2018,UNWTO,NA
 56,Cape Verde,2019,UNWTO,NA
+56,NA,2020,2020:2022 gapfill,gapfilled
 56,Cape Verde,2020,UNWTO,NA
+56,NA,2021,2020:2022 gapfill,gapfilled
 56,Cape Verde,2021,UNWTO,NA
+56,NA,2022,2020:2022 gapfill,gapfilled
 56,Cape Verde,2022,UNWTO,NA
 59,Belgium,2008,UNWTO,NA
 59,Belgium,2009,UNWTO,NA
@@ -506,8 +578,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 59,Belgium,2017,UNWTO,NA
 59,Belgium,2018,UNWTO,NA
 59,Belgium,2019,UNWTO,NA
+59,NA,2020,2020:2022 gapfill,gapfilled
 59,Belgium,2020,UNWTO,NA
+59,NA,2021,2020:2022 gapfill,gapfilled
 59,Belgium,2021,UNWTO,NA
+59,NA,2022,2020:2022 gapfill,gapfilled
 59,Belgium,2022,UNWTO,NA
 61,Tunisia,2008,UNWTO,NA
 61,Tunisia,2009,UNWTO,NA
@@ -521,8 +596,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 61,Tunisia,2017,UNWTO,NA
 61,Tunisia,2018,UNWTO,NA
 61,Tunisia,2019,UNWTO,NA
+61,NA,2020,2020:2022 gapfill,gapfilled
 61,Tunisia,2020,UNWTO,NA
+61,NA,2021,2020:2022 gapfill,gapfilled
 61,Tunisia,2021,UNWTO,NA
+61,NA,2022,2020:2022 gapfill,gapfilled
 61,Tunisia,2022,UNWTO,NA
 62,Morocco,2008,UNWTO,NA
 62,Morocco,2009,UNWTO,NA
@@ -536,8 +614,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 62,Morocco,2017,UNWTO,NA
 62,Morocco,2018,UNWTO,NA
 62,Morocco,2019,UNWTO,NA
+62,NA,2020,2020:2022 gapfill,gapfilled
 62,Morocco,2020,UNWTO,NA
+62,NA,2021,2020:2022 gapfill,gapfilled
 62,Morocco,2021,UNWTO,NA
+62,NA,2022,2020:2022 gapfill,gapfilled
 62,Morocco,2022,UNWTO,NA
 65,Gambia,2008,UNWTO,NA
 65,Gambia,2009,UNWTO,NA
@@ -551,8 +632,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 65,Gambia,2017,UNWTO,NA
 65,Gambia,2018,UNWTO,NA
 65,Gambia,2019,UNWTO,NA
+65,NA,2020,2020:2022 gapfill,gapfilled
 65,Gambia,2020,UNWTO,NA
+65,NA,2021,2020:2022 gapfill,gapfilled
 65,Gambia,2021,UNWTO,NA
+65,NA,2022,2020:2022 gapfill,gapfilled
 65,Gambia,2022,UNWTO,NA
 66,Senegal,2008,UNWTO,NA
 66,Senegal,2009,UNWTO,NA
@@ -564,26 +648,26 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 66,Senegal,2015,UNWTO,NA
 66,Senegal,2016,UNWTO,NA
 66,Senegal,2017,UNWTO,NA
-66,Senegal,2018,UNWTO - linear model,gapfilled
-66,Senegal,2019,UNWTO - linear model,gapfilled
-66,Senegal,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-66,Senegal,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-66,Senegal,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+66,NA,2018,NA,NA
+66,NA,2019,NA,NA
+66,NA,2020,NA,NA
+66,NA,2021,NA,NA
+66,NA,2022,NA,NA
 67,Libya,2008,UNWTO,NA
-67,Libya,2009,UNWTO - linear model,gapfilled
-67,Libya,2010,UNWTO - linear model,gapfilled
-67,Libya,2011,UNWTO - linear model,gapfilled
-67,Libya,2012,UNWTO - linear model,gapfilled
-67,Libya,2013,UNWTO - linear model,gapfilled
-67,Libya,2014,UNWTO - linear model,gapfilled
-67,Libya,2015,UNWTO - linear model,gapfilled
-67,Libya,2016,UNWTO - linear model,gapfilled
-67,Libya,2017,UNWTO - linear model,gapfilled
-67,Libya,2018,UNWTO - linear model,gapfilled
-67,Libya,2019,UNWTO - linear model,gapfilled
-67,Libya,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-67,Libya,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-67,Libya,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+67,NA,2009,NA,NA
+67,NA,2010,NA,NA
+67,NA,2011,NA,NA
+67,NA,2012,NA,NA
+67,NA,2013,NA,NA
+67,NA,2014,NA,NA
+67,NA,2015,NA,NA
+67,NA,2016,NA,NA
+67,NA,2017,NA,NA
+67,NA,2018,NA,NA
+67,NA,2019,NA,NA
+67,NA,2020,NA,NA
+67,NA,2021,NA,NA
+67,NA,2022,NA,NA
 68,Malta,2008,UNWTO,NA
 68,Malta,2009,UNWTO,NA
 68,Malta,2010,UNWTO,NA
@@ -596,8 +680,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 68,Malta,2017,UNWTO,NA
 68,Malta,2018,UNWTO,NA
 68,Malta,2019,UNWTO,NA
+68,NA,2020,2020:2022 gapfill,gapfilled
 68,Malta,2020,UNWTO,NA
+68,NA,2021,2020:2022 gapfill,gapfilled
 68,Malta,2021,UNWTO,NA
+68,NA,2022,2020:2022 gapfill,gapfilled
 68,Malta,2022,UNWTO,NA
 69,Latvia,2008,UNWTO,NA
 69,Latvia,2009,UNWTO,NA
@@ -611,9 +698,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 69,Latvia,2017,UNWTO,NA
 69,Latvia,2018,UNWTO,NA
 69,Latvia,2019,UNWTO,NA
+69,NA,2020,2020:2022 gapfill,gapfilled
 69,Latvia,2020,UNWTO,NA
+69,NA,2021,2020:2022 gapfill,gapfilled
 69,Latvia,2021,UNWTO,NA
-69,Latvia,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+69,NA,2022,2020:2022 gapfill,gapfilled
 70,Estonia,2008,UNWTO,NA
 70,Estonia,2009,UNWTO,NA
 70,Estonia,2010,UNWTO,NA
@@ -626,8 +715,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 70,Estonia,2017,UNWTO,NA
 70,Estonia,2018,UNWTO,NA
 70,Estonia,2019,UNWTO,NA
+70,NA,2020,2020:2022 gapfill,gapfilled
 70,Estonia,2020,UNWTO,NA
+70,NA,2021,2020:2022 gapfill,gapfilled
 70,Estonia,2021,UNWTO,NA
+70,NA,2022,2020:2022 gapfill,gapfilled
 70,Estonia,2022,UNWTO,NA
 71,Bulgaria,2008,UNWTO,NA
 71,Bulgaria,2009,UNWTO,NA
@@ -641,26 +733,29 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 71,Bulgaria,2017,UNWTO,NA
 71,Bulgaria,2018,UNWTO,NA
 71,Bulgaria,2019,UNWTO,NA
+71,NA,2020,2020:2022 gapfill,gapfilled
 71,Bulgaria,2020,UNWTO,NA
+71,NA,2021,2020:2022 gapfill,gapfilled
 71,Bulgaria,2021,UNWTO,NA
+71,NA,2022,2020:2022 gapfill,gapfilled
 71,Bulgaria,2022,UNWTO,NA
-73,Russia,2008,arrivals minus same day,gapfilled
-73,Russia,2009,arrivals minus same day,gapfilled
-73,Russia,2010,arrivals minus same day,gapfilled
-73,Russia,2011,arrivals minus same day,gapfilled
-73,Russia,2012,arrivals minus same day,gapfilled
-73,Russia,2013,arrivals minus same day,gapfilled
-73,Russia,2014,UNWTO - nearby year,gapfilled
-73,Russia,2015,arrivals minus same day,gapfilled
-73,Russia,2016,UNWTO - linear model,gapfilled
-73,Russia,2017,UNWTO - linear model,gapfilled
-73,Russia,2018,UNWTO - linear model,gapfilled
-73,Russia,2019,UNWTO - linear model,gapfilled
-73,Russia,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-73,Russia,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-73,Russia,2022,UNWTO - 2020:2022 gapfill method,gapfilled
-74,Georgia,2008,UNWTO - nearby year,gapfilled
-74,Georgia,2009,UNWTO - nearby year,gapfilled
+73,Russia,2008,Arrivals minus same day,gapfilled
+73,Russia,2009,Arrivals minus same day,gapfilled
+73,Russia,2010,Arrivals minus same day,gapfilled
+73,Russia,2011,Arrivals minus same day,gapfilled
+73,Russia,2012,Arrivals minus same day,gapfilled
+73,Russia,2013,Arrivals minus same day,gapfilled
+73,Russia,2014,Interpolation,gapfilled
+73,Russia,2015,Arrivals minus same day,gapfilled
+73,NA,2016,NA,NA
+73,NA,2017,NA,NA
+73,NA,2018,NA,NA
+73,NA,2019,NA,NA
+73,NA,2020,NA,NA
+73,NA,2021,NA,NA
+73,NA,2022,NA,NA
+74,Georgia,2008,Upfilling,gapfilled
+74,Georgia,2009,Upfilling,gapfilled
 74,Georgia,2010,UNWTO,NA
 74,Georgia,2011,UNWTO,NA
 74,Georgia,2012,UNWTO,NA
@@ -671,8 +766,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 74,Georgia,2017,UNWTO,NA
 74,Georgia,2018,UNWTO,NA
 74,Georgia,2019,UNWTO,NA
+74,NA,2020,2020:2022 gapfill,gapfilled
 74,Georgia,2020,UNWTO,NA
+74,NA,2021,2020:2022 gapfill,gapfilled
 74,Georgia,2021,UNWTO,NA
+74,NA,2022,2020:2022 gapfill,gapfilled
 74,Georgia,2022,UNWTO,NA
 75,Ukraine,2008,UNWTO,NA
 75,Ukraine,2009,UNWTO,NA
@@ -686,8 +784,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 75,Ukraine,2017,UNWTO,NA
 75,Ukraine,2018,UNWTO,NA
 75,Ukraine,2019,UNWTO,NA
+75,NA,2020,2020:2022 gapfill,gapfilled
 75,Ukraine,2020,UNWTO,NA
+75,NA,2021,2020:2022 gapfill,gapfilled
 75,Ukraine,2021,UNWTO,NA
+75,NA,2022,2020:2022 gapfill,gapfilled
 75,Ukraine,2022,UNWTO,NA
 76,Turkey,2008,UNWTO,NA
 76,Turkey,2009,UNWTO,NA
@@ -701,24 +802,27 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 76,Turkey,2017,UNWTO,NA
 76,Turkey,2018,UNWTO,NA
 76,Turkey,2019,UNWTO,NA
+76,NA,2020,2020:2022 gapfill,gapfilled
 76,Turkey,2020,UNWTO,NA
+76,NA,2021,2020:2022 gapfill,gapfilled
 76,Turkey,2021,UNWTO,NA
+76,NA,2022,2020:2022 gapfill,gapfilled
 76,Turkey,2022,UNWTO,NA
 77,Syria,2008,UNWTO,NA
 77,Syria,2009,UNWTO,NA
 77,Syria,2010,UNWTO,NA
 77,Syria,2011,UNWTO,NA
-77,Syria,2012,UNWTO - linear model,gapfilled
-77,Syria,2013,UNWTO - linear model,gapfilled
-77,Syria,2014,UNWTO - linear model,gapfilled
-77,Syria,2015,UNWTO - linear model,gapfilled
-77,Syria,2016,UNWTO - linear model,gapfilled
-77,Syria,2017,UNWTO - linear model,gapfilled
-77,Syria,2018,UNWTO - linear model,gapfilled
-77,Syria,2019,UNWTO - linear model,gapfilled
-77,Syria,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-77,Syria,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-77,Syria,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+77,NA,2012,NA,NA
+77,NA,2013,NA,NA
+77,NA,2014,NA,NA
+77,NA,2015,NA,NA
+77,NA,2016,NA,NA
+77,NA,2017,NA,NA
+77,NA,2018,NA,NA
+77,NA,2019,NA,NA
+77,NA,2020,NA,NA
+77,NA,2021,NA,NA
+77,NA,2022,NA,NA
 78,Lebanon,2008,UNWTO,NA
 78,Lebanon,2009,UNWTO,NA
 78,Lebanon,2010,UNWTO,NA
@@ -731,8 +835,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 78,Lebanon,2017,UNWTO,NA
 78,Lebanon,2018,UNWTO,NA
 78,Lebanon,2019,UNWTO,NA
+78,NA,2020,2020:2022 gapfill,gapfilled
 78,Lebanon,2020,UNWTO,NA
+78,NA,2021,2020:2022 gapfill,gapfilled
 78,Lebanon,2021,UNWTO,NA
+78,NA,2022,2020:2022 gapfill,gapfilled
 78,Lebanon,2022,UNWTO,NA
 79,Israel,2008,UNWTO,NA
 79,Israel,2009,UNWTO,NA
@@ -746,8 +853,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 79,Israel,2017,UNWTO,NA
 79,Israel,2018,UNWTO,NA
 79,Israel,2019,UNWTO,NA
+79,NA,2020,2020:2022 gapfill,gapfilled
 79,Israel,2020,UNWTO,NA
+79,NA,2021,2020:2022 gapfill,gapfilled
 79,Israel,2021,UNWTO,NA
+79,NA,2022,2020:2022 gapfill,gapfilled
 79,Israel,2022,UNWTO,NA
 80,Greece,2008,UNWTO,NA
 80,Greece,2009,UNWTO,NA
@@ -761,8 +871,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 80,Greece,2017,UNWTO,NA
 80,Greece,2018,UNWTO,NA
 80,Greece,2019,UNWTO,NA
+80,NA,2020,2020:2022 gapfill,gapfilled
 80,Greece,2020,UNWTO,NA
+80,NA,2021,2020:2022 gapfill,gapfilled
 80,Greece,2021,UNWTO,NA
+80,NA,2022,2020:2022 gapfill,gapfilled
 80,Greece,2022,UNWTO,NA
 81,Cyprus,2008,UNWTO,NA
 81,Cyprus,2009,UNWTO,NA
@@ -776,9 +889,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 81,Cyprus,2017,UNWTO,NA
 81,Cyprus,2018,UNWTO,NA
 81,Cyprus,2019,UNWTO,NA
+81,NA,2020,2020:2022 gapfill,gapfilled
 81,Cyprus,2020,UNWTO,NA
+81,NA,2021,2020:2022 gapfill,gapfilled
 81,Cyprus,2021,UNWTO,NA
-81,Cyprus,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+81,NA,2022,2020:2022 gapfill,gapfilled
 82,Albania,2008,UNWTO,NA
 82,Albania,2009,UNWTO,NA
 82,Albania,2010,UNWTO,NA
@@ -791,8 +906,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 82,Albania,2017,UNWTO,NA
 82,Albania,2018,UNWTO,NA
 82,Albania,2019,UNWTO,NA
+82,NA,2020,2020:2022 gapfill,gapfilled
 82,Albania,2020,UNWTO,NA
+82,NA,2021,2020:2022 gapfill,gapfilled
 82,Albania,2021,UNWTO,NA
+82,NA,2022,2020:2022 gapfill,gapfilled
 82,Albania,2022,UNWTO,NA
 96,Sierra Leone,2008,UNWTO,NA
 96,Sierra Leone,2009,UNWTO,NA
@@ -806,9 +924,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 96,Sierra Leone,2017,UNWTO,NA
 96,Sierra Leone,2018,UNWTO,NA
 96,Sierra Leone,2019,UNWTO,NA
+96,NA,2020,2020:2022 gapfill,gapfilled
 96,Sierra Leone,2020,UNWTO,NA
+96,NA,2021,2020:2022 gapfill,gapfilled
 96,Sierra Leone,2021,UNWTO,NA
-96,Sierra Leone,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+96,NA,2022,2020:2022 gapfill,gapfilled
 98,Togo,2008,UNWTO,NA
 98,Togo,2009,UNWTO,NA
 98,Togo,2010,UNWTO,NA
@@ -821,9 +941,10 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 98,Togo,2017,UNWTO,NA
 98,Togo,2018,UNWTO,NA
 98,Togo,2019,UNWTO,NA
+98,NA,2020,2020:2022 gapfill,gapfilled
 98,Togo,2020,UNWTO,NA
-98,Togo,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-98,Togo,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+98,NA,2021,2020:2022 gapfill,gapfilled
+98,NA,2022,NA,NA
 99,Benin,2008,UNWTO,NA
 99,Benin,2009,UNWTO,NA
 99,Benin,2010,UNWTO,NA
@@ -836,9 +957,10 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 99,Benin,2017,UNWTO,NA
 99,Benin,2018,UNWTO,NA
 99,Benin,2019,UNWTO,NA
+99,NA,2020,2020:2022 gapfill,gapfilled
 99,Benin,2020,UNWTO,NA
-99,Benin,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-99,Benin,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+99,NA,2021,2020:2022 gapfill,gapfilled
+99,NA,2022,NA,NA
 100,Republique du Congo,2008,UNWTO,NA
 100,Republique du Congo,2009,UNWTO,NA
 100,Republique du Congo,2010,UNWTO,NA
@@ -850,10 +972,10 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 100,Republique du Congo,2016,UNWTO,NA
 100,Republique du Congo,2017,UNWTO,NA
 100,Republique du Congo,2018,UNWTO,NA
-100,Republique du Congo,2019,UNWTO - linear model,gapfilled
-100,Republique du Congo,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-100,Republique du Congo,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-100,Republique du Congo,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+100,NA,2019,NA,NA
+100,NA,2020,NA,NA
+100,NA,2021,NA,NA
+100,NA,2022,NA,NA
 101,Namibia,2008,UNWTO,NA
 101,Namibia,2009,UNWTO,NA
 101,Namibia,2010,UNWTO,NA
@@ -866,8 +988,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 101,Namibia,2017,UNWTO,NA
 101,Namibia,2018,UNWTO,NA
 101,Namibia,2019,UNWTO,NA
+101,NA,2020,2020:2022 gapfill,gapfilled
 101,Namibia,2020,UNWTO,NA
+101,NA,2021,2020:2022 gapfill,gapfilled
 101,Namibia,2021,UNWTO,NA
+101,NA,2022,2020:2022 gapfill,gapfilled
 101,Namibia,2022,UNWTO,NA
 102,South Africa,2008,UNWTO,NA
 102,South Africa,2009,UNWTO,NA
@@ -881,24 +1006,29 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 102,South Africa,2017,UNWTO,NA
 102,South Africa,2018,UNWTO,NA
 102,South Africa,2019,UNWTO,NA
+102,NA,2020,2020:2022 gapfill,gapfilled
 102,South Africa,2020,UNWTO,NA
+102,NA,2021,2020:2022 gapfill,gapfilled
 102,South Africa,2021,UNWTO,NA
+102,NA,2022,2020:2022 gapfill,gapfilled
 102,South Africa,2022,UNWTO,NA
 103,Sao Tome and Principe,2008,UNWTO,NA
 103,Sao Tome and Principe,2009,UNWTO,NA
 103,Sao Tome and Principe,2010,UNWTO,NA
 103,Sao Tome and Principe,2011,UNWTO,NA
-103,Sao Tome and Principe,2012,UNWTO - nearby year,gapfilled
-103,Sao Tome and Principe,2013,UNWTO - nearby year,gapfilled
-103,Sao Tome and Principe,2014,UNWTO - nearby year,gapfilled
+103,Sao Tome and Principe,2012,Interpolation,gapfilled
+103,Sao Tome and Principe,2013,Interpolation,gapfilled
+103,Sao Tome and Principe,2014,Interpolation,gapfilled
 103,Sao Tome and Principe,2015,UNWTO,NA
 103,Sao Tome and Principe,2016,UNWTO,NA
 103,Sao Tome and Principe,2017,UNWTO,NA
 103,Sao Tome and Principe,2018,UNWTO,NA
 103,Sao Tome and Principe,2019,UNWTO,NA
+103,NA,2020,2020:2022 gapfill,gapfilled
 103,Sao Tome and Principe,2020,UNWTO,NA
+103,NA,2021,2020:2022 gapfill,gapfilled
 103,Sao Tome and Principe,2021,UNWTO,NA
-103,Sao Tome and Principe,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+103,NA,2022,2020:2022 gapfill,gapfilled
 106,Ghana,2008,UNWTO,NA
 106,Ghana,2009,UNWTO,NA
 106,Ghana,2010,UNWTO,NA
@@ -911,8 +1041,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 106,Ghana,2017,UNWTO,NA
 106,Ghana,2018,UNWTO,NA
 106,Ghana,2019,UNWTO,NA
+106,NA,2020,2020:2022 gapfill,gapfilled
 106,Ghana,2020,UNWTO,NA
+106,NA,2021,2020:2022 gapfill,gapfilled
 106,Ghana,2021,UNWTO,NA
+106,NA,2022,2020:2022 gapfill,gapfilled
 106,Ghana,2022,UNWTO,NA
 108,Bermuda,2008,UNWTO,NA
 108,Bermuda,2009,UNWTO,NA
@@ -926,8 +1059,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 108,Bermuda,2017,UNWTO,NA
 108,Bermuda,2018,UNWTO,NA
 108,Bermuda,2019,UNWTO,NA
+108,NA,2020,2020:2022 gapfill,gapfilled
 108,Bermuda,2020,UNWTO,NA
+108,NA,2021,2020:2022 gapfill,gapfilled
 108,Bermuda,2021,UNWTO,NA
+108,NA,2022,2020:2022 gapfill,gapfilled
 108,Bermuda,2022,UNWTO,NA
 110,Bahamas,2008,UNWTO,NA
 110,Bahamas,2009,UNWTO,NA
@@ -941,8 +1077,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 110,Bahamas,2017,UNWTO,NA
 110,Bahamas,2018,UNWTO,NA
 110,Bahamas,2019,UNWTO,NA
+110,NA,2020,2020:2022 gapfill,gapfilled
 110,Bahamas,2020,UNWTO,NA
+110,NA,2021,2020:2022 gapfill,gapfilled
 110,Bahamas,2021,UNWTO,NA
+110,NA,2022,2020:2022 gapfill,gapfilled
 110,Bahamas,2022,UNWTO,NA
 111,Turks and Caicos Islands,2008,UNWTO,NA
 111,Turks and Caicos Islands,2009,UNWTO,NA
@@ -956,9 +1095,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 111,Turks and Caicos Islands,2017,UNWTO,NA
 111,Turks and Caicos Islands,2018,UNWTO,NA
 111,Turks and Caicos Islands,2019,UNWTO,NA
+111,NA,2020,2020:2022 gapfill,gapfilled
 111,Turks and Caicos Islands,2020,UNWTO,NA
+111,NA,2021,2020:2022 gapfill,gapfilled
 111,Turks and Caicos Islands,2021,UNWTO,NA
-111,Turks and Caicos Islands,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+111,NA,2022,2020:2022 gapfill,gapfilled
 112,Cuba,2008,UNWTO,NA
 112,Cuba,2009,UNWTO,NA
 112,Cuba,2010,UNWTO,NA
@@ -971,8 +1112,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 112,Cuba,2017,UNWTO,NA
 112,Cuba,2018,UNWTO,NA
 112,Cuba,2019,UNWTO,NA
+112,NA,2020,2020:2022 gapfill,gapfilled
 112,Cuba,2020,UNWTO,NA
+112,NA,2021,2020:2022 gapfill,gapfilled
 112,Cuba,2021,UNWTO,NA
+112,NA,2022,2020:2022 gapfill,gapfilled
 112,Cuba,2022,UNWTO,NA
 113,Cayman Islands,2008,UNWTO,NA
 113,Cayman Islands,2009,UNWTO,NA
@@ -986,8 +1130,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 113,Cayman Islands,2017,UNWTO,NA
 113,Cayman Islands,2018,UNWTO,NA
 113,Cayman Islands,2019,UNWTO,NA
+113,NA,2020,2020:2022 gapfill,gapfilled
 113,Cayman Islands,2020,UNWTO,NA
+113,NA,2021,2020:2022 gapfill,gapfilled
 113,Cayman Islands,2021,UNWTO,NA
+113,NA,2022,2020:2022 gapfill,gapfilled
 113,Cayman Islands,2022,UNWTO,NA
 114,Haiti,2008,UNWTO,NA
 114,Haiti,2009,UNWTO,NA
@@ -1001,9 +1148,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 114,Haiti,2017,UNWTO,NA
 114,Haiti,2018,UNWTO,NA
 114,Haiti,2019,UNWTO,NA
+114,NA,2020,2020:2022 gapfill,gapfilled
 114,Haiti,2020,UNWTO,NA
+114,NA,2021,2020:2022 gapfill,gapfilled
 114,Haiti,2021,UNWTO,NA
-114,Haiti,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+114,NA,2022,2020:2022 gapfill,gapfilled
 115,Dominican Republic,2008,UNWTO,NA
 115,Dominican Republic,2009,UNWTO,NA
 115,Dominican Republic,2010,UNWTO,NA
@@ -1016,8 +1165,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 115,Dominican Republic,2017,UNWTO,NA
 115,Dominican Republic,2018,UNWTO,NA
 115,Dominican Republic,2019,UNWTO,NA
+115,NA,2020,2020:2022 gapfill,gapfilled
 115,Dominican Republic,2020,UNWTO,NA
+115,NA,2021,2020:2022 gapfill,gapfilled
 115,Dominican Republic,2021,UNWTO,NA
+115,NA,2022,2020:2022 gapfill,gapfilled
 115,Dominican Republic,2022,UNWTO,NA
 116,Puerto Rico and Virgin Islands of the United States,2008,UNWTO,NA
 116,Puerto Rico and Virgin Islands of the United States,2009,UNWTO,NA
@@ -1031,8 +1183,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 116,Puerto Rico and Virgin Islands of the United States,2017,UNWTO,NA
 116,Puerto Rico and Virgin Islands of the United States,2018,UNWTO,NA
 116,Puerto Rico and Virgin Islands of the United States,2019,UNWTO,NA
+116,NA,2020,2020:2022 gapfill,gapfilled
 116,Puerto Rico and Virgin Islands of the United States,2020,UNWTO,NA
+116,NA,2021,2020:2022 gapfill,gapfilled
 116,Puerto Rico and Virgin Islands of the United States,2021,UNWTO,NA
+116,NA,2022,2020:2022 gapfill,gapfilled
 116,Puerto Rico and Virgin Islands of the United States,2022,UNWTO,NA
 117,British Virgin Islands,2008,UNWTO,NA
 117,British Virgin Islands,2009,UNWTO,NA
@@ -1046,8 +1201,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 117,British Virgin Islands,2017,UNWTO,NA
 117,British Virgin Islands,2018,UNWTO,NA
 117,British Virgin Islands,2019,UNWTO,NA
+117,NA,2020,2020:2022 gapfill,gapfilled
 117,British Virgin Islands,2020,UNWTO,NA
+117,NA,2021,2020:2022 gapfill,gapfilled
 117,British Virgin Islands,2021,UNWTO,NA
+117,NA,2022,2020:2022 gapfill,gapfilled
 117,British Virgin Islands,2022,UNWTO,NA
 118,Anguilla,2008,UNWTO,NA
 118,Anguilla,2009,UNWTO,NA
@@ -1061,8 +1219,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 118,Anguilla,2017,UNWTO,NA
 118,Anguilla,2018,UNWTO,NA
 118,Anguilla,2019,UNWTO,NA
+118,NA,2020,2020:2022 gapfill,gapfilled
 118,Anguilla,2020,UNWTO,NA
+118,NA,2021,2020:2022 gapfill,gapfilled
 118,Anguilla,2021,UNWTO,NA
+118,NA,2022,2020:2022 gapfill,gapfilled
 118,Anguilla,2022,UNWTO,NA
 119,Saint Kitts and Nevis,2008,UNWTO,NA
 119,Saint Kitts and Nevis,2009,UNWTO,NA
@@ -1076,8 +1237,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 119,Saint Kitts and Nevis,2017,UNWTO,NA
 119,Saint Kitts and Nevis,2018,UNWTO,NA
 119,Saint Kitts and Nevis,2019,UNWTO,NA
+119,NA,2020,2020:2022 gapfill,gapfilled
 119,Saint Kitts and Nevis,2020,UNWTO,NA
+119,NA,2021,2020:2022 gapfill,gapfilled
 119,Saint Kitts and Nevis,2021,UNWTO,NA
+119,NA,2022,2020:2022 gapfill,gapfilled
 119,Saint Kitts and Nevis,2022,UNWTO,NA
 120,Antigua and Barbuda,2008,UNWTO,NA
 120,Antigua and Barbuda,2009,UNWTO,NA
@@ -1091,8 +1255,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 120,Antigua and Barbuda,2017,UNWTO,NA
 120,Antigua and Barbuda,2018,UNWTO,NA
 120,Antigua and Barbuda,2019,UNWTO,NA
+120,NA,2020,2020:2022 gapfill,gapfilled
 120,Antigua and Barbuda,2020,UNWTO,NA
+120,NA,2021,2020:2022 gapfill,gapfilled
 120,Antigua and Barbuda,2021,UNWTO,NA
+120,NA,2022,2020:2022 gapfill,gapfilled
 120,Antigua and Barbuda,2022,UNWTO,NA
 121,Montserrat,2008,UNWTO,NA
 121,Montserrat,2009,UNWTO,NA
@@ -1106,9 +1273,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 121,Montserrat,2017,UNWTO,NA
 121,Montserrat,2018,UNWTO,NA
 121,Montserrat,2019,UNWTO,NA
+121,NA,2020,2020:2022 gapfill,gapfilled
 121,Montserrat,2020,UNWTO,NA
+121,NA,2021,2020:2022 gapfill,gapfilled
 121,Montserrat,2021,UNWTO,NA
-121,Montserrat,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+121,NA,2022,2020:2022 gapfill,gapfilled
 122,Saint Lucia,2008,UNWTO,NA
 122,Saint Lucia,2009,UNWTO,NA
 122,Saint Lucia,2010,UNWTO,NA
@@ -1121,8 +1290,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 122,Saint Lucia,2017,UNWTO,NA
 122,Saint Lucia,2018,UNWTO,NA
 122,Saint Lucia,2019,UNWTO,NA
+122,NA,2020,2020:2022 gapfill,gapfilled
 122,Saint Lucia,2020,UNWTO,NA
+122,NA,2021,2020:2022 gapfill,gapfilled
 122,Saint Lucia,2021,UNWTO,NA
+122,NA,2022,2020:2022 gapfill,gapfilled
 122,Saint Lucia,2022,UNWTO,NA
 123,Dominica,2008,UNWTO,NA
 123,Dominica,2009,UNWTO,NA
@@ -1136,8 +1308,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 123,Dominica,2017,UNWTO,NA
 123,Dominica,2018,UNWTO,NA
 123,Dominica,2019,UNWTO,NA
+123,NA,2020,2020:2022 gapfill,gapfilled
 123,Dominica,2020,UNWTO,NA
+123,NA,2021,2020:2022 gapfill,gapfilled
 123,Dominica,2021,UNWTO,NA
+123,NA,2022,2020:2022 gapfill,gapfilled
 123,Dominica,2022,UNWTO,NA
 124,Barbados,2008,UNWTO,NA
 124,Barbados,2009,UNWTO,NA
@@ -1151,8 +1326,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 124,Barbados,2017,UNWTO,NA
 124,Barbados,2018,UNWTO,NA
 124,Barbados,2019,UNWTO,NA
+124,NA,2020,2020:2022 gapfill,gapfilled
 124,Barbados,2020,UNWTO,NA
+124,NA,2021,2020:2022 gapfill,gapfilled
 124,Barbados,2021,UNWTO,NA
+124,NA,2022,2020:2022 gapfill,gapfilled
 124,Barbados,2022,UNWTO,NA
 125,Grenada,2008,UNWTO,NA
 125,Grenada,2009,UNWTO,NA
@@ -1166,8 +1344,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 125,Grenada,2017,UNWTO,NA
 125,Grenada,2018,UNWTO,NA
 125,Grenada,2019,UNWTO,NA
+125,NA,2020,2020:2022 gapfill,gapfilled
 125,Grenada,2020,UNWTO,NA
+125,NA,2021,2020:2022 gapfill,gapfilled
 125,Grenada,2021,UNWTO,NA
+125,NA,2022,2020:2022 gapfill,gapfilled
 125,Grenada,2022,UNWTO,NA
 126,Trinidad and Tobago,2008,UNWTO,NA
 126,Trinidad and Tobago,2009,UNWTO,NA
@@ -1181,8 +1362,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 126,Trinidad and Tobago,2017,UNWTO,NA
 126,Trinidad and Tobago,2018,UNWTO,NA
 126,Trinidad and Tobago,2019,UNWTO,NA
+126,NA,2020,2020:2022 gapfill,gapfilled
 126,Trinidad and Tobago,2020,UNWTO,NA
+126,NA,2021,2020:2022 gapfill,gapfilled
 126,Trinidad and Tobago,2021,UNWTO,NA
+126,NA,2022,2020:2022 gapfill,gapfilled
 126,Trinidad and Tobago,2022,UNWTO,NA
 127,Saint Vincent and the Grenadines,2008,UNWTO,NA
 127,Saint Vincent and the Grenadines,2009,UNWTO,NA
@@ -1196,8 +1380,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 127,Saint Vincent and the Grenadines,2017,UNWTO,NA
 127,Saint Vincent and the Grenadines,2018,UNWTO,NA
 127,Saint Vincent and the Grenadines,2019,UNWTO,NA
+127,NA,2020,2020:2022 gapfill,gapfilled
 127,Saint Vincent and the Grenadines,2020,UNWTO,NA
+127,NA,2021,2020:2022 gapfill,gapfilled
 127,Saint Vincent and the Grenadines,2021,UNWTO,NA
+127,NA,2022,2020:2022 gapfill,gapfilled
 127,Saint Vincent and the Grenadines,2022,UNWTO,NA
 129,Panama,2008,UNWTO,NA
 129,Panama,2009,UNWTO,NA
@@ -1211,8 +1398,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 129,Panama,2017,UNWTO,NA
 129,Panama,2018,UNWTO,NA
 129,Panama,2019,UNWTO,NA
+129,NA,2020,2020:2022 gapfill,gapfilled
 129,Panama,2020,UNWTO,NA
+129,NA,2021,2020:2022 gapfill,gapfilled
 129,Panama,2021,UNWTO,NA
+129,NA,2022,2020:2022 gapfill,gapfilled
 129,Panama,2022,UNWTO,NA
 130,Costa Rica,2008,UNWTO,NA
 130,Costa Rica,2009,UNWTO,NA
@@ -1226,8 +1416,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 130,Costa Rica,2017,UNWTO,NA
 130,Costa Rica,2018,UNWTO,NA
 130,Costa Rica,2019,UNWTO,NA
+130,NA,2020,2020:2022 gapfill,gapfilled
 130,Costa Rica,2020,UNWTO,NA
+130,NA,2021,2020:2022 gapfill,gapfilled
 130,Costa Rica,2021,UNWTO,NA
+130,NA,2022,2020:2022 gapfill,gapfilled
 130,Costa Rica,2022,UNWTO,NA
 131,Nicaragua,2008,UNWTO,NA
 131,Nicaragua,2009,UNWTO,NA
@@ -1241,8 +1434,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 131,Nicaragua,2017,UNWTO,NA
 131,Nicaragua,2018,UNWTO,NA
 131,Nicaragua,2019,UNWTO,NA
+131,NA,2020,2020:2022 gapfill,gapfilled
 131,Nicaragua,2020,UNWTO,NA
+131,NA,2021,2020:2022 gapfill,gapfilled
 131,Nicaragua,2021,UNWTO,NA
+131,NA,2022,2020:2022 gapfill,gapfilled
 131,Nicaragua,2022,UNWTO,NA
 132,Colombia,2008,UNWTO,NA
 132,Colombia,2009,UNWTO,NA
@@ -1256,8 +1452,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 132,Colombia,2017,UNWTO,NA
 132,Colombia,2018,UNWTO,NA
 132,Colombia,2019,UNWTO,NA
+132,NA,2020,2020:2022 gapfill,gapfilled
 132,Colombia,2020,UNWTO,NA
+132,NA,2021,2020:2022 gapfill,gapfilled
 132,Colombia,2021,UNWTO,NA
+132,NA,2022,2020:2022 gapfill,gapfilled
 132,Colombia,2022,UNWTO,NA
 133,Honduras,2008,UNWTO,NA
 133,Honduras,2009,UNWTO,NA
@@ -1271,8 +1470,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 133,Honduras,2017,UNWTO,NA
 133,Honduras,2018,UNWTO,NA
 133,Honduras,2019,UNWTO,NA
+133,NA,2020,2020:2022 gapfill,gapfilled
 133,Honduras,2020,UNWTO,NA
+133,NA,2021,2020:2022 gapfill,gapfilled
 133,Honduras,2021,UNWTO,NA
+133,NA,2022,2020:2022 gapfill,gapfilled
 133,Honduras,2022,UNWTO,NA
 134,El Salvador,2008,UNWTO,NA
 134,El Salvador,2009,UNWTO,NA
@@ -1286,8 +1488,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 134,El Salvador,2017,UNWTO,NA
 134,El Salvador,2018,UNWTO,NA
 134,El Salvador,2019,UNWTO,NA
+134,NA,2020,2020:2022 gapfill,gapfilled
 134,El Salvador,2020,UNWTO,NA
+134,NA,2021,2020:2022 gapfill,gapfilled
 134,El Salvador,2021,UNWTO,NA
+134,NA,2022,2020:2022 gapfill,gapfilled
 134,El Salvador,2022,UNWTO,NA
 135,Mexico,2008,UNWTO,NA
 135,Mexico,2009,UNWTO,NA
@@ -1301,8 +1506,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 135,Mexico,2017,UNWTO,NA
 135,Mexico,2018,UNWTO,NA
 135,Mexico,2019,UNWTO,NA
+135,NA,2020,2020:2022 gapfill,gapfilled
 135,Mexico,2020,UNWTO,NA
+135,NA,2021,2020:2022 gapfill,gapfilled
 135,Mexico,2021,UNWTO,NA
+135,NA,2022,2020:2022 gapfill,gapfilled
 135,Mexico,2022,UNWTO,NA
 136,Guatemala,2008,UNWTO,NA
 136,Guatemala,2009,UNWTO,NA
@@ -1316,8 +1524,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 136,Guatemala,2017,UNWTO,NA
 136,Guatemala,2018,UNWTO,NA
 136,Guatemala,2019,UNWTO,NA
+136,NA,2020,2020:2022 gapfill,gapfilled
 136,Guatemala,2020,UNWTO,NA
+136,NA,2021,2020:2022 gapfill,gapfilled
 136,Guatemala,2021,UNWTO,NA
+136,NA,2022,2020:2022 gapfill,gapfilled
 136,Guatemala,2022,UNWTO,NA
 138,Peru,2008,UNWTO,NA
 138,Peru,2009,UNWTO,NA
@@ -1331,8 +1542,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 138,Peru,2017,UNWTO,NA
 138,Peru,2018,UNWTO,NA
 138,Peru,2019,UNWTO,NA
+138,NA,2020,2020:2022 gapfill,gapfilled
 138,Peru,2020,UNWTO,NA
+138,NA,2021,2020:2022 gapfill,gapfilled
 138,Peru,2021,UNWTO,NA
+138,NA,2022,2020:2022 gapfill,gapfilled
 138,Peru,2022,UNWTO,NA
 139,Venezuela,2008,UNWTO,NA
 139,Venezuela,2009,UNWTO,NA
@@ -1344,11 +1558,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 139,Venezuela,2015,UNWTO,NA
 139,Venezuela,2016,UNWTO,NA
 139,Venezuela,2017,UNWTO,NA
-139,Venezuela,2018,UNWTO - linear model,gapfilled
-139,Venezuela,2019,UNWTO - linear model,gapfilled
-139,Venezuela,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-139,Venezuela,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-139,Venezuela,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+139,NA,2018,NA,NA
+139,NA,2019,NA,NA
+139,NA,2020,NA,NA
+139,NA,2021,NA,NA
+139,NA,2022,NA,NA
 140,Guadeloupe and Martinique,2008,UNWTO,NA
 140,Guadeloupe and Martinique,2009,UNWTO,NA
 140,Guadeloupe and Martinique,2010,UNWTO,NA
@@ -1361,8 +1575,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 140,Guadeloupe and Martinique,2017,UNWTO,NA
 140,Guadeloupe and Martinique,2018,UNWTO,NA
 140,Guadeloupe and Martinique,2019,UNWTO,NA
+140,NA,2020,2020:2022 gapfill,gapfilled
 140,Guadeloupe and Martinique,2020,UNWTO,NA
+140,NA,2021,2020:2022 gapfill,gapfilled
 140,Guadeloupe and Martinique,2021,UNWTO,NA
+140,NA,2022,2020:2022 gapfill,gapfilled
 140,Guadeloupe and Martinique,2022,UNWTO,NA
 143,Iceland,2008,UNWTO,NA
 143,Iceland,2009,UNWTO,NA
@@ -1376,9 +1593,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 143,Iceland,2017,UNWTO,NA
 143,Iceland,2018,UNWTO,NA
 143,Iceland,2019,UNWTO,NA
+143,NA,2020,2020:2022 gapfill,gapfilled
 143,Iceland,2020,UNWTO,NA
+143,NA,2021,2020:2022 gapfill,gapfilled
 143,Iceland,2021,UNWTO,NA
-143,Iceland,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+143,NA,2022,2020:2022 gapfill,gapfilled
 147,French Polynesia,2008,UNWTO,NA
 147,French Polynesia,2009,UNWTO,NA
 147,French Polynesia,2010,UNWTO,NA
@@ -1391,8 +1610,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 147,French Polynesia,2017,UNWTO,NA
 147,French Polynesia,2018,UNWTO,NA
 147,French Polynesia,2019,UNWTO,NA
+147,NA,2020,2020:2022 gapfill,gapfilled
 147,French Polynesia,2020,UNWTO,NA
+147,NA,2021,2020:2022 gapfill,gapfilled
 147,French Polynesia,2021,UNWTO,NA
+147,NA,2022,2020:2022 gapfill,gapfilled
 147,French Polynesia,2022,UNWTO,NA
 151,American Samoa,2008,UNWTO,NA
 151,American Samoa,2009,UNWTO,NA
@@ -1406,9 +1628,10 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 151,American Samoa,2017,UNWTO,NA
 151,American Samoa,2018,UNWTO,NA
 151,American Samoa,2019,UNWTO,NA
+151,NA,2020,2020:2022 gapfill,gapfilled
 151,American Samoa,2020,UNWTO,NA
-151,American Samoa,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-151,American Samoa,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+151,NA,2021,2020:2022 gapfill,gapfilled
+151,NA,2022,NA,NA
 152,Samoa,2008,UNWTO,NA
 152,Samoa,2009,UNWTO,NA
 152,Samoa,2010,UNWTO,NA
@@ -1421,8 +1644,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 152,Samoa,2017,UNWTO,NA
 152,Samoa,2018,UNWTO,NA
 152,Samoa,2019,UNWTO,NA
+152,NA,2020,2020:2022 gapfill,gapfilled
 152,Samoa,2020,UNWTO,NA
+152,NA,2021,2020:2022 gapfill,gapfilled
 152,Samoa,2021,UNWTO,NA
+152,NA,2022,2020:2022 gapfill,gapfilled
 152,Samoa,2022,UNWTO,NA
 153,Cook Islands,2008,UNWTO,NA
 153,Cook Islands,2009,UNWTO,NA
@@ -1436,8 +1662,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 153,Cook Islands,2017,UNWTO,NA
 153,Cook Islands,2018,UNWTO,NA
 153,Cook Islands,2019,UNWTO,NA
+153,NA,2020,2020:2022 gapfill,gapfilled
 153,Cook Islands,2020,UNWTO,NA
+153,NA,2021,2020:2022 gapfill,gapfilled
 153,Cook Islands,2021,UNWTO,NA
+153,NA,2022,2020:2022 gapfill,gapfilled
 153,Cook Islands,2022,UNWTO,NA
 154,Niue,2008,UNWTO,NA
 154,Niue,2009,UNWTO,NA
@@ -1451,9 +1680,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 154,Niue,2017,UNWTO,NA
 154,Niue,2018,UNWTO,NA
 154,Niue,2019,UNWTO,NA
+154,NA,2020,2020:2022 gapfill,gapfilled
 154,Niue,2020,UNWTO,NA
+154,NA,2021,2020:2022 gapfill,gapfilled
 154,Niue,2021,UNWTO,NA
-154,Niue,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+154,NA,2022,2020:2022 gapfill,gapfilled
 155,Tonga,2008,UNWTO,NA
 155,Tonga,2009,UNWTO,NA
 155,Tonga,2010,UNWTO,NA
@@ -1466,8 +1697,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 155,Tonga,2017,UNWTO,NA
 155,Tonga,2018,UNWTO,NA
 155,Tonga,2019,UNWTO,NA
+155,NA,2020,2020:2022 gapfill,gapfilled
 155,Tonga,2020,UNWTO,NA
+155,NA,2021,2020:2022 gapfill,gapfilled
 155,Tonga,2021,UNWTO,NA
+155,NA,2022,2020:2022 gapfill,gapfilled
 155,Tonga,2022,UNWTO,NA
 162,New Zealand,2008,UNWTO,NA
 162,New Zealand,2009,UNWTO,NA
@@ -1481,8 +1715,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 162,New Zealand,2017,UNWTO,NA
 162,New Zealand,2018,UNWTO,NA
 162,New Zealand,2019,UNWTO,NA
+162,NA,2020,2020:2022 gapfill,gapfilled
 162,New Zealand,2020,UNWTO,NA
+162,NA,2021,2020:2022 gapfill,gapfilled
 162,New Zealand,2021,UNWTO,NA
+162,NA,2022,2020:2022 gapfill,gapfilled
 162,New Zealand,2022,UNWTO,NA
 163,United States,2008,UNWTO,NA
 163,United States,2009,UNWTO,NA
@@ -1496,8 +1733,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 163,United States,2017,UNWTO,NA
 163,United States,2018,UNWTO,NA
 163,United States,2019,UNWTO,NA
+163,NA,2020,2020:2022 gapfill,gapfilled
 163,United States,2020,UNWTO,NA
+163,NA,2021,2020:2022 gapfill,gapfilled
 163,United States,2021,UNWTO,NA
+163,NA,2022,2020:2022 gapfill,gapfilled
 163,United States,2022,UNWTO,NA
 164,Belize,2008,UNWTO,NA
 164,Belize,2009,UNWTO,NA
@@ -1511,8 +1751,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 164,Belize,2017,UNWTO,NA
 164,Belize,2018,UNWTO,NA
 164,Belize,2019,UNWTO,NA
+164,NA,2020,2020:2022 gapfill,gapfilled
 164,Belize,2020,UNWTO,NA
+164,NA,2021,2020:2022 gapfill,gapfilled
 164,Belize,2021,UNWTO,NA
+164,NA,2022,2020:2022 gapfill,gapfilled
 164,Belize,2022,UNWTO,NA
 166,Jamaica,2008,UNWTO,NA
 166,Jamaica,2009,UNWTO,NA
@@ -1526,8 +1769,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 166,Jamaica,2017,UNWTO,NA
 166,Jamaica,2018,UNWTO,NA
 166,Jamaica,2019,UNWTO,NA
+166,NA,2020,2020:2022 gapfill,gapfilled
 166,Jamaica,2020,UNWTO,NA
+166,NA,2021,2020:2022 gapfill,gapfilled
 166,Jamaica,2021,UNWTO,NA
+166,NA,2022,2020:2022 gapfill,gapfilled
 166,Jamaica,2022,UNWTO,NA
 167,Guyana,2008,UNWTO,NA
 167,Guyana,2009,UNWTO,NA
@@ -1541,8 +1787,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 167,Guyana,2017,UNWTO,NA
 167,Guyana,2018,UNWTO,NA
 167,Guyana,2019,UNWTO,NA
+167,NA,2020,2020:2022 gapfill,gapfilled
 167,Guyana,2020,UNWTO,NA
+167,NA,2021,2020:2022 gapfill,gapfilled
 167,Guyana,2021,UNWTO,NA
+167,NA,2022,2020:2022 gapfill,gapfilled
 167,Guyana,2022,UNWTO,NA
 168,Suriname,2008,UNWTO,NA
 168,Suriname,2009,UNWTO,NA
@@ -1554,26 +1803,26 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 168,Suriname,2015,UNWTO,NA
 168,Suriname,2016,UNWTO,NA
 168,Suriname,2017,UNWTO,NA
-168,Suriname,2018,UNWTO - linear model,gapfilled
-168,Suriname,2019,UNWTO - linear model,gapfilled
-168,Suriname,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-168,Suriname,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-168,Suriname,2022,UNWTO - 2020:2022 gapfill method,gapfilled
-169,French Guiana,2008,UNWTO - nearby year,gapfilled
+168,NA,2018,NA,NA
+168,NA,2019,NA,NA
+168,NA,2020,NA,NA
+168,NA,2021,NA,NA
+168,NA,2022,NA,NA
+169,French Guiana,2008,Interpolation,gapfilled
 169,French Guiana,2009,UNWTO,NA
-169,French Guiana,2010,UNWTO - nearby year,gapfilled
-169,French Guiana,2011,UNWTO - nearby year,gapfilled
-169,French Guiana,2012,UNWTO - nearby year,gapfilled
-169,French Guiana,2013,UNWTO - nearby year,gapfilled
-169,French Guiana,2014,UNWTO - nearby year,gapfilled
+169,French Guiana,2010,Interpolation,gapfilled
+169,French Guiana,2011,Interpolation,gapfilled
+169,French Guiana,2012,Interpolation,gapfilled
+169,French Guiana,2013,Interpolation,gapfilled
+169,French Guiana,2014,Interpolation,gapfilled
 169,French Guiana,2015,UNWTO,NA
 169,French Guiana,2016,UNWTO,NA
 169,French Guiana,2017,UNWTO,NA
-169,French Guiana,2018,UNWTO - linear model,gapfilled
-169,French Guiana,2019,UNWTO - linear model,gapfilled
-169,French Guiana,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-169,French Guiana,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-169,French Guiana,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+169,NA,2018,NA,NA
+169,NA,2019,NA,NA
+169,NA,2020,NA,NA
+169,NA,2021,NA,NA
+169,NA,2022,NA,NA
 171,Brazil,2008,UNWTO,NA
 171,Brazil,2009,UNWTO,NA
 171,Brazil,2010,UNWTO,NA
@@ -1586,8 +1835,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 171,Brazil,2017,UNWTO,NA
 171,Brazil,2018,UNWTO,NA
 171,Brazil,2019,UNWTO,NA
+171,NA,2020,2020:2022 gapfill,gapfilled
 171,Brazil,2020,UNWTO,NA
+171,NA,2021,2020:2022 gapfill,gapfilled
 171,Brazil,2021,UNWTO,NA
+171,NA,2022,2020:2022 gapfill,gapfilled
 171,Brazil,2022,UNWTO,NA
 172,Argentina,2008,UNWTO,NA
 172,Argentina,2009,UNWTO,NA
@@ -1601,8 +1853,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 172,Argentina,2017,UNWTO,NA
 172,Argentina,2018,UNWTO,NA
 172,Argentina,2019,UNWTO,NA
+172,NA,2020,2020:2022 gapfill,gapfilled
 172,Argentina,2020,UNWTO,NA
+172,NA,2021,2020:2022 gapfill,gapfilled
 172,Argentina,2021,UNWTO,NA
+172,NA,2022,2020:2022 gapfill,gapfilled
 172,Argentina,2022,UNWTO,NA
 173,Uruguay,2008,UNWTO,NA
 173,Uruguay,2009,UNWTO,NA
@@ -1616,9 +1871,9 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 173,Uruguay,2017,UNWTO,NA
 173,Uruguay,2018,UNWTO,NA
 173,Uruguay,2019,UNWTO,NA
-173,Uruguay,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-173,Uruguay,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-173,Uruguay,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+173,NA,2020,2020:2022 gapfill,gapfilled
+173,NA,2021,NA,NA
+173,NA,2022,NA,NA
 174,Finland,2008,UNWTO,NA
 174,Finland,2009,UNWTO,NA
 174,Finland,2010,UNWTO,NA
@@ -1631,8 +1886,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 174,Finland,2017,UNWTO,NA
 174,Finland,2018,UNWTO,NA
 174,Finland,2019,UNWTO,NA
+174,NA,2020,2020:2022 gapfill,gapfilled
 174,Finland,2020,UNWTO,NA
+174,NA,2021,2020:2022 gapfill,gapfilled
 174,Finland,2021,UNWTO,NA
+174,NA,2022,2020:2022 gapfill,gapfilled
 174,Finland,2022,UNWTO,NA
 175,Denmark,2008,UNWTO,NA
 175,Denmark,2009,UNWTO,NA
@@ -1646,8 +1904,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 175,Denmark,2017,UNWTO,NA
 175,Denmark,2018,UNWTO,NA
 175,Denmark,2019,UNWTO,NA
+175,NA,2020,2020:2022 gapfill,gapfilled
 175,Denmark,2020,UNWTO,NA
+175,NA,2021,2020:2022 gapfill,gapfilled
 175,Denmark,2021,UNWTO,NA
+175,NA,2022,2020:2022 gapfill,gapfilled
 175,Denmark,2022,UNWTO,NA
 176,Germany,2008,UNWTO,NA
 176,Germany,2009,UNWTO,NA
@@ -1661,8 +1922,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 176,Germany,2017,UNWTO,NA
 176,Germany,2018,UNWTO,NA
 176,Germany,2019,UNWTO,NA
+176,NA,2020,2020:2022 gapfill,gapfilled
 176,Germany,2020,UNWTO,NA
+176,NA,2021,2020:2022 gapfill,gapfilled
 176,Germany,2021,UNWTO,NA
+176,NA,2022,2020:2022 gapfill,gapfilled
 176,Germany,2022,UNWTO,NA
 177,Netherlands,2008,UNWTO,NA
 177,Netherlands,2009,UNWTO,NA
@@ -1676,8 +1940,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 177,Netherlands,2017,UNWTO,NA
 177,Netherlands,2018,UNWTO,NA
 177,Netherlands,2019,UNWTO,NA
+177,NA,2020,2020:2022 gapfill,gapfilled
 177,Netherlands,2020,UNWTO,NA
+177,NA,2021,2020:2022 gapfill,gapfilled
 177,Netherlands,2021,UNWTO,NA
+177,NA,2022,2020:2022 gapfill,gapfilled
 177,Netherlands,2022,UNWTO,NA
 178,Poland,2008,UNWTO,NA
 178,Poland,2009,UNWTO,NA
@@ -1691,8 +1958,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 178,Poland,2017,UNWTO,NA
 178,Poland,2018,UNWTO,NA
 178,Poland,2019,UNWTO,NA
+178,NA,2020,2020:2022 gapfill,gapfilled
 178,Poland,2020,UNWTO,NA
+178,NA,2021,2020:2022 gapfill,gapfilled
 178,Poland,2021,UNWTO,NA
+178,NA,2022,2020:2022 gapfill,gapfilled
 178,Poland,2022,UNWTO,NA
 179,France,2008,UNWTO,NA
 179,France,2009,UNWTO,NA
@@ -1706,9 +1976,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 179,France,2017,UNWTO,NA
 179,France,2018,UNWTO,NA
 179,France,2019,UNWTO,NA
+179,NA,2020,2020:2022 gapfill,gapfilled
 179,France,2020,UNWTO,NA
+179,NA,2021,2020:2022 gapfill,gapfilled
 179,France,2021,UNWTO,NA
-179,France,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+179,NA,2022,2020:2022 gapfill,gapfilled
 180,United Kingdom,2008,UNWTO,NA
 180,United Kingdom,2009,UNWTO,NA
 180,United Kingdom,2010,UNWTO,NA
@@ -1721,8 +1993,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 180,United Kingdom,2017,UNWTO,NA
 180,United Kingdom,2018,UNWTO,NA
 180,United Kingdom,2019,UNWTO,NA
+180,NA,2020,2020:2022 gapfill,gapfilled
 180,United Kingdom,2020,UNWTO,NA
+180,NA,2021,2020:2022 gapfill,gapfilled
 180,United Kingdom,2021,UNWTO,NA
+180,NA,2022,2020:2022 gapfill,gapfilled
 180,United Kingdom,2022,UNWTO,NA
 181,Ireland,2008,UNWTO,NA
 181,Ireland,2009,UNWTO,NA
@@ -1736,9 +2011,9 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 181,Ireland,2017,UNWTO,NA
 181,Ireland,2018,UNWTO,NA
 181,Ireland,2019,UNWTO,NA
-181,Ireland,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-181,Ireland,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-181,Ireland,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+181,NA,2020,2020:2022 gapfill,gapfilled
+181,NA,2021,NA,NA
+181,NA,2022,NA,NA
 182,Spain,2008,UNWTO,NA
 182,Spain,2009,UNWTO,NA
 182,Spain,2010,UNWTO,NA
@@ -1751,8 +2026,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 182,Spain,2017,UNWTO,NA
 182,Spain,2018,UNWTO,NA
 182,Spain,2019,UNWTO,NA
+182,NA,2020,2020:2022 gapfill,gapfilled
 182,Spain,2020,UNWTO,NA
+182,NA,2021,2020:2022 gapfill,gapfilled
 182,Spain,2021,UNWTO,NA
+182,NA,2022,2020:2022 gapfill,gapfilled
 182,Spain,2022,UNWTO,NA
 183,Portugal,2008,UNWTO,NA
 183,Portugal,2009,UNWTO,NA
@@ -1766,8 +2044,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 183,Portugal,2017,UNWTO,NA
 183,Portugal,2018,UNWTO,NA
 183,Portugal,2019,UNWTO,NA
+183,NA,2020,2020:2022 gapfill,gapfilled
 183,Portugal,2020,UNWTO,NA
+183,NA,2021,2020:2022 gapfill,gapfilled
 183,Portugal,2021,UNWTO,NA
+183,NA,2022,2020:2022 gapfill,gapfilled
 183,Portugal,2022,UNWTO,NA
 184,Italy,2008,UNWTO,NA
 184,Italy,2009,UNWTO,NA
@@ -1781,8 +2062,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 184,Italy,2017,UNWTO,NA
 184,Italy,2018,UNWTO,NA
 184,Italy,2019,UNWTO,NA
+184,NA,2020,2020:2022 gapfill,gapfilled
 184,Italy,2020,UNWTO,NA
+184,NA,2021,2020:2022 gapfill,gapfilled
 184,Italy,2021,UNWTO,NA
+184,NA,2022,2020:2022 gapfill,gapfilled
 184,Italy,2022,UNWTO,NA
 185,Monaco,2008,UNWTO,NA
 185,Monaco,2009,UNWTO,NA
@@ -1796,8 +2080,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 185,Monaco,2017,UNWTO,NA
 185,Monaco,2018,UNWTO,NA
 185,Monaco,2019,UNWTO,NA
+185,NA,2020,2020:2022 gapfill,gapfilled
 185,Monaco,2020,UNWTO,NA
+185,NA,2021,2020:2022 gapfill,gapfilled
 185,Monaco,2021,UNWTO,NA
+185,NA,2022,2020:2022 gapfill,gapfilled
 185,Monaco,2022,UNWTO,NA
 186,Montenegro,2008,UNWTO,NA
 186,Montenegro,2009,UNWTO,NA
@@ -1811,8 +2098,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 186,Montenegro,2017,UNWTO,NA
 186,Montenegro,2018,UNWTO,NA
 186,Montenegro,2019,UNWTO,NA
+186,NA,2020,2020:2022 gapfill,gapfilled
 186,Montenegro,2020,UNWTO,NA
+186,NA,2021,2020:2022 gapfill,gapfilled
 186,Montenegro,2021,UNWTO,NA
+186,NA,2022,2020:2022 gapfill,gapfilled
 186,Montenegro,2022,UNWTO,NA
 187,Croatia,2008,UNWTO,NA
 187,Croatia,2009,UNWTO,NA
@@ -1826,8 +2116,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 187,Croatia,2017,UNWTO,NA
 187,Croatia,2018,UNWTO,NA
 187,Croatia,2019,UNWTO,NA
+187,NA,2020,2020:2022 gapfill,gapfilled
 187,Croatia,2020,UNWTO,NA
+187,NA,2021,2020:2022 gapfill,gapfilled
 187,Croatia,2021,UNWTO,NA
+187,NA,2022,2020:2022 gapfill,gapfilled
 187,Croatia,2022,UNWTO,NA
 188,Slovenia,2008,UNWTO,NA
 188,Slovenia,2009,UNWTO,NA
@@ -1841,8 +2134,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 188,Slovenia,2017,UNWTO,NA
 188,Slovenia,2018,UNWTO,NA
 188,Slovenia,2019,UNWTO,NA
+188,NA,2020,2020:2022 gapfill,gapfilled
 188,Slovenia,2020,UNWTO,NA
+188,NA,2021,2020:2022 gapfill,gapfilled
 188,Slovenia,2021,UNWTO,NA
+188,NA,2022,2020:2022 gapfill,gapfilled
 188,Slovenia,2022,UNWTO,NA
 189,Lithuania,2008,UNWTO,NA
 189,Lithuania,2009,UNWTO,NA
@@ -1856,24 +2152,27 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 189,Lithuania,2017,UNWTO,NA
 189,Lithuania,2018,UNWTO,NA
 189,Lithuania,2019,UNWTO,NA
+189,NA,2020,2020:2022 gapfill,gapfilled
 189,Lithuania,2020,UNWTO,NA
+189,NA,2021,2020:2022 gapfill,gapfilled
 189,Lithuania,2021,UNWTO,NA
+189,NA,2022,2020:2022 gapfill,gapfilled
 189,Lithuania,2022,UNWTO,NA
 190,Qatar,2008,UNWTO,NA
-190,Qatar,2009,UNWTO - linear model,gapfilled
-190,Qatar,2010,UNWTO - linear model,gapfilled
-190,Qatar,2011,UNWTO - linear model,gapfilled
-190,Qatar,2012,UNWTO - linear model,gapfilled
-190,Qatar,2013,UNWTO - linear model,gapfilled
-190,Qatar,2014,UNWTO - linear model,gapfilled
-190,Qatar,2015,UNWTO - linear model,gapfilled
-190,Qatar,2016,UNWTO - linear model,gapfilled
-190,Qatar,2017,UNWTO - linear model,gapfilled
-190,Qatar,2018,UNWTO - linear model,gapfilled
-190,Qatar,2019,UNWTO - linear model,gapfilled
-190,Qatar,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-190,Qatar,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-190,Qatar,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+190,NA,2009,NA,NA
+190,NA,2010,NA,NA
+190,NA,2011,NA,NA
+190,NA,2012,NA,NA
+190,NA,2013,NA,NA
+190,NA,2014,NA,NA
+190,NA,2015,NA,NA
+190,NA,2016,NA,NA
+190,NA,2017,NA,NA
+190,NA,2018,NA,NA
+190,NA,2019,NA,NA
+190,NA,2020,NA,NA
+190,NA,2021,NA,NA
+190,NA,2022,NA,NA
 193,Guinea Bissau,2008,UNWTO,NA
 193,Guinea Bissau,2009,UNWTO,NA
 193,Guinea Bissau,2010,UNWTO,NA
@@ -1886,11 +2185,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 193,Guinea Bissau,2017,UNWTO,NA
 193,Guinea Bissau,2018,UNWTO,NA
 193,Guinea Bissau,2019,UNWTO,NA
-193,Guinea Bissau,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-193,Guinea Bissau,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-193,Guinea Bissau,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+193,NA,2020,2020:2022 gapfill,gapfilled
+193,NA,2021,NA,NA
+193,NA,2022,NA,NA
 194,Guinea,2008,UNWTO,NA
-194,Guinea,2009,UNWTO - nearby year,gapfilled
+194,Guinea,2009,Interpolation,gapfilled
 194,Guinea,2010,UNWTO,NA
 194,Guinea,2011,UNWTO,NA
 194,Guinea,2012,UNWTO,NA
@@ -1899,41 +2198,44 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 194,Guinea,2015,UNWTO,NA
 194,Guinea,2016,UNWTO,NA
 194,Guinea,2017,UNWTO,NA
-194,Guinea,2018,UNWTO - linear model,gapfilled
-194,Guinea,2019,UNWTO - linear model,gapfilled
-194,Guinea,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-194,Guinea,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-194,Guinea,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+194,NA,2018,NA,NA
+194,NA,2019,NA,NA
+194,NA,2020,NA,NA
+194,NA,2021,NA,NA
+194,NA,2022,NA,NA
 196,Nigeria,2008,UNWTO,NA
 196,Nigeria,2009,UNWTO,NA
 196,Nigeria,2010,UNWTO,NA
 196,Nigeria,2011,UNWTO,NA
 196,Nigeria,2012,UNWTO,NA
 196,Nigeria,2013,UNWTO,NA
-196,Nigeria,2014,UNWTO - nearby year,gapfilled
+196,Nigeria,2014,Interpolation,gapfilled
 196,Nigeria,2015,UNWTO,NA
 196,Nigeria,2016,UNWTO,NA
 196,Nigeria,2017,UNWTO,NA
 196,Nigeria,2018,UNWTO,NA
 196,Nigeria,2019,UNWTO,NA
+196,NA,2020,2020:2022 gapfill,gapfilled
 196,Nigeria,2020,UNWTO,NA
+196,NA,2021,2020:2022 gapfill,gapfilled
 196,Nigeria,2021,UNWTO,NA
+196,NA,2022,2020:2022 gapfill,gapfilled
 196,Nigeria,2022,UNWTO,NA
 197,Cameroon,2008,UNWTO,NA
 197,Cameroon,2009,UNWTO,NA
 197,Cameroon,2010,UNWTO,NA
 197,Cameroon,2011,UNWTO,NA
 197,Cameroon,2012,UNWTO,NA
-197,Cameroon,2013,UNWTO - linear model,gapfilled
-197,Cameroon,2014,UNWTO - linear model,gapfilled
-197,Cameroon,2015,UNWTO - linear model,gapfilled
-197,Cameroon,2016,UNWTO - linear model,gapfilled
-197,Cameroon,2017,UNWTO - linear model,gapfilled
-197,Cameroon,2018,UNWTO - linear model,gapfilled
-197,Cameroon,2019,UNWTO - linear model,gapfilled
-197,Cameroon,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-197,Cameroon,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-197,Cameroon,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+197,NA,2013,NA,NA
+197,NA,2014,NA,NA
+197,NA,2015,NA,NA
+197,NA,2016,NA,NA
+197,NA,2017,NA,NA
+197,NA,2018,NA,NA
+197,NA,2019,NA,NA
+197,NA,2020,NA,NA
+197,NA,2021,NA,NA
+197,NA,2022,NA,NA
 199,Democratic Republic of the Congo,2008,UNWTO,NA
 199,Democratic Republic of the Congo,2009,UNWTO,NA
 199,Democratic Republic of the Congo,2010,UNWTO,NA
@@ -1946,9 +2248,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 199,Democratic Republic of the Congo,2017,UNWTO,NA
 199,Democratic Republic of the Congo,2018,UNWTO,NA
 199,Democratic Republic of the Congo,2019,UNWTO,NA
+199,NA,2020,2020:2022 gapfill,gapfilled
 199,Democratic Republic of the Congo,2020,UNWTO,NA
+199,NA,2021,2020:2022 gapfill,gapfilled
 199,Democratic Republic of the Congo,2021,UNWTO,NA
-199,Democratic Republic of the Congo,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+199,NA,2022,2020:2022 gapfill,gapfilled
 200,Angola,2008,UNWTO,NA
 200,Angola,2009,UNWTO,NA
 200,Angola,2010,UNWTO,NA
@@ -1961,8 +2265,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 200,Angola,2017,UNWTO,NA
 200,Angola,2018,UNWTO,NA
 200,Angola,2019,UNWTO,NA
+200,NA,2020,2020:2022 gapfill,gapfilled
 200,Angola,2020,UNWTO,NA
+200,NA,2021,2020:2022 gapfill,gapfilled
 200,Angola,2021,UNWTO,NA
+200,NA,2022,2020:2022 gapfill,gapfilled
 200,Angola,2022,UNWTO,NA
 202,Tanzania,2008,UNWTO,NA
 202,Tanzania,2009,UNWTO,NA
@@ -1976,8 +2283,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 202,Tanzania,2017,UNWTO,NA
 202,Tanzania,2018,UNWTO,NA
 202,Tanzania,2019,UNWTO,NA
+202,NA,2020,2020:2022 gapfill,gapfilled
 202,Tanzania,2020,UNWTO,NA
+202,NA,2021,2020:2022 gapfill,gapfilled
 202,Tanzania,2021,UNWTO,NA
+202,NA,2022,2020:2022 gapfill,gapfilled
 202,Tanzania,2022,UNWTO,NA
 203,India,2008,UNWTO,NA
 203,India,2009,UNWTO,NA
@@ -1988,12 +2298,14 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 203,India,2014,UNWTO,NA
 203,India,2015,UNWTO,NA
 203,India,2016,UNWTO,NA
-203,India,2017,UNWTO - nearby year,gapfilled
-203,India,2018,UNWTO - nearby year,gapfilled
+203,India,2017,Interpolation,gapfilled
+203,India,2018,Interpolation,gapfilled
 203,India,2019,UNWTO,NA
+203,NA,2020,2020:2022 gapfill,gapfilled
 203,India,2020,UNWTO,NA
+203,NA,2021,2020:2022 gapfill,gapfilled
 203,India,2021,UNWTO,NA
-203,India,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+203,NA,2022,2020:2022 gapfill,gapfilled
 204,Bangladesh,2008,UNWTO,NA
 204,Bangladesh,2009,UNWTO,NA
 204,Bangladesh,2010,UNWTO,NA
@@ -2006,9 +2318,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 204,Bangladesh,2017,UNWTO,NA
 204,Bangladesh,2018,UNWTO,NA
 204,Bangladesh,2019,UNWTO,NA
+204,NA,2020,2020:2022 gapfill,gapfilled
 204,Bangladesh,2020,UNWTO,NA
+204,NA,2021,2020:2022 gapfill,gapfilled
 204,Bangladesh,2021,UNWTO,NA
-204,Bangladesh,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+204,NA,2022,2020:2022 gapfill,gapfilled
 205,Myanmar,2008,UNWTO,NA
 205,Myanmar,2009,UNWTO,NA
 205,Myanmar,2010,UNWTO,NA
@@ -2021,8 +2335,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 205,Myanmar,2017,UNWTO,NA
 205,Myanmar,2018,UNWTO,NA
 205,Myanmar,2019,UNWTO,NA
+205,NA,2020,2020:2022 gapfill,gapfilled
 205,Myanmar,2020,UNWTO,NA
+205,NA,2021,2020:2022 gapfill,gapfilled
 205,Myanmar,2021,UNWTO,NA
+205,NA,2022,2020:2022 gapfill,gapfilled
 205,Myanmar,2022,UNWTO,NA
 206,Malaysia,2008,UNWTO,NA
 206,Malaysia,2009,UNWTO,NA
@@ -2036,24 +2353,27 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 206,Malaysia,2017,UNWTO,NA
 206,Malaysia,2018,UNWTO,NA
 206,Malaysia,2019,UNWTO,NA
+206,NA,2020,2020:2022 gapfill,gapfilled
 206,Malaysia,2020,UNWTO,NA
+206,NA,2021,2020:2022 gapfill,gapfilled
 206,Malaysia,2021,UNWTO,NA
+206,NA,2022,2020:2022 gapfill,gapfilled
 206,Malaysia,2022,UNWTO,NA
-207,Vietnam,2008,arrivals minus same day,gapfilled
-207,Vietnam,2009,arrivals minus same day,gapfilled
-207,Vietnam,2010,arrivals minus same day,gapfilled
-207,Vietnam,2011,arrivals minus same day,gapfilled
-207,Vietnam,2012,UNWTO - nearby year,gapfilled
+207,Vietnam,2008,Arrivals minus same day,gapfilled
+207,Vietnam,2009,Arrivals minus same day,gapfilled
+207,Vietnam,2010,Arrivals minus same day,gapfilled
+207,Vietnam,2011,Arrivals minus same day,gapfilled
+207,Vietnam,2012,Interpolation,gapfilled
 207,Vietnam,2013,UNWTO,NA
 207,Vietnam,2014,UNWTO,NA
 207,Vietnam,2015,UNWTO,NA
-207,Vietnam,2016,UNWTO - linear model,gapfilled
-207,Vietnam,2017,UNWTO - linear model,gapfilled
-207,Vietnam,2018,UNWTO - linear model,gapfilled
-207,Vietnam,2019,UNWTO - linear model,gapfilled
-207,Vietnam,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-207,Vietnam,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-207,Vietnam,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+207,NA,2016,NA,NA
+207,NA,2017,NA,NA
+207,NA,2018,NA,NA
+207,NA,2019,NA,NA
+207,NA,2020,NA,NA
+207,NA,2021,NA,NA
+207,NA,2022,NA,NA
 208,Singapore,2008,UNWTO,NA
 208,Singapore,2009,UNWTO,NA
 208,Singapore,2010,UNWTO,NA
@@ -2066,8 +2386,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 208,Singapore,2017,UNWTO,NA
 208,Singapore,2018,UNWTO,NA
 208,Singapore,2019,UNWTO,NA
+208,NA,2020,2020:2022 gapfill,gapfilled
 208,Singapore,2020,UNWTO,NA
+208,NA,2021,2020:2022 gapfill,gapfilled
 208,Singapore,2021,UNWTO,NA
+208,NA,2022,2020:2022 gapfill,gapfilled
 208,Singapore,2022,UNWTO,NA
 209,China,2008,UNWTO,NA
 209,China,2009,UNWTO,NA
@@ -2081,8 +2404,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 209,China,2017,UNWTO,NA
 209,China,2018,UNWTO,NA
 209,China,2019,UNWTO,NA
+209,NA,2020,2020:2022 gapfill,gapfilled
 209,China,2020,UNWTO,NA
+209,NA,2021,2020:2022 gapfill,gapfilled
 209,China,2021,UNWTO,NA
+209,NA,2022,2020:2022 gapfill,gapfilled
 209,China,2022,UNWTO,NA
 212,Kiribati,2008,UNWTO,NA
 212,Kiribati,2009,UNWTO,NA
@@ -2096,8 +2422,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 212,Kiribati,2017,UNWTO,NA
 212,Kiribati,2018,UNWTO,NA
 212,Kiribati,2019,UNWTO,NA
+212,NA,2020,2020:2022 gapfill,gapfilled
 212,Kiribati,2020,UNWTO,NA
+212,NA,2021,2020:2022 gapfill,gapfilled
 212,Kiribati,2021,UNWTO,NA
+212,NA,2022,2020:2022 gapfill,gapfilled
 212,Kiribati,2022,UNWTO,NA
 214,Egypt,2008,UNWTO,NA
 214,Egypt,2009,UNWTO,NA
@@ -2111,8 +2440,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 214,Egypt,2017,UNWTO,NA
 214,Egypt,2018,UNWTO,NA
 214,Egypt,2019,UNWTO,NA
+214,NA,2020,2020:2022 gapfill,gapfilled
 214,Egypt,2020,UNWTO,NA
+214,NA,2021,2020:2022 gapfill,gapfilled
 214,Egypt,2021,UNWTO,NA
+214,NA,2022,2020:2022 gapfill,gapfilled
 214,Egypt,2022,UNWTO,NA
 215,Jordan,2008,UNWTO,NA
 215,Jordan,2009,UNWTO,NA
@@ -2126,24 +2458,29 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 215,Jordan,2017,UNWTO,NA
 215,Jordan,2018,UNWTO,NA
 215,Jordan,2019,UNWTO,NA
+215,NA,2020,2020:2022 gapfill,gapfilled
 215,Jordan,2020,UNWTO,NA
+215,NA,2021,2020:2022 gapfill,gapfilled
 215,Jordan,2021,UNWTO,NA
+215,NA,2022,2020:2022 gapfill,gapfilled
 215,Jordan,2022,UNWTO,NA
-216,Indonesia,2008,UNWTO - nearby year,gapfilled
-216,Indonesia,2009,UNWTO - nearby year,gapfilled
-216,Indonesia,2010,UNWTO - nearby year,gapfilled
-216,Indonesia,2011,UNWTO - nearby year,gapfilled
-216,Indonesia,2012,UNWTO - nearby year,gapfilled
-216,Indonesia,2013,UNWTO - nearby year,gapfilled
-216,Indonesia,2014,UNWTO - nearby year,gapfilled
+216,Indonesia,2008,Upfilling,gapfilled
+216,Indonesia,2009,Upfilling,gapfilled
+216,Indonesia,2010,Upfilling,gapfilled
+216,Indonesia,2011,Upfilling,gapfilled
+216,Indonesia,2012,Upfilling,gapfilled
+216,Indonesia,2013,Upfilling,gapfilled
+216,Indonesia,2014,Upfilling,gapfilled
 216,Indonesia,2015,UNWTO,NA
 216,Indonesia,2016,UNWTO,NA
 216,Indonesia,2017,UNWTO,NA
 216,Indonesia,2018,UNWTO,NA
 216,Indonesia,2019,UNWTO,NA
+216,NA,2020,2020:2022 gapfill,gapfilled
 216,Indonesia,2020,UNWTO,NA
+216,NA,2021,2020:2022 gapfill,gapfilled
 216,Indonesia,2021,UNWTO,NA
-216,Indonesia,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+216,NA,2022,2020:2022 gapfill,gapfilled
 218,Canada,2008,UNWTO,NA
 218,Canada,2009,UNWTO,NA
 218,Canada,2010,UNWTO,NA
@@ -2156,8 +2493,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 218,Canada,2017,UNWTO,NA
 218,Canada,2018,UNWTO,NA
 218,Canada,2019,UNWTO,NA
+218,NA,2020,2020:2022 gapfill,gapfilled
 218,Canada,2020,UNWTO,NA
+218,NA,2021,2020:2022 gapfill,gapfilled
 218,Canada,2021,UNWTO,NA
+218,NA,2022,2020:2022 gapfill,gapfilled
 218,Canada,2022,UNWTO,NA
 220,Sint Maarten,2008,UNWTO,NA
 220,Sint Maarten,2009,UNWTO,NA
@@ -2171,8 +2511,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 220,Sint Maarten,2017,UNWTO,NA
 220,Sint Maarten,2018,UNWTO,NA
 220,Sint Maarten,2019,UNWTO,NA
+220,NA,2020,2020:2022 gapfill,gapfilled
 220,Sint Maarten,2020,UNWTO,NA
+220,NA,2021,2020:2022 gapfill,gapfilled
 220,Sint Maarten,2021,UNWTO,NA
+220,NA,2022,2020:2022 gapfill,gapfilled
 220,Sint Maarten,2022,UNWTO,NA
 222,Sweden,2008,UNWTO,NA
 222,Sweden,2009,UNWTO,NA
@@ -2186,8 +2529,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 222,Sweden,2017,UNWTO,NA
 222,Sweden,2018,UNWTO,NA
 222,Sweden,2019,UNWTO,NA
+222,NA,2020,2020:2022 gapfill,gapfilled
 222,Sweden,2020,UNWTO,NA
+222,NA,2021,2020:2022 gapfill,gapfilled
 222,Sweden,2021,UNWTO,NA
+222,NA,2022,2020:2022 gapfill,gapfilled
 222,Sweden,2022,UNWTO,NA
 223,Norway,2008,UNWTO,NA
 223,Norway,2009,UNWTO,NA
@@ -2201,8 +2547,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 223,Norway,2017,UNWTO,NA
 223,Norway,2018,UNWTO,NA
 223,Norway,2019,UNWTO,NA
+223,NA,2020,2020:2022 gapfill,gapfilled
 223,Norway,2020,UNWTO,NA
+223,NA,2021,2020:2022 gapfill,gapfilled
 223,Norway,2021,UNWTO,NA
+223,NA,2022,2020:2022 gapfill,gapfilled
 223,Norway,2022,UNWTO,NA
 224,Chile,2008,UNWTO,NA
 224,Chile,2009,UNWTO,NA
@@ -2216,8 +2565,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 224,Chile,2017,UNWTO,NA
 224,Chile,2018,UNWTO,NA
 224,Chile,2019,UNWTO,NA
+224,NA,2020,2020:2022 gapfill,gapfilled
 224,Chile,2020,UNWTO,NA
+224,NA,2021,2020:2022 gapfill,gapfilled
 224,Chile,2021,UNWTO,NA
+224,NA,2022,2020:2022 gapfill,gapfilled
 224,Chile,2022,UNWTO,NA
 231,East Timor,2008,UNWTO,NA
 231,East Timor,2009,UNWTO,NA
@@ -2231,9 +2583,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 231,East Timor,2017,UNWTO,NA
 231,East Timor,2018,UNWTO,NA
 231,East Timor,2019,UNWTO,NA
+231,NA,2020,2020:2022 gapfill,gapfilled
 231,East Timor,2020,UNWTO,NA
+231,NA,2021,2020:2022 gapfill,gapfilled
 231,East Timor,2021,UNWTO,NA
-231,East Timor,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+231,NA,2022,2020:2022 gapfill,gapfilled
 232,Bosnia and Herzegovina,2008,UNWTO,NA
 232,Bosnia and Herzegovina,2009,UNWTO,NA
 232,Bosnia and Herzegovina,2010,UNWTO,NA
@@ -2246,8 +2600,11 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 232,Bosnia and Herzegovina,2017,UNWTO,NA
 232,Bosnia and Herzegovina,2018,UNWTO,NA
 232,Bosnia and Herzegovina,2019,UNWTO,NA
+232,NA,2020,2020:2022 gapfill,gapfilled
 232,Bosnia and Herzegovina,2020,UNWTO,NA
+232,NA,2021,2020:2022 gapfill,gapfilled
 232,Bosnia and Herzegovina,2021,UNWTO,NA
+232,NA,2022,2020:2022 gapfill,gapfilled
 232,Bosnia and Herzegovina,2022,UNWTO,NA
 244,Curacao,2008,UNWTO,NA
 244,Curacao,2009,UNWTO,NA
@@ -2261,24 +2618,27 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 244,Curacao,2017,UNWTO,NA
 244,Curacao,2018,UNWTO,NA
 244,Curacao,2019,UNWTO,NA
+244,NA,2020,2020:2022 gapfill,gapfilled
 244,Curacao,2020,UNWTO,NA
+244,NA,2021,2020:2022 gapfill,gapfilled
 244,Curacao,2021,UNWTO,NA
+244,NA,2022,2020:2022 gapfill,gapfilled
 244,Curacao,2022,UNWTO,NA
 245,Bonaire,2008,UNWTO,NA
 245,Bonaire,2009,UNWTO,NA
 245,Bonaire,2010,UNWTO,NA
-245,Bonaire,2011,UNWTO - linear model,gapfilled
-245,Bonaire,2012,UNWTO - linear model,gapfilled
-245,Bonaire,2013,UNWTO - linear model,gapfilled
-245,Bonaire,2014,UNWTO - linear model,gapfilled
-245,Bonaire,2015,UNWTO - linear model,gapfilled
-245,Bonaire,2016,UNWTO - linear model,gapfilled
-245,Bonaire,2017,UNWTO - linear model,gapfilled
-245,Bonaire,2018,UNWTO - linear model,gapfilled
-245,Bonaire,2019,UNWTO - linear model,gapfilled
-245,Bonaire,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-245,Bonaire,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-245,Bonaire,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+245,NA,2011,NA,NA
+245,NA,2012,NA,NA
+245,NA,2013,NA,NA
+245,NA,2014,NA,NA
+245,NA,2015,NA,NA
+245,NA,2016,NA,NA
+245,NA,2017,NA,NA
+245,NA,2018,NA,NA
+245,NA,2019,NA,NA
+245,NA,2020,NA,NA
+245,NA,2021,NA,NA
+245,NA,2022,NA,NA
 247,Brunei,2008,UNWTO,NA
 247,Brunei,2009,UNWTO,NA
 247,Brunei,2010,UNWTO,NA
@@ -2291,39 +2651,41 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 247,Brunei,2017,UNWTO,NA
 247,Brunei,2018,UNWTO,NA
 247,Brunei,2019,UNWTO,NA
+247,NA,2020,2020:2022 gapfill,gapfilled
 247,Brunei,2020,UNWTO,NA
+247,NA,2021,2020:2022 gapfill,gapfilled
 247,Brunei,2021,UNWTO,NA
-247,Brunei,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+247,NA,2022,2020:2022 gapfill,gapfilled
 248,Saba,2008,UNWTO,NA
 248,Saba,2009,UNWTO,NA
 248,Saba,2010,UNWTO,NA
-248,Saba,2011,UNWTO - linear model,gapfilled
-248,Saba,2012,UNWTO - linear model,gapfilled
-248,Saba,2013,UNWTO - linear model,gapfilled
-248,Saba,2014,UNWTO - linear model,gapfilled
-248,Saba,2015,UNWTO - linear model,gapfilled
-248,Saba,2016,UNWTO - linear model,gapfilled
-248,Saba,2017,UNWTO - linear model,gapfilled
-248,Saba,2018,UNWTO - linear model,gapfilled
-248,Saba,2019,UNWTO - linear model,gapfilled
-248,Saba,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-248,Saba,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-248,Saba,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+248,NA,2011,NA,NA
+248,NA,2012,NA,NA
+248,NA,2013,NA,NA
+248,NA,2014,NA,NA
+248,NA,2015,NA,NA
+248,NA,2016,NA,NA
+248,NA,2017,NA,NA
+248,NA,2018,NA,NA
+248,NA,2019,NA,NA
+248,NA,2020,NA,NA
+248,NA,2021,NA,NA
+248,NA,2022,NA,NA
 249,Sint Eustatius,2008,UNWTO,NA
 249,Sint Eustatius,2009,UNWTO,NA
 249,Sint Eustatius,2010,UNWTO,NA
-249,Sint Eustatius,2011,UNWTO - linear model,gapfilled
-249,Sint Eustatius,2012,UNWTO - linear model,gapfilled
-249,Sint Eustatius,2013,UNWTO - linear model,gapfilled
-249,Sint Eustatius,2014,UNWTO - linear model,gapfilled
-249,Sint Eustatius,2015,UNWTO - linear model,gapfilled
-249,Sint Eustatius,2016,UNWTO - linear model,gapfilled
-249,Sint Eustatius,2017,UNWTO - linear model,gapfilled
-249,Sint Eustatius,2018,UNWTO - linear model,gapfilled
-249,Sint Eustatius,2019,UNWTO - linear model,gapfilled
-249,Sint Eustatius,2020,UNWTO - 2020:2022 gapfill method,gapfilled
-249,Sint Eustatius,2021,UNWTO - 2020:2022 gapfill method,gapfilled
-249,Sint Eustatius,2022,UNWTO - 2020:2022 gapfill method,gapfilled
+249,NA,2011,NA,NA
+249,NA,2012,NA,NA
+249,NA,2013,NA,NA
+249,NA,2014,NA,NA
+249,NA,2015,NA,NA
+249,NA,2016,NA,NA
+249,NA,2017,NA,NA
+249,NA,2018,NA,NA
+249,NA,2019,NA,NA
+249,NA,2020,NA,NA
+249,NA,2021,NA,NA
+249,NA,2022,NA,NA
 250,Aruba,2008,UNWTO,NA
 250,Aruba,2009,UNWTO,NA
 250,Aruba,2010,UNWTO,NA
@@ -2336,6 +2698,9 @@ rgn_id,rgn_name,year,data_source,arrivals_gf
 250,Aruba,2017,UNWTO,NA
 250,Aruba,2018,UNWTO,NA
 250,Aruba,2019,UNWTO,NA
+250,NA,2020,2020:2022 gapfill,gapfilled
 250,Aruba,2020,UNWTO,NA
+250,NA,2021,2020:2022 gapfill,gapfilled
 250,Aruba,2021,UNWTO,NA
+250,NA,2022,2020:2022 gapfill,gapfilled
 250,Aruba,2022,UNWTO,NA
