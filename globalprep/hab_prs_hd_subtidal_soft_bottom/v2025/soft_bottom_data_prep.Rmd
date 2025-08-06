@@ -36,7 +36,7 @@ We employ a statistical remapping approach similar to that of McDonald et al. 20
 
 **Native data resolution**: 1 degree
 
-**Time range**: 2010-2017
+**Time range**: 2010-2017 (downloaded individually)
 
 **Format**: .csv
 
@@ -77,6 +77,8 @@ dir_goal_anx <- file.path(dir_anx, goal, scenario, 'spp_risk_dists')
 ### Find the reference point:
 
 Download data for all years here: https://data.mapping-global-fishing.cloud.edu.au/shiny/mapping_fishing_effort_app/
+
+For this analysis, we chose to use the 99.9 percentile (0.1% of area) from 2010 to represent total seafloor destruction: `quant_99_9_2010`. 
 
 ```{r}
 #2010
