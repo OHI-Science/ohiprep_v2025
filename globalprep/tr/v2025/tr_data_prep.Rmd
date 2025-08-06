@@ -107,6 +107,7 @@ librarian::shelf(
   countrycode,
   pdftools,
   plotly,
+  zoo
 )
 
 # ---- sources! ----
@@ -203,15 +204,15 @@ int_arrivals_gf <- int_arrivals_clean %>%
   ) %>% 
   mutate(arrivals_method = ifelse(is.na(overnights) & !is.na(same_day) & !is.na(total_arrivals), "arrivals minus same day", NA),
          arrivals_method = ifelse(is.na(total_arrivals) & !is.na(same_day) & !is.na(overnights), "overnights plus same day", arrivals_method)) %>%
-  mutate(arrivals_gapfilled = ifelse(arrivals_method == "arrivals minus same day", "gapfilled", NA),
-         arrivals_gapfilled = ifelse(arrivals_method == "overnights plus same day", "gapfilled", arrivals_gapfilled)) %>% # prepare a "gapfilled" column to indicate "gapfilled" or NA
+  mutate(arrivals_gapfilled = ifelse(arrivals_method == "Arrivals minus same day", "gapfilled", NA),
+         arrivals_gapfilled = ifelse(arrivals_method == "Overnights plus same day", "gapfilled", arrivals_gapfilled)) %>% # prepare a "gapfilled" column to indicate "gapfilled" or NA
   ungroup()
 
 # ----- Quick data check -----
 # v2024: overnights has 1036 NAs out of 6021
 # v2024: same_day has 3131 NAs out of 6021
 # v2024: total_arrivals has 2363 NAs
-view(int_arrivals_gf)
+
 colSums(is.na(int_arrivals_gf))
 # v2025: 
 #          overnights            same_day 
@@ -626,23 +627,6 @@ ggplot(dom_acc_guests_agg, aes(x = log(hotel_guests + 1), y = log(total_guests +
        y = "Log(Total Guests + 1)") # looks a lot better!
 
 # let's look at their correlation. see ?`cor` if you are interested in learning more about how this is calculated (`cor` computes the variance of x and the covariance or correlation of x and y).  Kendall correlation is preferred when there are small samples or some outliers (https://datascience.stackexchange.com/questions/64260/pearson-vs-spearman-vs-kendall)
-cor(dom_acc_guests_agg$total_guests, dom_acc_guests_agg$hotel_guests, method = "kendall") # NA
-
-sd(dom_acc_guests_agg$total_guests) # NA
-sd(dom_acc_guests_agg$hotel_guests) # NA
-
-# lets try a different cor method to see if that is why we are getting NAs
-cor(dom_acc_guests_agg$total_guests, dom_acc_guests_agg$hotel_guests, method = "pearson") # NA
-
-sum(!is.finite(dom_acc_guests_agg$total_guests)) # 3454
-sum(!is.finite(dom_acc_guests_agg$hotel_guests)) # 2506
-
-range(dom_acc_guests_agg$total_guests, na.rm = TRUE) #  53 371590
-range(dom_acc_guests_agg$hotel_guests, na.rm = TRUE) # 0.18 342883.00
-sum(is.na(dom_acc_guests_agg$total_guests)) # 3793 NAs
-sum(is.na(dom_acc_guests_agg$hotel_guests)) # 3244 NAs
-mean(!is.na(dom_acc_guests_agg$total_guests)) # 0.2869529, aka 18% NA/total obs
-mean(!is.na(dom_acc_guests_agg$hotel_guests)) # 0.482659, aka 30% NA/total obs
 
 # significant amt of NAs, so we need to remove them before finding the correlation:
 clean_dom_acc_guests <- dom_acc_guests_agg[complete.cases(dom_acc_guests_agg[c("total_guests", "hotel_guests")]), ] # filtering the dom_acc_guests data frame to keep only the rows where both "total_guests" and "hotel_guests" have non-missing values
@@ -717,7 +701,7 @@ dom_acc_guests_gf1 <- dom_acc_guests_agg %>%
   ) %>%
   ungroup() %>%  # now we have intercept and slope values for all regions (at different levels), lets use that to gapfill total_guests with hotel_overnights!
   mutate(
-    arrivals_method = ifelse(is.na(total_guests) & !is.na(hotel_guests), "UNWTO - Hotel:Guests", NA), # do this first so that we can use when tourism_arrivals_ct is NA as a qualifier
+    arrivals_method = ifelse(is.na(total_guests) & !is.na(hotel_guests), "Hotel:Guests", NA), # do this first so that we can use when tourism_arrivals_ct is NA as a qualifier
     tourism_arrivals_ct = case_when(
       !is.na(total_guests) ~ total_guests, # if there is a value, dont gapfill
       is.na(total_guests) & !is.na(hotel_guests) & !is.na(total_guests_slope) ~ (hotel_guests*total_guests_slope),
@@ -725,15 +709,15 @@ dom_acc_guests_gf1 <- dom_acc_guests_agg %>%
       is.na(total_guests) & !is.na(hotel_guests) & is.na(total_guests_slope) & is.na(total_guests_slope_r2mean) & !is.na(total_guests_slope_r1mean) ~ (hotel_guests*total_guests_slope_r1mean),
       TRUE ~ tourism_arrivals_ct
     ),
-    arrivals_gapfilled = ifelse(arrivals_method == "UNWTO - Hotel:Guests", "gapfilled", NA)
+    arrivals_gapfilled = ifelse(arrivals_method == "Hotel:Guests", "gapfilled", NA)
   ) %>% # example: 	New Caledonia and Monaco.  The numbers make sense because the estimated total_guests were larger than hotel_guests (makes sense because total includes other establishments than just hotels) and we can compare to hotel_overnights, of which tourism_arrivals_ct is about half ish, which based on our knowledge of mean_stays (found later on in raw gf for dom) the average is between 2-3 nights.  So this makes sense!
   select(rgn_id, rgn_name, year, tourism_arrivals_ct, total_guests, total_overnights, hotel_guests, hotel_overnights, arrivals_method, arrivals_gapfilled) # select all that we need moving forward
 ```
 
 ```{r}
 # take a look at how that changed the number of NAs after our first dom gf step:
-summary(dom_acc_guests_gf1) # now, `tourism_arrivals_ct` has 2419 NAs, versus 3454 NAs in `total_guests` from the raw clean accommodation data
-colSums(is.na(dom_acc_guests_gf1))
+colSums(is.na(dom_acc_guests_gf1))# now, `tourism_arrivals_ct` has 2419 NAs, versus 3454 NAs in `total_guests` from the raw clean accommodation data
+
 
 dom_acc_guests_gf1_noNA <- dom_acc_guests_gf1 %>% 
   filter(!is.na(tourism_arrivals_ct)) # remove NAs to see how many regions have total_guests values
@@ -813,8 +797,8 @@ dom_acc_guests_gf2 <- dom_acc_trips_join %>%
       is.na(tourism_arrivals_ct) & !is.na(trips_overnights) ~ trips_overnights, # gapfill, when there is no data on total guests or hotel guests, fill with trips_overnights visitors
       TRUE ~ tourism_arrivals_ct # otherwise, NA
     ),
-    arrivals_method = ifelse(is.na(total_guests) & is.na(hotel_guests) & !is.na(trips_overnights), "UNWTO - Trips:Overnights", arrivals_method),
-    arrivals_gapfilled = ifelse(arrivals_method == "UNWTO - Trips:Overnights", "gapfilled", arrivals_gapfilled) # fill the "gapfilled" column to indicate "gapfilled" or NA
+    arrivals_method = ifelse(is.na(total_guests) & is.na(hotel_guests) & !is.na(trips_overnights), "Trips:Overnights", arrivals_method),
+    arrivals_gapfilled = ifelse(arrivals_method == "Trips:Overnights", "gapfilled", arrivals_gapfilled) # fill the "gapfilled" column to indicate "gapfilled" or NA
     ) %>% 
   ungroup() # ungroup since not needed anymore
 
@@ -941,8 +925,8 @@ dom_acc_guests_gf3 <- dom_mean_stay_georgns_filled %>%
       is.na(tourism_arrivals_ct) & !is.na(total_overnights) ~ total_overnights/mean_stay_filled,
       TRUE ~ tourism_arrivals_ct
     ),
-    arrivals_method = ifelse(is.na(total_guests) & !is.na(total_overnights), "UNWTO - Total:Overnights / Mean Stay", arrivals_method),
-    arrivals_gapfilled = ifelse(arrivals_method == "UNWTO - Total:Overnights / Mean Stay", "gapfilled", arrivals_gapfilled) # fill the "gapfilled" column to indicate "gapfilled" or NA
+    arrivals_method = ifelse(is.na(total_guests) & !is.na(total_overnights), "Total:Overnights / Mean Stay", arrivals_method),
+    arrivals_gapfilled = ifelse(arrivals_method == "Total:Overnights / Mean Stay", "gapfilled", arrivals_gapfilled) # fill the "gapfilled" column to indicate "gapfilled" or NA
   ) %>%  # it worked!! Angola 1998 is a good example of where it may have worked.  There are others.
   select(rgn_id, rgn_name, year, total_guests, hotel_overnights, tourism_arrivals_ct, arrivals_method, arrivals_gapfilled) # only select columns needed for future analysis
 
@@ -1025,14 +1009,14 @@ dom_acc_guests_gf4 <- dom_acc_guests_gf3 %>%
   ) %>%
   ungroup() %>%  # now we have intercept and slope values for all regions (at different levels), lets use that to gapfill total_guests with hotel_overnights!
   mutate(
-    arrivals_method = ifelse(is.na(total_guests) & !is.na(hotel_overnights), "UNWTO - Hotel:Overnights", arrivals_method), # do this first so that we can use when tourism_arrivals_ct is NA as a qualifier
+    arrivals_method = ifelse(is.na(total_guests) & !is.na(hotel_overnights), "Hotel:Overnights", arrivals_method), # do this first so that we can use when tourism_arrivals_ct is NA as a qualifier
     tourism_arrivals_ct = case_when(
       is.na(tourism_arrivals_ct) & !is.na(hotel_overnights) & !is.na(total_guests_slope) ~ (hotel_overnights*total_guests_slope),
       is.na(tourism_arrivals_ct) & !is.na(hotel_overnights) & is.na(total_guests_slope) & !is.na(total_guests_slope_r2mean) ~ (hotel_overnights*total_guests_slope_r2mean), # if regional lm coefficients weren't possible, go to r2 which is second least specific, then r1
       is.na(tourism_arrivals_ct) & !is.na(hotel_overnights) & is.na(total_guests_slope) & is.na(total_guests_slope_r2mean) & !is.na(total_guests_slope_r1mean) ~ (hotel_overnights*total_guests_slope_r1mean),
       TRUE ~ tourism_arrivals_ct
     ),
-    arrivals_gapfilled = ifelse(arrivals_method == "UNWTO - Hotel:Overnights", "gapfilled", arrivals_gapfilled)
+    arrivals_gapfilled = ifelse(arrivals_method == "Hotel:Overnights", "gapfilled", arrivals_gapfilled)
   ) %>% # example: 	New Caledonia and Monaco.  The numbers make sense because the estimated total_guests were larger than hotel_guests (makes sense because total includes other establishments than just hotels) and we can compare to hotel_overnights, of which tourism_arrivals_ct is about half ish, which based on our knowledge of mean_stays (found later on in raw gf for dom) the average is between 2-3 nights.  So this makes sense!
   select(rgn_id, rgn_name, year, tourism_arrivals_ct, arrivals_method, arrivals_gapfilled) # select all that we need moving forward
 ```
@@ -1051,13 +1035,13 @@ colSums(is.na(dom_acc_guests_gf4))
 dom_acc_guests_gf4_noNA <- dom_acc_guests_gf4 %>% 
     filter(!is.na(tourism_arrivals_ct)) # remove NAs to see how many regions have total_guests values
 
-length(unique(dom_acc_guests_gf4_noNA$rgn_name)) # 98 unique regions, that's great!!! 
+length(unique(dom_acc_guests_gf4_noNA$rgn_name)) # 150 unique regions, that's great!!! 
 
 # Let's see how many are left if we filter to 2005-2021, which is our years of interest.
 dom_acc_guests_filt <- dom_acc_guests_gf4_noNA %>% 
   filter(year %in% data_years)
 
-length(unique(dom_acc_guests_filt$rgn_name)) # 91 unique regions, NOT BAD!!! Let's move forward :) 
+length(unique(dom_acc_guests_filt$rgn_name)) # 139 unique regions, NOT BAD!!! Let's move forward :) 
 ```
 
 ### Filter years and regions without enough data
@@ -1077,9 +1061,8 @@ domestic_guests <- dom_acc_guests_gf4 %>%
   filter(rgn_id %in% domestic_guests_rgns$rgn_id) %>%  # filter only for regions that are in that time frame and have at least three values
   filter(year %in% data_years)
   
-length(unique(domestic_guests$rgn_id))
+length(unique(domestic_guests$rgn_id)) # 134
 
-summary(domestic_guests) # only 229 NAs out of 1479 observations to gapfill!
 colSums(is.na(domestic_guests)) # 339 tourism_arrivals_ct
 nrow(domestic_guests) # 2412
 # ~ 14% NAs
@@ -1103,7 +1086,31 @@ Here is the second big gapfilling step in the script, which is the gapfilling of
 
 international_arrivals <- read_csv(here(current_tr_dir, "int", "international_arrivals_int.csv"))
 
-test_2022_int <- international_arrivals %>%
+# ---- Gapfill 1995-2019 ----
+pre_pandemic_int <-  international_arrivals %>%
+  # Adjust to match you want to consider 'pandemic years'
+  filter(!(year %in% c(2020, 2021, 2022))) %>%
+  group_by(rgn_id) %>%
+  arrange(year) %>%
+  # Linear interpolation
+  mutate(tourism_arrivals_ct = na.approx(tourism_arrivals_ct, x = year, na.rm = FALSE)) %>% 
+  mutate(
+    arrivals_gapfilled = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "gapfilled", arrivals_gapfilled),
+    arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "Interpolation", arrivals_method)
+  ) %>% 
+  # Upfilling # fill in any values that are empty from early years with values from the nearest year. Doing this because doesn't make sense to add earlier years based on a trend 
+  tidyr::fill(tourism_arrivals_ct, .direction = "up") %>% 
+  mutate(
+    arrivals_gapfilled = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "gapfilled", arrivals_gapfilled),
+    arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "Upfilling", arrivals_method)
+         ) 
+
+table(unwto_int_upfill$arrivals_method)
+nrow(unwto_int_upfill)
+colSums(is.na(unwto_int_upfill))
+
+# ==== gapfill for 2020 and 2021 now ==== 
+int21_22 <- international_arrivals %>%
   # Pandemic years
   filter(year %in% c(2020, 2021, 2022)) %>%
   pivot_wider(names_from = year, 
@@ -1114,17 +1121,18 @@ test_2022_int <- international_arrivals %>%
   # 2021 compared to 2020
          tourism_ct_diff_2021 = (int_tourism_2021 - int_tourism_2020)/int_tourism_2020)
 
-# global average increase for 2021 tourism_arrivals_ct
-gf_2021_tourism_int <- mean(test_2022_int$tourism_ct_diff_2021, na.rm = TRUE) 
+# global average change for 2021 tourism_arrivals_ct
+gf_2021_tourism_int <- mean(int21_22$tourism_ct_diff_2021, na.rm = TRUE) 
 gf_2021_tourism_int
 # v2024 and v2025: 0.1290837
 
-gf_2022_tourism_int <- mean(test_2022_int$tourism_ct_diff_2022, na.rm = TRUE) 
+# global average change for 2022 tourism_arrivals_ct
+gf_2022_tourism_int <- mean(int21_22$tourism_ct_diff_2022, na.rm = TRUE) 
 gf_2022_tourism_int
 # v2025: 4.407749 
 
 # ok, lets use these values to gapfill 2021 if it is NA and 2020 exists. So increase by X proportion (0.129)
-test_2020_int <- international_arrivals %>%
+int2020 <- international_arrivals %>%
   filter(year %in% c(2019, 2020)) %>%
   filter(!is.na(tourism_arrivals_ct)) %>%
   pivot_wider(names_from = year, 
@@ -1132,98 +1140,37 @@ test_2020_int <- international_arrivals %>%
               names_prefix = "int_tourism_") %>%
   mutate(tourism_ct_diff = (int_tourism_2020 - int_tourism_2019)/int_tourism_2019)
 
-# global average decrease for 2020 toursism
-gf_2020_tourism_int <- mean(test_2020_int$tourism_ct_diff, na.rm = TRUE)
+# global average change for 2020 toursism
+gf_2020_tourism_int <- mean(int2020$tourism_ct_diff, na.rm = TRUE)
 gf_2020_tourism_int
 # v2024 and v2025: -0.7118338
 
 # ok, lets use these values to gapfill 2020 if it is NA and 2019 exists. So decrease by X proportion ~70%
 
-# upfill earlier years that do not have data with nearby year data
-unwto_int_upfill <-  international_arrivals %>%
-  filter(year < 2020) %>%
-  group_by(rgn_id) %>%
-  arrange(rgn_id, year) %>%
-  tidyr::fill(tourism_arrivals_ct, .direction = "up") %>% # fill in any values that are empty from early years with values from the nearest year. Doing this because doesn't make sense to add earlier years based on a trend 
-  mutate(
-    arrivals_gapfilled = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "gapfilled", arrivals_gapfilled),
-    arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "UNWTO - nearby year", arrivals_method)
-         )
-
-## calculate regional average increase or decrease in number of tourism arrivals
-lm_coef_data_tourism_int <- international_arrivals %>%
-  mutate(year = as.numeric(year)) %>% 
-  filter(!(year %in% c(2020, 2021, 2022))) %>%
-  group_by(rgn_id) %>%
-  filter(!is.na(tourism_arrivals_ct)) # %>%
-  # summarize(lm_coef_tourism = lm(tourism_arrivals_ct ~ year)$coefficients[2])
-
-gf_mod <- lm(tourism_arrivals_ct ~ year, data = lm_coef_data_tourism_int)
-summary(gf_mod)
-
-mod_plot2 <- ggplot(lm_coef_data_tourism_int, aes(y = tourism_arrivals_ct, x = year)) +
-  geom_point(alpha = 0.5) + 
-  geom_abline(intercept = gf_mod$coefficients[1], 
-              slope = gf_mod$coefficients[2], 
-              color = "red", linetype = "dashed") +
-  theme_minimal() + 
-  labs(title = "Tourism arrivals vs Year, International data",
-       x = "Year",
-       y = "Tourism Arrivals");ggplotly(mod_plot2)
-
-# Initialize a flag to check if there are still NAs
-na_flag <- TRUE
-
-# filter out any regions that had all NAs
-unwto_gapfill_lm_2019_tourism_int <- unwto_int_upfill %>%
-  mutate(year = as.numeric(year)) %>% 
-  left_join(lm_coef_data_tourism_int) %>% 
-  ungroup() %>%
-  dplyr::select(rgn_id, rgn_name, year, tourism_arrivals_ct, arrivals_method, arrivals_gapfilled, lm_coef_tourism)
-
-## now lets fill in any values down with the linear model average increase per year for tourists
-while(na_flag) {
-  
-  unwto_gapfill_lm_2019_tourism_int <- unwto_gapfill_lm_2019_tourism_int %>%
-    group_by(rgn_id) %>%
-    arrange(year) %>%
-    mutate(
-      tourism_arrivals_ct = case_when(
-        is.na(tourism_arrivals_ct) & !is.na(lag(tourism_arrivals_ct)) ~ lag(tourism_arrivals_ct) + lm_coef_tourism, # if there is a previous value, but no current value, gapfill using the lag plus the lm_coef_tourism
-        TRUE ~ tourism_arrivals_ct
-      )
-    ) %>%
-    mutate(arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "UNWTO - linear model", arrivals_method)) %>%
-    mutate(arrivals_gapfilled = ifelse(arrivals_method == "UNWTO - linear model", "gapfilled", arrivals_gapfilled)) %>%
-    ungroup()
-  
-  # Check if there are still NAs left in either column
-  na_flag <- any(is.na(unwto_gapfill_lm_2019_tourism_int$tourism_arrivals_ct))
-}
-
-# ==== gapfill for 2020 and 2021 now ==== #
-unwto_2020_2021_int <- international_arrivals %>%
+pandemic_int <- international_arrivals %>%
   filter(year > 2019) 
 
-unwto_all_gf_int <- unwto_gapfill_lm_2019_tourism_int %>%
-  select(-lm_coef_tourism) %>% 
+int_arrivals_gf <- pre_pandemic_int %>%
   complete(year = 2005:max(data_years)) %>% 
-  rbind(unwto_2020_2021_int) %>%
+  rbind(pandemic_int) %>%
   group_by(rgn_id) %>%
   arrange(rgn_id, year) %>%
   # apply global average proportional increase or decrease for 2020 and 2021, because of covid pandemic messing up trends...
   mutate(tourism_arrivals_ct = ifelse(year == 2020 & is.na(tourism_arrivals_ct), lag(tourism_arrivals_ct, n = 1) + lag(tourism_arrivals_ct, n = 1)*gf_2020_tourism_int, tourism_arrivals_ct)) %>%
   mutate(tourism_arrivals_ct = ifelse(year == 2021 & is.na(tourism_arrivals_ct), lag(tourism_arrivals_ct, n = 1) + lag(tourism_arrivals_ct, n = 1)*gf_2021_tourism_int, tourism_arrivals_ct)) %>%
   mutate(tourism_arrivals_ct = ifelse(year == 2022 & is.na(tourism_arrivals_ct), lag(tourism_arrivals_ct, n = 1) + lag(tourism_arrivals_ct, n = 1)*gf_2022_tourism_int, tourism_arrivals_ct)) %>%
-  mutate(arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "UNWTO - 2020:2022 gapfill method", arrivals_method)) %>%
-  mutate(arrivals_gapfilled = ifelse(arrivals_method == "UNWTO - 2020:2022 gapfill method", "gapfilled", arrivals_gapfilled)) %>%
+  mutate(arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "2020:2022 gapfill", arrivals_method)) %>%
+  mutate(arrivals_gapfilled = ifelse(arrivals_method == "2020:2022 gapfill", "gapfilled", arrivals_gapfilled)) %>%
   filter(year >= 2008) %>% # get only the year we need and beyond
   drop_na(tourism_arrivals_ct) %>%  # remove any remaining NAs (any remaining have all NAs for that region)
    mutate(year = as.numeric(year)) # ensure it is numeric
 
-length(unique(unwto_all_gf_int$rgn_name)) # still 156 regions after gapfilling! good, same as `international_arrivals`
+length(unique(int_arrivals_gf$rgn_name)) # 157 regions after gapfilling! good, same as `international_arrivals`
 
-summary(unwto_all_gf_int) # however, we do see that Libya has negative values for `tourism_arrivals_ct` when the lm slope is used to gapfill by year, since we have the lag and now are between 2008:2021.  This needs to be looked into....
+summary(int_arrivals_gf) 
+table(int_arrivals_gf$arrivals_method) 
+
+colSums(is.na(int_arrivals_gf)) # no more missing values
 ```
 
 ## Domestic - for years that do not have values
@@ -1238,7 +1185,35 @@ summary(unwto_all_gf_int) # however, we do see that Libya has negative values fo
 
 domestic_guests <- read_csv(here(current_tr_dir, "int", "domestic_guests_first_gf.csv"))
 
-test_2021_dom <- domestic_guests %>%
+# ---- Gapfill 1995-2019 ----
+pre_pandemic_dom <-  domestic_guests %>%
+  # Adjust to match you want to consider 'pandemic years'
+  filter(!(year %in% c(2020, 2021, 2022))) %>%
+  group_by(rgn_id) %>%
+  arrange(year) %>%
+  # Linear interpolation
+  mutate(tourism_arrivals_ct = na.approx(tourism_arrivals_ct, x = year, na.rm = FALSE)) %>% 
+  mutate(
+    arrivals_gapfilled = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "gapfilled", arrivals_gapfilled),
+    arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "Interpolation", arrivals_method)
+  ) %>% 
+  # Upfilling # fill in any values that are empty from early years with values from the nearest year. Doing this because doesn't make sense to add earlier years based on a trend 
+  tidyr::fill(tourism_arrivals_ct, .direction = "up") %>% 
+  mutate(
+    arrivals_gapfilled = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "gapfilled", arrivals_gapfilled),
+    arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "Upfilling", arrivals_method)
+         ) 
+
+table(pre_pandemic_dom$arrivals_method)
+table(domestic_guests$arrivals_method)
+
+nrow(pre_pandemic_dom)
+colSums(is.na(pre_pandemic_dom))
+
+
+# ==== gapfill for 2020 and 2021 now ==== 
+
+dom21_22 <- domestic_guests %>%
   filter(year %in% c(2020, 2021, 2022)) %>%
   filter(!is.na(tourism_arrivals_ct)) %>%
   pivot_wider(names_from = year, 
@@ -1248,18 +1223,18 @@ test_2021_dom <- domestic_guests %>%
          tourism_arrivals_ct_diff_2021 = (int_tourism_2021 - int_tourism_2020)/int_tourism_2020)
 
 # global average increase for 2021 tourism_arrivals_ct
-gf_2021_tourism_dom <- mean(test_2021_dom$tourism_arrivals_ct_diff_2021, na.rm = TRUE)
+gf_2021_tourism_dom <- mean(dom21_22$tourism_arrivals_ct_diff_2021, na.rm = TRUE)
 gf_2021_tourism_dom
 # v2024: 0.2361595
 # v2025: 0.3409155
 
-gf_2022_tourism_dom <- mean(test_2021_dom$tourism_arrivals_ct_diff_2022, na.rm = TRUE)
+gf_2022_tourism_dom <- mean(dom21_22$tourism_arrivals_ct_diff_2022, na.rm = TRUE)
 gf_2022_tourism_dom
-# v2025: 1.793485
+# v2025: 2.24985
 
 # ok, lets use these values to gapfill 2021 if it is NA and 2020 exists. So increase by X proportion (0.294)
 
-test_2020_dom <- domestic_guests %>%
+dom_2020 <- domestic_guests %>%
   filter(year %in% c(2019, 2020)) %>%
   filter(!is.na(tourism_arrivals_ct)) %>%
   pivot_wider(names_from = year, 
@@ -1268,86 +1243,35 @@ test_2020_dom <- domestic_guests %>%
   mutate(tourism_arrivals_ct_diff = (int_tourism_2020 - int_tourism_2019)/int_tourism_2019)
  
 # global average decrease for 2020 toursism
-gf_2020_tourism_dom <- mean(test_2020_dom$tourism_arrivals_ct_diff, na.rm = TRUE) 
+gf_2020_tourism_dom <- mean(dom_2020$tourism_arrivals_ct_diff, na.rm = TRUE) 
 gf_2020_tourism_dom
 # v2024: -0.2984019
 # v2025: -0.6833755
 
 # ok, lets use these values to gapfill 2020 if it is NA and 2019 exists. So decrease by X proportion ~35%
 
-# upfill earlier years that do not have data with nearby year data
-unwto_upfill_dom <-  domestic_guests %>%
-  filter(year < 2020) %>%
-  group_by(rgn_id) %>%
-  arrange(rgn_id, year) %>%
-  tidyr::fill(tourism_arrivals_ct, .direction = "up") %>% # fill in any values that are empty from early years with values from the nearest year. Doing this because doesn't make sense to add earlier years based on a trend 
-  mutate(
-    arrivals_gapfilled = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "gapfilled", arrivals_gapfilled),
-    arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "UNWTO - nearby year", arrivals_method)
-  )
-
-## calculate regional average increase or decrease in number of tourism arrivals
-lm_coef_data_tourism_dom <- domestic_guests %>%
-  filter(!(year %in% c(2020, 2021, 2022))) %>%
-  mutate(year = as.numeric(year)) %>%
-  group_by(rgn_id) %>%
-  filter(!is.na(tourism_arrivals_ct)) %>%
-  summarize(lm_coef_tourism = lm(tourism_arrivals_ct ~ year)$coefficients[2]) # pull out the coeffiecient
-
-# Initialize a flag to check if there are still NAs
-na_flags <- TRUE
-
-unwto_future_gapfill_lm_2019_tourism_dom <- unwto_upfill_dom %>%
-  left_join(lm_coef_data_tourism_dom) %>% 
-  ungroup() %>%
-  dplyr::select(rgn_id, rgn_name, year, tourism_arrivals_ct, arrivals_method, arrivals_gapfilled, lm_coef_tourism)
-
-
-## now lets fill in any values down with the linear model average increase per year for tourists
-## v2024: issue with running!! It will complete the process but it won't finish running -- on Anna's session as well.
-while(na_flags) {
-  
-  unwto_future_gapfill_lm_2019_tourism_dom <- unwto_future_gapfill_lm_2019_tourism_dom %>%
-    group_by(rgn_id) %>%
-    arrange(year) %>%
-    mutate(
-      tourism_arrivals_ct = case_when(
-        is.na(tourism_arrivals_ct) & !is.na(dplyr::lag(tourism_arrivals_ct)) ~ dplyr::lag(tourism_arrivals_ct) + lm_coef_tourism, # if there is a previous value, but no current value, gapfill using the lag plus the lm_coef_tourism
-        TRUE ~ tourism_arrivals_ct
-      )
-    ) %>%
-    mutate(arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "UNWTO - linear model", arrivals_method)) %>%
-    mutate(arrivals_gapfilled = ifelse(arrivals_method == "UNWTO - linear model", "gapfilled", arrivals_gapfilled)) %>%
-    ungroup()
-  
-  # Check if there are still NAs left in either column
-  na_flags <- any(is.na(unwto_future_gapfill_lm_2019_tourism_dom$tourism_arrivals_ct)) # FALSE, great!
-} 
-
-# ==== gapfill for 2020 and 2021 now ==== #
-unwto_2020_2021_dom <- domestic_guests %>%
+pandemic_dom <- domestic_guests %>%
   filter(year > 2019) 
 
-unwto_all_gf_dom <- unwto_future_gapfill_lm_2019_tourism_dom %>%
-  select(-lm_coef_tourism) %>% 
-  rbind(unwto_2020_2021_dom) %>%
+dom_arrivals_gf <- pre_pandemic_dom %>%
+  rbind(pandemic_dom) %>%
   group_by(rgn_id) %>%
   arrange(rgn_id, year) %>%
   # apply global average proportional increase or decrease for 2020 and 2021, because of covid pandemic messing up trends...
   mutate(tourism_arrivals_ct = ifelse(year == 2020 & is.na(tourism_arrivals_ct), lag(tourism_arrivals_ct, n = 1) + lag(tourism_arrivals_ct, n = 1)*gf_2020_tourism_dom, tourism_arrivals_ct)) %>%
   mutate(tourism_arrivals_ct = ifelse(year == 2021 & is.na(tourism_arrivals_ct), lag(tourism_arrivals_ct, n = 1) + lag(tourism_arrivals_ct, n = 1)*gf_2021_tourism_dom, tourism_arrivals_ct)) %>%
   mutate(tourism_arrivals_ct = ifelse(year == 2022 & is.na(tourism_arrivals_ct), lag(tourism_arrivals_ct, n = 1) + lag(tourism_arrivals_ct, n = 1)*gf_2022_tourism_dom, tourism_arrivals_ct)) %>%
-  mutate(arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "UNWTO - 2020:2022 gapfill method", arrivals_method)) %>%
-  mutate(arrivals_gapfilled = ifelse(arrivals_method == "UNWTO - 2020:2022 gapfill method", "gapfilled", arrivals_gapfilled)) %>%
+  mutate(arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "2020:2022 method", arrivals_method)) %>%
+  mutate(arrivals_gapfilled = ifelse(arrivals_method == "2020:2022 method", "gapfilled", arrivals_gapfilled)) %>%
   filter(year >= 2008) %>% # get only the year we need and beyond
   drop_na(tourism_arrivals_ct) %>%  # remove any remaining NAs (any remaining have all NAs for that region)
    mutate(year = as.numeric(year)) # ensure it is numeric
 
-length(unique(unwto_all_gf_dom$rgn_name)) # now still 87 regions after gapfilling and removing regions with only NAs!
-# v2025: 134
+length(unique(dom_arrivals_gf$rgn_name)) # v2025: 134
 
-summary(unwto_all_gf_dom) 
-# Still have negative values here...
+summary(dom_arrivals_gf) 
+colSums(is.na(dom_arrivals_gf)) # 0 NAs
+table(dom_arrivals_gf$arrivals_method)
 ```
 
 ## Gapfilling -- for regions that do not have domestic data: prep for aggregation.
@@ -1423,9 +1347,9 @@ arrivals_aggregated <- mean_domestic_guests %>%
       TRUE ~ tourism_arrivals_ct_int
     ),
     ag_method = case_when(
-      !is.na(tourism_arrivals_ct_int) & !is.na(tourism_arrivals_ct_dom) ~ "UNWTO - aggregated international and domestic",
-      is.na(tourism_arrivals_ct_int) ~ "UNWTO - international",
-      is.na(tourism_arrivals_ct_dom) ~ "UNWTO - domestic",
+      !is.na(tourism_arrivals_ct_int) & !is.na(tourism_arrivals_ct_dom) ~ "Aggregated international and domestic",
+      is.na(tourism_arrivals_ct_int) ~ "International",
+      is.na(tourism_arrivals_ct_dom) ~ "Domestic",
       TRUE ~ data_source
     ),
     ag_gapfilled = case_when(
@@ -1679,18 +1603,10 @@ current_data_year
 previous_data_year <- max(old_tr$year)
 previous_data_year
 
-colnames(new_tr)
-colnames(old_tr)
-
-# Get rgn names for ease of viewing
-# rgn_name <- rgns_eez %>% 
-#   select(rgn_name, rgn_id)
-
 # Combine data frames
 comb_tr <- new_tr %>% 
   rename(new_Ap = Ap) %>% 
-  left_join(old_tr, by = join_by(rgn_id, year)) #%>% 
-  # left_join(rgn_name, by = join_by(rgn_id))
+  left_join(old_tr, by = join_by(rgn_id, year))
 
 # Plot
 comp_plot1 <- ggplot() + 
