@@ -53,7 +53,7 @@ library(tidyr)
 library(tidyverse)
 library(here)
 library(sf)
-library(countrycode)
+library(terra)
 
 #source('https://raw.githubusercontent.com/oharac/src/master/R/common.R')
 source(here('workflow/R/common.R'))
@@ -66,7 +66,6 @@ dir_goal <- here('globalprep', goal, scenario)
 ### goal specific folders and info
 dir_anx  <- file.path(dir_M, 'git-annex/globalprep')
 dir_goal_anx <- file.path(dir_anx, goal, scenario, 'spp_risk_dists')
-
 ```
 
 Download data for all years here: https://data.mapping-global-fishing.cloud.edu.au/shiny/mapping_fishing_effort_app/
@@ -95,87 +94,24 @@ fishing_effort_2010_logged <- fishing_effort_2010_summarized %>%
   filter(!eez_sovereign_iso3c == "High seas")
 
 #hist(fishing_effort_logged$pressure)
-quant_99_2010 <- quantile(fishing_effort_2010_logged$pressure, probs = 0.99)
-quant_90_2010 <- quantile(fishing_effort_2010_logged$pressure, probs = 0.9)
-quant_86_2010 <- quantile(fishing_effort_2010_logged$pressure, probs = 0.86)
+#quant_99_99_2010 <- quantile(fishing_effort_2010_logged$pressure, probs = 0.9999)
+quant_99_9_2010 <- quantile(fishing_effort_2010_logged$pressure, probs = 0.999)
+#quant_99_2010 <- quantile(fishing_effort_2010_logged$pressure, probs = 0.99)
+#quant_90_2010 <- quantile(fishing_effort_2010_logged$pressure, probs = 0.9)
+#quant_86_2010 <- quantile(fishing_effort_2010_logged$pressure, probs = 0.86)
 
-rast_2010 <- fishing_effort_2010_logged %>%
-  group_by(lat, lon) %>%
-  summarise(count = n())
-
-sum(rast_2010$count) #15006
-
-fishing_effort_2010_sf <- fishing_effort_2010_logged %>%
-  st_as_sf(coords = c("lon", "lat"), crs = 4326) 
-
-fishing_effort_2010_grid <- fishing_effort_2010_sf %>%
-  st_make_grid(cellsize = c(1,1),
-               what = "polygons") %>%
-  st_sf() %>%
-  # Fix invalid geometries
-  st_make_valid()
-
-# Spatially join emissions data to the grid
-fishing_effort_2010_grid_sf <- st_join(fishing_effort_2010_grid, fishing_effort_2010_sf, left = FALSE) 
-
-plot(fishing_effort_2010_grid_sf["pressure"])
-
-#2017
-# Read csv
-fishing_effort_2017 <- read_csv(file.path(dir_anx, "_raw_data", "global_fishing_effort", "fishing_effort_trawl_bottom_2017.csv"), show_col_types = FALSE)
-
-# Sum fishing hours by lon, lat, eez_sovereign_iso3c, flag_country_name pixel_area_km2
-fishing_effort_2017_summarized <- fishing_effort_2017 %>%
-  group_by(lon, lat, eez_sovereign_iso3c, pixel_area_km2) %>%
-  summarise(sum_eff_active_fishing_hours = sum(eff_active_fishing_hours, na.rm = TRUE))
-
-check_2017 <- fishing_effort_2017_summarized %>%
-  group_by(lon, lat) %>%
-  summarise(country_count = n())
-
-unique(check_2017$country_count) # only 1
-
-# Log pressure
-fishing_effort_2017_logged <- fishing_effort_2017_summarized %>%
-  mutate(pressure = log(sum_eff_active_fishing_hours/pixel_area_km2 +1)) %>%
-  filter(!eez_sovereign_iso3c == "High seas")
-
-#hist(fishing_effort_logged$pressure)
-quant_99_2017 <- quantile(fishing_effort_2017_logged$pressure, probs = 0.99)
-quant_90_2017 <- quantile(fishing_effort_2017_logged$pressure, probs = 0.9)
-quant_86_2017 <- quantile(fishing_effort_2017_logged$pressure, probs = 0.86)
-
-rast_2017 <- fishing_effort_2017_logged %>%
-  group_by(lat, lon) %>%
-  summarise(count = n())
-
-sum(rast_2017$count) #9235
-
-fishing_effort_2017_sf <- fishing_effort_2017_logged %>%
-  st_as_sf(coords = c("lon", "lat"), crs = 4326) 
-
-fishing_effort_2017_grid <- fishing_effort_2017_sf %>%
-  st_make_grid(cellsize = c(1,1),
-               what = "polygons") %>%
-  st_sf() %>%
-  # Fix invalid geometries
-  st_make_valid()
-
-# Spatially join emissions data to the grid
-fishing_effort_2017_grid_sf <- st_join(fishing_effort_2017_grid, fishing_effort_2017_sf, left = FALSE) 
-
-plot(fishing_effort_2017_grid_sf["pressure"])
-
+#plot(fishing_effort_2010_grid_sf["pressure"])
 ```
 
 
 ```{r}
+# Load bottom trawling filenames
 trawl_bottom_files <- list.files(file.path(dir_anx, "_raw_data", "global_fishing_effort"), pattern = ".csv", full.names = TRUE)
 
-region_data()
-
+# Initiate an empty list
 fishing_effort_trawl_bottom <- list()
 
+# Rasterize each year's data
 for (i in seq_along(trawl_bottom_files)) {
   
   #i <- 1
@@ -187,7 +123,7 @@ for (i in seq_along(trawl_bottom_files)) {
   year <- str_extract(trawl_bottom_files[i], "\\d{4}")
   
   message("Processing data for ", year, ".")
-  
+
   # Sum fishing hours by lon, lat, eez_sovereign_iso3c, flag_country_name pixel_area_km2
   fishing_effort_summarized <- fishing_effort %>%
     filter(!eez_sovereign_iso3c == "High seas") %>%
@@ -197,73 +133,106 @@ for (i in seq_along(trawl_bottom_files)) {
   # Log pressure
   fishing_effort_logged <- fishing_effort_summarized %>%
     mutate(pressure = log(sum_eff_active_fishing_hours/pixel_area_km2 +1)) 
-
-  fishing_effort_sf <- fishing_effort_logged %>%
-    mutate(pressure = pressure/quant_86_2010) %>%
-    st_as_sf(coords = c("lon", "lat"), crs = 4326) 
   
-  fishing_effort_grid <- fishing_effort_sf %>%
-    st_make_grid(cellsize = c(1,1),
-                 what = "polygons") %>%
-    st_sf() %>%
-    # Fix invalid geometries
-    st_make_valid()
+  # Convert to spatial points
+  pts <- vect(fishing_effort_logged, geom = c("lon", "lat"), crs = "EPSG:4326")
   
-  # Spatially join emissions data to the grid
-  fishing_effort_grid_sf <- st_join(fishing_effort_grid, fishing_effort_sf, left = FALSE) 
+  #plot(pts)
   
-  fishing_effort_trawl_bottom[[year]] <- fishing_effort_grid_sf
+  # Calculate extent and set 1-degree resolution
+  ext <- ext(min(fishing_effort_logged$lon), max(fishing_effort_logged$lon), min(fishing_effort_logged$lat), max(fishing_effort_logged$lat))
+  
+  # Create raster template
+  r_template <- rast(ext, resolution = 1, crs = "EPSG:4326")
+  
+  # Rasterize fishing effort
+  fishing_effort_raster <- rasterize(pts, r_template, field = "pressure")
+  
+  #plot(fishing_effort_raster)
+  
+  # Divide by reference point
+  fishing_effort_raster <- fishing_effort_raster/quant_99_9_2010
+  
+  #plot(fishing_effort_raster)
+  
+  # Cap pressure value at 1
+  fishing_effort_raster <- ifel(fishing_effort_raster > 1, 1, fishing_effort_raster)
+  
+  # Fill NA with 0 (for zonal stats)
+  fishing_effort_raster <- ifel(is.na(fishing_effort_raster), 0, fishing_effort_raster)
+  
+  #plot(fishing_effort_raster)
+  
+  # Append to list
+  fishing_effort_trawl_bottom[[year]] <- fishing_effort_raster
 }
 
+data_years <- as.numeric(names(fishing_effort_trawl_bottom))
+
 # Plot
-for (i in seq_along(c(2010:2017))) {
+for (i in seq_along(c(min(data_years):max(data_years)))) {
   
   #i <- 1
   
   year <- names(fishing_effort_trawl_bottom)[i]
   
-  png(file.path(dir_goal, "int/plots", paste0("fishing_effort_", year, "_q86_2010.png")), width = 800, height = 600)
+  png(file.path(dir_goal, "int/plots", paste0("fishing_effort_", year, "_q99_99_2010.png")), width = 800, height = 600)
   plot(fishing_effort_trawl_bottom[[i]]['pressure'], main = year)
   
   dev.off()
   
 }
-
-
-plot(fishing_effort_trawl_bottom[["2014"]]['pressure'], main = "2014")
 ```
-
-1. prepare for reference point
-
-- 2010 vs. 2017
-- 99 vs. 90
-- raster cells: 15,006
-
-save intermediate maps to github in "int" for each year
-
-
-
-zonal mean for each year is final final output (same naming conventions from before)
-
-
-hist plots
-
-how much of coastal areas highly degraded due to distructive fishing practices to help set referenc point (10%? 1%?)
-
-https://www.pnas.org/doi/10.1073/pnas.1802379115
-
-Overall, 14% of the 7.8 million-km2 study area was trawled, and 86% was not trawled.
-
-
-at 3, one value for every raster
-majority? centroid? how did they assign eez? are pixel repeated? more than one country eez?
 
 ```{r}
-check <- fishing_effort_2017 %>%
-  group_by(lat, lon) %>%
-  summarise(count_countries = n_distinct(eez_sovereign_iso3c))
+# Turn off scientific notation
+options(scipen = 999)
 
-unique(check$count_countries)
+# Load regions data
+region_data()
+
+# Load the EEZ raster
+eez_ocean_raster <- rast(file.path('globalprep/spp/v2024', '_spatial', 'eez_rast.tif')) 
+
+#plot(eez_ocean_raster)
+
+# Initiate empty list
+fishing_pressure <- list()
+
+# Calculate zonal stats for each year
+for (i in seq_along(c(min(data_years):max(data_years)))) {
+  
+  # Pull year
+  year <- names(fishing_effort_trawl_bottom)[i]
+  
+  # Pull raster for that year
+  fishing_effort_raster <- project(fishing_effort_trawl_bottom[[year]], eez_ocean_raster)
+  
+  # Calculate zonal stats
+  zonal_stats <- zonal(fishing_effort_raster, eez_ocean_raster, fun = "mean") %>%
+    rename(rgn_id = eez_rast,
+           pressure = last) %>%
+    mutate(year = year)
+  
+  # Append to list
+  fishing_pressure[[year]] <- zonal_stats
+  
+}
+
+# Combine all years for output
+total_fishing_pressure <- bind_rows(fishing_pressure) %>%
+  select(rgn_id, year, pressure_score = pressure)
+
+# Save output layer
+write_csv(file.path(dir_goal, 'output', 'hd_sb_subtidal.csv'))
+
+#gapfill?
+
+# Histogram
+ggplot(total_fishing_pressure, aes(x = pressure, fill = factor(year))) +
+  geom_histogram(position = "dodge", bins = 30, color = "black", alpha = 0.8) +
+  labs(fill = "Year", x = "Pressure", y = "Count") +
+  scale_fill_brewer(palette = "Blues") +
+  theme_minimal()
 ```
-
 
