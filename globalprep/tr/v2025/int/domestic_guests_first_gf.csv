@@ -1,0 +1,2413 @@
+rgn_id,rgn_name,year,tourism_arrivals_ct,arrivals_method,arrivals_gapfilled
+5,New Caledonia,2005,96.58071642725169,UNWTO - Hotel:Overnights,gapfilled
+5,New Caledonia,2006,106.61507657553757,UNWTO - Hotel:Overnights,gapfilled
+5,New Caledonia,2007,161.80405739110998,UNWTO - Hotel:Overnights,gapfilled
+5,New Caledonia,2008,127.9380918906451,UNWTO - Hotel:Overnights,gapfilled
+5,New Caledonia,2009,144.24392713160967,UNWTO - Hotel:Overnights,gapfilled
+5,New Caledonia,2010,166.82123746525292,UNWTO - Hotel:Overnights,gapfilled
+5,New Caledonia,2011,178.10989263207455,UNWTO - Hotel:Overnights,gapfilled
+5,New Caledonia,2012,151.7696972428241,UNWTO - Hotel:Overnights,gapfilled
+5,New Caledonia,2013,146.75251716868112,UNWTO - Hotel:Overnights,gapfilled
+5,New Caledonia,2014,154.27828727989555,UNWTO - Hotel:Overnights,gapfilled
+5,New Caledonia,2015,NA,NA,NA
+5,New Caledonia,2016,NA,NA,NA
+5,New Caledonia,2017,NA,NA,NA
+5,New Caledonia,2018,NA,NA,NA
+5,New Caledonia,2019,NA,NA,NA
+5,New Caledonia,2020,NA,NA,NA
+5,New Caledonia,2021,NA,NA,NA
+5,New Caledonia,2022,NA,NA,NA
+8,Palau,2005,NA,NA,NA
+8,Palau,2006,NA,NA,NA
+8,Palau,2007,NA,NA,NA
+8,Palau,2008,64.27197060228279,UNWTO - Hotel:Overnights,gapfilled
+8,Palau,2009,56.770732654005755,UNWTO - Hotel:Overnights,gapfilled
+8,Palau,2010,68.53403761834929,UNWTO - Hotel:Overnights,gapfilled
+8,Palau,2011,87.28713248904188,UNWTO - Hotel:Overnights,gapfilled
+8,Palau,2012,94.61788775667625,UNWTO - Hotel:Overnights,gapfilled
+8,Palau,2013,88.65099393418316,UNWTO - Hotel:Overnights,gapfilled
+8,Palau,2014,113.03001726608353,UNWTO - Hotel:Overnights,gapfilled
+8,Palau,2015,127.69152780135228,UNWTO - Hotel:Overnights,gapfilled
+8,Palau,2016,111.66615582094225,UNWTO - Hotel:Overnights,gapfilled
+8,Palau,2017,101.09622962109734,UNWTO - Hotel:Overnights,gapfilled
+8,Palau,2018,89.67389001803912,UNWTO - Hotel:Overnights,gapfilled
+8,Palau,2019,84.55940959875932,UNWTO - Hotel:Overnights,gapfilled
+8,Palau,2020,16.877785383623333,UNWTO - Hotel:Overnights,gapfilled
+8,Palau,2021,NA,NA,NA
+8,Palau,2022,NA,NA,NA
+11,Marshall Islands,2005,7.465365642126168,UNWTO - Total:Overnights / Mean Stay,gapfilled
+11,Marshall Islands,2006,6.737037286796785,UNWTO - Total:Overnights / Mean Stay,gapfilled
+11,Marshall Islands,2007,6.190791020299749,UNWTO - Total:Overnights / Mean Stay,gapfilled
+11,Marshall Islands,2008,4.369970131976293,UNWTO - Total:Overnights / Mean Stay,gapfilled
+11,Marshall Islands,2009,5.098298487305676,UNWTO - Total:Overnights / Mean Stay,gapfilled
+11,Marshall Islands,2010,6.190791020299749,UNWTO - Total:Overnights / Mean Stay,gapfilled
+11,Marshall Islands,2011,6.372873109132095,UNWTO - Total:Overnights / Mean Stay,gapfilled
+11,Marshall Islands,2012,NA,NA,NA
+11,Marshall Islands,2013,NA,NA,NA
+11,Marshall Islands,2014,NA,NA,NA
+11,Marshall Islands,2015,NA,NA,NA
+11,Marshall Islands,2016,NA,NA,NA
+11,Marshall Islands,2017,NA,NA,NA
+11,Marshall Islands,2018,NA,NA,NA
+11,Marshall Islands,2019,NA,NA,NA
+11,Marshall Islands,2020,NA,NA,NA
+11,Marshall Islands,2021,NA,NA,NA
+11,Marshall Islands,2022,NA,NA,NA
+13,Northern Mariana Islands and Guam,2005,NA,NA,NA
+13,Northern Mariana Islands and Guam,2006,1195.3431526645566,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2007,1171.5115473123776,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2008,1077.4394209221973,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2009,995.9102447173746,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2010,1089.9823711075549,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2011,1077.4394209221973,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2012,1202.8689227757711,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2013,1225.4462331094144,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2014,1246.7692484245217,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2015,1323.2812445552017,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2016,1458.7451065570613,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2017,1482.5767119092402,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2018,1527.7313325765267,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2019,1641.8721792632787,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2020,312.31945961539833,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2021,45.1546206672865,UNWTO - Hotel:Guests,gapfilled
+13,Northern Mariana Islands and Guam,2022,299.77650943004096,UNWTO - Hotel:Guests,gapfilled
+14,Taiwan,2005,2902,NA,NA
+14,Taiwan,2006,3056,NA,NA
+14,Taiwan,2007,3241,NA,NA
+14,Taiwan,2008,3369,NA,NA
+14,Taiwan,2009,3900,NA,NA
+14,Taiwan,2010,5062,NA,NA
+14,Taiwan,2011,5519,NA,NA
+14,Taiwan,2012,6736,NA,NA
+14,Taiwan,2013,7384,NA,NA
+14,Taiwan,2014,9110,NA,NA
+14,Taiwan,2015,9569,NA,NA
+14,Taiwan,2016,9777,NA,NA
+14,Taiwan,2017,9740,NA,NA
+14,Taiwan,2018,9975,NA,NA
+14,Taiwan,2019,10772,NA,NA
+14,Taiwan,2020,1262,NA,NA
+14,Taiwan,2021,49,NA,NA
+14,Taiwan,2022,452.4,NA,NA
+15,Philippines,2005,854.3962414656924,UNWTO - Hotel:Overnights,gapfilled
+15,Philippines,2006,906.286274978792,UNWTO - Hotel:Overnights,gapfilled
+15,Philippines,2007,918.811455481954,UNWTO - Hotel:Overnights,gapfilled
+15,Philippines,2008,876.7626352213388,UNWTO - Hotel:Overnights,gapfilled
+15,Philippines,2009,599.4193526513234,UNWTO - Hotel:Guests,gapfilled
+15,Philippines,2010,NA,NA,NA
+15,Philippines,2011,NA,NA,NA
+15,Philippines,2012,NA,NA,NA
+15,Philippines,2013,NA,NA,NA
+15,Philippines,2014,NA,NA,NA
+15,Philippines,2015,NA,NA,NA
+15,Philippines,2016,NA,NA,NA
+15,Philippines,2017,NA,NA,NA
+15,Philippines,2018,NA,NA,NA
+15,Philippines,2019,NA,NA,NA
+15,Philippines,2020,NA,NA,NA
+15,Philippines,2021,NA,NA,NA
+15,Philippines,2022,NA,NA,NA
+16,Australia,2005,69924,UNWTO - Trips:Overnights,gapfilled
+16,Australia,2006,73564,UNWTO - Trips:Overnights,gapfilled
+16,Australia,2007,74464,UNWTO - Trips:Overnights,gapfilled
+16,Australia,2008,3900,NA,NA
+16,Australia,2009,3703,NA,NA
+16,Australia,2010,3874,NA,NA
+16,Australia,2011,3725,NA,NA
+16,Australia,2012,3821,NA,NA
+16,Australia,2013,4011,NA,NA
+16,Australia,2014,4223,NA,NA
+16,Australia,2015,4484,NA,NA
+16,Australia,2016,5080,NA,NA
+16,Australia,2017,5389,NA,NA
+16,Australia,2018,5554,NA,NA
+16,Australia,2019,5574,NA,NA
+16,Australia,2020,1068,NA,NA
+16,Australia,2021,185,NA,NA
+16,Australia,2022,1606,NA,NA
+18,Fiji,2005,470.53219857374137,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2006,450.5857249385502,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2007,407.45360673595724,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2008,424.3313921195805,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2009,401.8276782747494,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2010,492.69494705728715,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2011,528.837275353531,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2012,532.0764462857417,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2013,540.7710629985173,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2014,562.7633288014204,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2015,594.8140727622405,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2016,523.0408642116806,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2017,558.8422271466392,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2018,579.3001488237584,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2019,643.2311540647559,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2020,125.4752529529977,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2021,24.08920277480785,UNWTO - Hotel:Overnights,gapfilled
+18,Fiji,2022,387.8480984620513,UNWTO - Hotel:Overnights,gapfilled
+20,South Korea,2005,NA,NA,NA
+20,South Korea,2006,NA,NA,NA
+20,South Korea,2007,NA,NA,NA
+20,South Korea,2008,NA,NA,NA
+20,South Korea,2009,8630.177887140391,UNWTO - Hotel:Overnights,gapfilled
+20,South Korea,2010,9396.182721390496,UNWTO - Hotel:Overnights,gapfilled
+20,South Korea,2011,9515.434525881046,UNWTO - Hotel:Overnights,gapfilled
+20,South Korea,2012,10537.132418408184,UNWTO - Hotel:Overnights,gapfilled
+20,South Korea,2013,9256.518445861024,UNWTO - Hotel:Overnights,gapfilled
+20,South Korea,2014,9511.137163557061,UNWTO - Hotel:Overnights,gapfilled
+20,South Korea,2015,7234.609472426663,UNWTO - Hotel:Overnights,gapfilled
+20,South Korea,2016,14402.609828831579,UNWTO - Hotel:Overnights,gapfilled
+20,South Korea,2017,12950.101363325068,UNWTO - Hotel:Overnights,gapfilled
+20,South Korea,2018,18301.391797265846,UNWTO - Hotel:Guests,gapfilled
+20,South Korea,2019,162376,UNWTO - Trips:Overnights,gapfilled
+20,South Korea,2020,88450,UNWTO - Trips:Overnights,gapfilled
+20,South Korea,2021,87785,UNWTO - Trips:Overnights,gapfilled
+20,South Korea,2022,116589,UNWTO - Trips:Overnights,gapfilled
+25,Thailand,2005,NA,NA,NA
+25,Thailand,2006,22870.084943023554,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2007,22848.613205018133,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2008,NA,NA,NA
+25,Thailand,2009,17890.43103726644,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2010,22856.665106770164,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2011,30535.495410958687,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2012,33446.705222193625,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2013,40849.08689956235,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2014,40530.589452481945,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2015,45178.32607490527,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2016,46971.216198357884,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2017,50602.623888524635,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2018,52983.302839875636,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2019,54797.66470133367,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2020,10413.792932628961,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2021,940.193727912352,UNWTO - Hotel:Guests,gapfilled
+25,Thailand,2022,NA,NA,NA
+28,Comoro Islands,2005,19.55683803628152,UNWTO - Total:Overnights / Mean Stay,gapfilled
+28,Comoro Islands,2006,19.414087393680923,UNWTO - Total:Overnights / Mean Stay,gapfilled
+28,Comoro Islands,2007,15.131568115663072,UNWTO - Total:Overnights / Mean Stay,gapfilled
+28,Comoro Islands,2008,14.703316187861287,UNWTO - Total:Overnights / Mean Stay,gapfilled
+28,Comoro Islands,2009,11.277300765447006,UNWTO - Total:Overnights / Mean Stay,gapfilled
+28,Comoro Islands,2010,15.274318758263666,UNWTO - Total:Overnights / Mean Stay,gapfilled
+28,Comoro Islands,2011,18.70033418067795,UNWTO - Total:Overnights / Mean Stay,gapfilled
+28,Comoro Islands,2012,22.697352173494608,UNWTO - Total:Overnights / Mean Stay,gapfilled
+28,Comoro Islands,2013,21.840848317891037,UNWTO - Total:Overnights / Mean Stay,gapfilled
+28,Comoro Islands,2014,12.2,NA,NA
+28,Comoro Islands,2015,13.6,NA,NA
+28,Comoro Islands,2016,12.5,NA,NA
+28,Comoro Islands,2017,14.8,NA,NA
+28,Comoro Islands,2018,19.5,NA,NA
+28,Comoro Islands,2019,19.8,NA,NA
+28,Comoro Islands,2020,3.3,NA,NA
+28,Comoro Islands,2021,13.8,NA,NA
+28,Comoro Islands,2022,NA,NA,NA
+31,Seychelles,2005,124.16728803781605,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2006,136.10645034914452,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2007,161.1786912029343,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2008,154.0151938161372,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2009,155.20911004727006,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2010,186.25093205672408,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2011,199.3840105991854,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2012,216.09883783504523,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2013,239.97716245770218,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2014,243.55891115110072,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2015,292.50947662754743,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2016,323.5512986370014,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2017,373.695780344581,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2018,379.66536150024524,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2019,389.216691349308,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2020,112.22812572648758,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2021,198.19009436805254,UNWTO - Hotel:Overnights,gapfilled
+31,Seychelles,2022,367.7261991889168,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2005,214.90492160391238,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2006,117.00379065101897,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2007,169.5361048208642,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2008,186.25093205672408,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2009,192.2205132123883,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2010,210.129256679381,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2011,239.97716245770218,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2012,196.9961781369197,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2013,192.2205132123883,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2014,192.2205132123883,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2015,188.63876451898977,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2016,200.57792683031823,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2017,206.54750798598246,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2018,211.32317291051385,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2019,204.15967552371677,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2020,68.5307916670254,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2021,84.7680524104321,UNWTO - Hotel:Overnights,gapfilled
+32,Reunion,2022,78.79847125476788,UNWTO - Hotel:Overnights,gapfilled
+37,Mauritius,2005,685.4565570008114,UNWTO - Total:Overnights / Mean Stay,gapfilled
+37,Mauritius,2006,771.2698853118189,UNWTO - Hotel:Overnights,gapfilled
+37,Mauritius,2007,821.578831390543,UNWTO - Total:Overnights / Mean Stay,gapfilled
+37,Mauritius,2008,931,NA,NA
+37,Mauritius,2009,882,NA,NA
+37,Mauritius,2010,888,NA,NA
+37,Mauritius,2011,940,NA,NA
+37,Mauritius,2012,951,NA,NA
+37,Mauritius,2013,989,NA,NA
+37,Mauritius,2014,1031,NA,NA
+37,Mauritius,2015,1142,NA,NA
+37,Mauritius,2016,1260,NA,NA
+37,Mauritius,2017,1321,NA,NA
+37,Mauritius,2018,1377,NA,NA
+37,Mauritius,2019,1360,NA,NA
+37,Mauritius,2020,355,NA,NA
+37,Mauritius,2021,147.4,NA,NA
+37,Mauritius,2022,960.1,NA,NA
+39,Maldives,2005,682.8537523164197,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2006,997.794179899932,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2007,1095.256033639639,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2008,1127.1225420810722,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2009,1065.0449282341249,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2010,1238.6553216260872,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2011,1351.015802689062,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2012,1334.8756230888555,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2013,1460.4793284391787,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2014,1508.486016480818,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2015,1443.718372700503,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2016,1477.4472095573444,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2017,1778.7305620945283,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2018,1961.2387468045533,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2019,2211.6184559872404,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2020,824.5976372669493,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2021,2084.3593476009987,UNWTO - Hotel:Overnights,gapfilled
+39,Maldives,2022,2523.4550028784056,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2005,865.6182503089708,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2006,1054.9836226946102,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2007,899.4855188317871,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2008,758.5539820755516,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2009,742.1665940806405,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2010,1191.7272714077017,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2011,1558.622680404878,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2012,1831.017485298067,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2013,1986.3335070720577,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2014,2752.8991010562327,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2015,3307.3390615507246,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2016,4051.6906406973535,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2017,3980.1323797862415,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2018,4373.975937930605,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2019,4040.947797456245,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2020,818.6410713902256,UNWTO - Hotel:Overnights,gapfilled
+40,Sri Lanka,2021,535.867587433593,UNWTO - Total:Overnights / Mean Stay,gapfilled
+40,Sri Lanka,2022,1224.3199653086915,UNWTO - Total:Overnights / Mean Stay,gapfilled
+41,Mozambique,2005,298.47905778321166,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2006,284.1520630096175,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2007,306.8364714011416,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2008,306.8364714011416,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2009,282.95814677848466,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2010,319.9695499436029,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2011,331.90871225493134,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2012,296.09122532094597,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2013,310.4182200945401,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2014,325.9391310992671,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2015,305.64255517000873,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2016,287.73381170301604,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2017,211.32317291051385,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2018,254.30415723129633,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2019,273.4068169294219,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2020,119.39162311328467,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2021,117.00379065101897,UNWTO - Hotel:Overnights,gapfilled
+41,Mozambique,2022,NA,NA,NA
+42,Madagascar,2005,755.955981536242,UNWTO - Hotel:Overnights,gapfilled
+42,Madagascar,2006,767.2497119633301,UNWTO - Hotel:Overnights,gapfilled
+42,Madagascar,2007,811.9902594244868,UNWTO - Hotel:Overnights,gapfilled
+42,Madagascar,2008,841.9620824809897,UNWTO - Hotel:Overnights,gapfilled
+42,Madagascar,2009,349.38168616107106,UNWTO - Hotel:Overnights,gapfilled
+42,Madagascar,2010,477.52208908380123,UNWTO - Hotel:Overnights,gapfilled
+42,Madagascar,2011,544.9948888148659,UNWTO - Hotel:Overnights,gapfilled
+42,Madagascar,2012,NA,NA,NA
+42,Madagascar,2013,NA,NA,NA
+42,Madagascar,2014,NA,NA,NA
+42,Madagascar,2015,7,UNWTO - Trips:Overnights,gapfilled
+42,Madagascar,2016,6,UNWTO - Trips:Overnights,gapfilled
+42,Madagascar,2017,7,UNWTO - Trips:Overnights,gapfilled
+42,Madagascar,2018,9,UNWTO - Trips:Overnights,gapfilled
+42,Madagascar,2019,11,UNWTO - Trips:Overnights,gapfilled
+42,Madagascar,2020,3,UNWTO - Trips:Overnights,gapfilled
+42,Madagascar,2021,NA,NA,NA
+42,Madagascar,2022,NA,NA,NA
+43,Kenya,2005,478.10125474672884,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2006,651.7061622092751,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2007,730.327900951696,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2008,301.16614472234886,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2009,588.1427307029717,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2010,616.8114310178876,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2011,630.2770326809541,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2012,583.0750311523552,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2013,555.9990364104902,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2014,468.25543847695974,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2015,379.6430920490379,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2016,414.9721974876211,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2017,492.5803963199187,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2018,580.3239942534492,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2019,708.898771423375,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2020,182.0028095749964,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2021,220.5173261596814,UNWTO - Hotel:Overnights,gapfilled
+43,Kenya,2022,NA,NA,NA
+45,Eritrea,2005,25.483289168814135,UNWTO - Hotel:Overnights,gapfilled
+45,Eritrea,2006,19.836423955270092,UNWTO - Hotel:Overnights,gapfilled
+45,Eritrea,2007,22.297878022712368,UNWTO - Hotel:Overnights,gapfilled
+45,Eritrea,2008,19.2572582923425,UNWTO - Hotel:Overnights,gapfilled
+45,Eritrea,2009,19.402049708074397,UNWTO - Hotel:Overnights,gapfilled
+45,Eritrea,2010,19.836423955270092,UNWTO - Hotel:Overnights,gapfilled
+45,Eritrea,2011,21.13954669685718,UNWTO - Hotel:Overnights,gapfilled
+45,Eritrea,2012,20.560381033929588,UNWTO - Hotel:Overnights,gapfilled
+45,Eritrea,2013,20.849963865393384,UNWTO - Hotel:Overnights,gapfilled
+45,Eritrea,2014,20.705172449661486,UNWTO - Hotel:Overnights,gapfilled
+45,Eritrea,2015,20.849963865393384,UNWTO - Hotel:Overnights,gapfilled
+45,Eritrea,2016,20.705172449661486,UNWTO - Hotel:Overnights,gapfilled
+45,Eritrea,2017,NA,NA,NA
+45,Eritrea,2018,NA,NA,NA
+45,Eritrea,2019,NA,NA,NA
+45,Eritrea,2020,NA,NA,NA
+45,Eritrea,2021,NA,NA,NA
+45,Eritrea,2022,NA,NA,NA
+46,Djibouti,2005,36.05627018021197,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2006,47.15969112974744,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2007,47.75664924531387,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2008,64.47147648117372,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2009,69.24714140570511,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2010,60.88972778777518,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2011,66.85930894343942,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2012,71.6349738679708,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2013,75.21672256136934,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2014,25.772872000277932,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2015,26.496829078937424,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2016,25.772872000277932,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2017,24.035375011495148,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2018,23.166626517103758,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2019,25.628080584546034,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2020,22.15308660698047,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2021,24.18016642722705,UNWTO - Hotel:Overnights,gapfilled
+46,Djibouti,2022,25.338497753082237,UNWTO - Hotel:Overnights,gapfilled
+47,Yemen,2005,339.42546630614225,UNWTO - Hotel:Overnights,gapfilled
+47,Yemen,2006,1071.62189858082,UNWTO - Hotel:Overnights,gapfilled
+47,Yemen,2007,1850.6008195184165,UNWTO - Hotel:Overnights,gapfilled
+47,Yemen,2008,2001.0452255063647,UNWTO - Hotel:Overnights,gapfilled
+47,Yemen,2009,1984.0487098410595,UNWTO - Hotel:Overnights,gapfilled
+47,Yemen,2010,2777.8364761108032,UNWTO - Hotel:Overnights,gapfilled
+47,Yemen,2011,1562.3331825415094,UNWTO - Hotel:Overnights,gapfilled
+47,Yemen,2012,1596.3262138721195,UNWTO - Hotel:Overnights,gapfilled
+47,Yemen,2013,1832.762892186512,UNWTO - Hotel:Overnights,gapfilled
+47,Yemen,2014,NA,NA,NA
+47,Yemen,2015,696.6888599441888,UNWTO - Hotel:Overnights,gapfilled
+47,Yemen,2016,NA,NA,NA
+47,Yemen,2017,NA,NA,NA
+47,Yemen,2018,NA,NA,NA
+47,Yemen,2019,NA,NA,NA
+47,Yemen,2020,NA,NA,NA
+47,Yemen,2021,NA,NA,NA
+47,Yemen,2022,NA,NA,NA
+48,Oman,2005,891,NA,NA
+48,Oman,2006,1066,NA,NA
+48,Oman,2007,1223,NA,NA
+48,Oman,2008,1373,NA,NA
+48,Oman,2009,1521,NA,NA
+48,Oman,2010,1441,NA,NA
+48,Oman,2011,1018,NA,NA
+48,Oman,2012,1241,NA,NA
+48,Oman,2013,1392,NA,NA
+48,Oman,2014,1611,NA,NA
+48,Oman,2015,1909,NA,NA
+48,Oman,2016,2335,NA,NA
+48,Oman,2017,2316,NA,NA
+48,Oman,2018,2301,NA,NA
+48,Oman,2019,2500,NA,NA
+48,Oman,2020,622,NA,NA
+48,Oman,2021,464,NA,NA
+48,Oman,2022,2059,NA,NA
+50,Saudi Arabia,2005,8037,NA,NA
+50,Saudi Arabia,2006,8620,NA,NA
+50,Saudi Arabia,2007,11531,NA,NA
+50,Saudi Arabia,2008,14757,NA,NA
+50,Saudi Arabia,2009,10896,NA,NA
+50,Saudi Arabia,2010,10850,NA,NA
+50,Saudi Arabia,2011,14179,NA,NA
+50,Saudi Arabia,2012,16332,NA,NA
+50,Saudi Arabia,2013,15772,NA,NA
+50,Saudi Arabia,2014,18260,NA,NA
+50,Saudi Arabia,2015,17994,NA,NA
+50,Saudi Arabia,2016,18044,NA,NA
+50,Saudi Arabia,2017,16109,NA,NA
+50,Saudi Arabia,2018,15334,NA,NA
+50,Saudi Arabia,2019,17526,NA,NA
+50,Saudi Arabia,2020,4138,NA,NA
+50,Saudi Arabia,2021,3477,NA,NA
+50,Saudi Arabia,2022,16638,NA,NA
+51,Kuwait,2005,106.67623459062486,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2006,189.76060960832308,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2007,300.53977629858736,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2008,265.6648534516523,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2009,304.6427083982268,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2010,212.32673615633985,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2011,275.92218370075085,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2012,307.7199074729563,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2013,314.9000386473253,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2014,203.09513893215117,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2015,186.6834105335935,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2016,208.22380405670043,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2017,187.70914355850334,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2018,205.14660498197088,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2019,156.93715281120774,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2020,88.21304014224748,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2021,87.18730711733762,UNWTO - Hotel:Overnights,gapfilled
+51,Kuwait,2022,NA,NA,NA
+52,Bahrain,2005,1153.901103211244,UNWTO - Hotel:Overnights,gapfilled
+52,Bahrain,2006,1198.676570433669,UNWTO - Hotel:Overnights,gapfilled
+52,Bahrain,2007,1231.3253486166873,UNWTO - Hotel:Overnights,gapfilled
+52,Bahrain,2008,1076.4768578058008,UNWTO - Hotel:Overnights,gapfilled
+52,Bahrain,2009,935.6207005019222,UNWTO - Hotel:Overnights,gapfilled
+52,Bahrain,2010,928.158122631518,UNWTO - Hotel:Overnights,gapfilled
+52,Bahrain,2011,765.8470539502274,UNWTO - Hotel:Overnights,gapfilled
+52,Bahrain,2012,945.881745073728,UNWTO - Hotel:Overnights,gapfilled
+52,Bahrain,2013,997.1869679327566,UNWTO - Hotel:Overnights,gapfilled
+52,Bahrain,2014,1334.8686165685451,UNWTO - Hotel:Overnights,gapfilled
+52,Bahrain,2015,3964,NA,NA
+52,Bahrain,2016,3990,NA,NA
+52,Bahrain,2017,4372,NA,NA
+52,Bahrain,2018,4366.7,NA,NA
+52,Bahrain,2019,3849,NA,NA
+52,Bahrain,2020,827,NA,NA
+52,Bahrain,2021,2182,NA,NA
+52,Bahrain,2022,3712,NA,NA
+54,United Arab Emirates,2005,7823.49698260313,UNWTO - Hotel:Overnights,gapfilled
+54,United Arab Emirates,2006,NA,NA,NA
+54,United Arab Emirates,2007,NA,NA,NA
+54,United Arab Emirates,2008,NA,NA,NA
+54,United Arab Emirates,2009,NA,NA,NA
+54,United Arab Emirates,2010,NA,NA,NA
+54,United Arab Emirates,2011,NA,NA,NA
+54,United Arab Emirates,2012,NA,NA,NA
+54,United Arab Emirates,2013,NA,NA,NA
+54,United Arab Emirates,2014,17820.79750513809,UNWTO - Hotel:Overnights,gapfilled
+54,United Arab Emirates,2015,16842.2,NA,NA
+54,United Arab Emirates,2016,18142.9,NA,NA
+54,United Arab Emirates,2017,19167.9,NA,NA
+54,United Arab Emirates,2018,20214,NA,NA
+54,United Arab Emirates,2019,21560.7,NA,NA
+54,United Arab Emirates,2020,7165.1,NA,NA
+54,United Arab Emirates,2021,11479,NA,NA
+54,United Arab Emirates,2022,NA,NA,NA
+56,Cape Verde,2005,489.7099236641224,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2006,598.5343511450385,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2007,660.3664122137409,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2008,704.8854961832066,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2009,709.8320610687027,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2010,831.0229007633593,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2011,1058.564885496184,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2012,1192.1221374045808,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2013,1244.0610687022909,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2014,1221.8015267175579,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2015,1286.1068702290083,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2016,1479.0229007633598,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2017,1652.1526717557263,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2018,1756.0305343511461,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2019,1874.7480916030545,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2020,445.19083969465674,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2021,333.8931297709926,UNWTO - Hotel:Overnights,gapfilled
+56,Cape Verde,2022,1941.526717557253,UNWTO - Hotel:Overnights,gapfilled
+59,Belgium,2005,6747,NA,NA
+59,Belgium,2006,6995,NA,NA
+59,Belgium,2007,7045,NA,NA
+59,Belgium,2008,7165,NA,NA
+59,Belgium,2009,6815,NA,NA
+59,Belgium,2010,7186,NA,NA
+59,Belgium,2011,7494,NA,NA
+59,Belgium,2012,7560,NA,NA
+59,Belgium,2013,7684,NA,NA
+59,Belgium,2014,7887,NA,NA
+59,Belgium,2015,8355,NA,NA
+59,Belgium,2016,7481,NA,NA
+59,Belgium,2017,8385,NA,NA
+59,Belgium,2018,9119,NA,NA
+59,Belgium,2019,9343,NA,NA
+59,Belgium,2020,2584,NA,NA
+59,Belgium,2021,3243,NA,NA
+59,Belgium,2022,8220,NA,NA
+61,Tunisia,2005,14751.356178017913,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2006,14678.168633584528,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2007,15006.157258637848,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2008,15187.770794824397,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2009,13667.096260486276,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2010,13957.135788425989,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2011,7110.034409213706,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2012,11075.715057585665,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2013,10711.132660315652,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2014,10606.772643253233,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2015,5808.922508175742,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2016,6191.124129105644,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2017,7633.189819422721,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2018,10360.103512014786,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2019,12149.132375941987,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2020,1740.2371676382763,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2021,2111.596189392862,UNWTO - Hotel:Overnights,gapfilled
+61,Tunisia,2022,7294.358595194084,UNWTO - Hotel:Overnights,gapfilled
+62,Morocco,2005,9405.954784586946,UNWTO - Hotel:Overnights,gapfilled
+62,Morocco,2006,10341.128963457983,UNWTO - Hotel:Overnights,gapfilled
+62,Morocco,2007,10598.640693871746,UNWTO - Hotel:Overnights,gapfilled
+62,Morocco,2008,10365.524811602443,UNWTO - Hotel:Overnights,gapfilled
+62,Morocco,2009,15691,NA,NA
+62,Morocco,2010,11054.029859235034,UNWTO - Hotel:Overnights,gapfilled
+62,Morocco,2011,9368.005687473338,UNWTO - Hotel:Overnights,gapfilled
+62,Morocco,2012,9677.019763969854,UNWTO - Hotel:Overnights,gapfilled
+62,Morocco,2013,15546,NA,NA
+62,Morocco,2014,18349,NA,NA
+62,Morocco,2015,19193,NA,NA
+62,Morocco,2016,18093,NA,NA
+62,Morocco,2017,18983,NA,NA
+62,Morocco,2018,21034,NA,NA
+62,Morocco,2019,23183,NA,NA
+62,Morocco,2020,2930.2124271292473,UNWTO - Hotel:Overnights,gapfilled
+62,Morocco,2021,2374.5292193942837,UNWTO - Hotel:Overnights,gapfilled
+62,Morocco,2022,9281.264894070808,UNWTO - Hotel:Overnights,gapfilled
+66,Senegal,2005,957.160305343512,UNWTO - Hotel:Overnights,gapfilled
+66,Senegal,2006,1004.1526717557258,UNWTO - Hotel:Overnights,gapfilled
+66,Senegal,2007,957.160305343512,UNWTO - Hotel:Overnights,gapfilled
+66,Senegal,2008,NA,NA,NA
+66,Senegal,2009,NA,NA,NA
+66,Senegal,2010,NA,NA,NA
+66,Senegal,2011,NA,NA,NA
+66,Senegal,2012,NA,NA,NA
+66,Senegal,2013,NA,NA,NA
+66,Senegal,2014,2245.7404580152684,UNWTO - Hotel:Overnights,gapfilled
+66,Senegal,2015,1681.8320610687033,UNWTO - Hotel:Overnights,gapfilled
+66,Senegal,2016,2028.0916030534363,UNWTO - Hotel:Overnights,gapfilled
+66,Senegal,2017,2361.9847328244286,UNWTO - Hotel:Overnights,gapfilled
+66,Senegal,2018,NA,NA,NA
+66,Senegal,2019,NA,NA,NA
+66,Senegal,2020,NA,NA,NA
+66,Senegal,2021,NA,NA,NA
+66,Senegal,2022,NA,NA,NA
+67,Libya,2005,219.56263330015636,UNWTO - Hotel:Overnights,gapfilled
+67,Libya,2006,113.84729134082183,UNWTO - Hotel:Overnights,gapfilled
+67,Libya,2007,103.00469216550546,UNWTO - Hotel:Overnights,gapfilled
+67,Libya,2008,92.1620929901891,UNWTO - Hotel:Overnights,gapfilled
+67,Libya,2009,NA,NA,NA
+67,Libya,2010,NA,NA,NA
+67,Libya,2011,NA,NA,NA
+67,Libya,2012,NA,NA,NA
+67,Libya,2013,NA,NA,NA
+67,Libya,2014,NA,NA,NA
+67,Libya,2015,NA,NA,NA
+67,Libya,2016,NA,NA,NA
+67,Libya,2017,NA,NA,NA
+67,Libya,2018,NA,NA,NA
+67,Libya,2019,NA,NA,NA
+67,Libya,2020,NA,NA,NA
+67,Libya,2021,NA,NA,NA
+67,Libya,2022,NA,NA,NA
+68,Malta,2005,1151,NA,NA
+68,Malta,2006,1104,NA,NA
+68,Malta,2007,1244,NA,NA
+68,Malta,2008,1291,NA,NA
+68,Malta,2009,1182,NA,NA
+68,Malta,2010,1339,NA,NA
+68,Malta,2011,1415,NA,NA
+68,Malta,2012,1443,NA,NA
+68,Malta,2013,1582,NA,NA
+68,Malta,2014,1690,NA,NA
+68,Malta,2015,1783,NA,NA
+68,Malta,2016,1966,NA,NA
+68,Malta,2017,2274,NA,NA
+68,Malta,2018,2599,NA,NA
+68,Malta,2019,2753,NA,NA
+68,Malta,2020,659,NA,NA
+68,Malta,2021,968,NA,NA
+68,Malta,2022,2287,NA,NA
+69,Latvia,2005,730,NA,NA
+69,Latvia,2006,816,NA,NA
+69,Latvia,2007,845,NA,NA
+69,Latvia,2008,945,NA,NA
+69,Latvia,2009,754,NA,NA
+69,Latvia,2010,878,NA,NA
+69,Latvia,2011,1063,NA,NA
+69,Latvia,2012,1096,NA,NA
+69,Latvia,2013,1250,NA,NA
+69,Latvia,2014,1431,NA,NA
+69,Latvia,2015,1475,NA,NA
+69,Latvia,2016,1574,NA,NA
+69,Latvia,2017,1779,NA,NA
+69,Latvia,2018,1925,NA,NA
+69,Latvia,2019,1946,NA,NA
+69,Latvia,2020,715,NA,NA
+69,Latvia,2021,442,NA,NA
+69,Latvia,2022,1139,NA,NA
+70,Estonia,2005,1453,NA,NA
+70,Estonia,2006,1428,NA,NA
+70,Estonia,2007,1380,NA,NA
+70,Estonia,2008,1433,NA,NA
+70,Estonia,2009,1381,NA,NA
+70,Estonia,2010,1564,NA,NA
+70,Estonia,2011,1808,NA,NA
+70,Estonia,2012,1874,NA,NA
+70,Estonia,2013,1940,NA,NA
+70,Estonia,2014,1983,NA,NA
+70,Estonia,2015,1929,NA,NA
+70,Estonia,2016,2057,NA,NA
+70,Estonia,2017,2156,NA,NA
+70,Estonia,2018,2141,NA,NA
+70,Estonia,2019,2253,NA,NA
+70,Estonia,2020,676,NA,NA
+70,Estonia,2021,563,NA,NA
+70,Estonia,2022,1467,NA,NA
+71,Bulgaria,2005,1936,NA,NA
+71,Bulgaria,2006,2054,NA,NA
+71,Bulgaria,2007,2232,NA,NA
+71,Bulgaria,2008,2226,NA,NA
+71,Bulgaria,2009,1944,NA,NA
+71,Bulgaria,2010,2084,NA,NA
+71,Bulgaria,2011,2423,NA,NA
+71,Bulgaria,2012,2632,NA,NA
+71,Bulgaria,2013,2821,NA,NA
+71,Bulgaria,2014,2792,NA,NA
+71,Bulgaria,2015,2864,NA,NA
+71,Bulgaria,2016,3387,NA,NA
+71,Bulgaria,2017,3656,NA,NA
+71,Bulgaria,2018,3910,NA,NA
+71,Bulgaria,2019,4067,NA,NA
+71,Bulgaria,2020,1176,NA,NA
+71,Bulgaria,2021,1893,NA,NA
+71,Bulgaria,2022,3070,NA,NA
+72,Romania,2005,1430,NA,NA
+72,Romania,2006,1380,NA,NA
+72,Romania,2007,1551,NA,NA
+72,Romania,2008,1466,NA,NA
+72,Romania,2009,1276,NA,NA
+72,Romania,2010,1346,NA,NA
+72,Romania,2011,1517,NA,NA
+72,Romania,2012,1653,NA,NA
+72,Romania,2013,1716,NA,NA
+72,Romania,2014,1912,NA,NA
+72,Romania,2015,2234,NA,NA
+72,Romania,2016,2471,NA,NA
+72,Romania,2017,2749,NA,NA
+72,Romania,2018,2785,NA,NA
+72,Romania,2019,2672,NA,NA
+72,Romania,2020,454,NA,NA
+72,Romania,2021,879,NA,NA
+72,Romania,2022,1674,NA,NA
+73,Russia,2005,3460.1334056820388,UNWTO - Hotel:Overnights,gapfilled
+73,Russia,2006,3703.691370828942,UNWTO - Hotel:Overnights,gapfilled
+73,Russia,2007,3965.365217680987,UNWTO - Hotel:Overnights,gapfilled
+73,Russia,2008,3922,NA,NA
+73,Russia,2009,3055,NA,NA
+73,Russia,2010,3413,NA,NA
+73,Russia,2011,3866,NA,NA
+73,Russia,2012,4214,NA,NA
+73,Russia,2013,4444,NA,NA
+73,Russia,2014,4608,NA,NA
+73,Russia,2015,5627,NA,NA
+73,Russia,2016,6093,NA,NA
+73,Russia,2017,8029.3,NA,NA
+73,Russia,2018,11480,NA,NA
+73,Russia,2019,10860,NA,NA
+73,Russia,2020,NA,NA,NA
+73,Russia,2021,NA,NA,NA
+73,Russia,2022,NA,NA,NA
+74,Georgia,2005,64.62118056932083,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2006,84.11010804260806,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2007,106.67623459062486,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2008,106.67623459062486,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2009,154.885686761388,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2010,314.9000386473253,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2011,449.2710649105162,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2012,642.1088735935689,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2013,793.9173612802273,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2014,888.284799571934,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2015,1200.1076391445297,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2016,1712.974151599457,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2017,2415.601273662707,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2018,2682.2918601392694,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2019,2941.8023154414623,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2020,421.57627323795015,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2021,1361.1477240553768,UNWTO - Hotel:Guests,gapfilled
+74,Georgia,2022,3057.710147256276,UNWTO - Hotel:Guests,gapfilled
+75,Ukraine,2005,1018.2108843548185,UNWTO - Hotel:Overnights,gapfilled
+75,Ukraine,2006,NA,NA,NA
+75,Ukraine,2007,1366,NA,NA
+75,Ukraine,2008,1428,NA,NA
+75,Ukraine,2009,1148,NA,NA
+75,Ukraine,2010,1395,NA,NA
+75,Ukraine,2011,1428,NA,NA
+75,Ukraine,2012,1555,NA,NA
+75,Ukraine,2013,1665,NA,NA
+75,Ukraine,2014,552,NA,NA
+75,Ukraine,2015,666,NA,NA
+75,Ukraine,2016,864,NA,NA
+75,Ukraine,2017,933,NA,NA
+75,Ukraine,2018,918,NA,NA
+75,Ukraine,2019,959,NA,NA
+75,Ukraine,2020,254,NA,NA
+75,Ukraine,2021,NA,NA,NA
+75,Ukraine,2022,NA,NA,NA
+76,Turkey,2005,12953,NA,NA
+76,Turkey,2006,11897,NA,NA
+76,Turkey,2007,14794,NA,NA
+76,Turkey,2008,13648,NA,NA
+76,Turkey,2009,14389,NA,NA
+76,Turkey,2010,17415,NA,NA
+76,Turkey,2011,19264,NA,NA
+76,Turkey,2012,20481,NA,NA
+76,Turkey,2013,21180,NA,NA
+76,Turkey,2014,23609,NA,NA
+76,Turkey,2015,23138,NA,NA
+76,Turkey,2016,18048,NA,NA
+76,Turkey,2017,22928,NA,NA
+76,Turkey,2018,31136,NA,NA
+76,Turkey,2019,38854,NA,NA
+76,Turkey,2020,12779,NA,NA
+76,Turkey,2021,28522,NA,NA
+76,Turkey,2022,46580,NA,NA
+77,Syria,2005,3571,NA,NA
+77,Syria,2006,4231,NA,NA
+77,Syria,2007,4158,NA,NA
+77,Syria,2008,5430,NA,NA
+77,Syria,2009,6092,NA,NA
+77,Syria,2010,8546,NA,NA
+77,Syria,2011,5070,NA,NA
+77,Syria,2012,331.2096086376894,UNWTO - Hotel:Overnights,gapfilled
+77,Syria,2013,144.90420377898914,UNWTO - Hotel:Overnights,gapfilled
+77,Syria,2014,144.90420377898914,UNWTO - Hotel:Overnights,gapfilled
+77,Syria,2015,218.8349199927591,UNWTO - Hotel:Overnights,gapfilled
+77,Syria,2016,450.0902003094315,UNWTO - Hotel:Overnights,gapfilled
+77,Syria,2017,706.1862012739307,UNWTO - Hotel:Overnights,gapfilled
+77,Syria,2018,846.0631163503836,UNWTO - Hotel:Overnights,gapfilled
+77,Syria,2019,1085.3029140181432,UNWTO - Hotel:Overnights,gapfilled
+77,Syria,2020,224.7493772898607,UNWTO - Hotel:Overnights,gapfilled
+77,Syria,2021,381.48249566305304,UNWTO - Hotel:Overnights,gapfilled
+77,Syria,2022,NA,NA,NA
+78,Lebanon,2005,190.66388365139275,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2006,480.04305565781186,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2007,452.3482639852458,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2008,651.3404708177576,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2009,788.788696155678,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2010,899.5678628459423,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2011,758.0167054083824,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2012,586.7192902484367,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2013,581.5906251238874,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2014,642.1088735935689,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2015,719.0388504618079,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2016,811.3548227036948,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2017,882.1304014224747,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2018,935.4685187177872,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2019,976.4978397141814,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2020,186.6834105335935,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2021,217.6605478858711,UNWTO - Hotel:Overnights,gapfilled
+78,Lebanon,2022,246.17592597836506,UNWTO - Hotel:Overnights,gapfilled
+79,Israel,2005,2382.6445629741015,UNWTO - Hotel:Overnights,gapfilled
+79,Israel,2006,2532.3768397495314,UNWTO - Hotel:Overnights,gapfilled
+79,Israel,2007,3265.589655387946,UNWTO - Hotel:Overnights,gapfilled
+79,Israel,2008,4008.309282250197,UNWTO - Hotel:Overnights,gapfilled
+79,Israel,2009,3114.6690272095366,UNWTO - Hotel:Overnights,gapfilled
+79,Israel,2010,3680,NA,NA
+79,Israel,2011,3700,NA,NA
+79,Israel,2012,3658,NA,NA
+79,Israel,2013,3635,NA,NA
+79,Israel,2014,3603,NA,NA
+79,Israel,2015,3265,NA,NA
+79,Israel,2016,3431,NA,NA
+79,Israel,2017,4481,NA,NA
+79,Israel,2018,5026.5,NA,NA
+79,Israel,2019,5280,NA,NA
+79,Israel,2020,968,NA,NA
+79,Israel,2021,367,NA,NA
+79,Israel,2022,2723,NA,NA
+80,Greece,2005,7349,NA,NA
+80,Greece,2006,7748,NA,NA
+80,Greece,2007,8954,NA,NA
+80,Greece,2008,8886,NA,NA
+80,Greece,2009,8781,NA,NA
+80,Greece,2010,9197,NA,NA
+80,Greece,2011,10266,NA,NA
+80,Greece,2012,9396,NA,NA
+80,Greece,2013,12749,NA,NA
+80,Greece,2014,15259,NA,NA
+80,Greece,2015,16502,NA,NA
+80,Greece,2016,16916,NA,NA
+80,Greece,2017,19069,NA,NA
+80,Greece,2018,24321,NA,NA
+80,Greece,2019,25039,NA,NA
+80,Greece,2020,5487,NA,NA
+80,Greece,2021,12363,NA,NA
+80,Greece,2022,23101,NA,NA
+81,Cyprus,2005,1763,NA,NA
+81,Cyprus,2006,1771,NA,NA
+81,Cyprus,2007,1785,NA,NA
+81,Cyprus,2008,1762,NA,NA
+81,Cyprus,2009,1672,NA,NA
+81,Cyprus,2010,1814,NA,NA
+81,Cyprus,2011,1947,NA,NA
+81,Cyprus,2012,2021,NA,NA
+81,Cyprus,2013,1948,NA,NA
+81,Cyprus,2014,1936,NA,NA
+81,Cyprus,2015,1874,NA,NA
+81,Cyprus,2016,2268,NA,NA
+81,Cyprus,2017,2489,NA,NA
+81,Cyprus,2018,2666,NA,NA
+81,Cyprus,2019,2689,NA,NA
+81,Cyprus,2020,532,NA,NA
+81,Cyprus,2021,1404,NA,NA
+81,Cyprus,2022,NA,NA,NA
+82,Albania,2005,60.847556254457494,UNWTO - Hotel:Overnights,gapfilled
+82,Albania,2006,67.25256217597934,UNWTO - Hotel:Overnights,gapfilled
+82,Albania,2007,71.52256612366057,UNWTO - Hotel:Overnights,gapfilled
+82,Albania,2008,60.847556254457494,UNWTO - Hotel:Overnights,gapfilled
+82,Albania,2009,69.38756414981995,UNWTO - Hotel:Overnights,gapfilled
+82,Albania,2010,78.99507303210271,UNWTO - Hotel:Overnights,gapfilled
+82,Albania,2011,145.18013422116175,UNWTO - Hotel:Overnights,gapfilled
+82,Albania,2012,159.05764705112574,UNWTO - Hotel:Overnights,gapfilled
+82,Albania,2013,125.96511645659622,UNWTO - Hotel:Overnights,gapfilled
+82,Albania,2014,171.8676588941694,UNWTO - Hotel:Overnights,gapfilled
+82,Albania,2015,274.3477536385189,UNWTO - Hotel:Overnights,gapfilled
+82,Albania,2016,NA,NA,NA
+82,Albania,2017,NA,NA,NA
+82,Albania,2018,767,NA,NA
+82,Albania,2019,785,NA,NA
+82,Albania,2020,294,NA,NA
+82,Albania,2021,685,NA,NA
+82,Albania,2022,887,NA,NA
+84,Algeria,2005,625.0468887672904,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2006,683.2810709505783,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2007,742.8093460712727,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2008,771.2793906942134,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2009,872.2186398119125,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2010,975.7460748044243,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2011,1093.5085321084066,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2012,1212.5650823497951,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2013,1286.32837978196,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2014,1084.4498815465618,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2015,1200.8178586662873,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2016,1596.5727285653345,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2017,2141.413337124982,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2018,2260.681928053462,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2019,2306.7629745485565,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2020,940.5954784586946,UNWTO - Hotel:Overnights,gapfilled
+84,Algeria,2021,NA,NA,NA
+84,Algeria,2022,547.5512583534763,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2005,51.81348333856828,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2006,43.671364528221844,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2007,41.82088298041583,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2008,46.26203869515025,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2009,47.557375778614464,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2010,49.96300179076228,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2011,67.91267280448058,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2012,77.35012869829123,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2013,105.29240007016197,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2014,56.62473536286391,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2015,30.90304184836037,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2016,69.57810619750599,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2017,66.24723941145517,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2018,73.279069293118,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2019,81.79128441302565,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2020,31.643234467482774,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2021,52.18357964812949,UNWTO - Hotel:Overnights,gapfilled
+96,Sierra Leone,2022,NA,NA,NA
+98,Togo,2005,200.33587786259554,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2006,232.48854961832075,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2007,212.702290076336,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2008,183.02290076335888,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2009,370.992366412214,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2010,499.6030534351148,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2011,741.984732824428,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2012,581.2213740458019,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2013,808.7633587786264,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2014,697.4656488549623,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2015,675.2061068702294,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2016,835.9694656488555,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2017,1271.2671755725198,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2018,1417.1908396946574,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2019,2166.5954198473296,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2020,1192.1221374045808,UNWTO - Hotel:Overnights,gapfilled
+98,Togo,2021,NA,NA,NA
+98,Togo,2022,NA,NA,NA
+99,Benin,2005,63.364566913656255,UNWTO - Total:Overnights / Mean Stay,gapfilled
+99,Benin,2006,58.44835051518292,UNWTO - Total:Overnights / Mean Stay,gapfilled
+99,Benin,2007,75.01782059892638,UNWTO - Total:Overnights / Mean Stay,gapfilled
+99,Benin,2008,99.59890259129303,UNWTO - Total:Overnights / Mean Stay,gapfilled
+99,Benin,2009,168.39382085034694,UNWTO - Hotel:Overnights,gapfilled
+99,Benin,2010,184.86310662582042,UNWTO - Hotel:Overnights,gapfilled
+99,Benin,2011,195.96599591265647,UNWTO - Hotel:Overnights,gapfilled
+99,Benin,2012,224.27836359408843,UNWTO - Hotel:Overnights,gapfilled
+99,Benin,2013,253.8860683589846,UNWTO - Hotel:Overnights,gapfilled
+99,Benin,2014,247.22433478688296,UNWTO - Hotel:Overnights,gapfilled
+99,Benin,2015,259.6225611571832,UNWTO - Hotel:Overnights,gapfilled
+99,Benin,2016,272.5759319918253,UNWTO - Hotel:Overnights,gapfilled
+99,Benin,2017,286.26949544558977,UNWTO - Hotel:Overnights,gapfilled
+99,Benin,2018,300.51820336369605,UNWTO - Hotel:Overnights,gapfilled
+99,Benin,2019,315.50710390092473,UNWTO - Hotel:Overnights,gapfilled
+99,Benin,2020,331.4212452120564,UNWTO - Hotel:Overnights,gapfilled
+99,Benin,2021,NA,NA,NA
+99,Benin,2022,NA,NA,NA
+100,Republique du Congo,2005,53.42047766088544,UNWTO - Hotel:Overnights,gapfilled
+100,Republique du Congo,2006,70.20977064002086,UNWTO - Hotel:Overnights,gapfilled
+100,Republique du Congo,2007,83.94646489567711,UNWTO - Hotel:Overnights,gapfilled
+100,Republique du Congo,2008,94.6305604278542,UNWTO - Hotel:Overnights,gapfilled
+100,Republique du Congo,2009,143.47214000352088,UNWTO - Hotel:Overnights,gapfilled
+100,Republique du Congo,2010,154.156235535698,UNWTO - Hotel:Overnights,gapfilled
+100,Republique du Congo,2011,256.4182927722501,UNWTO - Hotel:Overnights,gapfilled
+100,Republique du Congo,2012,311.3650697948751,UNWTO - Hotel:Overnights,gapfilled
+100,Republique du Congo,2013,352.5751525618439,UNWTO - Hotel:Overnights,gapfilled
+100,Republique du Congo,2014,416.67972575490643,UNWTO - Hotel:Overnights,gapfilled
+100,Republique du Congo,2015,554.0466683114689,UNWTO - Hotel:Overnights,gapfilled
+100,Republique du Congo,2016,341.8910570296668,UNWTO - Hotel:Overnights,gapfilled
+100,Republique du Congo,2017,140.41954128004173,UNWTO - Hotel:Overnights,gapfilled
+100,Republique du Congo,2018,173.99812723831258,UNWTO - Hotel:Overnights,gapfilled
+100,Republique du Congo,2019,NA,NA,NA
+100,Republique du Congo,2020,NA,NA,NA
+100,Republique du Congo,2021,NA,NA,NA
+100,Republique du Congo,2022,NA,NA,NA
+101,Namibia,2005,706,NA,NA
+101,Namibia,2006,1012.7220253992476,UNWTO - Hotel:Overnights,gapfilled
+101,Namibia,2007,NA,NA,NA
+101,Namibia,2008,1254,NA,NA
+101,Namibia,2009,769,NA,NA
+101,Namibia,2010,914,NA,NA
+101,Namibia,2011,739,NA,NA
+101,Namibia,2012,914,NA,NA
+101,Namibia,2013,873,NA,NA
+101,Namibia,2014,NA,NA,NA
+101,Namibia,2015,3740,UNWTO - Trips:Overnights,gapfilled
+101,Namibia,2016,NA,NA,NA
+101,Namibia,2017,NA,NA,NA
+101,Namibia,2018,NA,NA,NA
+101,Namibia,2019,NA,NA,NA
+101,Namibia,2020,NA,NA,NA
+101,Namibia,2021,NA,NA,NA
+101,Namibia,2022,NA,NA,NA
+102,South Africa,2005,NA,NA,NA
+102,South Africa,2006,NA,NA,NA
+102,South Africa,2007,35974,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2008,32860,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2009,30292,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2010,29128,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2011,26404,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2012,25438,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2013,25200,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2014,28000,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2015,24500,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2016,24300,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2017,17200,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2018,17600,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2019,28500,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2020,17000,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2021,14800,UNWTO - Trips:Overnights,gapfilled
+102,South Africa,2022,34000,UNWTO - Trips:Overnights,gapfilled
+103,Sao Tome and Principe,2005,NA,NA,NA
+103,Sao Tome and Principe,2006,NA,NA,NA
+103,Sao Tome and Principe,2007,NA,NA,NA
+103,Sao Tome and Principe,2008,NA,NA,NA
+103,Sao Tome and Principe,2009,NA,NA,NA
+103,Sao Tome and Principe,2010,NA,NA,NA
+103,Sao Tome and Principe,2011,NA,NA,NA
+103,Sao Tome and Principe,2012,NA,NA,NA
+103,Sao Tome and Principe,2013,NA,NA,NA
+103,Sao Tome and Principe,2014,NA,NA,NA
+103,Sao Tome and Principe,2015,NA,NA,NA
+103,Sao Tome and Principe,2016,27.1,NA,NA
+103,Sao Tome and Principe,2017,28.7,NA,NA
+103,Sao Tome and Principe,2018,32.8,NA,NA
+103,Sao Tome and Principe,2019,NA,NA,NA
+103,Sao Tome and Principe,2020,NA,NA,NA
+103,Sao Tome and Principe,2021,NA,NA,NA
+103,Sao Tome and Principe,2022,NA,NA,NA
+108,Bermuda,2005,270,NA,NA
+108,Bermuda,2006,299,NA,NA
+108,Bermuda,2007,306,NA,NA
+108,Bermuda,2008,264,NA,NA
+108,Bermuda,2009,236,NA,NA
+108,Bermuda,2010,232,NA,NA
+108,Bermuda,2011,236,NA,NA
+108,Bermuda,2012,232,NA,NA
+108,Bermuda,2013,236,NA,NA
+108,Bermuda,2014,224,NA,NA
+108,Bermuda,2015,220,NA,NA
+108,Bermuda,2016,244,NA,NA
+108,Bermuda,2017,270,NA,NA
+108,Bermuda,2018,282,NA,NA
+108,Bermuda,2019,269,NA,NA
+108,Bermuda,2020,42.1,NA,NA
+108,Bermuda,2021,72,NA,NA
+108,Bermuda,2022,146,NA,NA
+110,Bahamas,2005,1625,NA,NA
+110,Bahamas,2006,1613,NA,NA
+110,Bahamas,2007,1538,NA,NA
+110,Bahamas,2008,1469,NA,NA
+110,Bahamas,2009,1336,NA,NA
+110,Bahamas,2010,1378,NA,NA
+110,Bahamas,2011,1355,NA,NA
+110,Bahamas,2012,1431,NA,NA
+110,Bahamas,2013,1377,NA,NA
+110,Bahamas,2014,1444,NA,NA
+110,Bahamas,2015,1496,NA,NA
+110,Bahamas,2016,1499,NA,NA
+110,Bahamas,2017,1452,NA,NA
+110,Bahamas,2018,1633,NA,NA
+110,Bahamas,2019,1807,NA,NA
+110,Bahamas,2020,441,NA,NA
+110,Bahamas,2021,892,NA,NA
+110,Bahamas,2022,1452,NA,NA
+112,Cuba,2005,3088,NA,NA
+112,Cuba,2006,2928,NA,NA
+112,Cuba,2007,3006,NA,NA
+112,Cuba,2008,3244,NA,NA
+112,Cuba,2009,3244,NA,NA
+112,Cuba,2010,3252,NA,NA
+112,Cuba,2011,3427,NA,NA
+112,Cuba,2012,3428,NA,NA
+112,Cuba,2013,3397,NA,NA
+112,Cuba,2014,3547,NA,NA
+112,Cuba,2015,3601,NA,NA
+112,Cuba,2016,3853,NA,NA
+112,Cuba,2017,3939,NA,NA
+112,Cuba,2018,3723,NA,NA
+112,Cuba,2019,3071,NA,NA
+112,Cuba,2020,1856,NA,NA
+112,Cuba,2021,656,NA,NA
+112,Cuba,2022,1724,NA,NA
+113,Cayman Islands,2005,168,NA,NA
+113,Cayman Islands,2006,267,NA,NA
+113,Cayman Islands,2007,292,NA,NA
+113,Cayman Islands,2008,303,NA,NA
+113,Cayman Islands,2009,272,NA,NA
+113,Cayman Islands,2010,288,NA,NA
+113,Cayman Islands,2011,309,NA,NA
+113,Cayman Islands,2012,322,NA,NA
+113,Cayman Islands,2013,345,NA,NA
+113,Cayman Islands,2014,383,NA,NA
+113,Cayman Islands,2015,385,NA,NA
+113,Cayman Islands,2016,385,NA,NA
+113,Cayman Islands,2017,418,NA,NA
+113,Cayman Islands,2018,463,NA,NA
+113,Cayman Islands,2019,503,NA,NA
+113,Cayman Islands,2020,122,NA,NA
+113,Cayman Islands,2021,17,NA,NA
+113,Cayman Islands,2022,284,NA,NA
+114,Haiti,2005,61.361663936500456,UNWTO - Total:Overnights / Mean Stay,gapfilled
+114,Haiti,2006,58.812514692847614,UNWTO - Total:Overnights / Mean Stay,gapfilled
+114,Haiti,2007,210.85105886785615,UNWTO - Total:Overnights / Mean Stay,gapfilled
+114,Haiti,2008,166.05886501509914,UNWTO - Total:Overnights / Mean Stay,gapfilled
+114,Haiti,2009,NA,NA,NA
+114,Haiti,2010,NA,NA,NA
+114,Haiti,2011,NA,NA,NA
+114,Haiti,2012,NA,NA,NA
+114,Haiti,2013,NA,NA,NA
+114,Haiti,2014,NA,NA,NA
+114,Haiti,2015,NA,NA,NA
+114,Haiti,2016,NA,NA,NA
+114,Haiti,2017,NA,NA,NA
+114,Haiti,2018,NA,NA,NA
+114,Haiti,2019,NA,NA,NA
+114,Haiti,2020,NA,NA,NA
+114,Haiti,2021,NA,NA,NA
+114,Haiti,2022,NA,NA,NA
+115,Dominican Republic,2005,5563.490884320543,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2006,6086.53069819616,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2007,6162.313703800752,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2008,5515.514562942959,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2009,5415.6454857896215,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2010,5559.770271642281,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2011,5761.074999708225,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2012,5807.48474732654,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2013,6064.598665566407,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2014,6601.150178115712,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2015,7273.601964281519,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2016,7747.882169899919,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2017,8458.323369727976,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2018,8660.80302811337,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2019,9134.495768572044,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2020,3014.6753779914384,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2021,11025.741939448388,UNWTO - Hotel:Overnights,gapfilled
+115,Dominican Republic,2022,18355.544737343647,UNWTO - Hotel:Overnights,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2005,2189.2426311653676,UNWTO - Hotel:Overnights,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2006,2337.106929383048,UNWTO - Hotel:Overnights,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2007,2199.8803504616035,UNWTO - Hotel:Overnights,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2008,2207.3267539689687,UNWTO - Total:Overnights / Mean Stay,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2009,2199.8803504616035,UNWTO - Total:Overnights / Mean Stay,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2010,2231.7935083503116,UNWTO - Total:Overnights / Mean Stay,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2011,2228.602192561441,UNWTO - Total:Overnights / Mean Stay,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2012,2325.405438157188,UNWTO - Total:Overnights / Mean Stay,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2013,2493.481403037717,UNWTO - Total:Overnights / Mean Stay,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2014,2589.220876703841,UNWTO - Total:Overnights / Mean Stay,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2015,2757.2968415843698,UNWTO - Total:Overnights / Mean Stay,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2016,2730.70254334378,UNWTO - Total:Overnights / Mean Stay,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2017,2558.3714907447566,UNWTO - Total:Overnights / Mean Stay,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2018,1478.6429821768033,UNWTO - Total:Overnights / Mean Stay,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2019,1936.064911914951,UNWTO - Total:Overnights / Mean Stay,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2020,1515.8749997136292,UNWTO - Total:Overnights / Mean Stay,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2021,1241.4218418707405,UNWTO - Total:Overnights / Mean Stay,gapfilled
+116,Puerto Rico and Virgin Islands of the United States,2022,1898.832894378125,UNWTO - Hotel:Guests,gapfilled
+117,British Virgin Islands,2005,337,NA,NA
+117,British Virgin Islands,2006,356,NA,NA
+117,British Virgin Islands,2007,358,NA,NA
+117,British Virgin Islands,2008,346,NA,NA
+117,British Virgin Islands,2009,309,NA,NA
+117,British Virgin Islands,2010,330,NA,NA
+117,British Virgin Islands,2011,338,NA,NA
+117,British Virgin Islands,2012,351,NA,NA
+117,British Virgin Islands,2013,366,NA,NA
+117,British Virgin Islands,2014,386,NA,NA
+117,British Virgin Islands,2015,393,NA,NA
+117,British Virgin Islands,2016,408,NA,NA
+117,British Virgin Islands,2017,335,NA,NA
+117,British Virgin Islands,2018,192,NA,NA
+117,British Virgin Islands,2019,302,NA,NA
+117,British Virgin Islands,2020,83,NA,NA
+117,British Virgin Islands,2021,56,NA,NA
+117,British Virgin Islands,2022,173,NA,NA
+120,Antigua and Barbuda,2005,245,NA,NA
+120,Antigua and Barbuda,2006,254,NA,NA
+120,Antigua and Barbuda,2007,262,NA,NA
+120,Antigua and Barbuda,2008,266,NA,NA
+120,Antigua and Barbuda,2009,234,NA,NA
+120,Antigua and Barbuda,2010,230,NA,NA
+120,Antigua and Barbuda,2011,241,NA,NA
+120,Antigua and Barbuda,2012,247,NA,NA
+120,Antigua and Barbuda,2013,243,NA,NA
+120,Antigua and Barbuda,2014,249,NA,NA
+120,Antigua and Barbuda,2015,250,NA,NA
+120,Antigua and Barbuda,2016,265,NA,NA
+120,Antigua and Barbuda,2017,247,NA,NA
+120,Antigua and Barbuda,2018,269,NA,NA
+120,Antigua and Barbuda,2019,301,NA,NA
+120,Antigua and Barbuda,2020,125.1,NA,NA
+120,Antigua and Barbuda,2021,169,NA,NA
+120,Antigua and Barbuda,2022,265,NA,NA
+121,Montserrat,2005,2.6594298240589986,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2006,2.4466754381342786,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2007,2.7658070170213587,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2008,2.9785614029460783,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2009,2.340298245171919,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2010,2.5530526310966386,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2011,1.2765263155483193,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2012,2.5530526310966386,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2013,2.8721842099837187,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2014,3.723201753682598,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2015,3.935956139607318,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2016,3.2976929818331584,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2017,4.148710525532038,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2018,4.361464911456757,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2019,3.4040701747955184,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2020,1.1701491225859595,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2021,0.3191315788870798,UNWTO - Hotel:Guests,gapfilled
+121,Montserrat,2022,NA,NA,NA
+122,Saint Lucia,2005,303.17499994272583,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2006,NA,NA,NA
+122,Saint Lucia,2007,221.26456136170867,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2008,252.11394732079307,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2009,222.32833329133229,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2010,253.17771925041666,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2011,298.91991222423144,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2012,269.1342981947707,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2013,280.83578942063025,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2014,297.8561402946078,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2015,293.60105257611343,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2016,289.34596485761904,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2017,326.57798239444503,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2018,343.5983332684226,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2019,376.5752630867542,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2020,120.20622804746674,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2021,193.6064911914951,UNWTO - Hotel:Guests,gapfilled
+122,Saint Lucia,2022,325.5142104648214,UNWTO - Hotel:Guests,gapfilled
+123,Dominica,2005,79,NA,NA
+123,Dominica,2006,84,NA,NA
+123,Dominica,2007,81,NA,NA
+123,Dominica,2008,81,NA,NA
+123,Dominica,2009,75,NA,NA
+123,Dominica,2010,77,NA,NA
+123,Dominica,2011,76,NA,NA
+123,Dominica,2012,79,NA,NA
+123,Dominica,2013,78,NA,NA
+123,Dominica,2014,81.5,NA,NA
+123,Dominica,2015,75,NA,NA
+123,Dominica,2016,78,NA,NA
+123,Dominica,2017,72,NA,NA
+123,Dominica,2018,63,NA,NA
+123,Dominica,2019,90,NA,NA
+123,Dominica,2020,22,NA,NA
+123,Dominica,2021,15,NA,NA
+123,Dominica,2022,61,NA,NA
+125,Grenada,2005,99,NA,NA
+125,Grenada,2006,119,NA,NA
+125,Grenada,2007,130,NA,NA
+125,Grenada,2008,130,NA,NA
+125,Grenada,2009,114,NA,NA
+125,Grenada,2010,110,NA,NA
+125,Grenada,2011,118,NA,NA
+125,Grenada,2012,56.40935580406366,UNWTO - Hotel:Guests,gapfilled
+125,Grenada,2013,64.5978106788471,UNWTO - Hotel:Guests,gapfilled
+125,Grenada,2014,70.05678059536937,UNWTO - Hotel:Guests,gapfilled
+125,Grenada,2015,74.60592219247128,UNWTO - Hotel:Guests,gapfilled
+125,Grenada,2016,102.81060009450312,UNWTO - Hotel:Guests,gapfilled
+125,Grenada,2017,80.06489210899358,UNWTO - Hotel:Guests,gapfilled
+125,Grenada,2018,90.98283194203816,UNWTO - Hotel:Guests,gapfilled
+125,Grenada,2019,90.07300362261778,UNWTO - Hotel:Guests,gapfilled
+125,Grenada,2020,25.020278784060494,UNWTO - Hotel:Guests,gapfilled
+125,Grenada,2021,26.834476452984735,UNWTO - Hotel:Guests,gapfilled
+125,Grenada,2022,97.35163017798082,UNWTO - Hotel:Guests,gapfilled
+126,Trinidad and Tobago,2005,NA,NA,NA
+126,Trinidad and Tobago,2006,NA,NA,NA
+126,Trinidad and Tobago,2007,NA,NA,NA
+126,Trinidad and Tobago,2008,NA,NA,NA
+126,Trinidad and Tobago,2009,596,UNWTO - Trips:Overnights,gapfilled
+126,Trinidad and Tobago,2010,716,UNWTO - Trips:Overnights,gapfilled
+126,Trinidad and Tobago,2011,546,UNWTO - Trips:Overnights,gapfilled
+126,Trinidad and Tobago,2012,NA,NA,NA
+126,Trinidad and Tobago,2013,627,UNWTO - Trips:Overnights,gapfilled
+126,Trinidad and Tobago,2014,NA,NA,NA
+126,Trinidad and Tobago,2015,NA,NA,NA
+126,Trinidad and Tobago,2016,NA,NA,NA
+126,Trinidad and Tobago,2017,NA,NA,NA
+126,Trinidad and Tobago,2018,NA,NA,NA
+126,Trinidad and Tobago,2019,NA,NA,NA
+126,Trinidad and Tobago,2020,NA,NA,NA
+126,Trinidad and Tobago,2021,NA,NA,NA
+126,Trinidad and Tobago,2022,NA,NA,NA
+127,Saint Vincent and the Grenadines,2005,111.44858611825195,UNWTO - Hotel:Guests,gapfilled
+127,Saint Vincent and the Grenadines,2006,111.44858611825195,UNWTO - Hotel:Guests,gapfilled
+127,Saint Vincent and the Grenadines,2007,115.04370179948589,UNWTO - Hotel:Guests,gapfilled
+127,Saint Vincent and the Grenadines,2008,111.44858611825195,UNWTO - Hotel:Guests,gapfilled
+127,Saint Vincent and the Grenadines,2009,104.25835475578408,UNWTO - Hotel:Guests,gapfilled
+127,Saint Vincent and the Grenadines,2010,97.06812339331621,UNWTO - Hotel:Guests,gapfilled
+127,Saint Vincent and the Grenadines,2011,104.25835475578408,UNWTO - Hotel:Guests,gapfilled
+127,Saint Vincent and the Grenadines,2012,104.25835475578408,UNWTO - Hotel:Guests,gapfilled
+127,Saint Vincent and the Grenadines,2013,104.25835475578408,UNWTO - Hotel:Guests,gapfilled
+127,Saint Vincent and the Grenadines,2014,107.85347043701802,UNWTO - Hotel:Guests,gapfilled
+127,Saint Vincent and the Grenadines,2015,111.44858611825195,UNWTO - Hotel:Guests,gapfilled
+127,Saint Vincent and the Grenadines,2016,NA,NA,NA
+127,Saint Vincent and the Grenadines,2017,76,NA,NA
+127,Saint Vincent and the Grenadines,2018,80,NA,NA
+127,Saint Vincent and the Grenadines,2019,84,NA,NA
+127,Saint Vincent and the Grenadines,2020,27,NA,NA
+127,Saint Vincent and the Grenadines,2021,24,NA,NA
+127,Saint Vincent and the Grenadines,2022,59,NA,NA
+129,Panama,2005,749.1629043051819,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2006,823.3939847622503,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2007,1025.5309269299594,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2008,1024.388910307543,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2009,922.7494309124802,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2010,1081.4897414283648,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2011,1080.3477248059482,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2012,1410.3905286842983,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2013,1646.7879695245006,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2014,1682.1904848194101,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2015,1595.397221515761,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2016,1448.0770772240407,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2017,1601.1073046278432,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2018,1569.130839200183,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2019,1635.3678033003362,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2020,399.70581784575256,UNWTO - Hotel:Overnights,gapfilled
+129,Panama,2021,NA,NA,NA
+129,Panama,2022,NA,NA,NA
+131,Nicaragua,2005,221,NA,NA
+131,Nicaragua,2006,230,NA,NA
+131,Nicaragua,2007,277,NA,NA
+131,Nicaragua,2008,309,NA,NA
+131,Nicaragua,2009,266,NA,NA
+131,Nicaragua,2010,285,NA,NA
+131,Nicaragua,2011,357,NA,NA
+131,Nicaragua,2012,389,NA,NA
+131,Nicaragua,2013,410,NA,NA
+131,Nicaragua,2014,426,NA,NA
+131,Nicaragua,2015,445,NA,NA
+131,Nicaragua,2016,482,NA,NA
+131,Nicaragua,2017,493,NA,NA
+131,Nicaragua,2018,293,NA,NA
+131,Nicaragua,2019,260,NA,NA
+131,Nicaragua,2020,131,NA,NA
+131,Nicaragua,2021,88,NA,NA
+131,Nicaragua,2022,96.2,NA,NA
+134,El Salvador,2005,375.7234687750074,UNWTO - Total:Overnights / Mean Stay,gapfilled
+134,El Salvador,2006,427.114216783747,UNWTO - Total:Overnights / Mean Stay,gapfilled
+134,El Salvador,2007,428.25623340616346,UNWTO - Total:Overnights / Mean Stay,gapfilled
+134,El Salvador,2008,429.39825002857987,UNWTO - Total:Overnights / Mean Stay,gapfilled
+134,El Salvador,2009,526.4696629339769,UNWTO - Hotel:Overnights,gapfilled
+134,El Salvador,2010,679.4998903377793,UNWTO - Hotel:Overnights,gapfilled
+134,El Salvador,2011,733.1746715913519,UNWTO - Hotel:Overnights,gapfilled
+134,El Salvador,2012,685.2099734498615,UNWTO - Hotel:Overnights,gapfilled
+134,El Salvador,2013,703.4822394085245,UNWTO - Hotel:Overnights,gapfilled
+134,El Salvador,2014,784.5654196000914,UNWTO - Hotel:Overnights,gapfilled
+134,El Salvador,2015,813.1158351605023,UNWTO - Hotel:Overnights,gapfilled
+134,El Salvador,2016,864.5065831692419,UNWTO - Hotel:Overnights,gapfilled
+134,El Salvador,2017,842.8082673433297,UNWTO - Hotel:Overnights,gapfilled
+134,El Salvador,2018,793.7015525794229,UNWTO - Hotel:Overnights,gapfilled
+134,El Salvador,2019,816.5418850277516,UNWTO - Hotel:Overnights,gapfilled
+134,El Salvador,2020,197.5688756780434,UNWTO - Hotel:Overnights,gapfilled
+134,El Salvador,2021,277.5100392471939,UNWTO - Hotel:Overnights,gapfilled
+134,El Salvador,2022,634.9612420635383,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2005,12209.299710254116,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2006,11064.999054592847,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2007,15131.720247017774,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2008,16823.046864816515,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2009,13753.306183761137,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2010,14283.201896562363,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2011,14452.220356679996,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2012,14951.281620675978,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2013,15935.699949198946,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2014,17531.097170714707,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2015,19496.507777893392,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2016,21555.563748110228,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2017,24432.30361997723,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2018,24854.84977027131,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2019,25825.56389932528,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2020,10913.11084381146,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2021,17459.15012350247,UNWTO - Hotel:Overnights,gapfilled
+135,Mexico,2022,24327.238090714916,UNWTO - Hotel:Overnights,gapfilled
+137,Ecuador,2005,NA,NA,NA
+137,Ecuador,2006,NA,NA,NA
+137,Ecuador,2007,NA,NA,NA
+137,Ecuador,2008,NA,NA,NA
+137,Ecuador,2009,NA,NA,NA
+137,Ecuador,2010,1009,NA,NA
+137,Ecuador,2011,1100,NA,NA
+137,Ecuador,2012,1249,NA,NA
+137,Ecuador,2013,1310,NA,NA
+137,Ecuador,2014,1628,NA,NA
+137,Ecuador,2015,1675,NA,NA
+137,Ecuador,2016,1568,NA,NA
+137,Ecuador,2017,1804,NA,NA
+137,Ecuador,2018,2534,NA,NA
+137,Ecuador,2019,2106,NA,NA
+137,Ecuador,2020,505,NA,NA
+137,Ecuador,2021,667,NA,NA
+137,Ecuador,2022,1263,NA,NA
+138,Peru,2005,3442.9939788025526,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2006,3469.7469725567616,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2007,3938.505950076163,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2008,5193.570309241012,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2009,4721.321810797149,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2010,5190.080788316551,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2011,6638.2319719683,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2012,8299.243932012234,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2013,9461.254399858095,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2014,8359.728961369576,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2015,8578.405605969197,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2016,9218.151108787239,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2017,9135.565780241637,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2018,9261.18853352227,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2019,9613.630146892938,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2020,2069.2859082059936,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2021,2391.485006897989,UNWTO - Hotel:Overnights,gapfilled
+138,Peru,2022,5854.252937605826,UNWTO - Hotel:Overnights,gapfilled
+139,Venezuela,2005,505.98053404699675,UNWTO - Hotel:Guests,gapfilled
+139,Venezuela,2006,450.14819925560397,UNWTO - Hotel:Guests,gapfilled
+139,Venezuela,2007,459.4535883875028,UNWTO - Hotel:Guests,gapfilled
+139,Venezuela,2008,400.13173267164797,UNWTO - Hotel:Guests,gapfilled
+139,Venezuela,2009,305.91466771117274,UNWTO - Hotel:Guests,gapfilled
+139,Venezuela,2010,210.53442910921012,UNWTO - Hotel:Guests,gapfilled
+139,Venezuela,2011,319.8727514090209,UNWTO - Hotel:Guests,gapfilled
+139,Venezuela,2012,565.3023897628515,UNWTO - Hotel:Guests,gapfilled
+139,Venezuela,2013,564.1392161213641,UNWTO - Hotel:Guests,gapfilled
+139,Venezuela,2014,530.407180518231,UNWTO - Hotel:Guests,gapfilled
+139,Venezuela,2015,653.70358651589,UNWTO - Hotel:Guests,gapfilled
+139,Venezuela,2016,345.4625715217426,UNWTO - Hotel:Guests,gapfilled
+139,Venezuela,2017,212.86077639218485,UNWTO - Hotel:Guests,gapfilled
+139,Venezuela,2018,NA,NA,NA
+139,Venezuela,2019,NA,NA,NA
+139,Venezuela,2020,NA,NA,NA
+139,Venezuela,2021,NA,NA,NA
+139,Venezuela,2022,NA,NA,NA
+140,Guadeloupe and Martinique,2005,484,NA,NA
+140,Guadeloupe and Martinique,2006,503,NA,NA
+140,Guadeloupe and Martinique,2007,501,NA,NA
+140,Guadeloupe and Martinique,2008,481,NA,NA
+140,Guadeloupe and Martinique,2009,442,NA,NA
+140,Guadeloupe and Martinique,2010,478,NA,NA
+140,Guadeloupe and Martinique,2011,497,NA,NA
+140,Guadeloupe and Martinique,2012,488,NA,NA
+140,Guadeloupe and Martinique,2013,490,NA,NA
+140,Guadeloupe and Martinique,2014,490,NA,NA
+140,Guadeloupe and Martinique,2015,487,NA,NA
+140,Guadeloupe and Martinique,2016,519,NA,NA
+140,Guadeloupe and Martinique,2017,536,NA,NA
+140,Guadeloupe and Martinique,2018,537,NA,NA
+140,Guadeloupe and Martinique,2019,556,NA,NA
+140,Guadeloupe and Martinique,2020,312,NA,NA
+140,Guadeloupe and Martinique,2021,291,NA,NA
+140,Guadeloupe and Martinique,2022,556,NA,NA
+143,Iceland,2005,871,NA,NA
+143,Iceland,2006,971,NA,NA
+143,Iceland,2007,1058,NA,NA
+143,Iceland,2008,1106,NA,NA
+143,Iceland,2009,1281,NA,NA
+143,Iceland,2010,1224,NA,NA
+143,Iceland,2011,1419,NA,NA
+143,Iceland,2012,1642,NA,NA
+143,Iceland,2013,2019,NA,NA
+143,Iceland,2014,2597,NA,NA
+143,Iceland,2015,3347,NA,NA
+143,Iceland,2016,3978,NA,NA
+143,Iceland,2017,4378,NA,NA
+143,Iceland,2018,4562,NA,NA
+143,Iceland,2019,4533,NA,NA
+143,Iceland,2020,1041,NA,NA
+143,Iceland,2021,1903,NA,NA
+143,Iceland,2022,NA,NA,NA
+147,French Polynesia,2005,208,NA,NA
+147,French Polynesia,2006,222,NA,NA
+147,French Polynesia,2007,218,NA,NA
+147,French Polynesia,2008,196,NA,NA
+147,French Polynesia,2009,160,NA,NA
+147,French Polynesia,2010,154,NA,NA
+147,French Polynesia,2011,163,NA,NA
+147,French Polynesia,2012,169,NA,NA
+147,French Polynesia,2013,164,NA,NA
+147,French Polynesia,2014,181,NA,NA
+147,French Polynesia,2015,184,NA,NA
+147,French Polynesia,2016,192,NA,NA
+147,French Polynesia,2017,199,NA,NA
+147,French Polynesia,2018,216,NA,NA
+147,French Polynesia,2019,237,NA,NA
+147,French Polynesia,2020,77,NA,NA
+147,French Polynesia,2021,83,NA,NA
+147,French Polynesia,2022,219,NA,NA
+152,Samoa,2005,NA,NA,NA
+152,Samoa,2006,110,NA,NA
+152,Samoa,2007,111,NA,NA
+152,Samoa,2008,105,NA,NA
+152,Samoa,2009,116,NA,NA
+152,Samoa,2010,116,NA,NA
+152,Samoa,2011,121,NA,NA
+152,Samoa,2012,126,NA,NA
+152,Samoa,2013,116,NA,NA
+152,Samoa,2014,120,NA,NA
+152,Samoa,2015,128,NA,NA
+152,Samoa,2016,134,NA,NA
+152,Samoa,2017,146,NA,NA
+152,Samoa,2018,164,NA,NA
+152,Samoa,2019,172,NA,NA
+152,Samoa,2020,23.1,NA,NA
+152,Samoa,2021,2.6,NA,NA
+152,Samoa,2022,49.4,NA,NA
+153,Cook Islands,2005,22.6316644633318,UNWTO - Hotel:Overnights,gapfilled
+153,Cook Islands,2006,23.714048415925927,UNWTO - Hotel:Overnights,gapfilled
+153,Cook Islands,2007,22.238070298752113,UNWTO - Hotel:Overnights,gapfilled
+153,Cook Islands,2008,22.041273216462272,UNWTO - Hotel:Overnights,gapfilled
+153,Cook Islands,2009,23.615649874781006,UNWTO - Hotel:Overnights,gapfilled
+153,Cook Islands,2010,21.74607759302751,UNWTO - Hotel:Overnights,gapfilled
+153,Cook Islands,2011,24.599635286230214,UNWTO - Hotel:Overnights,gapfilled
+153,Cook Islands,2012,NA,NA,NA
+153,Cook Islands,2013,NA,NA,NA
+153,Cook Islands,2014,NA,NA,NA
+153,Cook Islands,2015,NA,NA,NA
+153,Cook Islands,2016,NA,NA,NA
+153,Cook Islands,2017,NA,NA,NA
+153,Cook Islands,2018,NA,NA,NA
+153,Cook Islands,2019,NA,NA,NA
+153,Cook Islands,2020,NA,NA,NA
+153,Cook Islands,2021,NA,NA,NA
+153,Cook Islands,2022,NA,NA,NA
+162,New Zealand,2005,NA,NA,NA
+162,New Zealand,2006,NA,NA,NA
+162,New Zealand,2007,27301,UNWTO - Trips:Overnights,gapfilled
+162,New Zealand,2008,15064.476,UNWTO - Hotel:Overnights,gapfilled
+162,New Zealand,2009,16681.177,UNWTO - Hotel:Overnights,gapfilled
+162,New Zealand,2010,15872.307,UNWTO - Hotel:Overnights,gapfilled
+162,New Zealand,2011,17680.867,UNWTO - Hotel:Overnights,gapfilled
+162,New Zealand,2012,16559.428,UNWTO - Hotel:Overnights,gapfilled
+162,New Zealand,2013,2381.8158040159124,UNWTO - Hotel:Overnights,gapfilled
+162,New Zealand,2014,2522.5652586833153,UNWTO - Hotel:Overnights,gapfilled
+162,New Zealand,2015,2679.884183434462,UNWTO - Hotel:Overnights,gapfilled
+162,New Zealand,2016,2995.432443380917,UNWTO - Hotel:Overnights,gapfilled
+162,New Zealand,2017,3138.913129380805,UNWTO - Hotel:Overnights,gapfilled
+162,New Zealand,2018,3202.4597783832937,UNWTO - Hotel:Overnights,gapfilled
+162,New Zealand,2019,NA,NA,NA
+162,New Zealand,2020,NA,NA,NA
+162,New Zealand,2021,249.45246170031342,UNWTO - Hotel:Overnights,gapfilled
+162,New Zealand,2022,882.9160487480436,UNWTO - Hotel:Overnights,gapfilled
+164,Belize,2005,NA,NA,NA
+164,Belize,2006,NA,NA,NA
+164,Belize,2007,NA,NA,NA
+164,Belize,2008,NA,NA,NA
+164,Belize,2009,NA,NA,NA
+164,Belize,2010,NA,NA,NA
+164,Belize,2011,NA,NA,NA
+164,Belize,2012,NA,NA,NA
+164,Belize,2013,NA,NA,NA
+164,Belize,2014,NA,NA,NA
+164,Belize,2015,113.25505925371894,UNWTO - Total:Overnights / Mean Stay,gapfilled
+164,Belize,2016,126.18288756081547,UNWTO - Total:Overnights / Mean Stay,gapfilled
+164,Belize,2017,140.93153675623546,UNWTO - Total:Overnights / Mean Stay,gapfilled
+164,Belize,2018,150.03564119785275,UNWTO - Total:Overnights / Mean Stay,gapfilled
+164,Belize,2019,147.1223277765352,UNWTO - Total:Overnights / Mean Stay,gapfilled
+164,Belize,2020,32.95685807865455,UNWTO - Total:Overnights / Mean Stay,gapfilled
+164,Belize,2021,143.1165218222236,UNWTO - Total:Overnights / Mean Stay,gapfilled
+164,Belize,2022,NA,NA,NA
+166,Jamaica,2005,1479,NA,NA
+166,Jamaica,2006,1679,NA,NA
+166,Jamaica,2007,1701,NA,NA
+166,Jamaica,2008,1767,NA,NA
+166,Jamaica,2009,1831,NA,NA
+166,Jamaica,2010,1922,NA,NA
+166,Jamaica,2011,1952,NA,NA
+166,Jamaica,2012,1986,NA,NA
+166,Jamaica,2013,2008,NA,NA
+166,Jamaica,2014,2080,NA,NA
+166,Jamaica,2015,2123,NA,NA
+166,Jamaica,2016,2182,NA,NA
+166,Jamaica,2017,2353,NA,NA
+166,Jamaica,2018,2473,NA,NA
+166,Jamaica,2019,2681,NA,NA
+166,Jamaica,2020,880.4,NA,NA
+166,Jamaica,2021,1464,NA,NA
+166,Jamaica,2022,2478,NA,NA
+167,Guyana,2005,NA,NA,NA
+167,Guyana,2006,NA,NA,NA
+167,Guyana,2007,NA,NA,NA
+167,Guyana,2008,NA,NA,NA
+167,Guyana,2009,NA,NA,NA
+167,Guyana,2010,NA,NA,NA
+167,Guyana,2011,NA,NA,NA
+167,Guyana,2012,NA,NA,NA
+167,Guyana,2013,NA,NA,NA
+167,Guyana,2014,NA,NA,NA
+167,Guyana,2015,60.485029357342135,UNWTO - Hotel:Guests,gapfilled
+167,Guyana,2016,97.7065858849373,UNWTO - Hotel:Guests,gapfilled
+167,Guyana,2017,124.45957963914633,UNWTO - Hotel:Guests,gapfilled
+167,Guyana,2018,152.3757470348427,UNWTO - Hotel:Guests,gapfilled
+167,Guyana,2019,145.3967051859186,UNWTO - Hotel:Guests,gapfilled
+167,Guyana,2020,31.40568832015842,UNWTO - Hotel:Guests,gapfilled
+167,Guyana,2021,24.426646471234324,UNWTO - Hotel:Guests,gapfilled
+167,Guyana,2022,72.11676577221563,UNWTO - Hotel:Guests,gapfilled
+168,Suriname,2005,NA,NA,NA
+168,Suriname,2006,NA,NA,NA
+168,Suriname,2007,NA,NA,NA
+168,Suriname,2008,NA,NA,NA
+168,Suriname,2009,NA,NA,NA
+168,Suriname,2010,NA,NA,NA
+168,Suriname,2011,102.3592804508867,UNWTO - Hotel:Guests,gapfilled
+168,Suriname,2012,123.29640599765898,UNWTO - Hotel:Guests,gapfilled
+168,Suriname,2013,131.43862148807042,UNWTO - Hotel:Guests,gapfilled
+168,Suriname,2014,115.15419050724753,UNWTO - Hotel:Guests,gapfilled
+168,Suriname,2015,96.54341224344995,UNWTO - Hotel:Guests,gapfilled
+168,Suriname,2016,NA,NA,NA
+168,Suriname,2017,NA,NA,NA
+168,Suriname,2018,NA,NA,NA
+168,Suriname,2019,NA,NA,NA
+168,Suriname,2020,NA,NA,NA
+168,Suriname,2021,NA,NA,NA
+168,Suriname,2022,NA,NA,NA
+169,French Guiana,2005,NA,NA,NA
+169,French Guiana,2006,NA,NA,NA
+169,French Guiana,2007,NA,NA,NA
+169,French Guiana,2008,NA,NA,NA
+169,French Guiana,2009,NA,NA,NA
+169,French Guiana,2010,NA,NA,NA
+169,French Guiana,2011,23.263472829746977,UNWTO - Hotel:Overnights,gapfilled
+169,French Guiana,2012,20.93712554677228,UNWTO - Hotel:Overnights,gapfilled
+169,French Guiana,2013,18.61077826379758,UNWTO - Hotel:Overnights,gapfilled
+169,French Guiana,2014,27.91616739569637,UNWTO - Hotel:Overnights,gapfilled
+169,French Guiana,2015,24.426646471234324,UNWTO - Hotel:Overnights,gapfilled
+169,French Guiana,2016,23.263472829746977,UNWTO - Hotel:Overnights,gapfilled
+169,French Guiana,2017,30.242514678671068,UNWTO - Hotel:Overnights,gapfilled
+169,French Guiana,2018,31.40568832015842,UNWTO - Hotel:Overnights,gapfilled
+169,French Guiana,2019,39.547903810569856,UNWTO - Hotel:Overnights,gapfilled
+169,French Guiana,2020,NA,NA,NA
+169,French Guiana,2021,NA,NA,NA
+169,French Guiana,2022,NA,NA,NA
+172,Argentina,2005,4728.300852646073,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2006,20706,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2007,5480.874198688388,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2008,5261.034380447279,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2009,4508.461034404964,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2010,5583.233479139274,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2011,5598.35473647861,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2012,5014.441568451961,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2013,4756.2170200417695,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2014,4992.341269263701,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2015,4449.139178689109,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2016,4470.076304235881,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2017,4746.911630909871,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2018,4978.383185565853,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2019,5582.070305497787,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2020,1379.5239388039956,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2021,257.06137476870407,UNWTO - Hotel:Overnights,gapfilled
+172,Argentina,2022,3121.958053752044,UNWTO - Hotel:Overnights,gapfilled
+173,Uruguay,2005,649,NA,NA
+173,Uruguay,2006,656,NA,NA
+173,Uruguay,2007,618,NA,NA
+173,Uruguay,2008,818,NA,NA
+173,Uruguay,2009,887,NA,NA
+173,Uruguay,2010,1004,NA,NA
+173,Uruguay,2011,1297,NA,NA
+173,Uruguay,2012,1226,NA,NA
+173,Uruguay,2013,1167,NA,NA
+173,Uruguay,2014,1163,NA,NA
+173,Uruguay,2015,1218,NA,NA
+173,Uruguay,2016,1392,NA,NA
+173,Uruguay,2017,1712,NA,NA
+173,Uruguay,2018,1491,NA,NA
+173,Uruguay,2019,1402,NA,NA
+173,Uruguay,2020,NA,NA,NA
+173,Uruguay,2021,87,NA,NA
+173,Uruguay,2022,NA,NA,NA
+174,Finland,2005,2080,NA,NA
+174,Finland,2006,2317,NA,NA
+174,Finland,2007,2472,NA,NA
+174,Finland,2008,2494,NA,NA
+174,Finland,2009,2220,NA,NA
+174,Finland,2010,2319,NA,NA
+174,Finland,2011,2623,NA,NA
+174,Finland,2012,2778,NA,NA
+174,Finland,2013,2797,NA,NA
+174,Finland,2014,2731,NA,NA
+174,Finland,2015,2622,NA,NA
+174,Finland,2016,2789,NA,NA
+174,Finland,2017,3180,NA,NA
+174,Finland,2018,3224,NA,NA
+174,Finland,2019,3290,NA,NA
+174,Finland,2020,896,NA,NA
+174,Finland,2021,807,NA,NA
+174,Finland,2022,2127,NA,NA
+175,Denmark,2005,9587,NA,NA
+175,Denmark,2006,9630,NA,NA
+175,Denmark,2007,9832,NA,NA
+175,Denmark,2008,9564,NA,NA
+175,Denmark,2009,9265,NA,NA
+175,Denmark,2010,9425,NA,NA
+175,Denmark,2011,8471,NA,NA
+175,Denmark,2012,8443,NA,NA
+175,Denmark,2013,8557,NA,NA
+175,Denmark,2014,10267,NA,NA
+175,Denmark,2015,10424,NA,NA
+175,Denmark,2016,10781,NA,NA
+175,Denmark,2017,12426,NA,NA
+175,Denmark,2018,12749,NA,NA
+175,Denmark,2019,14725,NA,NA
+175,Denmark,2020,6229,NA,NA
+175,Denmark,2021,7555,NA,NA
+175,Denmark,2022,14190,NA,NA
+176,Germany,2005,21500,NA,NA
+176,Germany,2006,23569,NA,NA
+176,Germany,2007,24421,NA,NA
+176,Germany,2008,24884,NA,NA
+176,Germany,2009,24220,NA,NA
+176,Germany,2010,26875,NA,NA
+176,Germany,2011,28374,NA,NA
+176,Germany,2012,30411,NA,NA
+176,Germany,2013,31545,NA,NA
+176,Germany,2014,32999,NA,NA
+176,Germany,2015,34970,NA,NA
+176,Germany,2016,35555,NA,NA
+176,Germany,2017,37452,NA,NA
+176,Germany,2018,38881,NA,NA
+176,Germany,2019,39563,NA,NA
+176,Germany,2020,12449,NA,NA
+176,Germany,2021,11688,NA,NA
+176,Germany,2022,28463,NA,NA
+177,Netherlands,2005,10012,NA,NA
+177,Netherlands,2006,10739,NA,NA
+177,Netherlands,2007,11008,NA,NA
+177,Netherlands,2008,10104,NA,NA
+177,Netherlands,2009,9921,NA,NA
+177,Netherlands,2010,10883,NA,NA
+177,Netherlands,2011,11300,NA,NA
+177,Netherlands,2012,11680,NA,NA
+177,Netherlands,2013,12783,NA,NA
+177,Netherlands,2014,13925,NA,NA
+177,Netherlands,2015,15007,NA,NA
+177,Netherlands,2016,15828,NA,NA
+177,Netherlands,2017,17924,NA,NA
+177,Netherlands,2018,18780,NA,NA
+177,Netherlands,2019,20129,NA,NA
+177,Netherlands,2020,7265,NA,NA
+177,Netherlands,2021,6248,NA,NA
+177,Netherlands,2022,16063,NA,NA
+178,Poland,2005,4310,NA,NA
+178,Poland,2006,4314,NA,NA
+178,Poland,2007,4387,NA,NA
+178,Poland,2008,4046,NA,NA
+178,Poland,2009,3862,NA,NA
+178,Poland,2010,4166,NA,NA
+178,Poland,2011,4442,NA,NA
+178,Poland,2012,4979,NA,NA
+178,Poland,2013,5243,NA,NA
+178,Poland,2014,5470,NA,NA
+178,Poland,2015,5690,NA,NA
+178,Poland,2016,6379,NA,NA
+178,Poland,2017,6804,NA,NA
+178,Poland,2018,7082,NA,NA
+178,Poland,2019,7471,NA,NA
+178,Poland,2020,2264,NA,NA
+178,Poland,2021,2510,NA,NA
+178,Poland,2022,5847,NA,NA
+179,France,2005,41944,NA,NA
+179,France,2006,39476,NA,NA
+179,France,2007,40417,NA,NA
+179,France,2008,39122,NA,NA
+179,France,2009,35882,NA,NA
+179,France,2010,36729,NA,NA
+179,France,2011,41605,NA,NA
+179,France,2012,42378,NA,NA
+179,France,2013,46001,NA,NA
+179,France,2014,45269,NA,NA
+179,France,2015,46129,NA,NA
+179,France,2016,44157,NA,NA
+179,France,2017,47928,NA,NA
+179,France,2018,51423,NA,NA
+179,France,2019,51396,NA,NA
+179,France,2020,15563,NA,NA
+179,France,2021,20361,NA,NA
+179,France,2022,45672,NA,NA
+180,United Kingdom,2005,30057,NA,NA
+180,United Kingdom,2006,32935,NA,NA
+180,United Kingdom,2007,32860,NA,NA
+180,United Kingdom,2008,32008,NA,NA
+180,United Kingdom,2009,31308,NA,NA
+180,United Kingdom,2010,30779,NA,NA
+180,United Kingdom,2011,32095,NA,NA
+180,United Kingdom,2012,32207,NA,NA
+180,United Kingdom,2013,33567,NA,NA
+180,United Kingdom,2014,35501,NA,NA
+180,United Kingdom,2015,37292,NA,NA
+180,United Kingdom,2016,39617,NA,NA
+180,United Kingdom,2017,41989,NA,NA
+180,United Kingdom,2018,40991,NA,NA
+180,United Kingdom,2019,41756,NA,NA
+180,United Kingdom,2020,NA,NA,NA
+180,United Kingdom,2021,11844.624656712136,UNWTO - Total:Overnights / Mean Stay,gapfilled
+180,United Kingdom,2022,32284,NA,NA
+181,Ireland,2005,9227.556097845609,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2006,7310,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2007,7942,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2008,8339,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2009,8340,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2010,7300,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2011,7169,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2012,8291,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2013,8413,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2014,8991,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2015,9125,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2016,9359,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2017,9626,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2018,10919,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2019,11621,UNWTO - Hotel:Overnights,gapfilled
+181,Ireland,2020,7721,UNWTO - Trips:Overnights,gapfilled
+181,Ireland,2021,5663,UNWTO - Trips:Overnights,gapfilled
+181,Ireland,2022,NA,NA,NA
+182,Spain,2005,37407,NA,NA
+182,Spain,2006,43114,NA,NA
+182,Spain,2007,44034,NA,NA
+182,Spain,2008,43727,NA,NA
+182,Spain,2009,39204,NA,NA
+182,Spain,2010,43183,NA,NA
+182,Spain,2011,47653,NA,NA
+182,Spain,2012,48101,NA,NA
+182,Spain,2013,49799,NA,NA
+182,Spain,2014,52359,NA,NA
+182,Spain,2015,55427,NA,NA
+182,Spain,2016,61342,NA,NA
+182,Spain,2017,65233,NA,NA
+182,Spain,2018,65771,NA,NA
+182,Spain,2019,67728,NA,NA
+182,Spain,2020,13389,NA,NA
+182,Spain,2021,25685,NA,NA
+182,Spain,2022,62502,NA,NA
+183,Portugal,2005,5769,NA,NA
+183,Portugal,2006,6349,NA,NA
+183,Portugal,2007,6788,NA,NA
+183,Portugal,2008,6962,NA,NA
+183,Portugal,2009,6439,NA,NA
+183,Portugal,2010,6756,NA,NA
+183,Portugal,2011,7264,NA,NA
+183,Portugal,2012,7503,NA,NA
+183,Portugal,2013,9177,NA,NA
+183,Portugal,2014,10497,NA,NA
+183,Portugal,2015,11723,NA,NA
+183,Portugal,2016,13359,NA,NA
+183,Portugal,2017,15432,NA,NA
+183,Portugal,2018,16186,NA,NA
+183,Portugal,2019,17283,NA,NA
+183,Portugal,2020,4208,NA,NA
+183,Portugal,2021,6345,NA,NA
+183,Portugal,2022,16308,NA,NA
+184,Italy,2005,38127,NA,NA
+184,Italy,2006,41194,NA,NA
+184,Italy,2007,42873,NA,NA
+184,Italy,2008,41797,NA,NA
+184,Italy,2009,41125,NA,NA
+184,Italy,2010,43794,NA,NA
+184,Italy,2011,47461,NA,NA
+184,Italy,2012,48739,NA,NA
+184,Italy,2013,50263,NA,NA
+184,Italy,2014,51636,NA,NA
+184,Italy,2015,55039,NA,NA
+184,Italy,2016,56764,NA,NA
+184,Italy,2017,60523,NA,NA
+184,Italy,2018,63195,NA,NA
+184,Italy,2019,65010,NA,NA
+184,Italy,2020,16512,NA,NA
+184,Italy,2021,26903,NA,NA
+184,Italy,2022,55087,NA,NA
+185,Monaco,2005,348.57435607543147,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2006,381.4817253552799,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2007,399.7635971774179,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2008,394.8884313581811,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2009,322.97973552443824,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2010,340.0428158917671,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2011,359.54347916871427,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2012,355.88710480428665,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2013,399.7635971774179,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2014,400.9823886322271,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2015,403.4199715418455,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2016,409.5139288158915,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2017,432.67096645726633,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2018,422.92063481879273,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2019,442.4212980957399,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2020,193.78784131466296,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2021,266.1840537303295,UNWTO - Hotel:Overnights,gapfilled
+185,Monaco,2022,398.5448057226087,UNWTO - Hotel:Overnights,gapfilled
+186,Montenegro,2005,272,NA,NA
+186,Montenegro,2006,378,NA,NA
+186,Montenegro,2007,984,NA,NA
+186,Montenegro,2008,1031,NA,NA
+186,Montenegro,2009,1044,NA,NA
+186,Montenegro,2010,1088,NA,NA
+186,Montenegro,2011,1201,NA,NA
+186,Montenegro,2012,1264,NA,NA
+186,Montenegro,2013,1324,NA,NA
+186,Montenegro,2014,1350,NA,NA
+186,Montenegro,2015,1560,NA,NA
+186,Montenegro,2016,1662,NA,NA
+186,Montenegro,2017,1877,NA,NA
+186,Montenegro,2018,2077,NA,NA
+186,Montenegro,2019,2510,NA,NA
+186,Montenegro,2020,351,NA,NA
+186,Montenegro,2021,1554,NA,NA
+186,Montenegro,2022,2036,NA,NA
+187,Croatia,2005,7743,NA,NA
+187,Croatia,2006,7988,NA,NA
+187,Croatia,2007,8559,NA,NA
+187,Croatia,2008,8665,NA,NA
+187,Croatia,2009,8694,NA,NA
+187,Croatia,2010,9111,NA,NA
+187,Croatia,2011,9927,NA,NA
+187,Croatia,2012,10369,NA,NA
+187,Croatia,2013,10948,NA,NA
+187,Croatia,2014,11623,NA,NA
+187,Croatia,2015,12683,NA,NA
+187,Croatia,2016,13809,NA,NA
+187,Croatia,2017,15593,NA,NA
+187,Croatia,2018,16645,NA,NA
+187,Croatia,2019,17353,NA,NA
+187,Croatia,2020,5545,NA,NA
+187,Croatia,2021,10641,NA,NA
+187,Croatia,2022,15324,NA,NA
+188,Slovenia,2005,1555,NA,NA
+188,Slovenia,2006,1617,NA,NA
+188,Slovenia,2007,1751,NA,NA
+188,Slovenia,2008,1958,NA,NA
+188,Slovenia,2009,1824,NA,NA
+188,Slovenia,2010,2049,NA,NA
+188,Slovenia,2011,2236,NA,NA
+188,Slovenia,2012,2377,NA,NA
+188,Slovenia,2013,2502,NA,NA
+188,Slovenia,2014,2675,NA,NA
+188,Slovenia,2015,3022,NA,NA
+188,Slovenia,2016,3397,NA,NA
+188,Slovenia,2017,3991,NA,NA
+188,Slovenia,2018,4425,NA,NA
+188,Slovenia,2019,4702,NA,NA
+188,Slovenia,2020,1216,NA,NA
+188,Slovenia,2021,1832,NA,NA
+188,Slovenia,2022,3936,NA,NA
+189,Lithuania,2005,681,NA,NA
+189,Lithuania,2006,759,NA,NA
+189,Lithuania,2007,849,NA,NA
+189,Lithuania,2008,910,NA,NA
+189,Lithuania,2009,752,NA,NA
+189,Lithuania,2010,840,NA,NA
+189,Lithuania,2011,1004,NA,NA
+189,Lithuania,2012,1125,NA,NA
+189,Lithuania,2013,1235,NA,NA
+189,Lithuania,2014,1330,NA,NA
+189,Lithuania,2015,1361,NA,NA
+189,Lithuania,2016,1488,NA,NA
+189,Lithuania,2017,1584,NA,NA
+189,Lithuania,2018,1745,NA,NA
+189,Lithuania,2019,1938,NA,NA
+189,Lithuania,2020,512,NA,NA
+189,Lithuania,2021,505,NA,NA
+189,Lithuania,2022,1150,NA,NA
+190,Qatar,2005,936.4942517426971,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2006,970.3434415647223,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2007,988.8066360130997,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2008,1441.1548999983454,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2009,258.3133816459734,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2010,289.95046031010565,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2011,451.6697826304838,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2012,473.71476829538443,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2013,542.5422426232041,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2014,609.855175951145,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2015,868.1685575971184,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2016,836.699761266306,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2017,864.8029109307214,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2018,952.982853590324,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2019,1097.705660245397,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2020,968.1282635891107,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2021,1201.7041422370658,UNWTO - Hotel:Overnights,gapfilled
+190,Qatar,2022,1103.595541911592,UNWTO - Hotel:Overnights,gapfilled
+194,Guinea,2005,45,NA,NA
+194,Guinea,2006,46,NA,NA
+194,Guinea,2007,30,NA,NA
+194,Guinea,2008,NA,NA,NA
+194,Guinea,2009,NA,NA,NA
+194,Guinea,2010,NA,NA,NA
+194,Guinea,2011,155.81679389312987,UNWTO - Hotel:Overnights,gapfilled
+194,Guinea,2012,86.56488549618325,UNWTO - Hotel:Overnights,gapfilled
+194,Guinea,2013,39.57251908396949,UNWTO - Hotel:Overnights,gapfilled
+194,Guinea,2014,37.099236641221395,UNWTO - Hotel:Overnights,gapfilled
+194,Guinea,2015,48.22900763358781,UNWTO - Hotel:Overnights,gapfilled
+194,Guinea,2016,93.98473282442754,UNWTO - Hotel:Overnights,gapfilled
+194,Guinea,2017,524.5639592575947,UNWTO - Hotel:Overnights,gapfilled
+194,Guinea,2018,NA,NA,NA
+194,Guinea,2019,NA,NA,NA
+194,Guinea,2020,NA,NA,NA
+194,Guinea,2021,NA,NA,NA
+194,Guinea,2022,NA,NA,NA
+195,Ivory Coast,2005,NA,NA,NA
+195,Ivory Coast,2006,NA,NA,NA
+195,Ivory Coast,2007,NA,NA,NA
+195,Ivory Coast,2008,NA,NA,NA
+195,Ivory Coast,2009,NA,NA,NA
+195,Ivory Coast,2010,NA,NA,NA
+195,Ivory Coast,2011,NA,NA,NA
+195,Ivory Coast,2012,884.3727054587024,UNWTO - Total:Overnights / Mean Stay,gapfilled
+195,Ivory Coast,2013,1002.9081452885594,UNWTO - Total:Overnights / Mean Stay,gapfilled
+195,Ivory Coast,2014,1265.4705173848017,UNWTO - Total:Overnights / Mean Stay,gapfilled
+195,Ivory Coast,2015,1586.4812399962268,UNWTO - Total:Overnights / Mean Stay,gapfilled
+195,Ivory Coast,2016,1515.2871432627799,UNWTO - Total:Overnights / Mean Stay,gapfilled
+195,Ivory Coast,2017,1414.9599123161574,UNWTO - Total:Overnights / Mean Stay,gapfilled
+195,Ivory Coast,2018,3448.088516218128,UNWTO - Total:Overnights / Mean Stay,gapfilled
+195,Ivory Coast,2019,3437.709837154684,UNWTO - Total:Overnights / Mean Stay,gapfilled
+195,Ivory Coast,2020,3707.191328626556,UNWTO - Total:Overnights / Mean Stay,gapfilled
+195,Ivory Coast,2021,3794.0444849995843,UNWTO - Total:Overnights / Mean Stay,gapfilled
+195,Ivory Coast,2022,4276.197856227635,UNWTO - Total:Overnights / Mean Stay,gapfilled
+196,Nigeria,2005,NA,NA,NA
+196,Nigeria,2006,NA,NA,NA
+196,Nigeria,2007,NA,NA,NA
+196,Nigeria,2008,NA,NA,NA
+196,Nigeria,2009,NA,NA,NA
+196,Nigeria,2010,NA,NA,NA
+196,Nigeria,2011,NA,NA,NA
+196,Nigeria,2012,NA,NA,NA
+196,Nigeria,2013,3606,UNWTO - Trips:Overnights,gapfilled
+196,Nigeria,2014,2320,UNWTO - Trips:Overnights,gapfilled
+196,Nigeria,2015,7622,UNWTO - Trips:Overnights,gapfilled
+196,Nigeria,2016,6287.5,UNWTO - Trips:Overnights,gapfilled
+196,Nigeria,2017,6414,UNWTO - Trips:Overnights,gapfilled
+196,Nigeria,2018,6542,UNWTO - Trips:Overnights,gapfilled
+196,Nigeria,2019,6674,UNWTO - Trips:Overnights,gapfilled
+196,Nigeria,2020,1668,UNWTO - Trips:Overnights,gapfilled
+196,Nigeria,2021,1721,UNWTO - Trips:Overnights,gapfilled
+196,Nigeria,2022,1755,UNWTO - Trips:Overnights,gapfilled
+197,Cameroon,2005,268.6286876661668,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2006,326.62806341227093,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2007,399.890432775771,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2008,454.83720979839603,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2009,526.5732798001565,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2010,592.2041523549585,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2011,628.8353370367086,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2012,666.9928210801982,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2013,705.1503051236878,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2014,662.4139229949794,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2015,689.8873115062919,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2016,738.7288910819586,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2017,845.5698464037295,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2018,833.3594515098129,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2019,702.0977064002086,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2020,224.36600617571884,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2021,746.3603878906565,UNWTO - Hotel:Overnights,gapfilled
+197,Cameroon,2022,NA,NA,NA
+199,Democratic Republic of the Congo,2005,73.26236936350003,UNWTO - Total:Overnights / Mean Stay,gapfilled
+199,Democratic Republic of the Congo,2006,82.42016553393753,UNWTO - Total:Overnights / Mean Stay,gapfilled
+199,Democratic Republic of the Congo,2007,41.21008276696877,UNWTO - Total:Overnights / Mean Stay,gapfilled
+199,Democratic Republic of the Congo,2008,59.525675107843774,UNWTO - Total:Overnights / Mean Stay,gapfilled
+199,Democratic Republic of the Congo,2009,64.10457319306252,UNWTO - Total:Overnights / Mean Stay,gapfilled
+199,Democratic Republic of the Congo,2010,48.841579575666685,UNWTO - Total:Overnights / Mean Stay,gapfilled
+199,Democratic Republic of the Congo,2011,45.78898085218752,UNWTO - Total:Overnights / Mean Stay,gapfilled
+199,Democratic Republic of the Congo,2012,NA,NA,NA
+199,Democratic Republic of the Congo,2013,NA,NA,NA
+199,Democratic Republic of the Congo,2014,574,UNWTO - Trips:Overnights,gapfilled
+199,Democratic Republic of the Congo,2015,530,UNWTO - Trips:Overnights,gapfilled
+199,Democratic Republic of the Congo,2016,NA,NA,NA
+199,Democratic Republic of the Congo,2017,NA,NA,NA
+199,Democratic Republic of the Congo,2018,NA,NA,NA
+199,Democratic Republic of the Congo,2019,NA,NA,NA
+199,Democratic Republic of the Congo,2020,NA,NA,NA
+199,Democratic Republic of the Congo,2021,NA,NA,NA
+199,Democratic Republic of the Congo,2022,NA,NA,NA
+200,Angola,2005,127,NA,NA
+200,Angola,2006,83,NA,NA
+200,Angola,2007,122,NA,NA
+200,Angola,2008,185,NA,NA
+200,Angola,2009,454,NA,NA
+200,Angola,2010,465,NA,NA
+200,Angola,2011,533,NA,NA
+200,Angola,2012,569,NA,NA
+200,Angola,2013,652,NA,NA
+200,Angola,2014,567,NA,NA
+200,Angola,2015,545,NA,NA
+200,Angola,2016,371,NA,NA
+200,Angola,2017,600,NA,NA
+200,Angola,2018,782,NA,NA
+200,Angola,2019,600,NA,NA
+200,Angola,2020,30,NA,NA
+200,Angola,2021,83,NA,NA
+200,Angola,2022,424,NA,NA
+202,Tanzania,2005,1116.1632045422782,UNWTO - Total:Overnights / Mean Stay,gapfilled
+202,Tanzania,2006,1407.3124645851988,UNWTO - Total:Overnights / Mean Stay,gapfilled
+202,Tanzania,2007,NA,NA,NA
+202,Tanzania,2008,NA,NA,NA
+202,Tanzania,2009,NA,NA,NA
+202,Tanzania,2010,NA,NA,NA
+202,Tanzania,2011,NA,NA,NA
+202,Tanzania,2012,NA,NA,NA
+202,Tanzania,2013,NA,NA,NA
+202,Tanzania,2014,NA,NA,NA
+202,Tanzania,2015,NA,NA,NA
+202,Tanzania,2016,NA,NA,NA
+202,Tanzania,2017,NA,NA,NA
+202,Tanzania,2018,NA,NA,NA
+202,Tanzania,2019,NA,NA,NA
+202,Tanzania,2020,NA,NA,NA
+202,Tanzania,2021,12337,UNWTO - Trips:Overnights,gapfilled
+202,Tanzania,2022,NA,NA,NA
+203,India,2005,392014,UNWTO - Trips:Overnights,gapfilled
+203,India,2006,462321,UNWTO - Trips:Overnights,gapfilled
+203,India,2007,526564,UNWTO - Trips:Overnights,gapfilled
+203,India,2008,563034,UNWTO - Trips:Overnights,gapfilled
+203,India,2009,668800,UNWTO - Trips:Overnights,gapfilled
+203,India,2010,747700,UNWTO - Trips:Overnights,gapfilled
+203,India,2011,864533,UNWTO - Trips:Overnights,gapfilled
+203,India,2012,1045050,UNWTO - Trips:Overnights,gapfilled
+203,India,2013,1142529,UNWTO - Trips:Overnights,gapfilled
+203,India,2014,1282802,UNWTO - Trips:Overnights,gapfilled
+203,India,2015,1431974,UNWTO - Trips:Overnights,gapfilled
+203,India,2016,1615389,UNWTO - Trips:Overnights,gapfilled
+203,India,2017,1657546,UNWTO - Trips:Overnights,gapfilled
+203,India,2018,1853788,UNWTO - Trips:Overnights,gapfilled
+203,India,2019,2321983,UNWTO - Trips:Overnights,gapfilled
+203,India,2020,610216,UNWTO - Trips:Overnights,gapfilled
+203,India,2021,677632,UNWTO - Trips:Overnights,gapfilled
+203,India,2022,1731010,UNWTO - Trips:Overnights,gapfilled
+205,Myanmar,2005,336.46066705045405,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2006,381.77732515872555,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2007,339.56454774280144,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2008,360.050160312294,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2009,427.9216847849563,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2010,514.4164934117028,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2011,647.4695124236598,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2012,830.5984732721541,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2013,1303.8368161653818,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2014,5738.661549391293,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2015,8717.5593125268,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2016,6617.266710705087,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2017,6412.203659630671,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2018,6613.955904633249,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2019,5418.341061941045,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2020,1121.5355568348468,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2021,162.64334827900177,UNWTO - Hotel:Overnights,gapfilled
+205,Myanmar,2022,531.3843745298684,UNWTO - Hotel:Overnights,gapfilled
+206,Malaysia,2005,19188.576530844155,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2006,20091.284182822044,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2007,22719.78277698561,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2008,25297.2859933863,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2009,25446.693503674018,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2010,22899.608582781006,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2011,23278.047965126545,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2012,23414.035639160873,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2013,20451.830450163066,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2014,23519.605017687525,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2015,22877.24218902536,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2016,23179.6358326017,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2017,25077.20067883074,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2018,26840.567162525902,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2019,25798.29321351278,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2020,4205.776681811749,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2021,168.821540067619,UNWTO - Hotel:Guests,gapfilled
+206,Malaysia,2022,71916,UNWTO - Trips:Overnights,gapfilled
+207,Vietnam,2005,NA,NA,NA
+207,Vietnam,2006,NA,NA,NA
+207,Vietnam,2007,NA,NA,NA
+207,Vietnam,2008,NA,NA,NA
+207,Vietnam,2009,NA,NA,NA
+207,Vietnam,2010,NA,NA,NA
+207,Vietnam,2011,NA,NA,NA
+207,Vietnam,2012,NA,NA,NA
+207,Vietnam,2013,NA,NA,NA
+207,Vietnam,2014,NA,NA,NA
+207,Vietnam,2015,NA,NA,NA
+207,Vietnam,2016,29200,UNWTO - Trips:Overnights,gapfilled
+207,Vietnam,2017,35700,UNWTO - Trips:Overnights,gapfilled
+207,Vietnam,2018,38600,UNWTO - Trips:Overnights,gapfilled
+207,Vietnam,2019,43500,UNWTO - Trips:Overnights,gapfilled
+207,Vietnam,2020,28700,UNWTO - Trips:Overnights,gapfilled
+207,Vietnam,2021,19000,UNWTO - Trips:Overnights,gapfilled
+207,Vietnam,2022,66700,UNWTO - Trips:Overnights,gapfilled
+208,Singapore,2005,4760.463246951779,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2006,5339.305517347908,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2007,5639.909849423795,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2008,5248.945286575096,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2009,5283.836860833905,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2010,6145.390348301404,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2011,7423.853415374152,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2012,8429.446478628013,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2013,8963.55596151285,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2014,8508.17618464789,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2015,7903.388897495211,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2016,8951.925436759913,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2017,8574.380710164603,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2018,8444.655626381853,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2019,9063.757405538146,UNWTO - Hotel:Guests,gapfilled
+208,Singapore,2020,NA,NA,NA
+208,Singapore,2021,NA,NA,NA
+208,Singapore,2022,NA,NA,NA
+209,China,2005,61410.381950308954,UNWTO - Hotel:Overnights,gapfilled
+209,China,2006,70718.46874405778,UNWTO - Hotel:Overnights,gapfilled
+209,China,2007,84395.8986807171,UNWTO - Hotel:Overnights,gapfilled
+209,China,2008,87237.52951745137,UNWTO - Hotel:Overnights,gapfilled
+209,China,2009,93242.01902463767,UNWTO - Hotel:Overnights,gapfilled
+209,China,2010,111600.3508726963,UNWTO - Hotel:Overnights,gapfilled
+209,China,2011,123123.72794445878,UNWTO - Hotel:Overnights,gapfilled
+209,China,2012,134454.79805222296,UNWTO - Hotel:Overnights,gapfilled
+209,China,2013,107369.5976647343,UNWTO - Hotel:Overnights,gapfilled
+209,China,2014,10762.743940417333,UNWTO - Hotel:Overnights,gapfilled
+209,China,2015,10661.755925803714,UNWTO - Hotel:Overnights,gapfilled
+209,China,2016,12140.048565254128,UNWTO - Hotel:Overnights,gapfilled
+209,China,2017,13310.005457958707,UNWTO - Hotel:Overnights,gapfilled
+209,China,2018,14187.74171263239,UNWTO - Hotel:Overnights,gapfilled
+209,China,2019,14495.003118797229,UNWTO - Hotel:Overnights,gapfilled
+209,China,2020,3486.235185331827,UNWTO - Hotel:Overnights,gapfilled
+209,China,2021,6158.120210268731,UNWTO - Hotel:Overnights,gapfilled
+209,China,2022,4518.676483668926,UNWTO - Hotel:Overnights,gapfilled
+210,Japan,2005,NA,NA,NA
+210,Japan,2006,NA,NA,NA
+210,Japan,2007,13818.930285438228,UNWTO - Total:Overnights / Mean Stay,gapfilled
+210,Japan,2008,14617,NA,NA
+210,Japan,2009,11838,NA,NA
+210,Japan,2010,17901,NA,NA
+210,Japan,2011,11362,NA,NA
+210,Japan,2012,16642,NA,NA
+210,Japan,2013,21046,NA,NA
+210,Japan,2014,28487,NA,NA
+210,Japan,2015,42229,NA,NA
+210,Japan,2016,45088,NA,NA
+210,Japan,2017,50976,NA,NA
+210,Japan,2018,59877,NA,NA
+210,Japan,2019,72370,NA,NA
+210,Japan,2020,11974,NA,NA
+210,Japan,2021,1975,NA,NA
+210,Japan,2022,8663,NA,NA
+214,Egypt,2005,15508.295670028536,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2006,16260.658861083788,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2007,20295.96211378623,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2008,23531.196668159348,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2009,8809,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2010,9027,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2011,8180,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2012,8300,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2013,9698,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2014,9931,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2015,10176,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2016,5956.269289883688,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2017,15983.712003969791,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2018,22122.427546863488,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2019,24817.60662575987,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2020,7823.521110859392,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2021,17082.0311638065,UNWTO - Total:Overnights / Mean Stay,gapfilled
+214,Egypt,2022,23861.493577301222,UNWTO - Total:Overnights / Mean Stay,gapfilled
+215,Jordan,2005,1795,NA,NA
+215,Jordan,2006,1590,NA,NA
+215,Jordan,2007,1758,NA,NA
+215,Jordan,2008,2081,NA,NA
+215,Jordan,2009,1933,NA,NA
+215,Jordan,2010,2244,NA,NA
+215,Jordan,2011,1707,NA,NA
+215,Jordan,2012,1840,NA,NA
+215,Jordan,2013,1761,NA,NA
+215,Jordan,2014,1771,NA,NA
+215,Jordan,2015,1268,NA,NA
+215,Jordan,2016,1546,NA,NA
+215,Jordan,2017,1586,NA,NA
+215,Jordan,2018,2238,NA,NA
+215,Jordan,2019,2775,NA,NA
+215,Jordan,2020,587,NA,NA
+215,Jordan,2021,1019,NA,NA
+215,Jordan,2022,2171,NA,NA
+216,Indonesia,2005,4821,NA,NA
+216,Indonesia,2006,4576,NA,NA
+216,Indonesia,2007,5273,NA,NA
+216,Indonesia,2008,4298.820879835237,UNWTO - Hotel:Guests,gapfilled
+216,Indonesia,2009,4794.460165460361,UNWTO - Hotel:Guests,gapfilled
+216,Indonesia,2010,5000.230988012308,UNWTO - Hotel:Guests,gapfilled
+216,Indonesia,2011,5408.194010115299,UNWTO - Hotel:Guests,gapfilled
+216,Indonesia,2012,7424.748071124378,UNWTO - Hotel:Guests,gapfilled
+216,Indonesia,2013,10722.449166456883,UNWTO - Hotel:Guests,gapfilled
+216,Indonesia,2014,11365.706650869273,UNWTO - Hotel:Guests,gapfilled
+216,Indonesia,2015,10678.611034695816,UNWTO - Hotel:Guests,gapfilled
+216,Indonesia,2016,12535.916372164693,UNWTO - Hotel:Guests,gapfilled
+216,Indonesia,2017,13666.761240450174,UNWTO - Hotel:Guests,gapfilled
+216,Indonesia,2018,17999.579038793992,UNWTO - Hotel:Guests,gapfilled
+216,Indonesia,2019,13053.922051545464,UNWTO - Hotel:Guests,gapfilled
+216,Indonesia,2020,2339.524786840613,UNWTO - Hotel:Guests,gapfilled
+216,Indonesia,2021,695.14751792549,UNWTO - Hotel:Guests,gapfilled
+216,Indonesia,2022,3255.6522750718896,UNWTO - Hotel:Guests,gapfilled
+218,Canada,2005,22879.706954317215,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2006,87327,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2007,88541,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2008,87647,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2009,91386,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2010,92143,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2011,105743,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2012,108393,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2013,108924.5,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2014,108646.5,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2015,109804.8,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2016,113052.6,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2017,115036.7,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2018,95445,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2019,93665,UNWTO - Total:Overnights / Mean Stay,gapfilled
+218,Canada,2020,68247,UNWTO - Trips:Overnights,gapfilled
+218,Canada,2021,69461,UNWTO - Trips:Overnights,gapfilled
+218,Canada,2022,90833,UNWTO - Trips:Overnights,gapfilled
+222,Sweden,2005,4883,NA,NA
+222,Sweden,2006,4729,NA,NA
+222,Sweden,2007,5224,NA,NA
+222,Sweden,2008,4555,NA,NA
+222,Sweden,2009,4899,NA,NA
+222,Sweden,2010,5183,NA,NA
+222,Sweden,2011,5222,NA,NA
+222,Sweden,2012,5146,NA,NA
+222,Sweden,2013,5229,NA,NA
+222,Sweden,2014,5660,NA,NA
+222,Sweden,2015,6482,NA,NA
+222,Sweden,2016,6782,NA,NA
+222,Sweden,2017,7054,NA,NA
+222,Sweden,2018,7440,NA,NA
+222,Sweden,2019,7616,NA,NA
+222,Sweden,2020,1957,NA,NA
+222,Sweden,2021,2990,NA,NA
+222,Sweden,2022,6629,NA,NA
+223,Norway,2005,3675.9408014412056,UNWTO - Hotel:Overnights,gapfilled
+223,Norway,2006,3931.983364794603,UNWTO - Hotel:Overnights,gapfilled
+223,Norway,2007,4012.2561684405327,UNWTO - Hotel:Overnights,gapfilled
+223,Norway,2008,3771.437757502743,UNWTO - Hotel:Overnights,gapfilled
+223,Norway,2009,3464.1866814786663,UNWTO - Hotel:Overnights,gapfilled
+223,Norway,2010,3768.6697297908145,UNWTO - Hotel:Overnights,gapfilled
+223,Norway,2011,4114.673193781891,UNWTO - Hotel:Overnights,gapfilled
+223,Norway,2012,4538,NA,NA
+223,Norway,2013,4778,NA,NA
+223,Norway,2014,4855,NA,NA
+223,Norway,2015,5361,NA,NA
+223,Norway,2016,5960,NA,NA
+223,Norway,2017,6252,NA,NA
+223,Norway,2018,5688,NA,NA
+223,Norway,2019,5879,NA,NA
+223,Norway,2020,1397,NA,NA
+223,Norway,2021,1435,NA,NA
+223,Norway,2022,4979.4,NA,NA
+224,Chile,2005,1624.9535771578262,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2006,1698.2335165715292,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2007,1818.0404016447262,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2008,1819.2035752862134,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2009,1656.3592654779848,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2010,1627.279924440801,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2011,1966.926627755107,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2012,2375.200575917166,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2013,2513.618239254161,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2014,3665.160144326636,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2015,3794.272418531732,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2016,4066.4550506397713,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2017,5101.679591563512,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2018,4554.987980064458,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2019,4340.964030030786,UNWTO - Hotel:Overnights,gapfilled
+224,Chile,2020,39322.78386933118,UNWTO - Trips:Overnights,gapfilled
+224,Chile,2021,49201.29601546767,UNWTO - Trips:Overnights,gapfilled
+224,Chile,2022,61092.787,UNWTO - Trips:Overnights,gapfilled
+231,East Timor,2005,NA,NA,NA
+231,East Timor,2006,NA,NA,NA
+231,East Timor,2007,NA,NA,NA
+231,East Timor,2008,NA,NA,NA
+231,East Timor,2009,12.525180503161982,UNWTO - Hotel:Overnights,gapfilled
+231,East Timor,2010,13.419836253387839,UNWTO - Hotel:Overnights,gapfilled
+231,East Timor,2011,15.209147753839549,UNWTO - Hotel:Overnights,gapfilled
+231,East Timor,2012,17.893115004517117,UNWTO - Hotel:Overnights,gapfilled
+231,East Timor,2013,21.47173800542054,UNWTO - Hotel:Overnights,gapfilled
+231,East Timor,2014,13.419836253387839,UNWTO - Hotel:Overnights,gapfilled
+231,East Timor,2015,12.525180503161982,UNWTO - Hotel:Overnights,gapfilled
+231,East Timor,2016,10.109609977552172,UNWTO - Hotel:Overnights,gapfilled
+231,East Timor,2017,6.799383701716504,UNWTO - Hotel:Overnights,gapfilled
+231,East Timor,2018,6.799383701716504,UNWTO - Hotel:Overnights,gapfilled
+231,East Timor,2019,NA,NA,NA
+231,East Timor,2020,NA,NA,NA
+231,East Timor,2021,14.761819878726621,UNWTO - Hotel:Overnights,gapfilled
+231,East Timor,2022,NA,NA,NA
+232,Bosnia and Herzegovina,2005,217,NA,NA
+232,Bosnia and Herzegovina,2006,256,NA,NA
+232,Bosnia and Herzegovina,2007,306,NA,NA
+232,Bosnia and Herzegovina,2008,322,NA,NA
+232,Bosnia and Herzegovina,2009,311,NA,NA
+232,Bosnia and Herzegovina,2010,365,NA,NA
+232,Bosnia and Herzegovina,2011,392,NA,NA
+232,Bosnia and Herzegovina,2012,439,NA,NA
+232,Bosnia and Herzegovina,2013,529,NA,NA
+232,Bosnia and Herzegovina,2014,536,NA,NA
+232,Bosnia and Herzegovina,2015,678,NA,NA
+232,Bosnia and Herzegovina,2016,778,NA,NA
+232,Bosnia and Herzegovina,2017,923,NA,NA
+232,Bosnia and Herzegovina,2018,1053,NA,NA
+232,Bosnia and Herzegovina,2019,1198,NA,NA
+232,Bosnia and Herzegovina,2020,197,NA,NA
+232,Bosnia and Herzegovina,2021,502,NA,NA
+232,Bosnia and Herzegovina,2022,915,NA,NA
+244,Curacao,2005,221,NA,NA
+244,Curacao,2006,233,NA,NA
+244,Curacao,2007,299,NA,NA
+244,Curacao,2008,323,NA,NA
+244,Curacao,2009,327,NA,NA
+244,Curacao,2010,296,NA,NA
+244,Curacao,2011,336,NA,NA
+244,Curacao,2012,350,NA,NA
+244,Curacao,2013,370,NA,NA
+244,Curacao,2014,390,NA,NA
+244,Curacao,2015,390,NA,NA
+244,Curacao,2016,441,NA,NA
+244,Curacao,2017,399,NA,NA
+244,Curacao,2018,432,NA,NA
+244,Curacao,2019,464,NA,NA
+244,Curacao,2020,175,NA,NA
+244,Curacao,2021,265,NA,NA
+244,Curacao,2022,489.6,NA,NA
+245,Bonaire,2005,103.05846227910759,UNWTO - Hotel:Overnights,gapfilled
+245,Bonaire,2006,113.0729771648866,UNWTO - Hotel:Overnights,gapfilled
+245,Bonaire,2007,133.28408902527696,UNWTO - Hotel:Overnights,gapfilled
+245,Bonaire,2008,126.36496964964782,UNWTO - Hotel:Overnights,gapfilled
+245,Bonaire,2009,121.99499951767153,UNWTO - Hotel:Overnights,gapfilled
+245,Bonaire,2010,NA,NA,NA
+245,Bonaire,2011,NA,NA,NA
+245,Bonaire,2012,NA,NA,NA
+245,Bonaire,2013,NA,NA,NA
+245,Bonaire,2014,NA,NA,NA
+245,Bonaire,2015,NA,NA,NA
+245,Bonaire,2016,NA,NA,NA
+245,Bonaire,2017,NA,NA,NA
+245,Bonaire,2018,NA,NA,NA
+245,Bonaire,2019,NA,NA,NA
+245,Bonaire,2020,NA,NA,NA
+245,Bonaire,2021,NA,NA,NA
+245,Bonaire,2022,NA,NA,NA
+250,Aruba,2005,733,NA,NA
+250,Aruba,2006,694,NA,NA
+250,Aruba,2007,772,NA,NA
+250,Aruba,2008,827,NA,NA
+250,Aruba,2009,813,NA,NA
+250,Aruba,2010,824,NA,NA
+250,Aruba,2011,869,NA,NA
+250,Aruba,2012,904,NA,NA
+250,Aruba,2013,979,NA,NA
+250,Aruba,2014,1072,NA,NA
+250,Aruba,2015,1225,NA,NA
+250,Aruba,2016,1102,NA,NA
+250,Aruba,2017,1070.5,NA,NA
+250,Aruba,2018,1082,NA,NA
+250,Aruba,2019,1119,NA,NA
+250,Aruba,2020,358,NA,NA
+250,Aruba,2021,807,NA,NA
+250,Aruba,2022,1101,NA,NA
