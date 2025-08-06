@@ -1104,12 +1104,14 @@ Here is the second big gapfilling step in the script, which is the gapfilling of
 international_arrivals <- read_csv(here(current_tr_dir, "int", "international_arrivals_int.csv"))
 
 test_2022_int <- international_arrivals %>%
+  # Pandemic years
   filter(year %in% c(2020, 2021, 2022)) %>%
-  # filter(!is.na(tourism_arrivals_ct)) %>%
   pivot_wider(names_from = year, 
               values_from = tourism_arrivals_ct,
               names_prefix = "int_tourism_") %>%
+  # 2022 compared to 2021
   mutate(tourism_ct_diff_2022 = (int_tourism_2022 - int_tourism_2021)/int_tourism_2021,
+  # 2021 compared to 2020
          tourism_ct_diff_2021 = (int_tourism_2021 - int_tourism_2020)/int_tourism_2020)
 
 # global average increase for 2021 tourism_arrivals_ct
@@ -1139,7 +1141,7 @@ gf_2020_tourism_int
 
 # upfill earlier years that do not have data with nearby year data
 unwto_int_upfill <-  international_arrivals %>%
-  filter(year < 2020) %>% # change to 2005:2021?
+  filter(year < 2020) %>%
   group_by(rgn_id) %>%
   arrange(rgn_id, year) %>%
   tidyr::fill(tourism_arrivals_ct, .direction = "up") %>% # fill in any values that are empty from early years with values from the nearest year. Doing this because doesn't make sense to add earlier years based on a trend 
@@ -1153,8 +1155,21 @@ lm_coef_data_tourism_int <- international_arrivals %>%
   mutate(year = as.numeric(year)) %>% 
   filter(!(year %in% c(2020, 2021, 2022))) %>%
   group_by(rgn_id) %>%
-  filter(!is.na(tourism_arrivals_ct)) %>%
-  summarize(lm_coef_tourism = lm(tourism_arrivals_ct ~ year)$coefficients[2])
+  filter(!is.na(tourism_arrivals_ct)) # %>%
+  # summarize(lm_coef_tourism = lm(tourism_arrivals_ct ~ year)$coefficients[2])
+
+gf_mod <- lm(tourism_arrivals_ct ~ year, data = lm_coef_data_tourism_int)
+summary(gf_mod)
+
+mod_plot2 <- ggplot(lm_coef_data_tourism_int, aes(y = tourism_arrivals_ct, x = year)) +
+  geom_point(alpha = 0.5) + 
+  geom_abline(intercept = gf_mod$coefficients[1], 
+              slope = gf_mod$coefficients[2], 
+              color = "red", linetype = "dashed") +
+  theme_minimal() + 
+  labs(title = "Tourism arrivals vs Year, International data",
+       x = "Year",
+       y = "Tourism Arrivals");ggplotly(mod_plot2)
 
 # Initialize a flag to check if there are still NAs
 na_flag <- TRUE
@@ -1192,7 +1207,7 @@ unwto_2020_2021_int <- international_arrivals %>%
 
 unwto_all_gf_int <- unwto_gapfill_lm_2019_tourism_int %>%
   select(-lm_coef_tourism) %>% 
-  complete(year = 2005:2022) %>% 
+  complete(year = 2005:max(data_years)) %>% 
   rbind(unwto_2020_2021_int) %>%
   group_by(rgn_id) %>%
   arrange(rgn_id, year) %>%
@@ -1229,7 +1244,7 @@ test_2021_dom <- domestic_guests %>%
   pivot_wider(names_from = year, 
               values_from = tourism_arrivals_ct,
               names_prefix = "int_tourism_") %>%
-  mutate(tourism_arrivals_ct_diff_2022 = (int_tourism_2022 - int_tourism_2020)/int_tourism_2020,
+  mutate(tourism_arrivals_ct_diff_2022 = (int_tourism_2022 - int_tourism_2021)/int_tourism_2021,
          tourism_arrivals_ct_diff_2021 = (int_tourism_2021 - int_tourism_2020)/int_tourism_2020)
 
 # global average increase for 2021 tourism_arrivals_ct
@@ -1363,7 +1378,7 @@ Now that we have a joined dataframe, let's adjust it to gapfill by years.
 # join with georegions again, and take the mean of the domestic guests data for r2 and r1 groups
 mean_domestic_guests <- arrivals_join %>% 
   group_by(rgn_id) %>% 
-  complete(year = 2008:2022) %>% # ensures that there is a row for every year for each region, to ensure there are no gaps
+  complete(year = 2008:max(data_years)) %>% # ensures that there is a row for every year for each region, to ensure there are no gaps
   left_join(georegions, by = c("rgn_id","rgn_name")) %>% 
   ungroup() %>% 
   group_by(r2) %>% 
@@ -1557,19 +1572,20 @@ Now, lets bring in the $$km^2$$ of coastal area for all OHI regions by aggregati
 ```{r, eval=FALSE}
 # ------- coastal area data -----------
 # read in area of coastline data
-inland_filepath <- here::here("globalprep", "lsp", version_year, "int", "rgn_area_inland1km.csv")
+inland_filepath <- here::here("globalprep", "lsp", version_year, "output", "rgn_area_inland1km.csv")
 inland_data <- read_csv(inland_filepath)
-offshore_filepath <- here::here("globalprep", "lsp", version_year, "int", "rgn_area_offshore3nm.csv")
+offshore_filepath <- here::here("globalprep", "lsp", version_year, "output", "rgn_area_offshore3nm.csv")
 offshore_data <- read_csv(offshore_filepath)
+
+colnames(offshore_data)
 
 # get combined value of inland and offshore for each ohi region
 inland_offshore <- inland_data %>%
-  left_join(offshore_data, by = join_by(rgn_id, year, rgn_name)) %>%
-  select(rgn_id, year, a_tot_km2.x, a_tot_km2.y) %>%
-  group_by(rgn_id, year) %>%
-  mutate(total_inland_offshore_area = a_tot_km2.x + a_tot_km2.y,
-         year = as.numeric(year)) %>% # add the areas together, as numeric
-  select(rgn_id, year, total_inland_offshore_area)
+  left_join(offshore_data, by = join_by(rgn_id)) %>%
+  select(rgn_id, area.x, area.y) %>%
+  group_by(rgn_id) %>%
+  mutate(total_inland_offshore_area = area.x + area.y) %>%
+  select(rgn_id, total_inland_offshore_area)
 ```
 
 # Arrival Proportion (AP)
@@ -1582,7 +1598,7 @@ Now we can join all of these data sources and conduct $$\frac{TourismArrivals * 
 arrivals_prop_df <- left_join(arrivals_aggregated, total_population_final, by = c("rgn_id","rgn_name","year")) %>% 
   mutate(year = as.numeric(year)) %>% 
   left_join(., coastal_pop_data_fill, by = c("rgn_id","year")) %>% 
-  left_join(., inland_offshore, by = c("rgn_id","year")) %>% 
+  left_join(., inland_offshore, by = c("rgn_id")) %>% 
   filter(year %in% 2000:2022) %>% # to keep consistent with the coastal pop data
   mutate(coastal_prop = (popsum/total_pop)) %>% # values that are greater than 1 are because of inconsistencies between World Bank and the coastal population data.  However, those with a value greater than 1 are mostly islands or small regions with a large coastal area.  In that case, we could say 100% of the tourism could be coastally related.
   mutate(coastal_prop = ifelse(coastal_prop > 1, 1, coastal_prop)) # for rgns and years in which the total_population is greater than 1, we cap it at 1 
