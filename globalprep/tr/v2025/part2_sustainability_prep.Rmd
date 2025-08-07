@@ -85,10 +85,10 @@ current_year <- 2025 # Update this in the future!!
 previous_year <- 2024
 
 version_year <- paste0("v",current_year)
-previous_vyear <- paste0("v", current_year - 1)
+previous_vyear <- paste0("v", previous_year)
 
 current_data_dir <- paste0("d", current_year)
-previous_data_dir <- paste0("d", (current_year - 1))
+previous_data_dir <- paste0("d", previous_year)
 
 data_years <- 2005:2022 # update with latest data year (probably just add 1)
 
