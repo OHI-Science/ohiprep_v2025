@@ -6,14 +6,14 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 5,New Caledonia,2012,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 5,New Caledonia,2013,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 5,New Caledonia,2014,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-5,New Caledonia,2015,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-5,New Caledonia,2016,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-5,New Caledonia,2017,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-5,New Caledonia,2018,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-5,New Caledonia,2019,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-5,New Caledonia,2020,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-5,New Caledonia,2021,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-5,New Caledonia,2022,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
+5,New Caledonia,2015,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+5,New Caledonia,2016,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+5,New Caledonia,2017,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+5,New Caledonia,2018,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+5,New Caledonia,2019,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+5,New Caledonia,2020,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+5,New Caledonia,2021,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+5,New Caledonia,2022,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 6,Vanuatu,2008,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 6,Vanuatu,2009,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 6,Vanuatu,2010,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
@@ -78,17 +78,17 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 11,Marshall Islands,2009,UNWTO,NA,Total:Overnights / Mean Stay,gapfilled,Aggregated international and domestic,gapfilled - domestic
 11,Marshall Islands,2010,UNWTO,NA,Total:Overnights / Mean Stay,gapfilled,Aggregated international and domestic,gapfilled - domestic
 11,Marshall Islands,2011,UNWTO,NA,Total:Overnights / Mean Stay,gapfilled,Aggregated international and domestic,gapfilled - domestic
-11,Marshall Islands,2012,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-11,Marshall Islands,2013,Interpolation,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
-11,Marshall Islands,2014,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-11,Marshall Islands,2015,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-11,Marshall Islands,2016,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-11,Marshall Islands,2017,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-11,Marshall Islands,2018,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-11,Marshall Islands,2019,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-11,Marshall Islands,2020,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-11,Marshall Islands,2021,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-11,Marshall Islands,2022,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+11,Marshall Islands,2012,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+11,Marshall Islands,2013,Interpolation,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+11,Marshall Islands,2014,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+11,Marshall Islands,2015,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+11,Marshall Islands,2016,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+11,Marshall Islands,2017,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+11,Marshall Islands,2018,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+11,Marshall Islands,2019,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+11,Marshall Islands,2020,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+11,Marshall Islands,2021,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+11,Marshall Islands,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 13,Northern Mariana Islands and Guam,2008,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
 13,Northern Mariana Islands and Guam,2009,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
 13,Northern Mariana Islands and Guam,2010,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -106,19 +106,19 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 13,Northern Mariana Islands and Guam,2022,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
 15,Philippines,2008,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 15,Philippines,2009,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
-15,Philippines,2010,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-15,Philippines,2011,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-15,Philippines,2012,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-15,Philippines,2013,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-15,Philippines,2014,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-15,Philippines,2015,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-15,Philippines,2016,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-15,Philippines,2017,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-15,Philippines,2018,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-15,Philippines,2019,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-15,Philippines,2020,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-15,Philippines,2021,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-15,Philippines,2022,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
+15,Philippines,2010,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+15,Philippines,2011,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+15,Philippines,2012,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+15,Philippines,2013,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+15,Philippines,2014,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+15,Philippines,2015,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+15,Philippines,2016,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+15,Philippines,2017,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+15,Philippines,2018,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+15,Philippines,2019,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+15,Philippines,2020,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+15,Philippines,2021,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+15,Philippines,2022,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 17,Papua New Guinea,2008,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 17,Papua New Guinea,2009,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 17,Papua New Guinea,2010,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
@@ -339,11 +339,11 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 43,Kenya,2015,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 43,Kenya,2016,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 43,Kenya,2017,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-43,Kenya,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-43,Kenya,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-43,Kenya,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-43,Kenya,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-43,Kenya,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+43,Kenya,2018,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+43,Kenya,2019,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+43,Kenya,2020,2020:2022 method,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+43,Kenya,2021,2020:2022 method,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+43,Kenya,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 46,Djibouti,2008,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 46,Djibouti,2009,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 46,Djibouti,2010,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -367,13 +367,13 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 47,Yemen,2013,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 47,Yemen,2014,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 47,Yemen,2015,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-47,Yemen,2016,NA,NA,NA,NA,Aggregated international and domestic,NA
-47,Yemen,2017,NA,NA,NA,NA,Aggregated international and domestic,NA
-47,Yemen,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-47,Yemen,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-47,Yemen,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-47,Yemen,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-47,Yemen,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+47,Yemen,2016,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+47,Yemen,2017,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+47,Yemen,2018,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+47,Yemen,2019,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+47,Yemen,2020,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+47,Yemen,2021,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+47,Yemen,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 48,Oman,2008,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 48,Oman,2009,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 48,Oman,2010,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -400,10 +400,10 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 49,Sudan,2016,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 49,Sudan,2017,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 49,Sudan,2018,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-49,Sudan,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-49,Sudan,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-49,Sudan,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-49,Sudan,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+49,Sudan,2019,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+49,Sudan,2020,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+49,Sudan,2021,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+49,Sudan,2022,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
 50,Saudi Arabia,2008,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 50,Saudi Arabia,2009,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 50,Saudi Arabia,2010,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -454,16 +454,16 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 53,Pakistan,2010,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 53,Pakistan,2011,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 53,Pakistan,2012,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-53,Pakistan,2013,NA,NA,NA,NA,Aggregated international and domestic,NA
-53,Pakistan,2014,NA,NA,NA,NA,Aggregated international and domestic,NA
-53,Pakistan,2015,NA,NA,NA,NA,Aggregated international and domestic,NA
-53,Pakistan,2016,NA,NA,NA,NA,Aggregated international and domestic,NA
-53,Pakistan,2017,NA,NA,NA,NA,Aggregated international and domestic,NA
-53,Pakistan,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-53,Pakistan,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-53,Pakistan,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-53,Pakistan,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-53,Pakistan,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+53,Pakistan,2013,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+53,Pakistan,2014,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+53,Pakistan,2015,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+53,Pakistan,2016,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+53,Pakistan,2017,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+53,Pakistan,2018,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+53,Pakistan,2019,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+53,Pakistan,2020,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+53,Pakistan,2021,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+53,Pakistan,2022,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
 54,United Arab Emirates,2008,Interpolation,gapfilled,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - both
 54,United Arab Emirates,2009,Interpolation,gapfilled,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - both
 54,United Arab Emirates,2010,Interpolation,gapfilled,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - both
@@ -564,26 +564,26 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 66,Senegal,2015,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 66,Senegal,2016,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 66,Senegal,2017,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-66,Senegal,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-66,Senegal,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-66,Senegal,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-66,Senegal,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-66,Senegal,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+66,Senegal,2018,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+66,Senegal,2019,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+66,Senegal,2020,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+66,Senegal,2021,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+66,Senegal,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 67,Libya,2008,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-67,Libya,2009,NA,NA,NA,NA,Aggregated international and domestic,NA
-67,Libya,2010,NA,NA,NA,NA,Aggregated international and domestic,NA
-67,Libya,2011,NA,NA,NA,NA,Aggregated international and domestic,NA
-67,Libya,2012,NA,NA,NA,NA,Aggregated international and domestic,NA
-67,Libya,2013,NA,NA,NA,NA,Aggregated international and domestic,NA
-67,Libya,2014,NA,NA,NA,NA,Aggregated international and domestic,NA
-67,Libya,2015,NA,NA,NA,NA,Aggregated international and domestic,NA
-67,Libya,2016,NA,NA,NA,NA,Aggregated international and domestic,NA
-67,Libya,2017,NA,NA,NA,NA,Aggregated international and domestic,NA
-67,Libya,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-67,Libya,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-67,Libya,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-67,Libya,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-67,Libya,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+67,Libya,2009,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+67,Libya,2010,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+67,Libya,2011,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+67,Libya,2012,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+67,Libya,2013,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+67,Libya,2014,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+67,Libya,2015,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+67,Libya,2016,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+67,Libya,2017,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+67,Libya,2018,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+67,Libya,2019,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+67,Libya,2020,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+67,Libya,2021,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+67,Libya,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 68,Malta,2008,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 68,Malta,2009,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 68,Malta,2010,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -652,13 +652,13 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 73,Russia,2013,Arrivals minus same day,gapfilled,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - both
 73,Russia,2014,Interpolation,gapfilled,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - both
 73,Russia,2015,Arrivals minus same day,gapfilled,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - both
-73,Russia,2016,NA,NA,NA,NA,Aggregated international and domestic,NA
-73,Russia,2017,NA,NA,NA,NA,Aggregated international and domestic,NA
-73,Russia,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-73,Russia,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-73,Russia,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-73,Russia,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-73,Russia,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+73,Russia,2016,Downfilling,gapfilled,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - both
+73,Russia,2017,Downfilling,gapfilled,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - both
+73,Russia,2018,Downfilling,gapfilled,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - both
+73,Russia,2019,Downfilling,gapfilled,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - both
+73,Russia,2020,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+73,Russia,2021,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+73,Russia,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 74,Georgia,2008,Upfilling,gapfilled,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - both
 74,Georgia,2009,Upfilling,gapfilled,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - both
 74,Georgia,2010,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -708,17 +708,17 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 77,Syria,2009,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 77,Syria,2010,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 77,Syria,2011,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
-77,Syria,2012,NA,NA,NA,NA,Aggregated international and domestic,NA
-77,Syria,2013,NA,NA,NA,NA,Aggregated international and domestic,NA
-77,Syria,2014,NA,NA,NA,NA,Aggregated international and domestic,NA
-77,Syria,2015,NA,NA,NA,NA,Aggregated international and domestic,NA
-77,Syria,2016,NA,NA,NA,NA,Aggregated international and domestic,NA
-77,Syria,2017,NA,NA,NA,NA,Aggregated international and domestic,NA
-77,Syria,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-77,Syria,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-77,Syria,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-77,Syria,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-77,Syria,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+77,Syria,2012,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+77,Syria,2013,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+77,Syria,2014,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+77,Syria,2015,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+77,Syria,2016,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+77,Syria,2017,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+77,Syria,2018,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+77,Syria,2019,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+77,Syria,2020,2020:2022 method,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+77,Syria,2021,2020:2022 method,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+77,Syria,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 78,Lebanon,2008,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 78,Lebanon,2009,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 78,Lebanon,2010,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -850,10 +850,10 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 100,Republique du Congo,2016,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 100,Republique du Congo,2017,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 100,Republique du Congo,2018,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-100,Republique du Congo,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-100,Republique du Congo,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-100,Republique du Congo,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-100,Republique du Congo,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+100,Republique du Congo,2019,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+100,Republique du Congo,2020,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+100,Republique du Congo,2021,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+100,Republique du Congo,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 101,Namibia,2008,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 101,Namibia,2009,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 101,Namibia,2010,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -862,13 +862,13 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 101,Namibia,2013,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 101,Namibia,2014,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 101,Namibia,2015,UNWTO,NA,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-101,Namibia,2016,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-101,Namibia,2017,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-101,Namibia,2018,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-101,Namibia,2019,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-101,Namibia,2020,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-101,Namibia,2021,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-101,Namibia,2022,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
+101,Namibia,2016,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+101,Namibia,2017,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+101,Namibia,2018,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+101,Namibia,2019,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+101,Namibia,2020,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+101,Namibia,2021,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+101,Namibia,2022,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 102,South Africa,2008,UNWTO,NA,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 102,South Africa,2009,UNWTO,NA,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 102,South Africa,2010,UNWTO,NA,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -895,10 +895,10 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 103,Sao Tome and Principe,2016,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 103,Sao Tome and Principe,2017,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 103,Sao Tome and Principe,2018,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
-103,Sao Tome and Principe,2019,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-103,Sao Tome and Principe,2020,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-103,Sao Tome and Principe,2021,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-103,Sao Tome and Principe,2022,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+103,Sao Tome and Principe,2019,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+103,Sao Tome and Principe,2020,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+103,Sao Tome and Principe,2021,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+103,Sao Tome and Principe,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 106,Ghana,2008,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 106,Ghana,2009,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 106,Ghana,2010,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
@@ -990,20 +990,20 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 113,Cayman Islands,2021,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 113,Cayman Islands,2022,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 114,Haiti,2008,UNWTO,NA,Total:Overnights / Mean Stay,gapfilled,Aggregated international and domestic,gapfilled - domestic
-114,Haiti,2009,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-114,Haiti,2010,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-114,Haiti,2011,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-114,Haiti,2012,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-114,Haiti,2013,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-114,Haiti,2014,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-114,Haiti,2015,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-114,Haiti,2016,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-114,Haiti,2017,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-114,Haiti,2018,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-114,Haiti,2019,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-114,Haiti,2020,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-114,Haiti,2021,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-114,Haiti,2022,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+114,Haiti,2009,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+114,Haiti,2010,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+114,Haiti,2011,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+114,Haiti,2012,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+114,Haiti,2013,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+114,Haiti,2014,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+114,Haiti,2015,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+114,Haiti,2016,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+114,Haiti,2017,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+114,Haiti,2018,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+114,Haiti,2019,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+114,Haiti,2020,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+114,Haiti,2021,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+114,Haiti,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 115,Dominican Republic,2008,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 115,Dominican Republic,2009,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 115,Dominican Republic,2010,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -1175,15 +1175,15 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 126,Trinidad and Tobago,2011,UNWTO,NA,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 126,Trinidad and Tobago,2012,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 126,Trinidad and Tobago,2013,UNWTO,NA,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-126,Trinidad and Tobago,2014,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-126,Trinidad and Tobago,2015,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-126,Trinidad and Tobago,2016,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-126,Trinidad and Tobago,2017,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-126,Trinidad and Tobago,2018,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-126,Trinidad and Tobago,2019,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-126,Trinidad and Tobago,2020,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-126,Trinidad and Tobago,2021,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-126,Trinidad and Tobago,2022,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
+126,Trinidad and Tobago,2014,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+126,Trinidad and Tobago,2015,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+126,Trinidad and Tobago,2016,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+126,Trinidad and Tobago,2017,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+126,Trinidad and Tobago,2018,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+126,Trinidad and Tobago,2019,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+126,Trinidad and Tobago,2020,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+126,Trinidad and Tobago,2021,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+126,Trinidad and Tobago,2022,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 127,Saint Vincent and the Grenadines,2008,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
 127,Saint Vincent and the Grenadines,2009,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
 127,Saint Vincent and the Grenadines,2010,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -1344,11 +1344,11 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 139,Venezuela,2015,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
 139,Venezuela,2016,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
 139,Venezuela,2017,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
-139,Venezuela,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-139,Venezuela,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-139,Venezuela,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-139,Venezuela,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-139,Venezuela,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+139,Venezuela,2018,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+139,Venezuela,2019,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+139,Venezuela,2020,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+139,Venezuela,2021,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+139,Venezuela,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 140,Guadeloupe and Martinique,2008,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 140,Guadeloupe and Martinique,2009,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 140,Guadeloupe and Martinique,2010,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -1428,17 +1428,17 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 153,Cook Islands,2009,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 153,Cook Islands,2010,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 153,Cook Islands,2011,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-153,Cook Islands,2012,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-153,Cook Islands,2013,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-153,Cook Islands,2014,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-153,Cook Islands,2015,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-153,Cook Islands,2016,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-153,Cook Islands,2017,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-153,Cook Islands,2018,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-153,Cook Islands,2019,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-153,Cook Islands,2020,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-153,Cook Islands,2021,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-153,Cook Islands,2022,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
+153,Cook Islands,2012,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+153,Cook Islands,2013,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+153,Cook Islands,2014,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+153,Cook Islands,2015,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+153,Cook Islands,2016,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+153,Cook Islands,2017,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+153,Cook Islands,2018,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+153,Cook Islands,2019,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+153,Cook Islands,2020,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+153,Cook Islands,2021,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+153,Cook Islands,2022,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 154,Niue,2008,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 154,Niue,2009,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 154,Niue,2010,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
@@ -1480,8 +1480,8 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 162,New Zealand,2016,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 162,New Zealand,2017,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 162,New Zealand,2018,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-162,New Zealand,2019,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-162,New Zealand,2020,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
+162,New Zealand,2019,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+162,New Zealand,2020,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 162,New Zealand,2021,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 162,New Zealand,2022,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 163,United States,2008,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
@@ -1552,13 +1552,13 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 168,Suriname,2013,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
 168,Suriname,2014,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
 168,Suriname,2015,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
-168,Suriname,2016,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-168,Suriname,2017,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-168,Suriname,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-168,Suriname,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-168,Suriname,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-168,Suriname,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-168,Suriname,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+168,Suriname,2016,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+168,Suriname,2017,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+168,Suriname,2018,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+168,Suriname,2019,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+168,Suriname,2020,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+168,Suriname,2021,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+168,Suriname,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 169,French Guiana,2008,Interpolation,gapfilled,Upfilling,gapfilled,Aggregated international and domestic,gapfilled - both
 169,French Guiana,2009,UNWTO,NA,Upfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
 169,French Guiana,2010,Interpolation,gapfilled,Upfilling,gapfilled,Aggregated international and domestic,gapfilled - both
@@ -1569,11 +1569,11 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 169,French Guiana,2015,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 169,French Guiana,2016,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 169,French Guiana,2017,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-169,French Guiana,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-169,French Guiana,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-169,French Guiana,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-169,French Guiana,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-169,French Guiana,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+169,French Guiana,2018,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+169,French Guiana,2019,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+169,French Guiana,2020,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+169,French Guiana,2021,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+169,French Guiana,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 171,Brazil,2008,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 171,Brazil,2009,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 171,Brazil,2010,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
@@ -1860,20 +1860,20 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 189,Lithuania,2021,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 189,Lithuania,2022,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 190,Qatar,2008,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-190,Qatar,2009,NA,NA,NA,NA,Aggregated international and domestic,NA
-190,Qatar,2010,NA,NA,NA,NA,Aggregated international and domestic,NA
-190,Qatar,2011,NA,NA,NA,NA,Aggregated international and domestic,NA
-190,Qatar,2012,NA,NA,NA,NA,Aggregated international and domestic,NA
-190,Qatar,2013,NA,NA,NA,NA,Aggregated international and domestic,NA
-190,Qatar,2014,NA,NA,NA,NA,Aggregated international and domestic,NA
-190,Qatar,2015,NA,NA,NA,NA,Aggregated international and domestic,NA
-190,Qatar,2016,NA,NA,NA,NA,Aggregated international and domestic,NA
-190,Qatar,2017,NA,NA,NA,NA,Aggregated international and domestic,NA
-190,Qatar,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-190,Qatar,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-190,Qatar,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-190,Qatar,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-190,Qatar,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+190,Qatar,2009,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+190,Qatar,2010,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+190,Qatar,2011,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+190,Qatar,2012,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+190,Qatar,2013,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+190,Qatar,2014,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+190,Qatar,2015,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+190,Qatar,2016,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+190,Qatar,2017,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+190,Qatar,2018,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+190,Qatar,2019,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+190,Qatar,2020,2020:2022 method,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+190,Qatar,2021,2020:2022 method,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+190,Qatar,2022,2020:2022 method,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
 193,Guinea Bissau,2008,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 193,Guinea Bissau,2009,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 193,Guinea Bissau,2010,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
@@ -1899,11 +1899,11 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 194,Guinea,2015,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 194,Guinea,2016,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 194,Guinea,2017,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-194,Guinea,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-194,Guinea,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-194,Guinea,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-194,Guinea,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-194,Guinea,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+194,Guinea,2018,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+194,Guinea,2019,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+194,Guinea,2020,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+194,Guinea,2021,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+194,Guinea,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 196,Nigeria,2008,UNWTO,NA,Upfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
 196,Nigeria,2009,UNWTO,NA,Upfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
 196,Nigeria,2010,UNWTO,NA,Upfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -1924,16 +1924,16 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 197,Cameroon,2010,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 197,Cameroon,2011,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 197,Cameroon,2012,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-197,Cameroon,2013,NA,NA,NA,NA,Aggregated international and domestic,NA
-197,Cameroon,2014,NA,NA,NA,NA,Aggregated international and domestic,NA
-197,Cameroon,2015,NA,NA,NA,NA,Aggregated international and domestic,NA
-197,Cameroon,2016,NA,NA,NA,NA,Aggregated international and domestic,NA
-197,Cameroon,2017,NA,NA,NA,NA,Aggregated international and domestic,NA
-197,Cameroon,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-197,Cameroon,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-197,Cameroon,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-197,Cameroon,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-197,Cameroon,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+197,Cameroon,2013,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+197,Cameroon,2014,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+197,Cameroon,2015,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+197,Cameroon,2016,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+197,Cameroon,2017,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+197,Cameroon,2018,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+197,Cameroon,2019,Downfilling,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+197,Cameroon,2020,2020:2022 method,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+197,Cameroon,2021,2020:2022 method,gapfilled,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+197,Cameroon,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 199,Democratic Republic of the Congo,2008,UNWTO,NA,Total:Overnights / Mean Stay,gapfilled,Aggregated international and domestic,gapfilled - domestic
 199,Democratic Republic of the Congo,2009,UNWTO,NA,Total:Overnights / Mean Stay,gapfilled,Aggregated international and domestic,gapfilled - domestic
 199,Democratic Republic of the Congo,2010,UNWTO,NA,Total:Overnights / Mean Stay,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -1942,13 +1942,13 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 199,Democratic Republic of the Congo,2013,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 199,Democratic Republic of the Congo,2014,UNWTO,NA,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 199,Democratic Republic of the Congo,2015,UNWTO,NA,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-199,Democratic Republic of the Congo,2016,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-199,Democratic Republic of the Congo,2017,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-199,Democratic Republic of the Congo,2018,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-199,Democratic Republic of the Congo,2019,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-199,Democratic Republic of the Congo,2020,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-199,Democratic Republic of the Congo,2021,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-199,Democratic Republic of the Congo,2022,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+199,Democratic Republic of the Congo,2016,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+199,Democratic Republic of the Congo,2017,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+199,Democratic Republic of the Congo,2018,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+199,Democratic Republic of the Congo,2019,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+199,Democratic Republic of the Congo,2020,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+199,Democratic Republic of the Congo,2021,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
+199,Democratic Republic of the Congo,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 200,Angola,2008,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 200,Angola,2009,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 200,Angola,2010,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -1964,19 +1964,19 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 200,Angola,2020,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 200,Angola,2021,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 200,Angola,2022,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
-202,Tanzania,2008,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-202,Tanzania,2009,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-202,Tanzania,2010,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-202,Tanzania,2011,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-202,Tanzania,2012,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-202,Tanzania,2013,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-202,Tanzania,2014,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-202,Tanzania,2015,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-202,Tanzania,2016,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-202,Tanzania,2017,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-202,Tanzania,2018,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-202,Tanzania,2019,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-202,Tanzania,2020,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
+202,Tanzania,2008,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+202,Tanzania,2009,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+202,Tanzania,2010,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+202,Tanzania,2011,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+202,Tanzania,2012,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+202,Tanzania,2013,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+202,Tanzania,2014,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+202,Tanzania,2015,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+202,Tanzania,2016,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+202,Tanzania,2017,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+202,Tanzania,2018,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+202,Tanzania,2019,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+202,Tanzania,2020,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 202,Tanzania,2021,UNWTO,NA,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 202,Tanzania,2022,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 203,India,2008,UNWTO,NA,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -2047,13 +2047,13 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 207,Vietnam,2013,UNWTO,NA,Upfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
 207,Vietnam,2014,UNWTO,NA,Upfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
 207,Vietnam,2015,UNWTO,NA,Upfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
-207,Vietnam,2016,NA,NA,NA,NA,Aggregated international and domestic,NA
-207,Vietnam,2017,NA,NA,NA,NA,Aggregated international and domestic,NA
-207,Vietnam,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-207,Vietnam,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-207,Vietnam,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-207,Vietnam,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-207,Vietnam,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+207,Vietnam,2016,Downfilling,gapfilled,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+207,Vietnam,2017,Downfilling,gapfilled,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+207,Vietnam,2018,Downfilling,gapfilled,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+207,Vietnam,2019,Downfilling,gapfilled,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+207,Vietnam,2020,2020:2022 method,gapfilled,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+207,Vietnam,2021,2020:2022 method,gapfilled,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
+207,Vietnam,2022,2020:2022 method,gapfilled,Trips:Overnights,gapfilled,Aggregated international and domestic,gapfilled - both
 208,Singapore,2008,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
 208,Singapore,2009,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
 208,Singapore,2010,UNWTO,NA,Hotel:Guests,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -2230,8 +2230,8 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 231,East Timor,2016,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 231,East Timor,2017,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 231,East Timor,2018,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-231,East Timor,2019,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-231,East Timor,2020,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
+231,East Timor,2019,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+231,East Timor,2020,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 231,East Timor,2021,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 231,East Timor,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 232,Bosnia and Herzegovina,2008,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
@@ -2266,19 +2266,19 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 244,Curacao,2022,UNWTO,NA,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - domestic
 245,Bonaire,2008,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
 245,Bonaire,2009,UNWTO,NA,Hotel:Overnights,gapfilled,Aggregated international and domestic,gapfilled - domestic
-245,Bonaire,2010,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-245,Bonaire,2011,NA,NA,NA,NA,Aggregated international and domestic,NA
-245,Bonaire,2012,NA,NA,NA,NA,Aggregated international and domestic,NA
-245,Bonaire,2013,NA,NA,NA,NA,Aggregated international and domestic,NA
-245,Bonaire,2014,NA,NA,NA,NA,Aggregated international and domestic,NA
-245,Bonaire,2015,NA,NA,NA,NA,Aggregated international and domestic,NA
-245,Bonaire,2016,NA,NA,NA,NA,Aggregated international and domestic,NA
-245,Bonaire,2017,NA,NA,NA,NA,Aggregated international and domestic,NA
-245,Bonaire,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-245,Bonaire,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-245,Bonaire,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-245,Bonaire,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-245,Bonaire,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+245,Bonaire,2010,UNWTO,NA,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - domestic
+245,Bonaire,2011,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+245,Bonaire,2012,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+245,Bonaire,2013,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+245,Bonaire,2014,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+245,Bonaire,2015,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+245,Bonaire,2016,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+245,Bonaire,2017,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+245,Bonaire,2018,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+245,Bonaire,2019,Downfilling,gapfilled,Downfilling,gapfilled,Aggregated international and domestic,gapfilled - both
+245,Bonaire,2020,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+245,Bonaire,2021,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
+245,Bonaire,2022,2020:2022 method,gapfilled,2020:2022 method,gapfilled,Aggregated international and domestic,gapfilled - both
 247,Brunei,2008,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 247,Brunei,2009,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 247,Brunei,2010,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
@@ -2297,33 +2297,33 @@ rgn_id,rgn_name,year,int_method,int_gapfilled,dom_method,dom_gapfilled,ag_method
 248,Saba,2008,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 248,Saba,2009,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 248,Saba,2010,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-248,Saba,2011,NA,NA,NA,NA,Aggregated international and domestic,NA
-248,Saba,2012,NA,NA,NA,NA,Aggregated international and domestic,NA
-248,Saba,2013,NA,NA,NA,NA,Aggregated international and domestic,NA
-248,Saba,2014,NA,NA,NA,NA,Aggregated international and domestic,NA
-248,Saba,2015,NA,NA,NA,NA,Aggregated international and domestic,NA
-248,Saba,2016,NA,NA,NA,NA,Aggregated international and domestic,NA
-248,Saba,2017,NA,NA,NA,NA,Aggregated international and domestic,NA
-248,Saba,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-248,Saba,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-248,Saba,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-248,Saba,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-248,Saba,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+248,Saba,2011,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+248,Saba,2012,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+248,Saba,2013,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+248,Saba,2014,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+248,Saba,2015,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+248,Saba,2016,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+248,Saba,2017,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+248,Saba,2018,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+248,Saba,2019,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+248,Saba,2020,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+248,Saba,2021,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+248,Saba,2022,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
 249,Sint Eustatius,2008,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 249,Sint Eustatius,2009,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
 249,Sint Eustatius,2010,UNWTO,NA,NA,NA,Aggregated international and domestic,NA
-249,Sint Eustatius,2011,NA,NA,NA,NA,Aggregated international and domestic,NA
-249,Sint Eustatius,2012,NA,NA,NA,NA,Aggregated international and domestic,NA
-249,Sint Eustatius,2013,NA,NA,NA,NA,Aggregated international and domestic,NA
-249,Sint Eustatius,2014,NA,NA,NA,NA,Aggregated international and domestic,NA
-249,Sint Eustatius,2015,NA,NA,NA,NA,Aggregated international and domestic,NA
-249,Sint Eustatius,2016,NA,NA,NA,NA,Aggregated international and domestic,NA
-249,Sint Eustatius,2017,NA,NA,NA,NA,Aggregated international and domestic,NA
-249,Sint Eustatius,2018,NA,NA,NA,NA,Aggregated international and domestic,NA
-249,Sint Eustatius,2019,NA,NA,NA,NA,Aggregated international and domestic,NA
-249,Sint Eustatius,2020,NA,NA,NA,NA,Aggregated international and domestic,NA
-249,Sint Eustatius,2021,NA,NA,NA,NA,Aggregated international and domestic,NA
-249,Sint Eustatius,2022,NA,NA,NA,NA,Aggregated international and domestic,NA
+249,Sint Eustatius,2011,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+249,Sint Eustatius,2012,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+249,Sint Eustatius,2013,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+249,Sint Eustatius,2014,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+249,Sint Eustatius,2015,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+249,Sint Eustatius,2016,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+249,Sint Eustatius,2017,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+249,Sint Eustatius,2018,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+249,Sint Eustatius,2019,Downfilling,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+249,Sint Eustatius,2020,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+249,Sint Eustatius,2021,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
+249,Sint Eustatius,2022,2020:2022 method,gapfilled,NA,NA,Aggregated international and domestic,gapfilled - international
 250,Aruba,2008,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 250,Aruba,2009,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
 250,Aruba,2010,UNWTO,NA,Interpolation,gapfilled,Aggregated international and domestic,gapfilled - domestic
