@@ -350,6 +350,20 @@ nrow(international_arrivals) # 2808
 write_csv(international_arrivals, here(current_tr_dir, "int", "international_arrivals_int.csv"))
 ```
 
+```{r}
+int_arrivals <- read_csv(here(current_tr_dir, "int", "international_arrivals_int.csv"))
+
+missing
+
+colnames(int_arrivals)
+
+int_arrivals %>% 
+  filter(rgn_id %in% missing$rgn_id & year %in% missing$year) %>% 
+  view()
+
+```
+
+
 ## Domestic Inbound Tourism Accomodation and Trips - UNWTO
 
 *Domestic data:* Click Domestic Tourism, scroll down to "Total trips", click download. Then download from "Accommodations".
@@ -1093,7 +1107,7 @@ international_arrivals <- read_csv(here(current_tr_dir, "int", "international_ar
 pre_pandemic_int <-  international_arrivals %>%
   # Adjust to match you want to consider 'pandemic years'
   filter(!(year %in% c(2020, 2021, 2022))) %>%
-  group_by(rgn_id) %>%
+  group_by(rgn_id, rgn_name) %>%
   arrange(year) %>%
   # Linear interpolation
   mutate(tourism_arrivals_ct = na.approx(tourism_arrivals_ct, x = year, na.rm = FALSE)) %>% 
@@ -1152,7 +1166,7 @@ pandemic_int <- international_arrivals %>%
 int_arrivals_gf <- pre_pandemic_int %>%
   complete(year = 2005:max(data_years)) %>% 
   rbind(pandemic_int) %>%
-  group_by(rgn_id) %>%
+  group_by(rgn_id, rgn_name) %>%
   arrange(rgn_id, year) %>%
   # apply global average proportional increase or decrease for 2020 and 2021, because of covid pandemic messing up trends...
   mutate(tourism_arrivals_ct = ifelse(year == 2020 & is.na(tourism_arrivals_ct), lag(tourism_arrivals_ct, n = 1) + lag(tourism_arrivals_ct, n = 1)*gf_2020_tourism_int, tourism_arrivals_ct)) %>%
@@ -1183,12 +1197,13 @@ colSums(is.na(int_arrivals_gf)) # no more missing values
 # `tourism_arrivals_ct` is the tourism arrivals count from the DOMESTIC data, which is primarily total guests (accommodation) data, and was gapfilled using domestic trip data also from UNWTO.
 
 domestic_guests <- read_csv(here(current_tr_dir, "int", "domestic_guests_first_gf.csv"))
+colnames(domestic_guests)
 
 # ---- Gapfill 1995-2019 ----
 pre_pandemic_dom <-  domestic_guests %>%
   # Adjust to match you want to consider 'pandemic years'
   filter(!(year %in% c(2020, 2021, 2022))) %>%
-  group_by(rgn_id) %>%
+  group_by(rgn_id, rgn_name) %>%
   arrange(year) %>%
   # Linear interpolation
   mutate(tourism_arrivals_ct = na.approx(tourism_arrivals_ct, x = year, na.rm = FALSE)) %>% 
@@ -1202,12 +1217,6 @@ pre_pandemic_dom <-  domestic_guests %>%
     arrivals_gapfilled = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "gapfilled", arrivals_gapfilled),
     arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "Upfilling", arrivals_method)
          ) 
-
-table(pre_pandemic_dom$arrivals_method)
-table(domestic_guests$arrivals_method)
-
-nrow(pre_pandemic_dom)
-colSums(is.na(pre_pandemic_dom))
 
 
 # ==== gapfill for 2020 and 2021 now ==== 
@@ -1254,12 +1263,13 @@ pandemic_dom <- domestic_guests %>%
 
 dom_arrivals_gf <- pre_pandemic_dom %>%
   rbind(pandemic_dom) %>%
-  group_by(rgn_id) %>%
+  group_by(rgn_id, rgn_name) %>%
   arrange(rgn_id, year) %>%
   # apply global average proportional increase or decrease for 2020 and 2021, because of covid pandemic messing up trends...
   mutate(tourism_arrivals_ct = ifelse(year == 2020 & is.na(tourism_arrivals_ct), lag(tourism_arrivals_ct, n = 1) + lag(tourism_arrivals_ct, n = 1)*gf_2020_tourism_dom, tourism_arrivals_ct)) %>%
   mutate(tourism_arrivals_ct = ifelse(year == 2021 & is.na(tourism_arrivals_ct), lag(tourism_arrivals_ct, n = 1) + lag(tourism_arrivals_ct, n = 1)*gf_2021_tourism_dom, tourism_arrivals_ct)) %>%
   mutate(tourism_arrivals_ct = ifelse(year == 2022 & is.na(tourism_arrivals_ct), lag(tourism_arrivals_ct, n = 1) + lag(tourism_arrivals_ct, n = 1)*gf_2022_tourism_dom, tourism_arrivals_ct)) %>%
+  # record gapfilling method
   mutate(arrivals_method = ifelse(is.na(arrivals_method) & !is.na(tourism_arrivals_ct), "2020:2022 method", arrivals_method)) %>%
   mutate(arrivals_gapfilled = ifelse(arrivals_method == "2020:2022 method", "gapfilled", arrivals_gapfilled)) %>%
   filter(year >= 2008) %>% # get only the year we need and beyond
@@ -1271,6 +1281,21 @@ length(unique(dom_arrivals_gf$rgn_name)) # v2025: 134
 summary(dom_arrivals_gf) 
 colSums(is.na(dom_arrivals_gf)) # 0 NAs
 table(dom_arrivals_gf$arrivals_method)
+```
+
+
+```{r}
+dom_missing <- dom_arrivals_gf %>% 
+  filter(rgn_id %in% missing$rgn_id & year %in% missing$year)
+
+int_missing <- int_arrivals_gf %>% 
+  filter(rgn_id %in% missing$rgn_id & year %in% missing$year)
+
+view(int_missing)
+view(dom_missing)
+
+colSums(is.na(int_missing))
+colSums(is.na(dom_missing))
 ```
 
 ## Gapfilling -- for regions that do not have domestic data: prep for aggregation.
@@ -1292,33 +1317,52 @@ total_arrivals <- left_join(int_arrivals_gf, dom_arrivals_gf, by = c("rgn_id","r
     arrivals_gapfilled = arrivals_gapfilled.y
   )
 
-length(unique(total_arrivals$rgn_name)) # v2025: 157 regions 
+length(unique(total_arrivals$rgn_name)) # v2025: 157 regions
+colSums(is.na(total_arrivals))
+# > colSums(is.na(total_arrivals))
+#                  rgn_id                rgn_name 
+#                       0                       0 
+#                    year tourism_arrivals_ct_int 
+#                       0                       0 
+#             data_source             arrivals_gf 
+#                       0                    2073 
+# tourism_arrivals_ct_dom         arrivals_method 
+#                     600                     600 
+#      arrivals_gapfilled 
+#                     600 
 ```
 
 Now that we have a joined dataframe, let's adjust it to gapfill by years.
 
 ```{r}
 # join with georegions again, and take the mean of the domestic guests data for r2 and r1 groups
+view(mean_domestic_guests)
 mean_domestic_guests <- total_arrivals %>% 
-  group_by(rgn_id) %>% 
+  group_by(rgn_id, rgn_name) %>% 
   complete(year = 2008:max(data_years)) %>% # ensures that there is a row for every year for each region, to ensure there are no gaps
-  left_join(georegions, by = c("rgn_id","rgn_name")) %>% 
-  ungroup() %>% 
-  group_by(r2) %>% 
+  left_join(georegions, by = c("rgn_id")) %>%
+  ungroup() %>%
+  group_by(r2) %>%
   mutate(
-    # take the mean of arrivals by georegion
-    tourism_arrivals_ct_dom_r2 = mean(tourism_arrivals_ct_dom, na.rm = TRUE), 
-    tourism_arrivals_ct_dom_r2 = ifelse(is.nan(tourism_arrivals_ct_dom_r2), NA, tourism_arrivals_ct_dom_r2) # to make NaN = NAs
-  ) %>% 
-  ungroup() %>% 
-  group_by(r1) %>% 
+    # take the mean of domestic arrivals by georegion
+    tourism_arrivals_ct_dom_r2 = mean(tourism_arrivals_ct_dom, na.rm = TRUE),
+    tourism_arrivals_ct_dom_r2 = ifelse(is.nan(tourism_arrivals_ct_dom_r2), NA, tourism_arrivals_ct_dom_r2), # to make NaN = NAs
+    # take the mean of international arrivals by georegion
+    tourism_arrivals_ct_int_r2 = mean(tourism_arrivals_ct_int, na.rm = TRUE),
+    tourism_arrivals_ct_int_r2 = ifelse(is.nan(tourism_arrivals_ct_int_r2), NA, tourism_arrivals_ct_dom_r2) # to make NaN = NAs
+  ) %>%
+  ungroup() %>%
+  group_by(r1) %>%
   mutate(
     tourism_arrivals_ct_dom_r1 = mean(tourism_arrivals_ct_dom, na.rm = TRUE),
-    tourism_arrivals_ct_dom_r1 = ifelse(is.nan(tourism_arrivals_ct_dom_r1), NA, tourism_arrivals_ct_dom_r1)
-  ) %>% 
+    tourism_arrivals_ct_dom_r1 = ifelse(is.nan(tourism_arrivals_ct_dom_r1), NA, tourism_arrivals_ct_dom_r1),
+    tourism_arrivals_ct_int_r1 = mean(tourism_arrivals_ct_int, na.rm = TRUE),
+    tourism_arrivals_ct_int_r1 = ifelse(is.nan(tourism_arrivals_ct_int_r1), NA, tourism_arrivals_ct_dom_r1)
+  ) %>%
   ungroup()
 
 length(unique(mean_domestic_guests$rgn_name)) # 157 yay!
+colSums(is.na(mean_domestic_guests))
 
 length(unique(georegions$r2)) # 22 r2 regions
 length(unique(mean_domestic_guests$tourism_arrivals_ct_dom_r2)) # 22, got all r2 regions
@@ -1327,6 +1371,14 @@ length(unique(georegions$r1)) # 7 regions
 length(unique(mean_domestic_guests$tourism_arrivals_ct_dom_r1)) # 7, that means it got all the r1 regions
 
 write_csv(mean_domestic_guests, here(current_tr_dir, "int", "mean_domestic_guests.csv"))
+```
+
+```{r}
+mean_domestic_guests <- read_csv(here(current_tr_dir, "int", "mean_domestic_guests.csv"))
+
+mean_domestic_guests %>% 
+  filter(rgn_id %in% missing$rgn_id & year %in% missing$year) %>% 
+  view()
 ```
 
 # Calculating Arrival Proportion
@@ -1345,6 +1397,11 @@ arrivals_aggregated <- mean_domestic_guests %>%
       is.na(tourism_arrivals_ct_dom) & !is.na(tourism_arrivals_ct_dom_r2) ~ tourism_arrivals_ct_dom_r2,
       is.na(tourism_arrivals_ct_dom) & is.na(tourism_arrivals_ct_dom_r2) & !is.na(tourism_arrivals_ct_dom_r1) ~ tourism_arrivals_ct_dom_r1,
       TRUE ~ tourism_arrivals_ct_dom
+    ),
+    tourism_arrivals_ct_int = case_when(
+      is.na(tourism_arrivals_ct_int) & !is.na(tourism_arrivals_ct_int_r2) ~ tourism_arrivals_ct_int_r2,
+      is.na(tourism_arrivals_ct_int) & is.na(tourism_arrivals_ct_int_r2) & !is.na(tourism_arrivals_ct_int_r1) ~ tourism_arrivals_ct_int_r1,
+      TRUE ~ tourism_arrivals_ct_int
     ),
     tourism_arrivals_ag = case_when(
       !is.na(tourism_arrivals_ct_int) & !is.na(tourism_arrivals_ct_dom) ~ tourism_arrivals_ct_int + tourism_arrivals_ct_dom,
@@ -1369,6 +1426,8 @@ arrivals_aggregated <- mean_domestic_guests %>%
 length(!is.na(arrivals_aggregated$tourism_arrivals_ct_int)) # 2184 v2025: 2705
 length(!is.na(arrivals_aggregated$tourism_arrivals_ct_dom)) # 2184 v2025: 2705
 # yay! now we can aggregate international and domestic with the least amount of error with the data we have
+colSums(is.na(arrivals_aggregated))
+nrow(arrivals_aggregated)
 
 # save gf information
 tourism_aggregated_gf <- arrivals_aggregated %>% 
@@ -1548,6 +1607,16 @@ htmlwidgets::saveWidget(ap_final_plot, here::here(current_tr_dir, "figs", "ap_re
 
 # save the final tourism arrivals csv
 write_csv(tr_arrivals_props_tourism, here::here(current_tr_dir, "output", "tr_arrivals_props_tourism.csv"))
+
+colSums(is.na(tr_arrivals_props_tourism))
+
+test <- tr_arrivals_props_tourism %>% 
+  filter(rgn_id %in% missing$rgn_id & year %in% missing$year)
+view(test)
+
+int_missing <- int_arrivals_gf %>% 
+  filter(rgn_id %in% missing$rgn_id & year %in% missing$year)
+
 ```
 
 # Data check
@@ -1556,6 +1625,24 @@ write_csv(tr_arrivals_props_tourism, here::here(current_tr_dir, "output", "tr_ar
 # Read in data
 new_tr <- read_csv(here(current_tr_dir, "output", "tr_arrivals_props_tourism.csv"))
 old_tr <- read_csv(here(previous_tr_dir, "output", "tr_arrivals_props_tourism.csv"))
+
+na_countries <- new_tr %>% 
+  filter(rgn_id %in% c(67, 190, 77, 53, 197, 47, 73, 207, 43, 66, 139, 168, 
+                       194, 49, 100, 9, 173, 181, 193, 6, 8, 98, 99, 151))
+colnames(old_na_countries) 
+
+
+old_na_countries <- old_tr %>% 
+  filter(rgn_id %in% c(67, 190, 77, 53, 197, 47, 73, 207, 43, 66, 139, 168, 
+                       194, 49, 100, 9, 173, 181, 193, 6, 8, 98, 99, 151))
+
+na_diff <- old_na_countries %>% 
+  rename(old_Ap = Ap) %>% 
+  left_join(na_countries, by = join_by(rgn_id, year))
+view(na_diff)
+
+missing <- na_diff %>% 
+  filter(is.na(Ap))
 
 # Get max data years for plotting
 current_data_year <- max(new_tr$year)
