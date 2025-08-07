@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Wed Aug 6 21:39:03 2025 by hoyt" />
+<meta name="author" content="Compiled on Thu Aug 7 16:06:20 2025 by hoyt" />
 
 
 <title>Softbottom Habitat Destruction</title>
@@ -1646,7 +1646,7 @@ border-radius: 0px;
 
 
 <h1 class="title toc-ignore">Softbottom Habitat Destruction</h1>
-<h4 class="author"><em>Compiled on Wed Aug 6 21:39:03 2025 by
+<h4 class="author"><em>Compiled on Thu Aug 7 16:06:20 2025 by
 hoyt</em></h4>
 
 </div>
@@ -1805,30 +1805,25 @@ log(<code>sum_eff_active_fishing_hours</code>/<code>pixel_area_km2</code>
 <span id="cb5-51"><a href="#cb5-51" tabindex="-1"></a>  <span class="co"># Cap pressure value at 1</span></span>
 <span id="cb5-52"><a href="#cb5-52" tabindex="-1"></a>  fishing_effort_raster <span class="ot">&lt;-</span> <span class="fu">ifel</span>(fishing_effort_raster <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="dv">1</span>, fishing_effort_raster)</span>
 <span id="cb5-53"><a href="#cb5-53" tabindex="-1"></a>  </span>
-<span id="cb5-54"><a href="#cb5-54" tabindex="-1"></a>  <span class="co"># # Fill NA with 0 (for zonal stats)</span></span>
-<span id="cb5-55"><a href="#cb5-55" tabindex="-1"></a>  <span class="co"># fishing_effort_raster &lt;- ifel(is.na(fishing_effort_raster), 0, fishing_effort_raster)</span></span>
-<span id="cb5-56"><a href="#cb5-56" tabindex="-1"></a>  <span class="co"># </span></span>
-<span id="cb5-57"><a href="#cb5-57" tabindex="-1"></a>  <span class="co">#plot(fishing_effort_raster)</span></span>
-<span id="cb5-58"><a href="#cb5-58" tabindex="-1"></a>  </span>
-<span id="cb5-59"><a href="#cb5-59" tabindex="-1"></a>  <span class="co"># Append to list</span></span>
-<span id="cb5-60"><a href="#cb5-60" tabindex="-1"></a>  fishing_effort_trawl_bottom[[year]] <span class="ot">&lt;-</span> fishing_effort_raster</span>
-<span id="cb5-61"><a href="#cb5-61" tabindex="-1"></a>}</span>
-<span id="cb5-62"><a href="#cb5-62" tabindex="-1"></a></span>
-<span id="cb5-63"><a href="#cb5-63" tabindex="-1"></a>data_years <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">names</span>(fishing_effort_trawl_bottom))</span>
-<span id="cb5-64"><a href="#cb5-64" tabindex="-1"></a></span>
-<span id="cb5-65"><a href="#cb5-65" tabindex="-1"></a><span class="co"># # Plots</span></span>
-<span id="cb5-66"><a href="#cb5-66" tabindex="-1"></a><span class="co"># for (i in seq_along(c(min(data_years):max(data_years)))) {</span></span>
-<span id="cb5-67"><a href="#cb5-67" tabindex="-1"></a><span class="co">#   </span></span>
-<span id="cb5-68"><a href="#cb5-68" tabindex="-1"></a><span class="co">#   #i &lt;- 1</span></span>
+<span id="cb5-54"><a href="#cb5-54" tabindex="-1"></a>  <span class="co"># Append to list</span></span>
+<span id="cb5-55"><a href="#cb5-55" tabindex="-1"></a>  fishing_effort_trawl_bottom[[year]] <span class="ot">&lt;-</span> fishing_effort_raster</span>
+<span id="cb5-56"><a href="#cb5-56" tabindex="-1"></a>}</span>
+<span id="cb5-57"><a href="#cb5-57" tabindex="-1"></a></span>
+<span id="cb5-58"><a href="#cb5-58" tabindex="-1"></a>data_years <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">names</span>(fishing_effort_trawl_bottom))</span>
+<span id="cb5-59"><a href="#cb5-59" tabindex="-1"></a></span>
+<span id="cb5-60"><a href="#cb5-60" tabindex="-1"></a><span class="co"># # Plots</span></span>
+<span id="cb5-61"><a href="#cb5-61" tabindex="-1"></a><span class="co"># for (i in seq_along(c(min(data_years):max(data_years)))) {</span></span>
+<span id="cb5-62"><a href="#cb5-62" tabindex="-1"></a><span class="co">#   </span></span>
+<span id="cb5-63"><a href="#cb5-63" tabindex="-1"></a><span class="co">#   #i &lt;- 1</span></span>
+<span id="cb5-64"><a href="#cb5-64" tabindex="-1"></a><span class="co">#   </span></span>
+<span id="cb5-65"><a href="#cb5-65" tabindex="-1"></a><span class="co">#   year &lt;- names(fishing_effort_trawl_bottom)[i]</span></span>
+<span id="cb5-66"><a href="#cb5-66" tabindex="-1"></a><span class="co">#   </span></span>
+<span id="cb5-67"><a href="#cb5-67" tabindex="-1"></a><span class="co">#   png(file.path(dir_goal, &quot;int/plots&quot;, paste0(&quot;fishing_effort_&quot;, year, &quot;_q99_99_2010.png&quot;)), width = 800, height = 600)</span></span>
+<span id="cb5-68"><a href="#cb5-68" tabindex="-1"></a><span class="co">#   plot(fishing_effort_trawl_bottom[[i]][&#39;pressure&#39;], main = year)</span></span>
 <span id="cb5-69"><a href="#cb5-69" tabindex="-1"></a><span class="co">#   </span></span>
-<span id="cb5-70"><a href="#cb5-70" tabindex="-1"></a><span class="co">#   year &lt;- names(fishing_effort_trawl_bottom)[i]</span></span>
+<span id="cb5-70"><a href="#cb5-70" tabindex="-1"></a><span class="co">#   dev.off()</span></span>
 <span id="cb5-71"><a href="#cb5-71" tabindex="-1"></a><span class="co">#   </span></span>
-<span id="cb5-72"><a href="#cb5-72" tabindex="-1"></a><span class="co">#   png(file.path(dir_goal, &quot;int/plots&quot;, paste0(&quot;fishing_effort_&quot;, year, &quot;_q99_99_2010.png&quot;)), width = 800, height = 600)</span></span>
-<span id="cb5-73"><a href="#cb5-73" tabindex="-1"></a><span class="co">#   plot(fishing_effort_trawl_bottom[[i]][&#39;pressure&#39;], main = year)</span></span>
-<span id="cb5-74"><a href="#cb5-74" tabindex="-1"></a><span class="co">#   </span></span>
-<span id="cb5-75"><a href="#cb5-75" tabindex="-1"></a><span class="co">#   dev.off()</span></span>
-<span id="cb5-76"><a href="#cb5-76" tabindex="-1"></a><span class="co">#   </span></span>
-<span id="cb5-77"><a href="#cb5-77" tabindex="-1"></a><span class="co"># }</span></span></code></pre></div>
+<span id="cb5-72"><a href="#cb5-72" tabindex="-1"></a><span class="co"># }</span></span></code></pre></div>
 </div>
 <div id="calculate-mean-pressure" class="section level3" number="3.0.3">
 <h3><span class="header-section-number">3.0.3</span> Calculate mean
@@ -1879,22 +1874,20 @@ EEZ. Make sure to fill all NA values with 0.</p>
 <span id="cb6-42"><a href="#cb6-42" tabindex="-1"></a><span class="co"># Save output layer</span></span>
 <span id="cb6-43"><a href="#cb6-43" tabindex="-1"></a><span class="fu">write_csv</span>(total_fishing_pressure, <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;output&#39;</span>, <span class="st">&#39;hd_sb_subtidal.csv&#39;</span>))</span>
 <span id="cb6-44"><a href="#cb6-44" tabindex="-1"></a></span>
-<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a><span class="co">#gapfill?</span></span>
-<span id="cb6-46"><a href="#cb6-46" tabindex="-1"></a></span>
-<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a><span class="co"># Histogram</span></span>
-<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a><span class="co"># ggplot(total_fishing_pressure, aes(x = pressure_score, fill = factor(year))) +</span></span>
-<span id="cb6-49"><a href="#cb6-49" tabindex="-1"></a><span class="co">#   geom_histogram(bins = 30, color = &quot;black&quot;, alpha = 0.8) + #position = &quot;dodge&quot;,</span></span>
-<span id="cb6-50"><a href="#cb6-50" tabindex="-1"></a><span class="co">#   labs(fill = &quot;Year&quot;, x = &quot;Pressure&quot;, y = &quot;Count&quot;) +</span></span>
-<span id="cb6-51"><a href="#cb6-51" tabindex="-1"></a><span class="co">#   scale_fill_brewer(palette = &quot;Blues&quot;) +</span></span>
-<span id="cb6-52"><a href="#cb6-52" tabindex="-1"></a><span class="co">#   theme_minimal()</span></span>
-<span id="cb6-53"><a href="#cb6-53" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb6-54"><a href="#cb6-54" tabindex="-1"></a><span class="co"># ggplot(total_fishing_pressure, aes(x = pressure_score, fill = factor(year))) +</span></span>
-<span id="cb6-55"><a href="#cb6-55" tabindex="-1"></a><span class="co">#   geom_histogram(bins = 30, color = &quot;black&quot;, alpha = 0.8) +</span></span>
-<span id="cb6-56"><a href="#cb6-56" tabindex="-1"></a><span class="co">#   labs(x = &quot;Pressure&quot;, y = &quot;Count&quot;, fill = &quot;Year&quot;) +</span></span>
-<span id="cb6-57"><a href="#cb6-57" tabindex="-1"></a><span class="co">#   scale_fill_brewer(palette = &quot;Blues&quot;) +</span></span>
-<span id="cb6-58"><a href="#cb6-58" tabindex="-1"></a><span class="co">#   facet_wrap(~year, ncol = 1) +</span></span>
-<span id="cb6-59"><a href="#cb6-59" tabindex="-1"></a><span class="co">#   theme_minimal() +</span></span>
-<span id="cb6-60"><a href="#cb6-60" tabindex="-1"></a><span class="co">#   theme(legend.position = &#39;none&#39;)</span></span></code></pre></div>
+<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a><span class="co"># Histogram</span></span>
+<span id="cb6-46"><a href="#cb6-46" tabindex="-1"></a><span class="co"># ggplot(total_fishing_pressure, aes(x = pressure_score, fill = factor(year))) +</span></span>
+<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a><span class="co">#   geom_histogram(bins = 30, color = &quot;black&quot;, alpha = 0.8) + #position = &quot;dodge&quot;,</span></span>
+<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a><span class="co">#   labs(fill = &quot;Year&quot;, x = &quot;Pressure&quot;, y = &quot;Count&quot;) +</span></span>
+<span id="cb6-49"><a href="#cb6-49" tabindex="-1"></a><span class="co">#   scale_fill_brewer(palette = &quot;Blues&quot;) +</span></span>
+<span id="cb6-50"><a href="#cb6-50" tabindex="-1"></a><span class="co">#   theme_minimal()</span></span>
+<span id="cb6-51"><a href="#cb6-51" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb6-52"><a href="#cb6-52" tabindex="-1"></a><span class="co"># ggplot(total_fishing_pressure, aes(x = pressure_score, fill = factor(year))) +</span></span>
+<span id="cb6-53"><a href="#cb6-53" tabindex="-1"></a><span class="co">#   geom_histogram(bins = 30, color = &quot;black&quot;, alpha = 0.8) +</span></span>
+<span id="cb6-54"><a href="#cb6-54" tabindex="-1"></a><span class="co">#   labs(x = &quot;Pressure&quot;, y = &quot;Count&quot;, fill = &quot;Year&quot;) +</span></span>
+<span id="cb6-55"><a href="#cb6-55" tabindex="-1"></a><span class="co">#   scale_fill_brewer(palette = &quot;Blues&quot;) +</span></span>
+<span id="cb6-56"><a href="#cb6-56" tabindex="-1"></a><span class="co">#   facet_wrap(~year, ncol = 1) +</span></span>
+<span id="cb6-57"><a href="#cb6-57" tabindex="-1"></a><span class="co">#   theme_minimal() +</span></span>
+<span id="cb6-58"><a href="#cb6-58" tabindex="-1"></a><span class="co">#   theme(legend.position = &#39;none&#39;)</span></span></code></pre></div>
 </div>
 <div id="check-with-v2017" class="section level3" number="3.0.4">
 <h3><span class="header-section-number">3.0.4</span> Check with
