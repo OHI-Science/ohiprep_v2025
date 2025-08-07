@@ -5,6 +5,11 @@ Model details on dataprep [here](http://ohi-science.github.io/ohiprep_v2023/glob
 
 More information about the Tourism and Recreation Goal [here](http://ohi-science.org/goals/#tourism-and-recreation)
 
+`part1_arrivals_prep.Rmd` is the script for preparing the UNWTO data on international and domestic arrival flights as well as domestic accommodations. 
+`part2_sustainability_prep.Rmd` is the script for calculating tourism sustainability using WEF data. 
+
+A note: part one is signficantly longer than part 2 and could reasonably stand to be broken up into more pieces in future assessments. 
+
 ## Layers created
 * tr_arrivals_props_tourism
 * tr_sustainability

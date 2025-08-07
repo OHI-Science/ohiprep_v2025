@@ -28,10 +28,15 @@ This document describes the steps for calculating tourism and recreation sustain
 
 # Data Sources
 
+**New data sources**
+
 -   Tourism sustainability: World Economic Forum. The Travel & Tourism Development Index 2024 (version May 2024). 2024. [TTDI](https://www3.weforum.org/docs/WEF_Travel_and_Tourism_Development_Index_2024.pdf)
--   Per capita GDP: (World Bank with gaps filled using CIA data), used to gapfill missing values in Tourism sustainability
--   World Bank (brought in from AO intermediate, \~/globalprep/ao/v2024/intermediate/gdppcppp_ohi.csv)
--   CIA (<https://www.cia.gov/the-world-factbook/field/real-gdp-per-capita/country-comparison/>) Click the download button on the website, top right hand corner.
+- GDP per capita, World bank: This is the main dataset used to measure GDP. It is used to gapfill missing values in Tourism sustainability
+- GDP per capita, CIA: This is a secondary dataset used to fill gaps in the World Bank data. (<https://www.cia.gov/the-world-factbook/field/real-gdp-per-capita/country-comparison/>) Click the download button on the website, top right hand corner.
+
+**Data sources from other goals**
+
+- `ao` World Bank GDP per capita purchasing power parity: `globalprep/ao/vYEAR/intermediate/gdppcppp_ohi.csv`
 
 **Citation**: World Bank. (2024). *Population, total*. https://data.worldbank.org/indicator/SP.POP.TOTL © 2024 The World Bank Group, All Rights Reserved.
 
@@ -41,6 +46,7 @@ Ts: Sustainability Index -- TTDI
 
 -   Data is from the World Economic Forum's "Travel and Tourism Development Index" (<https://www.weforum.org/publications/travel-tourism-development-index-2024/>)
 -   2023 scores are from the index. World Bank GDP per capita ppp adj from `/ohiprep_v2024/globalprep/ao/v2024/intermediate/gdppcppp_ohi.csv` and substituted with [CIA GDP per capita ppp adj](https://www.cia.gov/the-world-factbook/field/real-gdp-per-capita/country-comparison) is used to gapfill scores into previous years (2005 - 2022).
+
 
 # Setup
 
