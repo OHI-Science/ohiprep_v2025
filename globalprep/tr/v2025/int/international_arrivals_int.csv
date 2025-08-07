@@ -205,16 +205,16 @@ rgn_id,rgn_name,year,tourism_arrivals_ct,arrivals_method,arrivals_gapfilled
 20,South Korea,2010,NA,NA,NA
 20,South Korea,2011,NA,NA,NA
 20,South Korea,2012,NA,NA,NA
-20,South Korea,2013,11477000,arrivals minus same day,gapfilled
-20,South Korea,2014,13247000,arrivals minus same day,gapfilled
-20,South Korea,2015,12186000,arrivals minus same day,gapfilled
-20,South Korea,2016,14984000,arrivals minus same day,gapfilled
-20,South Korea,2017,12831000,arrivals minus same day,gapfilled
-20,South Korea,2018,15129000,arrivals minus same day,gapfilled
-20,South Korea,2019,17224000,arrivals minus same day,gapfilled
-20,South Korea,2020,2516000,arrivals minus same day,gapfilled
-20,South Korea,2021,967000,arrivals minus same day,gapfilled
-20,South Korea,2022,3198000,arrivals minus same day,gapfilled
+20,South Korea,2013,11477000,Arrivals minus same day,gapfilled
+20,South Korea,2014,13247000,Arrivals minus same day,gapfilled
+20,South Korea,2015,12186000,Arrivals minus same day,gapfilled
+20,South Korea,2016,14984000,Arrivals minus same day,gapfilled
+20,South Korea,2017,12831000,Arrivals minus same day,gapfilled
+20,South Korea,2018,15129000,Arrivals minus same day,gapfilled
+20,South Korea,2019,17224000,Arrivals minus same day,gapfilled
+20,South Korea,2020,2516000,Arrivals minus same day,gapfilled
+20,South Korea,2021,967000,Arrivals minus same day,gapfilled
+20,South Korea,2022,3198000,Arrivals minus same day,gapfilled
 24,Cambodia,2005,1422000,UNWTO,NA
 24,Cambodia,2006,1700000,UNWTO,NA
 24,Cambodia,2007,2015000,UNWTO,NA
@@ -774,16 +774,16 @@ rgn_id,rgn_name,year,tourism_arrivals_ct,arrivals_method,arrivals_gapfilled
 71,Bulgaria,2021,2300000,UNWTO,NA
 71,Bulgaria,2022,5557000,UNWTO,NA
 73,Russia,2005,19940000,UNWTO,NA
-73,Russia,2006,21913000,arrivals minus same day,gapfilled
-73,Russia,2007,21760000,arrivals minus same day,gapfilled
-73,Russia,2008,22424000,arrivals minus same day,gapfilled
-73,Russia,2009,20092000,arrivals minus same day,gapfilled
-73,Russia,2010,21085000,arrivals minus same day,gapfilled
-73,Russia,2011,23663000,arrivals minus same day,gapfilled
-73,Russia,2012,26826000,arrivals minus same day,gapfilled
-73,Russia,2013,29306000,arrivals minus same day,gapfilled
+73,Russia,2006,21913000,Arrivals minus same day,gapfilled
+73,Russia,2007,21760000,Arrivals minus same day,gapfilled
+73,Russia,2008,22424000,Arrivals minus same day,gapfilled
+73,Russia,2009,20092000,Arrivals minus same day,gapfilled
+73,Russia,2010,21085000,Arrivals minus same day,gapfilled
+73,Russia,2011,23663000,Arrivals minus same day,gapfilled
+73,Russia,2012,26826000,Arrivals minus same day,gapfilled
+73,Russia,2013,29306000,Arrivals minus same day,gapfilled
 73,Russia,2014,NA,NA,NA
-73,Russia,2015,32059000,arrivals minus same day,gapfilled
+73,Russia,2015,32059000,Arrivals minus same day,gapfilled
 73,Russia,2016,NA,NA,NA
 73,Russia,2017,NA,NA,NA
 73,Russia,2018,NA,NA,NA
@@ -1565,8 +1565,8 @@ rgn_id,rgn_name,year,tourism_arrivals_ct,arrivals_method,arrivals_gapfilled
 135,Mexico,2020,24824000,UNWTO,NA
 135,Mexico,2021,31860000,UNWTO,NA
 135,Mexico,2022,38325600,UNWTO,NA
-136,Guatemala,2005,1298000,arrivals minus same day,gapfilled
-136,Guatemala,2006,1467000,arrivals minus same day,gapfilled
+136,Guatemala,2005,1298000,Arrivals minus same day,gapfilled
+136,Guatemala,2006,1467000,Arrivals minus same day,gapfilled
 136,Guatemala,2007,1448000,UNWTO,NA
 136,Guatemala,2008,1527000,UNWTO,NA
 136,Guatemala,2009,1055000,UNWTO,NA
@@ -2447,13 +2447,13 @@ rgn_id,rgn_name,year,tourism_arrivals_ct,arrivals_method,arrivals_gapfilled
 206,Malaysia,2020,4333000,UNWTO,NA
 206,Malaysia,2021,135000,UNWTO,NA
 206,Malaysia,2022,10071000,UNWTO,NA
-207,Vietnam,2005,3277000,arrivals minus same day,gapfilled
-207,Vietnam,2006,3359000,arrivals minus same day,gapfilled
-207,Vietnam,2007,4004000,arrivals minus same day,gapfilled
-207,Vietnam,2008,4084000,arrivals minus same day,gapfilled
-207,Vietnam,2009,3681000,arrivals minus same day,gapfilled
-207,Vietnam,2010,5000000,arrivals minus same day,gapfilled
-207,Vietnam,2011,5968000,arrivals minus same day,gapfilled
+207,Vietnam,2005,3277000,Arrivals minus same day,gapfilled
+207,Vietnam,2006,3359000,Arrivals minus same day,gapfilled
+207,Vietnam,2007,4004000,Arrivals minus same day,gapfilled
+207,Vietnam,2008,4084000,Arrivals minus same day,gapfilled
+207,Vietnam,2009,3681000,Arrivals minus same day,gapfilled
+207,Vietnam,2010,5000000,Arrivals minus same day,gapfilled
+207,Vietnam,2011,5968000,Arrivals minus same day,gapfilled
 207,Vietnam,2012,NA,NA,NA
 207,Vietnam,2013,7201000,UNWTO,NA
 207,Vietnam,2014,7488000,UNWTO,NA
