@@ -19,7 +19,7 @@ editor_options:
 ---
 # Summary
 
-Find mean bottom trawling pressure (in terms of effort) for each EEZ.
+Find mean bottom trawling pressure (in terms of fishing effort) for each EEZ.
 
 # Data Sources
 
@@ -169,11 +169,6 @@ for (i in seq_along(trawl_bottom_files)) {
   # Cap pressure value at 1
   fishing_effort_raster <- ifel(fishing_effort_raster > 1, 1, fishing_effort_raster)
   
-  # # Fill NA with 0 (for zonal stats)
-  # fishing_effort_raster <- ifel(is.na(fishing_effort_raster), 0, fishing_effort_raster)
-  # 
-  #plot(fishing_effort_raster)
-  
   # Append to list
   fishing_effort_trawl_bottom[[year]] <- fishing_effort_raster
 }
@@ -243,8 +238,6 @@ total_fishing_pressure <- bind_rows(fishing_pressure) %>%
 
 # Save output layer
 write_csv(total_fishing_pressure, file.path(dir_goal, 'output', 'hd_sb_subtidal.csv'))
-
-#gapfill?
 
 # Histogram
 # ggplot(total_fishing_pressure, aes(x = pressure_score, fill = factor(year))) +
