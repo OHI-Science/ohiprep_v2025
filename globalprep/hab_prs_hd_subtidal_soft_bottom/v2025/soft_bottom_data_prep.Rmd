@@ -16,7 +16,7 @@ pdf_document:
   toc: true
 editor_options: 
   chunk_output_type: console
----
+--- 
 # Summary
 
 Find mean bottom trawling pressure (in terms of fishing effort) for each EEZ.
@@ -60,6 +60,7 @@ library(here)
 library(sf)
 library(terra)
 library(plotly)
+library(ohicore)
 
 #source('https://raw.githubusercontent.com/oharac/src/master/R/common.R')
 source(here('workflow/R/common.R'))
@@ -296,5 +297,116 @@ total_fishing_pressure %>%
   labs(x = "Year: 2010", y = "Year: 2017") +
   theme_minimal()
 
+```
+
+### Calculate health and pressure scores 
+
+```{r, eval=FALSE}
+total_fishing_health <- total_fishing_pressure %>%
+  mutate(habitat = "soft_bottom") %>%
+  mutate(health = (1 - pressure_score)) %>% 
+  dplyr::select(rgn_id, year, habitat, health)
+
+# Save output layer
+write_csv(total_fishing_health, file.path(dir_goal, 'output', 'habitat_health_softbottom.csv'))
+
+health_pressure <- total_fishing_pressure %>%
+  left_join(total_fishing_health, by = c("rgn_id", "year")) %>%
+  rename(pressure = pressure_score) %>%
+  mutate(year = as.numeric(year))
+```
+
+## Calculate and save trend 
+
+```{r, eval=FALSE}
+## Get habitat trends
+stop_year <- max(health_pressure$year)
+
+trend <- data.frame()
+
+# Run trend calculation on last 5 years of data
+for (status_year in (stop_year-3):stop_year){ 
+  trend_years <- status_year:(status_year - 4)
+  first_trend_year <- min(trend_years)
+  
+  trend_new <- health_pressure %>%
+    # subset health & pressure scores to just trend years
+    filter(year %in% trend_years) %>%
+    group_by(rgn_id) %>%
+    # create linear model of habitat health over 5 years
+    do(mdl = lm(health ~ year, data = .),
+       # starting point for the health trend is derived from the health values within the first year of the trend, this serves as a kind of reference point
+       adjust_trend = .$health[.$year == first_trend_year]) %>%
+    summarize(rgn_id = rgn_id,
+              # create trend by dividing the year coefficient by the health in the first year of the trend, then multiplying that slope by the number of years in the trend
+              trend = round(coef(mdl)['year']/adjust_trend * 5, 4)) %>%
+    ungroup() %>%
+    # cap the trend at 1 and -1
+    mutate(trend = ifelse(trend > 1, 1, trend)) %>%
+    mutate(trend = ifelse(trend < (-1), (-1), trend))
+  
+  trend_test <- health_pressure %>%
+    do(adjust_trend = .$health[.$year == first_trend_year])
+  
+  test <- health_pressure %>%
+    filter(year %in% trend_years)
+  
+  trend_new <- trend_new %>%
+    dplyr::mutate(habitat = "soft_bottom") %>%
+    dplyr::mutate(year = status_year) %>%
+    dplyr::select(rgn_id, year, habitat, trend)
+  
+  trend <- rbind(trend, trend_new)
+}
+  
+write.csv(trend, file.path(dir_goal, 'output', 'habitat_trend_softbottom.csv'), row.names = FALSE)
+```
+
+### Compare trend values to 2017 assessment
+
+```{r, eval=FALSE}
+# trend
+old_trend_data <- read.csv(here("globalprep/hab_prs_hd_subtidal_soft_bottom/v2017/output/habitat_trend_softbottom.csv")) %>%
+  dplyr::filter(year == 2014) %>% # plot the last year that 2025 and 2017 assessment years have in common: 2014
+  dplyr::select(rgn_id, old_trend = trend)
+
+compare_trend <- read.csv(here("globalprep/hab_prs_hd_subtidal_soft_bottom/v2025/output/habitat_trend_softbottom.csv")) %>%
+  filter(year == 2014) %>%
+  dplyr::select(rgn_id, new_trend = trend) %>%
+  left_join(old_trend_data)
+
+# check range of health scores:
+plot(new_trend ~ old_trend, data = compare_trend, 
+     main = "Soft Bottom Habitat Trend 2014:\nComparison between 2017 Assessment and 20225 Assessment",
+     xlab = "2017 Assessment",
+     ylab = "2025 Assessment")
+abline(0,1, col = 'red')
+```
+
+## Gapfill record keeping
+
+There was no gapfilling for these data, so we create gapfill files with values of 0. Every data layer has to have a corresponding gapfill file. If there is no gapfilling the gapfill column is filled in with 0 as done below.
+
+```{r, eval=FALSE}
+# health
+hab_health_sb_gf <- read.csv(here("globalprep/hab_prs_hd_subtidal_soft_bottom/v2025/output/habitat_health_softbottom.csv")) %>%
+  mutate(gapfilled = 0) %>% 
+  dplyr::select(rgn_id, year, gapfilled)
+
+write.csv(hab_health_sb_gf, file.path(dir_goal, 'output', 'habitat_health_softbottom_gf.csv'), row.names=FALSE)
+
+# trend
+hab_trend_sb_gf <- read.csv(here("globalprep/hab_prs_hd_subtidal_soft_bottom/v2025/output/habitat_trend_softbottom.csv"))%>%
+  mutate(gapfilled = 0) %>% 
+  dplyr::select(rgn_id, year, gapfilled)
+
+write.csv(hab_health_sb_gf, file.path(dir_goal, 'output', 'habitat_trend_softbottom_gf.csv'), row.names=FALSE)
+
+# pressure
+hd_sb_subtidal_gf <- read.csv(here("globalprep/hab_prs_hd_subtidal_soft_bottom/v2025/output/hd_sb_subtidal.csv")) %>%
+  mutate(gapfilled = 0) %>% 
+  dplyr::select(rgn_id, year, gapfilled)
+
+write.csv(hab_health_sb_gf, file.path(dir_goal, 'output', 'hd_sb_subtidal_gf.csv'), row.names=FALSE)
 ```
 
