@@ -377,7 +377,7 @@ compare_trend <- read.csv(here("globalprep/hab_prs_hd_subtidal_soft_bottom/v2025
 
 # check range of health scores:
 plot(new_trend ~ old_trend, data = compare_trend, 
-     main = "Soft Bottom Habitat Trend 2014:\nComparison between 2017 Assessment and 20225 Assessment",
+     main = "Soft Bottom Habitat Trend 2014:\nComparison between 2017 Assessment and 2025 Assessment",
      xlab = "2017 Assessment",
      ylab = "2025 Assessment")
 abline(0,1, col = 'red')
