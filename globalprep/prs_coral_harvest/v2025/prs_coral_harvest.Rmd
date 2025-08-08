@@ -593,6 +593,54 @@ readr::write_csv(coral_harvest_prs, here::here(current_prs_folder, "output", "pr
 ```
 
 
+
+```{r}
+# Read in production harvest data 
+roll_prod_24 <- readr::read_csv("/home/hoyt/OHI/ohiprep_v2025/globalprep/prs_coral_harvest/v2024/int/tonnes_coral_harvest.csv")
+
+# check grouping status
+#is.grouped_df(roll_prod)
+
+# Read in coral extent data
+coral_ext_24 <- readr::read_csv(here::here(
+  "globalprep", "hab_coral",
+# paste0("v", (as.numeric(scen_year) - 2)), # error in v2024: most recent update to this folder is 2021
+  "v2021", # temporary hard-coded fix (UPDATE TO MOST RECENT VERSION!!)
+  "data", "habitat_extent_coral_updated.csv")) %>% 
+  dplyr::select(-c(habitat, year)) %>%
+  filter(km2 != 0)
+
+# Read in coral health data 
+# coral_health <- readr::read_csv(paste0("globalprep/hab_coral/v", (as.numeric(scen_year) - 2), "/data/habitat_health_coral_updated.csv")) %>% # UPDATE TO MOST RECENT VERSION
+#   dplyr::select(-habitat, -year)
+coral_health_24 <- readr::read_csv(here::here(
+  "globalprep", "hab_coral",
+  # paste0("v", (as.numeric(scen_year) - 2)), # error in v2024: most recent update to this folder is 2021... 
+  "v2021", # temporary hard-coded fix (UPDATE TO MOST RECENT VERSION!!)
+  "data", "habitat_health_coral_updated.csv")) %>% 
+  dplyr::select(-c(habitat, year))
+
+# Join coral harvest data with the coral health and extent
+coral_harvest_join_24 <- roll_prod_24 %>%
+  left_join(coral_ext, by = "rgn_id") %>%
+  left_join(coral_health, by = "rgn_id")
+
+# Calculate harvest intensity 
+coral_harvest_24 <- coral_harvest_join_24 %>%
+  mutate(intensity = tonnes/km2)
+
+# Find the 95th quantile for a reference point
+ref_24 <- quantile(coral_harvest_24$intensity, probs = 0.95, na.rm = TRUE) 
+
+
+ggplot(coral_harvest_24, aes(intensity)) +
+  geom_histogram()
+
+ggplot(coral_harvest, aes(intensity)) +
+  geom_histogram()
+```
+
+
 Datacheck
 
 ```{r}
@@ -601,12 +649,15 @@ current_version_coral <- readr::read_csv(here::here(current_prs_folder, "output"
   rename("new_prs" = "pressure_score")
 
 previous_version_coral <- readr::read_csv(here::here("globalprep", "prs_coral_harvest",
-                                              paste0("v", prev_scen_year),
-                                              "output", "prs_coral_harvest.csv")) %>%
+                                                     paste0("v", prev_scen_year),
+                                                     "output", "prs_coral_harvest.csv")) %>%
   rename("old_prs" = "pressure_score") 
 
 combined_coral <- previous_version_coral %>%
   left_join(current_version_coral, by = c("rgn_id", "year")) 
+
+ggplot(combined_coral, aes(old_prs, new_prs)) +
+  geom_point()
 
 # if wanting to look at highest differences
 changes <- combined_coral %>%
@@ -637,12 +688,12 @@ na_regions %>% select(rgn_id) %>% unique()
 # check all data from previous version vs. all data from current version
 plot(combined_coral$old_prs, combined_coral$new_prs,
      xlab = paste0("Old Pressure All Years v", prev_scen_year),
-     ylab = paste0("New Pressure All Years v", scen_year))
+     ylab = paste0("New Pressure All Years v", scen_year)) +
 abline(0,1, col = "red")
 
 # explore some deviations v2024 & v2025
 previous_version_coral_latest_yr <- previous_version_coral %>%
-  filter(year == common_year) # year 2021 in v2024
+  filter(year == common_year) # year 2022 in v2025
 
 current_version_coral_latest_yr <- current_version_coral %>%
   filter(year == as.character(as.numeric(scen_year) - 2)) # set to latest year of data
@@ -653,8 +704,8 @@ combined_latest_yr <- previous_version_coral_latest_yr %>%
 
 plot(combined_latest_yr$old_prs, combined_latest_yr$new_prs,
      xlab = paste0("Old Pressure Data Year ", common_year, " v", prev_scen_year),
-     ylab = paste0("New Pressure Data Year ", (as.numeric(scen_year) - 2), " v", scen_year))
-abline(0,1, col = "red")
+     ylab = paste0("New Pressure Data Year ", (as.numeric(scen_year) - 2), " v", scen_year)) +
+  abline(0,1, col = "red")
 
 # compare within the new data itself 
 # 2020 vs. 2021 since both years are new v2023
@@ -669,7 +720,7 @@ combined_two_recent_yrs <- current_version_coral_prior_yr %>%
 
 plot(combined_two_recent_yrs$prior_prs, combined_two_recent_yrs$new_prs,
      xlab = paste0("New Pressure Data Year ", (as.numeric(scen_year) - 3), " v", scen_year),
-     ylab = paste0("New Pressure Data Year ", (as.numeric(scen_year) - 2), " v", scen_year))
+     ylab = paste0("New Pressure Data Year ", (as.numeric(scen_year) - 2), " v", scen_year)) +
 abline(0,1, col = "red")
 
 # check the most recent year in common in both versions
@@ -677,8 +728,8 @@ combined_coral_common_yr <- combined_coral %>%
   filter(year == common_year)
 
 plot(combined_coral_common_yr$old_prs, combined_coral_common_yr$new_prs,
-     xlab = paste0("Old Pressure Data Year ", (as.numeric(prev_scen_year) - 3), " v", prev_scen_year),
-     ylab = paste0("New Pressure Data Year ", (as.numeric(scen_year) - 4), " v", scen_year))
+     xlab = paste0("Old Pressure Data Year ", (as.numeric(prev_scen_year) - 2), " v", prev_scen_year),
+     ylab = paste0("New Pressure Data Year ", (as.numeric(scen_year) - 3), " v", scen_year)) +
 abline(0,1, col = "red")
 
 # comparing changes in the data for the same year
