@@ -259,6 +259,8 @@ write_csv(total_fishing_pressure, file.path(dir_goal, 'output', 'hd_sb_subtidal.
 ### Check with v2017
 
 ```{r}
+total_fishing_pressure <- read_csv(file.path(dir_goal, 'output', 'hd_sb_subtidal.csv'), show_col_types = FALSE)
+
 # Import old data
 hd_sb_subtidal_2017 <- read_csv(here('globalprep', goal, "v2017", "output", "hd_sb_subtidal.csv"), show_col_types = FALSE) 
 
