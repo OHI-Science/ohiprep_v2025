@@ -560,8 +560,12 @@ coral_harvest_join <- roll_prod %>%
 coral_harvest <- coral_harvest_join %>%
   mutate(intensity = tonnes/km2)
 
+# Calculate reference point from years 2010-2014
+coral_harvest_ref <- coral_harvest %>%
+  filter(year %in% c(2010:2014))
+
 # Find the 95th quantile for a reference point
-ref <- quantile(coral_harvest$intensity, probs = 0.95, na.rm = TRUE) 
+ref <- quantile(coral_harvest_ref$intensity, probs = 0.95, na.rm = TRUE) 
 
 # check grouping status
 #is.grouped_df(coral_harvest)
