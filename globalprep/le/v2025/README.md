@@ -4,7 +4,7 @@
 
 | Sector                                                   | Acronym |
 |----------------------------------------------------------|---------|
-| Fishing (formerly commercial fishing)                    | cf      |
+| Fishing (formerly commercial fishing cf)                 | fis     |
 | Mariculture                                              | mar     |
 | Tourism                                                  | tour    |
 | Ports and Harbors                                        | ph      |
@@ -15,6 +15,8 @@
 | Ocean Energy (formerly wave and tidal energy)            | wte     |
 | Fish processing (not formerly included)                  | fp      |
 | ? (unclear what this is, only in original revenue files) | og      |
+
+In 2025 we renamed Fishing to fis instead of cf. 
 
 In 2024 we cleaned and prepped the best available data for most sectors and components included in this goal. The ECO subgoal was pursued, but LIV was tabled due to a lack of data in the fishing (cf) and tourism (tour) sectors. When newly updated data wasn't available, we re-downloaded and cleaned the previous data source. If needed to refer to, ohiprep_v2024 in v2023 contains all scripts and data produced during the 2023 fellows' deep dive. All of the v2024 cleaned files are now saved in the folder `~/ohiprep_v2024/globalprep/le/v2024/int` .
 
@@ -34,9 +36,9 @@ This year we decided to revamp both the LIV and ECO subgoals within LE for as ma
 
 We started with LIV, which included both the number and quality of jobs within a sector. The scripts used were:
 
--   `liv_cf_jobs_prep.Rmd`
+-   `liv_fis_jobs_prep.Rmd`
     -   Commercial fishing number of jobs (employment)
--   `liv_cf_quality_prep.Rmd`
+-   `liv_fis_quality_prep.Rmd`
     -   Commercial fishing quality of jobs (wages)
 -   `liv_mar_jobs_prep.Rmd`
     -   Mariculture number of jobs (employment)
@@ -76,7 +78,7 @@ Initially, there are three scripts, each with different starting units of value,
 +---------------------+-----------------------------------------------------------------------+------------------------------------+--------------------------------+
 | cf                  | [FAO Capture Data](https://www.fao.org/fishery/en/collection/capture) | Final: USD (current year)          | USD inflation adjusted to 2017 |
 |                     |                                                                       |                                    |                                |
-| `eco_cf_prep.Rmd`   | [Ex-Vessel Price Data](https://github.com/SFG-UCSB/price-db-sfg)      | FAO Capture: tonnes                |                                |
+| `eco_fis_prep.Rmd`   | [Ex-Vessel Price Data](https://github.com/SFG-UCSB/price-db-sfg)      | FAO Capture: tonnes                |                                |
 |                     |                                                                       |                                    |                                |
 |                     |                                                                       | Ex-Vessel Prices: USD/metric tonne |                                |
 +---------------------+-----------------------------------------------------------------------+------------------------------------+--------------------------------+
@@ -93,7 +95,7 @@ Initially, there are three scripts, each with different starting units of value,
 
 #### Livelihoods (LIV)
 
--   `liv_cf_jobs_prep.Rmd`
+-   `liv_fis_jobs_prep.Rmd`
 
     -   Commercial fishing number of jobs (employment)
     -   Labor Force & Employment Data
@@ -107,7 +109,7 @@ Initially, there are three scripts, each with different starting units of value,
             -   <https://rshiny.ilo.org/dataexplorer46/?lang=en&id=EAR_4MTH_SEX_ECO_CUR_NB_A>
             -   select Rev 3.1.B: Fishing
 
--   `liv_cf_quality_prep.Rmd`
+-   `liv_fis_quality_prep.Rmd`
 
     -   Commercial fishing quality of jobs (wages)
     -   Labor Force & Employment Data
@@ -193,7 +195,7 @@ Initially, there are three scripts, each with different starting units of value,
             -   This should import the workspace and allow you to access the 'FAO Global Fishery and Aquaculture Production Value' data
             -   Once it opens, click 'File' -\> 'Export Selection (CSV File)'
             -   Store it somewhere you can find on your local drive and from there move it into the 'FAO_mariculture' folder under /home/shares/ohi/git-annex/globalprep/\_raw_data/FAO_mariculture/*your data year*
--   `eco_cf_prep.Rmd`
+-   `eco_fis_prep.Rmd`
     -   USD Value of Marine (Commercial) Fishing per Country/Region per Year (1976-2019)
 
     -   **FAO Capture Data (downloaded August 24, 2023)**
@@ -363,7 +365,7 @@ Initially, there are three scripts, each with different starting units of value,
 
 ### *First: clean*
 
--   **3 scripts, each one produces a dataset**: e.g., `eco_cf_prep.Rmd` (rgn_id, rgn_name, year, usd, unit, sector, usd_yr). Make sure that all the USD are in the same units!!! e.g., non-inflation adjusted, or inflation adjusted to same year, etc.
+-   **3 scripts, each one produces a dataset**: e.g., `eco_fis_prep.Rmd` (rgn_id, rgn_name, year, usd, unit, sector, usd_yr). Make sure that all the USD are in the same units!!! e.g., non-inflation adjusted, or inflation adjusted to same year, etc.
 
     -   `usd` = "value", in US Dollars
 

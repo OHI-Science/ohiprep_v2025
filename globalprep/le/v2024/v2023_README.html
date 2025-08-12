@@ -11,7 +11,7 @@
 
 
 
-<title>README</title>
+<title>v2023_README</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -354,8 +354,29 @@ display: none;
 
 <div id="status-of-livelihoods-and-economies-update" class="section level1">
 <h1>Status of Livelihoods and Economies Update</h1>
-<div id="acronyms-for-sectors-used-in-the-original-output-layers" class="section level2">
-<h2>Acronyms for sectors used in the original output layers:</h2>
+<p>In 2023 we cleaned and prepped the best available data for most
+sectors and components included in this goal. Data for tourism still
+needs to be selected, and is discussed in tourism sections. When newly
+updated data wasn’t available, we re-downloaded and cleaned the previous
+data source. The old versions of the raw data prepped by OHI were stored
+on a server previously used by OHI and were no longer accessible. All of
+the cleaned files are now saved in the folder
+<code>~/ohiprep_v2023/globalprep/le/v2023/int</code> in the format
+sector_component.csv.</p>
+<p>More detailed methods and explanations are available in the
+livelihoods_economies_dataprep.RMD saved in
+<code>~/ohiprep_v2023/globalprep/le/v2023</code>. Included below is a
+summary of what tasks were completed in the methods update.</p>
+<p>For all datasets, except tourism revenue, the current format has one
+value for each country and year included in the dataset. Tourism uses a
+pre-cleaned version of the revenue data, so countries have already been
+converted to regions. We did not do any gapfilling to fill in countries
+missing from the cleaned data sets, so this will likely need to be done
+for most of the included data.</p>
+<p>Acronyms for sectors used in the original output layers are used for
+simplicity of incorporating into the finalized OHI model. A new sector
+fish processing FP was added in this analysis, and will need to be
+incorporated into the model.</p>
 <table>
 <thead>
 <tr class="header">
@@ -410,755 +431,669 @@ display: none;
 </tr>
 </tbody>
 </table>
-<p>In 2024 we cleaned and prepped the best available data for most
-sectors and components included in this goal. The ECO subgoal was
-pursued, but LIV was tabled due to a lack of data in the fishing (cf)
-and tourism (tour) sectors. When newly updated data wasn’t available, we
-re-downloaded and cleaned the previous data source. If needed to refer
-to, ohiprep_v2024 in v2023 contains all scripts and data produced during
-the 2023 fellows’ deep dive. All of the v2024 cleaned files are now
-saved in the folder <code>~/ohiprep_v2024/globalprep/le/v2024/int</code>
-.</p>
-<div id="v2023-updates" class="section level3">
-<h3>v2023 updates</h3>
-<p>Detailed methods and explanations for v2023’s work are available in
-the livelihoods_economies_dataprep.RMD saved in
-<code>~/ohiprep_v2023/globalprep/le/v2023</code>. Included below is a
-summary of what tasks were completed in the 2023 methods update.</p>
-<p>For all datasets, except tourism revenue, the current format has one
-value for each country and year included in the dataset. Tourism uses a
-pre-cleaned version of the revenue data, so countries have already been
-converted to regions. We did not do any gapfilling to fill in countries
-missing from the cleaned data sets, so this will likely need to be done
-for most of the included data.</p>
-<p>Acronyms for sectors used in the original output layers are used for
-simplicity of incorporating into the finalized OHI model. A new sector
-fish processing FP was added in this analysis, and will need to be
-incorporated into the model.</p>
 </div>
-<div id="v2024-updates" class="section level3">
-<h3>v2024 updates</h3>
-<p>This year we decided to revamp both the LIV and ECO subgoals within
-LE for as many sectors as we could. The main sectors we decided to
-tackle were tourism (tour), mariculture (mar), and commercial fishing
-(cf), due to higher prevalence of data.</p>
-<div id="livelihoods-liv" class="section level4">
-<h4>Livelihoods (LIV)</h4>
-<p>We started with LIV, which included both the number and quality of
-jobs within a sector. The scripts used were:</p>
+<div id="revenue" class="section level1">
+<h1>Revenue:</h1>
+<p>Value in each of these data sets is the total estimated revenue per
+country in us dollars.</p>
+<div id="ocean-energy" class="section level2">
+<h2>Ocean Energy</h2>
 <ul>
-<li><code>liv_cf_jobs_prep.Rmd</code>
-<ul>
-<li>Commercial fishing number of jobs (employment)</li>
-</ul></li>
-<li><code>liv_cf_quality_prep.Rmd</code>
-<ul>
-<li>Commercial fishing quality of jobs (wages)</li>
-</ul></li>
-<li><code>liv_mar_jobs_prep.Rmd</code>
-<ul>
-<li>Mariculture number of jobs (employment)</li>
-</ul></li>
-<li><code>liv_tour_dataprep.Rmd</code>
-<ul>
-<li>Tourism number and quality of jobs</li>
-</ul></li>
-<li><code>fp_dataprep.Rmd</code>
-<ul>
-<li>Fish Processing: Proportion of Jobs per Country per Year
-(2019-2021)</li>
-</ul></li>
-<li><code>liv_labor_force_dataprep.Rmd</code>
-<ul>
-<li>Proportion of Tourism Jobs per Country/Region per Year, data from
-World Bank</li>
-<li>saves as liv_labor_force.csv</li>
-</ul></li>
+<li>This sector was originally called Wave and Renewable Energy</li>
 </ul>
-<p>We are currently shelving LIV because it has been difficult to find
-data on the number of jobs for the tourism sector, as well as find their
-wages to infer some reference point of quality compared to quantity. For
-quality within the cf sector, ILOSTAT was the best we could find at the
-time, but it was complied from many data sources and had only 32 unique
-geo areas with data. An iteration of this issue was present in almost
-every sector, solidifying our decision to focus on the ECO subgoal.</p>
-</div>
-<div id="economies-eco" class="section level4">
-<h4>Economies (ECO)</h4>
-<p>This subgoal was more successful in obtaining data, and may produce
-scores for the v2024 Assessment.</p>
+<!-- -->
 <ul>
-<li><code>aqf_dataprep.Rmd</code>
+<li>We used the indicator “All ocean and offshore energy (offshore wind
++ ocean energy) RD&amp;D, million USD 2021 PPP” from the <a href="https://stats.oecd.org/Index.aspx?QueryId=95228#">OECD:
+Sustainable Ocean Economy</a> dataset.
 <ul>
-<li>Aquarium Fishing Revenue per Country per Year (2019-2021) –DROPPED
-due to lack of data</li>
-</ul></li>
-<li><code>eco_mar_prep.Rmd</code>
-<ul>
-<li>Mariculture Revenue Data (1984 - 2022)</li>
-</ul></li>
-<li><code>eco_cf_prep.Rmd</code>
-<ul>
-<li>USD Value of Marine (Commercial) Fishing per Country/Region per Year
-(1976-2019)</li>
-</ul></li>
-<li><code>eco_tour_prep.Rmd</code>
-<ul>
-<li>Tourism Revenue in USD per Country per Year (2008 - 2019)</li>
-</ul></li>
-<li><code>eco_usd_adj.Rmd</code>
-<ul>
-<li>Adjusting Economies data by Sector for Inflation</li>
-</ul></li>
-</ul>
-<p>The individual LE::ECO scripts from other sectors will all be
-adjusted for inflation within <code>eco_usd_adj.Rmd</code>. After, they
-will be combined into one data frame. Finally, the values will be
-aggregated by region and year across all sectors, which can then be used
-to calculate the final score.</p>
-<p>Initially, there are three scripts, each with different starting
-units of value, shown below:</p>
-</div>
-<div id="adjustment-units-prepost-inflation" class="section level4">
-<h4>Adjustment Units Pre/Post-Inflation</h4>
-<table style="width:99%;">
-<colgroup>
-<col width="13%" />
-<col width="43%" />
-<col width="22%" />
-<col width="19%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td></td>
-<td>Metadata documentation</td>
-<td>Pre-Adjustment Unit</td>
-<td>Post-Adjustment Unit</td>
-</tr>
-<tr class="even">
-<td><p>cf</p>
-<p><code>eco_cf_prep.Rmd</code></p></td>
-<td><p><a href="https://www.fao.org/fishery/en/collection/capture">FAO
-Capture Data</a></p>
-<p><a href="https://github.com/SFG-UCSB/price-db-sfg">Ex-Vessel Price
-Data</a></p></td>
-<td><p>Final: USD (current year)</p>
-<p>FAO Capture: tonnes</p>
-<p>Ex-Vessel Prices: USD/metric tonne</p></td>
-<td>USD inflation adjusted to 2017</td>
-</tr>
-<tr class="odd">
-<td><p>tour</p>
-<p><code>eco_tour_prep.Rmd</code></p></td>
-<td></td>
-<td>USD (constant 2015 US$)</td>
-<td>USD inflation adjusted to 2017</td>
-</tr>
-<tr class="even">
-<td><p>mar</p>
-<p><code>eco_mar_prep.Rmd</code></p></td>
-<td></td>
-<td>USD (current year)</td>
-<td>USD inflation adjusted to 2017</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div id="data-sources" class="section level2">
-<h2><strong>Data sources</strong></h2>
-<div id="livelihoods-liv-1" class="section level4">
-<h4>Livelihoods (LIV)</h4>
-<ul>
-<li><p><code>liv_cf_jobs_prep.Rmd</code></p>
-<ul>
-<li>Commercial fishing number of jobs (employment)</li>
-<li>Labor Force &amp; Employment Data
-<ul>
-<li>Labor Force data from World Bank (downloaded June 28. 2024)
-<ul>
-<li><a href="https://data.worldbank.org/indicator/SL.TLF.TOTL.IN" class="uri">https://data.worldbank.org/indicator/SL.TLF.TOTL.IN</a></li>
-</ul></li>
-<li>OECD (Employment in fisheries, aquaculture and processing, 2009 -
-2021) (downloaded July 2, 2024) – for cf job data
-<ul>
-<li><a href="https://data-explorer.oecd.org/vis?fs%5B0%5D=Topic%2C1%7CAgriculture%20and%20fisheries%23AGR%23%7CFisheries%20and%20aquaculture%23AGR_FSA%23&amp;pg=0&amp;fc=Topic&amp;bp=true&amp;snb=6&amp;vw=ov&amp;df%5Bds%5D=dsDisseminateFinalDMZ&amp;df%5Bid%5D=DSD_FISH_EMP%40DF_FISH_EMPL&amp;df%5Bag%5D=OECD.TAD.ARP&amp;df%5Bvs%5D=1.0&amp;dq=.A...._T._T&amp;pd=2009%2C&amp;to%5BTIME_PERIOD%5D=false&amp;ly%5Bcl%5D=TIME_PERIOD&amp;ly%5Brs%5D=REF_AREA&amp;ly%5Brw%5D=DOMAIN" class="uri">https://data-explorer.oecd.org/vis?fs[0]=Topic%2C1%7CAgriculture%20and%20fisheries%23AGR%23%7CFisheries%20and%20aquaculture%23AGR_FSA%23&amp;pg=0&amp;fc=Topic&amp;bp=true&amp;snb=6&amp;vw=ov&amp;df[ds]=dsDisseminateFinalDMZ&amp;df[id]=DSD_FISH_EMP%40DF_FISH_EMPL&amp;df[ag]=OECD.TAD.ARP&amp;df[vs]=1.0&amp;dq=.A…._T._T&amp;pd=2009%2C&amp;to[TIME_PERIOD]=false&amp;ly[cl]=TIME_PERIOD&amp;ly[rs]=REF_AREA&amp;ly[rw]=DOMAIN</a></li>
-</ul></li>
-<li>FAO Yearbook (downloaded July 2, 2024) – for cf job gapfilling if
-needed
-<ul>
-<li><a href="https://openknowledge.fao.org/server/api/core/bitstreams/2be6c2fa-07b1-429d-91c5-80d3d1af46a6/content" class="uri">https://openknowledge.fao.org/server/api/core/bitstreams/2be6c2fa-07b1-429d-91c5-80d3d1af46a6/content</a></li>
-</ul></li>
-<li>ILOSTAT (downloaded July 2, 2024) – for cf wage data
-<ul>
-<li><a href="https://rshiny.ilo.org/dataexplorer46/?lang=en&amp;id=EAR_4MTH_SEX_ECO_CUR_NB_A" class="uri">https://rshiny.ilo.org/dataexplorer46/?lang=en&amp;id=EAR_4MTH_SEX_ECO_CUR_NB_A</a></li>
-<li>select Rev 3.1.B: Fishing</li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li><p><code>liv_cf_quality_prep.Rmd</code></p>
-<ul>
-<li>Commercial fishing quality of jobs (wages)</li>
-<li>Labor Force &amp; Employment Data
-<ul>
-<li><p>Labor Force data from World Bank (downloaded June 28. 2024)</p>
-<ul>
-<li><a href="https://data.worldbank.org/indicator/SL.TLF.TOTL.IN" class="uri">https://data.worldbank.org/indicator/SL.TLF.TOTL.IN</a></li>
-</ul></li>
-<li><p>OECD (Employment in fisheries, aquaculture and processing, 2009 -
-2021) (downloaded July 2, 2024) – for cf job data</p>
-<ul>
-<li><a href="https://data-explorer.oecd.org/vis?fs%5B0%5D=Topic%2C1%7CAgriculture%20and%20fisheries%23AGR%23%7CFisheries%20and%20aquaculture%23AGR_FSA%23&amp;pg=0&amp;fc=Topic&amp;bp=true&amp;snb=6&amp;vw=ov&amp;df%5Bds%5D=dsDisseminateFinalDMZ&amp;df%5Bid%5D=DSD_FISH_EMP%40DF_FISH_EMPL&amp;df%5Bag%5D=OECD.TAD.ARP&amp;df%5Bvs%5D=1.0&amp;dq=.A...._T._T&amp;pd=2009%2C&amp;to%5BTIME_PERIOD%5D=false&amp;ly%5Bcl%5D=TIME_PERIOD&amp;ly%5Brs%5D=REF_AREA&amp;ly%5Brw%5D=DOMAIN" class="uri">https://data-explorer.oecd.org/vis?fs[0]=Topic%2C1%7CAgriculture%20and%20fisheries%23AGR%23%7CFisheries%20and%20aquaculture%23AGR_FSA%23&amp;pg=0&amp;fc=Topic&amp;bp=true&amp;snb=6&amp;vw=ov&amp;df[ds]=dsDisseminateFinalDMZ&amp;df[id]=DSD_FISH_EMP%40DF_FISH_EMPL&amp;df[ag]=OECD.TAD.ARP&amp;df[vs]=1.0&amp;dq=.A…._T._T&amp;pd=2009%2C&amp;to[TIME_PERIOD]=false&amp;ly[cl]=TIME_PERIOD&amp;ly[rs]=REF_AREA&amp;ly[rw]=DOMAIN</a></li>
-</ul></li>
-<li><p>FAO Yearbook (downloaded July 2, 2024) – for cf job gapfilling if
-needed</p>
-<ul>
-<li><a href="https://openknowledge.fao.org/server/api/core/bitstreams/2be6c2fa-07b1-429d-91c5-80d3d1af46a6/content" class="uri">https://openknowledge.fao.org/server/api/core/bitstreams/2be6c2fa-07b1-429d-91c5-80d3d1af46a6/content</a></li>
-</ul></li>
-<li><p>OECD and FAO joint collection data (1995 - 2022) from Fabiana
-Cerasa (OECD) and Orsolya Mikecz (FAO)</p>
-<ul>
-<li><p><code>/home/shares/ohi/git-annex/globalprep/_raw_data/OECD_FAO_joint_collection/d2024</code></p></li>
-<li><p>Data was provided by email for Marine fishing (among other
-sectors) and aggregated by geo area and year for all sexes.</p></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li><p><code>liv_mar_jobs_prep.Rmd</code></p>
-<ul>
-<li>Mariculture number of jobs (employment)
-<ul>
-<li>Partially obtained from <a href="https://openknowledge.fao.org/server/api/core/bitstreams/2be6c2fa-07b1-429d-91c5-80d3d1af46a6/content">FAO
-Fisheries and Aquaculture Statistical Yearbook</a></li>
-<li>Also brought in OECD data from their online <a href="https://data-explorer.oecd.org/vis?df%5Bds%5D=DisseminateFinalDMZ&amp;df%5Bid%5D=DSD_SOE%40DF_SOE&amp;df%5Bag%5D=OECD.ENV.EPI&amp;dq=.A....&amp;pd=1995%2C2024&amp;to%5BTIME_PERIOD%5D=false&amp;vw=tb">OECD
+<li>Metadata is available for download through the portal. This platform
+is being retired, this data set will likely be located in the <a href="https://data-explorer.oecd.org/">OECD Data Explorer</a> in future
+years.</li>
+<li>v2024: new link to the Ocean Sustainability data on <a href="https://data-explorer.oecd.org/vis?df%5Bds%5D=DisseminateFinalDMZ&amp;df%5Bid%5D=DSD_SOE%40DF_SOE&amp;df%5Bag%5D=OECD.ENV.EPI&amp;dq=AUS.A....&amp;pd=2017%2C&amp;to%5BTIME_PERIOD%5D=false">OECD
 Data Explorer</a></li>
 </ul></li>
-</ul></li>
-<li><p><code>liv_tour_dataprep.Rmd</code></p>
-<ul>
-<li>Tourism number and quality of jobs
-<ul>
-<li><p>Labor Force data from World Bank (downloaded June 28, 2024)</p>
-<p>- <a href="https://data.worldbank.org/indicator/SL.TLF.TOTL.IN" class="uri">https://data.worldbank.org/indicator/SL.TLF.TOTL.IN</a></p>
-<ul>
-<li><p>Jobs data from UN Tourism / UNWTO (downloaded June 26th,
-2024)</p>
-<ul>
-<li>Key Tourism Statistics <a href="https://www.unwto.org/tourism-statistics/key-tourism-statistics" class="uri">https://www.unwto.org/tourism-statistics/key-tourism-statistics</a></li>
-<li>According to the website, the latest update of the dataset took
-place in 31 January 2024.</li>
-</ul></li>
-<li><p>Quality/Wage data from ILOSTAT (downloaded July 2, 2024) – for
-tour/cf wage data</p>
-<ul>
-<li><a href="https://rshiny.ilo.org/dataexplorer46/?lang=en&amp;id=EAR_4MTH_SEX_ECO_CUR_NB_A" class="uri">https://rshiny.ilo.org/dataexplorer46/?lang=en&amp;id=EAR_4MTH_SEX_ECO_CUR_NB_A</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li><p><code>fp_dataprep.Rmd</code></p>
-<ul>
-<li><p>Fish Processing: Proportion of Jobs per Country per Year
-(2019-2021)</p>
-<ul>
-<li><strong>Data:</strong> <a href="https://data-explorer.oecd.org/vis?fs%5B0%5D=Topic%2C1%7CAgriculture%20and%20fisheries%23AGR%23%7CFisheries%20and%20aquaculture%23AGR_FSA%23&amp;pg=0&amp;fc=Topic&amp;bp=true&amp;snb=6&amp;df%5Bds%5D=dsDisseminateFinalDMZ&amp;df%5Bid%5D=DSD_FISH_EMP%40DF_FISH_EMPL&amp;df%5Bag%5D=OECD.TAD.ARP&amp;df%5Bvs%5D=1.0&amp;dq=.A...PROC._T._T&amp;pd=2009%2C2021&amp;to%5BTIME_PERIOD%5D=false&amp;ly%5Bcl%5D=TIME_PERIOD&amp;ly%5Brs%5D=REF_AREA&amp;vw=tb">OECD
-Employment in Fisheries, Aquaculture, and Processing Dataset</a></li>
-</ul>
-<p>Filtered to select: - Time Period 2009-2021 (2009-most recent year of
-data as of July 5th, 2024). - “Working domain” –&gt; “Processing” -
-“Sex” –&gt; “Total” - “Working status” –&gt; “Total”</p>
-<ul>
-<li><p><strong>Data:</strong> Labor Force Data</p>
-<ul>
-<li><p>Labor Force data from World Bank (downloaded June 28. 2024)</p>
-<ul>
-<li><a href="https://data.worldbank.org/indicator/SL.TLF.TOTL.IN" class="uri">https://data.worldbank.org/indicator/SL.TLF.TOTL.IN</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li><p><code>liv_labor_force_dataprep.Rmd</code></p>
-<ul>
-<li>Proportion of Tourism Jobs per Country/Region per Year, data from
-World Bank</li>
-<li>saves as liv_labor_force.csv
-<ul>
-<li><p>Labor Force data from World Bank (downloaded June 28. 2024)</p>
-<ul>
-<li><a href="https://data.worldbank.org/indicator/SL.TLF.TOTL.IN" class="uri">https://data.worldbank.org/indicator/SL.TLF.TOTL.IN</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
+<li>The ocean energy data from OECD is actually the amount country and
+state governments budget for ocean energy, and is not specifically
+revenue. However, it is included as this was the only comprehensive data
+set available with monetary amounts related to ocean energy, it will
+likely need to be modified before being used as a proxy for
+revenue.</li>
+<li>This dataset only contains 32 countries, so gap filling would be
+needed.</li>
 </ul>
 </div>
-<div id="economies-eco-1" class="section level4">
-<h4>Economies (ECO)</h4>
-<ul>
-<li><code>aqf_dataprep.Rmd</code>
+<div id="aquarium-fishing" class="section level2">
+<h2>Aquarium Fishing</h2>
 <ul>
 <li>The original data source for aquarium fishing revenue had been
 updated since this goal was originally calculated: <a href="https://www.fao.org/fishery/en/collection/global_commodity_prod">FAO
-global trade value data.</a> - Revenue data was prepared as is described
-in the methods: export data from the FAO Global Commodities database for
-‘Ornamental fish’ for all available years, ornamental freshwater fish
-were excluded. The global commodities database is a component of the
-Global Aquatic Trade Statistic Collection published by FAO. - **v2024:**
-downloaded using on July 3rd, 2024 using the FAO status query
-interface/dashboard (data exploration &amp; download portal, seems to be
-relatively new): - <a href="https://www.fao.org/fishery/statistics-query/en/trade_partners/trade_partners_value">Global
-aquatic trade - By partner country Value (2019 - 2021)</a> - under
-“Trade Flow” in the Dimensions filtering section, select “Exports”
-(alternatively, you could skip this and filter to “Export” in R) -
-scroll to the bottom of the page, click the “download” button/icon, then
-select “csv”, “Flag enabled” (we clean this later), then “Yes” for
-“Include null values” - select “Preferences”, then: - for “Show
-unavailable values” select “NA” - for “Thousands separator” select “No
-space” - (all years – 2019, 2020, and 2021 are selected by default, no
-countries or commodities etc. are selected for any filtering) - © FAO
-2024. Global Aquatic Trade Statistics. In: Fisheries and Aquaculture.
-Rome. [Cited Wednesday, July 3rd 2024]. &lt;[<a href="https://www.fao.org/fishery/en/collection/global_commodity_prod\" class="uri">https://www.fao.org/fishery/en/collection/global_commodity_prod\\</a>](<a href="https://www.fao.org/fishery/en/collection/global_commodity_prod)%7B.uri%7D" class="uri">https://www.fao.org/fishery/en/collection/global_commodity_prod\</a>&gt;</li>
+global trade value data.</a></li>
+<li>Revenue data was prepared as is described in the methods: export
+data from the FAO Global Commodities database for ‘Ornamental fish’ for
+all available years, ornamental freshwater fish were excluded. The
+global commodities database is a component of the Global Aquatic Trade
+Statistic Collection published by FAO.</li>
+<li>v2024: downloaded using on July 3rd, 2024 using the FAO status query
+interface (like a data download portal, seems to be relatively
+new):</li>
+<li><a href="https://www.fao.org/fishery/statistics-query/en/trade_partners/trade_partners_value">Global
+aquatic trade - By partner country Value (2019 - 2021)</a></li>
+<li>under “Trade Flow” in the Dimensions filtering section, select
+“Exports”</li>
+<li>scroll to the bottom of the page, click the “download” button/icon,
+then select “csv”, “Flag enabled” (we clean this later), then “Yes” for
+“Include null values”</li>
+<li>select “Preferences”, then:
+<ul>
+<li>for “Show unavailable values” select “NA”</li>
+<li>for “Thousands separator” select “No space”</li>
+<li>(all years – 2019, 2020, and 2021 are selected by default, no
+countries or commodities etc. are selected for any filtering)</li>
+<li>© FAO 2024. Global Aquatic Trade Statistics. In: Fisheries and
+Aquaculture. Rome. [Cited Wednesday, July 3rd 2024]. <a href="https://www.fao.org/fishery/en/collection/global_commodity_prod" class="uri">https://www.fao.org/fishery/en/collection/global_commodity_prod</a></li>
+</ul></li>
 <li><a href="https://www.fao.org/fishery/en/collection/global_commodity_prod">Metadata</a></li>
-</ul></li>
-<li><code>eco_mar_prep.Rmd</code>
-<ul>
-<li>Mariculture Revenue Data (1984 - 2022)
-<ul>
-<li><p>Data came from FishStatJ, FAO’s application to obtain different
-fishery-related metrics by country as well as by sector</p></li>
-<li><p>Citation: © FAO 2024. Global Aquaculture Production. In:
-Fisheries and Aquaculture. Rome. [Cited Tuesday, July 9th 2024]. <a href="https://www.fao.org/fishery/en/collection/aquaculture" class="uri">https://www.fao.org/fishery/en/collection/aquaculture</a></p></li>
-<li><p><strong>Instructions for download from FishStatJ</strong></p>
-<ul>
-<li>Go to FAO website for download <a href="https://www.fao.org/fishery/en/statistics/software/fishstatj">FAO</a></li>
-<li>Also open the user manual found on that page, linked <a href="https://www.fao.org/fishery/static/FishStatJ/FishStatJ_4.03.05-Manual.pdf">here</a></li>
-<li>Once downloaded, open FishStatJ on your computer and follow the
-instructions to set it up.</li>
-<li>Then click file -&gt; manage workspaces -&gt; click ‘FAO Global
-Fishery and Aquaculture Production Statistics’ -&gt; click ‘Import’
--&gt; Next -&gt; Next; until it opens</li>
-<li>This should import the workspace and allow you to access the ‘FAO
-Global Fishery and Aquaculture Production Value’ data</li>
-<li>Once it opens, click ‘File’ -&gt; ‘Export Selection (CSV File)’</li>
-<li>Store it somewhere you can find on your local drive and from there
-move it into the ‘FAO_mariculture’ folder under
-/home/shares/ohi/git-annex/globalprep/_raw_data/FAO_mariculture/<em>your
-data year</em></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li><code>eco_cf_prep.Rmd</code>
-<ul>
-<li><p>USD Value of Marine (Commercial) Fishing per Country/Region per
-Year (1976-2019)</p></li>
-<li><p><strong>FAO Capture Data (downloaded August 24,
-2023)</strong></p>
-<ul>
-<li><p>Data Source FAO Global Capture Production (in metric
-tonnes)</p></li>
-<li><p>This version of the value database was downloaded from the
-Statistical Query Panel. Data from <a href="https://www.fao.org/fishery/en/collection/capture?lang=en">FAO
-Global Capture Production</a></p></li>
-<li><p>Citation: FAO 2023. Global Capture Production. Fisheries and
-Aquaculture Division <a href="https://www.fao.org/fishery/en/collection/capture?lang=en" class="uri">https://www.fao.org/fishery/en/collection/capture?lang=en</a></p></li>
-<li><p>Source information: Navigate to the <a href="https://www.fao.org/fishery/statistics-query/en/capture/capture_quantity">online
-query portal</a> for FAO Global Capture Production Quantity. Deselect
-all pre-selected years. Drag these fields into selected rows: ASFIS
-species name, FAO major fishing area name, ASFIS species ISSCAP group
-name En. ASFIS species Family scientific name, FAO major fishing areas,
-Inland/Marine areas Name en. Click on show data and confirm that data is
-present for 1950- two years prior to current year. Click download and
-select yes to include Null Values.</p></li>
-<li><p>Date: September 15th, 2023</p></li>
-<li><p>Time range: 1950-2021</p></li>
-<li><p>Native data resolution: Country level</p></li>
-<li><p>Format: csv</p></li>
-<li><p>Description: Global Capture Production Quantity</p></li>
+<li>I also downloaded the full dataset, which showed up as a folder
+titled “FI_Trade_Partners” and contained other metadata-adjacent
+documents on what different symbols represented, as well as several
+other tables describing country codes, UN codes, and terms of usage and
+licensing.</li>
 </ul>
-<p><strong>Ex-Vessel Price Data (downloaded August 24,
-2023)</strong></p>
+</div>
+<div id="fishing" class="section level2">
+<h2>Fishing</h2>
+<p>Data:</p>
 <ul>
-<li><p>Ex-vessel price data is in USD/metric tonne.</p>
+<li><p><a href="https://www.fao.org/fishery/statistics-query/en/capture">FAO
+Capture Production Database</a>: This database contains capture
+production statistics by country or territory, species item, and FAO
+Major Fishing Area.</p>
 <ul>
-<li><p>ex-vessel-prices: ex-vessel prices for fishery caught species
-from 1976-2019</p>
-<ul>
-<li>exvessel_price_database_1976_2019.csv: ex-vessel price data gathered
-from <a href="https://doi.org/10.1093/icesjms/fsw169">Melnychuk et
-al. 2016</a> and updated to 2019 using methods described in the
-public-facing <a href="https://github.com/SFG-UCSB/price-db-sfg">github
-repo</a> associated with the Melnychuk et al. 2016 paper</li>
+<li><p><a href="https://www.fao.org/fishery/en/collection/capture?lang=en">Metadata</a></p>
+<table>
+<tbody>
+<tr class="odd">
+<td>Type:</td>
+<td>Quantity</td>
+</tr>
+<tr class="even">
+<td>Unit:</td>
+<td>Tonnes</td>
+</tr>
+<tr class="odd">
+<td>Unit:</td>
+<td>Number of animals (removed)</td>
+</tr>
+</tbody>
+</table></li>
 </ul></li>
-<li><p>**Citation for paper**  </p></li>
-<li><p>Melnychuk, M. C., Clavelle, T., Owashi, B., and Strauss, K. 2016.
-Reconstruction of global ex-vessel prices of fished species. - ICES
-Journal of Marine Science. <a href="doi:10.1093/icesjms/fsw169" class="uri">doi:10.1093/icesjms/fsw169</a>.</p></li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li><code>eco_tour_prep.Rmd</code>
+<li><p>Exvessel price database: Metada stored on Mazu with
+database.</p></li>
+</ul>
+<p>Methods Description:</p>
 <ul>
-<li><p><strong>UNWTO: Tourism direct GDP as a proportion of total
-GDP</strong></p>
+<li>This component which was previously just commercial fishing, and has
+been updated to include fishing included in the FAO capture production
+database, as this was the best available data source.</li>
+<li>The capture production database was subset to only marine areas, to
+ensure that inland fishing was not included.</li>
+<li>Since the capture production database did not include value we used
+the ex-vessel price database (acquired from emlab). This data had a
+yearly global price per tonne for each species, which was multiplied by
+the tonnes captured in the FAO data. This data is derived from the FAO
+commodities database, so the species overlapped significantly with those
+in the fao capture data. We gapfilled this data set using a linear model
+for each species based on year. To fill in missing species we then
+gapfilled further using an average for each isscaap_group by year. For
+roughly 5% of species we were not able to gapfill, and no price value
+was included.</li>
+</ul>
+</div>
+<div id="mariculture" class="section level2">
+<h2>Mariculture</h2>
 <ul>
-<li><strong>Reference</strong>: World Tourism Organization. (2024).
-<em>Tourism direct GDP as a proportion of total GDP (indicator
-8.9.1)</em>. UNWTO. <a href="https://www.unwto.org/tourism-statistics/economic-contribution-SDG" class="uri">https://www.unwto.org/tourism-statistics/economic-contribution-SDG</a></li>
-<li><strong>Downloaded</strong>: 2024-07-01</li>
-<li><strong>Last updated</strong>: 2024-04-29</li>
-<li><strong>Description</strong>: Tourism direct GDP as a proportion of
-total GDP (%) for 118 regions. Data is aggregated from multiple
-sources.</li>
-<li><strong>Download Instructions</strong>: Navigate to the UN Tourism
-<a href="https://www.unwto.org/tourism-statistics/economic-contribution-SDG">Economic
-Contribution and SDG page</a>, find the “Tourism direct GDP as a
-proportion of total GDP (indicator 8.9.1)” section (should be the first
-section on the page), right-click on the “Download Data” button, copy
-the link address, and paste the link in a new tab to download the file
-(most browsers initially blocked the download and flagged it as
-“Insecure Content”). Upload the file to the appropriate folder on Mazu
-(UNWTO/dYYYY/, where YYYY = scenario year, e.g., 2024).</li>
-<li><strong>Time range</strong>: 2008-2022</li>
-<li><strong>Native data resolution</strong>: Country-level, not spatial
+<li>The original data source for revenue from mariculture had been
+updated. <a href="https://www.fao.org/fishery/statistics-query/en/aquaculture/aquaculture_value">FAO
+(Aquaculture value).</a></li>
+<li>Revenue data was prepared as described in the methods. Total revenue
+from mariculture was calculated by summing value of all marine/brackish
+species for each country.</li>
+<li>Note: “the OHI methods (7.19.0.3 Mariculture) state:
+<ul>
+<li>that to isolate production values attributable to marine and
+brackish aquaculture, data pertaining to freshwater species were
+omitted. This species classification process was very time consuming as
+each species had to be queried individually per year. There was little
+year-to year variation, and thus data were extracted in 5 year
+increments, providing data for 1997, 2002 and 2007.”</li>
+<li>It was unclear how this process was implemented in the previous
+methods, this was replaced with simply filtering out species that were
+listed as freshwater in the environment column.</li>
+</ul></li>
+<li><a href="https://www.fao.org/fishery/en/collection/aquaculture?lang=en">Metadata</a></li>
+</ul>
+</div>
+<div id="marine-mammal-watching" class="section level2">
+<h2>Marine Mammal Watching</h2>
+<ul>
+<li>No new data was available for this sector, so previous data from <a href="https://www.mmc.gov/wp-content/uploads/whale_watching_worldwide.pdf">O’Connor
+et al 2009</a> was used.</li>
+<li>Data was extracted from a pdf of this paper stored on MAZU</li>
+<li>For revenue data we attempted to replicate the methods described in
+the OHI supplemental methods, this involved quantifying the percent of
+marine mammal watching that was marine vs freshwater, and then
+multiplying this by total revenue to find total marine revenue.
+<ul>
+<li>We modified the methods used to determine percent marine to a
+programmatic approach using habitat classification from the IUCN Red
+List api. Percent marine was calculated as an exact percentages (total
+species marine/total species) instead of grouping countries into 50%,
+90% or 100% marine.</li>
+</ul></li>
+<li>Unlike the other revenue components, value in this data set already
+includes indirect revenue as this was given in the paper.</li>
+<li>Years of available data are not always consistent for every country,
+it is unclear how this was handled in previous methods.</li>
+</ul>
+</div>
+<div id="tourism" class="section level2">
+<h2>Tourism</h2>
+<p>The data previously used from WTTC is no longer available for free,
+and we were unable to locate this data on MAZU.</p>
+<ul>
+<li>The methods state: “WTTC reports dollar values of visitor exports
+(spending by foreign visitors) and domestic travel and tourism spending;
+combining these two data sets creates a proxy for total travel and
+tourism revenues. WTTC was chosen as the source for tourism revenue data
+because of the near-complete country coverage, the yearly time series
+component starting in 1988 and updated yearly, and the inclusion of both
+foreign and domestic expenditures. This dataset lumps inland and
+coastal/marine revenues, and so was adjusted by the percent of a
+country’s population within a 25 mile inland coastal zone. We included
+no projected data. We used total contribution to GDP data (rather than
+direct contribution to GDP) to avoid the use of literature derived
+multiplier effects.”</li>
+</ul>
+<div id="tourism-revenue-data" class="section level3">
+<h3>Tourism Revenue Data</h3>
+<p>Data for revenue from tourism was not finalized in 2023. One
+potential option is listed below.</p>
+<ul>
+<li>“Tourism spending in the country”, “Inbound Tourism-Expenditure”,
+from the UNWTO.
+<ul>
+<li>To download this data navigate to the <a href="https://www.unwto.org/tourism-statistics/key-tourism-statistics">UNWTO
+Website</a>, click on inbound tourism, and scroll to expenditure
 data.</li>
-<li><strong>Format</strong>: <code>.xlsx</code></li>
-<li><strong>Metadata</strong>: Linked in the “Download Metadata” button
-below the “Download Data” button: <a href="http://pre-webunwto.s3.eu-west-1.amazonaws.com/s3fs-public/2024-04/Metadata-08-09-01%202_3_april2024_updated.pdf" class="uri">http://pre-webunwto.s3.eu-west-1.amazonaws.com/s3fs-public/2024-04/Metadata-08-09-01%202_3_april2024_updated.pdf</a></li>
-<li><strong>Note:</strong> A big issue with this data set is that it
-does not have data for mainland China. Thus, I was instructed to gapfill
-using another data source. I found tourism revenue data on the website
-for the National Bureau of Statistics for China</li>
+<li><a href="https://www.unwto.org/glossary-tourism-terms">metadata</a></li>
 </ul></li>
-<li><p><strong>National Data: National Bureau of Statistics of China
-(NBS): Development of Tourism</strong></p>
+</ul>
+<div id="v2024-tourism-livelihood-data" class="section level4">
+<h4>v2024: Tourism – Livelihood data</h4>
+<p>Jobs: Number of jobs (employed in the tourism sector) per
+country/region per year</p>
 <ul>
-<li><p>Files downloaded: Foreign Exchange Earnings from International
-Tourism(USD million); Earnings from Domestic Tourism (100 million
-yuan)</p></li>
-<li><p><strong>Reference</strong>: National Bureau of Statistics of
-China. (2024). <em>Foreign Exchange Earnings from International
-Tourism(USD million)</em>. NBS. <a href="https://data.stats.gov.cn/english/easyquery.htm?cn=C01" class="uri">https://data.stats.gov.cn/english/easyquery.htm?cn=C01</a>
-.</p>
-<p>National Bureau of Statistics of China. (2024). <em>Earnings from
-Domestic Tourism (100 million yuan)</em>. NBS. <a href="https://data.stats.gov.cn/english/easyquery.htm?cn=C01" class="uri">https://data.stats.gov.cn/english/easyquery.htm?cn=C01</a>
-.</p></li>
-<li><p><strong>Downloaded</strong>: 2024-07-11</p></li>
-<li><p><strong>Last updated</strong>: n.d. 2024 assumed.</p></li>
-<li><p><strong>Description</strong>: Foreign Exchange Earnings from
-International Tourism(USD million) “Foreign Exchange Earnings from
-International Tourism refer to the total expenditure on transportation,
-sighting, accommodation, food, shopping and entertainment of foreigners
-and overseas Chinese during their stay in the mainland of China.”
-Assumed to be in present USD (i.e., 2018 values are in 2018 USD, 2022
-values are in 2022 USD).</p>
-<p>Earnings from Domestic Tourism (100 million yuan) Earnings from
-Domestic Tourism in present 100 million yuan.</p></li>
-<li><p><strong>Download Instructions</strong>:</p>
+<li>UN Tourism (UNWTO) Key Tourism Statistics <a href="https://www.unwto.org/tourism-statistics/key-tourism-statistics" class="uri">https://www.unwto.org/tourism-statistics/key-tourism-statistics</a></li>
+<li>Downloaded June 26th, 2024. According to the website, the latest
+update of the dataset took place in 31 January 2024.</li>
+<li>The data ranges from 1995 to 2021, with many data gaps for many
+countries along that range. We limited the range from 2009-2019 to
+address the notable cutoff in data for many countries beginning in 2020
+(reflective of the COVID-19 Pandemic), which had a notable impact on
+global tourism that should be investigated in future years of OHI prep
+(once more data is available).</li>
+<li>The data is in the form of a <code>.xlsx</code> with many tabs. We
+use the “Employment” tab in our “number of jobs” dataprep script.</li>
+</ul>
+<p>Labor Force: used to find proportion of working-eligible population
+employed in tourism sector</p>
 <ul>
-<li>Make an account to download data.</li>
-<li>Return to the <a href="https://data.stats.gov.cn/english/index.htm">home page</a>, click
-“Annual” from the top navigation bar, then click “Tourism” from options
-on the left navigation menu, click “Year” dropdown menu and selected
-“LATEST20”, then clicked the download button and select “.csv”. File
-appears as “Annual.csv” – rename this to
-<code>eco_tour_china_all_metrics_[start-year]-[end-year].csv</code>,
-e.g., <code>eco_tour_china_all_metrics_2004-2023.csv</code></li>
-<li>Add new file to <code>_raw_data/NBS_China/d[YYYY]</code> folder on
-Mazu. Replace [YYYY] with scenario year, e.g., 2024.</li>
-</ul></li>
-<li><p><strong>Time range</strong>: 2004-2023</p></li>
-<li><p><strong>Native data resolution</strong>: N/A</p></li>
-<li><p><strong>Format</strong>: <code>.csv</code></p></li>
-<li><p><strong>Metadata</strong>: <a href="https://data.stats.gov.cn/english/staticreq.htm?m=aboutctryinfo#:~:text=National%20statistical%20indicators%20involved%20in,area%2C%20forest%20resources%20and%20precipitation." class="uri">https://data.stats.gov.cn/english/staticreq.htm?m=aboutctryinfo#:~:text=National%20statistical%20indicators%20involved%20in,area%2C%20forest%20resources%20and%20precipitation.</a></p></li>
-</ul></li>
-<li><p><strong>World Bank: GDP (constant 2015 US$)</strong></p>
+<li><p>World Bank (downloaded June 28. 2024)</p>
 <ul>
-<li><strong>Reference</strong>: World Bank. (n.d.). <em>GDP (constant
-2015 US$)</em>. World Bank Open Data. <a href="https://data.worldbank.org/indicator/NY.GDP.MKTP.KD" class="uri">https://data.worldbank.org/indicator/NY.GDP.MKTP.KD</a>.</li>
-<li>License: CC BY-4.0</li>
-<li><strong>Downloaded</strong>: 2024-07-09</li>
-<li><strong>Last updated</strong>: No precise date listed on website.
-Found in the first few pages of the .csv when opened locally:
-2024-06-28.</li>
-<li><strong>Description</strong>: “GDP at purchaser’s prices is the sum
-of gross value added by all resident producers in the economy plus any
-product taxes and minus any subsidies not included in the value of the
-products. It is calculated without making deductions for depreciation of
-fabricated assets or for depletion and degradation of natural resources.
-Data are in constant 2015 prices, expressed in U.S. dollars. Dollar
-figures for GDP are converted from domestic currencies using 2015
-official exchange rates. For a few countries where the official exchange
-rate does not reflect the rate effectively applied to actual foreign
-exchange transactions, an alternative conversion factor is used.”
-Aggregation method: Gap-filled total.</li>
-<li><strong>Download Instructions</strong>: Navigate to the World Bank
-GDP (constant 2015 US$) data page <a href="https://data.worldbank.org/indicator/NY.GDP.MKTP.KD" class="uri">https://data.worldbank.org/indicator/NY.GDP.MKTP.KD</a>. The
-full time range should be selected on the slider bar by default. Select
-“CSV” under the “Download” options on the lower right-hand side of the
-page. Save in the appropriate folder on Mazu:
-<code>home/shares/ohi/git-annex/globalprep/_raw_data/WorldBank/dYYYY/WorldBank_global_annual_GDP_2015_constant_USD/WorldBank_global_annual_GDP_2015_constant_USD.csv</code></li>
-<li><strong>Time range</strong>: 1960-2023</li>
-<li><strong>Native data resolution</strong>: Country-level (not spatial
-data).</li>
-<li><strong>Format</strong>: <code>.csv.</code> Note: Data is also
-available in XML and EXCEL formats.</li>
-<li><strong>Metadata</strong>: Click on “Details” (in the upper right
-hand corner of the plot on the main page), scroll to the bottom of the
-popup page, and select “All Metadata”. <a href="http://databank.worldbank.org/data/reports.aspx?source=2&amp;type=metadata&amp;series=NY.GDP.MKTP.KD&amp;_gl=1*10r25gl*_gcl_au*MTI5NjExNDc0NS4xNzE2NTY4ODAx" class="uri">http://databank.worldbank.org/data/reports.aspx?source=2&amp;type=metadata&amp;series=NY.GDP.MKTP.KD&amp;_gl=1*10r25gl*_gcl_au*MTI5NjExNDc0NS4xNzE2NTY4ODAx</a></li>
+<li><a href="https://data.worldbank.org/indicator/SL.TLF.TOTL.IN" class="uri">https://data.worldbank.org/indicator/SL.TLF.TOTL.IN</a></li>
 </ul></li>
-<li><p><strong>Economics: National Ocean Watch (ENOW); Marine Economies:
-Industries for States and Coastal US</strong></p>
+</ul>
+<p>“Quality”: wages</p>
 <ul>
-<li><p><strong>Reference</strong>: Office for Coastal Management, 2024:
-<em>Time-Series Data on the Ocean and Great Lakes Economy for Counties,
-States, and the Nation between 2005 and 2021 (Sector Level) from
-2008-01-01 to 2019-12-31</em>. NOAA National Centers for Environmental
-Information, <a href="https://www.fisheries.noaa.gov/inport/item/48033" class="uri">https://www.fisheries.noaa.gov/inport/item/48033</a>.
-Downloaded 2024-07-18. Reference is tailored to the filtered date range
-used in this project. Actual date range of data was 2005-2021 as of
-2024. <a href="https://coast.noaa.gov/digitalcoast/data/" class="uri">https://coast.noaa.gov/digitalcoast/data/</a></p></li>
-<li><p><strong>Downloaded</strong>: 2024-07-18</p></li>
-<li><p><strong>Last updated</strong>: 2022</p></li>
-<li><p><strong>Description</strong>: Annual marine sector- and
-industry-level data at national and state levels for coastal (Great
-Lakes included) United States. Data is processed in this notebook to
-filter data to the tourism industry and ultimately calculate coastal
-(Great Lakes exclusive) tourism GDP. RealGDP variable indicated
-2012-adjusted GDP.</p></li>
-<li><div>
-<blockquote>
-<p>Abstract: Economics: National Ocean Watch (ENOW) contains annual
-time-series data for over 400 coastal counties, 30 coastal states, 8
-regions, and the nation, derived from the Bureau of Labor Statistics and
-the Bureau of Economic Analysis. It describes six economic sectors that
-depend on the oceans and Great Lakes and measures four economic
-indicators: Establishments, Employment, Wages, and Gross Domestic
-Product (GDP).</p>
-</blockquote>
-</div></li>
-<li><p>Providers: <a href="https://coast.noaa.gov/digitalcoast/contributing-partners/bureau-economic-analysis.html">Bureau
-of Economic Analysis</a>, <a href="https://coast.noaa.gov/digitalcoast/contributing-partners/bureau-labor-statistics.html">Bureau
-of Labor Statistics</a>, <a href="https://coast.noaa.gov/digitalcoast/contributing-partners/office-for-coastal-management.html">NOAA
-Office for Coastal Management</a>.</p>
-<p>Downloaded from NOAA Office for Coastal Management; Digital Coast
-website: <a href="https://coast.noaa.gov/digitalcoast/data/" class="uri">https://coast.noaa.gov/digitalcoast/data/</a>.</p></li>
-<li><p><strong>Download Instructions</strong>: Navigate to the <a href="https://coast.noaa.gov/digitalcoast/data/">NOAA Digital Coast Data
-Catalog</a> page, scroll down to “Marine Economies: Industries for
-States and Coastal US” and click on it. Then click the “Download”
-button, right click on the “Download” hyperlinked text that pops up, and
-copy and paste it into a new tab in your browser to download the zip
-file. It should be called “ENOW_Industries.zip”. Open it (unzip it), and
-upload the whole folder to the appropriate folder on Mazu.
-<code>home/shares/ohi/git-annex/globalprep/_raw_data/ENOW/d[YYYY]/</code>
-replace [YYYY] with your scenario year, e.g., 2024.</p>
-<p>Note: the metadata linked for this data under “Other Resources” on
-the page where you download it links to the more general Time-Series
-Data page, which is not specific to this dataset. <a href="https://www.fisheries.noaa.gov/inport/item/48033" class="uri">https://www.fisheries.noaa.gov/inport/item/48033</a></p></li>
-<li><p><strong>Time range</strong>: 2005-2021. Filtered to
-2008-2019</p></li>
-<li><p><strong>Native data resolution</strong>: State and national
-level. Not spatial data. <code>NA</code> value code for privacy
-protection (see notes on <code>eco_tour_prep.Rmd</code> for more
-details): <code>-9999</code>.</p></li>
-<li><p><strong>Format</strong>: <code>.csv</code></p></li>
-<li><p><strong>Metadata</strong>: <a href="https://www.fisheries.noaa.gov/inport/item/48033" class="uri">https://www.fisheries.noaa.gov/inport/item/48033</a> . Note:
-this metadata is not specific to this exact dataset.</p></li>
-</ul></li>
-<li><p><strong>National Aggregates of Geospatial Data Collection
-(NAGDC): Population, Landscape, And Climate Estimates (PLACE), v3 (1990,
-2000, 2010)</strong></p>
+<li><p>“Average monthly earnings of employees by sex and economic
+activity - Annual”</p></li>
+<li><p>ILO via ILOSTAT explorer <a href="https://rshiny.ilo.org/dataexplorer46/?lang=en&amp;id=EAR_4MTH_SEX_ECO_CUR_NB_A" class="uri">https://rshiny.ilo.org/dataexplorer46/?lang=en&amp;id=EAR_4MTH_SEX_ECO_CUR_NB_A</a></p>
 <ul>
-<li><p>Used for Coastal Proximity (within 100km of coast) population
-data. National Aggregates of Geospatial Data Collection (NAGDC). From
-Socioeconomic Data and Applications Center (SEDAC), hosted by Center for
-International Earth Science Information Network (CIESIN) at Columbia
-University.</p></li>
-<li><p><strong>Reference</strong>: Center for International Earth
-Science Information Network - CIESIN - Columbia University. 2012.
-<em>National Aggregates of Geospatial Data Collection: Population,
-Landscape, And Climate Estimates, Version 3 (PLACE III)</em>. Palisades,
-New York: NASA Socioeconomic Data and Applications Center (SEDAC). <a href="https://doi.org/10.7927/H4F769GP" class="uri">https://doi.org/10.7927/H4F769GP</a>. Accessed 22 July
-2024.</p>
-<p><a href="https://sedac.ciesin.columbia.edu/data/set/nagdc-population-landscape-climate-estimates-v3/data-download" class="uri">https://sedac.ciesin.columbia.edu/data/set/nagdc-population-landscape-climate-estimates-v3/data-download</a></p></li>
-<li><p><strong>Downloaded</strong>: 2024-07-22</p></li>
-<li><p><strong>Last updated</strong>: 2012-07-09</p></li>
-<li><p><strong>Description</strong>: Abstract: “The National Aggregates
-of Geospatial Data Collection: Population, Landscape, And Climate
-Estimates, Version 3 (PLACE III) data set contains estimates of
-national-level aggregations in urban, rural, and total designations of
-territorial extent and population size by biome, climate zone, coastal
-proximity zone, elevation zone, and population density zone, for 232
-statistical areas (countries and other UN recognized territories). This
-data set is produced by the Columbia University Center for International
-Earth Science Information Network (CIESIN).” Purpose: “To provide
-tabular data to researchers without GIS capabilities who need data on
-population and land area by country across a range of physical
-characteristics. These include measures such as the number of persons
-living within coastal zones, the percent of a region within specific
-elevation strata, or the number of persons living within different
-climate zones.”</p>
-<p>2010 Coastal Population values used to create proportional
-multipliers for tourism GDP to calculate coastal tourism value.</p></li>
-<li><p><strong>Download Instructions</strong>:</p>
+<li><p>navigate to ILOSTAT explorer, select:</p>
 <ul>
-<li>Navigate to the SEDAC PLACE v3 <a href="https://sedac.ciesin.columbia.edu/data/set/nagdc-population-landscape-climate-estimates-v3/data-download">Data
-Download</a> page. Select “CSV” to download the <code>.csv</code>. You
-may need to make an account to download the data. In 2024, our account
-information was as follows:
+<li><p>“Sex”: select “none” (to un-select all options), then select
+“Total”</p></li>
+<li><p>“Economic Activity”: select “none” and then select “ISIC-Rev.4:
+I. Accommodation and food service activities”</p></li>
+<li><p>“Currency”: keep all selected (we end up filtering this in
+R)</p></li>
+<li><p>set Time Frame (sliding range bar) to 2009-present year (for us
+it would have been 2024, but we ended up ending our time frame at 2019
+due to data constraints in the employment dataset)</p></li>
+</ul></li>
+<li><p>Then click “Export”, and for the file type option (appears as a
+drop-down menu), select “csv”.</p></li>
+<li><p>Raw data file name used in 2024:
+<code>EAR_4MTH_SEX_ECO_CUR_NB_A-filtered-2024-07-02-tour-wage.csv</code></p></li>
+</ul></li>
+</ul>
+</div>
+<div id="v2024-tourism-economies-data" class="section level4">
+<h4>v2024: Tourism – Economies data:</h4>
 <ul>
-<li>Username: ohifellows2024</li>
-<li>Password: OHIfellows.2024!</li>
-</ul></li>
-<li>After logging in, the zip file
-<code>nagdc-population-landscape-and-climate-estimates-v3-csv</code>
-should be downloaded automatically. Upload this folder to the
-appropriate folder on Mazu:
-<code>home/shares/ohi/git-annex/globalprep/_raw_data/SEDAC_CIESIN/d[YYYY]</code>.
-Replace [YYYY] with the scenario year, e.g., 2024.</li>
-</ul></li>
-<li><p><strong>Time range</strong>: 1990 (January 1), 2000 (January 1),
-2010 (January 1)</p></li>
-<li><p><strong>Native data resolution</strong>: This is a
-<code>.csv</code>, but the <strong>Spatial Domain:</strong> is as
-follows: Bounding Coordinates: West Bounding Coordinate: -180.000000
-East Bounding Coordinate: 180.000000 North Bounding Coordinate:
-85.000000 South Bounding Coordinate: -58.000000</p></li>
-<li><p><strong>Format</strong>: <code>.csv</code> Note: Data is also
-available in <code>.xlsm</code> format.</p></li>
-<li><p><strong>Metadata</strong>: Navigate to the “Documentation” tab of
-the PLACE page: <a href="https://sedac.ciesin.columbia.edu/data/set/nagdc-population-landscape-climate-estimates-v3/docs" class="uri">https://sedac.ciesin.columbia.edu/data/set/nagdc-population-landscape-climate-estimates-v3/docs</a>.
-Under “Documentation:”, select “Methods (PDF)”. Note: also available as
-an RTF. <a href="https://sedac.ciesin.columbia.edu/downloads/docs/nagdc/nagdc-population-landscape-climate-estimates-v3.pdf" class="uri">https://sedac.ciesin.columbia.edu/downloads/docs/nagdc/nagdc-population-landscape-climate-estimates-v3.pdf</a></p>
-<p>Portal metadata: <a href="https://sedac.ciesin.columbia.edu/data/set/nagdc-population-landscape-climate-estimates-v3/metadata" class="uri">https://sedac.ciesin.columbia.edu/data/set/nagdc-population-landscape-climate-estimates-v3/metadata</a></p></li>
-<li><p><strong>Notes</strong>: - This data is not updated. Future years
-should consider using an updated version of PLACE, such as v4.</p></li>
-</ul></li>
-</ul></li>
-<li><code>eco_usd_adj.Rmd</code>
+<li><p>Tourism direct GDP as a proportion of total GDP (indicator 8.9.1
+on UN Tourism page)</p>
 <ul>
-<li>Adjusting Economies data by Sector for Inflation</li>
-<li>No new data brought in</li>
-<li>Uses <code>inflation_adjustment.R</code>
-<ul>
-<li>a function we made that utilizes
-<code>priceR::adjust_for_inflation()</code></li>
-<li><code>priceR</code> description: “Inflate/deflate prices from any
-year to any year, using World Bank inflation data and assumptions only
-where necessary. Typically used for converting past (nominal) values
-into current (real) values. This uses World Bank inflation data where
-available, but allows for both historical and future assumptions in
-extrapolation.”</li>
-<li>We adjusted to USD 2017, arbitrarily, as long as it was before
-2020.</li>
+<li><a href="https://www.unwto.org/tourism-statistics/economic-contribution-SDG" class="uri">https://www.unwto.org/tourism-statistics/economic-contribution-SDG</a></li>
 </ul></li>
+<li><p>Downloaded July 1st, 2024, along with Metadata, stored in UNWTO
+folder</p>
+<ul>
+<li>raw data file name
+<code>Indicator-8_9_1-2022-UN_Tourism_april2024_update.xlsx</code></li>
+<li>metadata file name
+<code>metadata_unwto_economies_tourism.Rmd (change this to updated name)</code></li>
 </ul></li>
 </ul>
 </div>
 </div>
-<div id="three-steps-to-calculate-the-overall-eco-subgoal-score" class="section level2">
-<h2>Three steps to calculate the overall ECO subgoal score:</h2>
-<div id="first-clean" class="section level3">
-<h3><em>First: clean</em></h3>
+<div id="percent-of-population-within-25-miles-of-coast" class="section level3">
+<h3>Percent of Population within 25 miles of coast</h3>
+<p>In order to calculate percent of a country’s population within a 25
+mile inland coastal zone we will need total population and coastal
+population information.</p>
 <ul>
-<li><p><strong>3 scripts, each one produces a dataset</strong>: e.g.,
-<code>eco_cf_prep.Rmd</code> (rgn_id, rgn_name, year, usd, unit, sector,
-usd_yr). Make sure that all the USD are in the same units!!! e.g.,
-non-inflation adjusted, or inflation adjusted to same year, etc.</p>
+<li><p>Coastal population within 25 miles of the coast is calculated in
+the mar_prs_population folder. As of 2023 the latest version of this
+file was
+<code>~/OHI_repositories/ohiprep_v2023/globalprep/mar_prs_population/v2021/output/mar_pop_25mi.csv</code></p></li>
+<li><p>In order to obtain total population for most regions, one
+potential option would be to use the World Bank Data Population data in
+the WDI package. Example code is given below.</p>
+<p><code>population_total &lt;- WDI(</code></p>
+<p><code>country = &quot;all&quot;,</code></p>
+<p><code>indicator = &quot;SP.POP.TOTL&quot;,</code></p>
+<p><code>start = 2000, end = 2020) %&gt;%</code></p>
+<p><code>select(eez_iso3 = iso3c, population = SP.POP.TOTL, year) %&gt;%</code></p>
+<p><code>filter(!is.na(eez_iso3)) %&gt;%</code></p>
+<p><code>filter(!eez_iso3 == &quot;&quot;)</code></p></li>
+<li><p>A possible alternative to the WDI package is calculating total
+population based on a similar method to mar_prs_population.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="v2024-fishing---livelihood-data-downloaded-july-3-2024" class="section level1">
+<h1>v2024: Fishing - Livelihood data (downloaded July 3, 2024)</h1>
+<div id="number-jobs" class="section level2">
+<h2>“Number”: jobs</h2>
+<div id="oecd-data-explorer" class="section level4">
+<h4>OECD Data Explorer:</h4>
 <ul>
-<li><p><code>usd</code> = “value”, in US Dollars</p></li>
-<li><p><code>usd_yr</code> is a column to describe what year the column
-<code>usd</code> was adjusted to. If there were no adjustments,
-<code>usd_yr</code> would equal year.</p></li>
-<li><p>Cleaning the data</p>
+<li><p>Employment in fisheries, aquaculture and processing (2009 - 2021)
+<a href="https://data-explorer.oecd.org/vis?fs%5B0%5D=Topic%2C1%7CAgriculture%20and%20fisheries%23AGR%23%7CFisheries%20and%20aquaculture%23AGR_FSA%23&amp;pg=0&amp;fc=Topic&amp;bp=true&amp;snb=6&amp;vw=tb&amp;df%5Bds%5D=dsDisseminateFinalDMZ&amp;df%5Bid%5D=DSD_FISH_EMP%40DF_FISH_EMPL&amp;df%5Bag%5D=OECD.TAD.ARP&amp;df%5Bvs%5D=1.0&amp;dq=.A...._T._T&amp;pd=2009%2C&amp;to%5BTIME_PERIOD%5D=false" class="uri">https://data-explorer.oecd.org/vis?fs[0]=Topic%2C1%7CAgriculture%20and%20fisheries%23AGR%23%7CFisheries%20and%20aquaculture%23AGR_FSA%23&amp;pg=0&amp;fc=Topic&amp;bp=true&amp;snb=6&amp;vw=tb&amp;df[ds]=dsDisseminateFinalDMZ&amp;df[id]=DSD_FISH_EMP%40DF_FISH_EMPL&amp;df[ag]=OECD.TAD.ARP&amp;df[vs]=1.0&amp;dq=.A…._T._T&amp;pd=2009%2C&amp;to[TIME_PERIOD]=false</a></p>
 <ul>
-<li><p>Don’t filter dates here. This will be done procedurally
-downstream</p></li>
-<li><p>This will ideally end with columns: <strong>country</strong>,
-<strong>year</strong>, <strong>usd</strong> (value),
-<strong>unit</strong> (currency), <strong>sector</strong>,
-<strong>data_source</strong></p></li>
-</ul></li>
-<li><p>Assigning countries to OHI regions where possible</p>
-<ul>
-<li><p>Done using the <strong>name_2_rgn()</strong> function from
-ohicore</p></li>
-<li><p>Check that values align and that there are no duplicated
-countries</p></li>
-</ul></li>
-<li><p>Add column <strong>usd_yr</strong> that contains the year that
-the associated <strong>usd</strong> value is currently adjusted to</p>
-<ul>
-<li><p>Example: If I have a value for each year from 1984-2022, each
-with a value that was adjusted to USD for that year, my
-<strong>usd_yr</strong> column would be each year from 1984-2022,
-because 1984’s value is adjusted to 1984 USD, and 1985’s value is
-adjusted to 1985 USD </p></li>
-<li><p>Example: If all of my data were already adjusted to 2015 USD, my
-<strong>usd_yr</strong> column would contain only 2015</p></li>
-</ul></li>
-<li><p>This step should end with multiple scripts, one for each sector
-with the following naming conventions:</p>
-<ul>
-<li><p>eco_“sector abbreviation”_prep.Rmd → creating the eco_“sector
-abbreviation”_usd_pre.csv file</p></li>
-<li><p>Ex: “eco_mar_prep.Rmd” creates “eco_mar_usd_pre.csv”</p></li>
-</ul></li>
+<li><p>=============
+OECD_2009-2021_employment_fish_aqua_processing_raw.csv ==========</p>
+<p>Title: Employment in fisheries, aquaculture and processing</p>
+<p>This dataset contains information on the number of fishers (marine
+coastal, marine deep-sea, inland, subsistence), fish farmers, and fish
+processors working in each country. Data are broken down by working
+status (part-time, full-time, occasional) and sex.</p>
+<p>Unit of measure: Persons</p>
+<p>Topic: Agriculture and fisheries &gt; Fisheries and aquaculture</p>
+<p>Number of unfiltered data points: 48142</p>
+<p>Last updated: March 08, 2024 at 10:53:06 AM</p>
+<p>Date Downloaded: July 8th, 2024</p>
+<p>Link: <a href="https://data-explorer.oecd.org/vis?fs%5B0%5D=Topic%2C1%7CAgriculture%20and%20fisheries%23AGR%23%7CFisheries%20and%20aquaculture%23AGR_FSA%23&amp;pg=0&amp;fc=Topic&amp;bp=true&amp;snb=6&amp;vw=ov&amp;df%5Bds%5D=dsDisseminateFinalDMZ&amp;df%5Bid%5D=DSD_FISH_EMP%40DF_FISH_EMPL&amp;df%5Bag%5D=OECD.TAD.ARP&amp;df%5Bvs%5D=1.0&amp;dq=.A...._T._T&amp;pd=2009%2C&amp;to%5BTIME_PERIOD%5D=false&amp;ly%5Bcl%5D=TIME_PERIOD&amp;ly%5Brs%5D=REF_AREA&amp;ly%5Brw%5D=DOMAIN" class="uri">https://data-explorer.oecd.org/vis?fs[0]=Topic%2C1%7CAgriculture%20and%20fisheries%23AGR%23%7CFisheries%20and%20aquaculture%23AGR_FSA%23&amp;pg=0&amp;fc=Topic&amp;bp=true&amp;snb=6&amp;vw=ov&amp;df[ds]=dsDisseminateFinalDMZ&amp;df[id]=DSD_FISH_EMP%40DF_FISH_EMPL&amp;df[ag]=OECD.TAD.ARP&amp;df[vs]=1.0&amp;dq=.A…._T._T&amp;pd=2009%2C&amp;to[TIME_PERIOD]=false&amp;ly[cl]=TIME_PERIOD&amp;ly[rs]=REF_AREA&amp;ly[rw]=DOMAIN</a></p>
+<p>Download directions: Navigate to the link. Choose a start date (v2024
+used 2009 - 2021). For Reference area, use advanced selection modes and
+select all. For Sex, select Total. For working status, select Total.
+Click download, and select “Filtered data in tabular text (CSV)”. Bring
+into Mazu and rename intuitively.</p></li>
 </ul></li>
 </ul>
 </div>
-<div id="second-adjust-inflation" class="section level3">
-<h3><em>Second: adjust inflation</em></h3>
+<div id="fao-gapfilling" class="section level4">
+<h4>FAO (gapfilling):</h4>
 <ul>
-<li><p><strong>1 script, produce 1 dataset</strong>:
-<code>eco_usd_adj.Rmd</code> (rgn_id, rgn_name, year, unit, sector,
-usd_yr, usd_adj): script that takes care of all layers: adjusts for
-inflation and combines sectors into 1 csv.</p>
+<li><p>FAO Yearbook Number of Fishers (2015 - 2021) <a href="https://openknowledge.fao.org/server/api/core/bitstreams/2be6c2fa-07b1-429d-91c5-80d3d1af46a6/content" class="uri">https://openknowledge.fao.org/server/api/core/bitstreams/2be6c2fa-07b1-429d-91c5-80d3d1af46a6/content</a></p>
 <ul>
-<li><p>With the previously made dataframes in the correct file
-structure, this script’s job will be to read them in and adjust
-“<code>usd</code>” columns for inflation. This will be done using the
-<code>{priceR}</code> package.</p></li>
-<li><p>First the user will follow the steps at the top to read in the
-data for each sector and <code>rbind</code> them</p>
-<ul>
-<li><p>This is possible because each dataframe (df) should have the same
-columns in the same order</p></li>
-<li><p>Then they will use a small chunk of code to identify the
-<strong>most recent minimum year (highest minimum)</strong> in each of
-the datasets. Due to the nature of calculating the score, we found that
-it was important that the bound “score calculation” df have the range of
-years that corresponds to the most recent shared minimum year and to the
-most recent shared maximum year <strong>(lowest
-maximum)</strong></p></li>
+<li><code>/home/shares/ohi/git-annex/globalprep/_raw_data/FAO/d2024/fao_statistics_yearbook_07_03_24.pdf</code></li>
 </ul></li>
-<li><p>We made a small function that takes each of the
-eco_sector_usd_pre.csv dataframes, the year that you want each value to
-be inflation-adjusted for, the country of the currency that the value is
-in, and the year of assessment.</p>
+<li><p>Title: Fishery and Aquaculture Statistics – Yearbook 2021</p>
+<p>“This is the second edition of a totally revamped Yearbook, both in
+layout and content. In addition to presenting the datasets, the Yearbook
+now includes a synthesis of the major trends in the fisheries and
+aquaculture sector. Statistics are presented in a coherent, systematic
+and easily accessible way in the form of maps, figures and tables in
+eight thematic chapters, accompanied by a short descriptive analysis
+highlighting the main findings. The information is complemented by
+methodological notes (general and specific for the different chapters),
+glossary and reference tables to facilitate its use.</p>
+<p>Comments and feedback on the new format and on how the presentation
+of data could be further improved can be provided to the email account
+<a href="mailto:Fish-Statistics-Inquiries@fao.org" class="email">Fish-Statistics-Inquiries@fao.org</a>. This same email can
+be used for queries on our freely accessible statistics, FishStat.”</p>
+<p>Source: FAO. 2023. FishStat. Employment 1995-2021 (unpublished
+data).</p>
+<p>Required citation: FAO. 2024. Fishery and Aquaculture Statistics –
+Yearbook 2021. FAO Yearbook of Fishery and Aquaculture Statistics. Rome.
+<a href="https://doi.org/10.4060/cc9523en" class="uri">https://doi.org/10.4060/cc9523en</a></p>
+<p>Unit of measure: Employment: Persons (1)</p>
+<p>Topic: CHAPTER 6: EMPLOYMENT. TABLE T.39. FISHERS BY TOP CAPTURE
+FISHERIES PRODUCERS.</p>
+<p>Last updated: Food and Agriculture Organization of the United
+Nations. Rome, 2024</p>
+<p>Date Downloaded: July 3rd, 2024</p>
+<p>Link: <a href="https://openknowledge.fao.org/server/api/core/bitstreams/2be6c2fa-07b1-429d-91c5-80d3d1af46a6/content" class="uri">https://openknowledge.fao.org/server/api/core/bitstreams/2be6c2fa-07b1-429d-91c5-80d3d1af46a6/content</a></p></li>
+</ul>
+</div>
+</div>
+<div id="quality-wages" class="section level2">
+<h2>“Quality”: wages</h2>
+<div id="ilo-via-ilostat-explorer-httpsrshiny.ilo.orgdataexplorer48langenidear_4mth_sex_eco_cur_nb_a" class="section level4">
+<h4>ILO via ILOSTAT explorer <a href="https://rshiny.ilo.org/dataexplorer48/?lang=en&amp;id=EAR_4MTH_SEX_ECO_CUR_NB_A" class="uri">https://rshiny.ilo.org/dataexplorer48/?lang=en&amp;id=EAR_4MTH_SEX_ECO_CUR_NB_A</a></h4>
 <ul>
-<li><p>This function then draws out relevant values from the df for both
-usd and usd_yr, adjusts the values for inflation to your desired year,
-and</p>
+<li><p>“Average monthly earnings of employees by sex and economic
+activity - Annual”</p>
 <ul>
-<li><p>1. Adds a column onto the sector df that contains the adjusted
-values for usd</p></li>
-<li><p>2. Writes a csv out to the ‘<code>int</code>’ folder with the
-naming structure <code>eco_&quot;sector abbreviation&quot;_usd_adj.csv</code></p>
+<li><p>navigate to ILOSTAT explorer, select:</p>
 <ul>
-<li>This is so as to be able to track changes in real time as well as
-look back/forward when working on a different script</li>
+<li><p>“Sex”: select “none” (to un-select all options), then select
+“Total”</p></li>
+<li><p>“Economic Activity”: select “none” and then select “ISIC-Rev.3.1:
+B. Fishing”</p></li>
+<li><p>“Currency”: keep all selected (we end up filtering this in
+R)</p></li>
+<li><p>set Time Frame (sliding range bar) to 2009-present year (for us
+it would have been 2024, but we ended up ending our time frame at 2019
+due to data constraints in the employment dataset)</p></li>
 </ul></li>
-</ul></li>
-</ul></li>
+<li><p>Then click “Export”, and for the file type option (appears as a
+drop-down menu), select “csv”.</p></li>
+<li><p>Raw data file name used in 2024:
+<code>EAR_4MTH_SEX_ECO_CUR_NB_A-filtered-2024-07-03-cf-wage.csv</code></p></li>
 </ul></li>
 </ul>
 </div>
-<div id="third-calculate" class="section level3">
-<h3><em>Third: calculate</em></h3>
+<div id="oecd-ppp-gdp-adjustment-by-year" class="section level4">
+<h4>OECD PPP GDP Adjustment by year</h4>
+<p>============= OECD_2009-2020_wage_quality_annual_ppp_raw.csv
+==========</p>
+<p>Title: Annual Purchasing Power Parities and exchange rates</p>
+<p>This table shows annual Purchasing Power Parities (PPPs) for Gross
+Domestic Product (GDP), household final consumption expenditure and
+actual individual consumption. It also shows exchange rates (annual
+averages and end of period), sourced from the International Monetary
+Fund’s database on International Financial Statistics.</p>
+<p>Final consumption expenditure is the expenditure of resident
+households on consumption goods or services, while individual
+consumption is the sum of household consumption plus the individual (not
+collective) consumption of the non-profit institutions serving
+households (NPISH) and General Government sectors.</p>
+<p>These indicators were presented in the previous dissemination system
+in the SNA_TABLE4 dataset. For further information on (PPPs) please
+check the following link: <a href="%22http://www.oecd.org/std/purchasingpowerparities-frequentlyaskedquestionsfaqs.html%22">Purchasing
+Power Parities</a>.</p>
+<p>OECD statistics contact: <a href="mailto:STAT.Contact@oecd.org" class="email">STAT.Contact@oecd.org</a></p>
+<p>Institutional sector: Total economy</p>
+<p>Counterpart institutional sector: Total economy</p>
+<p>Financial instruments and non-financial assets: Currency</p>
+<p>Unit of measure: National currency per US dollar</p>
+<p>Topic: Economy &gt; National accounts &gt; GDP and non-financial
+accounts &gt; GDP and components</p>
+<p>Number of unfiltered data points: 15517</p>
+<p>Last updated: July 05, 2024 at 4:09:47 PM</p>
+<p>Link: <a href="https://data-explorer.oecd.org/vis?lc=en&amp;tm=ppp&amp;pg=0&amp;snb=111&amp;vw=ov&amp;df%5Bds%5D=dsDisseminateFinalDMZ&amp;df%5Bid%5D=DSD_NAMAIN10%40DF_TABLE4&amp;df%5Bag%5D=OECD.SDD.NAD&amp;df%5Bvs%5D=1.0&amp;dq=A.AUS%2BAUT%2BBEL%2BCAN%2BCHL%2BCOL%2BCRI%2BCZE%2BDNK%2BEST%2BFIN%2BFRA%2BDEU%2BGRC%2BHUN%2BISL%2BIRL%2BISR%2BITA%2BJPN%2BKOR%2BLVA%2BLTU%2BLUX%2BMEX%2BNLD%2BNZL%2BNOR%2BPOL%2BPRT%2BSVK%2BSVN%2BESP%2BSWE%2BCHE%2BTUR%2BGBR%2BUSA...PPP_B1GQ.......&amp;pd=2009%2C2020&amp;to%5BTIME_PERIOD%5D=false" class="uri">https://data-explorer.oecd.org/vis?lc=en&amp;tm=ppp&amp;pg=0&amp;snb=111&amp;vw=ov&amp;df[ds]=dsDisseminateFinalDMZ&amp;df[id]=DSD_NAMAIN10%40DF_TABLE4&amp;df[ag]=OECD.SDD.NAD&amp;df[vs]=1.0&amp;dq=A.AUS%2BAUT%2BBEL%2BCAN%2BCHL%2BCOL%2BCRI%2BCZE%2BDNK%2BEST%2BFIN%2BFRA%2BDEU%2BGRC%2BHUN%2BISL%2BIRL%2BISR%2BITA%2BJPN%2BKOR%2BLVA%2BLTU%2BLUX%2BMEX%2BNLD%2BNZL%2BNOR%2BPOL%2BPRT%2BSVK%2BSVN%2BESP%2BSWE%2BCHE%2BTUR%2BGBR%2BUSA…PPP_B1GQ…….&amp;pd=2009%2C2020&amp;to[TIME_PERIOD]=false</a></p>
+<p>Download directions: Navigate to the link. Choose a start date (v2024
+used 2009 - 2020). For Reference area, use advanced selection modes and
+select all. For Transaction, select “Purchasing Power Parities for GDP”.
+Click download, and select “Filtered data in tabular text (CSV)”. Bring
+into Mazu and rename intuitively.</p>
+</div>
+</div>
+<div id="jobs" class="section level2">
+<h2>Jobs</h2>
+<div id="fishing-1" class="section level3">
+<h3>Fishing</h3>
+<p>v2023:</p>
 <ul>
-<li><strong>1 script, calculates score</strong> (use the methods: <a href="https://oceanhealthindex.org/images/htmls/Supplement.html#67_Livelihoods_and_economies" class="uri">https://oceanhealthindex.org/images/htmls/Supplement.html#67_Livelihoods_and_economies</a>)</li>
+<li>We used “People employed in fishing sectors excluding inland
+fisheries, total by occupation rate, thousands” from <a href="https://stats.oecd.org/Index.aspx?QueryId=95228#">OECD:
+Sustainable Ocean Economy</a> as the primary data set.
+<ul>
+<li>Metadata is available for download through the portal. This platform
+is being retired, this data set will likely be located in the <a href="https://data-explorer.oecd.org/">OECD Data Explorer</a> in future
+years.</li>
+</ul></li>
+<li>Additional countries were filled in using the number of fishers data
+from the <a href="#id_0">2019 FAO yearbook</a>.</li>
+<li>We were not able to separate subsistence fishing from other fishing
+jobs, as the data only includes totals for people employed in fishing.
+For this reason the sector has been renamed from commercial fishing to
+fishing.</li>
+<li>It is worth noting that using a value of 1 job for all employment is
+different from the original methods. Previously these methods were used:
+“Employment is disaggregated into full-time, parttime, occasional, and
+unspecified statuses. These categories are defined as full time workers
+having &gt; 90% of their time or livelihood from fishing/aquaculture,
+part time workers are between 30-90% time (or 30-90% of their
+livelihood) and occasional workers are &lt; 30% time. Unspecified status
+workers could fall anywhere from 0-100% time. Taking the midpoints of
+those ranges, we assume that 1 part time worker = 0.6 full time workers,
+1 occasional worker = 0.15 full time workers, and 1 unspecified worker =
+0.5 full time workers, which we used as a weighting scheme for
+determining total numbers of jobs.”</li>
+<li>A disaggregation version of the OECD data can be found in OECD’s <a href="#id_0">Employment in fisheries, aquaculture and processing
+Database</a> if needed. We did not use the dis-aggregated data, as the
+disaggregated numbers were not available for the FAO data which was used
+to gapfill.</li>
+<li>Even after using FAO data to gapfill, there are still only 77
+countries with available data. Further gapfilling will be
+necessary.</li>
+</ul>
+<p>v2024:</p>
+<ul>
+<li>We used the <a href="%22https://data-explorer.oecd.org/vis?fs%5B0%5D=Topic%2C1%7CAgriculture%20and%20fisheries%23AGR%23%7CFisheries%20and%20aquaculture%23AGR_FSA%23&amp;pg=0&amp;fc=Topic&amp;bp=true&amp;snb=6&amp;vw=tb&amp;df%5Bds%5D=dsDisseminateFinalDMZ&amp;df%5Bid%5D=DSD_FISH_EMP%40DF_FISH_EMPL&amp;df%5Bag%5D=OECD.TAD.ARP&amp;df%5Bvs%5D=1.0&amp;dq=.A...._T._T&amp;pd=2009%2C2021&amp;to%5BTIME_PERIOD%5D=false&amp;ly%5Bcl%5D=TIME_PERIOD&amp;ly%5Brs%5D=REF_AREA&amp;ly%5Brw%5D=DOMAIN%22">“Employment
+in fisheries, aquaculture and processing”</a> dataset from OECD as the
+primary dataset.</li>
 </ul>
 </div>
+<div id="mariculture-1" class="section level3">
+<h3>Mariculture</h3>
+<ul>
+<li><p>We used <a href="https://www.google.com/url?q=https://stats.oecd.org/Index.aspx?QueryId%3D95228%23&amp;sa=D&amp;source=editors&amp;ust=1694558475957922&amp;usg=AOvVaw0YmPDwvN_uKIAReu61df6G">OECD
+Sustainable Ocean Economies</a> data on people employed in aquaculture
+sector (marine and inland), total by occupation rate, thousands.</p>
+<ul>
+<li>Metadata is available for download through the portal. This platform
+is being retired, this data set will likely be located in the <a href="https://data-explorer.oecd.org/">OECD Data Explorer</a> in future
+years.</li>
+</ul></li>
+<li><p>Additional jobs data is filled in from the <a href="#id_0">2019
+FAO yearbook</a>.</p></li>
+<li><p>Because this data included both marine and inland values, we
+estimate the proportion of total aquaculture jobs that can be attributed
+to marine and brackish aquaculture. We used country and year specific
+proportions of marine and brackish aquaculture revenues (compared to
+total revenues) calculated from FAO aquaculture production value data
+set.</p></li>
+<li><p>See note in fishing about data disaggregation for fulltime,
+partime, occassional and status unspecified.</p></li>
+<li><p>Even after using two datasets to fill in additional countries,
+there are only 57 countries with data, further gapfilling will be
+needed.</p></li>
+</ul>
+</div>
+<div id="fish-processing" class="section level3">
+<h3>Fish Processing</h3>
+<ul>
+<li><p>Data for the fishery processing sector is from the <a href="#id_0">OECD: Sustainable Ocean Economy</a> database. We use the
+variable: “People employed in fishery processing sector (marine and
+inland), total by occupation rate, thousands”</p>
+<ul>
+<li>Metadata is available for download through the portal. This platform
+is being retired, this data set will likely be located in the <a href="https://data-explorer.oecd.org/">OECD Data Explorer</a> in future
+years.</li>
+</ul></li>
+<li><p>Due to timing constraints we did not determine a method to subset
+this data to only marine related fishery processing in 2023.
+<strong>This will needed to be added to the cleaning script once a
+method is determined.</strong></p></li>
+<li><p>There are only 49 countries included in this dataset, further
+gapfilling will be needed.</p></li>
+</ul>
+</div>
+<div id="tourism-1" class="section level3">
+<h3>Tourism</h3>
+<p>Takeaways from the methods:</p>
+<ul>
+<li><p>Original data source was “The World Travel &amp; Tourism Council
+(WTTC) provides data on travel and tourism’s total contribution to
+employment for 180 countries (<a href="http://www.wttc.org/eng/Tourism_Research/Economic_Data_Search_Tool/" class="uri">http://www.wttc.org/eng/Tourism_Research/Economic_Data_Search_Tool/</a>).</p></li>
+<li><p>WTTC provides projected data, however, we do not use these
+values. We used total employment data to avoid the use of literature
+derived multiplier effects.</p></li>
+<li><p>The WTTC shares a significant drawback with UNTWO data, in that
+data on coastal/marine and inland tourism are lumped. Therefore, a
+country-specific coefficient must be applied to estimate the jobs
+provided by coastal/marine tourism alone. We adjusted national tourism
+data by the proportion of a country’s population that lives within a 25
+mile inland coastal zone.”</p></li>
+</ul>
+<p>The optimal data source for revenue from tourism was not finalized in
+2023. There are multiple potential options.</p>
+<p><strong>WTTC Data:</strong> Jobs data is the original source of data
+used for this goal. This data is no longer available online, however it
+was used by the tourism goal until 2022, and downloaded versions of the
+data are available on MAZU.</p>
+<pre><code>-   WTTC Jobs data was last cleaned in the 2022 version of the repository and is located here:
+
+    `&quot;~/OHI_repositories/ohiprep_v2023/globalprep/tr/v2022/intermediate/wttc_empd_rgn.csv&quot;`</code></pre>
+<p><strong>UNWTO Data</strong>: <a href="https://www.unwto.org/tourism-statistics/key-tourism-statistics">Number
+of Employees by tourism industry.</a></p>
+<ul>
+<li>The latest version from 2023 is located on Mazu:</li>
+</ul>
+<pre><code>`/home/shares/ohi/git-annex/globalprep/_raw_data/UNWTO/d2023/unwto-employment-data.xlsx.`</code></pre>
+<ul>
+<li><p>This data had too many missing values to be used in the tourism
+and recreation goal, so extensive gapfilling will be needed.</p></li>
+<li><p>A cleaning script was created for this data in the exploratory
+phase of the 2023 tourism update
+<code>~/OHI_repositories/ohiprep_v2023/globalprep/tr/v2023/unused_R/process_UNWTO_employ.R</code></p></li>
+</ul>
+<p><strong>Ilostat</strong>: <a href="https://www.ilo.org/shinyapps/bulkexplorer9/?lang=en&amp;id=EMP_TEMP_SEX_OC2_NB_A">Employment
+by sex and occupation - ISCO level 2 (thousands) - Annual</a></p>
+<ul>
+<li><p>Latest version from 2023 is located on Mazu</p>
+<p><code>/home/shares/ohi/git-annex/globalprep/_raw_data/ILOSTAT/d2023EMP_TEMP_SEX_OC2_NB_A-filtered-2023-07-28.csv</code></p></li>
+<li><p>A cleaning script was created for this data in the exploratory
+phase of the 2023 tourism update
+<code>~/OHI_repositories/ohiprep_v2023/globalprep/tr/v2023/unused_R/process_ILOSTAT.R</code></p></li>
+<li><p>This data had too many missing values to be used in the tourism
+and recreation goal, so extensive gapfilling will be needed.</p></li>
+</ul>
+<p><strong>OECD</strong>: <a href="https://doi.org/10.1787/065e083a-en">Enterprises and employment in
+tourism</a></p>
+<ul>
+<li><p>Latest version from 2023 is located on Mazu</p>
+<p><code>/home/shares/ohi/git-annex/globalprep/_raw_data/OECD/d2023/TOURISM_ENTR_EMPL_31072023210756847.csv</code></p></li>
+<li><p>A cleaning script was created for this data in the exploratory
+phase of the 2023 tourism update
+<code>~/OHI_repositories/ohiprep_v2023/globalprep/tr/v2023/unused_R/process_OECD.R</code></p></li>
+<li><p>This data had too many missing values to be used in the tourism
+and recreation goal, so extensive gapfilling will be needed.</p></li>
+</ul>
+<p><strong>Eurostat:</strong> <a href="https://ec.europa.eu/eurostat/data/database">Employed persons by
+full-time/part-time activity and NACE Rev. 2 activity</a>
+(tour_lfs1r2)</p>
+<ul>
+<li><p>Latest version from 2023 is located on Mazu</p>
+<p><code>/home/shares/ohi/git-annex/globalprep/_raw_data/OECD/d2023/tour_lfs1r2_linear.csv</code></p></li>
+</ul>
+<!-- -->
+<ul>
+<li><p>A cleaning script was created for this data in the exploratory
+phase of the 2023 tourism update
+<code>~/OHI_repositories/ohiprep_v2023/globalprep/tr/v2023/unused_R/process_Eurostat.R</code></p></li>
+<li><p>This data had too many missing values to be used in the tourism
+and recreation goal, so extensive gapfilling will be needed.</p></li>
+</ul>
+<p>For information on data for calculating proportion of the population
+within 25 miles of the coast, see the above tourism revenue section.</p>
+</div>
+<div id="ocean-energy-1" class="section level3">
+<h3>Ocean Energy</h3>
+<ul>
+<li>Data for marine renewable energy was previously only available for
+two countries, one was obtained through a news release, the other
+through personal communication. We were not able to use this old data or
+find an updated data source.</li>
+</ul>
+</div>
+<div id="marine-mammal-watching-1" class="section level3">
+<h3>Marine Mammal Watching</h3>
+<ul>
+<li>No new data was available for this sector, so previous data from <a href="https://www.mmc.gov/wp-content/uploads/whale_watching_worldwide.pdf">O’Connor
+et al 2009</a> was used.</li>
+<li>Data was extracted from a pdf of this paper stored on MAZU</li>
+<li>Jobs are based on number of whale watchers in a country and a
+regional average number of whale watchers per employee. Includes all
+marine mammal watching.</li>
+<li>We attempted to replicate the methods described in the OHI
+supplemental methods, this involved quantifying the percent of marine
+mammal watching that was marine vs freshwater, and then multiplying this
+by total jobs to find total marine jobs.
+<ul>
+<li>We modified the methods used to determine percent marine to a
+programmatic approach using habitat classification from the IUCN Red
+List api. Percent marine was calculated as an exact percentages (total
+species marine/total species) instead of grouping countries into 50%,
+90% or 100% marine.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="wages" class="section level1">
+<h1>Wages</h1>
+<div id="tourism-fishing-ports-and-harbors-ship-and-boat-building." class="section level3">
+<h3>Tourism, fishing, ports and harbors, ship and boat-building.</h3>
+<ul>
+<li>The <a href="https://www.nber.org/research/data/occupational-wages-around-world-oww-database">OWW
+databas</a>e is used to determine wages for all sectors where data is
+available: tourism, fishing, ports and harbors, ship and
+boat-building.</li>
+<li>The last year of data available is 2008, however this is still an
+update from the original livelihoods calculations as the OHI methods
+state we originally used a version of the database that stopped in
+2003.</li>
+<li>I performed only minimal cleaning of this data- as some of the
+cleaning relies on determining next steps:
+<ul>
+<li>The methods state that we need to: divided by the inflation
+conversion factor for 2010 so that wage data across years would be
+comparable (<a href="http://oregonstate.edu/cla/polisci/sahr/sahr" class="uri">http://oregonstate.edu/cla/polisci/sahr/sahr</a>), then
+multiply by the purchasing power parity-adjusted per capita gdp
+(ppppcgdp, WorldBank) and finally multiply the adjusted wage by 12 to
+get annual wages</li>
+<li>I did not complete these steps as I assume it is likely we will be
+using an inflation conversion factor for a year other than 2010.</li>
+<li>It was also unclear how wages were determined for sectors with more
+than one occupation in the dataset. I assume that these may have been
+average.</li>
+<li>An additional data set that is available is the ilo data set, which
+has fishing sector wages through 2022. We didn’t include this data for
+consistency reasons, since all other sector wage data was available only
+until 2008, and the interpolation methods may not be the same between
+data sets. However this data set is stored on MAZU in case it is needed
+in the future, it can be found at
+“<code>/home/shares/ohi/git-annex/globalprep/_raw_data/ILOSTAT/d2023/ILO_earnings_economic.csv&quot; if needed in the future.</code></li>
+</ul></li>
+</ul>
 </div>
 </div>
 
