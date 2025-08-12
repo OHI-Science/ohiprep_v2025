@@ -196,6 +196,13 @@ current_data_year
 previous_data_year <- max(old_le$year)
 previous_data_year
 
+colSums(is.na(new_le)) # 390
+nrow(new_le) # 2656
+
+colSums(is.na(old_le)) # 362
+nrow(old_le) # 2490
+
+
 # Combine data frames
 comb_le <- new_le %>% 
   rename(new_labor_force = labor_force_total) %>% 
