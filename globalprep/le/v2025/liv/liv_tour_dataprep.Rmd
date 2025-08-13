@@ -41,6 +41,9 @@ Livelihoods includes two equally important sub-components, the **number of jobs*
   * Quality/Wage data from ILOSTAT (downloaded August 7, 2025) -- for tour/cf wage data
   
       - <https://rshiny.ilo.org/dataexplorer46/?lang=en&id=EAR_4MTH_SEX_ECO_CUR_NB_A> 
+      
+  [OECD data](https://ec.europa.eu/eurostat/data/database)
+  - This is the file path on the OECD website: `Data navigation tree/Detailed datasets/Industry, trade, and services/Tourism (tour)/Tourism industries - annual data (tour_inda)/Annual and quarterly data on employment for selected tourism industries (source: Labor force survey)(tour_lfsa)/Employed persons by full-time/part-time and NACE Rev. 2 activity (tour_lfs1r2).csv`
 
 ## Methods
 
@@ -75,9 +78,14 @@ source(here("workflow", "R", "common.R"))
 
 region_data() # for rgns_all and rgns_eez
 
+# OHI regions data ----
+region_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/spatial/regions_list.csv") 
+
 # ---- set year and file path info ----
 current_year <- 2025 # Update this in the future!!
 previous_year <- 2024
+
+data_year <- 2023
 
 version_year <- paste0("v",current_year)
 previous_vyear <- paste0("v", previous_year)
@@ -90,15 +98,6 @@ previous_data_dir <- paste0("d", previous_year)
 # Raw data directory (on Mazu)
 raw_data_dir <- here::here(dir_M, "git-annex", "globalprep", "_raw_data")
 
-# WorldBank raw data directory
-current_wb_dir <- here(raw_data_dir, "WorldBank", current_data_dir)
-
-# ILOSTAT raw data directory
-current_ilostat_dir <- here(raw_data_dir, "ILOSTAT", current_data_dir)
-
-# UNWTO raw data directory
-current_unwto_dir <- here(raw_data_dir, "UNWTO", current_data_dir)
-
 # Livelihoods and Economies directory
 current_le_dir <- here("globalprep", "le", version_year)
 previous_le_dir <- here("globalprep", "le", previous_vyear)
@@ -110,83 +109,75 @@ country_regex_to_iso3c <- function(country_string) {
 }
 ```
 
-### Read in Data
+labor_force: 2009 - 2024
+un_jobs_data_raw: 2008 - 2023
+ilo_wage_data: 2015 - 2025
 
-```{r}
-# ===================== Read in Data ==============================
-
-
-# Labor force data ----
-# created in liv_labor_force_dataprep.Rmd
-labor_force <- read_csv(here(current_le_dir, "int", "liv_labor_force.csv"))
-
-# Jobs data ----
-# total number of people employed by the tourism sector, in thousands
-un_jobs_data_raw <- read_xlsx(here(current_unwto_dir,
-                                   "UN_Tourism_8_9_2_employed_persons_04_2025",
-                                   "UN_Tourism_8_9_2_employed_persons_04_2025.xlsx"),
-                              # skip = 2, # skip first 2 rows
-                              sheet = 2, # the sheet name has changed over time, confirm this
-                              col_names = TRUE, # use first row as column names
-                              na = c("","..")) # define NA markers
-
-
-
-# ILO wage data ----
-ilo_wage_data <- read_csv(here(current_ilostat_dir, "EAR_4MTH_SEX_ECO_CUR_NB_A-filtered-2025-08-07.csv"))
-
-# OHI regions data ----
-region_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/spatial/regions_list.csv") 
-```
+v2025: Let's aim for 2008-2023
 
 
 ## Labor force gapfilling
 
 ```{r}
-summary(labor_force)
-# 2009 - 2024
-summary(un_jobs_data_raw)
-# 2008 - 2023
-summary(ilo_wage_data)
-# 2015 - 2025
-
-colSums(is.na(labor_force))
-
-filter(labor_force, is.na(labor_force_total)) %>% view()
+# Labor force data
+# created in liv_labor_force_dataprep.Rmd
+labor_force <- read_csv(here(current_le_dir, "int", "liv_labor_force.csv"))
 
 # Gapfill total labor force values for missing years
-labor_force <- labor_force %>% 
+labor_force_gf <- labor_force %>% 
+  # this data often goes one year past the current data year for other sources
+  filter(year <= data_year) %>% 
   group_by(rgn_id, rgn_name) %>% 
   # Ensure we're hitting all years for joining later on
-  complete(year = 2008:max(un_jobs_data_raw$TimePeriod)) %>% 
-  filter(year < 2024) %>% 
-  ungroup() %>% 
+  complete(year = 2008:data_year) %>% 
+  ungroup() %>%
   # First, create gapfilled boolean and method columns
-  mutate(lf_gapfilled = ifelse(is.na(labor_force_total), 1, NA),
-         lf_gf_method = ifelse(is.na(labor_force_total), 1, NA)) %>%
-   # Upfilling: fill in any values that are empty from early years with values from the nearest year. 
+  mutate(lf_gapfilled = ifelse(is.na(labor_force_total), "1", NA_character_),
+         lf_gf_method = ifelse(is.na(labor_force_total), "1", NA_character_),
+         # Add some metadata back after expanding
+         unit = "Persons (1)",
+         sector = "liv",
+         data_source = "World Bank") %>%
+  # need to group again before gapfilling 
+  group_by(rgn_id, rgn_name) %>% 
+  arrange(rgn_id, year) %>% 
+  # Linear interpolation
+  mutate(labor_force_total = na.approx(labor_force_total, x = year, na.rm = FALSE)) %>% 
+  mutate(lf_gapfilled = ifelse(lf_gapfilled == "1" & !is.na(labor_force_total), 
+                               "gapfilled", lf_gapfilled),
+         lf_gf_method = ifelse(lf_gf_method == "1" & !is.na(labor_force_total), 
+                               "Interpolation", lf_gf_method)) %>% 
+  # Upfilling
   tidyr::fill(labor_force_total, .direction = "up") %>% 
-  mutate(lf_gapfilled = ifelse(lf_gapfilled == 1 & !is.na(labor_force_total), 
-                            "gapfilled", lf_gapfilled),
-         lf_gf_method = ifelse(lf_gf_method == 1 & !is.na(labor_force_total), 
-                            "Upfilling", lf_gf_method)) %>% 
+  mutate(lf_gapfilled = ifelse(lf_gapfilled == "1" & !is.na(labor_force_total), 
+                               "gapfilled", lf_gapfilled),
+         lf_gf_method = ifelse(lf_gf_method == "1" & !is.na(labor_force_total), 
+                               "Upfilling", lf_gf_method)) %>% 
   # Downfilling
   tidyr::fill(labor_force_total, .direction = "down") %>% 
-  mutate(lf_gapfilled = ifelse(lf_gapfilled == 1 & !is.na(labor_force_total), 
-                            "gapfilled", lf_gapfilled),
-         lf_gf_method = ifelse(lf_gf_method == 1 & !is.na(labor_force_total), 
-                            "Downfilling", lf_gf_method)) %>% 
-  # Fix missing static metadata from the expand 
-  mutate(unit = "Persons (1)",
-         sector = "liv",
-         data_source = "World Bank")
+  mutate(lf_gapfilled = ifelse(lf_gapfilled == "1" & !is.na(labor_force_total), 
+                               "gapfilled", lf_gapfilled),
+         lf_gf_method = ifelse(lf_gf_method == "1" & !is.na(labor_force_total), 
+                               "Downfilling", lf_gf_method))
 
-view(labor_force)
-table(labor_force$lf_gf_method) # 16 downfilling, 513 upfilling
-colSums(is.na(labor_force))
+# view(labor_force_gf)
+table(labor_force_gf$lf_gf_method) 
+# 3 downfilling, 142 upfilling, (1 is a flag for missing here), no interpolation
+colSums(is.na(labor_force_gf)) # 384 still missing 
+
+labor_force_gf %>% 
+  filter(is.na(labor_force_total)) %>% 
+  distinct(rgn_id, rgn_name) %>% 
+  nrow() # view()
+# 24 regions with NO labor force data 
+
+labor_force_gf %>% 
+  filter(!is.na(labor_force_total)) %>% 
+  distinct(rgn_id, rgn_name) %>% 
+  nrow()
+# 142 regions WITH labor force data
 ```
 
-v2025: Let's aim for 2008-2023
 
 # Employment (number of jobs)
 
@@ -195,86 +186,49 @@ v2025: Let's aim for 2008-2023
 ### UNWTO Data
 
 ```{r}
-# ==================== Tidy Data ===================================
+# Jobs data
+# total number of people employed by the tourism sector, in thousands
+un_jobs_data_raw <- read_xlsx(here(raw_data_dir, "UNWTO", current_data_dir,
+                                   "UN_Tourism_8_9_2_employed_persons_04_2025",
+                                   "UN_Tourism_8_9_2_employed_persons_04_2025.xlsx"),
+                              # skip = 2, # skip first 2 rows
+                              sheet = 2, # the sheet name has changed over time, confirm this
+                              col_names = TRUE, # use first row as column names
+                              na = c("","..")) # define NA markers
 
 # Select columns of interest and add a unit column
 un_jobs_data <- un_jobs_data_raw %>% 
-  select(country = GeoAreaName, year = TimePeriod, tourism_jobs = Value) %>% 
-  mutate(unit = "Persons (1)",
-         tourism_jobs = as.numeric(tourism_jobs)) 
+  select(country = GeoAreaName, year = TimePeriod, jobs = Value) %>% 
+  mutate(jobs = as.numeric(jobs)) 
 
-# run ohicore name_2_rgn --------
+# run ohicore name_2_rgn 
 tour_jobs_rgn <- name_2_rgn(df_in = un_jobs_data, 
                        fld_name = 'country',
                        flds_unique = c("year"))
 
-# identify duplicates
-tour_duplicates <- tour_jobs_rgn[duplicated(tour_jobs_rgn[, c("rgn_name", "year")]),]
-unique(tour_duplicates$country)
+# Duplicates
 # [1] "China, Hong Kong Special Administrative Region"
 # [2] "China, Macao Special Administrative Region"
-unique(tour_duplicates$rgn_name)
 # [1] "China"
 
-# aggregate: sum by rgn_name etc. ----
-tour_jobs_rgn_agg <- tour_jobs_rgn %>%
+# aggregate: sum by rgn_name etc.
+unwto_jobs <- tour_jobs_rgn %>%
   group_by(rgn_id, rgn_name, year) %>%
-  dplyr::summarize(tourism_jobs = sum(tourism_jobs, na.rm = TRUE) 
+  dplyr::summarize(jobs = sum(jobs, na.rm = TRUE) 
             )%>%
   ungroup() %>% 
   filter(year >= 2008) %>% 
   # turn 0s into NAs (appropriate flag for lack of data)
-  mutate(tourism_jobs = case_when(
-    tourism_jobs == 0 ~ NA,
-    .default = tourism_jobs
-  ))
+  mutate(jobs = case_when(jobs == 0 ~ NA,
+                          .default = jobs),
+         unit = "Persons (1)",
+         source = "UNWTO")
 
 # Confirm duplicates are gone
-tour_duplicates2 <- tour_jobs_rgn_agg[duplicated(tour_jobs_rgn_agg[, c("rgn_name", "year")]),]
-unique(tour_duplicates2$rgn_name)
+tour_duplicates <- unwto_jobs[duplicated(unwto_jobs[, c("rgn_name", "year")]),]
+unique(tour_duplicates$rgn_name)
 
-# Gapfill total labor force values for missing years
-tourism_jobs_gf <- tour_jobs_rgn_agg %>% 
-  group_by(rgn_id, rgn_name) %>% 
-  # Ensure we're hitting all years for joining later on
-  complete(year = 2008:max(un_jobs_data_raw$TimePeriod)) %>% 
-  ungroup() %>%
-  group_by(rgn_id, rgn_name) %>% 
-  arrange(rgn_id, year) %>% 
-  # First, create gapfilled boolean and method columns
-  mutate(tr_gapfilled = ifelse(is.na(tourism_jobs), "1", NA_character_),
-         tr_gf_method = ifelse(is.na(tourism_jobs), "1", NA_character_)) %>%
-  arrange(rgn_id, year) %>% 
-  # Linear interpolation
-  mutate(tourism_jobs = na.approx(tourism_jobs, x = year, na.rm = FALSE)) %>% 
-  mutate(tr_gapfilled = ifelse(tr_gapfilled == "1" & !is.na(tourism_jobs), 
-                               "gapfilled", tr_gapfilled),
-         tr_gf_method = ifelse(tr_gf_method == "1" & !is.na(tourism_jobs), 
-                               "Interpolation", tr_gf_method)) %>% 
-  # Upfilling
-  tidyr::fill(tourism_jobs, .direction = "up") %>% 
-  mutate(tr_gapfilled = ifelse(tr_gapfilled == "1" & !is.na(tourism_jobs), 
-                               "gapfilled", tr_gapfilled),
-         tr_gf_method = ifelse(tr_gf_method == "1" & !is.na(tourism_jobs), 
-                               "Upfilling", tr_gf_method)) %>% 
-  # Downfilling
-  tidyr::fill(tourism_jobs, .direction = "down") %>% 
-  mutate(tr_gapfilled = ifelse(tr_gapfilled == "1" & !is.na(tourism_jobs), 
-                               "gapfilled", tr_gapfilled),
-         tr_gf_method = ifelse(tr_gf_method == "1" & !is.na(tourism_jobs), 
-                               "Downfilling", tr_gf_method))
-
-view(tourism_jobs_gf)
-table(tourism_jobs_gf$tr_gf_method)
-# Downfilling Interpolation     Upfilling 
-#          94            58           204 
-
-colSums(is.na(tourism_jobs_gf))
-nrow(tourism_jobs_gf)
-
-# No U.S.
-colnames(rgns_eez)
-unique(tourism_jobs_gf$rgn_name) %>% view()
+length(unique(unwto_jobs$rgn_id)) # 73
 ```
 
 ### OECD Data
@@ -292,44 +246,44 @@ oecd_clean <- oecd_jobs_data_raw %>%
   # AND total tourism activity, not sub categories
   filter(unit_measure == "PS" & activity == "_T") %>% 
   select(country_code = ref_area, country = reference_area, 
-         unit = unit_of_measure, year = time_period, value = obs_value)
+         unit = unit_of_measure, year = time_period, jobs = obs_value)
 
-# run ohicore name_2_rgn --------
+# run ohicore name_2_rgn
 oecd_job_rgn <- name_2_rgn(df_in = oecd_clean, 
                        fld_name = 'country',
                        flds_unique = c("year"))
 
-oecd_jobs_clean <- oecd_job_rgn %>% 
-  select(rgn_id, rgn_name, year, value, unit) %>% 
+oecd_jobs <- oecd_job_rgn %>% 
+  select(rgn_id, rgn_name, year, jobs, unit) %>% 
   mutate(unit = "Persons (1)",
          source = "OECD")
 
-view(oecd_jobs_clean)
-unique(oecd_jobs_clean$rgn_name)
+# view(oecd_jobs_clean)
+unique(oecd_jobs$rgn_name)
 
 # Adds Netherlands, United States, and Morocco!
-setdiff(oecd_jobs_clean$rgn_name, tourism_jobs_gf$rgn_name)
-
-# Let's see how the magnitude changes between countries with data in both
-compare_oecd_unwto <- tourism_jobs_gf %>% 
-  full_join(oecd_jobs_clean, by = join_by(rgn_id, rgn_name, year))
-
-shared_countries <- compare_oecd_unwto %>% 
-  filter(!is.na(tourism_jobs) & !is.na(value))
-view(shared_countries)
-
-unique(shared_countries$rgn_name) # 10 countries shared
-
-comp_plot <- ggplot(shared_countries) +
-  geom_point(aes(x = year, y = tourism_jobs), color = "red", alpha = 0.7) +
-  geom_point(aes(x = year, y = value), color = "blue", alpha = 0.7) +
-  facet_wrap(~rgn_name, #) +
-             scales = "free_y") +
-  labs(title = "UNWTO vs. OECD Data Shared Countries: Free y-axis",
-       y = "Jobs",
-       x = "Year") +
-  theme(panel.spacing.x = unit(0.01, "cm")) +
-  theme_bw();ggplotly(comp_plot)
+# setdiff(oecd_jobs_clean$rgn_name, tourism_jobs_gf$rgn_name)
+# 
+# # Let's see how the magnitude changes between countries with data in both
+# compare_oecd_unwto <- tourism_jobs_gf %>% 
+#   full_join(oecd_jobs_clean, by = join_by(rgn_id, rgn_name, year))
+# 
+# shared_countries <- compare_oecd_unwto %>% 
+#   filter(!is.na(tourism_jobs) & !is.na(value))
+# view(shared_countries)
+# 
+# unique(shared_countries$rgn_name) # 10 countries shared
+# 
+# comp_plot <- ggplot(shared_countries) +
+#   geom_point(aes(x = year, y = tourism_jobs), color = "red", alpha = 0.7) +
+#   geom_point(aes(x = year, y = jobs), color = "blue", alpha = 0.7) +
+#   facet_wrap(~rgn_name, #) +
+#              scales = "free_y") +
+#   labs(title = "UNWTO vs. OECD Data Shared Countries: Free y-axis",
+#        y = "Jobs",
+#        x = "Year") +
+#   theme(panel.spacing.x = unit(0.01, "cm")) +
+#   theme_bw();ggplotly(comp_plot)
 ```
 
 ### Eurostat Data
@@ -367,8 +321,9 @@ eurostat_clean <- eurostat_raw %>%
          country = str_replace_all(country, "&", "and"),
          value = as.numeric(value),
          year = as.numeric(year))
+# Don't worry about the warning in countrycode, we drop those aggregated regions with no matches
 
-# run ohicore name_2_rgn --------
+# run ohicore name_2_rgn 
 eurostat_rgn <- name_2_rgn(df_in = eurostat_clean, 
                        fld_name = 'country',
                        flds_unique = c("year"))
@@ -381,126 +336,204 @@ eurostat_jobs <- eurostat_rgn %>%
   select(rgn_id, rgn_name, year, jobs, unit, source)
 
 # check what countries we've added:
-setdiff(eurostat_jobs$rgn_name, tourism_jobs_gf$rgn_name)
-# [1] "Germany"     "Estonia"     "Ireland"    
-# [4] "Iceland"     "Montenegro"  "Netherlands"
-# [7] "Norway" 
-# That's pretty good!
-
-# Let's see how the magnitude changes between countries with data in both
-compare_euro_unwto <- tourism_jobs_gf %>% 
-  full_join(eurostat_jobs, by = join_by(rgn_id, rgn_name, year))
-
-shared_countries <- compare_euro_unwto %>% 
-  filter(!is.na(tourism_jobs) & !is.na(jobs))
-
-unique(shared_countries$rgn_name) # 21 countries shared
-
-comp_plot <- ggplot(shared_countries) +
-  geom_point(aes(x = year, y = tourism_jobs), color = "red", alpha = 0.7) +
-  geom_point(aes(x = year, y = jobs), color = "blue", alpha = 0.7) +
-  facet_wrap(~rgn_name) +
-             # scales = "free_y") +
-  labs(title = "UNWTO vs. Eurostat Data Shared Countries: Free y-axis",
-       y = "Jobs",
-       x = "Year") +
-  theme(panel.spacing.x = unit(0.01, "cm")) +
-  theme_bw();ggplotly(comp_plot)
+# setdiff(eurostat_jobs$rgn_name, tourism_jobs_gf$rgn_name)
+# # [1] "Germany"     "Estonia"     "Ireland"    
+# # [4] "Iceland"     "Montenegro"  "Netherlands"
+# # [7] "Norway" 
+# # That's pretty good!
+# 
+# # Let's see how the magnitude changes between countries with data in both
+# compare_euro_unwto <- tourism_jobs_gf %>% 
+#   full_join(eurostat_jobs, by = join_by(rgn_id, rgn_name, year))
+# 
+# shared_countries <- compare_euro_unwto %>% 
+#   filter(!is.na(tourism_jobs) & !is.na(jobs))
+# 
+# unique(shared_countries$rgn_name) # 21 countries shared
+# 
+# comp_plot <- ggplot(shared_countries) +
+#   geom_point(aes(x = year, y = tourism_jobs), color = "red", alpha = 0.7) +
+#   geom_point(aes(x = year, y = jobs), color = "blue", alpha = 0.7) +
+#   facet_wrap(~rgn_name) +
+#              # scales = "free_y") +
+#   labs(title = "UNWTO vs. Eurostat Data Shared Countries: Free y-axis",
+#        y = "Jobs",
+#        x = "Year") +
+#   theme(panel.spacing.x = unit(0.01, "cm")) +
+#   theme_bw();ggplotly(comp_plot)
 ```
 
+## Join all tourism jobs together
 
 ```{r}
-# Join UNWTO and OECD
-test <- left_join(oecd_jobs_clean, tourism_jobs_gf,
-                                 by = join_by(rgn_id, rgn_name, year))
-view(test)
+# view(unwto_jobs)
+# view(eurostat_jobs)
+# view(oecd_jobs)
+# 
+# colSums(is.na(unwto_jobs)) # 10
+# colSums(is.na(eurostat_jobs)) # 25 
+# colSums(is.na(oecd_jobs)) # 0
+# 
+# colnames(unwto_jobs)
+# colnames(eurostat_jobs)
+# colnames(oecd_jobs)
 
-# join with labor force data ------------
+# Find all observations in oecd data NOT in unwto data
+new_oecd_jobs <- anti_join(oecd_jobs, unwto_jobs, by = join_by(rgn_id, rgn_name, year)) 
+view(new_oecd_jobs)
+
+# Bind unwto and new oecd data
+unwto_oecd <- bind_rows(unwto_jobs, new_oecd_jobs) 
+
+# Find all observations in eurostat data NOT in unwto+oeced data
+new_eurostat_jobs <- anti_join(eurostat_jobs, unwto_oecd, by = join_by(rgn_id, rgn_name, year))
+
+# Bind eurostat with previous two
+tourism_jobs <- bind_rows(unwto_oecd, new_eurostat_jobs) 
+
+# Check NAs
+colSums(is.na(tourism_jobs)) # 10
+nrow(tourism_jobs) # 1007
+length(unique(tourism_jobs$rgn_name)) # 82
+# Increased regions from 73 to 82, not bad
+```
+
+### Gapfill tourism jobs
+
+```{r}
+# Gapfill total labor force values for missing years
+tourism_jobs_gf <- tourism_jobs %>% 
+  group_by(rgn_id, rgn_name) %>% 
+  # Ensure we're hitting all years for joining later on
+  complete(year = 2008:data_year) %>% 
+  ungroup() %>%
+  # First, create gapfilled boolean and method columns
+  mutate(tr_gapfilled = ifelse(is.na(jobs), "1", NA_character_),
+         tr_gf_method = ifelse(is.na(jobs), "1", NA_character_),
+         unit = "Persons (1)") %>%
+  # Regroup for gapfilling
+  group_by(rgn_id, rgn_name) %>% 
+  arrange(rgn_id, year) %>%   
+  # Linear interpolation
+  mutate(jobs = na.approx(jobs, x = year, na.rm = FALSE)) %>% 
+  mutate(tr_gapfilled = ifelse(tr_gapfilled == "1" & !is.na(jobs), 
+                               "gapfilled", tr_gapfilled),
+         tr_gf_method = ifelse(tr_gf_method == "1" & !is.na(jobs), 
+                               "Interpolation", tr_gf_method)) %>% 
+  # Upfilling
+  tidyr::fill(jobs, .direction = "up") %>% 
+  mutate(tr_gapfilled = ifelse(tr_gapfilled == "1" & !is.na(jobs), 
+                               "gapfilled", tr_gapfilled),
+         tr_gf_method = ifelse(tr_gf_method == "1" & !is.na(jobs), 
+                               "Upfilling", tr_gf_method)) %>% 
+  # Downfilling
+  tidyr::fill(jobs, .direction = "down") %>% 
+  mutate(tr_gapfilled = ifelse(tr_gapfilled == "1" & !is.na(jobs), 
+                               "gapfilled", tr_gapfilled),
+         tr_gf_method = ifelse(tr_gf_method == "1" & !is.na(jobs), 
+                               "Downfilling", tr_gf_method))
+
+view(tourism_jobs_gf)
+table(tourism_jobs_gf$tr_gf_method)
+# Downfilling Interpolation     Upfilling 
+#          94            58           191 
+colSums(is.na(tourism_jobs_gf)) # 0 NAs
+# Source is gonna have NAs due to the gapfilling
+nrow(tourism_jobs_gf) # 1340 observations
+```
+
+## Labor force join
+
+```{r}
+# join with labor force data 
 # COME BACK -- rejoin once labor force has been updated
-tour_jobs_labor <- full_join(tourism_jobs_gf, labor_force , by = c("rgn_id", "rgn_name", "year"))  %>% 
+tour_jobs_labor <- full_join(tourism_jobs_gf, labor_force_gf , by = c("rgn_id", "rgn_name", "year", "unit"))  %>% 
   select(-c(sector, data_source)) # these currently only show Labor Force data-related values. Will add back on before exporting.
 
-summary(tourism_jobs_gf)
-summary(labor_force)
+view(tour_jobs_labor)
 
-# calculate tourism jobs proportion of total labor force -----
-tour_jobs_prop_df <- tour_jobs_labor %>% 
-  mutate(tour_jobs_prop = (tourism_jobs / labor_force_total)) %>% 
+# calculate tourism jobs proportion of total labor force 
+tour_jobs_prop <- tour_jobs_labor %>% 
+  mutate(tour_jobs_prop = (jobs / labor_force_total)) %>% 
   mutate(rgn_id = as.numeric(rgn_id)) 
 
-colSums(is.na(tour_jobs_prop_df)) 
- # tourism_jobs      labor_force_total      tour_jobs_prop 
- #         1488                     0                 1488
+summary(tour_jobs_prop$tour_jobs_prop)
 
-nrow(tour_jobs_prop_df) # 2656
-nrow(tour_jobs_rgn_agg) # 773
-nrow(labor_force) # 2656
+colSums(is.na(tour_jobs_prop)) 
+ #         jobs      labor_force_total      tour_jobs_prop 
+ #         1344                   412                 1420
+
+nrow(tour_jobs_prop) # 2684
+nrow(tourism_jobs_gf) # 1340
+nrow(labor_force_gf) # 2656
 # ~ 71% NA
 # After first round of gapfilling, dropped to 56% 
+# After adding new data sources, down to 52%
 
-tour_jobs_prop_df %>% 
-  group_by(rgn_id, rgn_name) %>% 
-  filter(is.na(tourism_jobs)) %>% 
-  view()
+tour_jobs_prop %>% 
+  filter(is.na(jobs) & is.na(labor_force_total)) %>% 
+  distinct(rgn_id, rgn_name) %>% 
+  nrow()
 
-tour_jobs_na <- tour_jobs_prop_df %>%
+# 21 countries with no data for jobs or labor force, we'll end up dropping these for now
+tour_jobs_final <- tour_jobs_prop %>% 
+  filter(!is.na(jobs),
+         !is.na(labor_force_total)) 
+
+length(unique(tour_jobs_final$rgn_id)) # 79 final regions
+
+colSums(is.na(tour_jobs_final))
+nrow(tour_jobs_final) # 1264
+view(tour_jobs_prop)
+
+# write_csv(tour_jobs_final, here(current_le_dir, "int", "tourism_jobs_unwto_gf.csv"))
+```
+
+```{r}
+df_with_missing <- tour_jobs_prop %>%
   group_by(rgn_id, rgn_name) %>%
-  filter(any(is.na(tourism_jobs))) %>%
+  filter(any(is.na(jobs))) %>%
   arrange(rgn_name, year)
 
-length(unique(tour_jobs_na$rgn_name)) # 93
+View(df_with_missing)
+df_with_missing %>% 
+  filter(!is.na(jobs)) %>% view()
 
-tour_jobs_non_na <- tour_jobs_prop_df %>% 
-filter(any(!is.na(tourism_jobs)))
-
-length(unique(tour_jobs_non_na$rgn_name)) # 73
-
-length(unique(tour_jobs_prop_df$rgn_name)) # 73
-
-
-# 73 countries with 
-
-View(df_with_missing) 
-
-
-rm(tour_duplicates, tour_duplicates2)
+test <- tour_jobs_prop %>% 
+  # group_by(rgn_id, rgn_name) %>% 
+  # Ensure we're hitting all years for joining later on
+  # complete(year = 2008:data_year) %>% 
+  # ungroup() %>%
+  # First, create gapfilled boolean and method columns
+  # mutate(tr_gapfilled = ifelse(is.na(jobs), "1", NA_character_),
+  #        tr_gf_method = ifelse(is.na(jobs), "1", NA_character_),
+  #        unit = "Persons (1)") %>%
+  # Regroup for gapfilling
+  group_by(rgn_id, rgn_name) %>% 
+  arrange(rgn_id, year) %>%   
+  # Linear interpolation
+  mutate(jobs = na.approx(jobs, x = year, na.rm = FALSE)) %>% 
+  mutate(tr_gapfilled = ifelse(tr_gapfilled == "1" & !is.na(jobs), 
+                               "gapfilled", tr_gapfilled),
+         tr_gf_method = ifelse(tr_gf_method == "1" & !is.na(jobs), 
+                               "Interpolation", tr_gf_method)) %>% 
+  # Upfilling
+  tidyr::fill(jobs, .direction = "up") %>% 
+  mutate(tr_gapfilled = ifelse(tr_gapfilled == "1" & !is.na(jobs), 
+                               "gapfilled", tr_gapfilled),
+         tr_gf_method = ifelse(tr_gf_method == "1" & !is.na(jobs), 
+                               "Upfilling", tr_gf_method)) %>% 
+  # Downfilling
+  tidyr::fill(jobs, .direction = "down") %>% 
+  mutate(tr_gapfilled = ifelse(tr_gapfilled == "1" & !is.na(jobs), 
+                               "gapfilled", tr_gapfilled),
+         tr_gf_method = ifelse(tr_gf_method == "1" & !is.na(jobs), 
+                               "Downfilling", tr_gf_method))
 ```
 
-```{r}
-georegions <- ohicore::georegions %>% 
-  left_join(rgns_eez, by = "rgn_id") %>% 
-  select(-c(Notes)) # not needed
-
-georegions_label <- ohicore::georegion_labels %>% 
-  left_join(rgns_eez, by = "rgn_id") %>% 
-  select(-c(Notes)) # not needed
-table(georegions_label$r1_label)
-
-colnames(georegions)
-
-test <- tour_jobs_prop_df %>% 
-  left_join(georegions_label, by = join_by(rgn_id, rgn_name))
-view(test)
-
-test %>% 
-  distinct(rgn_id, rgn_name) %>% view()
-
-table(test$r1_label)
-
-```
-
-
-I think this is old code...
-```{r}
-# join w OHI regions
-# tourism_un_jobs_ohi <- left_join(region_clean, un_jobs_cc, by = c("eez_iso3" = "iso3c"))
-# 
-# 
-# # ----------Join with Labor Force Data--------------
-# tourism_labor_join <- left_join(labor_regions, tourism_un_jobs_ohi, by = c("rgn_id", "year")) 
-```
 
 Create the proportion between tourism jobs and the total labor force
+
 ```{r}
 # tourism_job_proportion <- tourism_labor_join %>%
 #   dplyr::relocate(tourism_jobs, .before = labor_force_total) %>%
@@ -511,7 +544,7 @@ colnames(tour_jobs_prop_df)
  max(tour_jobs_prop_df$year)
 
 # plot it, interactively!
-line_plot <- plotly::plot_ly(tour_jobs_prop_df, x = ~year, y = ~labor_force_total, color = ~rgn_name, type = "scatter", mode = "lines") %>% 
+line_plot <- plotly::plot_ly(tour_jobs_prop, x = ~year, y = ~tour_jobs_prop, color = ~rgn_name, type = "scatter", mode = "lines") %>% 
   layout(title = "All Regions: Proportional Tourism Employment Within Total Labor Force", 
          xaxis = list(title = "Year"),
          yaxis = list(title = "Percent of people by region employed by the tourism sector"))
@@ -537,6 +570,10 @@ write_csv(tourism_job_proportion, here(int_dir, "tour_jobs.csv"))
   - note: this data came from many sources and was compiled by ILO
 
 ```{r}
+# ILO wage data ----
+ilo_wage_data <- read_csv(here(raw_data_dir, "ILOSTAT", current_data_dir, "EAR_4MTH_SEX_ECO_CUR_NB_A-filtered-2025-08-07.csv"))
+
+
 # preliminary cleanings
 wage_data_clean <- ilo_wage_data %>% 
   # lower_snake_case
