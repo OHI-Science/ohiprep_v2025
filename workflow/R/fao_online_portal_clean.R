@@ -3,29 +3,53 @@
 #' fao_online_portal_clean
 #'
 #' @param fao FAO dataset downloaded from Statistical Query Panel
-#' @param initial_data_year initial year available in the dataset
-#' @param last_data_year latest year available in the dataset
 #' @param sub_N value to substitute for rows that have the flag of N
 #'
 #' @return returns a cleaned version of the FAO data
-fao_online_portal_clean <- function(fao, initial_data_year, last_data_year, sub_N = 0.1) {
+fao_online_portal_clean <- function(fao, sub_N = 0.1) {
+  
+  fao <- fao %>% 
+    dplyr::rename(country = "Country (Name)",
+                  asfis_species = "ASFIS species (Name)",
+                  area = "FAO major fishing area (Name)",
+                  unit_name = "Unit (Name)") %>%
+    # remove brackets from years
+    dplyr::rename_with(~ base::gsub("\\[", "", .)) %>% 
+    dplyr::rename_with(~ base::gsub("\\]", "", .)) %>% 
+    mutate(row_id = row_number())
+  
+# fao <- fao %>% 
+#   mutate(row_id = row_number())
 
-fao <- fao %>% 
-  mutate(row_id = row_number())
+# Find column names that are 4-digit numbers
+year_cols <- grep("^\\d{4}$", names(fao), value = TRUE)
+
+# Convert those names to numeric
+years <- as.numeric(year_cols)
+
+initial_data_year <- min(years)
+last_data_year <- max(years)
 
 #N is a flag used by FAO to indicate not significant (negligible)
 #we replace this with 0.1, both for tonnes and value in thousands
 
+s_cols <- names(fao)[startsWith(names(fao), "S...")]
+# Create a sequence of new names for flag cols
+new_names <- paste0(initial_data_year:last_data_year, " Flag")
+# Rename them in the data frame
+names(fao)[names(fao) %in% s_cols] <- new_names
+
 #pivot all of the year/value columns 
 fao_values <- fao %>% 
-  dplyr::select(-c(paste(initial_data_year:last_data_year, "Flag"))) %>% 
+  # Remove flag columns
+  dplyr::select(-c(contains("Flag"))) %>% 
   pivot_longer(cols = paste0(initial_data_year:last_data_year),
                names_to = "year",
                values_to = "value")
 
 #pivot all of the flag columns   
 fao_flags <- fao %>%
-  select(-paste0(initial_data_year:last_data_year)) %>% 
+  select(-matches("^\\d{4}$")) %>% 
   pivot_longer(cols = paste(initial_data_year:last_data_year, "Flag"),
                names_to = "flag_year",
                values_to = "flag") %>% 

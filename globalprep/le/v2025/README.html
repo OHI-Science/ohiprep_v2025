@@ -365,8 +365,8 @@ display: none;
 </thead>
 <tbody>
 <tr class="odd">
-<td>Fishing (formerly commercial fishing)</td>
-<td>cf</td>
+<td>Fishing (formerly commercial fishing cf)</td>
+<td>fis</td>
 </tr>
 <tr class="even">
 <td>Mariculture</td>
@@ -410,6 +410,7 @@ display: none;
 </tr>
 </tbody>
 </table>
+<p>In 2025 we renamed Fishing to fis instead of cf. </p>
 <p>In 2024 we cleaned and prepped the best available data for most
 sectors and components included in this goal. The ECO subgoal was
 pursued, but LIV was tabled due to a lack of data in the fishing (cf)
@@ -447,11 +448,11 @@ tackle were tourism (tour), mariculture (mar), and commercial fishing
 <p>We started with LIV, which included both the number and quality of
 jobs within a sector. The scripts used were:</p>
 <ul>
-<li><code>liv_cf_jobs_prep.Rmd</code>
+<li><code>liv_fis_jobs_prep.Rmd</code>
 <ul>
 <li>Commercial fishing number of jobs (employment)</li>
 </ul></li>
-<li><code>liv_cf_quality_prep.Rmd</code>
+<li><code>liv_fis_quality_prep.Rmd</code>
 <ul>
 <li>Commercial fishing quality of jobs (wages)</li>
 </ul></li>
@@ -521,12 +522,13 @@ units of value, shown below:</p>
 </div>
 <div id="adjustment-units-prepost-inflation" class="section level4">
 <h4>Adjustment Units Pre/Post-Inflation</h4>
-<table style="width:99%;">
+<table style="width:98%;">
 <colgroup>
 <col width="13%" />
-<col width="43%" />
+<col width="42%" />
 <col width="22%" />
 <col width="19%" />
+<col width="0%" />
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -534,18 +536,14 @@ units of value, shown below:</p>
 <td>Metadata documentation</td>
 <td>Pre-Adjustment Unit</td>
 <td>Post-Adjustment Unit</td>
+<td></td>
 </tr>
 <tr class="even">
-<td><p>cf</p>
-<p><code>eco_cf_prep.Rmd</code></p></td>
-<td><p><a href="https://www.fao.org/fishery/en/collection/capture">FAO
-Capture Data</a></p>
-<p><a href="https://github.com/SFG-UCSB/price-db-sfg">Ex-Vessel Price
-Data</a></p></td>
-<td><p>Final: USD (current year)</p>
-<p>FAO Capture: tonnes</p>
-<p>Ex-Vessel Prices: USD/metric tonne</p></td>
-<td>USD inflation adjusted to 2017</td>
+<td colspan="5">cf | <a href="https://www.fao.org/fishery/en/collection/capture">FAO Capture
+Data</a> | Final: USD (current year) | USD inflation adjusted to 2017 |
+| | | | <code>eco_fis_prep.Rmd</code> | <a href="https://github.com/SFG-UCSB/price-db-sfg">Ex-Vessel Price Data</a>
+| FAO Capture: tonnes | | | | | | | Ex-Vessel Prices: USD/metric tonne |
+|</td>
 </tr>
 <tr class="odd">
 <td><p>tour</p>
@@ -553,6 +551,7 @@ Data</a></p></td>
 <td></td>
 <td>USD (constant 2015 US$)</td>
 <td>USD inflation adjusted to 2017</td>
+<td></td>
 </tr>
 <tr class="even">
 <td><p>mar</p>
@@ -560,6 +559,7 @@ Data</a></p></td>
 <td></td>
 <td>USD (current year)</td>
 <td>USD inflation adjusted to 2017</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -571,7 +571,7 @@ Data</a></p></td>
 <div id="livelihoods-liv-1" class="section level4">
 <h4>Livelihoods (LIV)</h4>
 <ul>
-<li><p><code>liv_cf_jobs_prep.Rmd</code></p>
+<li><p><code>liv_fis_jobs_prep.Rmd</code></p>
 <ul>
 <li>Commercial fishing number of jobs (employment)</li>
 <li>Labor Force &amp; Employment Data
@@ -597,7 +597,7 @@ needed
 </ul></li>
 </ul></li>
 </ul></li>
-<li><p><code>liv_cf_quality_prep.Rmd</code></p>
+<li><p><code>liv_fis_quality_prep.Rmd</code></p>
 <ul>
 <li>Commercial fishing quality of jobs (wages)</li>
 <li>Labor Force &amp; Employment Data
@@ -747,7 +747,7 @@ data year</em></li>
 </ul></li>
 </ul></li>
 </ul></li>
-<li><code>eco_cf_prep.Rmd</code>
+<li><code>eco_fis_prep.Rmd</code>
 <ul>
 <li><p>USD Value of Marine (Commercial) Fishing per Country/Region per
 Year (1976-2019)</p></li>
@@ -1061,9 +1061,10 @@ extrapolation.”</li>
 <h3><em>First: clean</em></h3>
 <ul>
 <li><p><strong>3 scripts, each one produces a dataset</strong>: e.g.,
-<code>eco_cf_prep.Rmd</code> (rgn_id, rgn_name, year, usd, unit, sector,
-usd_yr). Make sure that all the USD are in the same units!!! e.g.,
-non-inflation adjusted, or inflation adjusted to same year, etc.</p>
+<code>eco_fis_prep.Rmd</code> (rgn_id, rgn_name, year, usd, unit,
+sector, usd_yr). Make sure that all the USD are in the same units!!!
+e.g., non-inflation adjusted, or inflation adjusted to same year,
+etc.</p>
 <ul>
 <li><p><code>usd</code> = “value”, in US Dollars</p></li>
 <li><p><code>usd_yr</code> is a column to describe what year the column

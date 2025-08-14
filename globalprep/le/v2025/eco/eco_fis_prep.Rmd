@@ -101,7 +101,8 @@ librarian::shelf(
   pdftools, # for FAO yearbook
   ohicore,
   modelr, # needed for gapfilling exvessel price data
-  ggplot2
+  ggplot2,
+  readxl
 )
 #remotes::install_github("skgrange/threadr") # for na_extrapolate
 #library(threadr) # for gapfilling, if necessary
@@ -146,19 +147,332 @@ ex_vess_dir <- here(raw_data_dir, "ex-vessel-price-database-updated")
 int_dir <- here(data_path, "int")
 ```
 
+# Methods
+
+## Calculate estimated exvessel prices (based off Melnycuk's methods and emLab's code)
+
+### Read in data
+
+```{r}
+# Linkage tables
+link1<-read.csv(file.path(ex_vess_dir, 'price-db-linkage-tables/exvessel_tableS1.csv'), stringsAsFactors = F)
+link2<-read.csv(file.path(ex_vess_dir, 'price-db-linkage-tables/exvessel_tableS2.csv'), stringsAsFactors = F)
+link3<-read.csv(file.path(ex_vess_dir, 'price-db-linkage-tables/exvessel_tableS3.csv'), stringsAsFactors = F)
+
+# Updated commodity data
+cvalue <- read.csv(file.path(ex_vess_dir, 'price-db-data/Commodity_value_76to23.csv'), stringsAsFactors = F, na.strings = c('...','0 0','-')) %>% # value in 1000s
+  clean_names() %>%
+  filter(trade_flow_name == "Exports") %>%
+  mutate(row_id = row_number())
+
+# Updated commodity quantity data (v2025)
+cquantity<-read.csv(file.path(ex_vess_dir, 'price-db-data/Commodity_quantity_76to23.csv'), stringsAsFactors = F,na.strings = c('...','0 0','-')) %>% # quantity in tons
+  clean_names() %>%
+  filter(trade_flow_name == "Exports") %>%
+  mutate(row_id = row_number())
+
+# FAO estimated ex-vessel data by ISSCAAP group
+faoprices <- read_excel(file.path(ex_vess_dir, 'price-db-data/FAO exvessel estimates from archives.xlsx'), sheet = 4)[1:6]
+
+## Set options for database
+lowprocess <- FALSE # for using all commodities or just low processed commodities
+commod_min <- 100 # minimum quantity required for inclusion in export price calculation
+```
+
+### Process FAO data
+
+```{r}
+process_fao <- function(data) {
+  
+  # Deal with year columns 
+  yr_col_names <- names(data)[startsWith(names(data), "x_")]
+  year_cols <- grep("x_", names(data), value = TRUE)
+  years <- as.numeric(str_remove(year_cols, "x_"))
+  initial_data_year <- min(years)
+  last_data_year <- max(years)
+  new_year_names <- paste0(initial_data_year:last_data_year)
+  names(data)[names(data) %in% yr_col_names] <- new_year_names
+  
+  # Deal with flag columns
+  s_cols <- names(data)[startsWith(names(data), "s")]
+  new_names <- paste0(initial_data_year:last_data_year, " Flag")
+  names(data)[names(data) %in% s_cols] <- new_names
+  
+  # Pivot all of the year/value columns 
+  fao_values <- data %>% 
+    # Remove flag columns
+    dplyr::select(-c(contains("Flag"))) %>% 
+    pivot_longer(cols = paste0(initial_data_year:last_data_year),
+                 names_to = "year",
+                 values_to = "value")
+  
+  # Pivot all of the flag columns   
+  fao_flags <- data %>%
+    select(-matches("^\\d{4}$")) %>% 
+    pivot_longer(cols = paste(initial_data_year:last_data_year, "Flag"),
+                 names_to = "flag_year",
+                 values_to = "flag") %>% 
+    mutate(year = str_remove(flag_year, " Flag")) %>% 
+    select(year, flag, row_id) 
+  
+  # Combine flag and row id 
+  fao_new <- fao_values %>%
+    left_join(fao_flags, by = c("row_id", "year"))
+  
+  # Replace 
+  fao_processed <- fao_new %>% 
+    mutate(value = case_when((str_detect(flag, "N") & value == 0) ~ 0.1, #sub_N = 0.1
+                             TRUE ~ value)) %>% #replace values that are 0 and have the flag N with sub_N
+    select(-c(row_id, flag))
+  
+  
+  return(fao_processed)
+  
+}
+
+cvalue_processed <- process_fao(cvalue) %>%
+  select(reporting_country_name, commodity_name, year, value_usd = value)
+
+cquantity_processed <- process_fao(cquantity) %>%
+  select(reporting_country_name, commodity_name, year, quantity_tonnes = value) 
+```
+
+### Process commodities
+
+```{r}
+# join value and quantity tables so they only include matched pairs
+cboth <- inner_join(cvalue_processed, cquantity_processed) %>%
+  # remove contested commodity "Miscellaneous crustaceans, not frozen, nei" due to apparent errors in data
+  filter(commodity_name != 'Miscellaneous crustaceans, not frozen, nei')
+
+# standardize missing values to NAs
+fix<-cboth$quantity_tonnes==0 | cboth$value_usd==0 | is.na(cboth$quantity_tonnes) | is.na(cboth$value_usd)
+
+cboth$quantity_tonnes[fix]<-NA
+cboth$value_usd[fix]<-NA
+
+# Subset data to exclude highly processed categories if desired
+if(lowprocess == T) {
+
+  process <- read.csv(file = 'price-db-linkage-tables/processing assingments.csv')
+
+  lows <- filter(process, assingment == 'low')
+
+  cboth <- filter(cboth, commodity_name %in% lows$FAO_commodity)
+}
+
+# Calculate country export prices
+cboth <- cboth %>%
+  mutate(export_price = 1000 * (value_usd) / quantity_tonnes)
+
+# aggregate country values to get aggregate quantities and values by commodity and match to linkage table one
+# to include pooled commodity category
+agg<-cboth %>%
+  group_by(commodity_name, year) %>%
+  summarize(total_quantity = sum(quantity_tonnes, na.rm=TRUE),
+            total_value=sum(value_usd, na.rm=TRUE)) %>%
+  left_join(link1, by = c("commodity_name" = "FAO_commodity")) %>%
+  filter(is.na(pooled_commodity)==F) %>%
+  ungroup()
+
+# aggregate across pooled commodities
+agg<-agg %>%
+  group_by(pooled_commodity, group_for_pairing, year) %>%
+  summarize(pooled_quantity = sum(total_quantity,na.rm=T),
+            pooled_value    = sum(total_value,na.rm=T)) %>%
+  mutate(pooled_price       = pooled_value/pooled_quantity,
+         year = as.numeric(year)) %>%
+  ungroup()
+
+# aggregate over ISSCAAP
+aggisscaap<- agg %>%
+  group_by(group_for_pairing, year) %>%
+  summarize(isscaap_quantity  =  sum(pooled_quantity,na.rm=T),
+            isscaap_value     =  sum(pooled_value,na.rm=T)) %>%
+  mutate(isscaap_price        =  isscaap_value/isscaap_quantity,
+         year = as.numeric(year)) %>%
+  ungroup()
+```
+
+### Process exvessel data
+
+```{r}
+# Filter FAO price data to appropriate level and rename variables to more convenient names
+faoexvessel<-faoprices %>%
+  filter(is.na(`Species group`)==F & `Species group`!='World total' & `Prod type`=='Capture fisheries') %>% #& Archive < 2019
+  spread(Units,Value) %>%
+  mutate(Year           = as.integer(Year)) %>%
+  rename(Quantity_1000s = `1 000 t`,
+         Value_Millions = `US$ mill`,
+         Price_PerTon   = `US$/t`,
+         group_for_pairing = `Species group`)
+
+# Pull out earliest year from archives prior to 2012
+archive_pull <- function(df, year) {
+  temp <- df %>%
+    filter(Year == year) %>%
+    filter(Archive == max(Archive, na.rm = T))
+  return(temp)
+}
+
+# Loop over unique years and apply archive_pull function
+yrs <- unique(faoexvessel$Year)
+exv <- list()
+for(a in 1:length(yrs)) {
+  exv[[a]] <- archive_pull(faoexvessel, year = yrs[a])
+}
+
+# flatten list into data frame
+faoexvessel <- bind_rows(exv) %>%
+  rename(year = Year) 
+
+# rename miscellaneous animal products to miscellaneous aquatic invertebrates
+faoexvessel$group_for_pairing[faoexvessel$group_for_pairing=='Miscellaneous aquatic animals']<-'Miscellaneous aquatic invertebrates'
+
+max_year <- max(faoexvessel$year)
+min_year <- min(faoexvessel$year)
+```
+
+### Calculate expansion factor
+
+```{r}
+# join export and exvessel data and calculate expansion factor as export/exvessel
+expansion <- left_join(aggisscaap,faoexvessel) %>%
+  #filter(year<2024) %>%
+  mutate(isscaap_price = 1000*isscaap_price,
+         expfactor    = isscaap_price/Price_PerTon)
+
+# calculate the weighted expansion factor
+wt_expansion <- expansion %>%
+  as_tibble() %>%
+  # Years we have archive data for
+  filter(year>= min_year & year <= max_year) %>%
+  group_by(group_for_pairing) %>%
+  summarize(exvessel_wt_mean = (1000000*sum(Value_Millions,na.rm=T)) / (1000*(sum(Quantity_1000s,na.rm=T))),
+            export_wt_mean   = (1000*sum(isscaap_value,na.rm=T))/(sum(isscaap_quantity,na.rm=T)),
+            wt_exp_factor    = export_wt_mean / exvessel_wt_mean)
+```
+
+### Fill in missing years
+
+```{r}
+# extract data for years with exvessel and export prices and calculate the median and mean exp factors
+hist_factor <- expansion %>%
+  filter(year>= min_year & year <= max_year) %>%
+  group_by(group_for_pairing) %>%
+  summarize(med_exp_factor   = median(expfactor,na.rm=T),
+            mean_exp_factor  = mean(expfactor,na.rm=T))
+
+# use calculated median (or mean) expansion factors to estimate exvessel prices for 1976-1994
+needs_price_old<-expansion %>%
+  as_tibble() %>%
+  filter(year< min_year) %>%
+  left_join(hist_factor) %>%
+  mutate(Price_PerTon = isscaap_price / med_exp_factor)
+
+needs_price_new <- expansion %>%
+  as_tibble() %>%
+  filter(year > max_year) %>%
+  left_join(hist_factor) %>%
+  mutate(Price_PerTon = isscaap_price / med_exp_factor)
+
+# rejoin the timeseries
+expansion<-expansion %>%
+  filter(year>= min_year & year <= max_year) %>%
+  bind_rows(needs_price_old) %>%
+  bind_rows(needs_price_new) %>%
+  arrange(group_for_pairing,year)
+
+# fill in expfactor variable for '76-'94 with the calculated expfactor of choice (median or mean)
+expansion$expfactor[is.na(expansion$expfactor)] <- expansion$med_exp_factor[is.na(expansion$expfactor)]
+```
+
+### Calculate exvessel prices
+
+```{r}
+# join pooled commodities with expansion factors
+aggexvessel<-left_join(agg,expansion)
+
+# convert PooledValue from 1000s to dollars
+aggexvessel$pooled_value<- aggexvessel$pooled_value*1000
+
+# recalculate pooled price
+aggexvessel$pooled_price<- aggexvessel$pooled_value/aggexvessel$pooled_quantity
+
+# calculate ex-vessel price using inverse expansion factor
+aggexvessel$exvessel<- aggexvessel$pooled_price/aggexvessel$expfactor
+
+# join exvessel estimates with linkage table 3 to match exvessel prices to species
+database<-left_join(link3,aggexvessel) %>%
+  as_tibble()
+
+# select only main variables to output for expansion factor table
+tbl_six <- expansion %>%
+  filter(group_for_pairing != '') %>%
+  select(group_for_pairing,
+         year,
+         export_price = isscaap_price,
+         fao_exvessel_estimate = Price_PerTon,
+         expfactor)
+
+# select only main variables to output for database
+tbl_seven <- database %>%
+  select(ASFIS_species,
+         scientific_name,
+         pooled_commodity,
+         ISSCAAP_group,
+         ISSCAAP_division,
+         group_for_pairing,
+         year,
+         exvessel)
+
+#write_csv(tbl_sevel, file.path(ex_vess_dir, "price-db-results/exvessel_price_database_1976_2023.csv"))
+
+# Ex-Vessel raw data, from EmLab, who projected Melnycuk's data (see README, or overview)
+exvessel_prices_raw <- read_csv(here(ex_vess_dir, "price-db-results", "exvessel_price_database_1976_2023.csv"), show_col_types = FALSE) %>%
+  clean_names()
+```
+
+### Sanity check the exvessel data
+
+```{r}
+# import FAO capture data
+fao_capture_raw <- read_csv(here(fao_capture_dir, "global_capture_production_quantity_1950-2023.csv"), show_col_types = FALSE)
+
+# v2025 updated function to clean
+fao_capture_clean <- fao_online_portal_clean(fao_capture_raw) %>%
+  # for proper merge, make sure "nei" is consistent
+  mutate(asfis_species = str_replace_all(asfis_species, regex("NEI", ignore_case = TRUE), "nei")) %>%
+  rename(quantity_tonnes = value)
+
+
+usa_catch <- fao_capture_clean %>%
+  filter(country == "United States of America" & quantity_tonnes != 0) %>%
+  mutate(year = as.numeric(year)) %>%
+  
+  ## HERE
+  
+  
+  mutate(value = quantity_tonnes * esvessel_prices_raw$)
+  left_join(exvessel_prices_raw, by = c("asfis_species", "year"))
+```
+
+
+
+
+
 ### Read in Data
 
 ```{r read_data}
 # FAO Capture raw data, downloaded August 8, 2025.  Data goes from 1950 - 2023. This was downloaded to exemplify what the raw FAO Capture data looks like, though it will not need to be used in this script.
-fao_capture_raw <- read_csv(here(fao_capture_dir, "global_capture_production_quantity_1950-2023.csv"))
-
-# Ex-Vessel raw data, from EmLab, who projected Melnycuk's data (see README, or overview)
-exvessel_prices_raw <- read_csv(here(ex_vess_dir, "price-db-results", "exvessel_price_database_1976_2019.csv"))
+fao_capture_raw <- read_csv(here(fao_capture_dir, "global_capture_production_quantity_1950-2023.csv"), show_col_types = FALSE)
 
 # read in cf revenue data from v2023, that already used FAO Capture data and Ex-vessel data
 ## this will be used for v2024 as well, considering that the EmLab exvessel data is not projected further than 2019
-fis_revenue <- read_csv(here("globalprep", "le", "v2023", "int", "cf_revenue.csv"))
+fis_revenue <- read_csv(here("globalprep", "le", "v2023", "int", "cf_revenue.csv"), show_col_types = FALSE)
 ```
+
+HERE
 
 #### v2023 Methodology to produce fis_revenue
 
@@ -169,38 +483,106 @@ revenue from fishing for each country.
 
 Here we do some basic cleanup of the global capture production database.
 
-```{r fao_capture_cleaning, eval = FALSE}
+```{r}
 # this is code from the `livelihood_economies_dataprep.Rmd` in v2023, so that future reviewers can understand where the object cf_revenue came from (which is what will be used going forward), aka "cf_revenue.csv", the final output from v2023
-fao_latest_data_year <- 2023 #update to the last year available in FAO data, likely the same for all FAO data included. 
 
-# reading in FAO capture data and cleaning
+# v2025 updated function to clean
+fao_capture_clean <- fao_online_portal_clean(fao_capture_raw)
+# 
+# fao <- fao_capture_raw
+# 
+# # reading in FAO capture data and cleaning
 # fao_capture_clean <- fao_capture_raw %>% 
-#    dplyr::rename(country = "Country Name En",
-#                 asfis_species = "ASFIS species Name En",
-#                 area = "FAO major fishing area Name En",
-#                 area_type = "Inland/Marine areas Name En",
-#                 isscaap_group = "ISSCAAP group Name En",
-#                 family_scientific = "Family Scientific name")
+#   dplyr::rename(country = "Country (Name)",
+#                 asfis_species = "ASFIS species (Name)",
+#                 area = "FAO major fishing area (Name)") %>%
+#   # remove brackets from years
+#   dplyr::rename_with(~ base::gsub("\\[", "", .)) %>% 
+#   dplyr::rename_with(~ base::gsub("\\]", "", .)) %>% 
+#   mutate(row_id = row_number())
+# #area_type = "Inland/Marine areas Name En",
+# #isscaap_group = "ISSCAAP group Name En",
+# #family_scientific = "Family Scientific name")
+# 
+# # Find column names that are 4-digit numbers
+# year_cols <- grep("^\\d{4}$", names(fao_capture_clean), value = TRUE)
+# 
+# # Convert those names to numeric
+# years <- as.numeric(year_cols)
+# 
+# initial_data_year <- min(years)
+# fao_latest_data_year <- max(years)
+# 
+# # Replace S... cols with year flag
+# s_cols <- names(fao_capture_clean)[startsWith(names(fao_capture_clean), "S...")]
+# # Create a sequence of new names for flag cols
+# new_names <- paste0(initial_data_year:last_data_year, " Flag")
+# # Rename them in the data frame
+# names(fao_capture_clean)[names(fao_capture_clean) %in% s_cols] <- new_names
+# 
+# fao_values <- fao_capture_clean %>% 
+#   dplyr::select(-c(contains("Flag"))) %>% 
+#   pivot_longer(cols = paste0(initial_data_year:last_data_year),
+#                names_to = "year",
+#                values_to = "value")
+# 
+# fao_flags <- fao_capture_clean %>%
+#   select(-matches("^\\d{4}$")) %>% 
+#   pivot_longer(cols = paste(initial_data_year:last_data_year, "Flag"),
+#                names_to = "flag_year",
+#                values_to = "flag") %>% 
+#   mutate(year = str_remove(flag_year, " Flag")) %>% 
+#   select(year, flag, row_id) 
+# 
+# #combine flag and row id 
+# fao_new <- fao_values %>%
+#   left_join(fao_flags, by = c("row_id", "year"))
+# 
+# sub_N = 0.1
+# 
+# #replace 
+# fao_new <- fao_new%>% 
+#   mutate(value = case_when((str_detect(flag, "N") & value == 0) ~ sub_N,
+#                            TRUE ~ value)) %>% #replace values that are 0 and have the flag N with sub_N
+#   select(-c(row_id, flag))
+# 
+# Filter
+fao_capture_clean <- fao_capture_clean %>%
+  # We only want marine capture
+  filter(!str_detect(area, "Inland waters")) %>% 
+  mutate(year = as.numeric(year)) %>%
+  # Filter to years in the price database
+  filter(year >= 1976 & year <= 2019) %>%
+  # We do not need the nas or 0, only want the ones with value for tonnes
+  filter(!is.na(value) & value > 0) %>% 
+  # We don't have price data for species measured in whole animals
+  filter(unit_name == "Tonnes - live weight") 
+```
 
-fao_capture_clean <- fao_capture_raw %>% 
-  # Had to update some of these columns in v2025
-  dplyr::rename(country = "Country (Name)",
-                asfis_species = "ASFIS species (Name)",
-                area = "FAO major fishing area (Name)",
-                unit_name = "Unit (Name)") %>%
-  dplyr::select(-c("Unit", contains("Flag"), contains("S..."))) %>% #  added removing Unit also
-  dplyr::rename_with(~ base::gsub("\\[", "", .)) %>% 
-  dplyr::rename_with(~ base::gsub("\\]", "", .)) %>%
-  tidyr::pivot_longer(cols = -(1:4), names_to = 'year', values_to = 'value', values_drop_na = T) %>%
-    fao_clean_data_new() 
 
-fao_capture_clean <- fao_capture_clean %>% 
-  # Remove inland waters
-  filter(!str_detect(area, "Inland waters")) %>% #we only want marine capture
-  mutate(year = as.numeric(year)) %>% 
-  filter(year >= 1976 & year <= 2019) %>% #filter to years in the price database
-  filter(!is.na(value) & value > 0) %>% # we do not need the nas or 0, only want the ones with value for tonnes
-  filter(unit_name == "Tonnes - live weight") # we don't have price data for species measured in whole animals
+```{r fao_capture_cleaning, eval = FALSE}
+# # this is code from the `livelihood_economies_dataprep.Rmd` in v2023, so that future reviewers can understand where the object cf_revenue came from (which is what will be used going forward), aka "cf_revenue.csv", the final output from v2023
+# fao_latest_data_year <- 2023 #update to the last year available in FAO data, likely the same for all FAO data included. 
+# 
+# fao_capture_clean <- fao_capture_raw %>% 
+#   # Had to update some of these columns in v2025
+#   dplyr::rename(country = "Country (Name)",
+#                 asfis_species = "ASFIS species (Name)",
+#                 area = "FAO major fishing area (Name)",
+#                 unit_name = "Unit (Name)") %>%
+#   dplyr::select(-c("Unit", contains("Flag"), contains("S..."))) %>% #  added removing Unit also
+#   dplyr::rename_with(~ base::gsub("\\[", "", .)) %>% 
+#   dplyr::rename_with(~ base::gsub("\\]", "", .)) %>%
+#   tidyr::pivot_longer(cols = -(1:4), names_to = 'year', values_to = 'value', values_drop_na = T) %>%
+#     fao_clean_data_new() 
+# 
+# fao_capture_clean <- fao_capture_clean %>% 
+#   # Remove inland waters (since there is no "area_type" anymore in 2025)
+#   filter(!str_detect(area, "Inland waters")) %>% #we only want marine capture
+#   mutate(year = as.numeric(year)) %>% 
+#   filter(year >= 1976 & year <= 2019) %>% #filter to years in the price database
+#   filter(!is.na(value) & value > 0) %>% # we do not need the nas or 0, only want the ones with value for tonnes
+#   filter(unit_name == "Tonnes - live weight") # we don't have price data for species measured in whole animals
 ```
 
 Next we'll clean up and gapfill the exvessel price data. This has
@@ -288,8 +670,8 @@ Next, the exvessel data that has now been gapfilled will be joined with
 the fao capture data.
 
 ```{r combine_exvessel, eval = FALSE}
-# read in species key from emLab
-species_key <- read_csv(file.path(data_path, "int", "species-key.csv")) %>%
+# Read in species key from emLab
+species_key <- read_csv(file.path(data_path, "int", "species-key.csv"), show_col_types = FALSE) %>%
   mutate(name_en = str_replace_all(name_en, regex("nei", ignore_case = TRUE), "NEI"))
 
 fao_capture_clean_isscaap <- fao_capture_clean %>%
@@ -302,10 +684,11 @@ exvessel_prices_gapfilled <- exvessel_prices_gapfilled %>%
   
 #combine the price data with the capture data 
 fao_capture_price <- fao_capture_clean_isscaap %>% 
+  mutate(year = as.numeric(year)) %>%
   left_join(exvessel_prices_gapfilled, by = c("asfis_species", "isscaap_group", "year")) %>% 
   select(-prediction)
 
-# v2025: 7% of observations still have NAS
+# v2025: 7.5% of observations still have NAS
 summary(fao_capture_price)
 sum(is.na(fao_capture_price$value_num))/nrow(fao_capture_price)
 
@@ -339,7 +722,7 @@ unique(nas$isscaap_group)
 # [10] "Sea-squirts and other tunicates"      "Horseshoe crabs and other arachnoids"
 
 nrow(nas)/nrow(fao_capture_price_final)
-# v2025: now 2%
+# v2025: now 2.3%
 
 fao_capture_price_final <- fao_capture_price_final %>% 
   select(country, year, value, asfis_species, final_price, gapfilled, method) %>% 
@@ -354,8 +737,6 @@ fishing_revenue <- fao_capture_price_final %>%
   mutate(unit = "USD (1)",
          sector = "fis",
          data_source = "FAO capture production and ex-vessel prices")
-
-#fis_revenue <- fishing_revenue
 
 # save intermediate data!
 write_csv(fishing_revenue, here(data_path, "int/fis_revenue.csv"))
@@ -375,7 +756,7 @@ fis_revenue_rgn <- ohicore::name_2_rgn(df_in = fis_revenue,
                              flds_unique = c("year"))
 
 # to determine the correct OHI regions and compare the function's actions:
-region_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/spatial/regions_list.csv") %>% select(-Notes)
+region_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/spatial/regions_list.csv", show_col_types = FALSE) %>% select(-Notes)
 ```
 
 When names_2_rgn has been run, there are some countries from fis_revenue
@@ -439,7 +820,7 @@ relative to that proportion.
 
 ```{r proportions}
 # load in data on the mean catch for each region, used as a proxy to determine which region has a greater commercial fishing economy
-mean_catch_2017 <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohiprep_v2024/gh-pages/globalprep/fis/v2020/int/mean_catch.csv")
+mean_catch_2017 <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohiprep_v2024/gh-pages/globalprep/fis/v2020/int/mean_catch.csv", show_col_types = FALSE)
 
 # function to calculate average catch for certain regions and certain years
 calculate_avg_catch <- function(data, region_ids, years) {
