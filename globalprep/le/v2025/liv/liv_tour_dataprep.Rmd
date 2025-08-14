@@ -194,16 +194,16 @@ labor_force_gf %>%
 ```{r}
 # Jobs data
 # total number of people employed by the tourism sector, in thousands
-un_jobs_data_raw <- read_xlsx(here(raw_data_dir, "UNWTO", current_data_dir,
-                                   "UN_Tourism_8_9_2_employed_persons_04_2025",
-                                   "UN_Tourism_8_9_2_employed_persons_04_2025.xlsx"),
-                              # skip = 2, # skip first 2 rows
-                              sheet = 2, # the sheet name has changed over time, confirm this
-                              col_names = TRUE, # use first row as column names
-                              na = c("","..")) # define NA markers
+un_jobs_raw <- read_xlsx(here(raw_data_dir, "UNWTO", current_data_dir,
+                              "UN_Tourism_8_9_2_employed_persons_04_2025",
+                              "UN_Tourism_8_9_2_employed_persons_04_2025.xlsx"),
+                          # skip = 2, # skip first 2 rows
+                          sheet = 2, # sheet name has changed over time, check this
+                          col_names = TRUE, # use first row as column names
+                          na = c("","..")) # define NA markers
 
 # Select columns of interest and add a unit column
-un_jobs_data <- un_jobs_data_raw %>% 
+un_jobs_data <- un_jobs_raw %>% 
   select(country = GeoAreaName, year = TimePeriod, jobs = Value) %>% 
   mutate(jobs = as.numeric(jobs)) 
 
@@ -215,7 +215,7 @@ tour_jobs_rgn <- name_2_rgn(df_in = un_jobs_data,
 # Duplicates
 # [1] "China, Hong Kong Special Administrative Region"
 # [2] "China, Macao Special Administrative Region"
-# [1] "China"
+# [3] "China"
 
 # aggregate: sum by rgn_name etc.
 unwto_jobs <- tour_jobs_rgn %>%
@@ -259,37 +259,16 @@ oecd_job_rgn <- name_2_rgn(df_in = oecd_clean,
                        fld_name = 'country',
                        flds_unique = c("year"))
 
+# Select columns of interest
 oecd_jobs <- oecd_job_rgn %>% 
   select(rgn_id, rgn_name, year, jobs, unit) %>% 
   mutate(unit = "Persons (1)",
          source = "OECD")
 
-# view(oecd_jobs_clean)
-unique(oecd_jobs$rgn_name)
-
-# Adds Netherlands, United States, and Morocco!
-# setdiff(oecd_jobs_clean$rgn_name, tourism_jobs_gf$rgn_name)
-# 
-# # Let's see how the magnitude changes between countries with data in both
-# compare_oecd_unwto <- tourism_jobs_gf %>% 
-#   full_join(oecd_jobs_clean, by = join_by(rgn_id, rgn_name, year))
-# 
-# shared_countries <- compare_oecd_unwto %>% 
-#   filter(!is.na(tourism_jobs) & !is.na(value))
-# view(shared_countries)
-# 
-# unique(shared_countries$rgn_name) # 10 countries shared
-# 
-# comp_plot <- ggplot(shared_countries) +
-#   geom_point(aes(x = year, y = tourism_jobs), color = "red", alpha = 0.7) +
-#   geom_point(aes(x = year, y = jobs), color = "blue", alpha = 0.7) +
-#   facet_wrap(~rgn_name, #) +
-#              scales = "free_y") +
-#   labs(title = "UNWTO vs. OECD Data Shared Countries: Free y-axis",
-#        y = "Jobs",
-#        x = "Year") +
-#   theme(panel.spacing.x = unit(0.01, "cm")) +
-#   theme_bw();ggplotly(comp_plot)
+# Countries added
+setdiff(oecd_jobs$rgn_name, unwto_jobs$rgn_name)
+# [1] "Netherlands"   "United States"
+# [3] "Morocco"  
 ```
 
 ### Eurostat Data
@@ -342,48 +321,16 @@ eurostat_jobs <- eurostat_rgn %>%
   select(rgn_id, rgn_name, year, jobs, unit, source)
 
 # check what countries we've added:
-# setdiff(eurostat_jobs$rgn_name, tourism_jobs_gf$rgn_name)
-# # [1] "Germany"     "Estonia"     "Ireland"    
-# # [4] "Iceland"     "Montenegro"  "Netherlands"
-# # [7] "Norway" 
-# # That's pretty good!
-# 
-# # Let's see how the magnitude changes between countries with data in both
-# compare_euro_unwto <- tourism_jobs_gf %>% 
-#   full_join(eurostat_jobs, by = join_by(rgn_id, rgn_name, year))
-# 
-# shared_countries <- compare_euro_unwto %>% 
-#   filter(!is.na(tourism_jobs) & !is.na(jobs))
-# 
-# unique(shared_countries$rgn_name) # 21 countries shared
-# 
-# comp_plot <- ggplot(shared_countries) +
-#   geom_point(aes(x = year, y = tourism_jobs), color = "red", alpha = 0.7) +
-#   geom_point(aes(x = year, y = jobs), color = "blue", alpha = 0.7) +
-#   facet_wrap(~rgn_name) +
-#              # scales = "free_y") +
-#   labs(title = "UNWTO vs. Eurostat Data Shared Countries: Free y-axis",
-#        y = "Jobs",
-#        x = "Year") +
-#   theme(panel.spacing.x = unit(0.01, "cm")) +
-#   theme_bw();ggplotly(comp_plot)
+setdiff(eurostat_jobs$rgn_name, unwto_jobs$rgn_name)
+# [1] "Germany"     "Estonia"     "Ireland"
+# [4] "Iceland"     "Montenegro"  "Netherlands"
+# [7] "Norway"
+
 ```
 
 ## Join all tourism jobs together
 
 ```{r}
-# view(unwto_jobs)
-# view(eurostat_jobs)
-# view(oecd_jobs)
-# 
-# colSums(is.na(unwto_jobs)) # 10
-# colSums(is.na(eurostat_jobs)) # 25 
-# colSums(is.na(oecd_jobs)) # 0
-# 
-# colnames(unwto_jobs)
-# colnames(eurostat_jobs)
-# colnames(oecd_jobs)
-
 # Find all observations in oecd data NOT in unwto data
 new_oecd_jobs <- anti_join(oecd_jobs, unwto_jobs, by = join_by(rgn_id, rgn_name, year)) 
 
@@ -399,6 +346,7 @@ tourism_jobs <- bind_rows(unwto_oecd, new_eurostat_jobs)
 # Check NAs
 colSums(is.na(tourism_jobs)) # 10
 nrow(tourism_jobs) # 1007
+# Only ~10% NA
 length(unique(tourism_jobs$rgn_name)) # 82
 # Increased regions from 73 to 82, not bad
 ```
@@ -432,24 +380,23 @@ tourism_jobs_gf <- tourism_jobs %>%
          tr_gf_method = ifelse(tr_gf_method == "1" & !is.na(jobs), 
                                "Up/Downfilling", tr_gf_method))
 
-# view(tourism_jobs_gf)
+
 table(tourism_jobs_gf$tr_gf_method)
 # Interpolation Up/Downfilling 
 #            58            285 
+
 colSums(is.na(tourism_jobs_gf)) # 0 NAs
 # Source is gonna have NAs due to the gapfilling
-nrow(tourism_jobs_gf) # 1340 observations
+
 ```
 
 ## Labor force join
 
 ```{r}
 # join with labor force data 
-# COME BACK -- rejoin once labor force has been updated
 tour_jobs_labor <- full_join(tourism_jobs_gf, labor_force_gf , by = c("rgn_id", "rgn_name", "year", "unit"))  %>% 
   select(-c(sector, data_source)) # these currently only show Labor Force data-related values. Will add back on before exporting.
 
-# view(tour_jobs_labor)
 
 # calculate tourism jobs proportion of total labor force 
 tour_jobs_prop <- tour_jobs_labor %>% 
@@ -483,9 +430,8 @@ length(unique(tour_jobs_final$rgn_id)) # 79 final regions
 
 colSums(is.na(tour_jobs_final))
 nrow(tour_jobs_final) # 1264
-# view(tour_jobs_prop)
 
-# write_csv(tour_jobs_final, here(current_le_dir, "int", "tourism_jobs_unwto_gf.csv"))
+write_csv(tour_jobs_final, here(current_le_dir, "int", "liv_tour_quantity.csv"))
 ```
 
 
@@ -493,12 +439,12 @@ Create the proportion between tourism jobs and the total labor force
 
 ```{r}
 # plot it, interactively!
-line_plot <- plotly::plot_ly(tour_jobs_prop, x = ~year, y = ~tour_jobs_prop, color = ~rgn_name, type = "scatter", mode = "lines") %>% 
-  layout(title = "All Regions: Proportional Tourism Employment Within Total Labor Force", 
-         xaxis = list(title = "Year"),
-         yaxis = list(title = "Percent of people by region employed by the tourism sector"))
-
-line_plot
+# line_plot <- plotly::plot_ly(tour_jobs_prop, x = ~year, y = ~tour_jobs_prop, color = ~rgn_name, type = "scatter", mode = "lines") %>% 
+#   layout(title = "All Regions: Proportional Tourism Employment Within Total Labor Force", 
+#          xaxis = list(title = "Year"),
+#          yaxis = list(title = "Percent of people by region employed by the tourism sector"))
+# 
+# line_plot
 
 # htmlwidgets::saveWidget(line_plot, file = "prop_tourism_laborforce.html")
 ```
@@ -513,13 +459,10 @@ line_plot
 # ILO wage data
 ilo_wage_data <- read_csv(here(raw_data_dir, "ILOSTAT", current_data_dir, "EAR_4MTH_SEX_ECO_CUR_NB_A-filtered-2025-08-14.csv"))
 
-view(ilo_wage_data)
 
 # preliminary cleanings
 wage_data_clean <- ilo_wage_data %>% 
-  # lower_snake_case
   janitor::clean_names() %>% 
-  # more intuitive value name
   rename(monthly_wage = obs_value) %>% 
   # filter to PPP adjusted data (this accounts for inflation, diff in currencies globally, cost of living, etc.) 
   # NEED TO CHECK WHAT THE YEAR IS ON YOUR DATASET
@@ -533,7 +476,8 @@ wage_data_clean <- ilo_wage_data %>%
   # add iso3 column, tourism sector label
   mutate(iso3 = country_regex_to_iso3c(ref_area_label), 
           sector = "tour") %>%
-  select(c(ref_area_label, iso3, year, monthly_wage, classif2_label, classif1_label))
+  select(ref_area_label, iso3, year, monthly_wage, 
+         classif2_label, classif1_label)
 
 # v2025: we updated the categories to include arts, entertainment, and recreation
 wage_pivot <- wage_data_clean %>% 
@@ -550,7 +494,7 @@ wage_pivot <- wage_data_clean %>%
          total_monthly_wage = ifelse(total_monthly_wage == 0, NA_real_,
                                      total_monthly_wage))
 
-# view(wage_pivot)
+
 colSums(is.na(wage_pivot)) 
 # No NAs in the total, which is good!
 
@@ -569,22 +513,7 @@ wage_years_filled <- wage_data_years %>%
   fill(ref_area_label, .direction = "downup") %>% 
   ungroup()
 
-# =================
-
-# test gapfilling
-# gap_fill_test <- wage_years_filled %>% 
-#   mutate(ref_area_label = as.factor(ref_area_label)) %>% 
-#   mutate(lm_est = list(lm(monthly_wage ~ year + ref_area_label)))
-# 
-# 
-# lm_test <- lm(monthly_wage ~ year + ref_area_label, data = wage_years_filled)
-# summary(lm_test)
-# 
-# lm_test$coefficients 
-
-# wage_years_filled$lm_values <- lm_test$fitted.values
-
-# gap filling  ----
+# gap filling
 wage_gf <- wage_years_filled %>% 
   group_by(ref_area_label) %>% 
   # interpolate (fill missing values between 2 values)
@@ -597,24 +526,20 @@ wage_gf <- wage_years_filled %>%
   
   # fill NA values with the only other observed value (making sure to note the list of countries/regions we did this for)
   mutate(appx_wage_fill = zoo::na.aggregate(appx_wage, by = 1, FUN = mean, na.rm = FALSE))
-# note: made this a new column so that we can still identify each country that we are using this fill (na.aggregate function) method for.
-  
-# other notes: 
-# need more than 1 data point to do any approximation. 
-# also, extremes (leading and trailing) are just copied data points from nearest extreme
 
 colSums(is.na(wage_gf))
 
 ```
 
-
+notes: 
+- made this a new column so that we can still identify each country that we are using this fill (na.aggregate function) method for.
+- need more than 1 data point to do any approximation. 
+- also, extremes (leading and trailing) are just copied data points from nearest extreme
 
 ```{r}
 # find regions with only 1 data point (still have NAs in appx_wage column)
-
 na_regions <- wage_gf %>% 
   filter(is.na(appx_wage))
-
 
 unique(na_regions$ref_area_label)
 num_na <- length(unique(na_regions$ref_area_label))
@@ -641,13 +566,9 @@ Clean up ILO data, join with OHI regions
 
 ```{r}
 # join with OHI regions
-colnames(rgns_eez)
-colnames(wage_gf)
-
 wage_region_join <- left_join(rgns_eez, wage_gf, by = c("eez_iso3" = "iso3"))
 
 # Currency: 2021 PPP $
-
 wage_regions <- wage_region_join %>% 
   mutate(unit = "Currency: 2021 PPP $") %>% 
   select(-classif2_label) %>% 
@@ -671,13 +592,12 @@ Plot
 # Join quantity and quality data
 
 ```{r}
-colnames(wage_regions)
-colnames(tour_jobs_final)
-
+# Narrow wage columns before joining
 wage_small <- wage_regions %>% 
   select(rgn_id, rgn_name, year, total_monthly_wage, appx_wage, 
          appx_wage_fill, wage_unit = unit, sector)
 
+# Join quantity and quality data
 tour_job_wage <- tour_jobs_final %>% 
   left_join(wage_small, by = join_by(rgn_id, rgn_name, year))
          
@@ -687,36 +607,15 @@ nrow(tour_job_wage) # 1264
 colSums(is.na(tour_job_wage))
 ```
 
-10 countries with missing wage data
-
-Northern Mariana Islands and Guam
-Australia
-Papua New Guinea
-Mozambique
-Saudi Arabia
-Bahrain
-Morocco
-Algeria
-South Africa
-Canada
 
 ```{r}
-# gapfill wage after joining
-
-tour_job_wage %>% 
-  group_by(rgn_name) %>% 
-  filter(any(is.na(appx_wage_fill))) %>% 
-  select(rgn_id, rgn_name, year, appx_wage_fill, tour_jobs_prop) %>% 
-  view()
-
 # Gapfill with regional means for wage data
 georegions <- ohicore::georegions %>% 
   left_join(rgns_eez, by = "rgn_id") %>% 
-  select(-c(Notes, territory, admin_rgn_id, admin_country_name, r0, eez_iso3)) # not needed
-colnames(georegions)
+   # not needed
+  select(-c(Notes, territory, admin_rgn_id, admin_country_name, r0, eez_iso3))
 
-colnames(tour_job_wage)
-
+# Find avg wage by georegion
 wage_georgn <- tour_job_wage %>% 
   group_by(rgn_id, rgn_name) %>% 
   complete(year = 2008:data_year) %>% # ensures that there is a row for every year for each region, to ensure there are no gaps
@@ -754,7 +653,6 @@ colSums(is.na(wage_georgn_gf))
 ```
 
 
-
 # Livelihoods Calculation
 
 ```{r}
@@ -773,18 +671,14 @@ liv_tourism_max <- liv_tourism %>%
   select(rgn_id, rgn_name, year, liv_norm, livelihood, ref_point,
          tour_jobs_prop, appx_wage_fill)
 
-# view(liv_tourism_max)
-
-
 ```
 
 ## Coastal Proportion
 
 Now, lets bring in our tourism data and calculate the coastal proportion! The coastal proportion will then be multiplied by the arrivals value per region and year. Finally, the coastal area will be divided, giving us a density of tourism per region (individuals/km\^2).
 
-```{r, eval=FALSE}
+```{r}
 # ------- coastal population data -----------
-# In 2024, the coastal population data was fixed! This is great.  We will now use `globalprep/mar_prs_population/v2024/output/mar_pop_25mi.csv`.
 coastal_pop_data <- read_csv(here("globalprep","mar_prs_population","v2025","output","mar_pop_25mi.csv")) ## read in coastal population data from other data layer
 
 # Checking out the coastal population data, the only year with missing population is 2023. We'll gapfill 2023 with the 2022 value
@@ -794,12 +688,10 @@ coastal_pop_data_fill <- coastal_pop_data %>%
   mutate(year = 2023) %>%
   rbind(coastal_pop_data) # add 2023 data year, just using year 2022
 
-
-length(unique(coastal_pop_data_fill$rgn_id)) # v2024 and v2025: 220 regions available! Any region without data is uninhabited.
+length(unique(coastal_pop_data_fill$rgn_id)) # v2024 and v2025: 220 regions available
 ```
 
-```{r, eval=FALSE}
-# ------- total global population data -----------
+```{r}
 # bring in World Bank Global population data 
 total_population_wb <- read_csv(here(raw_data_dir, "WorldBank", current_data_dir,
                                      # UPDATE FILE NAME TO MATCH
@@ -809,8 +701,6 @@ total_population_wb <- read_csv(here(raw_data_dir, "WorldBank", current_data_dir
   pivot_longer(cols = 5:(ncol(.) - 1), names_to = "year",
                values_to = "total_pop") %>% 
   janitor::clean_names()
-
-
 
 # give ohi rgns to world bank data
 total_population_rgns <- name_2_rgn(df_in = total_population_wb, 
@@ -837,11 +727,7 @@ total_population_final <- total_population_rgns %>%
   ) %>% 
   mutate(year = as.numeric(year)) 
 
-
-length(unique(total_population_final$rgn_name)) # v2024: 166 regions available of total population data!
-# length(unique(arrivals_aggregated$rgn_name)) # 157
-# length(union(arrivals_aggregated$rgn_name, total_population_final$rgn_name)) # v2025: 177, so 10 regions do not have total population data
-# length(intersect(arrivals_aggregated$rgn_name, total_population_final$rgn_name)) # v2025: 146, only 146 regions have the same name
+length(unique(total_population_final$rgn_name)) # v2024: 166 regions available of total population data
 ```
 
 
@@ -849,12 +735,10 @@ length(unique(total_population_final$rgn_name)) # v2024: 166 regions available o
 
 Now, lets bring in the $$km^2$$ of coastal area for all OHI regions by aggregating the area protected 1 kilometer inland, and 3 nautical miles out into the eez.
 
-```{r, eval=FALSE}
-# ------- coastal area data -----------
+```{r}
 # read in area of coastline data
 inland_data <- read_csv(here("globalprep", "lsp", version_year, "output", "rgn_area_inland1km.csv"))
 offshore_data <- read_csv(here("globalprep", "lsp", version_year, "output", "rgn_area_offshore3nm.csv"))
-
 
 # get combined value of inland and offshore for each ohi region
 inland_offshore <- inland_data %>%
@@ -869,7 +753,7 @@ inland_offshore <- inland_data %>%
 
 Now we can join all of these data sources and conduct $$\frac{TourismLivelihoods * (CoastalPop/TotalPop)}{CoastalArea}$$.
 
-```{r, eval=FALSE}
+```{r}
 # join the tourism data, coastal population, and total population data 
 
 liv_prop_df <- left_join(liv_tourism_max, total_population_final, by = c("rgn_id","rgn_name","year")) %>% 
