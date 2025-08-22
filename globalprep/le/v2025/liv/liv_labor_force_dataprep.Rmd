@@ -22,14 +22,28 @@ editor_options:
 
 # Livelihoods: Proportion of Tourism Jobs per Country/Region per Year
 
+# v2025 Updates:
+- Added ILOSTAT data for gapfilling missing regions in World Bank data
+- Added general gapfilling methods for World Bank and ILOSTAT data to this processing step. In previous assessments, there either was no gapfilling, or gapfilling was done in individual sector preps. Now, it get's completed here. 
+
 ## Overview
 
 * **Data:** Labor Force & Employment Data
 
-  * Labor Force data from World Bank, last updated 7/1/25 (downloaded August 7, 2025).
+  * Labor Force data from World Bank, last updated 7/1/25 (downloaded August 7, 2025). This serves as the primary dataset for total labor force population data
 
       - https://data.worldbank.org/indicator/SL.TLF.TOTL.IN
       - Click the csv button on the bottom/middle right under the download heading.
+      
+  * ILOSTAT Labor Force data, (downloaded August 20, 2025). Secondary dataset to gapfill missing countries in world bank data
+
+      - https://rshiny.ilo.org/dataexplorer38/?lang=en&segment=indicator&id=SDG_0831_SEX_ECO_RT_A 
+      - Select indicator "Labour force by sex and age (thousands) - annual"
+      - Left hand selection menus:
+        - Sex: Total
+        - Age: Aggregate bands: Total
+        - Adjust time period slider to assessment years of interest. i.e. in v2025, we used years 2008-2023
+      - Click the export button. Default selections should be fine, but you want "filtered", "label", and ".csv". Hit download. 
 
 
 ### Setup
@@ -54,6 +68,7 @@ librarian::shelf(
   tidyverse, 
   httr,
   plotly,
+  zoo
 )
 
 
@@ -63,12 +78,15 @@ source(here("workflow", "R", "common.R"))
 # ---- set year and file path info ----
 current_year <- 2025 # Update this in the future!!
 previous_year <- 2024
+data_year <-  2023
 
 version_year <- paste0("v",current_year)
 previous_vyear <- paste0("v", previous_year)
 
 current_data_dir <- paste0("d", current_year)
 previous_data_dir <- paste0("d", previous_year)
+
+data_year <-  2023
 
 # ---- data directories ----
 
@@ -91,12 +109,13 @@ country_regex_to_iso3c <- function(country_string) {
     countrycode::countrycode(origin = "country.name", destination = "iso3c", origin_regex = TRUE)
 }
 ```
+# Labor Force Data
 
-### Read in Data
+## World Bank 
 
 ```{r}
 # ===================== Read in Data ==============================
-# Labor force data ----
+# World Bank labor force data ----
 labor_raw <- read_csv(here(current_wb_dir, "WorldBank_total_labor_force_1990-2024",
                                    "API_SL.TLF.TOTL.IN_DS2_en_csv_v2_38674.csv"),
                                skip = 4, # How many rows to skip before data starts,
@@ -111,14 +130,14 @@ region_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-glob
 
 # ==================== Tidy Data ===================================
 
-# Labor force data -----------------------------------
+# Labor force data 
 labor_clean <- labor_raw %>% 
   # conver to lower_snake_case
   janitor::clean_names() %>% 
   # tidy data from wide to long (years are currently columns)
   pivot_longer(cols = 5:length(names(labor_raw)),
                names_to = "year", 
-               values_to = "labor_force_total") %>% 
+               values_to = "labor_force") %>% 
   # remove unnecessary columns
   select(-c(indicator_name, indicator_code)) %>% 
   # clean up year column (currently in the form of xYYYY)
@@ -126,61 +145,234 @@ labor_clean <- labor_raw %>%
   # fix data types
   mutate(year = as.numeric(year),
          country_name = as.factor(country_name),
-         labor_force_total = as.numeric(labor_force_total)) %>% 
-  filter(year >= 2009) # starting 5 years back from first year of evaluation
-  
+         labor_force = as.numeric(labor_force)) %>% 
+  filter(year >= 2008) # starting 5 years back from first year of evaluation
 
-# clean regions data --------------
+
+# clean regions data
 region_clean <- region_names %>% 
   janitor::clean_names() %>% 
-  # drop notes column
-  select(-c(("notes")))
+  select(-c("notes"))
 
 
-# ============== Run ohicore name_2_rgn ==================================
+# Run ohicore name_2_rgn 
 # check names
 labor_rgn <- name_2_rgn(df_in = labor_clean, 
                        fld_name='country_name',
                       flds_unique = c("year"))
 
 duplicates <- labor_rgn[duplicated(labor_rgn[, c("rgn_name", "year")]),]
-
 unique(duplicates$country_name)
 unique(duplicates$rgn_name)
 
 # aggregating to address duplicates ----
-
-# we don't need to do a weighted average since the values can just be added (end goal is total labor force)
-# China: Hong Kong, Macao
-# Northern Mariana Islands and Guam: Northern Mariana Islands, Guam 
-# Puerto Rico and Virgin Islands of the United States: Puerto Rico, Virgin Islands (U.S.)
-
-
 labor_rgn_agg <- labor_rgn %>%
   group_by(rgn_id, rgn_name, year) %>%
-  dplyr::summarize(labor_force_total = sum(labor_force_total, na.rm=TRUE)
+  dplyr::summarize(labor_force = sum(labor_force, na.rm=TRUE)
             )%>%
   ungroup() %>% 
   dplyr::mutate(year = as.numeric(year)) %>% 
-  mutate(labor_force_total = case_when(
-    labor_force_total == 0 ~ NA, # replace 0s with NAs, because there are no true 0s in our dataset -- NAs became 0s in the summarize step earlier
-    .default = labor_force_total
+  mutate(labor_force = case_when(
+    labor_force == 0 ~ NA, # replace 0s with NAs, because there are no true 0s in our dataset -- NAs became 0s in the summarize step earlier
+    .default = labor_force
   ))
- # mutate(eez_iso3 = country_regex_to_iso3c(rgn_name))
 
-# because we aggregated, getting EEZs is more complicated... OHI has assigned certain EEZ ISO3 codes to these aggregated regions, so if you want EEZ ISO3 codes, you'll need to join with regions_clean read in earlier by rgn_name
-# Caused by warning:
-#! Some values were not matched unambiguously: Micronesia, Northern Mariana Islands and Guam, Northern #Saint-Martin, Puerto Rico and Virgin Islands of the United States
+```
+
+## Gapfill World Bank 
+
+```{r}
+# Labor force data
+# created in liv_labor_force_dataprep.Rmd
+# labor_force <- read_csv(here(current_le_dir, "int", "liv_labor_force.csv"))
+
+# Gapfill total labor force values for missing years
+world_bank_gf <- labor_rgn_agg %>% 
+  # this data often goes one year past the current data year for other sources
+  filter(year <= data_year) %>% 
+  group_by(rgn_id, rgn_name) %>% 
+  # Ensure we're hitting all years for joining later on
+  complete(year = 2008:data_year) %>% 
+  ungroup() %>%
+  # First, create gapfilled boolean and method columns
+  mutate(lf_gapfilled = ifelse(is.na(labor_force), "1", NA_character_),
+         lf_gf_method = ifelse(is.na(labor_force), "1", NA_character_)) %>%
+  # need to group again before gapfilling 
+  group_by(rgn_id, rgn_name) %>% 
+  arrange(rgn_id, year) %>% 
+  # Linear interpolation
+  mutate(labor_force = na.approx(labor_force, x = year, na.rm = FALSE)) %>% 
+  mutate(lf_gapfilled = ifelse(lf_gapfilled == "1" & !is.na(labor_force), 
+                               "gapfilled", lf_gapfilled),
+         lf_gf_method = ifelse(lf_gf_method == "1" & !is.na(labor_force), 
+                               "Interpolation", lf_gf_method)) %>% 
+  # Upfilling and downfilling
+  tidyr::fill(labor_force, .direction = "updown") %>% 
+  mutate(lf_gapfilled = ifelse(lf_gapfilled == "1" & !is.na(labor_force), 
+                               "gapfilled", lf_gapfilled),
+         lf_gf_method = ifelse(lf_gf_method == "1" & !is.na(labor_force), 
+                               "Up/Downfilling", lf_gf_method)) %>% 
+  # Add data source
+  mutate(source = "World Bank")
+
+table(world_bank_gf$lf_gf_method) 
+# 3 downfilling, 142 upfilling, (1 is a flag for missing here), no interpolation
+colSums(is.na(world_bank_gf)) # 384 still missing
+
+world_bank_gf %>% 
+  filter(is.na(labor_force)) %>% 
+  distinct(rgn_id, rgn_name) %>% 
+  nrow() 
+# 24 regions with NO labor force data 
+
+world_bank_gf %>% 
+  filter(!is.na(labor_force)) %>% 
+  distinct(rgn_id, rgn_name) %>% 
+  nrow()
+# 142 regions WITH labor force data
+
+# Drop NAs before combining with ILOSTAT data
+world_bank_gf <- world_bank_gf %>% 
+  drop_na(labor_force)
+
+```
 
 
-labor_export <- labor_rgn_agg %>% 
+## ILOSTAT
+
+```{r}
+# Read in raw ILOSTAT
+ilostat_labor <- read_csv(here(raw_data_dir, "ILOSTAT", current_data_dir,
+                               "EAP_TEAP_SEX_AGE_NB_A-filtered-2025-08-21.csv"))
+
+# Select columns and adjust units
+ilostat_labor_clean <- ilostat_labor %>% 
+  select(country = ref_area.label, year = time, labor_force = obs_value) %>% 
+  mutate(labor_force = labor_force * 1000)
+         # unit = "Persons (1)",
+         # source = "ILOSTAT")
+
+# Fix name_2_rgn error with Netherland Antillies
+neth_ant <- ilostat_labor_clean %>%
+    filter(country == 'Netherlands Antilles') %>% 
+    mutate(labor_force = (labor_force / 5),  
+           'Curacao' = labor_force,
+           'Sint Maarten' = labor_force,
+           'Bonaire' = labor_force,
+           'Saint Eustatius' = labor_force,
+           'Saba' = labor_force) %>%
+    select(-c(labor_force, country)) %>%
+    pivot_longer(cols = c("Curacao", "Sint Maarten", "Bonaire",
+                          "Saint Eustatius", "Saba"),
+                 names_to = "country",
+                 values_to = "labor_force") %>%
+    mutate(country = as.character(country),
+           labor_force = as.numeric(labor_force)) %>% 
+    select(c(country, labor_force, year))
+  
+ilostat_labor_clean <- ilostat_labor_clean %>%
+    filter(country != 'Netherlands Antilles') %>%
+    bind_rows(neth_ant)
+
+# Add rgn names/ids
+ilostat_rgn <- name_2_rgn(df_in = ilostat_labor_clean, 
+                       fld_name='country',
+                      flds_unique = c("year"))
+
+# Check duplicates
+duplicates <- ilostat_rgn[duplicated(ilostat_rgn[, c("rgn_name", "year")]),]
+unique(duplicates$rgn_name)
+
+# Aggregate duplicates
+ilostat_rgn_agg <- ilostat_rgn %>%
+  group_by(rgn_id, rgn_name, year) %>%
+  dplyr::summarize(labor_force = sum(labor_force, na.rm=TRUE)
+            )%>%
+  ungroup() %>% 
+  dplyr::mutate(year = as.numeric(year)) %>% 
+  mutate(labor_force = case_when(
+    labor_force == 0 ~ NA, # replace 0s with NAs, because there are no true 0s in our dataset -- NAs became 0s in the summarize step earlier
+    .default = labor_force
+  ))
+
+# Confirm duplicates have been aggregated
+duplicates <- ilostat_rgn_agg[duplicated(ilostat_rgn_agg[, c("rgn_name", "year")]),]
+unique(duplicates$rgn_name)
+```
+
+## Gapfill ILOSTAT
+
+```{r}
+# Gapfill total labor force values for missing years
+ilostat_gf <- ilostat_rgn_agg %>% 
+  # this data often goes one year past the current data year for other sources
+  filter(year <= data_year) %>% 
+  group_by(rgn_id, rgn_name) %>% 
+  # Ensure we're hitting all years for joining later on
+  complete(year = 2008:data_year) %>% 
+  ungroup() %>%
+  # First, create gapfilled boolean and method columns
+  mutate(lf_gapfilled = ifelse(is.na(labor_force), "1", NA_character_),
+         lf_gf_method = ifelse(is.na(labor_force), "1", NA_character_)) %>%
+  # need to group again before gapfilling 
+  group_by(rgn_id, rgn_name) %>% 
+  arrange(rgn_id, year) %>% 
+  # Linear interpolation
+  mutate(labor_force = na.approx(labor_force, x = year, na.rm = FALSE)) %>% 
+  mutate(lf_gapfilled = ifelse(lf_gapfilled == "1" & !is.na(labor_force), 
+                               "gapfilled", lf_gapfilled),
+         lf_gf_method = ifelse(lf_gf_method == "1" & !is.na(labor_force), 
+                               "Interpolation", lf_gf_method)) %>% 
+  # Upfilling and downfilling
+  tidyr::fill(labor_force, .direction = "updown") %>% 
+  mutate(lf_gapfilled = ifelse(lf_gapfilled == "1" & !is.na(labor_force), 
+                               "gapfilled", lf_gapfilled),
+         lf_gf_method = ifelse(lf_gf_method == "1" & !is.na(labor_force), 
+                               "Up/Downfilling", lf_gf_method)) %>% 
+  # Add data source column 
+  mutate(source = "ILOSTAT")
+
+table(ilostat_gf$lf_gf_method) 
+ # Interpolation Up/Downfilling 
+ #           379            745 
+colSums(is.na(ilostat_gf)) # 0 missing
+
+ilostat_gf %>% 
+  filter(!is.na(labor_force)) %>% 
+  distinct(rgn_id, rgn_name) %>% 
+  nrow()
+# 164 regions WITH labor force data
+```
+
+
+# Join datasets
+
+```{r}
+# Find only the observations in ilostat NOT in wb
+new_rgns <- anti_join(ilostat_gf, world_bank_gf, 
+                      by = join_by(rgn_id, rgn_name, year))
+
+# Bind new region data to world bank
+total_labor_force <- bind_rows(world_bank_gf, new_rgns)
+
+length(unique(total_labor_force$rgn_id)) # 170 regions total!
+colSums(is.na(total_labor_force)) # no missing data
+
+# Add final columns for export
+labor_export <- total_labor_force %>%
   mutate(rgn_id = as.character(rgn_id),
          unit = "Persons (1)",
-         sector = "liv",
-         data_source = "World Bank")
+         sector = "liv") %>% 
+  select(rgn_id, rgn_name, year, labor_force, unit, sector, source)
 
-# save csv for use in other livelihood dataprep
 write_csv(labor_export, here(current_le_dir, "int", "liv_labor_force.csv"))
+
+# Save gapfilling information
+labor_gf <- total_labor_force %>% 
+  select(rgn_id, rgn_name, year, lf_gapfilled, lf_gf_method, source)
+
+write_csv(labor_gf, here(current_le_dir, "int", "liv_labor_force_gf.csv"))
+
 ```
 
 # Data check
@@ -205,9 +397,8 @@ nrow(old_le) # 2490
 
 # Combine data frames
 comb_le <- new_le %>% 
-  rename(new_labor_force = labor_force_total) %>% 
+  rename(new_labor_force = labor_force) %>% 
   left_join(old_le, by = join_by(rgn_id, year, rgn_name))
-
 
 # Plot
 comp_plot1 <- ggplot() + 
