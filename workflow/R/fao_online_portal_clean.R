@@ -16,7 +16,9 @@ fao_online_portal_clean <- function(fao, sub_N = 0.1) {
     # remove brackets from years
     dplyr::rename_with(~ base::gsub("\\[", "", .)) %>% 
     dplyr::rename_with(~ base::gsub("\\]", "", .)) %>% 
-    mutate(row_id = row_number())
+    mutate(row_id = row_number(),
+           # Remove brackets from some species names
+           asfis_species = str_replace_all(asfis_species, "\\[|\\]", ""))
   
 # fao <- fao %>% 
 #   mutate(row_id = row_number())

@@ -116,13 +116,12 @@ int_dir <- here::here(data_path, "int")
 ```{r read data}
 # OHI regions data ----
 # read in OHI regions for joining
-region_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/spatial/regions_list.csv") %>% 
+region_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/spatial/regions_list.csv", show_col_types = FALSE) %>% 
   janitor::clean_names() %>% 
   select(-notes)
 
 # FAO Aquaculture data ----
-aquaculture_value <- read_csv(file.path(fao_dir, "FAO_GlobalAquacultureProduction_Value_1984_2023.csv")) %>% 
-  janitor::clean_names()
+aquaculture_value <- read_csv(file.path(fao_dir, "FAO_GlobalAquacultureProduction_Value_1984_2023.csv"))
 
 ## str to view file structure (it can be very messy)
 # str(aquaculture_value)
@@ -130,263 +129,31 @@ aquaculture_value <- read_csv(file.path(fao_dir, "FAO_GlobalAquacultureProductio
 
 ## Clean Aquaculture value data
 
-**Note:** This process was done manually because instead of reading in the data with "flag" as the header for each observation's symbol, 2024's year was read in with "symbol" as the header for each observation's symbol
-
--   As a result, the data cleaning function fao_online_portal_clean.R
-    was not applicable. We instead used components of the
-    cleaning function and manually cleaned the data. See v2023
-    livelihoods_economies_dataprep.Rmd to see what they did.
-    -   With the data in the correct format (drawn from online FAO
-        portal), this function should apply
-
-```{r clean fao data}
-#clean the aquaculture value data ----
-#this will also be used in the mariculture jobs data section, so need to keep in all environments in the first step
-
-# Cleaning aquaculture value data
-aquaculture_value_clean <- aquaculture_value %>% 
-   dplyr::rename(country = country_name, # Assigning relevant column names 
-                species =  asfis_species_name, 
-                area = fao_major_fishing_area_name,
-                environment = environment_name) %>%
-  dplyr::select(-c(unit_name, contains("s_"))) %>%
-  tidyr::pivot_longer(cols = -(1:5), names_to = 'year', values_to = 'value', values_drop_na = T) %>%
-  mutate(year = str_remove(year, "x"))
-         #clean data, note that we are still using a sub_n value of .1 (100 dollars) 
-        # row_id  = 1:nrow(.)) 
-
-# This section adjusts columns simultaneously so that you dont have to ---- 
-
-# Check these! These are for the "year" columns
-initial_data_year = 1984
-last_data_year = 2023
-
-# Testing to make sure the "year" specs follow the same naming format as the df
-test = paste0("x", initial_data_year:last_data_year)
-
-# Check these! These are for the "symbol" or "flag" columns (2024 they were in increments of 2)
-flag_start = 8
-flag_end = 84
-
-# Testing to make sure the symbol or flag specs are the same naming format as the df 
-test = paste0("symbol_", seq(flag_start, flag_end, by = 2))
-
-# Pivoting columns to tidy the data ---- 
-
-# This creates a dataframe of just the values in the FAO data 
-fao_values <- aquaculture_value_clean %>% 
-  dplyr::select(-c(paste0("symbol_", seq(flag_start, flag_end, by = 2)))) %>% # remove "flag" columns
-  pivot_longer(cols = paste0("x", initial_data_year:last_data_year), 
-               names_to = "year",
-               values_to = "value") %>% # Pivot value colunns
-  mutate(year = str_remove(year, "x")) # clean_names() put an 'x' in front of years. Removing the x
-
-# This is a little bit more messy than the values because my column headers contained symbol instead of flag 
-fao_flags1 <- aquaculture_value_clean %>% 
-  dplyr::select(-c(paste0("x", initial_data_year:last_data_year))) # select out year
-
-### MAYBE MOVE THIS TO APPLY TO THE AQUACULTURE_VALUE_CLEAN DF RATHER THAN FAO_FLAGS1
-
-# Rename the columns in the Flag dataframe to actually have "flag" rather than symbol AND** getting the year for each flag so that we can rejoin the flags df with the values df 
-colnames(fao_flags1) = c("country", "species", "area", "environment", "unit", paste0("flag", initial_data_year:last_data_year), "row_id")
-
-# Because values were already selected out, this line of code is just pivoting the flags df and cleaning
-fao_flags <- fao_flags1 %>% 
-  pivot_longer(cols = paste0("flag", initial_data_year:last_data_year),
-               names_to = "flag_year",
-               values_to = "flag") %>% # Pivot longer 
-  mutate(year = str_remove(flag_year, "flag")) %>% # Remove the "flag" from flag year so that we can have year to join by in the final flag df
-  dplyr::select(year, row_id, flag) # selecting relevant columns to join by 
-
-# Creating final df ---- 
-
-# Joining fao values dataframe with the fao flags dataframe so that we can account for "N" flag and assign a value to it 
-fao_new <- fao_values %>%
-  left_join(fao_flags, by = c("row_id", "year")) # This is why we need year from each flag. If we just pivoted the values and then the flags in the aquaculture_values_clean df then it would double the values for each observation. 
-
-# Assign value to substitute "N" flags for 
-sub_N = 0.1
-
-# Replace "N" flags 
-fao_new <- fao_new %>% 
-  mutate(value = case_when((str_detect(flag, "N") & value == 0) ~ sub_N,
-                           TRUE ~value)) %>% #replace values that are 0 and have the flag N with sub_N
-  select(-c(row_id, flag)) # Getting rid of temporary indexing row and flag row 
-
-
-# Filter to only marine habitats
- mariculture_revenue <- fao_new %>% 
-   filter(environment %in% c("Brackishwater", "Marine")) %>% 
-   mutate(species = case_when(
-     species == "Mexican spiny loster" ~ "Mexican spiny lobster",
-     TRUE ~ species
-   ))
- 
-# 
-# mar_sp <- read.csv(here::here('globalprep/mar/v2023/raw/species_list.csv'), stringsAsFactors=FALSE) %>%
-#   select(FAO_name, exclude,Taxon_code, family, notes, notes_2)
-# 
-# mar_sp_fix <- read.csv(here::here('globalprep/mar/v2022/raw/species_list.csv'), stringsAsFactors=FALSE)
-# 
-# new.spp <- setdiff(mariculture_revenue$species, mar_sp$FAO_name)
-# 
-# new.spp # I suppose there are 17 new species in the 2024 data
-# 
-# 
-# 
-# mariculture_revenue <- mariculture_revenue %>%
-#   dplyr::rename(FAO_name = species)
-# 
-# mar_test <- mariculture_revenue %>% left_join(mar_sp, by="FAO_name")
-# 
-# mar_test <- mariculture_test %>% dplyr::filter(exclude < 1)
-# 
-# mar_test <- mar_test %>%
-#   dplyr::mutate(include = 1 - exclude)
-# 
-# mar_test <- mar_test %>%
-#   mutate(value_include = value*include)
-
-# Sum by region and year (we need total revenue)
-total_mar_rev_new <- aquaculture_value_clean %>%
-  filter(environment %in% c("Brackishwater", "Marine")) %>% 
-  group_by(country, year) %>% 
-  dplyr::summarize(value = sum(value, na.rm = TRUE)) %>% 
-  mutate(sector = "mar", data_source = "FAO aquaculture value", unit = "USD (1)",
-          value = value *1000) %>% # Multiply value times 1000 to get dollars
-  select(country, year, value, unit, sector, data_source) # Select relevant columns
-
-unique(setdiff(total_mar_rev_new, total_mar_rev_old)$country)
-
-# Plotting to gut check ---- 
-total_mar_rev %>% 
-  # filter(!country == "China") %>% # If needed, filter out China because it tends to squish the lower values 
-  ggplot(aes(x = as.numeric(year), y = value, color = country)) + 
-  geom_line() + 
-  theme(legend.position = "none") + 
-  scale_y_continuous(labels = scales::label_dollar(scale = 0.000000001, suffix = "B"))
-```
-
 ```{r}
-# Cleaning aquaculture value data
-aquaculture_value_clean <- aquaculture_value %>% 
-   dplyr::rename(country = country_name, # Assigning relevant column names 
-                species =  asfis_species_name, 
-                area = fao_major_fishing_area_name,
-                environment = environment_name) %>%
-  dplyr::select(-c(unit_name)) %>% #clean data, note that we are still using a sub_n value of .1 (100 dollars) 
-  mutate(row_id = 1:nrow(.))
-
-# This section adjusts columns simultaneously so that you dont have to ---- 
-
-# Check these! These are for the "year" columns
-initial_data_year = 1984
-last_data_year = 2023
-
-# Testing to make sure the "year" specs follow the same naming format as the df
-test = paste0("x", initial_data_year:last_data_year)
-
-# Check these! These are for the "symbol" or "flag" columns (2024 they were in increments of 2)
-flag_start = 8
-flag_end = 86
-
-# Testing to make sure the symbol or flag specs are the same naming format as the df 
-test = paste0("symbol_", seq(flag_start, flag_end, by = 2))
-
-# Pivoting columns to tidy the data ---- 
-
-# This creates a dataframe of just the values in the FAO data 
-fao_values <- aquaculture_value_clean %>% 
-  dplyr::select(-c(paste0("s_", seq(flag_start, flag_end, by = 2)))) %>% # remove "flag" columns
-  pivot_longer(cols = paste0("x", initial_data_year:last_data_year), 
-               names_to = "year",
-               values_to = "value") %>% # Pivot value colunns
-  mutate(year = str_remove(year, "x")) # clean_names() put an 'x' in front of years. Removing the x
-
-# This is a little bit more messy than the values because my column headers contained symbol instead of flag 
-fao_flags1 <- aquaculture_value_clean %>% 
-  dplyr::select(-c(paste0("x", initial_data_year:last_data_year))) # select out year
-
-### MAYBE MOVE THIS TO APPLY TO THE AQUACULTURE_VALUE_CLEAN DF RATHER THAN FAO_FLAGS1
-
-# Rename the columns in the Flag dataframe to actually have "flag" rather than symbol AND** getting the year for each flag so that we can rejoin the flags df with the values df 
-colnames(fao_flags1) = c("country", "species", "area", "environment", "unit", paste0("flag", initial_data_year:last_data_year), "row_id")
-
-# Because values were already selected out, this line of code is just pivoting the flags df and cleaning
-fao_flags <- fao_flags1 %>% 
-  pivot_longer(cols = paste0("flag", initial_data_year:last_data_year),
-               names_to = "flag_year",
-               values_to = "flag") %>% # Pivot longer 
-  mutate(year = str_remove(flag_year, "flag")) %>% # Remove the "flag" from flag year so that we can have year to join by in the final flag df
-  dplyr::select(year, row_id, flag) # selecting relevant columns to join by 
-
-# Creating final df ---- 
-
-# Joining fao values dataframe with the fao flags dataframe so that we can account for "N" flag and assign a value to it 
-fao_new <- fao_values %>%
-  left_join(fao_flags, by = c("row_id", "year")) # This is why we need year from each flag. If we just pivoted the values and then the flags in the aquaculture_values_clean df then it would double the values for each observation. 
-
-# Assign value to substitute "N" flags for 
-sub_N = 0.1
-
-# Replace "N" flags 
-fao_new <- fao_new %>% 
-  mutate(value = case_when((str_detect(flag, "N") & value == 0) ~ sub_N,
-                           TRUE ~value)) %>% #replace values that are 0 and have the flag N with sub_N
-  select(-c(row_id, flag)) # Getting rid of temporary indexing row and flag row 
-
-
-# Filter to only marine habitats
- mariculture_revenue <- fao_new %>% 
-   filter(environment %in% c("Brackishwater", "Marine")) %>% 
+aquaculture_value_cleaned <- fao_online_portal_clean(aquaculture_value) %>%
+  clean_names() %>% 
+   filter(environment_name %in% c("Brackishwater", "Marine")) %>% 
    mutate(species = case_when(
-     species == "Mexican spiny loster" ~ "Mexican spiny lobster",
-     TRUE ~ species
-   ))
- 
-# 
-# mar_sp <- read.csv(here::here('globalprep/mar/v2023/raw/species_list.csv'), stringsAsFactors=FALSE) %>%
-#   select(FAO_name, exclude,Taxon_code, family, notes, notes_2)
-# 
-# mar_sp_fix <- read.csv(here::here('globalprep/mar/v2022/raw/species_list.csv'), stringsAsFactors=FALSE)
-# 
-# new.spp <- setdiff(mariculture_revenue$species, mar_sp$FAO_name)
-# 
-# new.spp # I suppose there are 17 new species in the 2024 data
-# 
-# 
-# 
-# mariculture_revenue <- mariculture_revenue %>%
-#   dplyr::rename(FAO_name = species)
-# 
-# mar_test <- mariculture_revenue %>% left_join(mar_sp, by="FAO_name")
-# 
-# mar_test <- mariculture_test %>% dplyr::filter(exclude < 1)
-# 
-# mar_test <- mar_test %>%
-#   dplyr::mutate(include = 1 - exclude)
-# 
-# mar_test <- mar_test %>%
-#   mutate(value_include = value*include)
+     asfis_species == "Mexican spiny loster" ~ "Mexican spiny lobster",
+     TRUE ~ asfis_species
+   )) 
 
-# Sum by region and year (we need total revenue)
-total_mar_rev_old <- mariculture_revenue %>%
+total_mar_rev <- aquaculture_value_cleaned %>% 
   group_by(country, year) %>% 
   dplyr::summarize(value = sum(value, na.rm = TRUE)) %>% 
   mutate(sector = "mar", data_source = "FAO aquaculture value", unit = "USD (1)",
-          value = value *1000) %>% # Multiply value times 1000 to get dollars
+          value = value * 1000) %>% # Multiply value times 1000 to get dollars
   select(country, year, value, unit, sector, data_source) # Select relevant columns
 
-# Plotting to gut check ---- 
+unique(setdiff(total_mar_rev$country, aquaculture_value_cleaned$country))
+
 total_mar_rev %>% 
-  # filter(!country == "China") %>% # If needed, filter out China because it tends to squish the lower values 
+  filter(!country == "China") %>% # If needed, filter out China because it tends to squish the lower values 
   ggplot(aes(x = as.numeric(year), y = value, color = country)) + 
   geom_line() + 
   theme(legend.position = "none") + 
   scale_y_continuous(labels = scales::label_dollar(scale = 0.000000001, suffix = "B"))
 ```
-
-
 
 ## Assigning country names to their respective regions in OHI
 
@@ -522,39 +289,39 @@ joined_13 <- mar_rev_dupes_temp %>%
   relocate(country, .before = year) %>% 
   relocate(rgn_id, .before = rgn_name)
 
-rgn_186 <- mar_rev_rgn_temp %>% 
-  filter(rgn_id %in% c(186)) %>% 
-  filter(country %in% "Serbia and Montenegro")
+# rgn_186 <- mar_rev_rgn_temp %>% 
+#   filter(rgn_id %in% c(186)) %>% 
+#   filter(country %in% "Serbia and Montenegro")
+# 
+# joined_186 <- mar_rev_dupes_temp %>% 
+#   filter(rgn_id %in% 186) %>% 
+#   mutate(country = rgn_186$country,
+#          unit = rgn_186$unit,
+#          sector = rgn_186$sector,
+#          data_source = rgn_186$data_source,
+#          Country = rgn_186$Country,
+#          rgn_name = rgn_186$rgn_name,
+#          rgn_id = as.numeric(rgn_id)
+#          ) %>% 
+#   relocate(country, .before = year) %>% 
+#   relocate(rgn_id, .before = rgn_name)
 
-joined_186 <- mar_rev_dupes_temp %>% 
-  filter(rgn_id %in% 186) %>% 
-  mutate(country = rgn_186$country,
-         unit = rgn_186$unit,
-         sector = rgn_186$sector,
-         data_source = rgn_186$data_source,
-         Country = rgn_186$Country,
-         rgn_name = rgn_186$rgn_name,
-         rgn_id = as.numeric(rgn_id)
-         ) %>% 
-  relocate(country, .before = year) %>% 
-  relocate(rgn_id, .before = rgn_name)
-
-rgn_73 <- mar_rev_rgn_temp %>% 
-  filter(rgn_id %in% c(73)) %>% 
-  filter(country %in% "Un. Sov. Soc. Rep.")
-
-joined_73 <- mar_rev_dupes_temp %>% 
-  filter(rgn_id %in% 73) %>% 
-  mutate(country = rgn_73$country,
-         unit = rgn_73$unit,
-         sector = rgn_73$sector,
-         data_source = rgn_73$data_source,
-         Country = rgn_73$Country,
-         rgn_name = rgn_73$rgn_name,
-         rgn_id = as.numeric(rgn_id)
-         ) %>% 
-  relocate(country, .before = year) %>% 
-  relocate(rgn_id, .before = rgn_name)
+# rgn_73 <- mar_rev_rgn_temp %>% 
+#   filter(rgn_id %in% c(73)) %>% 
+#   filter(country %in% "Un. Sov. Soc. Rep.")
+# 
+# joined_73 <- mar_rev_dupes_temp %>% 
+#   filter(rgn_id %in% 73) %>% 
+#   mutate(country = rgn_73$country,
+#          unit = rgn_73$unit,
+#          sector = rgn_73$sector,
+#          data_source = rgn_73$data_source,
+#          Country = rgn_73$Country,
+#          rgn_name = rgn_73$rgn_name,
+#          rgn_id = as.numeric(rgn_id)
+#          ) %>% 
+#   relocate(country, .before = year) %>% 
+#   relocate(rgn_id, .before = rgn_name)
 
 rgn_202 <- mar_rev_rgn_temp %>% 
   filter(rgn_id %in% c(202)) %>% 
@@ -578,9 +345,9 @@ mar_rev_fixed <- mar_rev_rgn_no_dupes %>%
   rbind(., joined_13) %>% 
   rbind(., joined_202) %>% 
   rbind(., joined_209) %>% 
-  rbind(., joined_140) %>% 
-  rbind(., joined_186) %>% 
-  rbind(., joined_73)
+  rbind(., joined_140) 
+  #rbind(., joined_186) %>% 
+  #rbind(., joined_73)
 
 # Checking for duplicates one more times --> No observations = no duplicates 
 duplicates <- mar_rev_fixed[duplicated(mar_rev_fixed[, c('rgn_id','year')]),  ]
@@ -600,12 +367,13 @@ mar_heatmap <- eco_mar_usd_raw %>%
     usd == 0 ~ FALSE,
     usd > 0 ~ TRUE
   )) %>% 
-  filter(year %in% 2009:2019)
+  filter(year %in% 2009:2023)
 
 heatmap <- ggplot(mar_heatmap, aes(x = year, y = rgn_name, fill = as.factor(status))) + 
   geom_tile(color = "black") + 
   scale_fill_manual(values = c("darkgrey", "lightgreen")) + 
   theme_bw()
+
 heatmap
 
 # plotly::ggplotly(heatmap) # rgn_id 249, 244, 98, and 116 have missing data for almost all years, aside from that what's in there is pretty good and those countries likely are present from freshwater aquaculture data im assuming 
@@ -616,10 +384,9 @@ total_na <- mar_heatmap %>%
 
 # Check here if you need to update the years in your dataframe. If there are  
 
-## Checking how many unique countries are within the revenue data - 142 (2024 Assessment)
+## Checking how many unique countries are within the revenue data - 142 (2024 Assessment) (144 2025 assessment)
 duplicates <- eco_mar_usd_raw[duplicated(eco_mar_usd_raw[, c('rgn_id','year')]),  ]
-
-
+length(unique(eco_mar_usd_raw$rgn_id))
 ```
 
 ## Find out which countries can be gapfilled versus the countries that cant be
@@ -635,7 +402,8 @@ mar_heatmap <- eco_mar_usd_raw_cut %>%
     usd == 0 ~ FALSE,
     usd > 0 ~ TRUE
   )) %>% 
-  filter(year %in% 2009:2019)
+  filter(year %in% 2009:2023)
+
 heatmap <- ggplot(mar_heatmap, aes(x = year, y = rgn_name, fill = as.factor(status))) + 
   geom_tile(color = "black") + 
   scale_fill_manual(values = c("darkgrey", "lightgreen")) + 
