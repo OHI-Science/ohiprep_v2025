@@ -165,14 +165,14 @@ previous_le_dir <- here("globalprep", "le", previous_vyear)
 # ===================== Read in Data ==============================
 
 # ---- Tourism revenue data ----
-# International visitor spending or Visitor exports, US$, real 2024 prices and exchange rates, billions
+# International visitor vis_spending or Visitor exports, US$, real 2024 prices and exchange rates, billions
 visitor_exports <- read_xlsx(here(raw_data_dir, "WTTC", current_data_dir, 
                               "WTTC-Data-Request-OHI-13.08.2025.xlsx"),
                               sheet = 3,
                               skip = 2)
 
 # Domestic T&T expenditure, US$, real 2024 prices and exchange rates, billions
-domesting_spending <- read_xlsx(here(raw_data_dir, "WTTC", current_data_dir, 
+domesting_vis_spending <- read_xlsx(here(raw_data_dir, "WTTC", current_data_dir, 
                               "WTTC-Data-Request-OHI-13.08.2025.xlsx"),
                               sheet = 4,
                               skip = 2)
@@ -190,7 +190,7 @@ wb_gdp_raw <- read_csv(here(raw_data_dir, "WorldBank", current_data_dir,
 ## Visitor Exports
 
 ```{r}
-# International visitor spending or Visitor exports, US$, real 2024 prices and exchange rates, billions
+# International visitor vis_spending or Visitor exports, US$, real 2024 prices and exchange rates, billions
 visitor_exports <- read_xlsx(here(raw_data_dir, "WTTC", current_data_dir, 
                               "WTTC-Data-Request-OHI-13.08.2025.xlsx"),
                               sheet = 3,
@@ -199,7 +199,7 @@ visitor_exports <- read_xlsx(here(raw_data_dir, "WTTC", current_data_dir,
 # Pivot longer and rename
 visitor_long <- visitor_exports %>% 
   pivot_longer(cols = -1, # everything except the first column
-               values_to = "spending",
+               values_to = "vis_spending",
                names_to = "year") %>% 
   rename(country = Economy) %>% 
   mutate(year = as.numeric(year))
@@ -207,20 +207,20 @@ visitor_long <- visitor_exports %>%
 # Fix name_2_rgn error with Netherland Antillies
 neth_ant <- visitor_long %>%
     filter(country == 'Former Netherland Antillies') %>% 
-    mutate(spending = (spending / 5),  
-           'Curacao' = spending,
-           'Sint Maarten' = spending,
-           'Bonaire' = spending,
-           'Saint Eustatius' = spending,
-           'Saba' = spending) %>%
-    select(-c(spending, country)) %>%
+    mutate(vis_spending = (vis_spending / 5),  
+           'Curacao' = vis_spending,
+           'Sint Maarten' = vis_spending,
+           'Bonaire' = vis_spending,
+           'Saint Eustatius' = vis_spending,
+           'Saba' = vis_spending) %>%
+    select(-c(vis_spending, country)) %>%
     pivot_longer(cols = c("Curacao", "Sint Maarten", "Bonaire",
                           "Saint Eustatius", "Saba"),
                  names_to = "country",
-                 values_to = "spending") %>%
+                 values_to = "vis_spending") %>%
     mutate(country = as.character(country),
-           spending = as.numeric(spending)) %>% 
-    select(c(country, spending, year))
+           vis_spending = as.numeric(vis_spending)) %>% 
+    select(c(country, vis_spending, year))
   
 visitor_long <- visitor_long %>%
     filter(country != 'Former Netherland Antillies') %>%
@@ -238,11 +238,11 @@ unique(tour_duplicates$rgn_name)
 # aggregate: sum by rgn_name etc.
 visitor_clean <- visitor_rgn %>%
   group_by(rgn_id, rgn_name, year) %>%
-  dplyr::summarize(spending = sum(spending, na.rm = TRUE) )%>%
+  dplyr::summarize(vis_spending = sum(vis_spending, na.rm = TRUE) )%>%
   ungroup() %>% 
   # turn 0s into NAs (appropriate flag for lack of data)
-  mutate(spending = case_when(spending == 0 ~ NA,
-                          .default = spending),
+  mutate(vis_spending = case_when(vis_spending == 0 ~ NA,
+                          .default = vis_spending),
          unit = "US$, real 2024 prices and exchange rates, billions",
          source = "WTTC")
 
@@ -253,46 +253,46 @@ unique(tour_duplicates$rgn_name)
 # Check years for possible gapfilling
 visitor_clean <- visitor_clean %>% 
   group_by(rgn_id, rgn_name) %>% 
-  complete(year = 2008:data_year)
+  complete(year = 2008:data_year) %>% 
+  ungroup()
 
 visitor_clean %>% 
-  filter(is.na(spending))
-# Missing two observations for 2021. Will gapfill these with 2020 data (assuming pandemic trends still apply)
+  filter(is.na(vis_spending))
+# Missing two observations for 2021
 
-# ---- Visitor spending gapfilling ----
+# ---- Visitor vis_spending gapfilling ----
 visitor_gf <- visitor_clean %>% 
   # First, create gapfilled boolean and method columns
-  mutate(vs_gapfilled = ifelse(is.na(spending), "1", NA_character_),
-         vs_gf_method = ifelse(is.na(spending), "1", NA_character_)) %>%
+  mutate(vs_gapfilled = ifelse(is.na(vis_spending), "1", NA_character_),
+         vs_gf_method = ifelse(is.na(vis_spending), "1", NA_character_)) %>%
   # Regroup for gapfilling
   group_by(rgn_id, rgn_name) %>% 
   arrange(rgn_id, year) %>%   
   # Linear interpolation
-  mutate(spending = na.approx(spending, x = year, na.rm = FALSE)) %>% 
-  mutate(vs_gapfilled = ifelse(vs_gapfilled == "1" & !is.na(spending), 
+  mutate(vis_spending = na.approx(vis_spending, x = year, na.rm = FALSE)) %>% 
+  mutate(vs_gapfilled = ifelse(vs_gapfilled == "1" & !is.na(vis_spending), 
                                "gapfilled", vs_gapfilled),
-         vs_gf_method = ifelse(vs_gf_method == "1" & !is.na(spending), 
+         vs_gf_method = ifelse(vs_gf_method == "1" & !is.na(vis_spending), 
                                "Interpolation", vs_gf_method)) %>% 
   # Upfilling and Downfiling
-  tidyr::fill(spending, .direction = "updown") %>% 
-  mutate(vs_gapfilled = ifelse(vs_gapfilled == "1" & !is.na(spending), 
+  tidyr::fill(vis_spending, .direction = "updown") %>% 
+  mutate(vs_gapfilled = ifelse(vs_gapfilled == "1" & !is.na(vis_spending), 
                                "gapfilled", vs_gapfilled),
-         vs_gf_method = ifelse(vs_gf_method == "1" & !is.na(spending), 
+         vs_gf_method = ifelse(vs_gf_method == "1" & !is.na(vis_spending), 
                                "Up/Downfilling", vs_gf_method))
 
 table(visitor_gf$vs_gf_method)
 # Interpolation 
 #           2 
 
-colSums(is.na(visitor_gf)) # 0 NAs for spending now
+colSums(is.na(visitor_gf)) # 0 NAs for vis_spending now
 length(unique(visitor_clean$rgn_id)) # 147 regions
 
 ```
 
-## Domestic
+## Domestic Spending
 
 ```{r}
-# International visitor spending or Visitor exports, US$, real 2024 prices and exchange rates, billions
 # Domestic T&T expenditure, US$, real 2024 prices and exchange rates, billions
 domesting_spending <- read_xlsx(here(raw_data_dir, "WTTC", current_data_dir, 
                               "WTTC-Data-Request-OHI-13.08.2025.xlsx"),
@@ -300,98 +300,72 @@ domesting_spending <- read_xlsx(here(raw_data_dir, "WTTC", current_data_dir,
                               skip = 2)
 
 # Pivot longer and rename
-visitor_long <- visitor_exports %>% 
+domestic_long <- domesting_spending %>% 
   pivot_longer(cols = -1, # everything except the first column
-               values_to = "spending",
+               values_to = "dom_spending",
                names_to = "year") %>% 
   rename(country = Economy) %>% 
   mutate(year = as.numeric(year))
 
 # Fix name_2_rgn error with Netherland Antillies
-neth_ant <- visitor_long %>%
+neth_ant <- domestic_long %>%
     filter(country == 'Former Netherland Antillies') %>% 
-    mutate(spending = (spending / 5),  
-           'Curacao' = spending,
-           'Sint Maarten' = spending,
-           'Bonaire' = spending,
-           'Saint Eustatius' = spending,
-           'Saba' = spending) %>%
-    select(-c(spending, country)) %>%
+    mutate(dom_spending = (dom_spending / 5),  
+           'Curacao' = dom_spending,
+           'Sint Maarten' = dom_spending,
+           'Bonaire' = dom_spending,
+           'Saint Eustatius' = dom_spending,
+           'Saba' = dom_spending) %>%
+    select(-c(dom_spending, country)) %>%
     pivot_longer(cols = c("Curacao", "Sint Maarten", "Bonaire",
                           "Saint Eustatius", "Saba"),
                  names_to = "country",
-                 values_to = "spending") %>%
+                 values_to = "dom_spending") %>%
     mutate(country = as.character(country),
-           spending = as.numeric(spending)) %>% 
-    select(c(country, spending, year))
+           dom_spending = as.numeric(dom_spending)) %>% 
+    select(c(country, dom_spending, year))
   
-visitor_long <- visitor_long %>%
+domestic_long <- domestic_long %>%
     filter(country != 'Former Netherland Antillies') %>%
     bind_rows(neth_ant)
 
 # run ohicore name_2_rgn 
-visitor_rgn <- name_2_rgn(df_in = visitor_long, 
+domestic_rgn <- name_2_rgn(df_in = domestic_long, 
                        fld_name = 'country',
                        flds_unique = c("year"))
 
 # Check duplicates
-tour_duplicates <- visitor_rgn[duplicated(visitor_rgn[, c("rgn_name", "year")]),]
+tour_duplicates <- domestic_rgn[duplicated(domestic_rgn[, c("rgn_name", "year")]),]
 unique(tour_duplicates$rgn_name)
 
 # aggregate: sum by rgn_name etc.
-visitor_clean <- visitor_rgn %>%
+domestic_clean <- domestic_rgn %>%
   group_by(rgn_id, rgn_name, year) %>%
-  dplyr::summarize(spending = sum(spending, na.rm = TRUE) )%>%
+  dplyr::summarize(dom_spending = sum(dom_spending, na.rm = TRUE) )%>%
   ungroup() %>% 
   # turn 0s into NAs (appropriate flag for lack of data)
-  mutate(spending = case_when(spending == 0 ~ NA,
-                          .default = spending),
+  mutate(dom_spending = case_when(dom_spending == 0 ~ NA,
+                          .default = dom_spending),
          unit = "US$, real 2024 prices and exchange rates, billions",
          source = "WTTC")
 
 # Confirm duplicates have been removed
-tour_duplicates <- visitor_clean[duplicated(visitor_clean[, c("rgn_name", "year")]),]
+tour_duplicates <- domestic_clean[duplicated(domestic_clean[, c("rgn_name", "year")]),]
 unique(tour_duplicates$rgn_name)
 
 # Check years for possible gapfilling
-visitor_clean <- visitor_clean %>% 
+domestic_clean <- domestic_clean %>% 
   group_by(rgn_id, rgn_name) %>% 
-  complete(year = 2008:data_year)
+  complete(year = 2008:data_year) %>% 
+  ungroup()
 
-visitor_clean %>% 
-  filter(is.na(spending))
-# Missing two observations for 2021. Will gapfill these with 2020 data (assuming pandemic trends still apply)
-
-# ---- Visitor spending gapfilling ----
-visitor_gf <- visitor_clean %>% 
-  # First, create gapfilled boolean and method columns
-  mutate(vs_gapfilled = ifelse(is.na(spending), "1", NA_character_),
-         vs_gf_method = ifelse(is.na(spending), "1", NA_character_)) %>%
-  # Regroup for gapfilling
-  group_by(rgn_id, rgn_name) %>% 
-  arrange(rgn_id, year) %>%   
-  # Linear interpolation
-  mutate(spending = na.approx(spending, x = year, na.rm = FALSE)) %>% 
-  mutate(vs_gapfilled = ifelse(vs_gapfilled == "1" & !is.na(spending), 
-                               "gapfilled", vs_gapfilled),
-         vs_gf_method = ifelse(vs_gf_method == "1" & !is.na(spending), 
-                               "Interpolation", vs_gf_method)) %>% 
-  # Upfilling and Downfiling
-  tidyr::fill(spending, .direction = "updown") %>% 
-  mutate(vs_gapfilled = ifelse(vs_gapfilled == "1" & !is.na(spending), 
-                               "gapfilled", vs_gapfilled),
-         vs_gf_method = ifelse(vs_gf_method == "1" & !is.na(spending), 
-                               "Up/Downfilling", vs_gf_method))
-
-table(visitor_gf$vs_gf_method)
-# Interpolation 
-#           2 
-
-colSums(is.na(visitor_gf)) # 0 NAs for spending now
+colSums(is.na(domestic_clean))
+# No missing data, so no need for gapfilling
 length(unique(visitor_clean$rgn_id)) # 147 regions
 
 ```
 
+# Total GDP 
 
 ## Tourism GDP % 
 
@@ -424,6 +398,7 @@ gdp_prop_yrs[46:60,] # for countries without data in certain years,
 ```
 
 #### Preliminary plot 1: full dataset
+
 Create preliminary plot of cleaned full dataset (not joined/filtered to OHI regions yet)
 ```{r}
 # ---- preliminary plot ----
@@ -454,6 +429,7 @@ prelim_plot
 # optional: 
 # htmlwidgets::saveWidget(prelim_plot, file = "tourism_gdp_prop_all_data.html")
 ```
+
 v2024 notes/observations:
 
 -   Macao has an extremely high percent of tourism contributing to their GDP (max of 59.6% in 2023)
