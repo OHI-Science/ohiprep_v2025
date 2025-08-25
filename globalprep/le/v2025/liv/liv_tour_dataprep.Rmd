@@ -24,19 +24,20 @@ editor_options:
 
 Livelihoods includes two equally important sub-components, the **number of jobs**, which is a proxy for livelihood quantity, and the **per capita average annual wages**, which is a proxy for job quality. 
 
+# v2025 Updates
+
+- New data for tourism jobs!! A data inquiry was filed with the WTTC and they very kindly agreed to provide the data necessary for tourism jobs as well as tourism revenue (to be used in economies, tourism). This data covers the time range 2008-2023. For future assessments, I would recommend filling out the data enquiry form again. The point of contact for 2025 was Chok Tsering: `Chok.Tsering@wttc.org`. 
+- Increased total regions included from ~80 to ~145.
+
 ## Overview
 
 * **Data:** Labor Force & Employment Data
 
-  * Labor Force data from World Bank, last updated 7/1/25 (downloaded August 7, 2025).
-
-      - <https://data.worldbank.org/indicator/SL.TLF.TOTL.IN>
-      - Located in `globalprep/_raw_data/
-
-  * Jobs data from UN Tourism / UNWTO (downloaded August 7, 2025)
+  * Jobs data from World Trade and Tourism Council (WTTC) 
   
-      - Key Tourism Statistics <https://www.unwto.org/tourism-statistics/key-tourism-statistics>
-      - According to the website, the latest update of the dataset took place in 31 January 2024. 
+      - Data enquiry form  <https://wttc.org/research/data-enquiries>
+      - Make sure it's clear that this is a request from an academic institution, as the WTTC seems to make allowances for providing free data to researchers. Also make sure you communicate that the raw data will not be publicly available. 
+
       
   * Quality/Wage data from ILOSTAT (downloaded August 7, 2025) -- for tour/cf wage data
   
@@ -54,8 +55,6 @@ Livelihoods includes two equally important sub-components, the **number of jobs*
 
   - Then click “Export”, and for the file type option (appears as a drop-down menu), select “csv”.
       
-  [OECD data](https://ec.europa.eu/eurostat/data/database)
-  - This is the file path on the OECD website: `Data navigation tree/Detailed datasets/Industry, trade, and services/Tourism (tour)/Tourism industries - annual data (tour_inda)/Annual and quarterly data on employment for selected tourism industries (source: Labor force survey)(tour_lfsa)/Employed persons by full-time/part-time and NACE Rev. 2 activity (tour_lfs1r2).csv`
 
 ## Methods
 
@@ -89,8 +88,6 @@ librarian::shelf(
 source(here("workflow", "R", "common.R"))
 
 region_data() # for rgns_all and rgns_eez
-# rgns_eez <- rgns_eez %>% 
-#   select(rgn_id, rgn_name)
 
 # OHI regions data 
 region_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/spatial/regions_list.csv") 
@@ -239,11 +236,6 @@ nrow(tour_jobs_prop) # 2784
 
 length(unique(tour_jobs_prop$rgn_id)) # 174 regions
 
-# tour_jobs_prop %>% 
-#   group_by(rgn_id, rgn_name) %>% 
-#   filter(is.na(jobs)) %>% 
-#   view()
-
 # Regions without jobs data
 tour_jobs_prop %>% 
   filter(is.na(jobs)) %>% 
@@ -272,8 +264,6 @@ write_csv(tour_jobs_final, here(current_le_dir, "int", "liv_tour_quantity.csv"))
 ```
 
 
-Create the proportion between tourism jobs and the total labor force
-
 ```{r, eval=FALSE}
 # plot it, interactively!
 line_plot <- plotly::plot_ly(tour_jobs_prop, x = ~year, y = ~jobs_prop, color = ~rgn_name, type = "scatter", mode = "lines") %>%
@@ -281,7 +271,7 @@ line_plot <- plotly::plot_ly(tour_jobs_prop, x = ~year, y = ~jobs_prop, color = 
          xaxis = list(title = "Year"),
          yaxis = list(title = "Percent of people by region employed by the tourism sector"))
 
-# line_pslot
+# line_plot
 
 # htmlwidgets::saveWidget(line_plot, file = "prop_tourism_laborforce.html")
 ```
@@ -339,57 +329,7 @@ wage_region_join <- left_join(rgns_eez, wage_pivot, by = c("eez_iso3" = "iso3"))
   select(-c(territory, admin_rgn_id, admin_country_name, 
             Notes, country, eez_iso3, classif2_label ))
 
-# make sequence of years for gapfilling
-# years_df <- tibble(iso3 = wage_pivot$iso3) %>% 
-#   group_by(iso3) %>% 
-#   reframe(year = seq(2008, data_year))
-# 
-# colSums(is.na(wage_data_years))
-# 
-# wage_data_years <- left_join(years_df, wage_pivot, by = c("iso3", "year"))
-# 
-# # filling in country names when possible --- 
-# wage_years_filled <- wage_data_years %>% 
-#   group_by(iso3) %>% 
-#   fill(country, .direction = "downup") %>% 
-#   ungroup()
-# 
-# # gap filling
-# wage_gf <- wage_years_filled %>% 
-#   group_by(country) %>% 
-#   # interpolate (fill missing values between 2 values)
-#   mutate(appx_wage = zoo::na.approx(total_monthly_wage, # using values in this column
-#                                     na.rm = FALSE, # don't replace (internal) NAs in new column that can't be approximated
-#                                     #  extrapolate using rule = 2 from approx(),
-#                                     # uses closest data extreme to extrapolate 
-#                                     # for leading and trailing NAs
-#                                     rule = 2)) %>% 
-#   
-#   # fill NA values with the only other observed value (making sure to note the list of countries/regions we did this for)
-#   mutate(appx_wage_fill = zoo::na.aggregate(appx_wage, by = 1, FUN = mean, na.rm = FALSE)) %>% 
-#   ungroup() %>% 
-#   select(-c(classif2_label))
-# 
-# colSums(is.na(wage_gf))
-# colnames(wage_gf)
-
-```
-
-notes: 
-- made this a new column so that we can still identify each country that we are using this fill (na.aggregate function) method for.
-- need more than 1 data point to do any approximation. 
-- also, extremes (leading and trailing) are just copied data points from nearest extreme
-
-```{r}
-# find regions with only 1 data point (still have NAs in appx_wage column)
-# na_regions <- wage_gf %>% 
-#   filter(is.na(appx_wage))
-# 
-# unique(na_regions$country)
-# num_na <- length(unique(na_regions$country))
-# num_tot <- length(unique(wage_gf$country))
-# 
-# paste0("proportion of countries/regions with only 1 data point: ", round(((num_na / num_tot) * 100), 3), "%")
+# colSums(is.na(wage_region_join))
 ```
 
 ## Wages Gapfill
@@ -433,7 +373,6 @@ nrow(wage_gf) # 3641
 # Keep in mind this is including ALL OHI regions, that's why NA count is so high
 
 ```
-
 
 
 ```{r}
@@ -516,7 +455,7 @@ wages <- read_csv(here(current_le_dir, "int", "liv_tour_quality.csv")) %>%
 tour_job_wage <- left_join(jobs, wages, by = join_by(rgn_id, rgn_name, year))
          
 nrow(tour_job_wage) # 2288
-colSums(is.na(tour_job_wage)) # 16 missing values from the wage data]
+colSums(is.na(tour_job_wage)) # 16 missing values from the wage data
 length(unique(tour_job_wage$rgn_id)) # 143
 
 tour_job_wage %>% 
@@ -525,7 +464,6 @@ tour_job_wage %>%
 # Kiribati is the only region that has jobs data but no wage data
 
 # Drop NAs here before joining with coastal proportion
-
 tour_job_wage <- tour_job_wage %>% 
   drop_na(total_monthly_wage)
 ```
@@ -580,9 +518,6 @@ liv_coast_tour <- tour_job_wage %>%
   mutate(liv_coast = livelihood * coastal_prop) 
 
 
-  # drop_na(liv_prop)# %>%
-  # select(rgn_id, rgn_name, year, liv_prop)
-
 liv_rescaled <- liv_coast_tour %>%
   # look at previous ten years
   filter(year >= (max(year) - 10)) %>% 
@@ -616,8 +551,8 @@ write_csv(liv_tour_final, here::here(current_le_dir, "output", "liv_tour.csv"))
 
 
 ```{r}
-liv_norm_plot <- liv_rescaled %>%
-  plot_ly(x = ~year, y = ~liv_rescaled, color = ~rgn_name,
+liv_norm_plot <- liv_tour_final %>%
+  plot_ly(x = ~year, y = ~livelihood, color = ~rgn_name,
           type = "scatter", mode = "lines") %>%
   layout(title = "Livelihood Coastal Proportion: Max Rescale",
          xaxis = list(title = "Year"),
@@ -641,23 +576,11 @@ liv_norm_plot
 # Data check
 
 ```{r}
-colnames(liv_rescaled_final)
-year_check <- liv_rescaled_final %>% 
-  filter(rgn_id == 183)
-view(year_check)
-
-liv1 <- liv_rescaled_final %>% 
-  filter(liv_rescaled == 1) 
-table(liv1$source)
-
-ggplot(year_check, aes(x = liv_rescaled)) +
-  geom_boxplot()
-
 # Get max data years for plotting
-current_data_year <- max(new_tr$year)
-current_data_year
-previous_data_year <- max(old_tr$year)
-previous_data_year
+# current_data_year <- max(new_tr$year)
+# current_data_year
+# previous_data_year <- max(old_tr$year)
+# previous_data_year
 
 # Combine data frames
 # comb_tr <- new_tr %>% 
@@ -665,19 +588,35 @@ previous_data_year
 #   left_join(old_tr, by = join_by(rgn_id, year))
 
 # Plot
-comp_plot1 <- ggplot() + 
-  geom_jitter(data = filter(comb_tr, year == previous_data_year),
-              aes(x = Ap, y = new_Ap, 
-                  text = paste("Year:", year, "<br>Region:", rgn_name)),
-              alpha = 0.7) +
-  labs(x = paste("Previous Value", previous_data_year),
-       y = paste("Current Value", previous_data_year),
-       title = paste("Sustainable tourism and recreation", previous_data_year, "Data", previous_year, "Assessment vs.", previous_data_year, "Data", current_year, "assessment")) +
-  geom_abline(slope = 1, intercept = 0, col = "red") +
-  theme_bw();ggplotly(comp_plot1)
+# comp_plot1 <- ggplot() + 
+#   geom_jitter(data = filter(comb_tr, year == previous_data_year),
+#               aes(x = Ap, y = new_Ap, 
+#                   text = paste("Year:", year, "<br>Region:", rgn_name)),
+#               alpha = 0.7) +
+#   labs(x = paste("Previous Value", previous_data_year),
+#        y = paste("Current Value", previous_data_year),
+#        title = paste("Sustainable tourism and recreation", previous_data_year, "Data", previous_year, "Assessment vs.", previous_data_year, "Data", current_year, "assessment")) +
+#   geom_abline(slope = 1, intercept = 0, col = "red") +
+#   theme_bw();ggplotly(comp_plot1)
 ```
 
+
 # OLD - legacy tourism data
+
+* Jobs data from UN Tourism / UNWTO (downloaded August 7, 2025)
+  
+      - Key Tourism Statistics <https://www.unwto.org/tourism-statistics/key-tourism-statistics>
+      - According to the website, the latest update of the dataset took place in 31 January 2024. 
+
+  * Labor Force data from World Bank, last updated 7/1/25 (downloaded August 7, 2025).
+
+      - <https://data.worldbank.org/indicator/SL.TLF.TOTL.IN>
+      - Located in `globalprep/_raw_data/
+
+  * Jobs data from [OECD](https://ec.europa.eu/eurostat/data/database)
+  
+      - Visit this site <https://ec.europa.eu/eurostat/data/database>
+      - This is the file path on the OECD website: `Data navigation tree/Detailed datasets/Industry, trade, and services/Tourism (tour)/Tourism industries - annual data (tour_inda)/Annual and quarterly data on employment for selected tourism industries (source: Labor force survey)(tour_lfsa)/Employed persons by full-time/part-time and NACE Rev. 2 activity (tour_lfs1r2).csv`
 
 ### UNWTO Data
 

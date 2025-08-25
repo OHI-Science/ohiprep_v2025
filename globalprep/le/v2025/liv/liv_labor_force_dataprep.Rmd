@@ -109,6 +109,7 @@ country_regex_to_iso3c <- function(country_string) {
     countrycode::countrycode(origin = "country.name", destination = "iso3c", origin_regex = TRUE)
 }
 ```
+
 # Labor Force Data
 
 ## World Bank 
