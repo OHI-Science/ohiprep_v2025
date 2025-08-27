@@ -262,6 +262,8 @@ colSums(is.na(tour_jobs_final))
 
 # Export quantity data
 write_csv(tour_jobs_final, here(current_le_dir, "int", "liv_tour_quantity.csv"))
+
+test <- read_csv(here(current_le_dir, "int", "liv_tour_quantity.csv")) %>% view()
 ```
 
 
@@ -330,7 +332,6 @@ wage_region_join <- left_join(rgns_eez, wage_pivot, by = c("eez_iso3" = "iso3"))
   select(-c(territory, admin_rgn_id, admin_country_name, 
             Notes, country, eez_iso3, classif2_label ))
 
-# colSums(is.na(wage_region_join))
 ```
 
 ## Wages Gapfill
@@ -431,11 +432,13 @@ wage_final <- wage_georgn_gf %>%
   drop_na(total_monthly_wage) %>% 
   mutate(unit = "Currency: 2021 PPP $",
          sector = "tour",
-         source = "ILOSTAT") %>% 
-  select(rgn_id, rgn_name, year, total_monthly_wage, unit, sector, source)
+         source = "ILOSTAT",
+         annual_income = total_monthly_wage * 12) %>% 
+  select(rgn_id, rgn_name, year, annual_income, unit, sector, source)
 
 colSums(is.na(wage_final))
 length(unique(wage_final$rgn_id)) # 213 final regions
+view(wage_final)
 
 write_csv(wage_final, here(current_le_dir, "int", "liv_tour_quality.csv"))
 
@@ -449,7 +452,7 @@ jobs <- read_csv(here(current_le_dir, "int", "liv_tour_quantity.csv")) %>%
   select(rgn_id, rgn_name, year, jobs_prop)
 
 wages <- read_csv(here(current_le_dir, "int", "liv_tour_quality.csv")) %>% 
-  select(rgn_id, rgn_name, year, total_monthly_wage)
+  select(rgn_id, rgn_name, year, annual_income)
 
 # Join quantity and quality data
 # Jobs is the limiting factor here so we'll left join wages into jobs
@@ -460,13 +463,13 @@ colSums(is.na(tour_job_wage)) # 16 missing values from the wage data
 length(unique(tour_job_wage$rgn_id)) # 143
 
 tour_job_wage %>% 
-  filter(is.na(total_monthly_wage)) %>% 
+  filter(is.na(annual_income)) %>% 
   distinct(rgn_id, rgn_name)
 # Kiribati is the only region that has jobs data but no wage data
 
 # Drop NAs here before joining with coastal proportion
 tour_job_wage <- tour_job_wage %>% 
-  drop_na(total_monthly_wage)
+  drop_na(annual_income)
 ```
 
 ## Coastal Proportion
@@ -513,7 +516,7 @@ colnames(tour_job_wage)
 # Calculate livelihood then multiply by coastal population proportion
 liv_coast_tour <- tour_job_wage %>% 
   # Livelihood
-  mutate(livelihood = jobs_prop * total_monthly_wage) %>% 
+  mutate(livelihood = jobs_prop * annual_income) %>% 
   left_join(coastal_prop_df, by = c("rgn_id","rgn_name","year")) %>% 
   # Coastal livelihood
   mutate(liv_coast = livelihood * coastal_prop) 
@@ -527,7 +530,6 @@ liv_rescaled <- liv_coast_tour %>%
   ungroup() %>% 
   mutate(liv_rescaled = liv_coast / ref_point,
          liv_rescaled = ifelse(liv_rescaled > 1, 1, liv_rescaled))
-
 
 colSums(is.na(liv_rescaled)) # 22 missing data points
 
@@ -546,7 +548,7 @@ options(scipen = 999)
 liv_tour_final <- liv_rescaled %>% 
   select(rgn_id, rgn_name, year, livelihood = liv_rescaled)
 
-write_csv(liv_tour_final, here::here(current_le_dir, "output", "liv_tour.csv"))
+write_csv(liv_tour_final, here::here(current_le_dir, "output", "liv_tourism.csv"))
 ```
 
 

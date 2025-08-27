@@ -69,30 +69,16 @@ License: CC BY-4.0
 
 ## IMF Total GDP Data
 
-**Reference**: World Bank. (n.d.). *GDP (constant 2015 US$)*. World Bank Open Data. <https://data.worldbank.org/indicator/NY.GDP.MKTP.KD> .
+**Download Instructions**: Navigate to this link <https://data.imf.org/en/Data-Explorer?datasetUrn=IMF.RES:WEO(6.0.0)>. 
 
-License: CC BY-4.0
-
-**Downloaded**: 2024-07-09
-
-**Last updated**: No precise date listed on website. Found in the first few pages of the .csv when opened locally: 2024-06-28. 
-
-**Description**: “GDP at purchaser's prices is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsidies not included in the value of the products. It is calculated without making deductions for depreciation of fabricated assets or for depletion and degradation of natural resources. Data are in constant 2015 prices, expressed in U.S. dollars. Dollar figures for GDP are converted from domestic currencies using 2015 official exchange rates. For a few countries where the official exchange rate does not reflect the rate effectively applied to actual foreign exchange transactions, an alternative conversion factor is used.” Aggregation method: Gap-filled total. 
-
-**Download Instructions**: Navigate to the World Bank GDP (constant 2015 US$) data page <https://data.worldbank.org/indicator/NY.GDP.MKTP.KD>. The full time range should be selected on the slider bar by default. Select “CSV” under the “Download” options on the lower right-hand side of the page. Save in the appropriate folder on Mazu: 
-`home/shares/ohi/git-annex/globalprep/_raw_data/WorldBank/dYYYY/WorldBank_global_annual_GDP_2015_constant_USD/WorldBank_global_annual_GDP_2015_constant_USD.csv`
-
-**Time range**: 1960-2023
-
-**Native data resolution**: Country-level (not spatial data). 
-
-**Format**: `.csv.` Note: Data is also available in XML and EXCEL formats. 
-
-**Metadata**: Click on “Details” (in the upper right hand corner of the plot on the main page), scroll to the bottom of the popup page, and select “All Metadata”.
-<http://databank.worldbank.org/data/reports.aspx?source=2&type=metadata&series=NY.GDP.MKTP.KD&_gl=1*10r25gl*_gcl_au*MTI5NjExNDc0NS4xNzE2NTY4ODAx>
-
-<https://data.imf.org/en/Data-Explorer?datasetUrn=IMF.RES:WEO(6.0.0)>
-
+Choose these options for the selectors on the left-hand side:
+  - Indicator: Gross Domestic Product (GDP), current prices, US Dollar
+  - Time Period: Custom --> select years of interest (for v2025, this was 2008-2023)
+- Hit apply
+- Click the blue download button dropdown on the right side of the page 
+  - Select "Data on this page"
+  
+This should give you a .csv file of total annual GDP by country. 
 
 ### Setup
 
