@@ -24,7 +24,7 @@ editor_options:
 
 Livelihoods includes two equally important sub-components, the **number of jobs**, which is a proxy for livelihood quantity, and the **per capita average annual wages**, which is a proxy for job quality. 
 
-# v2025 Updates
+### v2025 Updates
 
 - New data for tourism jobs!! A data inquiry was filed with the WTTC and they very kindly agreed to provide the data necessary for tourism jobs as well as tourism revenue (to be used in economies, tourism). This data covers the time range 2008-2023. For future assessments, I would recommend filling out the data enquiry form again. The point of contact for 2025 was Chok Tsering: `Chok.Tsering@wttc.org`. 
 - Increased total regions included from ~80 to ~145.
@@ -192,7 +192,8 @@ unique(tour_duplicates$rgn_name)
 # Check years for possible gapfilling
 wttc_jobs <- wttc_jobs %>% 
   group_by(rgn_id, rgn_name) %>% 
-  complete(year = 2008:data_year)
+  complete(year = 2008:data_year) %>% 
+  ungroup()
 
 # This data is so clean that no gapfilling is necessary! The above step was just a check to ensure we didn't need to add any years
 colSums(is.na(wttc_jobs))
