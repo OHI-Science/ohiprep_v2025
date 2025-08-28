@@ -202,6 +202,61 @@ length(unique(wttc_jobs$rgn_id)) # 147 regions!!! Much more than the ~80 we were
 
 ```
 
+## Coastal Proportion
+
+Now, lets bring in our tourism data and calculate the coastal proportion! The coastal proportion will then be multiplied by the arrivals value per region and year. Finally, the coastal area will be divided, giving us a density of tourism per region (individuals/km\^2).
+
+```{r}
+# -------  population data -----------
+# Coastal population
+coastal_pop_data <- read_csv(here("globalprep","mar_prs_population","v2025","output","mar_pop_25mi.csv")) ## read in coastal population data from other data layer
+
+# UN total population
+un_pop <- read_csv(here("globalprep", "mar_prs_population", version_year,
+                        "output", "UN_population.csv"))
+
+# Add region names
+coast_pop_rgn <- left_join(coastal_pop_data, rgns_eez_small, 
+                           by = join_by(rgn_id))
+un_pop_rgn <- left_join(un_pop, rgns_eez_small, by = join_by(rgn_id))
+
+
+# Calculate coastal proportion
+coastal_prop_df <- left_join(un_pop_rgn, coast_pop_rgn, 
+                             by = join_by(rgn_id, rgn_name, year)) %>% 
+  # mutate(year = as.numeric(year)) %>% 
+  filter(year %in% 2008:data_year) %>% 
+  mutate(coastal_prop = (popsum / population),
+         coastal_prop = ifelse(coastal_prop > 1, 1, coastal_prop))
+
+colSums(is.na(coastal_prop_df))
+length(unique(coastal_prop_df$rgn_id)) #183
+
+write_csv(coastal_prop_df, here(current_le_dir, "int", "coastal_pop_proportion.csv"))
+
+```
+
+## Coastal Jobs 
+
+Multiply the total number of tourism jobs by the coastal population proportion as a proxy for marine-related tourism jobs.
+
+```{r}
+colnames(wttc_jobs)
+# Calculate livelihood then multiply by coastal population proportion
+wttc_coastal_jobs <- wttc_jobs %>% 
+  left_join(coastal_prop_df, by = c("rgn_id","rgn_name","year")) %>% 
+  # Coastal livelihood
+  mutate(jobs_coast = jobs * coastal_prop)
+
+colSums(is.na(wttc_coastal_jobs))
+
+# Regions without labor force data
+wttc_coastal_jobs %>% 
+  filter(is.na(coastal_prop)) %>% 
+  distinct(rgn_name)
+
+```
+
 
 ## Labor force join
 
@@ -215,12 +270,12 @@ labor_force <- labor_force %>%
 
 
 # join with labor force data 
-tour_jobs_prop <- full_join(wttc_jobs, labor_force, 
+tour_jobs_prop <- full_join(wttc_coastal_jobs, labor_force, 
                              by = c("rgn_id", "rgn_name", "year")) %>% 
   # calculate tourism jobs proportion of total labor force 
-  mutate(jobs_prop = jobs / labor_force)
+  mutate(jobs_coast_prop = jobs_coast / labor_force)
 
-summary(tour_jobs_prop$jobs_prop)
+summary(tour_jobs_prop$jobs_coast_prop)
 
 colSums(is.na(tour_jobs_prop)) 
  #         jobs      labor_force         tour_jobs_prop 
@@ -249,32 +304,32 @@ tour_jobs_prop %>%
 
 # Number of countries without propotion data
 tour_jobs_prop %>% 
-  filter(is.na(jobs_prop)) %>% 
+  filter(is.na(jobs_coast_prop)) %>% 
   distinct(rgn_name) %>% 
   nrow()
 
-# 31 countries with no data for jobs or labor force, we'll end up dropping these for now
+# 34 countries with no data for jobs or labor force, we'll end up dropping these for now
 tour_jobs_final <- tour_jobs_prop %>% 
-  drop_na(jobs_prop)
+  drop_na(jobs_coast_prop) %>% 
+  select(rgn_id, year, quantity = jobs_coast_prop)
 
-length(unique(tour_jobs_final$rgn_id)) # 143 final regions
+length(unique(tour_jobs_final$rgn_id)) # 140 final regions
 colSums(is.na(tour_jobs_final))
 
 # Export quantity data
-write_csv(tour_jobs_final, here(current_le_dir, "int", "liv_tour_quantity.csv"))
+write_csv(tour_jobs_final, here(current_le_dir, "output", "liv_tour_quantity.csv"))
 
-test <- read_csv(here(current_le_dir, "int", "liv_tour_quantity.csv")) %>% view()
 ```
 
 
 ```{r, eval=FALSE}
 # plot it, interactively!
-line_plot <- plotly::plot_ly(tour_jobs_prop, x = ~year, y = ~jobs_prop, color = ~rgn_name, type = "scatter", mode = "lines") %>%
-  layout(title = "All Regions: Proportional Tourism Employment Within Total Labor Force",
+line_plot <- plotly::plot_ly(tour_jobs_prop, x = ~year, y = ~jobs_coast_prop, color = ~rgn_name, type = "scatter", mode = "lines") %>%
+  layout(title = "All Regions: Coastal Proportional Tourism Employment Within Total Labor Force",
          xaxis = list(title = "Year"),
          yaxis = list(title = "Percent of people by region employed by the tourism sector"))
 
-# line_plot
+ # line_plot
 
 # htmlwidgets::saveWidget(line_plot, file = "prop_tourism_laborforce.html")
 ```
@@ -438,9 +493,12 @@ wage_final <- wage_georgn_gf %>%
 
 colSums(is.na(wage_final))
 length(unique(wage_final$rgn_id)) # 213 final regions
-view(wage_final)
+# view(wage_final)
 
-write_csv(wage_final, here(current_le_dir, "int", "liv_tour_quality.csv"))
+wage_export <- wage_final %>% 
+  select(rgn_id, year, quality = annual_income)
+
+write_csv(wage_export, here(current_le_dir, "output", "liv_tour_quality.csv"))
 
 ```
 
@@ -448,120 +506,40 @@ write_csv(wage_final, here(current_le_dir, "int", "liv_tour_quality.csv"))
 
 ```{r}
 # Read in cleaned data
-jobs <- read_csv(here(current_le_dir, "int", "liv_tour_quantity.csv")) %>% 
-  select(rgn_id, rgn_name, year, jobs_prop)
-
-wages <- read_csv(here(current_le_dir, "int", "liv_tour_quality.csv")) %>% 
-  select(rgn_id, rgn_name, year, annual_income)
+jobs <- read_csv(here(current_le_dir, "output", "liv_tour_quantity.csv")) 
+wages <- read_csv(here(current_le_dir, "output", "liv_tour_quality.csv")) 
 
 # Join quantity and quality data
 # Jobs is the limiting factor here so we'll left join wages into jobs
-tour_job_wage <- left_join(jobs, wages, by = join_by(rgn_id, rgn_name, year))
-         
-nrow(tour_job_wage) # 2288
-colSums(is.na(tour_job_wage)) # 16 missing values from the wage data
-length(unique(tour_job_wage$rgn_id)) # 143
+tour_livelihood <- left_join(jobs, wages, by = join_by(rgn_id, year)) %>% 
+  mutate(livelihood = jobs_coast_prop * annual_income)
 
-tour_job_wage %>% 
-  filter(is.na(annual_income)) %>% 
-  distinct(rgn_id, rgn_name)
-# Kiribati is the only region that has jobs data but no wage data
-
-# Drop NAs here before joining with coastal proportion
-tour_job_wage <- tour_job_wage %>% 
-  drop_na(annual_income)
-```
-
-## Coastal Proportion
-
-Now, lets bring in our tourism data and calculate the coastal proportion! The coastal proportion will then be multiplied by the arrivals value per region and year. Finally, the coastal area will be divided, giving us a density of tourism per region (individuals/km\^2).
-
-```{r}
-# -------  population data -----------
-# Coastal population
-coastal_pop_data <- read_csv(here("globalprep","mar_prs_population","v2025","output","mar_pop_25mi.csv")) ## read in coastal population data from other data layer
-
-# UN total population
-un_pop <- read_csv(here("globalprep", "mar_prs_population", version_year,
-                        "output", "UN_population.csv"))
-
-# Add region names
-coast_pop_rgn <- left_join(coastal_pop_data, rgns_eez_small, by = join_by(rgn_id))
-un_pop_rgn <- left_join(un_pop, rgns_eez_small, by = join_by(rgn_id))
-
-
-# Calculate coastal proportion
-coastal_prop_df <- left_join(un_pop_rgn, coast_pop_rgn, 
-                             by = join_by(rgn_id, rgn_name, year)) %>% 
-  # mutate(year = as.numeric(year)) %>% 
-  filter(year %in% 2008:data_year) %>% 
-  mutate(coastal_prop = (popsum / population),
-         coastal_prop = ifelse(coastal_prop > 1, 1, coastal_prop))
-
-colSums(is.na(coastal_prop_df))
-length(unique(coastal_prop_df$rgn_id)) #183
-
-```
-
-
-## Tourism Livelihoods Proportion
-
-Now we can join all of these data sources and conduct $$\frac{TourismLivelihoods * (CoastalPop/TotalPop)}{CoastalArea}$$.
-
-```{r}
-# join the tourism data, coastal population, and total population data 
-colnames(coastal_prop_df)
-colnames(tour_job_wage)
-
-# Calculate livelihood then multiply by coastal population proportion
-liv_coast_tour <- tour_job_wage %>% 
-  # Livelihood
-  mutate(livelihood = jobs_prop * annual_income) %>% 
-  left_join(coastal_prop_df, by = c("rgn_id","rgn_name","year")) %>% 
-  # Coastal livelihood
-  mutate(liv_coast = livelihood * coastal_prop) 
-
-
-liv_rescaled <- liv_coast_tour %>%
+tour_liv_rescaled <- tour_livelihood %>%
   # look at previous ten years
   filter(year >= (max(year) - 10)) %>% 
-  group_by(rgn_id, rgn_name) %>% 
-  mutate(ref_point = max(liv_coast)) %>% 
+  group_by(rgn_id) %>% 
+  mutate(ref_point = max(livelihood)) %>% 
   ungroup() %>% 
-  mutate(liv_rescaled = liv_coast / ref_point,
+  mutate(liv_rescaled = livelihood / ref_point,
          liv_rescaled = ifelse(liv_rescaled > 1, 1, liv_rescaled))
 
-colSums(is.na(liv_rescaled)) # 22 missing data points
-
-liv_rescaled %>% 
-  filter(is.na(coastal_prop)) %>% 
-  distinct(rgn_id, rgn_name)
-# Bonaire and Saba are the two regions missing coastal proportion data
-
-# Drop missing values
-liv_rescaled <- liv_rescaled %>% 
-  drop_na(liv_rescaled)
-
-options(scipen = 999)
+view(tour_liv_rescaled)
 
 # Select final livelihoods proportion data
 liv_tour_final <- liv_rescaled %>% 
   select(rgn_id, rgn_name, year, livelihood = liv_rescaled)
-
-write_csv(liv_tour_final, here::here(current_le_dir, "output", "liv_tourism.csv"))
 ```
 
 
 
 ```{r}
-liv_norm_plot <- liv_tour_final %>%
+liv_norm_plot <- tour_liv_rescaled %>%
   plot_ly(x = ~year, y = ~livelihood, color = ~rgn_name,
           type = "scatter", mode = "lines") %>%
   layout(title = "Livelihood Coastal Proportion: Max Rescale",
          xaxis = list(title = "Year"),
          yaxis = list(title = "Livelihood (max rescale)"))
 liv_norm_plot
-
 
 # hist_max <- ggplot() +
 #   geom_histogram(data = liv_rescaled_final, aes(x = liv_norm),
