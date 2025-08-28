@@ -1,0 +1,1042 @@
+rgn_id,rgn_name,year,number_jobs,unit,sector,source
+14,Taiwan,2008,235048,Persons (1),fis,OECD
+14,Taiwan,2009,235048,Persons (1),fis,OECD
+14,Taiwan,2010,236108,Persons (1),fis,OECD
+14,Taiwan,2011,237373,Persons (1),fis,OECD
+14,Taiwan,2012,227208,Persons (1),fis,OECD
+14,Taiwan,2013,229048,Persons (1),fis,OECD
+14,Taiwan,2014,228868,Persons (1),fis,OECD
+14,Taiwan,2015,229793,Persons (1),fis,OECD
+14,Taiwan,2016,228175,Persons (1),fis,OECD
+14,Taiwan,2017,228411,Persons (1),fis,OECD
+14,Taiwan,2018,227778,Persons (1),fis,OECD
+14,Taiwan,2019,219641,Persons (1),fis,OECD
+14,Taiwan,2020,220253,Persons (1),fis,OECD
+14,Taiwan,2021,226958,Persons (1),fis,OECD
+14,Taiwan,2022,226496,Persons (1),fis,OECD
+15,Philippines,2008,1863520,Persons (1),fis,OECD
+15,Philippines,2009,1863520,Persons (1),fis,OECD
+15,Philippines,2010,1868435,Persons (1),fis,OECD
+15,Philippines,2011,1868435,Persons (1),fis,OECD
+15,Philippines,2012,1868435,Persons (1),fis,OECD
+15,Philippines,2013,1868435,Persons (1),fis,OECD
+15,Philippines,2014,1868435,Persons (1),fis,OECD
+15,Philippines,2015,1868435,Persons (1),fis,OECD
+15,Philippines,2016,1868435,Persons (1),fis,OECD
+15,Philippines,2017,1868435,Persons (1),fis,OECD
+15,Philippines,2018,1868435,Persons (1),fis,OECD
+15,Philippines,2019,1868435,Persons (1),fis,OECD
+15,Philippines,2020,1868435,Persons (1),fis,OECD
+15,Philippines,2021,1789695,Persons (1),fis,OECD
+15,Philippines,2022,1789695,Persons (1),fis,OECD
+16,Australia,2008,14000,Persons (1),fis,OECD
+16,Australia,2009,14000,Persons (1),fis,OECD
+16,Australia,2010,13000,Persons (1),fis,OECD
+16,Australia,2011,13000,Persons (1),fis,OECD
+16,Australia,2012,14000,Persons (1),fis,OECD
+16,Australia,2013,12000,Persons (1),fis,OECD
+16,Australia,2014,11000,Persons (1),fis,OECD
+16,Australia,2015,11000,Persons (1),fis,OECD
+16,Australia,2016,10000,Persons (1),fis,OECD
+16,Australia,2017,10000,Persons (1),fis,OECD
+16,Australia,2018,11000,Persons (1),fis,OECD
+16,Australia,2019,10000,Persons (1),fis,OECD
+16,Australia,2020,10000,Persons (1),fis,OECD
+16,Australia,2021,10000,Persons (1),fis,OECD
+16,Australia,2022,10000,Persons (1),fis,OECD
+20,South Korea,2008,129590,Persons (1),fis,OECD
+20,South Korea,2009,129590,Persons (1),fis,OECD
+20,South Korea,2010,131446,Persons (1),fis,OECD
+20,South Korea,2011,121025,Persons (1),fis,OECD
+20,South Korea,2012,117266,Persons (1),fis,OECD
+20,South Korea,2013,112560,Persons (1),fis,OECD
+20,South Korea,2014,108476,Persons (1),fis,OECD
+20,South Korea,2015,100282,Persons (1),fis,OECD
+20,South Korea,2016,94884,Persons (1),fis,OECD
+20,South Korea,2017,93635,Persons (1),fis,OECD
+20,South Korea,2018,86175,Persons (1),fis,OECD
+20,South Korea,2019,84001,Persons (1),fis,OECD
+20,South Korea,2020,76913,Persons (1),fis,OECD
+20,South Korea,2021,72817,Persons (1),fis,OECD
+20,South Korea,2022,70380,Persons (1),fis,OECD
+25,Thailand,2008,24871,Persons (1),fis,OECD
+25,Thailand,2009,24871,Persons (1),fis,OECD
+25,Thailand,2010,24844,Persons (1),fis,OECD
+25,Thailand,2011,24842,Persons (1),fis,OECD
+25,Thailand,2012,24825,Persons (1),fis,OECD
+25,Thailand,2013,24801,Persons (1),fis,OECD
+25,Thailand,2014,24732,Persons (1),fis,OECD
+25,Thailand,2015,24737,Persons (1),fis,OECD
+25,Thailand,2016,24725,Persons (1),fis,OECD
+25,Thailand,2017,24666,Persons (1),fis,OECD
+25,Thailand,2018,24133,Persons (1),fis,OECD
+25,Thailand,2019,24408,Persons (1),fis,OECD
+25,Thailand,2020,54181,Persons (1),fis,OECD
+25,Thailand,2021,54436,Persons (1),fis,OECD
+25,Thailand,2022,141842,Persons (1),fis,OECD
+59,Belgium,2008,599,Persons (1),fis,OECD
+59,Belgium,2009,599,Persons (1),fis,OECD
+59,Belgium,2010,614,Persons (1),fis,OECD
+59,Belgium,2011,587,Persons (1),fis,OECD
+59,Belgium,2012,585,Persons (1),fis,OECD
+59,Belgium,2013,382,Persons (1),fis,OECD
+59,Belgium,2014,605,Persons (1),fis,OECD
+59,Belgium,2015,563,Persons (1),fis,OECD
+59,Belgium,2016,491,Persons (1),fis,OECD
+59,Belgium,2017,483,Persons (1),fis,OECD
+59,Belgium,2018,521,Persons (1),fis,OECD
+59,Belgium,2019,490,Persons (1),fis,OECD
+59,Belgium,2020,504,Persons (1),fis,OECD
+59,Belgium,2021,516,Persons (1),fis,OECD
+59,Belgium,2022,517,Persons (1),fis,OECD
+69,Latvia,2008,741,Persons (1),fis,OECD
+69,Latvia,2009,741,Persons (1),fis,OECD
+69,Latvia,2010,667,Persons (1),fis,OECD
+69,Latvia,2011,601,Persons (1),fis,OECD
+69,Latvia,2012,553,Persons (1),fis,OECD
+69,Latvia,2013,559,Persons (1),fis,OECD
+69,Latvia,2014,518,Persons (1),fis,OECD
+69,Latvia,2015,510,Persons (1),fis,OECD
+69,Latvia,2016,1004,Persons (1),fis,OECD
+69,Latvia,2017,437,Persons (1),fis,OECD
+69,Latvia,2018,485,Persons (1),fis,OECD
+69,Latvia,2019,411,Persons (1),fis,OECD
+69,Latvia,2020,398,Persons (1),fis,OECD
+69,Latvia,2021,336,Persons (1),fis,OECD
+69,Latvia,2022,318,Persons (1),fis,OECD
+70,Estonia,2008,2999,Persons (1),fis,OECD
+70,Estonia,2009,2999,Persons (1),fis,OECD
+70,Estonia,2010,2761,Persons (1),fis,OECD
+70,Estonia,2011,2251,Persons (1),fis,OECD
+70,Estonia,2012,2295,Persons (1),fis,OECD
+70,Estonia,2013,2315,Persons (1),fis,OECD
+70,Estonia,2014,2369,Persons (1),fis,OECD
+70,Estonia,2015,2387,Persons (1),fis,OECD
+70,Estonia,2016,2416,Persons (1),fis,OECD
+70,Estonia,2017,2404,Persons (1),fis,OECD
+70,Estonia,2018,2384,Persons (1),fis,OECD
+70,Estonia,2019,2392,Persons (1),fis,OECD
+70,Estonia,2020,2543,Persons (1),fis,OECD
+70,Estonia,2021,2849,Persons (1),fis,OECD
+70,Estonia,2022,2524,Persons (1),fis,OECD
+71,Bulgaria,2008,1195,Persons (1),fis,OECD
+71,Bulgaria,2009,1195,Persons (1),fis,OECD
+71,Bulgaria,2010,1368,Persons (1),fis,OECD
+71,Bulgaria,2011,1344,Persons (1),fis,OECD
+71,Bulgaria,2012,1541,Persons (1),fis,OECD
+71,Bulgaria,2013,1331,Persons (1),fis,OECD
+71,Bulgaria,2014,1298,Persons (1),fis,OECD
+71,Bulgaria,2015,1800,Persons (1),fis,OECD
+71,Bulgaria,2016,1601,Persons (1),fis,OECD
+71,Bulgaria,2017,2151,Persons (1),fis,OECD
+71,Bulgaria,2018,1738,Persons (1),fis,OECD
+71,Bulgaria,2019,2055,Persons (1),fis,OECD
+71,Bulgaria,2020,1761,Persons (1),fis,OECD
+71,Bulgaria,2021,1589,Persons (1),fis,OECD
+71,Bulgaria,2022,1711,Persons (1),fis,OECD
+72,Romania,2008,546,Persons (1),fis,OECD
+72,Romania,2009,546,Persons (1),fis,OECD
+72,Romania,2010,522,Persons (1),fis,OECD
+72,Romania,2011,500,Persons (1),fis,OECD
+72,Romania,2012,477,Persons (1),fis,OECD
+72,Romania,2013,455,Persons (1),fis,OECD
+72,Romania,2014,432,Persons (1),fis,OECD
+72,Romania,2015,406,Persons (1),fis,OECD
+72,Romania,2016,383,Persons (1),fis,OECD
+72,Romania,2017,571,Persons (1),fis,OECD
+72,Romania,2018,581,Persons (1),fis,OECD
+72,Romania,2019,591,Persons (1),fis,OECD
+72,Romania,2020,597,Persons (1),fis,OECD
+72,Romania,2021,607,Persons (1),fis,OECD
+72,Romania,2022,549,Persons (1),fis,OECD
+76,Turkey,2008,47413,Persons (1),fis,OECD
+76,Turkey,2009,47413,Persons (1),fis,OECD
+76,Turkey,2010,46361,Persons (1),fis,OECD
+76,Turkey,2011,37747,Persons (1),fis,OECD
+76,Turkey,2012,36776,Persons (1),fis,OECD
+76,Turkey,2013,33455,Persons (1),fis,OECD
+76,Turkey,2014,32599,Persons (1),fis,OECD
+76,Turkey,2015,31350,Persons (1),fis,OECD
+76,Turkey,2016,32631,Persons (1),fis,OECD
+76,Turkey,2017,31842,Persons (1),fis,OECD
+76,Turkey,2018,30878,Persons (1),fis,OECD
+76,Turkey,2019,28717,Persons (1),fis,OECD
+76,Turkey,2020,35540,Persons (1),fis,OECD
+76,Turkey,2021,35107,Persons (1),fis,OECD
+76,Turkey,2022,34684,Persons (1),fis,OECD
+79,Israel,2008,1344,Persons (1),fis,OECD
+79,Israel,2009,1344,Persons (1),fis,OECD
+79,Israel,2010,1309,Persons (1),fis,OECD
+79,Israel,2011,1275,Persons (1),fis,OECD
+79,Israel,2012,1240,Persons (1),fis,OECD
+79,Israel,2013,1240,Persons (1),fis,OECD
+79,Israel,2014,734,Persons (1),fis,OECD
+79,Israel,2015,820,Persons (1),fis,OECD
+79,Israel,2016,840,Persons (1),fis,OECD
+79,Israel,2017,830,Persons (1),fis,OECD
+79,Israel,2018,897,Persons (1),fis,OECD
+79,Israel,2019,965,Persons (1),fis,OECD
+79,Israel,2020,1032,Persons (1),fis,OECD
+79,Israel,2021,1040,Persons (1),fis,OECD
+79,Israel,2022,1040,Persons (1),fis,OECD
+80,Greece,2008,24403,Persons (1),fis,OECD
+80,Greece,2009,24403,Persons (1),fis,OECD
+80,Greece,2010,24319,Persons (1),fis,OECD
+80,Greece,2011,21923,Persons (1),fis,OECD
+80,Greece,2012,21941,Persons (1),fis,OECD
+80,Greece,2013,21590,Persons (1),fis,OECD
+80,Greece,2014,21662,Persons (1),fis,OECD
+80,Greece,2015,21674,Persons (1),fis,OECD
+80,Greece,2016,21600,Persons (1),fis,OECD
+80,Greece,2017,21153,Persons (1),fis,OECD
+80,Greece,2018,20565,Persons (1),fis,OECD
+80,Greece,2019,19889,Persons (1),fis,OECD
+80,Greece,2020,18535,Persons (1),fis,OECD
+80,Greece,2021,16779,Persons (1),fis,OECD
+80,Greece,2022,17196,Persons (1),fis,OECD
+130,Costa Rica,2008,5496,Persons (1),fis,OECD
+130,Costa Rica,2009,5496,Persons (1),fis,OECD
+130,Costa Rica,2010,5747,Persons (1),fis,OECD
+130,Costa Rica,2011,5907,Persons (1),fis,OECD
+130,Costa Rica,2012,6741,Persons (1),fis,OECD
+130,Costa Rica,2013,7564,Persons (1),fis,OECD
+130,Costa Rica,2014,4846,Persons (1),fis,OECD
+130,Costa Rica,2015,3695,Persons (1),fis,OECD
+130,Costa Rica,2016,3888,Persons (1),fis,OECD
+130,Costa Rica,2017,3338,Persons (1),fis,OECD
+130,Costa Rica,2018,5763,Persons (1),fis,OECD
+130,Costa Rica,2019,6315,Persons (1),fis,OECD
+130,Costa Rica,2020,5348,Persons (1),fis,OECD
+130,Costa Rica,2021,7039,Persons (1),fis,OECD
+130,Costa Rica,2022,4117,Persons (1),fis,OECD
+132,Colombia,2008,24495,Persons (1),fis,OECD
+132,Colombia,2009,24495,Persons (1),fis,OECD
+132,Colombia,2010,24495,Persons (1),fis,OECD
+132,Colombia,2011,24495,Persons (1),fis,OECD
+132,Colombia,2012,24495,Persons (1),fis,OECD
+132,Colombia,2013,20561,Persons (1),fis,OECD
+132,Colombia,2014,16105,Persons (1),fis,OECD
+132,Colombia,2015,15938,Persons (1),fis,OECD
+132,Colombia,2016,17287,Persons (1),fis,OECD
+132,Colombia,2017,17674,Persons (1),fis,OECD
+132,Colombia,2018,17420,Persons (1),fis,OECD
+132,Colombia,2019,23173,Persons (1),fis,OECD
+132,Colombia,2020,20239,Persons (1),fis,OECD
+132,Colombia,2021,32826,Persons (1),fis,OECD
+132,Colombia,2022,32920,Persons (1),fis,OECD
+135,Mexico,2008,231511,Persons (1),fis,OECD
+135,Mexico,2009,231511,Persons (1),fis,OECD
+135,Mexico,2010,241678,Persons (1),fis,OECD
+135,Mexico,2011,213831,Persons (1),fis,OECD
+135,Mexico,2012,199340,Persons (1),fis,OECD
+135,Mexico,2013,201539,Persons (1),fis,OECD
+135,Mexico,2014,204384,Persons (1),fis,OECD
+135,Mexico,2015,226968,Persons (1),fis,OECD
+135,Mexico,2016,226580,Persons (1),fis,OECD
+135,Mexico,2017,227182,Persons (1),fis,OECD
+135,Mexico,2018,233990,Persons (1),fis,OECD
+135,Mexico,2019,230596,Persons (1),fis,OECD
+135,Mexico,2020,228519,Persons (1),fis,OECD
+135,Mexico,2021,224769,Persons (1),fis,OECD
+135,Mexico,2022,228296,Persons (1),fis,OECD
+138,Peru,2008,69486,Persons (1),fis,OECD
+138,Peru,2009,69486,Persons (1),fis,OECD
+138,Peru,2010,63532,Persons (1),fis,OECD
+138,Peru,2011,67228,Persons (1),fis,OECD
+138,Peru,2012,57952,Persons (1),fis,OECD
+138,Peru,2013,65025,Persons (1),fis,OECD
+138,Peru,2014,65214,Persons (1),fis,OECD
+138,Peru,2015,65500,Persons (1),fis,OECD
+138,Peru,2016,65100,Persons (1),fis,OECD
+138,Peru,2017,66413,Persons (1),fis,OECD
+138,Peru,2018,62610,Persons (1),fis,OECD
+138,Peru,2019,61991,Persons (1),fis,OECD
+138,Peru,2020,55140,Persons (1),fis,OECD
+138,Peru,2021,68017,Persons (1),fis,OECD
+138,Peru,2022,57713,Persons (1),fis,OECD
+143,Iceland,2008,4010,Persons (1),fis,OECD
+143,Iceland,2009,4010,Persons (1),fis,OECD
+143,Iceland,2010,4416,Persons (1),fis,OECD
+143,Iceland,2011,5222,Persons (1),fis,OECD
+143,Iceland,2012,5161,Persons (1),fis,OECD
+143,Iceland,2013,5004,Persons (1),fis,OECD
+143,Iceland,2014,4777,Persons (1),fis,OECD
+143,Iceland,2015,4046,Persons (1),fis,OECD
+143,Iceland,2016,4363,Persons (1),fis,OECD
+143,Iceland,2017,4157,Persons (1),fis,OECD
+143,Iceland,2018,3944,Persons (1),fis,OECD
+143,Iceland,2019,3730,Persons (1),fis,OECD
+143,Iceland,2020,3460,Persons (1),fis,OECD
+143,Iceland,2021,3478,Persons (1),fis,OECD
+143,Iceland,2022,3478,Persons (1),fis,OECD
+162,New Zealand,2008,1900,Persons (1),fis,OECD
+162,New Zealand,2009,1900,Persons (1),fis,OECD
+162,New Zealand,2010,1800,Persons (1),fis,OECD
+162,New Zealand,2011,1800,Persons (1),fis,OECD
+162,New Zealand,2012,1700,Persons (1),fis,OECD
+162,New Zealand,2013,1800,Persons (1),fis,OECD
+162,New Zealand,2014,1850,Persons (1),fis,OECD
+162,New Zealand,2015,2050,Persons (1),fis,OECD
+162,New Zealand,2016,1950,Persons (1),fis,OECD
+162,New Zealand,2017,2450,Persons (1),fis,OECD
+162,New Zealand,2018,2550,Persons (1),fis,OECD
+162,New Zealand,2019,2550,Persons (1),fis,OECD
+162,New Zealand,2020,2650,Persons (1),fis,OECD
+162,New Zealand,2021,2600,Persons (1),fis,OECD
+162,New Zealand,2022,2600,Persons (1),fis,OECD
+163,United States,2008,135466,Persons (1),fis,OECD
+163,United States,2009,135466,Persons (1),fis,OECD
+163,United States,2010,159739,Persons (1),fis,OECD
+163,United States,2011,186726,Persons (1),fis,OECD
+163,United States,2012,175565,Persons (1),fis,OECD
+163,United States,2013,198647,Persons (1),fis,OECD
+163,United States,2014,185263,Persons (1),fis,OECD
+163,United States,2015,164047,Persons (1),fis,OECD
+163,United States,2016,166952,Persons (1),fis,OECD
+163,United States,2017,168746,Persons (1),fis,OECD
+163,United States,2018,158811,Persons (1),fis,OECD
+163,United States,2019,164522,Persons (1),fis,OECD
+163,United States,2020,138342,Persons (1),fis,OECD
+163,United States,2021,182568,Persons (1),fis,OECD
+163,United States,2022,182568,Persons (1),fis,OECD
+171,Brazil,2008,532912,Persons (1),fis,OECD
+171,Brazil,2009,532912,Persons (1),fis,OECD
+171,Brazil,2010,546755,Persons (1),fis,OECD
+171,Brazil,2011,560073,Persons (1),fis,OECD
+171,Brazil,2012,822274,Persons (1),fis,OECD
+171,Brazil,2013,822274,Persons (1),fis,OECD
+171,Brazil,2014,822274,Persons (1),fis,OECD
+171,Brazil,2015,822274,Persons (1),fis,OECD
+171,Brazil,2016,822274,Persons (1),fis,OECD
+171,Brazil,2017,822274,Persons (1),fis,OECD
+171,Brazil,2018,822274,Persons (1),fis,OECD
+171,Brazil,2019,822274,Persons (1),fis,OECD
+171,Brazil,2020,821973,Persons (1),fis,OECD
+171,Brazil,2021,821973,Persons (1),fis,OECD
+171,Brazil,2022,821973,Persons (1),fis,OECD
+172,Argentina,2008,16967,Persons (1),fis,OECD
+172,Argentina,2009,16967,Persons (1),fis,OECD
+172,Argentina,2010,16050,Persons (1),fis,OECD
+172,Argentina,2011,16563,Persons (1),fis,OECD
+172,Argentina,2012,15514,Persons (1),fis,OECD
+172,Argentina,2013,15178,Persons (1),fis,OECD
+172,Argentina,2014,15223,Persons (1),fis,OECD
+172,Argentina,2015,15160,Persons (1),fis,OECD
+172,Argentina,2016,14085,Persons (1),fis,OECD
+172,Argentina,2017,14273,Persons (1),fis,OECD
+172,Argentina,2018,14596,Persons (1),fis,OECD
+172,Argentina,2019,13594,Persons (1),fis,OECD
+172,Argentina,2020,13525,Persons (1),fis,OECD
+172,Argentina,2021,14744,Persons (1),fis,OECD
+172,Argentina,2022,14574,Persons (1),fis,OECD
+174,Finland,2008,2077,Persons (1),fis,OECD
+174,Finland,2009,2077,Persons (1),fis,OECD
+174,Finland,2010,2195,Persons (1),fis,OECD
+174,Finland,2011,2199,Persons (1),fis,OECD
+174,Finland,2012,2155,Persons (1),fis,OECD
+174,Finland,2013,2063,Persons (1),fis,OECD
+174,Finland,2014,2067,Persons (1),fis,OECD
+174,Finland,2015,2084,Persons (1),fis,OECD
+174,Finland,2016,2360,Persons (1),fis,OECD
+174,Finland,2017,2491,Persons (1),fis,OECD
+174,Finland,2018,2499,Persons (1),fis,OECD
+174,Finland,2019,2231,Persons (1),fis,OECD
+174,Finland,2020,2276,Persons (1),fis,OECD
+174,Finland,2021,2357,Persons (1),fis,OECD
+174,Finland,2022,2136,Persons (1),fis,OECD
+175,Denmark,2008,2170,Persons (1),fis,OECD
+175,Denmark,2009,2170,Persons (1),fis,OECD
+175,Denmark,2010,2106,Persons (1),fis,OECD
+175,Denmark,2011,2045,Persons (1),fis,OECD
+175,Denmark,2012,1949,Persons (1),fis,OECD
+175,Denmark,2013,1934,Persons (1),fis,OECD
+175,Denmark,2014,1886,Persons (1),fis,OECD
+175,Denmark,2015,1809,Persons (1),fis,OECD
+175,Denmark,2016,1814,Persons (1),fis,OECD
+175,Denmark,2017,1825,Persons (1),fis,OECD
+175,Denmark,2018,1802,Persons (1),fis,OECD
+175,Denmark,2019,1781,Persons (1),fis,OECD
+175,Denmark,2020,1589,Persons (1),fis,OECD
+175,Denmark,2021,1575,Persons (1),fis,OECD
+175,Denmark,2022,1441,Persons (1),fis,OECD
+176,Germany,2008,1529,Persons (1),fis,OECD
+176,Germany,2009,1529,Persons (1),fis,OECD
+176,Germany,2010,1744,Persons (1),fis,OECD
+176,Germany,2011,1639,Persons (1),fis,OECD
+176,Germany,2012,1752,Persons (1),fis,OECD
+176,Germany,2013,1647,Persons (1),fis,OECD
+176,Germany,2014,1605,Persons (1),fis,OECD
+176,Germany,2015,1532,Persons (1),fis,OECD
+176,Germany,2016,1539,Persons (1),fis,OECD
+176,Germany,2017,1668,Persons (1),fis,OECD
+176,Germany,2018,1657,Persons (1),fis,OECD
+176,Germany,2019,1506,Persons (1),fis,OECD
+176,Germany,2020,1324,Persons (1),fis,OECD
+176,Germany,2021,1209,Persons (1),fis,OECD
+176,Germany,2022,1198,Persons (1),fis,OECD
+177,Netherlands,2008,2138,Persons (1),fis,OECD
+177,Netherlands,2009,2138,Persons (1),fis,OECD
+177,Netherlands,2010,2137,Persons (1),fis,OECD
+177,Netherlands,2011,2089,Persons (1),fis,OECD
+177,Netherlands,2012,2009,Persons (1),fis,OECD
+177,Netherlands,2013,2023,Persons (1),fis,OECD
+177,Netherlands,2014,1984,Persons (1),fis,OECD
+177,Netherlands,2015,1934,Persons (1),fis,OECD
+177,Netherlands,2016,1969,Persons (1),fis,OECD
+177,Netherlands,2017,2061,Persons (1),fis,OECD
+177,Netherlands,2018,1984,Persons (1),fis,OECD
+177,Netherlands,2019,1945,Persons (1),fis,OECD
+177,Netherlands,2020,1880,Persons (1),fis,OECD
+177,Netherlands,2021,1876,Persons (1),fis,OECD
+177,Netherlands,2022,1780,Persons (1),fis,OECD
+178,Poland,2008,2460,Persons (1),fis,OECD
+178,Poland,2009,2460,Persons (1),fis,OECD
+178,Poland,2010,2424,Persons (1),fis,OECD
+178,Poland,2011,2401,Persons (1),fis,OECD
+178,Poland,2012,2502,Persons (1),fis,OECD
+178,Poland,2013,2443,Persons (1),fis,OECD
+178,Poland,2014,2706,Persons (1),fis,OECD
+178,Poland,2015,2492,Persons (1),fis,OECD
+178,Poland,2016,2474,Persons (1),fis,OECD
+178,Poland,2017,2992,Persons (1),fis,OECD
+178,Poland,2018,2655,Persons (1),fis,OECD
+178,Poland,2019,2537,Persons (1),fis,OECD
+178,Poland,2020,2163,Persons (1),fis,OECD
+178,Poland,2021,2265,Persons (1),fis,OECD
+178,Poland,2022,2156,Persons (1),fis,OECD
+179,France,2008,14746,Persons (1),fis,OECD
+179,France,2009,14746,Persons (1),fis,OECD
+179,France,2010,14457,Persons (1),fis,OECD
+179,France,2011,14273,Persons (1),fis,OECD
+179,France,2012,14273,Persons (1),fis,OECD
+179,France,2013,13609,Persons (1),fis,OECD
+179,France,2014,13548,Persons (1),fis,OECD
+179,France,2015,13441,Persons (1),fis,OECD
+179,France,2016,13437,Persons (1),fis,OECD
+179,France,2017,13541,Persons (1),fis,OECD
+179,France,2018,13268,Persons (1),fis,OECD
+179,France,2019,13119,Persons (1),fis,OECD
+179,France,2020,12417,Persons (1),fis,OECD
+179,France,2021,12458,Persons (1),fis,OECD
+179,France,2022,12458,Persons (1),fis,OECD
+180,United Kingdom,2008,12703,Persons (1),fis,OECD
+180,United Kingdom,2009,12703,Persons (1),fis,OECD
+180,United Kingdom,2010,12405,Persons (1),fis,OECD
+180,United Kingdom,2011,12445,Persons (1),fis,OECD
+180,United Kingdom,2012,12235,Persons (1),fis,OECD
+180,United Kingdom,2013,11845,Persons (1),fis,OECD
+180,United Kingdom,2014,12107,Persons (1),fis,OECD
+180,United Kingdom,2015,11757,Persons (1),fis,OECD
+180,United Kingdom,2016,11692,Persons (1),fis,OECD
+180,United Kingdom,2017,11692,Persons (1),fis,OECD
+180,United Kingdom,2018,11961,Persons (1),fis,OECD
+180,United Kingdom,2019,12043,Persons (1),fis,OECD
+180,United Kingdom,2020,11298,Persons (1),fis,OECD
+180,United Kingdom,2021,10724,Persons (1),fis,OECD
+180,United Kingdom,2022,10356,Persons (1),fis,OECD
+181,Ireland,2008,4889,Persons (1),fis,OECD
+181,Ireland,2009,4889,Persons (1),fis,OECD
+181,Ireland,2010,4422,Persons (1),fis,OECD
+181,Ireland,2011,3243,Persons (1),fis,OECD
+181,Ireland,2012,3121,Persons (1),fis,OECD
+181,Ireland,2013,3087,Persons (1),fis,OECD
+181,Ireland,2014,3154,Persons (1),fis,OECD
+181,Ireland,2015,3451,Persons (1),fis,OECD
+181,Ireland,2016,3461,Persons (1),fis,OECD
+181,Ireland,2017,3062,Persons (1),fis,OECD
+181,Ireland,2018,2944,Persons (1),fis,OECD
+181,Ireland,2019,3297,Persons (1),fis,OECD
+181,Ireland,2020,2688,Persons (1),fis,OECD
+181,Ireland,2021,2779,Persons (1),fis,OECD
+181,Ireland,2022,2774,Persons (1),fis,OECD
+182,Spain,2008,39055,Persons (1),fis,OECD
+182,Spain,2009,39055,Persons (1),fis,OECD
+182,Spain,2010,41062,Persons (1),fis,OECD
+182,Spain,2011,36909,Persons (1),fis,OECD
+182,Spain,2012,35672,Persons (1),fis,OECD
+182,Spain,2013,34029,Persons (1),fis,OECD
+182,Spain,2014,34172,Persons (1),fis,OECD
+182,Spain,2015,33292,Persons (1),fis,OECD
+182,Spain,2016,32508,Persons (1),fis,OECD
+182,Spain,2017,34327,Persons (1),fis,OECD
+182,Spain,2018,31744,Persons (1),fis,OECD
+182,Spain,2019,31934,Persons (1),fis,OECD
+182,Spain,2020,31117,Persons (1),fis,OECD
+182,Spain,2021,32106,Persons (1),fis,OECD
+182,Spain,2022,30494,Persons (1),fis,OECD
+183,Portugal,2008,17415,Persons (1),fis,OECD
+183,Portugal,2009,17415,Persons (1),fis,OECD
+183,Portugal,2010,14984,Persons (1),fis,OECD
+183,Portugal,2011,14633,Persons (1),fis,OECD
+183,Portugal,2012,14933,Persons (1),fis,OECD
+183,Portugal,2013,15117,Persons (1),fis,OECD
+183,Portugal,2014,15163,Persons (1),fis,OECD
+183,Portugal,2015,15493,Persons (1),fis,OECD
+183,Portugal,2016,15634,Persons (1),fis,OECD
+183,Portugal,2017,15979,Persons (1),fis,OECD
+183,Portugal,2018,13493,Persons (1),fis,OECD
+183,Portugal,2019,12480,Persons (1),fis,OECD
+183,Portugal,2020,12324,Persons (1),fis,OECD
+183,Portugal,2021,12065,Persons (1),fis,OECD
+183,Portugal,2022,11928,Persons (1),fis,OECD
+184,Italy,2008,29222,Persons (1),fis,OECD
+184,Italy,2009,29222,Persons (1),fis,OECD
+184,Italy,2010,29222,Persons (1),fis,OECD
+184,Italy,2011,28964,Persons (1),fis,OECD
+184,Italy,2012,28292,Persons (1),fis,OECD
+184,Italy,2013,26758,Persons (1),fis,OECD
+184,Italy,2014,26932,Persons (1),fis,OECD
+184,Italy,2015,25812,Persons (1),fis,OECD
+184,Italy,2016,25933,Persons (1),fis,OECD
+184,Italy,2017,25524,Persons (1),fis,OECD
+184,Italy,2018,25868,Persons (1),fis,OECD
+184,Italy,2019,24243,Persons (1),fis,OECD
+184,Italy,2020,21392,Persons (1),fis,OECD
+184,Italy,2021,20935,Persons (1),fis,OECD
+184,Italy,2022,20935,Persons (1),fis,OECD
+187,Croatia,2008,15410,Persons (1),fis,OECD
+187,Croatia,2009,15410,Persons (1),fis,OECD
+187,Croatia,2010,15410,Persons (1),fis,OECD
+187,Croatia,2011,15324,Persons (1),fis,OECD
+187,Croatia,2012,15940,Persons (1),fis,OECD
+187,Croatia,2013,15392,Persons (1),fis,OECD
+187,Croatia,2014,6800,Persons (1),fis,OECD
+187,Croatia,2015,4728,Persons (1),fis,OECD
+187,Croatia,2016,7227,Persons (1),fis,OECD
+187,Croatia,2017,7813,Persons (1),fis,OECD
+187,Croatia,2018,7820,Persons (1),fis,OECD
+187,Croatia,2019,7952,Persons (1),fis,OECD
+187,Croatia,2020,7986,Persons (1),fis,OECD
+187,Croatia,2021,8113,Persons (1),fis,OECD
+187,Croatia,2022,8057,Persons (1),fis,OECD
+188,Slovenia,2008,117,Persons (1),fis,OECD
+188,Slovenia,2009,117,Persons (1),fis,OECD
+188,Slovenia,2010,124,Persons (1),fis,OECD
+188,Slovenia,2011,126,Persons (1),fis,OECD
+188,Slovenia,2012,113,Persons (1),fis,OECD
+188,Slovenia,2013,115,Persons (1),fis,OECD
+188,Slovenia,2014,125,Persons (1),fis,OECD
+188,Slovenia,2015,124,Persons (1),fis,OECD
+188,Slovenia,2016,101,Persons (1),fis,OECD
+188,Slovenia,2017,96,Persons (1),fis,OECD
+188,Slovenia,2018,89,Persons (1),fis,OECD
+188,Slovenia,2019,80,Persons (1),fis,OECD
+188,Slovenia,2020,86,Persons (1),fis,OECD
+188,Slovenia,2021,89,Persons (1),fis,OECD
+188,Slovenia,2022,70,Persons (1),fis,OECD
+189,Lithuania,2008,732,Persons (1),fis,OECD
+189,Lithuania,2009,732,Persons (1),fis,OECD
+189,Lithuania,2010,709,Persons (1),fis,OECD
+189,Lithuania,2011,764,Persons (1),fis,OECD
+189,Lithuania,2012,713,Persons (1),fis,OECD
+189,Lithuania,2013,749,Persons (1),fis,OECD
+189,Lithuania,2014,756,Persons (1),fis,OECD
+189,Lithuania,2015,711,Persons (1),fis,OECD
+189,Lithuania,2016,627,Persons (1),fis,OECD
+189,Lithuania,2017,511,Persons (1),fis,OECD
+189,Lithuania,2018,458,Persons (1),fis,OECD
+189,Lithuania,2019,474,Persons (1),fis,OECD
+189,Lithuania,2020,439,Persons (1),fis,OECD
+189,Lithuania,2021,455,Persons (1),fis,OECD
+189,Lithuania,2022,424,Persons (1),fis,OECD
+203,India,2008,907578,Persons (1),fis,OECD
+203,India,2009,907578,Persons (1),fis,OECD
+203,India,2010,1663496,Persons (1),fis,OECD
+203,India,2011,1933110,Persons (1),fis,OECD
+203,India,2012,1890283,Persons (1),fis,OECD
+203,India,2013,1913051,Persons (1),fis,OECD
+203,India,2014,1995913,Persons (1),fis,OECD
+203,India,2015,2078777,Persons (1),fis,OECD
+203,India,2016,2161639,Persons (1),fis,OECD
+203,India,2017,2244501,Persons (1),fis,OECD
+203,India,2018,2327362,Persons (1),fis,OECD
+203,India,2019,2410226,Persons (1),fis,OECD
+203,India,2020,2493088,Persons (1),fis,OECD
+203,India,2021,2316197,Persons (1),fis,OECD
+203,India,2022,2316197,Persons (1),fis,OECD
+204,Bangladesh,2008,10032727,Persons (1),fis,OECD
+204,Bangladesh,2009,10032727,Persons (1),fis,OECD
+204,Bangladesh,2010,10080509,Persons (1),fis,OECD
+204,Bangladesh,2011,10141845,Persons (1),fis,OECD
+204,Bangladesh,2012,11730064,Persons (1),fis,OECD
+204,Bangladesh,2013,11994428,Persons (1),fis,OECD
+204,Bangladesh,2014,12258791,Persons (1),fis,OECD
+204,Bangladesh,2015,11985440,Persons (1),fis,OECD
+204,Bangladesh,2016,12079791,Persons (1),fis,OECD
+204,Bangladesh,2017,12180174,Persons (1),fis,OECD
+204,Bangladesh,2018,12267422,Persons (1),fis,OECD
+204,Bangladesh,2019,12348316,Persons (1),fis,OECD
+204,Bangladesh,2020,13215157,Persons (1),fis,OECD
+204,Bangladesh,2021,13343602,Persons (1),fis,OECD
+204,Bangladesh,2022,13446167,Persons (1),fis,OECD
+206,Malaysia,2008,125632,Persons (1),fis,OECD
+206,Malaysia,2009,125632,Persons (1),fis,OECD
+206,Malaysia,2010,129622,Persons (1),fis,OECD
+206,Malaysia,2011,134110,Persons (1),fis,OECD
+206,Malaysia,2012,136514,Persons (1),fis,OECD
+206,Malaysia,2013,144019,Persons (1),fis,OECD
+206,Malaysia,2014,143421,Persons (1),fis,OECD
+206,Malaysia,2015,140949,Persons (1),fis,OECD
+206,Malaysia,2016,132305,Persons (1),fis,OECD
+206,Malaysia,2017,130645,Persons (1),fis,OECD
+206,Malaysia,2018,128148,Persons (1),fis,OECD
+206,Malaysia,2019,126595,Persons (1),fis,OECD
+206,Malaysia,2020,119828,Persons (1),fis,OECD
+206,Malaysia,2021,114979,Persons (1),fis,OECD
+206,Malaysia,2022,116148,Persons (1),fis,OECD
+207,Vietnam,2008,830040,Persons (1),fis,OECD
+207,Vietnam,2009,830040,Persons (1),fis,OECD
+207,Vietnam,2010,956895,Persons (1),fis,OECD
+207,Vietnam,2011,916750,Persons (1),fis,OECD
+207,Vietnam,2012,947280,Persons (1),fis,OECD
+207,Vietnam,2013,863735,Persons (1),fis,OECD
+207,Vietnam,2014,864920,Persons (1),fis,OECD
+207,Vietnam,2015,846340,Persons (1),fis,OECD
+207,Vietnam,2016,863440,Persons (1),fis,OECD
+207,Vietnam,2017,863440,Persons (1),fis,OECD
+207,Vietnam,2018,863440,Persons (1),fis,OECD
+207,Vietnam,2019,863440,Persons (1),fis,OECD
+207,Vietnam,2020,863440,Persons (1),fis,OECD
+207,Vietnam,2021,863440,Persons (1),fis,OECD
+207,Vietnam,2022,863440,Persons (1),fis,OECD
+209,China,2008,9848633,Persons (1),fis,OECD
+209,China,2009,9848633,Persons (1),fis,OECD
+209,China,2010,9843338,Persons (1),fis,OECD
+209,China,2011,9695644,Persons (1),fis,OECD
+209,China,2012,9587651,Persons (1),fis,OECD
+209,China,2013,9472645,Persons (1),fis,OECD
+209,China,2014,9261979,Persons (1),fis,OECD
+209,China,2015,8977696,Persons (1),fis,OECD
+209,China,2016,8619962,Persons (1),fis,OECD
+209,China,2017,8276782,Persons (1),fis,OECD
+209,China,2018,7953100,Persons (1),fis,OECD
+209,China,2019,7581663,Persons (1),fis,OECD
+209,China,2020,7134228,Persons (1),fis,OECD
+209,China,2021,6792435,Persons (1),fis,OECD
+209,China,2022,6740433,Persons (1),fis,OECD
+210,Japan,2008,163332,Persons (1),fis,OECD
+210,Japan,2009,163332,Persons (1),fis,OECD
+210,Japan,2010,158814,Persons (1),fis,OECD
+210,Japan,2011,143853,Persons (1),fis,OECD
+210,Japan,2012,134788,Persons (1),fis,OECD
+210,Japan,2013,141693,Persons (1),fis,OECD
+210,Japan,2014,135628,Persons (1),fis,OECD
+210,Japan,2015,126329,Persons (1),fis,OECD
+210,Japan,2016,120516,Persons (1),fis,OECD
+210,Japan,2017,116725,Persons (1),fis,OECD
+210,Japan,2018,115877,Persons (1),fis,OECD
+210,Japan,2019,111952,Persons (1),fis,OECD
+210,Japan,2020,103543,Persons (1),fis,OECD
+210,Japan,2021,98904,Persons (1),fis,OECD
+210,Japan,2022,94140,Persons (1),fis,OECD
+216,Indonesia,2008,2169279,Persons (1),fis,OECD
+216,Indonesia,2009,2169279,Persons (1),fis,OECD
+216,Indonesia,2010,2162442,Persons (1),fis,OECD
+216,Indonesia,2011,2265213,Persons (1),fis,OECD
+216,Indonesia,2012,2278388,Persons (1),fis,OECD
+216,Indonesia,2013,2164969,Persons (1),fis,OECD
+216,Indonesia,2014,2186900,Persons (1),fis,OECD
+216,Indonesia,2015,2275139,Persons (1),fis,OECD
+216,Indonesia,2016,2261874,Persons (1),fis,OECD
+216,Indonesia,2017,2289529,Persons (1),fis,OECD
+216,Indonesia,2018,2292024,Persons (1),fis,OECD
+216,Indonesia,2019,2088959,Persons (1),fis,OECD
+216,Indonesia,2020,2359064,Persons (1),fis,OECD
+216,Indonesia,2021,2359264,Persons (1),fis,OECD
+216,Indonesia,2022,2401540,Persons (1),fis,OECD
+218,Canada,2008,45783,Persons (1),fis,OECD
+218,Canada,2009,45783,Persons (1),fis,OECD
+218,Canada,2010,44692,Persons (1),fis,OECD
+218,Canada,2011,44584,Persons (1),fis,OECD
+218,Canada,2012,43543,Persons (1),fis,OECD
+218,Canada,2013,41181,Persons (1),fis,OECD
+218,Canada,2014,39843,Persons (1),fis,OECD
+218,Canada,2015,38614,Persons (1),fis,OECD
+218,Canada,2016,40982,Persons (1),fis,OECD
+218,Canada,2017,42133,Persons (1),fis,OECD
+218,Canada,2018,41934,Persons (1),fis,OECD
+218,Canada,2019,41678,Persons (1),fis,OECD
+218,Canada,2020,41049,Persons (1),fis,OECD
+218,Canada,2021,43087,Persons (1),fis,OECD
+218,Canada,2022,41802,Persons (1),fis,OECD
+222,Sweden,2008,1876,Persons (1),fis,OECD
+222,Sweden,2009,1876,Persons (1),fis,OECD
+222,Sweden,2010,1833,Persons (1),fis,OECD
+222,Sweden,2011,1803,Persons (1),fis,OECD
+222,Sweden,2012,1796,Persons (1),fis,OECD
+222,Sweden,2013,1723,Persons (1),fis,OECD
+222,Sweden,2014,1728,Persons (1),fis,OECD
+222,Sweden,2015,1620,Persons (1),fis,OECD
+222,Sweden,2016,1638,Persons (1),fis,OECD
+222,Sweden,2017,1534,Persons (1),fis,OECD
+222,Sweden,2018,1480,Persons (1),fis,OECD
+222,Sweden,2019,1482,Persons (1),fis,OECD
+222,Sweden,2020,1441,Persons (1),fis,OECD
+222,Sweden,2021,1421,Persons (1),fis,OECD
+222,Sweden,2022,1421,Persons (1),fis,OECD
+223,Norway,2008,13229,Persons (1),fis,OECD
+223,Norway,2009,13229,Persons (1),fis,OECD
+223,Norway,2010,12993,Persons (1),fis,OECD
+223,Norway,2011,12768,Persons (1),fis,OECD
+223,Norway,2012,12048,Persons (1),fis,OECD
+223,Norway,2013,11611,Persons (1),fis,OECD
+223,Norway,2014,11301,Persons (1),fis,OECD
+223,Norway,2015,11130,Persons (1),fis,OECD
+223,Norway,2016,11236,Persons (1),fis,OECD
+223,Norway,2017,11340,Persons (1),fis,OECD
+223,Norway,2018,11219,Persons (1),fis,OECD
+223,Norway,2019,11048,Persons (1),fis,OECD
+223,Norway,2020,10978,Persons (1),fis,OECD
+223,Norway,2021,10852,Persons (1),fis,OECD
+223,Norway,2022,10830,Persons (1),fis,OECD
+224,Chile,2008,42116,Persons (1),fis,OECD
+224,Chile,2009,42116,Persons (1),fis,OECD
+224,Chile,2010,42488,Persons (1),fis,OECD
+224,Chile,2011,44726,Persons (1),fis,OECD
+224,Chile,2012,45001,Persons (1),fis,OECD
+224,Chile,2013,44355,Persons (1),fis,OECD
+224,Chile,2014,47319,Persons (1),fis,OECD
+224,Chile,2015,49299,Persons (1),fis,OECD
+224,Chile,2016,51169,Persons (1),fis,OECD
+224,Chile,2017,56700,Persons (1),fis,OECD
+224,Chile,2018,57817,Persons (1),fis,OECD
+224,Chile,2019,49747,Persons (1),fis,OECD
+224,Chile,2020,44844,Persons (1),fis,OECD
+224,Chile,2021,46112,Persons (1),fis,OECD
+224,Chile,2022,45216,Persons (1),fis,OECD
+24,Cambodia,2008,697368.2,Persons (1),fis,FAO Yrbk
+24,Cambodia,2009,701706.6,Persons (1),fis,FAO Yrbk
+24,Cambodia,2010,706045,Persons (1),fis,FAO Yrbk
+24,Cambodia,2011,753581.2,Persons (1),fis,FAO Yrbk
+24,Cambodia,2012,801117.4,Persons (1),fis,FAO Yrbk
+24,Cambodia,2013,848653.6,Persons (1),fis,FAO Yrbk
+24,Cambodia,2014,896189.8,Persons (1),fis,FAO Yrbk
+24,Cambodia,2015,943726,Persons (1),fis,FAO Yrbk
+24,Cambodia,2016,1016483,Persons (1),fis,FAO Yrbk
+24,Cambodia,2017,1089240,Persons (1),fis,FAO Yrbk
+24,Cambodia,2018,1148982,Persons (1),fis,FAO Yrbk
+24,Cambodia,2019,1203395,Persons (1),fis,FAO Yrbk
+24,Cambodia,2020,1257686,Persons (1),fis,FAO Yrbk
+24,Cambodia,2021,1203395,Persons (1),fis,FAO Yrbk
+40,Sri Lanka,2008,193364,Persons (1),fis,FAO Yrbk
+40,Sri Lanka,2009,206652,Persons (1),fis,FAO Yrbk
+40,Sri Lanka,2010,219940,Persons (1),fis,FAO Yrbk
+40,Sri Lanka,2011,229503.6,Persons (1),fis,FAO Yrbk
+40,Sri Lanka,2012,239067.2,Persons (1),fis,FAO Yrbk
+40,Sri Lanka,2013,248630.8,Persons (1),fis,FAO Yrbk
+40,Sri Lanka,2014,258194.4,Persons (1),fis,FAO Yrbk
+40,Sri Lanka,2015,267758,Persons (1),fis,FAO Yrbk
+40,Sri Lanka,2016,268699,Persons (1),fis,FAO Yrbk
+40,Sri Lanka,2017,269640,Persons (1),fis,FAO Yrbk
+40,Sri Lanka,2018,261204,Persons (1),fis,FAO Yrbk
+40,Sri Lanka,2019,281394,Persons (1),fis,FAO Yrbk
+40,Sri Lanka,2020,288684,Persons (1),fis,FAO Yrbk
+40,Sri Lanka,2021,294439,Persons (1),fis,FAO Yrbk
+41,Mozambique,2008,148200,Persons (1),fis,FAO Yrbk
+41,Mozambique,2009,155200,Persons (1),fis,FAO Yrbk
+41,Mozambique,2010,162200,Persons (1),fis,FAO Yrbk
+41,Mozambique,2011,174043.4,Persons (1),fis,FAO Yrbk
+41,Mozambique,2012,185886.8,Persons (1),fis,FAO Yrbk
+41,Mozambique,2013,197730.2,Persons (1),fis,FAO Yrbk
+41,Mozambique,2014,209573.6,Persons (1),fis,FAO Yrbk
+41,Mozambique,2015,221417,Persons (1),fis,FAO Yrbk
+41,Mozambique,2016,234737.5,Persons (1),fis,FAO Yrbk
+41,Mozambique,2017,248058,Persons (1),fis,FAO Yrbk
+41,Mozambique,2018,263889,Persons (1),fis,FAO Yrbk
+41,Mozambique,2019,284435,Persons (1),fis,FAO Yrbk
+41,Mozambique,2020,293256,Persons (1),fis,FAO Yrbk
+41,Mozambique,2021,309268,Persons (1),fis,FAO Yrbk
+48,Oman,2008,36979.2,Persons (1),fis,FAO Yrbk
+48,Oman,2009,37368.6,Persons (1),fis,FAO Yrbk
+48,Oman,2010,37758,Persons (1),fis,FAO Yrbk
+48,Oman,2011,39683.4,Persons (1),fis,FAO Yrbk
+48,Oman,2012,41608.8,Persons (1),fis,FAO Yrbk
+48,Oman,2013,43534.2,Persons (1),fis,FAO Yrbk
+48,Oman,2014,45459.6,Persons (1),fis,FAO Yrbk
+48,Oman,2015,47385,Persons (1),fis,FAO Yrbk
+48,Oman,2016,50897.5,Persons (1),fis,FAO Yrbk
+48,Oman,2017,54410,Persons (1),fis,FAO Yrbk
+48,Oman,2018,55933,Persons (1),fis,FAO Yrbk
+48,Oman,2019,58710,Persons (1),fis,FAO Yrbk
+48,Oman,2020,59898,Persons (1),fis,FAO Yrbk
+48,Oman,2021,62108,Persons (1),fis,FAO Yrbk
+53,Pakistan,2008,344622.8,Persons (1),fis,FAO Yrbk
+53,Pakistan,2009,355742.4,Persons (1),fis,FAO Yrbk
+53,Pakistan,2010,366862,Persons (1),fis,FAO Yrbk
+53,Pakistan,2011,374695.4,Persons (1),fis,FAO Yrbk
+53,Pakistan,2012,382528.8,Persons (1),fis,FAO Yrbk
+53,Pakistan,2013,390362.2,Persons (1),fis,FAO Yrbk
+53,Pakistan,2014,398195.6,Persons (1),fis,FAO Yrbk
+53,Pakistan,2015,406029,Persons (1),fis,FAO Yrbk
+53,Pakistan,2016,419073,Persons (1),fis,FAO Yrbk
+53,Pakistan,2017,432117,Persons (1),fis,FAO Yrbk
+53,Pakistan,2018,446945,Persons (1),fis,FAO Yrbk
+53,Pakistan,2019,477404,Persons (1),fis,FAO Yrbk
+53,Pakistan,2020,493133,Persons (1),fis,FAO Yrbk
+53,Pakistan,2021,494670,Persons (1),fis,FAO Yrbk
+62,Morocco,2008,109029.6,Persons (1),fis,FAO Yrbk
+62,Morocco,2009,109424.8,Persons (1),fis,FAO Yrbk
+62,Morocco,2010,109820,Persons (1),fis,FAO Yrbk
+62,Morocco,2011,108870.4,Persons (1),fis,FAO Yrbk
+62,Morocco,2012,107920.8,Persons (1),fis,FAO Yrbk
+62,Morocco,2013,106971.2,Persons (1),fis,FAO Yrbk
+62,Morocco,2014,106021.6,Persons (1),fis,FAO Yrbk
+62,Morocco,2015,105072,Persons (1),fis,FAO Yrbk
+62,Morocco,2016,108079,Persons (1),fis,FAO Yrbk
+62,Morocco,2017,111086,Persons (1),fis,FAO Yrbk
+62,Morocco,2018,118605,Persons (1),fis,FAO Yrbk
+62,Morocco,2019,124114,Persons (1),fis,FAO Yrbk
+62,Morocco,2020,132344,Persons (1),fis,FAO Yrbk
+62,Morocco,2021,122903,Persons (1),fis,FAO Yrbk
+64,Mauritania,2008,98894.2,Persons (1),fis,FAO Yrbk
+64,Mauritania,2009,119525.6,Persons (1),fis,FAO Yrbk
+64,Mauritania,2010,140157,Persons (1),fis,FAO Yrbk
+64,Mauritania,2011,148409.6,Persons (1),fis,FAO Yrbk
+64,Mauritania,2012,156662.2,Persons (1),fis,FAO Yrbk
+64,Mauritania,2013,164914.8,Persons (1),fis,FAO Yrbk
+64,Mauritania,2014,173167.4,Persons (1),fis,FAO Yrbk
+64,Mauritania,2015,181420,Persons (1),fis,FAO Yrbk
+64,Mauritania,2016,181420,Persons (1),fis,FAO Yrbk
+64,Mauritania,2017,181420,Persons (1),fis,FAO Yrbk
+64,Mauritania,2018,181420,Persons (1),fis,FAO Yrbk
+64,Mauritania,2019,181420,Persons (1),fis,FAO Yrbk
+64,Mauritania,2020,181420,Persons (1),fis,FAO Yrbk
+64,Mauritania,2021,181420,Persons (1),fis,FAO Yrbk
+66,Senegal,2008,69814.6,Persons (1),fis,FAO Yrbk
+66,Senegal,2009,69799.8,Persons (1),fis,FAO Yrbk
+66,Senegal,2010,69785,Persons (1),fis,FAO Yrbk
+66,Senegal,2011,69406.6,Persons (1),fis,FAO Yrbk
+66,Senegal,2012,69028.2,Persons (1),fis,FAO Yrbk
+66,Senegal,2013,68649.8,Persons (1),fis,FAO Yrbk
+66,Senegal,2014,68271.4,Persons (1),fis,FAO Yrbk
+66,Senegal,2015,67893,Persons (1),fis,FAO Yrbk
+66,Senegal,2016,78208.5,Persons (1),fis,FAO Yrbk
+66,Senegal,2017,88524,Persons (1),fis,FAO Yrbk
+66,Senegal,2018,88135,Persons (1),fis,FAO Yrbk
+66,Senegal,2019,94562,Persons (1),fis,FAO Yrbk
+66,Senegal,2020,99490,Persons (1),fis,FAO Yrbk
+66,Senegal,2021,92891,Persons (1),fis,FAO Yrbk
+74,Georgia,2008,2682.4,Persons (1),fis,FAO Yrbk
+74,Georgia,2009,2292.2,Persons (1),fis,FAO Yrbk
+74,Georgia,2010,1902,Persons (1),fis,FAO Yrbk
+74,Georgia,2011,1756,Persons (1),fis,FAO Yrbk
+74,Georgia,2012,1610,Persons (1),fis,FAO Yrbk
+74,Georgia,2013,1464,Persons (1),fis,FAO Yrbk
+74,Georgia,2014,1318,Persons (1),fis,FAO Yrbk
+74,Georgia,2015,1172,Persons (1),fis,FAO Yrbk
+74,Georgia,2016,2086.5,Persons (1),fis,FAO Yrbk
+74,Georgia,2017,3001,Persons (1),fis,FAO Yrbk
+74,Georgia,2018,3510,Persons (1),fis,FAO Yrbk
+74,Georgia,2019,3629,Persons (1),fis,FAO Yrbk
+74,Georgia,2020,3580,Persons (1),fis,FAO Yrbk
+74,Georgia,2021,3361,Persons (1),fis,FAO Yrbk
+96,Sierra Leone,2008,63340,Persons (1),fis,FAO Yrbk
+96,Sierra Leone,2009,66420,Persons (1),fis,FAO Yrbk
+96,Sierra Leone,2010,69500,Persons (1),fis,FAO Yrbk
+96,Sierra Leone,2011,69757.2,Persons (1),fis,FAO Yrbk
+96,Sierra Leone,2012,70014.4,Persons (1),fis,FAO Yrbk
+96,Sierra Leone,2013,70271.6,Persons (1),fis,FAO Yrbk
+96,Sierra Leone,2014,70528.8,Persons (1),fis,FAO Yrbk
+96,Sierra Leone,2015,70786,Persons (1),fis,FAO Yrbk
+96,Sierra Leone,2016,70786,Persons (1),fis,FAO Yrbk
+96,Sierra Leone,2017,70786,Persons (1),fis,FAO Yrbk
+96,Sierra Leone,2018,70786,Persons (1),fis,FAO Yrbk
+96,Sierra Leone,2019,70786,Persons (1),fis,FAO Yrbk
+96,Sierra Leone,2020,70786,Persons (1),fis,FAO Yrbk
+96,Sierra Leone,2021,70786,Persons (1),fis,FAO Yrbk
+101,Namibia,2008,17834,Persons (1),fis,FAO Yrbk
+101,Namibia,2009,18295,Persons (1),fis,FAO Yrbk
+101,Namibia,2010,18756,Persons (1),fis,FAO Yrbk
+101,Namibia,2011,19059.6,Persons (1),fis,FAO Yrbk
+101,Namibia,2012,19363.2,Persons (1),fis,FAO Yrbk
+101,Namibia,2013,19666.8,Persons (1),fis,FAO Yrbk
+101,Namibia,2014,19970.4,Persons (1),fis,FAO Yrbk
+101,Namibia,2015,20274,Persons (1),fis,FAO Yrbk
+101,Namibia,2016,18909,Persons (1),fis,FAO Yrbk
+101,Namibia,2017,17544,Persons (1),fis,FAO Yrbk
+101,Namibia,2018,16984,Persons (1),fis,FAO Yrbk
+101,Namibia,2019,16955,Persons (1),fis,FAO Yrbk
+101,Namibia,2020,19046,Persons (1),fis,FAO Yrbk
+101,Namibia,2021,19046,Persons (1),fis,FAO Yrbk
+102,South Africa,2008,18636,Persons (1),fis,FAO Yrbk
+102,South Africa,2009,18644,Persons (1),fis,FAO Yrbk
+102,South Africa,2010,18652,Persons (1),fis,FAO Yrbk
+102,South Africa,2011,18327,Persons (1),fis,FAO Yrbk
+102,South Africa,2012,18002,Persons (1),fis,FAO Yrbk
+102,South Africa,2013,17677,Persons (1),fis,FAO Yrbk
+102,South Africa,2014,17352,Persons (1),fis,FAO Yrbk
+102,South Africa,2015,17027,Persons (1),fis,FAO Yrbk
+102,South Africa,2016,17027,Persons (1),fis,FAO Yrbk
+102,South Africa,2017,17027,Persons (1),fis,FAO Yrbk
+102,South Africa,2018,17027,Persons (1),fis,FAO Yrbk
+102,South Africa,2019,17027,Persons (1),fis,FAO Yrbk
+102,South Africa,2020,17027,Persons (1),fis,FAO Yrbk
+102,South Africa,2021,17027,Persons (1),fis,FAO Yrbk
+106,Ghana,2008,229670.4,Persons (1),fis,FAO Yrbk
+106,Ghana,2009,235709.2,Persons (1),fis,FAO Yrbk
+106,Ghana,2010,241748,Persons (1),fis,FAO Yrbk
+106,Ghana,2011,244163.6,Persons (1),fis,FAO Yrbk
+106,Ghana,2012,246579.2,Persons (1),fis,FAO Yrbk
+106,Ghana,2013,248994.8,Persons (1),fis,FAO Yrbk
+106,Ghana,2014,251410.4,Persons (1),fis,FAO Yrbk
+106,Ghana,2015,253826,Persons (1),fis,FAO Yrbk
+106,Ghana,2016,253826,Persons (1),fis,FAO Yrbk
+106,Ghana,2017,253826,Persons (1),fis,FAO Yrbk
+106,Ghana,2018,253826,Persons (1),fis,FAO Yrbk
+106,Ghana,2019,253826,Persons (1),fis,FAO Yrbk
+106,Ghana,2020,253826,Persons (1),fis,FAO Yrbk
+106,Ghana,2021,253826,Persons (1),fis,FAO Yrbk
+137,Ecuador,2008,7657,Persons (1),fis,FAO Yrbk
+137,Ecuador,2009,7657,Persons (1),fis,FAO Yrbk
+137,Ecuador,2010,7657,Persons (1),fis,FAO Yrbk
+137,Ecuador,2011,7657,Persons (1),fis,FAO Yrbk
+137,Ecuador,2012,7657,Persons (1),fis,FAO Yrbk
+137,Ecuador,2013,7657,Persons (1),fis,FAO Yrbk
+137,Ecuador,2014,7657,Persons (1),fis,FAO Yrbk
+137,Ecuador,2015,7657,Persons (1),fis,FAO Yrbk
+137,Ecuador,2016,7657,Persons (1),fis,FAO Yrbk
+137,Ecuador,2017,7657,Persons (1),fis,FAO Yrbk
+137,Ecuador,2018,6500,Persons (1),fis,FAO Yrbk
+137,Ecuador,2019,6218,Persons (1),fis,FAO Yrbk
+137,Ecuador,2020,6315,Persons (1),fis,FAO Yrbk
+137,Ecuador,2021,7438,Persons (1),fis,FAO Yrbk
+139,Venezuela,2008,42685.399999999994,Persons (1),fis,FAO Yrbk
+139,Venezuela,2009,48389.2,Persons (1),fis,FAO Yrbk
+139,Venezuela,2010,54093,Persons (1),fis,FAO Yrbk
+139,Venezuela,2011,55916.4,Persons (1),fis,FAO Yrbk
+139,Venezuela,2012,57739.8,Persons (1),fis,FAO Yrbk
+139,Venezuela,2013,59563.2,Persons (1),fis,FAO Yrbk
+139,Venezuela,2014,61386.6,Persons (1),fis,FAO Yrbk
+139,Venezuela,2015,63210,Persons (1),fis,FAO Yrbk
+139,Venezuela,2016,81246,Persons (1),fis,FAO Yrbk
+139,Venezuela,2017,99282,Persons (1),fis,FAO Yrbk
+139,Venezuela,2018,99282,Persons (1),fis,FAO Yrbk
+139,Venezuela,2019,99282,Persons (1),fis,FAO Yrbk
+139,Venezuela,2020,99282,Persons (1),fis,FAO Yrbk
+139,Venezuela,2021,99282,Persons (1),fis,FAO Yrbk
+145,Greenland,2008,1227.8,Persons (1),fis,FAO Yrbk
+145,Greenland,2009,1169.4,Persons (1),fis,FAO Yrbk
+145,Greenland,2010,1111,Persons (1),fis,FAO Yrbk
+145,Greenland,2011,1111,Persons (1),fis,FAO Yrbk
+145,Greenland,2012,1111,Persons (1),fis,FAO Yrbk
+145,Greenland,2013,1111,Persons (1),fis,FAO Yrbk
+145,Greenland,2014,1111,Persons (1),fis,FAO Yrbk
+145,Greenland,2015,1111,Persons (1),fis,FAO Yrbk
+145,Greenland,2016,1111,Persons (1),fis,FAO Yrbk
+145,Greenland,2017,1111,Persons (1),fis,FAO Yrbk
+145,Greenland,2018,1111,Persons (1),fis,FAO Yrbk
+145,Greenland,2019,1111,Persons (1),fis,FAO Yrbk
+145,Greenland,2020,1111,Persons (1),fis,FAO Yrbk
+145,Greenland,2021,1111,Persons (1),fis,FAO Yrbk
+191,Iran,2008,149724.2,Persons (1),fis,FAO Yrbk
+191,Iran,2009,150374.6,Persons (1),fis,FAO Yrbk
+191,Iran,2010,151025,Persons (1),fis,FAO Yrbk
+191,Iran,2011,150770.4,Persons (1),fis,FAO Yrbk
+191,Iran,2012,150515.8,Persons (1),fis,FAO Yrbk
+191,Iran,2013,150261.2,Persons (1),fis,FAO Yrbk
+191,Iran,2014,150006.6,Persons (1),fis,FAO Yrbk
+191,Iran,2015,149752,Persons (1),fis,FAO Yrbk
+191,Iran,2016,149559,Persons (1),fis,FAO Yrbk
+191,Iran,2017,149366,Persons (1),fis,FAO Yrbk
+191,Iran,2018,149366,Persons (1),fis,FAO Yrbk
+191,Iran,2019,149366,Persons (1),fis,FAO Yrbk
+191,Iran,2020,149366,Persons (1),fis,FAO Yrbk
+191,Iran,2021,149366,Persons (1),fis,FAO Yrbk
+194,Guinea,2008,29456.2,Persons (1),fis,FAO Yrbk
+194,Guinea,2009,30532.6,Persons (1),fis,FAO Yrbk
+194,Guinea,2010,31609,Persons (1),fis,FAO Yrbk
+194,Guinea,2011,33278.4,Persons (1),fis,FAO Yrbk
+194,Guinea,2012,34947.8,Persons (1),fis,FAO Yrbk
+194,Guinea,2013,36617.2,Persons (1),fis,FAO Yrbk
+194,Guinea,2014,38286.6,Persons (1),fis,FAO Yrbk
+194,Guinea,2015,39956,Persons (1),fis,FAO Yrbk
+194,Guinea,2016,42021.5,Persons (1),fis,FAO Yrbk
+194,Guinea,2017,44087,Persons (1),fis,FAO Yrbk
+194,Guinea,2018,46153,Persons (1),fis,FAO Yrbk
+194,Guinea,2019,47762,Persons (1),fis,FAO Yrbk
+194,Guinea,2020,47762,Persons (1),fis,FAO Yrbk
+194,Guinea,2021,47762,Persons (1),fis,FAO Yrbk
+196,Nigeria,2008,676144.8,Persons (1),fis,FAO Yrbk
+196,Nigeria,2009,673754.4,Persons (1),fis,FAO Yrbk
+196,Nigeria,2010,671364,Persons (1),fis,FAO Yrbk
+196,Nigeria,2011,691647.2,Persons (1),fis,FAO Yrbk
+196,Nigeria,2012,711930.4,Persons (1),fis,FAO Yrbk
+196,Nigeria,2013,732213.6,Persons (1),fis,FAO Yrbk
+196,Nigeria,2014,752496.8,Persons (1),fis,FAO Yrbk
+196,Nigeria,2015,772780,Persons (1),fis,FAO Yrbk
+196,Nigeria,2016,672583,Persons (1),fis,FAO Yrbk
+196,Nigeria,2017,572386,Persons (1),fis,FAO Yrbk
+196,Nigeria,2018,735657,Persons (1),fis,FAO Yrbk
+196,Nigeria,2019,735657,Persons (1),fis,FAO Yrbk
+196,Nigeria,2020,735657,Persons (1),fis,FAO Yrbk
+196,Nigeria,2021,735657,Persons (1),fis,FAO Yrbk
+197,Cameroon,2008,154930.6,Persons (1),fis,FAO Yrbk
+197,Cameroon,2009,171201.8,Persons (1),fis,FAO Yrbk
+197,Cameroon,2010,187473,Persons (1),fis,FAO Yrbk
+197,Cameroon,2011,198124,Persons (1),fis,FAO Yrbk
+197,Cameroon,2012,208775,Persons (1),fis,FAO Yrbk
+197,Cameroon,2013,219426,Persons (1),fis,FAO Yrbk
+197,Cameroon,2014,230077,Persons (1),fis,FAO Yrbk
+197,Cameroon,2015,240728,Persons (1),fis,FAO Yrbk
+197,Cameroon,2016,240728,Persons (1),fis,FAO Yrbk
+197,Cameroon,2017,240728,Persons (1),fis,FAO Yrbk
+197,Cameroon,2018,230280,Persons (1),fis,FAO Yrbk
+197,Cameroon,2019,221992,Persons (1),fis,FAO Yrbk
+197,Cameroon,2020,225606,Persons (1),fis,FAO Yrbk
+197,Cameroon,2021,212480,Persons (1),fis,FAO Yrbk
+200,Angola,2008,81080,Persons (1),fis,FAO Yrbk
+200,Angola,2009,87940,Persons (1),fis,FAO Yrbk
+200,Angola,2010,94800,Persons (1),fis,FAO Yrbk
+200,Angola,2011,94800,Persons (1),fis,FAO Yrbk
+200,Angola,2012,94800,Persons (1),fis,FAO Yrbk
+200,Angola,2013,94800,Persons (1),fis,FAO Yrbk
+200,Angola,2014,94800,Persons (1),fis,FAO Yrbk
+200,Angola,2015,94800,Persons (1),fis,FAO Yrbk
+200,Angola,2016,94800,Persons (1),fis,FAO Yrbk
+200,Angola,2017,94800,Persons (1),fis,FAO Yrbk
+200,Angola,2018,94800,Persons (1),fis,FAO Yrbk
+200,Angola,2019,94800,Persons (1),fis,FAO Yrbk
+200,Angola,2020,94800,Persons (1),fis,FAO Yrbk
+200,Angola,2021,94800,Persons (1),fis,FAO Yrbk
+202,Tanzania,2008,170499.4,Persons (1),fis,FAO Yrbk
+202,Tanzania,2009,182905.2,Persons (1),fis,FAO Yrbk
+202,Tanzania,2010,195311,Persons (1),fis,FAO Yrbk
+202,Tanzania,2011,196796.2,Persons (1),fis,FAO Yrbk
+202,Tanzania,2012,198281.4,Persons (1),fis,FAO Yrbk
+202,Tanzania,2013,199766.6,Persons (1),fis,FAO Yrbk
+202,Tanzania,2014,201251.8,Persons (1),fis,FAO Yrbk
+202,Tanzania,2015,202737,Persons (1),fis,FAO Yrbk
+202,Tanzania,2016,214432,Persons (1),fis,FAO Yrbk
+202,Tanzania,2017,226127,Persons (1),fis,FAO Yrbk
+202,Tanzania,2018,228527,Persons (1),fis,FAO Yrbk
+202,Tanzania,2019,234543,Persons (1),fis,FAO Yrbk
+202,Tanzania,2020,226041,Persons (1),fis,FAO Yrbk
+202,Tanzania,2021,224868,Persons (1),fis,FAO Yrbk
+205,Myanmar,2008,2886733,Persons (1),fis,FAO Yrbk
+205,Myanmar,2009,2917644,Persons (1),fis,FAO Yrbk
+205,Myanmar,2010,2948555,Persons (1),fis,FAO Yrbk
+205,Myanmar,2011,2958744,Persons (1),fis,FAO Yrbk
+205,Myanmar,2012,2968933,Persons (1),fis,FAO Yrbk
+205,Myanmar,2013,2979122,Persons (1),fis,FAO Yrbk
+205,Myanmar,2014,2989311,Persons (1),fis,FAO Yrbk
+205,Myanmar,2015,2999500,Persons (1),fis,FAO Yrbk
+205,Myanmar,2016,3029000,Persons (1),fis,FAO Yrbk
+205,Myanmar,2017,3058500,Persons (1),fis,FAO Yrbk
+205,Myanmar,2018,3060500,Persons (1),fis,FAO Yrbk
+205,Myanmar,2019,2719534,Persons (1),fis,FAO Yrbk
+205,Myanmar,2020,2595922,Persons (1),fis,FAO Yrbk
+205,Myanmar,2021,2516968,Persons (1),fis,FAO Yrbk
+214,Egypt,2008,92505.4,Persons (1),fis,FAO Yrbk
+214,Egypt,2009,93761.2,Persons (1),fis,FAO Yrbk
+214,Egypt,2010,95017,Persons (1),fis,FAO Yrbk
+214,Egypt,2011,95271.2,Persons (1),fis,FAO Yrbk
+214,Egypt,2012,95525.4,Persons (1),fis,FAO Yrbk
+214,Egypt,2013,95779.6,Persons (1),fis,FAO Yrbk
+214,Egypt,2014,96033.8,Persons (1),fis,FAO Yrbk
+214,Egypt,2015,96288,Persons (1),fis,FAO Yrbk
+214,Egypt,2016,96288,Persons (1),fis,FAO Yrbk
+214,Egypt,2017,96288,Persons (1),fis,FAO Yrbk
+214,Egypt,2018,96236,Persons (1),fis,FAO Yrbk
+214,Egypt,2019,96183,Persons (1),fis,FAO Yrbk
+214,Egypt,2020,96131,Persons (1),fis,FAO Yrbk
+214,Egypt,2021,96078,Persons (1),fis,FAO Yrbk
