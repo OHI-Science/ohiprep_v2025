@@ -24,6 +24,7 @@ This analysis converts FAO mariculture and seafood watch sustainability data int
 This file produces three layers: `mar_harvest_tonnes`, `mar_sustainability_score`, and `sp_genetic`. 
 
 # 2025 updates from 2024 assessment
+
 - We got updated Seafood Watch data from the Monterey Bay Aquarium in 2025. Because of this, we wanted to combine the SFW data from 2024 and 2025 together as a way to gapfill and as a way to change the data year in the `scenario_data_years.csv` for the OHI-global score checking. Gapfilling by a different data year occurs BEFORE all of the other gapfilling methods and has not been documented in the gapfill csv yet. This is a change that future assessments could add.
 
 One thing to note, finding the best way to merge the 2024 assessment data (which is data year 2023) into this incredibly long workflow was tricky. Data is kept in a wide format for part of it to avoid having errors when combining with the FAO tonnes of production data. 

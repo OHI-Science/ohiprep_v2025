@@ -51,9 +51,9 @@ v2021 Using updated February 2021 data
 
 # Data Source
 
-**Reference**: IUCN and UNEP-WCMC (2023), The World Database on Protected Areas (WDPA) [On-line], May 2024. Cambridge, UK: UNEP-WCMC. Available at: www.protectedplanet.net.
+**Reference**: IUCN and UNEP-WCMC (2025), The World Database on Protected Areas (WDPA) [On-line], June 2025. Cambridge, UK: UNEP-WCMC. Available at: www.protectedplanet.net.
 
-**Downloaded**: May 24, 2024
+**Downloaded**: June 16, 2025
 
 **Description**: Shapefile of World Database on Protected Areas
 

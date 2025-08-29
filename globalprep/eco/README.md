@@ -6,6 +6,8 @@ More information about this goal is available [here](http://ohi-science.org/goal
 
 The folders in this file include the metadata, R scripts, and data for each assessement year (i.e., the year the assessment was conducted).  The most current year represents the best available data and methods, and previous years are maintained for archival purposes.
 
+The folder v2025 will contain only dataprep for the economies goals. Previous assessments have nested both livelihoods and economies together in one folder, but this file organization was changed in the v2025 assessment. 
+
 Our [data managment SOP](https://rawgit.com/OHI-Science/ohiprep/master/src/dataOrganization_SOP.html) describes how we manage OHI global data, including a description of the file structure.
 
 Please see our [citation policy](http://ohi-science.org/citation-policy/) if you use OHI data or methods.

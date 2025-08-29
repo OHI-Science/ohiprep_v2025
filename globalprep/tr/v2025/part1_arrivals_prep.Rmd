@@ -54,6 +54,8 @@ v2025:
 
 You can also find the same files if you do the bulk data download from the homepage, although you will only need these three. 
 
+*Accessed*: 2025-08-14
+
 - [World bank total population data](https://data.worldbank.org/indicator/SP.POP.TOTL): Open link. Find download button on the bottom/middle right side of the page. Click the CSV option. Upload to mazu under
  `globalprep/_raw_data/WorldBank/dYEAR/WorldBank_global_country_population_1960-20XX/API_SP.POP.TOTL_DS2_en_csv_v2_######.csv`).
 
