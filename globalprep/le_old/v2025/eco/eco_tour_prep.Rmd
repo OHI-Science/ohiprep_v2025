@@ -1,0 +1,678 @@
+---
+title: "OHI `r format(Sys.Date(), '%Y')` - Economies Tourism Dataprep"
+author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
+output: 
+  html_document:
+    code_folding: show
+    toc: true
+    toc_depth: 3
+    toc_float: yes
+    number_sections: false
+    theme: cerulean
+    highlight: haddock
+    includes: 
+      in_header: '../../../../workflow/templates/ohi_hdr.html'
+pdf_document:
+  toc: true
+editor_options: 
+  chunk_output_type: console
+  markdown: 
+    wrap: 72
+---
+
+------------------------------------------------------------------------
+
+
+# Economies Dataprep 
+        
+### v2025 Updates
+
+- New WTTC data to use for tourism revenue
+- Added data from the IMF to gapfill a few missing countries in World Bank GDP data
+- Overhauled framework such that scoring and coastal population proportion happens in `ohi_global`, not here. 
+
+## Data Sources
+
+
+**Tourism revenue from World Trade and Tourism Council (WTTC)**
+
+This data does not have the usual download steps. It was acquired via a request directly to the WTTC via the enquiry form below. More detailed instructions around the acquisition of this data can be found in [issue 358](https://github.com/OHI-Science/globalfellows-issues/issues/358). 
+  
+- Data enquiry form  <https://wttc.org/research/data-enquiries>
+- Make sure it's clear that this is a request from an academic institution, as the WTTC seems to make allowances for providing free data to researchers. Also make sure you communicate that the raw data will not be publicly available.
+
+
+**World Bank: GDP (constant 2015 US$)**
+
+**Reference**: World Bank. (n.d.). *GDP (constant 2015 US$)*. World Bank Open Data. <https://data.worldbank.org/indicator/NY.GDP.MKTP.KD> .
+
+License: CC BY-4.0
+
+**Downloaded**: 2025-08-20
+
+**Last updated**: No precise date listed on website. Found in the first few pages of the .csv when opened locally: 2024-06-28. 
+
+**Description**: “GDP at purchaser's prices is the sum of gross value added by all resident producers in the economy plus any product taxes and minus any subsidies not included in the value of the products. It is calculated without making deductions for depreciation of fabricated assets or for depletion and degradation of natural resources. Data are in constant 2015 prices, expressed in U.S. dollars. Dollar figures for GDP are converted from domestic currencies using 2015 official exchange rates. For a few countries where the official exchange rate does not reflect the rate effectively applied to actual foreign exchange transactions, an alternative conversion factor is used.” Aggregation method: Gap-filled total. 
+
+**Download Instructions**: Navigate to the World Bank GDP (constant 2015 US$) data page <https://data.worldbank.org/indicator/NY.GDP.MKTP.KD>. The full time range should be selected on the slider bar by default. Select “CSV” under the “Download” options on the lower right-hand side of the page. Save in the appropriate folder on Mazu: 
+`home/shares/ohi/git-annex/globalprep/_raw_data/WorldBank/dYYYY/WorldBank_global_annual_GDP_2015_constant_USD/WorldBank_global_annual_GDP_2015_constant_USD.csv`
+
+**Time range**: 1960-2023
+
+**Native data resolution**: Country-level (not spatial data). 
+
+**Format**: `.csv.` Note: Data is also available in XML and EXCEL formats. 
+
+**Metadata**: Click on “Details” (in the upper right hand corner of the plot on the main page), scroll to the bottom of the popup page, and select “All Metadata”.
+<http://databank.worldbank.org/data/reports.aspx?source=2&type=metadata&series=NY.GDP.MKTP.KD&_gl=1*10r25gl*_gcl_au*MTI5NjExNDc0NS4xNzE2NTY4ODAx> 
+
+**IMF Total GDP Data**
+
+**Download Instructions**: Navigate to this link <https://data.imf.org/en/Data-Explorer?datasetUrn=IMF.RES:WEO(6.0.0)>. 
+
+Choose these options for the selectors on the left-hand side:
+  - Indicator: Gross Domestic Product (GDP), current prices, US Dollar
+  - Time Period: Custom --> select years of interest (for v2025, this was 2008-2023)
+- Hit apply
+- Click the blue download button dropdown on the right side of the page 
+  - Select "Data on this page"
+  
+This should give you a .csv file of total annual GDP by country. 
+
+### Setup
+
+```{r}
+knitr::opts_chunk$set(eval = FALSE, warning = FALSE, message = FALSE)
+
+# ---- Load packages ----
+
+if (!require(librarian)){
+  install.packages("librarian")
+  library(librarian)
+}
+librarian::shelf(
+  ohicore, # name_2_rgn
+  tidyverse,
+  here,
+  countrycode,
+  janitor,
+  priceR, # for inflation adjustment
+  RColorBrewer,
+  foreach,
+  doParallel, # for using multiple cores
+  httr,
+  scales,
+  plotly,
+  readxl,
+  zoo # for gapfilling
+)
+
+# ---- Source common.R ----
+source(here::here("workflow", "R", "common.R"))
+
+# ---- Set scenario year, reproducible file paths ----
+current_year <- 2025 # Update this in the future!!
+previous_year <- 2024
+
+data_year <- 2023
+
+version_year <- paste0("v",current_year)
+previous_vyear <- paste0("v", previous_year)
+
+current_data_dir <- paste0("d", current_year)
+previous_data_dir <- paste0("d", previous_year)
+
+# ---- data directories
+# Raw data directory (on Mazu)
+raw_data_dir <- here::here(dir_M, "git-annex", "globalprep", "_raw_data")
+
+# Livelihoods and Economies directory
+current_le_dir <- here("globalprep", "le", version_year)
+previous_le_dir <- here("globalprep", "le", previous_vyear)
+```
+
+
+# Tourism Revenue
+
+## Visitor Exports
+
+```{r}
+# International visitor vis_spending or Visitor exports, US$, real 2024 prices and exchange rates, billions
+visitor_exports <- read_xlsx(here(raw_data_dir, "WTTC", current_data_dir, 
+                              "WTTC-Data-Request-OHI-13.08.2025.xlsx"),
+                              sheet = 3, # make sure sheet num matches
+                              skip = 2)
+
+# Pivot longer and rename
+visitor_long <- visitor_exports %>% 
+  pivot_longer(cols = -1, # everything except the first column
+               values_to = "vis_spending",
+               names_to = "year") %>% 
+  rename(country = Economy) %>% 
+  mutate(year = as.numeric(year))
+
+# Fix name_2_rgn error with Netherland Antillies
+neth_ant <- visitor_long %>%
+    filter(country == 'Former Netherland Antillies') %>% 
+    mutate(vis_spending = (vis_spending / 5),  
+           'Curacao' = vis_spending,
+           'Sint Maarten' = vis_spending,
+           'Bonaire' = vis_spending,
+           'Saint Eustatius' = vis_spending,
+           'Saba' = vis_spending) %>%
+    select(-c(vis_spending, country)) %>%
+    pivot_longer(cols = c("Curacao", "Sint Maarten", "Bonaire",
+                          "Saint Eustatius", "Saba"),
+                 names_to = "country",
+                 values_to = "vis_spending") %>%
+    mutate(country = as.character(country),
+           vis_spending = as.numeric(vis_spending)) %>% 
+    select(c(country, vis_spending, year))
+  
+visitor_long <- visitor_long %>%
+    filter(country != 'Former Netherland Antillies') %>%
+    bind_rows(neth_ant)
+
+# run ohicore name_2_rgn 
+visitor_rgn <- name_2_rgn(df_in = visitor_long, 
+                       fld_name = 'country',
+                       flds_unique = c("year"))
+
+# Check duplicates
+tour_duplicates <- visitor_rgn[duplicated(visitor_rgn[, c("rgn_name", "year")]),]
+unique(tour_duplicates$rgn_name)
+
+# aggregate: sum by rgn_name etc.
+visitor_clean <- visitor_rgn %>%
+  group_by(rgn_id, rgn_name, year) %>%
+  dplyr::summarize(vis_spending = sum(vis_spending, na.rm = TRUE) )%>%
+  ungroup() %>% 
+  # turn 0s into NAs (appropriate flag for lack of data)
+  mutate(vis_spending = case_when(vis_spending == 0 ~ NA,
+                          .default = vis_spending),
+         unit = "US$, real 2024 prices and exchange rates, billions",
+         source = "WTTC")
+
+# Confirm duplicates have been removed
+tour_duplicates <- visitor_clean[duplicated(visitor_clean[, c("rgn_name", "year")]),]
+unique(tour_duplicates$rgn_name)
+
+# Check years for possible gapfilling
+visitor_clean <- visitor_clean %>% 
+  group_by(rgn_id, rgn_name) %>% 
+  complete(year = 2008:data_year) %>% 
+  ungroup()
+
+visitor_clean %>% 
+  filter(is.na(vis_spending))
+# Missing two observations for 2021
+
+# ---- Visitor vis_spending gapfilling ----
+visitor_gf <- visitor_clean %>% 
+  # First, create gapfilled boolean and method columns
+  mutate(vis_gapfilled = ifelse(is.na(vis_spending), "1", NA_character_),
+         vis_gf_method = ifelse(is.na(vis_spending), "1", NA_character_)) %>%
+  # Regroup for gapfilling
+  group_by(rgn_id, rgn_name) %>% 
+  arrange(rgn_id, year) %>%   
+  # Linear interpolation
+  mutate(vis_spending = na.approx(vis_spending, x = year, na.rm = FALSE)) %>% 
+  mutate(vis_gapfilled = ifelse(vis_gapfilled == "1" & !is.na(vis_spending), 
+                               "gapfilled", vis_gapfilled),
+         vis_gf_method = ifelse(vis_gf_method == "1" & !is.na(vis_spending), 
+                               "Interpolation", vis_gf_method)) %>% 
+  # Upfilling and Downfiling
+  tidyr::fill(vis_spending, .direction = "updown") %>% 
+  mutate(vis_gapfilled = ifelse(vis_gapfilled == "1" & !is.na(vis_spending), 
+                               "gapfilled", vis_gapfilled),
+         vis_gf_method = ifelse(vis_gf_method == "1" & !is.na(vis_spending), 
+                               "Up/Downfilling", vis_gf_method))
+
+table(visitor_gf$vis_gf_method)
+colSums(is.na(visitor_gf)) # 0 NAs for vis_spending now
+length(unique(visitor_gf$rgn_id)) # 147 regions
+
+```
+
+## Domestic Spending
+
+```{r}
+# Domestic T&T expenditure, US$, real 2024 prices and exchange rates, billions
+domesting_spending <- read_xlsx(here(raw_data_dir, "WTTC", current_data_dir, 
+                              "WTTC-Data-Request-OHI-13.08.2025.xlsx"),
+                              sheet = 4, # make sure sheet num matches
+                              skip = 2)
+
+# Pivot longer and rename
+domestic_long <- domesting_spending %>% 
+  pivot_longer(cols = -1, # everything except the first column
+               values_to = "dom_spending",
+               names_to = "year") %>% 
+  rename(country = Economy) %>% 
+  mutate(year = as.numeric(year))
+
+# Fix name_2_rgn error with Netherland Antillies
+neth_ant <- domestic_long %>%
+    filter(country == 'Former Netherland Antillies') %>% 
+    mutate(dom_spending = (dom_spending / 5),  
+           'Curacao' = dom_spending,
+           'Sint Maarten' = dom_spending,
+           'Bonaire' = dom_spending,
+           'Saint Eustatius' = dom_spending,
+           'Saba' = dom_spending) %>%
+    select(-c(dom_spending, country)) %>%
+    pivot_longer(cols = c("Curacao", "Sint Maarten", "Bonaire",
+                          "Saint Eustatius", "Saba"),
+                 names_to = "country",
+                 values_to = "dom_spending") %>%
+    mutate(country = as.character(country),
+           dom_spending = as.numeric(dom_spending)) %>% 
+    select(c(country, dom_spending, year))
+  
+domestic_long <- domestic_long %>%
+    filter(country != 'Former Netherland Antillies') %>%
+    bind_rows(neth_ant)
+
+# run ohicore name_2_rgn 
+domestic_rgn <- name_2_rgn(df_in = domestic_long, 
+                       fld_name = 'country',
+                       flds_unique = c("year"))
+
+# Check duplicates
+tour_duplicates <- domestic_rgn[duplicated(domestic_rgn[, c("rgn_name", "year")]),]
+unique(tour_duplicates$rgn_name)
+
+# aggregate: sum by rgn_name etc.
+domestic_clean <- domestic_rgn %>%
+  group_by(rgn_id, rgn_name, year) %>%
+  dplyr::summarize(dom_spending = sum(dom_spending, na.rm = TRUE) )%>%
+  ungroup() %>% 
+  # turn 0s into NAs (appropriate flag for lack of data)
+  mutate(dom_spending = case_when(dom_spending == 0 ~ NA,
+                          .default = dom_spending),
+         unit = "US$, real 2024 prices and exchange rates, billions",
+         source = "WTTC")
+
+# Confirm duplicates have been removed
+tour_duplicates <- domestic_clean[duplicated(domestic_clean[, c("rgn_name", "year")]),]
+unique(tour_duplicates$rgn_name)
+
+# Check years for possible gapfilling
+domestic_clean <- domestic_clean %>% 
+  group_by(rgn_id, rgn_name) %>% 
+  complete(year = 2008:data_year) %>% 
+  ungroup()
+
+colSums(is.na(domestic_clean))
+# No missing data, so no need for gapfilling
+length(unique(domestic_clean$rgn_id)) # 147 regions
+
+```
+
+## Combine Visitor and Domestic Spending
+
+```{r}
+# Combine spending data
+tourism_spending <- full_join(visitor_gf, domestic_clean, 
+                              by = join_by(rgn_id, rgn_name, year, unit, source)) %>% 
+  mutate(total_spending = vis_spending + dom_spending)
+
+colSums(is.na(tourism_spending)) # No NAs
+
+# Save tourism spending as an int data file
+tour_spending_export <- tourism_spending %>% 
+  select(rgn_id, rgn_name, year, total_spending, unit)
+
+write_csv(tour_spending_export, here(current_le_dir, "int", "eco_tour_spending.csv"))
+
+# Save gapfilling info
+write_csv(tourism_spending, here(current_le_dir, "int", "eco_tour_spending_gf.csv"))
+```
+
+# Total GDP 
+
+Current unit of "total" in dataframe:
+
+- "Tourism direct GDP as a proportion of total GDP (%)" 
+
+## World Bank Data
+
+This serves as the primary data source for total GDP
+
+```{r}
+# ---- World Bank GDP in 2015 Constant USD data ----
+wb_gdp_raw <- read_csv(here(raw_data_dir, "WorldBank", current_data_dir,
+                            "WorldBank_global_annual_GDP_2015_constant_USD",
+                            "API_NY.GDP.MKTP.KD_DS2_en_csv_v2_366142.csv"),
+                       skip = 4) # skip first 4 rows
+
+# Preliminary cleaning 
+wb_gdp_long <- wb_gdp_raw %>% 
+  pivot_longer(cols = `1960`:`2024`,
+               names_to = "year",
+               values_to = "gdp") %>% 
+  clean_names() %>% 
+  # Need to use fixed bc of parentheses
+  mutate(country_name = str_replace_all(country_name, fixed("Puerto Rico (US)"), "Puerto Rico")) %>% 
+  select(country = country_name, country_code, 
+         year, gdp, unit = indicator_name) %>% 
+  # Filter to years of interest
+  filter(year >= 2008 & year < 2024) 
+
+
+# Add OHI regions
+wb_gdp_rgn <- name_2_rgn(wb_gdp_long,
+                        fld_name = 'country',
+                        flds_unique = c("year")) 
+
+# Check duplicates
+duplicates <- wb_gdp_rgn[duplicated(wb_gdp_rgn[, c("rgn_name", "year")]),]
+unique(duplicates$rgn_name)
+
+# aggregate: sum by rgn_name etc.
+wb_gdp_agg <- wb_gdp_rgn %>%
+  group_by(rgn_id, rgn_name, year, unit) %>%
+  dplyr::summarize(gdp = sum(gdp, na.rm = TRUE) )%>%
+  ungroup() %>% 
+  # turn 0s into NAs (appropriate flag for lack of data)
+  mutate(gdp = case_when(gdp == 0 ~ NA,
+                          .default = gdp),
+         source = "WorldBank",
+         year = as.integer(year))
+
+# Confirm duplicates have been removed
+duplicates <- wb_gdp_agg[duplicated(wb_gdp_agg[, c("rgn_name", "year")]),]
+unique(duplicates$rgn_name)
+
+# Check years for possible gapfilling
+wb_gdp_comp <- wb_gdp_agg %>% 
+  group_by(rgn_id, rgn_name) %>% 
+  complete(year = 2008:data_year) %>% 
+  ungroup()
+
+
+# ---- Total GDP gapfilling ----
+wb_gdp_gf <- wb_gdp_comp %>% 
+  # First, create gapfilled boolean and method columns
+  mutate(wb_gapfilled = ifelse(is.na(gdp), "1", NA_character_),
+         wb_gf_method = ifelse(is.na(gdp), "1", NA_character_)) %>%
+  # Regroup for gapfilling
+  group_by(rgn_id, rgn_name) %>% 
+  arrange(rgn_id, year) %>%   
+  # Linear interpolation
+  mutate(gdp = na.approx(gdp, x = year, na.rm = FALSE)) %>% 
+  mutate(wb_gapfilled = ifelse(wb_gapfilled == "1" & !is.na(gdp), 
+                               "gapfilled", wb_gapfilled),
+         wb_gf_method = ifelse(wb_gf_method == "1" & !is.na(gdp), 
+                               "Interpolation", wb_gf_method)) %>% 
+  # Upfilling and Downfiling
+  tidyr::fill(gdp, .direction = "updown") %>% 
+  mutate(wb_gapfilled = ifelse(wb_gapfilled == "1" & !is.na(gdp), 
+                               "gapfilled", wb_gapfilled),
+         wb_gf_method = ifelse(wb_gf_method == "1" & !is.na(gdp), 
+                               "Up/Downfilling", wb_gf_method))
+
+table(wb_gdp_gf$wb_gf_method)
+
+wb_gdp_gf %>% 
+  filter(is.na(gdp)) %>% 
+  distinct(rgn_id, rgn_name)
+# 5 regions with no data. We'll drop these
+
+wb_gdp_gf <- wb_gdp_gf %>% 
+  drop_na(gdp)
+
+colSums(is.na(wb_gdp_gf)) # No NAs
+nrow(wb_gdp_gf) # 2576
+summary(wb_gdp_gf)
+length(unique(wb_gdp_gf$rgn_id)) # 161 regions
+
+```
+
+## IMF Data
+
+Secondary gapfilling dataset for total GDP
+
+```{r}
+# Read in the IMF data
+imf_gdp_raw <- read_csv(here(raw_data_dir, "IMF", current_data_dir,
+                      "dataset_2025-08-27T15_17_19.726948394Z_DEFAULT_INTEGRATION_IMF.RES_WEO_6.0.0.csv"))
+
+
+# Preliminary cleaning 
+imf_gdp_long <- imf_gdp_raw %>% 
+  pivot_longer(cols = `2008`:`2023`,
+               names_to = "year",
+               values_to = "gdp") %>% 
+  clean_names() %>% 
+  # Remove all text after commas in country name. This is for name 2 rgn later
+  mutate(country = case_when(country == "Congo, Democratic Republic of the" ~ "Democratic Republic of the Congo",
+                             country == "Congo, Republic of" ~ "Republique du Congo",
+                             country == "São Tomé and Príncipe, Democratic Republic of" ~ "Sao Tome and Principe",
+                             .default = country),
+         country = str_remove_all(country, ",.*"),
+         year = as.integer(year)) %>% 
+  select(country, year, gdp, indicator, unit = scale)
+
+# Add OHI regions
+imf_gdp_rgn <- name_2_rgn(imf_gdp_long,
+                        fld_name = 'country',
+                        flds_unique = c("year"))
+
+# Check duplicates
+duplicates <- imf_gdp_rgn[duplicated(imf_gdp_rgn[, c("rgn_name", "year")]),]
+unique(duplicates$rgn_name)
+# No duplicates here
+
+# Check years for possible gapfilling
+imf_gdp_comp <- imf_gdp_rgn %>% 
+  group_by(rgn_id, rgn_name) %>% 
+  complete(year = 2008:data_year) %>% 
+  ungroup() %>% 
+  select(!country)
+
+# ---- Total GDP gapfilling ----
+imf_gdp_gf <- imf_gdp_comp %>% 
+  # First, create gapfilled boolean and method columns
+  mutate(imf_gapfilled = ifelse(is.na(gdp), "1", NA_character_),
+         imf_gf_method = ifelse(is.na(gdp), "1", NA_character_)) %>%
+  # Regroup for gapfilling
+  group_by(rgn_id, rgn_name) %>% 
+  arrange(rgn_id, year) %>%   
+  # Linear interpolation
+  mutate(gdp = na.approx(gdp, x = year, na.rm = FALSE)) %>% 
+  mutate(imf_gapfilled = ifelse(imf_gapfilled == "1" & !is.na(gdp), 
+                               "gapfilled", imf_gapfilled),
+         imf_gf_method = ifelse(imf_gf_method == "1" & !is.na(gdp), 
+                               "Interpolation", imf_gf_method)) %>% 
+  # Upfilling and Downfiling
+  tidyr::fill(gdp, .direction = "updown") %>% 
+  mutate(imf_gapfilled = ifelse(imf_gapfilled == "1" & !is.na(gdp), 
+                               "gapfilled", imf_gapfilled),
+         imf_gf_method = ifelse(imf_gf_method == "1" & !is.na(gdp), 
+                               "Up/Downfilling", imf_gf_method))
+
+table(imf_gdp_gf$imf_gf_method)
+colSums(is.na(imf_gdp_gf)) # No NAs
+nrow(imf_gdp_gf) # 2533
+length(unique(imf_gdp_gf$rgn_id)) # 149 regions
+
+```
+
+## Join WB and IMF data
+
+The conversion from IMF to WB dollar units is trickier because the IMF isn't using a constant value, but rather the real price for each year. This means we need a separate deflation factor for each year of our data
+
+```{r}
+# Make df of year and gdp deflators
+deflators <- data.frame(
+  year = 2008:2023,
+  gdp_deflator = c(
+    88.646, 87.729, 89.676, 91.652, 94.099, 95.776, 97.042,
+    97.316, 99.275, 101.711, 104.134, 106.748, 109.606,
+    112.378, 116.057, 119.908
+  )
+)
+
+deflator_wb <- 2015
+
+# Convert from real prices to constant 2015
+imf_gdp_conv <- imf_gdp_gf %>%
+  left_join(deflators, by = "year") %>%
+  mutate(deflator_wb = deflators$gdp_deflator[deflators$year == deflator_wb],
+         gdp_const_wb = gdp * (deflator_wb / gdp_deflator)) %>% 
+  mutate(source = "IMF") %>% 
+  select(rgn_id, rgn_name, year, gdp = gdp_const_wb, source, 
+         imf_gapfilled, imf_gf_method)
+
+# Filter out only the new regions
+new_rgns <- anti_join(imf_gdp_conv, wb_gdp_gf, 
+                      by = join_by(rgn_id, rgn_name, year)) %>% 
+  select(-c(imf_gapfilled, imf_gf_method))
+
+# Bind new regions to WB data
+total_gdp <- bind_rows(wb_gdp_gf, new_rgns) %>% 
+  mutate(unit = "constant 2015 US$")
+
+colSums(is.na(total_gdp))
+summary(total_gdp)
+length(unique(total_gdp$rgn_id)) # 163 regions
+
+# Export intermediate file
+gdp_export <- total_gdp %>% 
+  select(rgn_id, rgn_name, year, gdp, unit)
+
+write_csv(gdp_export, here(current_le_dir, "int", "eco_total_gdp.csv"))
+
+# Save gapfilling information
+write_csv(total_gdp, here(current_le_dir, "int", "eco_total_gdp_gf.csv"))
+```
+
+
+# Combine GDP with Tourism Revenue
+
+This is the conversion we're using to go between 2024 real prices to 2015 constant prices.
+
+$$Value_{2015} = Value_{2024} \times \frac {GDP Deflator_{2015}} {GDP Deflator_{2024}}$$
+Price deflator data comes from [FRED](https://fred.stlouisfed.org/data/A191RD3A086NBEA). Where GDP Deflator 2015: 97.316 and GDP Deflator 2024: 125.230
+
+Update these values as needed for different prices and years. 
+
+```{r}
+# Read in clean data
+total_gdp <- read_csv(here(current_le_dir, "int", "eco_total_gdp.csv"))
+tour_spending <- read_csv(here(current_le_dir, "int", "eco_tour_spending.csv"))
+
+# Need to fix units between total gdp and tourism spending
+# UPDATE AS NEEDED
+deflator_wb <- 97.316 # 2015 value
+deflator_wttc <- 125.230 # 2024 value
+
+deflation_factor <- deflator_wb / deflator_wttc
+
+# Convert WTTC units to match WB units
+tour_convert <- tour_spending %>% 
+  # First, change from billions to regular $
+  mutate(total_spending = total_spending * 1e9) %>% 
+  # Then, apply the conversion factor
+  mutate(spending_2015 = total_spending * deflation_factor) %>% 
+  select(rgn_id, rgn_name, year, tourism_spending = spending_2015) 
+
+# Join WB and WTTC data
+eco_tourism <- left_join(tour_convert, total_gdp, 
+                         by = join_by(rgn_id, rgn_name, year)) %>% 
+  mutate(tour_prop = tourism_spending / gdp,
+         unit = "constant 2015 US$")
+
+colSums(is.na(eco_tourism)) # 96 missing data points
+nrow(eco_tourism) # 2352
+length(unique(eco_tourism$rgn_id)) # 147 rgns
+
+eco_tourism %>% 
+  filter(is.na(tour_prop)) %>% 
+  distinct(rgn_id, rgn_name)
+# 6 Regions with WTTC data and no WB data
+
+# Drop NAs
+eco_tourism <- eco_tourism %>% 
+  drop_na(tour_prop) 
+```
+
+## Coastal Population Proportion
+
+This dataset gets prepped in `liv_tour_dataprep.Rmd`, so I would encourage you to run that section first before this. The code needed to create the dataset is small, so you do not need to run the entire script to get this data file.
+
+```{r}
+# Read in coastal proportion data
+coast_prop <- read_csv(here(current_le_dir, "int", "coastal_pop_proportion.csv"))
+
+# Join coastal prop and tourism revenue
+eco_tour_coast <- left_join(eco_tourism, coast_prop,
+                            by = join_by(rgn_id, rgn_name, year)) %>% 
+  mutate(tour_coast_rev = tour_prop * coastal_prop)
+
+# Check NAs
+eco_tour_coast %>% 
+  filter(is.na(tour_coast_rev)) %>% 
+  distinct(rgn_id, rgn_name)
+# 1 region with no data
+
+# Drop NAs
+eco_tourism_final <- eco_tour_coast %>% 
+  drop_na(tour_prop) %>% 
+  select(rgn_id, year, revenue = tour_coast_rev) %>% view()
+
+write_csv(eco_tourism_final, here(current_le_dir, "output", "eco_tour_revenue.csv"))
+
+```
+
+# Data check
+
+```{r}
+eco_tour_plot <- eco_tourism %>%
+  plot_ly(x = ~year, y = ~tour_prop, color = ~rgn_name,
+          type = "scatter", mode = "lines") %>%
+  layout(title = "Economies: Tourism Proportion",
+         xaxis = list(title = "Year"),
+         yaxis = list(title = "Tourism revenue proportion"))
+eco_tour_plot
+
+
+# hist_max <- ggplot() +
+#   geom_histogram(data = liv_rescaled_final, aes(x = liv_norm),
+#                  color = "grey10", fill = "indianred")+
+#   labs(title = "Distribution of rescaled livelihood: Maximum",
+#        x = "Livelihood proportion: Max rescale",
+#        y = "Count") +
+#   theme_bw();ggplotly(hist_max)
+
+# htmlwidgets::saveWidget(liv_final_plot, here::here(current_tr_dir, "figs", "ap_rescaled.html")) # save plot
+
+```
+
+```{r}
+# Get max data years for plotting
+# current_data_year <- max(new_tr$year)
+# current_data_year
+# previous_data_year <- max(old_tr$year)
+# previous_data_year
+
+# Combine data frames
+# comb_tr <- new_tr %>% 
+#   rename(new_Ap = Ap) %>% 
+#   left_join(old_tr, by = join_by(rgn_id, year))
+
+# Plot
+# comp_plot1 <- ggplot() + 
+#   geom_jitter(data = filter(comb_tr, year == previous_data_year),
+#               aes(x = Ap, y = new_Ap, 
+#                   text = paste("Year:", year, "<br>Region:", rgn_name)),
+#               alpha = 0.7) +
+#   labs(x = paste("Previous Value", previous_data_year),
+#        y = paste("Current Value", previous_data_year),
+#        title = paste("Sustainable tourism and recreation", previous_data_year, "Data", previous_year, "Assessment vs.", previous_data_year, "Data", current_year, "assessment")) +
+#   geom_abline(slope = 1, intercept = 0, col = "red") +
+#   theme_bw();ggplotly(comp_plot1)
+```
+
+

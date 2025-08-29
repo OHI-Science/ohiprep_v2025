@@ -1,0 +1,586 @@
+---
+title: "OHI `r format(Sys.Date(), '%Y')` - FIS Livelihoods Job Preparation"
+author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
+output: 
+  html_document:
+    code_folding: show
+    toc: true
+    toc_depth: 1
+    toc_float: yes
+    number_sections: true
+    theme: cerulean
+    highlight: haddock
+    includes: 
+      in_header: '../../../../workflow/templates/ohi_hdr.html'
+  pdf_document:
+    toc: true
+editor_options: 
+  chunk_output_type: console
+---
+
+# FIS Livelihoods: Proportion of Fishing Jobs per Country/Region per Year
+
+## Overview
+
+* **Data:** Labor Force & Employment Data
+
+  * Labor Force data from World Bank (downloaded August 7. 2025)
+
+      - https://data.worldbank.org/indicator/SL.TLF.TOTL.IN
+      
+  * OECD (Employment in fisheries, aquaculture and processing, 2009 - 2021) (downloaded August 11, 2025) -- for fis job data
+  
+    - <https://data-explorer.oecd.org/vis?fs[0]=Topic%2C1%7CAgriculture%20and%20fisheries%23AGR%23%7CFisheries%20and%20aquaculture%23AGR_FSA%23&pg=0&fc=Topic&bp=true&snb=6&vw=ov&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_FISH_EMP%40DF_FISH_EMPL&df[ag]=OECD.TAD.ARP&df[vs]=1.0&dq=.A...._T._T&pd=2009%2C&to[TIME_PERIOD]=false&ly[cl]=TIME_PERIOD&ly[rs]=REF_AREA&ly[rw]=DOMAIN>
+    
+  * FAO Yearbook (downloaded August 25, 2025) -- for fis job gapfilling if needed
+  
+    - <https://openknowledge.fao.org/server/api/core/bitstreams/2be6c2fa-07b1-429d-91c5-80d3d1af46a6/content>
+      
+  * ILOSTAT (downloaded August 26, 2025) -- for fis gapfilling if needed
+  
+      - https://rshiny.ilo.org/dataexplorer46/?lang=en&id=EAR_4MTH_SEX_ECO_CUR_NB_A
+      - select Rev 3.1.B: Fishing
+
+### Setup
+
+```{r setup}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, eval=FALSE)
+
+# load packages
+if (!require(librarian)){
+  install.packages("librarian")
+  library(librarian)
+}
+librarian::shelf(
+  here,
+  ohicore,
+  janitor,
+  terra,
+  readxl,
+  RColorBrewer,
+  foreach,
+  doParallel, # for using multiple cores
+  tidyverse, 
+  httr,
+  plotly,
+  zoo, # for gapfilling
+  pdftools
+)
+
+# source 
+source(here("workflow/R/common.R"))
+
+source(here('workflow/R/fao_fxn.R')) # function for cleaning old version of FAO data 
+
+source(here('workflow/R/fao_online_portal_clean.R'))
+
+# set year and file path info
+current_year <- 2025 # Update this!!
+
+version_year <- paste0("v",current_year)
+data_dir_version_year <- paste0("d", current_year)
+data_path <- here("globalprep", "le", version_year)
+
+# Raw data directory (on Mazu)
+raw_data_dir <- here::here(dir_M, "git-annex", "globalprep", "_raw_data")
+
+# world bank raw data directory
+wb_dir <- here(raw_data_dir, "WorldBank", data_dir_version_year)
+
+# ILO raw data directory
+ilo_dir <- here(raw_data_dir, "ILOSTAT", data_dir_version_year)
+
+# FAO raw data directory
+fao_dir <- here(raw_data_dir, "FAO", data_dir_version_year)
+
+# OECD raw data directory
+oecd_dir <- here(raw_data_dir, "OECD", data_dir_version_year)
+
+# FAO capture raw data directory
+fao_capture_dir <- here(raw_data_dir, "FAO_capture", data_dir_version_year)
+
+# Joint OECD, FAO data directory
+oecd_fao_dir <- here(raw_data_dir, "OECD_FAO_joint_collection", data_dir_version_year)
+
+# Ex-vessel raw data directory
+ex_vess_dir <- here(raw_data_dir, "ex-vessel-price-database-updated")
+
+# output data dir for intermediate data products
+int_dir <- here(data_path, "int")
+```
+
+Create country code --> iso3 function
+```{r}
+library(countrycode)
+
+country_regex_to_iso3c <- function(country_string) {
+  country_string %>%
+    countrycode::countrycode(origin = "country.name", destination = "iso3c", origin_regex = TRUE)
+}
+```
+
+# Livelihood: Number of Jobs -- fis
+
+## Read in data
+
+```{r}
+#----------OHI regions data--------------------
+# read in OHI regions for joining
+region_names <- read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/spatial/regions_list.csv") %>% 
+  janitor::clean_names() %>% 
+  select(-notes)
+
+#----------Labor Force Data (from earlier)-----
+labor_force <- read_csv(here(data_path, "int", "liv_labor_force.csv"), show_col_types = FALSE)
+```
+
+### OECD Data
+
+```{r}
+#---------- fis OECD data---------------------------
+oecd_fis_job_raw <- read_csv(here(oecd_dir, "OECD_2009-2022_employment_fish_aqua_processing_raw.csv"), show_col_types = FALSE)
+
+# total number of people employed by the fishing (previously commercial fishing, cf -- see README.md) sector
+
+# Remove NAs
+nas <- oecd_fis_job_raw %>% 
+  filter(is.na(OBS_VALUE))
+
+# Remove NAs
+oecd_fis_job_raw <- oecd_fis_job_raw %>% 
+  filter(!is.na(OBS_VALUE))
+
+# ============== fis OECD number of fishers data ============== 
+#note that this is data for the same category as the FAO fishers data, FAO data will be used to gapfill
+oecd_fisher_jobs <- oecd_fis_job_raw %>% 
+  janitor::clean_names() %>% 
+  select(ref_area, reference_area, working_domain, time_period, obs_value, unit_of_measure) %>% 
+  filter(working_domain %in% c("Marine fishing, nei","Marine deep-sea fishing", "Marine coastal fishing","Subsistence"))  %>% 
+  mutate(year = as.numeric(time_period),
+         value = obs_value,
+         unit = ("persons (1)"),
+         sector = "cf",
+         data_source = "oecd sustainable economies") %>% 
+  select(-c(unit_of_measure, obs_value, time_period, working_domain))
+
+unique(is.na(oecd_fisher_jobs$value))
+# FALSE -- no NAs
+# v2025: NAs
+
+# ============== Run ohicore name_2_rgn ==================================
+
+# check names
+#china, taiwan province of or china (provice of china) should pick it up as taiwan
+# "Chinese Taipei", "China (People’s Republic of)", "Korea"
+
+oecd_fisher_jobs_fix <- oecd_fisher_jobs %>%
+  mutate(reference_area = case_when(
+    reference_area=="Chinese Taipei" ~ "Taiwan",
+    reference_area=="China (People’s Republic of)" ~ "China",
+    reference_area=="Korea" ~ "South Korea",
+    TRUE ~ reference_area # Everything else, leave it be
+  ))
+
+oecd_fisher_jobs_rgn <- name_2_rgn(df_in = oecd_fisher_jobs_fix, 
+                       fld_name='reference_area',
+                      flds_unique = c("year"))
+
+oecd_duplicates <- oecd_fisher_jobs_rgn[duplicated(oecd_fisher_jobs_rgn[, c("reference_area", "year")]),]
+
+oecd_ref_duplicates <- unique(oecd_duplicates$reference_area)
+oecd_rgn_duplicates <- unique(oecd_duplicates$rgn_name)
+
+oecd_diff <- setdiff(oecd_rgn_duplicates, oecd_ref_duplicates)
+oecd_diff # Vietnam is the only difference, and name_2_rgn works, so we are good to move forward! The raw data had duplicates in observation by year and region, so now we have to aggregate.
+```
+
+### Aggregating data
+
+```{r}
+# ============== Aggregating data ==================================
+length(unique(oecd_fisher_jobs_rgn$reference_area)) 
+# v2025: 47
+# v2024: 44
+length(unique(oecd_fisher_jobs_rgn$rgn_name)) 
+# v2025: 47
+# v2024: 44
+
+duplicate_exists <- oecd_fisher_jobs_rgn %>% 
+  group_by(rgn_name, year) %>% 
+  filter(n() > 1)
+
+bang_filt <- oecd_fisher_jobs_rgn %>% 
+  filter(rgn_name %in% "Bangladesh")
+head(bang_filt) # still have multiple entries per region and year from raw oecd data, need to aggregate
+
+oecd_fis_jobs_rgn_agg <- oecd_fisher_jobs_rgn %>%
+  group_by(rgn_id, rgn_name, year) %>%
+  dplyr::summarize(value = sum(value, na.rm=TRUE)) %>%
+  ungroup() %>% 
+  dplyr::mutate(year = as.numeric(year)) 
+```
+
+Gapfill OECD data
+
+```{r}
+# Join with OHI regions
+jobs_region_join <- left_join(rgns_eez, oecd_fis_jobs_rgn_agg, by = c("rgn_id", "rgn_name")) %>%
+  select(-c(territory, admin_rgn_id, admin_country_name, 
+            Notes, eez_iso3))
+
+data_year <- max(jobs_region_join$year, na.rm = TRUE)
+
+# ---- Within country gapfilling ----
+fis_jobs_gf <- jobs_region_join %>% 
+   group_by(rgn_id, rgn_name) %>% 
+  complete(year = 2008:data_year) %>% # ensures that there is a row for every year for each region, to ensure there are no gaps
+  ungroup() %>%
+  # First, create gapfilled boolean and method columns
+  mutate(jb_gapfilled = ifelse(is.na(value), "1", NA_character_),
+         jb_gf_method = ifelse(is.na(value), "1", NA_character_)) %>%
+  # Regroup for gapfilling
+  group_by(rgn_id, rgn_name) %>% 
+  arrange(rgn_id, year) %>%   
+  # Linear interpolation
+  mutate(value = na.approx(value, x = year, na.rm = FALSE)) %>% 
+  mutate(jb_gapfilled = ifelse(jb_gapfilled == "1" & !is.na(value), 
+                               "gapfilled", jb_gapfilled),
+         jb_gf_method = ifelse(jb_gf_method == "1" & !is.na(value), 
+                               "Interpolation", jb_gf_method)) %>% 
+  # Upfilling and Downfiling
+  tidyr::fill(value, .direction = "updown") %>% 
+  mutate(jb_gapfilled = ifelse(jb_gapfilled == "1" & !is.na(value), 
+                               "gapfilled", jb_gapfilled),
+         jb_gf_method = ifelse(jb_gf_method == "1" & !is.na(value), 
+                               "Up/Downfilling", jb_gf_method))
+
+table(fis_jobs_gf$jb_gf_method)
+
+# Regions with no job data after all gapfilling
+fis_jobs_gf %>% 
+  filter(is.na(value)) %>% 
+  distinct(rgn_id, rgn_name) 
+
+# Narrow wage columns before joining
+jobs_final_oecd <- fis_jobs_gf %>% 
+  drop_na(value) %>% 
+  mutate(unit = "Persons (1)",
+         sector = "fis",
+         source = "OECD") %>% 
+  select(rgn_id, rgn_name, year, number_jobs = value, unit, sector, source)
+
+colSums(is.na(jobs_final_oecd))
+length(unique(jobs_final_oecd$rgn_id)) # 47 regions
+```
+
+### FAO Yearbook Data
+
+```{r}
+#------fis FAO Yearbook Number of Fishers-------
+# turn the number of fishers table from the FAO yearbook into a data frame and clean.
+# note: world total includes countries and regions not within the table.  Unsure of where that data comes from; look for methodology.
+fao_pdf <- pdf_text(here(fao_dir, "fao_statistics_yearbook_07_03_24.pdf"))
+
+cat(fao_pdf[[169]])
+table <- strsplit(fao_pdf[[169]], "\n")[[1]]
+# Remove header and footer (may need to adjust with new tables)
+table_lines_keep <- table[11:(length(table) - 14)]
+# Convert to df
+fishers_table <- table_lines_keep %>%
+  str_trim() %>%
+  # number of columns is n
+  str_split_fixed("\\s{2,}", n = 11) %>%
+  as.data.frame(stringsAsFactors = FALSE)
+
+#specify columns 
+columns <- c("country", "1995", "2000", "2005", "2010", "2015", "2017", "2018", "2019", "2020", "2021")
+
+colnames(fishers_table) <- columns
+
+fao_fisher_jobs <- fishers_table %>%
+  mutate(country = str_remove_all(country, "\\*")) %>%  # Remove asterisks
+  mutate(across(2:11, ~ str_remove_all(as.character(.), "E"))) %>%  # Remove "E", coerce to character first
+  pivot_longer(cols = 2:11, names_to = "year", values_to = "value") %>%
+  mutate(value = str_squish(value)) %>% #remove extra spaces
+  mutate(value = str_remove_all(value, " ")) %>% 
+  mutate(value = if_else(value == "…" , NA, value)) %>% 
+  mutate(value = as.numeric(value)) %>% 
+  mutate(unit = "persons (1)",
+         sector = "cf",
+         data_source = "FAO number of fishers")
+
+length(unique(fao_fisher_jobs$country)) 
+# v2025: 59
+# v2024: 59
+
+# --------- run names_2_rgn to see how many OHI regions we have from this data -----
+fao_fis_jobs_rgn <- name_2_rgn(df_in = fao_fisher_jobs, 
+                             fld_name='country',
+                             flds_unique = c("year"))
+
+#let's see how many OHI regions we have:
+length(unique(fao_fis_jobs_rgn$rgn_id)) 
+# v2025: 50 (Uganda dropped for being landlocked)
+# v2024: 50 nothing was dropped out.  
+
+
+# See if any of these countries were not gapfilled in OECD data
+setdiff(unique(fao_fis_jobs_rgn$rgn_name), unique(jobs_final$rgn_name))
+# v2025: countries to add:
+#  [1] "Nigeria"      "Mozambique"   "Ghana"        "Tanzania"     "Cameroon"     "Mauritania"   "Morocco"      "Egypt"        "Senegal"      "Sierra Leone" "Angola"     
+# [12] "Guinea"       "Namibia"      "South Africa"
+
+# fao_fisher_jobs_fix <- fao_fisher_jobs %>%
+#   filter(country != "World total") %>% 
+#   mutate(country = case_when(
+#     country=="China,Taiwan" ~ "Taiwan",
+#     country=="Dem R Congo" ~ "Democratic Republic of the Congo",
+#     country=="DPR Korea" ~ "North Korea",
+#     country=="Faroe Is" ~ "Faeroe Islands",
+#     country=="Russian Fed" ~ "Russia",
+#     country=="USA" ~ "United States",
+#     country=="Rep.of Korea" ~ "South Korea",
+#     TRUE ~ country # Everything else, leave it be
+#   ))
+
+```
+
+Gapfill FAO data
+
+```{r}
+# Join with OHI regions
+jobs_region_join <- left_join(rgns_eez, fao_fis_jobs_rgn, by = c("rgn_id", "rgn_name")) %>%
+  select(-c(territory, admin_rgn_id, admin_country_name, 
+            Notes, eez_iso3)) %>%
+  mutate(year = as.numeric(year))
+
+data_year <- max(jobs_region_join$year, na.rm = TRUE)
+
+# ---- Within country gapfilling ----
+fis_jobs_gf <- jobs_region_join %>% 
+  group_by(rgn_id, rgn_name) %>% 
+  complete(year = 2008:data_year) %>% # ensures that there is a row for every year for each region, to ensure there are no gaps
+  ungroup() %>%
+  # First, create gapfilled boolean and method columns
+  mutate(jb_gapfilled = ifelse(is.na(value), "1", NA_character_),
+         jb_gf_method = ifelse(is.na(value), "1", NA_character_)) %>%
+  # Regroup for gapfilling
+  group_by(rgn_id, rgn_name) %>% 
+  arrange(rgn_id, year) %>%   
+  # Linear interpolation
+  mutate(value = na.approx(value, x = year, na.rm = FALSE)) %>% 
+  mutate(jb_gapfilled = ifelse(jb_gapfilled == "1" & !is.na(value), 
+                               "gapfilled", jb_gapfilled),
+         jb_gf_method = ifelse(jb_gf_method == "1" & !is.na(value), 
+                               "Interpolation", jb_gf_method)) %>% 
+  # Upfilling and Downfiling
+  tidyr::fill(value, .direction = "updown") %>% 
+  mutate(jb_gapfilled = ifelse(jb_gapfilled == "1" & !is.na(value), 
+                               "gapfilled", jb_gapfilled),
+         jb_gf_method = ifelse(jb_gf_method == "1" & !is.na(value), 
+                               "Up/Downfilling", jb_gf_method))
+
+table(fis_jobs_gf$jb_gf_method)
+
+# Regions with no job data after all gapfilling
+fis_jobs_gf %>% 
+  filter(is.na(value)) %>% 
+  distinct(rgn_id, rgn_name) 
+
+# Narrow wage columns before joining
+jobs_final_fao <- fis_jobs_gf %>% 
+  drop_na(value) %>% 
+  mutate(unit = "Persons (1)",
+         sector = "fis",
+         source = "FAO Yrbk") %>% 
+  select(rgn_id, rgn_name, year, number_jobs = value, unit, sector, source)
+
+colSums(is.na(jobs_final_fao))
+length(unique(jobs_final_fao$rgn_id)) # 50 regions
+```
+
+Supplement the OECD data with FAO data
+
+```{r}
+# Find which countries OECD is missing
+fao_supplemental_countries <- setdiff(unique(jobs_final_fao$rgn_name), unique(jobs_final_oecd$rgn_name))
+
+# Filter FAO to those countries
+fao_supplemental_jobs <- jobs_final_fao %>%
+  filter(rgn_name %in% fao_supplemental_countries)
+
+# Bind dataframes
+jobs_final <- jobs_final_oecd %>%
+  rbind(fao_supplemental_jobs) %>%
+  filter(year >= 2008 & year <= 2022)
+
+length(unique(jobs_final$rgn_name)) #71 countries!
+
+write_csv(jobs_final, file.path(int_dir, "liv_fis_quantity.csv"))
+```
+
+```{r}
+# preliminary plot
+prelim_plot <- plotly::plot_ly(jobs_final, x = ~year, y = ~number_jobs, color = ~rgn_name, type = "scatter", mode = "lines") %>% 
+  layout(title = "All Regions: Marine Fishing Employment", 
+         xaxis = list(title = "Year"),
+         yaxis = list(title = "Number of people by region employed by the fishing sector"))
+prelim_plot
+```
+
+```{r}
+# Plot without the large outliers Bangladesh and China
+remove_values <- c("Bangladesh", "China") 
+jobs_final_subset <- jobs_final %>% 
+  filter(!(rgn_name %in% remove_values))
+
+prelim_plot_lim <- plotly::plot_ly(jobs_final_subset, x = ~year, y = ~number_jobs, color = ~rgn_name, type = "scatter", mode = "lines") %>%
+  layout(title = "All Regions: Marine Fishing Employment", 
+         xaxis = list(title = "Year"),
+         yaxis = list(title = "Number of people by region employed by the fishing sector"))
+prelim_plot_lim
+```
+
+### Create the proportion between tourism jobs and the total labor force
+
+```{r}
+# Join labor force data with fis employment
+fis_job_labor_join <- full_join(labor_force, jobs_final, by = c("rgn_id", "rgn_name", "year"))
+
+# make proportion of people employed in the commercial fishing sector
+fis_job_prop <- fis_job_labor_join %>% 
+  dplyr::relocate(number_jobs, .before = labor_force) %>%
+  mutate(fis_prop_percent = (number_jobs/labor_force)*100) %>%
+  select(-c(source.x, source.y, sector.x, sector.y, unit.y)) %>%
+  rename(unit = unit.x)
+```
+
+Preliminary plot of the percent of labor force working in the fishing sector (fis)
+
+```{r}
+fis_prop_plot <- plotly::plot_ly(fis_job_prop, x = ~year, y = ~fis_prop_percent, color = ~rgn_name, type = "scatter", mode = "lines") %>% 
+  layout(title = "All Regions: Percent of Labor Force Employed by Marine Fishing Sector", 
+         xaxis = list(title = "Year"),
+         yaxis = list(title = "Percent by region employed by the fishing sector"))
+fis_prop_plot
+```
+
+### ILOSTAT data
+
+```{r}
+ilostat_fis_jobs <- read_csv(file.path(ilo_dir, "ilostat_fishing_sex_age_2008-2025.csv"), show_col_types = FALSE) %>%
+  clean_names()
+
+unique(ilostat_fis_jobs$ref_area_label)
+
+ilostat_fis_jobs_clean <- ilostat_fis_jobs %>%
+  filter(sex_label == "Total") %>%
+  group_by(ref_area_label, time) %>%
+  # Multiply by 1000 because the unit is thousands
+  summarise(persons = sum(obs_value, na.rm = TRUE)*1000) %>%
+  rename(rgn_name = ref_area_label,
+         year = time)
+
+unique(ilostat_fis_jobs_clean$rgn_name)
+
+islostat_fis_jobs_fix <- ilostat_fis_jobs_clean %>%
+  mutate(rgn_name = case_when(
+    rgn_name=="China,Taiwan" ~ "Taiwan",
+    rgn_name=="Congo, Democratic Republic of the" ~ "Democratic Republic of the Congo",
+    rgn_name=="Russian Federation" ~ "Russia",
+    rgn_name=="Venezuela (Bolivarian Republic of)" ~ "Venezuela",
+    rgn_name == "United Kingdom of Great Britain and Northern Ireland" ~ "United Kingdom",
+    rgn_name == "Tanzania, United Republic of" ~ "Tanzania",
+    rgn_name == "Bolivia (Plurinational State of)" ~ "Bolivia",
+    TRUE ~ rgn_name # Everything else, leave it be
+  ))
+
+ilostat_fis_jobs_rgn <- name_2_rgn(df_in = islostat_fisher_jobs_fix, 
+                             fld_name='rgn_name',
+                             flds_unique = c("year"))
+```
+
+Gapfill ILOSTAT data
+
+```{r}
+# Join with OHI regions
+jobs_region_join <- left_join(rgns_eez, ilostat_fis_jobs_rgn, by = c("rgn_id", "rgn_name")) %>%
+  select(-c(territory, admin_rgn_id, admin_country_name, 
+            Notes, eez_iso3)) %>%
+  mutate(year = as.numeric(year)) %>%
+  rename(value = persons)
+
+data_year <- max(jobs_region_join$year, na.rm = TRUE)
+
+# ---- Within country gapfilling ----
+fis_jobs_gf <- jobs_region_join %>% 
+  group_by(rgn_id, rgn_name) %>% 
+  complete(year = 2008:data_year) %>% # ensures that there is a row for every year for each region, to ensure there are no gaps
+  ungroup() %>%
+  # First, create gapfilled boolean and method columns
+  mutate(jb_gapfilled = ifelse(is.na(value), "1", NA_character_),
+         jb_gf_method = ifelse(is.na(value), "1", NA_character_)) %>%
+  # Regroup for gapfilling
+  group_by(rgn_id, rgn_name) %>% 
+  arrange(rgn_id, year) %>%   
+  # Linear interpolation
+  mutate(value = na.approx(value, x = year, na.rm = FALSE)) %>% 
+  mutate(jb_gapfilled = ifelse(jb_gapfilled == "1" & !is.na(value), 
+                               "gapfilled", jb_gapfilled),
+         jb_gf_method = ifelse(jb_gf_method == "1" & !is.na(value), 
+                               "Interpolation", jb_gf_method)) %>% 
+  # Upfilling and Downfiling
+  tidyr::fill(value, .direction = "updown") %>% 
+  mutate(jb_gapfilled = ifelse(jb_gapfilled == "1" & !is.na(value), 
+                               "gapfilled", jb_gapfilled),
+         jb_gf_method = ifelse(jb_gf_method == "1" & !is.na(value), 
+                               "Up/Downfilling", jb_gf_method))
+
+table(fis_jobs_gf$jb_gf_method)
+
+# Regions with no job data after all gapfilling
+fis_jobs_gf %>% 
+  filter(is.na(value)) %>% 
+  distinct(rgn_id, rgn_name) 
+
+# Narrow wage columns before joining
+jobs_final_ilostat <- fis_jobs_gf %>% 
+  drop_na(value) %>% 
+  mutate(unit = "Persons (1)",
+         sector = "fis",
+         source = "ILOSTAT") %>% 
+  select(rgn_id, rgn_name, year, number_jobs = value, unit, sector, source)
+
+colSums(is.na(jobs_final_ilostat))
+length(unique(jobs_final_ilostat$rgn_id)) # 65 regions
+```
+
+Supplement job data with ILOSTAT data
+
+```{r}
+# Find which countries OECD is missing
+ilostat_supplemental_countries <- setdiff(unique(jobs_final_ilostat$rgn_name), unique(jobs_final$rgn_name))
+
+# Filter FAO to those countries
+ilostat_supplemental_jobs <- jobs_final_ilostat %>%
+  filter(rgn_name %in% ilostat_supplemental_countries)
+
+# Bind dataframes
+jobs_final <- jobs_final %>%
+  rbind(ilostat_supplemental_jobs) %>%
+  filter(year >= 2008 & year <= 2022)
+
+length(unique(jobs_final$rgn_name)) #91 countries!
+
+write_csv(jobs_final, file.path(int_dir, "liv_fis_quantity.csv"))
+```
+
+```{r}
+# preliminary plot
+prelim_plot <- plotly::plot_ly(jobs_final, x = ~year, y = ~number_jobs, color = ~rgn_name, type = "scatter", mode = "lines") %>% 
+  layout(title = "All Regions: Marine Fishing Employment", 
+         xaxis = list(title = "Year"),
+         yaxis = list(title = "Number of people by region employed by the fishing sector"))
+prelim_plot
+```
+
