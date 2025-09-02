@@ -3,7 +3,8 @@
 
 
 ### v2025 updates
-- Renamed Fishing to fis instead of cf. 
+
+- Renamed fishing to fis instead of cf. 
 - Changed file structure organization such that livelihood and economies are two separate folders, as opposed nested inside each other
 - New data from the WTTC for tourism job quantity and revenue.
 
