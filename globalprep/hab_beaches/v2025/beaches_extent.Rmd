@@ -1,0 +1,124 @@
+---
+title: "beaches_extent"
+author: "Maddy Enda"
+date: "2025-08-25"
+output: html_document
+echo: False
+---
+
+```{r}
+# Load relevant libraries
+library(readr) 
+library(raster)
+library(here)
+library(sf)
+library(fasterize)
+library(tidyverse)
+library(mapview)
+library(sp)
+library(terra)
+
+source(here::here('workflow', 'R', 'common.R'))
+
+goal <- 'globalprep/hab_beaches/v2025'
+
+dir_git  <- file.path('~/github/ohiprep_v2025', goal)
+
+dir_beaches<- file.path(file.path(dir_M, 'git-annex/globalprep/_raw_data/Global_Coastline_Data/v2025')) #note: folder should be made for each year of new data, and changed
+
+ohi_rasters() # call the region zones raster
+```
+
+# Load in the data from the server
+
+```{r}
+# Get all reefextent_.gpkg files
+beaches_2010 <- st_read(file.path(dir_beaches, "GCL2010.shp"))
+
+beaches_2015 <- st_read(file.path(dir_beaches, "GCL2015.shp"))
+
+beaches_2020 <- st_read(file.path(dir_beaches, "GCL2020.shp"))
+```
+
+```{r}
+# Combine all of the beaches data into one object
+beaches_all <- bind_rows(beaches_2010, beaches_2015, beaches_2020)
+```
+
+```{r}
+# Find the length of all coastline
+# vector of lengths for each feature
+lengths <- st_length(beaches_all)
+
+# Total length of coastal data
+total_length <- sum(lengths)
+
+# Total length in km
+total_length_km <- units::set_units(total_length, "km")
+```
+
+```{r}
+# Confirm reprojection
+beaches_transform <- st_transform(beaches_all, crs= "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs")
+```
+
+## Rasterize the lines
+
+```{r}
+# Take the land rasters from OHI
+land_ocean <- raster("/home/shares/ohi/git-annex/globalprep/spatial/v2017/regions_land_ocean.tif")
+
+# Convert raster to a Terra() package type raster (SpatRaster). This is because lines can only be rasterized through the terra package. In order to stick with OHI convention, we will be converting this back to a RasterLayer. 
+eez_raster <- rast(land_ocean)
+
+# Make valid, Vectorize the lines
+beaches_transform <- st_make_valid(beaches_transform)
+beaches_transform <- beaches_transform[!st_is_empty(beaches_transform), ]# remove empty geometries
+
+# Vectorize the lines (a terra specific package)
+lines_vect <- vect(beaches_transform)
+
+# Rasterize lines to the same grid as zones
+beaches_raster <- rasterize(lines_vect, eez_raster, field = 1, background = 0)
+
+writeRaster(beaches_raster, filename = file.path(dir_M, "git-annex/globalprep/hab_beaches/beaches_raster.tif"), overwrite=TRUE)
+```
+
+
+# Plot the raster of beaches data
+```{r}
+plot(beaches_raster)
+```
+
+# Run Zonal Statistics to Get Average Length Per EEZ
+
+I loaded in the raster from the server in order to save time, and decrease the GiB used by the environment. By loading it in using raster(), we also convert it back into a RasterLayer, which will allow us to continue in the raster package from here.
+
+```{r}
+# Load in the beaches raster
+beaches_raster <- raster(file.path(dir_M, "git-annex/globalprep/hab_beaches/beaches_raster.tif"))
+```
+
+```{r}
+# Calculate zonal stats with zones raster and new coral. Convert to km^2 and save int/output files*
+zonal_sums <- terra::zonal(beaches_raster,
+                                     land_ocean,
+                                     fun = "sum",
+                                     na.rm = TRUE,
+                                     progress="text") #sum all coral cells for each ohi zone
+# Create a zonal_sums dataframe
+zonal_sums_df <- data.frame(zonal_sums)
+
+zonal_sums_km2 <- zonal_sums_df %>%
+  mutate(year = 2025, habitat = "beaches",
+         km2 = (0.934478877011218970**2*sum)) %>% #one cell is equal to ~0.93 km
+  rename("rgn_id" = "zone") %>%
+  dplyr::select(-sum) %>%
+  filter(rgn_id <= 250)
+
+print(sum(zonal_sums_km2$km2)) # v2025: 1,056,968 km2
+
+# Write the data frame to CSV locally (on Github). Be sure to check file path using here() 
+write.csv(zonal_sums_km2, here("int", "beaches_zonal.csv"), row.names = FALSE)
+```
+

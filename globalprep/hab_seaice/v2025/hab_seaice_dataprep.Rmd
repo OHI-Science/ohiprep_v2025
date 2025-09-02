@@ -597,5 +597,18 @@ hab_ice_trend_gf <- read.csv("globalprep/hab_seaice/v2025/output/hab_ice_trend_e
 write.csv(hab_ice_health_gf, "globalprep/hab_seaice/v2025/output/hab_ice_trend_eez_gf.csv", row.names=FALSE) # save sea ice trend gapfill file
 
 ```
-
 ------------------------------------------------------------------------
+
+
+Testing
+
+```{r, eval=FALSE}
+# Rename the 2025 data
+hab_ice_health_eez_2025 <- hab_ice_health_eez
+```
+
+```{r}
+hab_ice_health_eez_2024 <- hab_ice_health_eez
+```
+
+
