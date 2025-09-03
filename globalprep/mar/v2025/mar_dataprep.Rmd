@@ -23,7 +23,7 @@ This analysis converts FAO mariculture and seafood watch sustainability data int
 
 This file produces three layers: `mar_harvest_tonnes`, `mar_sustainability_score`, and `sp_genetic`. 
 
-# 2025 updates from 2024 assessment
+**2025 updates from 2024 assessment**
 
 - We got updated Seafood Watch data from the Monterey Bay Aquarium in 2025. Because of this, we wanted to combine the SFW data from 2024 and 2025 together as a way to gapfill and as a way to change the data year in the `scenario_data_years.csv` for the OHI-global score checking. Gapfilling by a different data year occurs BEFORE all of the other gapfilling methods and has not been documented in the gapfill csv yet. This is a change that future assessments could add.
 
@@ -74,7 +74,7 @@ Obtained upon request of SFW.
 
 ```{r setup, message=FALSE, warning=FALSE}
 
-knitr::opts_chunk$set(eval = FALSE)
+knitr::opts_chunk$set(eval=FALSE)
   
 # ---- Load packages ----
 if (!require(librarian)){
@@ -358,7 +358,7 @@ mar_rgn_agg <- mar_rgn %>%
 
 Take a look at the tidied data for a single year and region
 
-```{r see-tidy-data eval=FALSE}
+```{r see-tidy-data, eval=FALSE}
 test <- data.frame(
   dplyr::filter(mar_rgn_agg, rgn_id == 207) %>% # Vietnam
   dplyr::filter(year == 2020) %>%

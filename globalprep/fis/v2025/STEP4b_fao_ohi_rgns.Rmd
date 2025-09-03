@@ -1,5 +1,5 @@
 ---
-title: "OHI 2024: Food Provision/Fisheries, Identify FAO and OHI regions for RAM stocks"
+title: "OHI `r format(Sys.Date(), '%Y')`: Food Provision/Fisheries, Identify FAO and OHI regions for RAM stocks"
 author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
 output: 
   html_document:
@@ -26,9 +26,9 @@ knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
 
 Generates a dataset describing the OHI and FAO major fishing regions that correspond to each stock's range.  This combines last year's dataset of stock-spatial information from RAM v4.61 database and Christopher M. Free's spatial work at Rutgers as well as newly added stocks from RAM v4.65 with manually assigned ohi and fao region ids. Dataset only contains stocks with B/Bmsy data.
 
-## Updates from previous assessment
+### Updates from previous assessment
 
-- The RAM data changed for v2024 so we re-ran this
+- The RAM data changed for v2025 so we re-ran this
 
 ## Setup
 

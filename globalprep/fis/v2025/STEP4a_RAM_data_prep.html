@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Wed Sep 4 17:07:45 2024 by lecuona" />
+<meta name="author" content="Compiled on Wed Sep 3 16:34:11 2025 by oyler" />
 
 
-<title>OHI 2024: Food Provision/Fisheries, Preparing RAM B/Bmsy data</title>
+<title>OHI 2025: Food Provision/Fisheries, Preparing RAM B/Bmsy data</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1645,10 +1645,10 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">OHI 2024: Food Provision/Fisheries,
+<h1 class="title toc-ignore">OHI 2025: Food Provision/Fisheries,
 Preparing RAM B/Bmsy data</h1>
-<h4 class="author"><em>Compiled on Wed Sep 4 17:07:45 2024 by
-lecuona</em></h4>
+<h4 class="author"><em>Compiled on Wed Sep 3 16:34:11 2025 by
+oyler</em></h4>
 
 </div>
 
@@ -1663,7 +1663,10 @@ regions</p>
 <div id="updates-from-previous-assessment" class="section level2">
 <h2>Updates from previous assessment</h2>
 <ul>
-<li>Updated RAM data for v2024</li>
+<li>Updated RAM data for v2025</li>
+<li>Extended the date range for the RAM data from 2019 to 2023. Previous
+assessments had stopped at 2019 to match the SAUP data. This was NOT
+done for the 2025 assessment and data up to 2023 was used.</li>
 </ul>
 <hr />
 </div>
@@ -1673,15 +1676,14 @@ regions</p>
 <div id="bbmsy-values-from-stock-assessments" class="section level2">
 <h2>B/Bmsy values from stock assessments</h2>
 <p>Reference: <a href="http://ramlegacy.org">RAM Legacy Stock Assessment
-Database</a> v4.65</p>
+Database</a> v4.66</p>
 <ul>
-<li>Downloaded: 08/07/2024</li>
+<li>Downloaded: 06/26/2025</li>
 <li>Description: B/Bmsy value by stock and year (other data, which we do
 not use, are also available in the database)</li>
 <li>Native data resolution: stock (fish stock, species and region
 specific)</li>
-<li>Time range: 1800 - 2023 (we only use the year which matches our
-fisheries catch data (2019 for v2024))*</li>
+<li>Time range: 1800 - 2023</li>
 <li>Format: R data files (.rds)</li>
 <li>DOI: <a href="http://doi.org/10.5281/zenodo.4824192" class="uri">http://doi.org/10.5281/zenodo.4824192</a></li>
 </ul>
@@ -1704,43 +1706,42 @@ distribution</li>
 <h2>Setup</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">fig.width =</span> <span class="dv">6</span>, <span class="at">fig.height =</span> <span class="dv">4</span>, <span class="at">fig.path =</span> <span class="st">&#39;figs/&#39;</span>,<span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">warning =</span> <span class="cn">FALSE</span>, <span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">eval=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="do">## Libraries</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">library</span>(here) </span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fu">library</span>(here) </span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co"># ---- sources! ----</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&quot;workflow&quot;</span>, <span class="st">&quot;R&quot;</span>, <span class="st">&quot;common.R&quot;</span>)) <span class="co"># file creates objects to process data</span></span>
 <span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co"># ---- sources! ----</span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&quot;workflow&quot;</span>, <span class="st">&quot;R&quot;</span>, <span class="st">&quot;common.R&quot;</span>)) <span class="co"># file creates objects to process data</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co"># ---- set year and file path info ----</span></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>current_year <span class="ot">&lt;-</span> <span class="dv">2024</span> <span class="co"># Update this in the future!!</span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>version_year <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>,current_year)</span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>data_dir_version_year <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;d&quot;</span>, current_year)</span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co"># ---- data directories ----</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co"># ---- set year and file path info ----</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>current_year <span class="ot">&lt;-</span> <span class="dv">2025</span> <span class="co"># Update this in the future!!</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>version_year <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>,current_year)</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>data_dir_version_year <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;d&quot;</span>, current_year)</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co"># ---- data directories ----</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co"># Raw data directory (on Mazu)</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>raw_data_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(dir_M, <span class="st">&quot;git-annex&quot;</span>, <span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;_raw_data&quot;</span>)</span>
 <span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="co"># Raw data directory (on Mazu)</span></span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>raw_data_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(dir_M, <span class="st">&quot;git-annex&quot;</span>, <span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;_raw_data&quot;</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="co"># RAM raw data directory</span></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>RAM_dir <span class="ot">&lt;-</span> <span class="fu">here</span>(raw_data_dir, <span class="st">&quot;RAM&quot;</span>, data_dir_version_year)</span>
 <span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="co"># RAM raw data directory</span></span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>RAM_dir <span class="ot">&lt;-</span> <span class="fu">here</span>(raw_data_dir, <span class="st">&quot;RAM&quot;</span>, data_dir_version_year)</span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="co"># intermediate directory</span></span>
-<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>int_dir <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;fis&quot;</span>, version_year, <span class="st">&quot;int&quot;</span>)</span></code></pre></div>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="co"># intermediate directory</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>int_dir <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;fis&quot;</span>, version_year, <span class="st">&quot;int&quot;</span>)</span></code></pre></div>
 </div>
 <div id="obtain-ram-bbmsy-data" class="section level2">
 <h2>Obtain RAM B/Bmsy data</h2>
+<div id="dataset-description" class="section level3">
+<h3>Dataset description</h3>
 <p>The data is stored as a relational database in an R object. Check
 that the names of each element have not changed from last year! Update
 as appropriate in the below list.</p>
 <p>The following tables are included (for full list, see loadDBdata.r in
 mazu):</p>
 <ol style="list-style-type: decimal">
-<li>timeseries # checked v2024 The time series data is a data frame
+<li>timeseries # checked v2025 The time series data is a data frame
 containing all assessments conducted per stock with the following
 headers/columns:<br />
 </li>
@@ -1750,7 +1751,7 @@ headers/columns:<br />
 tsvalue</li>
 </ol>
 <ol start="2" style="list-style-type: decimal">
-<li>bioparams # checked v2024 The time series data is a data frame with
+<li>bioparams # checked v2025 The time series data is a data frame with
 parameter values for all stocks and assessments. It has the following
 headers/columns:<br />
 </li>
@@ -1760,7 +1761,7 @@ headers/columns:<br />
 bioyear (7) bionotes</li>
 </ol>
 <ol start="3" style="list-style-type: decimal">
-<li><p>timeseries_values_views # checked v2024 This stores the
+<li><p>timeseries_values_views # checked v2025 This stores the
 timeseries values, using the most recent assessment available, with
 timeseries type. The dataframe contains the following headers/columns:
 stockid, stocklong, year, TBbest, TCbest, ERbest, BdivBmsypref,
@@ -1801,12 +1802,12 @@ ids, with bioparam id along the columns (TBmsybest, ERmsybest, MSYbest,
 TBmgtbest, ERmgtbest, TBmsy, SSBmsy, Nmsy, MSY, Fmsy, ERmsy, TBmgt,
 SSBmgt, Fmgt, ERmgt, TB0, SSB0, M, TBlim, SSBlim, Flim, ERlim) and
 stocks along the rows.</p></li>
-<li><p>metadata # checked v2024 This stores assorted metadata associated
+<li><p>metadata # checked v2025 This stores assorted metadata associated
 with the stock, with datatypes along the columns (assessid, stockid,
 stocklong, assessyear, scientificname, commonname, areaname,
 managementauthority, assessorfull, region, FisheryType, taxGroup,
 primary_FAOarea, primary_country) and stock by row.</p></li>
-<li><p>tsmetrics # checked v2024 Contains metadata, with columns
+<li><p>tsmetrics # checked v2025 Contains metadata, with columns
 tscategory, tsshort, tslong, tsunitsshort, tsunitslong,
 tsunique.</p></li>
 <li><p>timeseries_assessments_views # checked v2024 The dataframe
@@ -1861,8 +1862,20 @@ rows.</p></li>
 <p>For this data prep we primarily use and consult
 <code>timeseries_values_views</code>, <code>tsmetrics</code>, and
 <code>metadata</code></p>
+<p>Abbreviations: - <code>TBdivTBmsy</code> = Total biomass relative to
+TBmsy - <code>SSBdivSSBmsy</code> = Spawning stock biomass relative to
+SSBmsy - <code>TBdivTBmgt</code> = Total biomass relative to TB
+management target - <code>SSBdivSSBmgt</code> = Spawning stock biomass
+relative to SSB management target - <code>stocklong</code> = Stock
+name</p>
+<p>Definitions: - Spawning stock: mature, breeding age fish - Total
+biomass: all fish in the stock</p>
+</div>
+</div>
+<div id="load-data" class="section level2">
+<h2>Load data</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Manually download a new database from http://ramlegacy.org/ if applicable</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">load</span>(here<span class="sc">::</span><span class="fu">here</span>(RAM_dir, <span class="st">&quot;RAMLDB v4.65/R Data/DBdata[asmt][v4.65].RData&quot;</span>)) <span class="co"># update if downloading a new database</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">load</span>(here<span class="sc">::</span><span class="fu">here</span>(RAM_dir, <span class="st">&quot;RAMLDB v4.66/R Data/DBdata[asmt][v4.66].RData&quot;</span>)) <span class="co"># update if downloading a new database</span></span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>ram_bmsy_new <span class="ot">&lt;-</span> timeseries_values_views <span class="sc">%&gt;%</span></span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(stockid, stocklong, year, TBdivTBmsy, SSBdivSSBmsy, TBdivTBmgt, SSBdivSSBmgt) <span class="sc">%&gt;%</span></span>
@@ -1877,22 +1890,60 @@ rows.</p></li>
 <span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(stockid, stocklong, year, ram_bmsy)</span>
 <span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a></span>
 <span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>test <span class="ot">&lt;-</span> ram_bmsy_new <span class="sc">%&gt;%</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span><span class="dv">2001</span>, year <span class="sc">&lt;=</span><span class="dv">2019</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>  <span class="fu">group_by</span>(stockid) <span class="sc">%&gt;%</span></span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">max_year =</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>  <span class="fu">distinct</span>(stockid, max_year) <span class="sc">%&gt;%</span></span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>  <span class="fu">group_by</span>(max_year) <span class="sc">%&gt;%</span></span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">num_max_yrs =</span> <span class="fu">c</span>(<span class="st">&quot;n()&quot;</span>))</span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="co"># histogram of all years and how many stocks have their latest year of data in that year</span></span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="fu">hist</span>(test<span class="sc">$</span>num_max_yrs,<span class="at">breaks=</span><span class="dv">18</span>)</span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="fu">hist</span>(test<span class="sc">$</span>max_year,<span class="at">breaks=</span><span class="dv">18</span>)</span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a><span class="fu">sum</span>(test<span class="sc">$</span>num_max_yrs) <span class="co"># 474 total stocks</span></span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a><span class="fu">plot</span>(test) <span class="co"># 203 stocks have data until 2019, but that is out of 474 stocks (lots need to be gapfilled)</span></span></code></pre></div>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>  <span class="co"># v2025: update max year to 2023</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">2001</span>, year <span class="sc">&lt;=</span> <span class="dv">2023</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>  <span class="fu">group_by</span>(stockid) <span class="sc">%&gt;%</span></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">max_year =</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>  <span class="fu">distinct</span>(stockid, max_year) <span class="sc">%&gt;%</span></span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>  <span class="fu">group_by</span>(max_year) <span class="sc">%&gt;%</span></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">num_max_yrs =</span> <span class="fu">c</span>(<span class="st">&quot;n()&quot;</span>))</span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="co"># Histogram of all years and how many stocks have their latest year of data in that year</span></span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="fu">hist</span>(test<span class="sc">$</span>num_max_yrs,<span class="at">breaks=</span><span class="dv">18</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="fu">hist</span>(test<span class="sc">$</span>max_year,<span class="at">breaks=</span><span class="dv">18</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="fu">sum</span>(test<span class="sc">$</span>num_max_yrs) <span class="co"># 476 total stocks</span></span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a><span class="fu">plot</span>(test)</span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a><span class="co"># Check the number of unique stocks over time</span></span>
+<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>stocks_year <span class="ot">&lt;-</span> ram_bmsy_new <span class="sc">%&gt;%</span></span>
+<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">2001</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>  <span class="fu">distinct</span>(year, stockid) <span class="sc">%&gt;%</span></span>
+<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>  <span class="fu">count</span>(year, <span class="at">name =</span> <span class="st">&quot;num_stocks&quot;</span>)</span>
+<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a></span>
+<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a>stocks_year_only <span class="ot">&lt;-</span> ram_bmsy_new <span class="sc">%&gt;%</span></span>
+<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">2001</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a>  <span class="fu">count</span>(year, <span class="at">name =</span> <span class="st">&quot;num_stocks&quot;</span>)</span>
+<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a>stocks_year_only <span class="ot">&lt;-</span> ram_bmsy_new <span class="sc">%&gt;%</span></span>
+<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">2001</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a>  <span class="fu">count</span>(year, <span class="at">name =</span> <span class="st">&quot;num_stocks&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a>  <span class="fu">arrange</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> num_stocks <span class="sc">-</span> <span class="fu">lag</span>(num_stocks))</span>
+<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a>ram_2025_stocks <span class="ot">&lt;-</span> ram_bmsy_new <span class="sc">%&gt;%</span></span>
+<span id="cb3-52"><a href="#cb3-52" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">2001</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-53"><a href="#cb3-53" tabindex="-1"></a>  <span class="fu">distinct</span>(year, stockid) <span class="sc">%&gt;%</span></span>
+<span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a>  <span class="fu">count</span>(year, <span class="at">name =</span> <span class="st">&quot;num_stocks&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a>  <span class="fu">arrange</span>(year) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> num_stocks <span class="sc">-</span> <span class="fu">lag</span>(num_stocks))</span>
+<span id="cb3-57"><a href="#cb3-57" tabindex="-1"></a></span>
+<span id="cb3-58"><a href="#cb3-58" tabindex="-1"></a><span class="fu">ggplot</span>(stocks_year_only, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> diff)) <span class="sc">+</span></span>
+<span id="cb3-59"><a href="#cb3-59" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-60"><a href="#cb3-60" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb3-61"><a href="#cb3-61" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Number of stocks&quot;</span>,</span>
+<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Unique stocks over time&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-63"><a href="#cb3-63" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb3-64"><a href="#cb3-64" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" tabindex="-1"></a><span class="fu">ggplot</span>(ram_2025_stocks, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> diff)) <span class="sc">+</span></span>
+<span id="cb3-66"><a href="#cb3-66" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-67"><a href="#cb3-67" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb3-68"><a href="#cb3-68" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Change in stock&quot;</span>,</span>
+<span id="cb3-69"><a href="#cb3-69" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Change in unique stocks over time&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-70"><a href="#cb3-70" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 <div id="gapfill-ram-data-when-there-are-missing-years" class="section level2">
 <h2>Gapfill RAM data when there are missing years</h2>
@@ -1917,197 +1968,192 @@ gets carried over all the way to 2019, or vice-versa)</p>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co"># identify stocks for gapfilling (those with 5 or more years of data since 2005).</span></span>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: we potentially gapfill to 2001, but we want stocks with adequate *recent* data </span></span>
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>ram_bmsy_gf <span class="ot">&lt;-</span> ram_bmsy_new <span class="sc">%&gt;%</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">2001</span> <span class="sc">&amp;</span> year <span class="sc">&lt;=</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span>   <span class="co"># v2024: 2019 corresponds to the final year of SAUP catch data</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">2001</span> <span class="sc">&amp;</span> year <span class="sc">&lt;=</span> <span class="dv">2023</span>) <span class="sc">%&gt;%</span>   <span class="co"># v2025: changed year to 2023 from 2019. 2019 is the last year of SAUP data. </span></span>
 <span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>  <span class="fu">group_by</span>(stockid) <span class="sc">%&gt;%</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">max_year =</span> <span class="fu">max</span>(year)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">years_data_2005_now =</span> <span class="fu">length</span>(ram_bmsy[year <span class="sc">&gt;=</span> <span class="dv">2005</span>])) <span class="sc">%&gt;%</span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">years_data_2001_now =</span> <span class="fu">length</span>(ram_bmsy[year <span class="sc">&gt;=</span> <span class="dv">2001</span>])) <span class="sc">%&gt;%</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>  <span class="fu">filter</span>(max_year <span class="sc">&gt;=</span> <span class="dv">2010</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>  <span class="fu">group_by</span>(stockid) <span class="sc">%&gt;%</span></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff_years =</span> year <span class="sc">-</span> <span class="fu">lag</span>(year)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff_years =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(diff_years), <span class="dv">0</span>, diff_years))</span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co"># filter(years_data_2005_now &gt;= 5)</span></span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a></span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co"># stocks with gaps in between years</span></span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>in_between_stocks <span class="ot">&lt;-</span> ram_bmsy_gf <span class="sc">%&gt;%</span></span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>  <span class="fu">filter</span>(diff_years <span class="sc">&gt;</span><span class="dv">1</span>)</span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="co"># which stocks have gaps in between years</span></span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>in_between_stocks_id <span class="ot">&lt;-</span> <span class="fu">unique</span>(in_between_stocks<span class="sc">$</span>stockid) <span class="co"># v2024: [1] &quot;SDOGATLC&quot; &quot;WPOLLWBS&quot;</span></span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a></span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="co"># remove diff_years for gapfilling</span></span>
-<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a>ram_bmsy_gf_2 <span class="ot">&lt;-</span> ram_bmsy_gf <span class="sc">%&gt;%</span></span>
-<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>diff_years)</span>
-<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a></span>
-<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a></span>
-<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a><span class="do">## Get rows for stocks/years with no B/Bmsy (identified as NA B/Bmsy value for now)</span></span>
-<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a>ram_bmsy_gf_3 <span class="ot">&lt;-</span> ram_bmsy_gf_2 <span class="sc">%&gt;%</span></span>
-<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a>  <span class="fu">spread</span>(year, ram_bmsy) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;ram_bmsy&quot;</span>, <span class="sc">-</span>stockid, <span class="sc">-</span>years_data_2005_now, <span class="sc">-</span>years_data_2001_now, <span class="sc">-</span>stocklong, <span class="sc">-</span>max_year) <span class="sc">%&gt;%</span></span>
-<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>years_data_2005_now, <span class="sc">-</span>years_data_2001_now)</span>
-<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a></span>
-<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a><span class="co"># remove stocks with in between years</span></span>
-<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a>ram_bmsy_gf_4 <span class="ot">&lt;-</span> ram_bmsy_gf_3 <span class="sc">%&gt;%</span></span>
-<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(stockid <span class="sc">%in%</span> <span class="fu">c</span>(in_between_stocks_id)))</span>
-<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a></span>
-<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a><span class="co"># for those that don&#39;t have gaps in between years, gapfill by drawing the recent values up or down</span></span>
-<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a>ram_bmsy_gf_updown <span class="ot">&lt;-</span> ram_bmsy_gf_4 <span class="sc">%&gt;%</span></span>
-<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ram_bmsy_gf =</span> ram_bmsy) <span class="sc">%&gt;%</span></span>
-<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a>  <span class="fu">group_by</span>(stockid) <span class="sc">%&gt;%</span></span>
-<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a>  <span class="fu">fill</span>(ram_bmsy_gf, <span class="at">.direction =</span> <span class="st">&quot;downup&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gapfilled =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(ram_bmsy), <span class="st">&quot;none&quot;</span>, <span class="st">&quot;down/upfilling&quot;</span>)) </span>
-<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a></span>
-<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a><span class="co"># df of stocks that have gaps in between years</span></span>
-<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a>ram_bmsy_gf_in_between <span class="ot">&lt;-</span> ram_bmsy_gf_3 <span class="sc">%&gt;%</span></span>
-<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a>  <span class="fu">filter</span>(stockid <span class="sc">%in%</span> <span class="fu">c</span>(in_between_stocks_id)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a>  <span class="fu">group_by</span>(stockid) <span class="sc">%&gt;%</span></span>
-<span id="cb4-57"><a href="#cb4-57" tabindex="-1"></a>  <span class="fu">arrange</span>(stockid, year)</span>
-<span id="cb4-58"><a href="#cb4-58" tabindex="-1"></a></span>
-<span id="cb4-59"><a href="#cb4-59" tabindex="-1"></a>  </span>
-<span id="cb4-60"><a href="#cb4-60" tabindex="-1"></a><span class="do">## split and do this 3 times for each stock in a for loop </span></span>
-<span id="cb4-61"><a href="#cb4-61" tabindex="-1"></a>stocks <span class="ot">&lt;-</span> <span class="fu">unique</span>(ram_bmsy_gf_in_between<span class="sc">$</span>stockid) <span class="co"># v2024: [1] &quot;SDOGATLC&quot; &quot;WPOLLWBS&quot; </span></span>
-<span id="cb4-62"><a href="#cb4-62" tabindex="-1"></a></span>
-<span id="cb4-63"><a href="#cb4-63" tabindex="-1"></a>ram_bmsy_gf_interpolate <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">stockid =</span> <span class="cn">NA</span>, <span class="at">stocklong =</span> <span class="cn">NA</span>, <span class="at">max_year =</span> <span class="cn">NA</span>, <span class="at">year =</span> <span class="cn">NA</span>, <span class="at">ram_bmsy =</span> <span class="cn">NA</span>, <span class="at">ram_bmsy_gf =</span> <span class="cn">NA</span>, <span class="at">gapfilled =</span> <span class="cn">NA</span>)</span>
-<span id="cb4-64"><a href="#cb4-64" tabindex="-1"></a></span>
-<span id="cb4-65"><a href="#cb4-65" tabindex="-1"></a><span class="cf">for</span>(stock <span class="cf">in</span> stocks){</span>
-<span id="cb4-66"><a href="#cb4-66" tabindex="-1"></a>  </span>
-<span id="cb4-67"><a href="#cb4-67" tabindex="-1"></a>  <span class="co"># stock = stocks[1]</span></span>
-<span id="cb4-68"><a href="#cb4-68" tabindex="-1"></a>  </span>
-<span id="cb4-69"><a href="#cb4-69" tabindex="-1"></a>  filter_stock <span class="ot">&lt;-</span> ram_bmsy_gf_in_between <span class="sc">%&gt;%</span></span>
-<span id="cb4-70"><a href="#cb4-70" tabindex="-1"></a>    <span class="fu">filter</span>(stockid <span class="sc">==</span> stock)</span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">max_year =</span> <span class="fu">max</span>(year),</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>         <span class="co"># It doesn&#39;t seem like we actually use these columns. Not sure if still necessary</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>         <span class="at">years_data_2005_now =</span> <span class="fu">length</span>(ram_bmsy[year <span class="sc">&gt;=</span> <span class="dv">2005</span>]),</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>         <span class="at">years_data_2001_now =</span> <span class="fu">length</span>(ram_bmsy[year <span class="sc">&gt;=</span> <span class="dv">2001</span>])) <span class="sc">%&gt;%</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>  <span class="fu">filter</span>(max_year <span class="sc">&gt;=</span> <span class="dv">2010</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>  <span class="fu">group_by</span>(stockid) <span class="sc">%&gt;%</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff_years =</span> year <span class="sc">-</span> <span class="fu">lag</span>(year)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff_years =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(diff_years), <span class="dv">0</span>, diff_years))</span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co"># filter(years_data_2005_now &gt;= 5)</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co"># stocks with gaps in between years</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>year_gap_stocks <span class="ot">&lt;-</span> ram_bmsy_gf <span class="sc">%&gt;%</span></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>  <span class="fu">filter</span>(diff_years <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="co"># view year gap stocks</span></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>year_gap_stocks_id <span class="ot">&lt;-</span> <span class="fu">unique</span>(year_gap_stocks<span class="sc">$</span>stockid)</span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>year_gap_stocks_id <span class="co"># v2025: [1] &quot;SDOGATLC&quot; &quot;WPOLLWBS&quot;</span></span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="co"># remove diff_years for gapfilling</span></span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a>ram_bmsy_gf2 <span class="ot">&lt;-</span> ram_bmsy_gf <span class="sc">%&gt;%</span></span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>diff_years)</span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a><span class="do">## Get rows for stocks/years with no B/Bmsy (identified as NA B/Bmsy value for now)</span></span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a>ram_bmsy_gf_3 <span class="ot">&lt;-</span> ram_bmsy_gf2 <span class="sc">%&gt;%</span></span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a>  <span class="fu">spread</span>(year, ram_bmsy) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;ram_bmsy&quot;</span>, <span class="sc">-</span>stockid, <span class="sc">-</span>years_data_2005_now, <span class="sc">-</span>years_data_2001_now, <span class="sc">-</span>stocklong, <span class="sc">-</span>max_year) <span class="sc">%&gt;%</span></span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>years_data_2005_now, <span class="sc">-</span>years_data_2001_now)</span>
+<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a><span class="co"># remove stocks with year gaps</span></span>
+<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a>ram_bmsy_gf_4 <span class="ot">&lt;-</span> ram_bmsy_gf_3 <span class="sc">%&gt;%</span></span>
+<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>stockid <span class="sc">%in%</span> <span class="fu">c</span>(year_gap_stocks_id))</span>
+<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a></span>
+<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a><span class="co"># for those that don&#39;t have year gaps, gapfill by drawing the recent values up or down</span></span>
+<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a>ram_bmsy_gf_updown <span class="ot">&lt;-</span> ram_bmsy_gf_4 <span class="sc">%&gt;%</span></span>
+<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ram_bmsy_gf =</span> ram_bmsy) <span class="sc">%&gt;%</span></span>
+<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a>  <span class="fu">group_by</span>(stockid) <span class="sc">%&gt;%</span></span>
+<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a>  <span class="fu">fill</span>(ram_bmsy_gf, <span class="at">.direction =</span> <span class="st">&quot;downup&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gapfilled =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(ram_bmsy), <span class="st">&quot;none&quot;</span>, <span class="st">&quot;down/upfilling&quot;</span>)) </span>
+<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a><span class="co"># df of stocks that have year gaps</span></span>
+<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a>ram_bmsy_gf_year_gap <span class="ot">&lt;-</span> ram_bmsy_gf_3 <span class="sc">%&gt;%</span></span>
+<span id="cb4-57"><a href="#cb4-57" tabindex="-1"></a>  <span class="fu">filter</span>(stockid <span class="sc">%in%</span> <span class="fu">c</span>(year_gap_stocks_id)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-58"><a href="#cb4-58" tabindex="-1"></a>  <span class="fu">group_by</span>(stockid) <span class="sc">%&gt;%</span></span>
+<span id="cb4-59"><a href="#cb4-59" tabindex="-1"></a>  <span class="fu">arrange</span>(stockid, year)</span>
+<span id="cb4-60"><a href="#cb4-60" tabindex="-1"></a></span>
+<span id="cb4-61"><a href="#cb4-61" tabindex="-1"></a>  </span>
+<span id="cb4-62"><a href="#cb4-62" tabindex="-1"></a><span class="do">## split and do this 3 times for each stock in a for loop </span></span>
+<span id="cb4-63"><a href="#cb4-63" tabindex="-1"></a>stocks <span class="ot">&lt;-</span> <span class="fu">unique</span>(ram_bmsy_gf_year_gap<span class="sc">$</span>stockid) <span class="co"># v2025: [1] &quot;SDOGATLC&quot; &quot;WPOLLWBS&quot; </span></span>
+<span id="cb4-64"><a href="#cb4-64" tabindex="-1"></a>stocks</span>
+<span id="cb4-65"><a href="#cb4-65" tabindex="-1"></a></span>
+<span id="cb4-66"><a href="#cb4-66" tabindex="-1"></a>ram_bmsy_gf_interpolate <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">stockid =</span> <span class="cn">NA</span>, <span class="at">stocklong =</span> <span class="cn">NA</span>, <span class="at">max_year =</span> <span class="cn">NA</span>, <span class="at">year =</span> <span class="cn">NA</span>, <span class="at">ram_bmsy =</span> <span class="cn">NA</span>, <span class="at">ram_bmsy_gf =</span> <span class="cn">NA</span>, <span class="at">gapfilled =</span> <span class="cn">NA</span>)</span>
+<span id="cb4-67"><a href="#cb4-67" tabindex="-1"></a></span>
+<span id="cb4-68"><a href="#cb4-68" tabindex="-1"></a><span class="cf">for</span>(stock <span class="cf">in</span> stocks){</span>
+<span id="cb4-69"><a href="#cb4-69" tabindex="-1"></a>  </span>
+<span id="cb4-70"><a href="#cb4-70" tabindex="-1"></a>  <span class="co"># stock = stocks[1]</span></span>
 <span id="cb4-71"><a href="#cb4-71" tabindex="-1"></a>  </span>
-<span id="cb4-72"><a href="#cb4-72" tabindex="-1"></a>  interpolate <span class="ot">&lt;-</span> <span class="fu">tibble</span>(filter_stock, <span class="at">ram_bmsy_gf =</span> <span class="fu">na.approx</span>(filter_stock<span class="sc">$</span>ram_bmsy, <span class="at">rule =</span> <span class="dv">2</span>), <span class="at">gapfilled =</span> <span class="st">&quot;linear interpolation&quot;</span>)</span>
-<span id="cb4-73"><a href="#cb4-73" tabindex="-1"></a>  </span>
-<span id="cb4-74"><a href="#cb4-74" tabindex="-1"></a>  ram_bmsy_gf_interpolate <span class="ot">&lt;-</span> <span class="fu">rbind</span>(ram_bmsy_gf_interpolate, interpolate)</span>
-<span id="cb4-75"><a href="#cb4-75" tabindex="-1"></a>  </span>
-<span id="cb4-76"><a href="#cb4-76" tabindex="-1"></a>}</span>
-<span id="cb4-77"><a href="#cb4-77" tabindex="-1"></a></span>
-<span id="cb4-78"><a href="#cb4-78" tabindex="-1"></a><span class="do">## now fix the gapfilled column for the linear interpolation observations.. some of them need to be flagged as &quot;upfilled&quot; </span></span>
-<span id="cb4-79"><a href="#cb4-79" tabindex="-1"></a>ram_bmsy_gf_interpolate_2 <span class="ot">&lt;-</span> ram_bmsy_gf_interpolate <span class="sc">%&gt;%</span></span>
-<span id="cb4-80"><a href="#cb4-80" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(stockid)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-81"><a href="#cb4-81" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gapfilled =</span> <span class="fu">case_when</span>(</span>
-<span id="cb4-82"><a href="#cb4-82" tabindex="-1"></a>    stockid <span class="sc">==</span> <span class="st">&quot;SDOGATLC&quot;</span> <span class="sc">&amp;</span> year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2019</span>) <span class="sc">~</span> <span class="st">&quot;down/upfilling&quot;</span>,</span>
-<span id="cb4-83"><a href="#cb4-83" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> gapfilled</span>
-<span id="cb4-84"><a href="#cb4-84" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
-<span id="cb4-85"><a href="#cb4-85" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gapfilled =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(ram_bmsy), <span class="st">&quot;none&quot;</span>, gapfilled))</span>
-<span id="cb4-86"><a href="#cb4-86" tabindex="-1"></a></span>
-<span id="cb4-87"><a href="#cb4-87" tabindex="-1"></a><span class="co"># bind the different dataframes from diff gapfilling methods</span></span>
-<span id="cb4-88"><a href="#cb4-88" tabindex="-1"></a>ram_bmsy_gf_final <span class="ot">&lt;-</span> <span class="fu">rbind</span>(ram_bmsy_gf_interpolate_2, ram_bmsy_gf_updown)</span>
+<span id="cb4-72"><a href="#cb4-72" tabindex="-1"></a>  filter_stock <span class="ot">&lt;-</span> ram_bmsy_gf_year_gap <span class="sc">%&gt;%</span></span>
+<span id="cb4-73"><a href="#cb4-73" tabindex="-1"></a>    <span class="fu">filter</span>(stockid <span class="sc">==</span> stock)</span>
+<span id="cb4-74"><a href="#cb4-74" tabindex="-1"></a>  </span>
+<span id="cb4-75"><a href="#cb4-75" tabindex="-1"></a>  interpolate <span class="ot">&lt;-</span> <span class="fu">tibble</span>(filter_stock, <span class="at">ram_bmsy_gf =</span> <span class="fu">na.approx</span>(filter_stock<span class="sc">$</span>ram_bmsy, <span class="at">rule =</span> <span class="dv">2</span>), <span class="at">gapfilled =</span> <span class="st">&quot;linear interpolation&quot;</span>)</span>
+<span id="cb4-76"><a href="#cb4-76" tabindex="-1"></a>  </span>
+<span id="cb4-77"><a href="#cb4-77" tabindex="-1"></a>  ram_bmsy_gf_interpolate <span class="ot">&lt;-</span> <span class="fu">rbind</span>(ram_bmsy_gf_interpolate, interpolate)</span>
+<span id="cb4-78"><a href="#cb4-78" tabindex="-1"></a>  </span>
+<span id="cb4-79"><a href="#cb4-79" tabindex="-1"></a>}</span>
+<span id="cb4-80"><a href="#cb4-80" tabindex="-1"></a></span>
+<span id="cb4-81"><a href="#cb4-81" tabindex="-1"></a><span class="do">## now fix the gapfilled column for the linear interpolation observations.. some of them need to be flagged as &quot;upfilled&quot; </span></span>
+<span id="cb4-82"><a href="#cb4-82" tabindex="-1"></a>ram_bmsy_gf_interpolate_2 <span class="ot">&lt;-</span> ram_bmsy_gf_interpolate <span class="sc">%&gt;%</span></span>
+<span id="cb4-83"><a href="#cb4-83" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(stockid)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-84"><a href="#cb4-84" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gapfilled =</span> <span class="fu">case_when</span>(</span>
+<span id="cb4-85"><a href="#cb4-85" tabindex="-1"></a>    stockid <span class="sc">==</span> <span class="st">&quot;SDOGATLC&quot;</span> <span class="sc">&amp;</span> year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2023</span>) <span class="sc">~</span> <span class="st">&quot;down/upfilling&quot;</span>,</span>
+<span id="cb4-86"><a href="#cb4-86" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> gapfilled</span>
+<span id="cb4-87"><a href="#cb4-87" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb4-88"><a href="#cb4-88" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gapfilled =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(ram_bmsy), <span class="st">&quot;none&quot;</span>, gapfilled))</span>
 <span id="cb4-89"><a href="#cb4-89" tabindex="-1"></a></span>
-<span id="cb4-90"><a href="#cb4-90" tabindex="-1"></a><span class="co"># check that everything has been taken care of</span></span>
-<span id="cb4-91"><a href="#cb4-91" tabindex="-1"></a><span class="fu">unique</span>(<span class="fu">is.na</span>(ram_bmsy_gf_final<span class="sc">$</span>ram_bmsy_gf)) <span class="co"># v2024: FALSE</span></span>
+<span id="cb4-90"><a href="#cb4-90" tabindex="-1"></a><span class="co"># bind the different dataframes from diff gapfilling methods</span></span>
+<span id="cb4-91"><a href="#cb4-91" tabindex="-1"></a>ram_bmsy_gf_final <span class="ot">&lt;-</span> <span class="fu">rbind</span>(ram_bmsy_gf_interpolate_2, ram_bmsy_gf_updown)</span>
 <span id="cb4-92"><a href="#cb4-92" tabindex="-1"></a></span>
-<span id="cb4-93"><a href="#cb4-93" tabindex="-1"></a></span>
-<span id="cb4-94"><a href="#cb4-94" tabindex="-1"></a><span class="do">## see unique values of stocks</span></span>
-<span id="cb4-95"><a href="#cb4-95" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> ram_bmsy_gf_final <span class="sc">%&gt;%</span></span>
-<span id="cb4-96"><a href="#cb4-96" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(stockid, gapfilled) <span class="sc">%&gt;%</span></span>
-<span id="cb4-97"><a href="#cb4-97" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
-<span id="cb4-98"><a href="#cb4-98" tabindex="-1"></a></span>
-<span id="cb4-99"><a href="#cb4-99" tabindex="-1"></a></span>
-<span id="cb4-100"><a href="#cb4-100" tabindex="-1"></a><span class="do">## check out gapfilling stats</span></span>
-<span id="cb4-101"><a href="#cb4-101" tabindex="-1"></a><span class="fu">table</span>(tmp<span class="sc">$</span>gapfilled) <span class="co"># only 2 stocks use linear interpolation for some years. 231 are down/upfilled. 431 stocks are not gapfilled at all! </span></span>
-<span id="cb4-102"><a href="#cb4-102" tabindex="-1"></a></span>
-<span id="cb4-103"><a href="#cb4-103" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">table</span>(tmp<span class="sc">$</span>gapfilled))  </span>
-<span id="cb4-104"><a href="#cb4-104" tabindex="-1"></a><span class="co"># 664 stocks have at least one year of bbmsy values after 2010</span></span>
-<span id="cb4-105"><a href="#cb4-105" tabindex="-1"></a></span>
-<span id="cb4-106"><a href="#cb4-106" tabindex="-1"></a></span>
-<span id="cb4-107"><a href="#cb4-107" tabindex="-1"></a><span class="fu">summary</span>(ram_bmsy_gf_final)<span class="co"># should be no NAs</span></span>
-<span id="cb4-108"><a href="#cb4-108" tabindex="-1"></a><span class="fu">sum</span>(ram_bmsy_gf_final<span class="sc">$</span>ram_bmsy_gf <span class="sc">&lt;</span> <span class="dv">0</span> )  <span class="co"># should be 0 </span></span>
-<span id="cb4-109"><a href="#cb4-109" tabindex="-1"></a><span class="fu">min</span>(ram_bmsy_gf_final<span class="sc">$</span>ram_bmsy_gf, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># v2024: 0.002531646</span></span>
-<span id="cb4-110"><a href="#cb4-110" tabindex="-1"></a></span>
-<span id="cb4-111"><a href="#cb4-111" tabindex="-1"></a><span class="do">## gapfilling record keeping</span></span>
-<span id="cb4-112"><a href="#cb4-112" tabindex="-1"></a>ram_bmsy_gf_final_fin <span class="ot">&lt;-</span> ram_bmsy_gf_final <span class="sc">%&gt;%</span></span>
-<span id="cb4-113"><a href="#cb4-113" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">method =</span> gapfilled) <span class="sc">%&gt;%</span></span>
-<span id="cb4-114"><a href="#cb4-114" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gapfilled =</span> <span class="fu">ifelse</span>(method <span class="sc">==</span> <span class="st">&quot;none&quot;</span>, <span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-115"><a href="#cb4-115" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(stockid, year, <span class="at">ram_bmsy =</span> ram_bmsy_gf, gapfilled, method) </span>
-<span id="cb4-116"><a href="#cb4-116" tabindex="-1"></a></span>
-<span id="cb4-117"><a href="#cb4-117" tabindex="-1"></a><span class="co"># v2023</span></span>
-<span id="cb4-118"><a href="#cb4-118" tabindex="-1"></a><span class="co"># write.csv(ram_bmsy_gf_final_fin, &quot;int/ram_stock_bmsy_gf.csv&quot;, row.names=FALSE)</span></span>
-<span id="cb4-119"><a href="#cb4-119" tabindex="-1"></a></span>
-<span id="cb4-120"><a href="#cb4-120" tabindex="-1"></a><span class="co"># v2024</span></span>
-<span id="cb4-121"><a href="#cb4-121" tabindex="-1"></a><span class="do">## directory for intermediate outputs</span></span>
-<span id="cb4-122"><a href="#cb4-122" tabindex="-1"></a>int_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>,<span class="st">&quot;fis&quot;</span>, version_year, <span class="st">&quot;int&quot;</span>)</span>
-<span id="cb4-123"><a href="#cb4-123" tabindex="-1"></a></span>
-<span id="cb4-124"><a href="#cb4-124" tabindex="-1"></a><span class="fu">write_csv</span>(ram_bmsy_gf_final_fin, <span class="fu">here</span>(int_dir, <span class="st">&quot;ram_stock_bmsy_gf.csv&quot;</span>))</span></code></pre></div>
+<span id="cb4-93"><a href="#cb4-93" tabindex="-1"></a><span class="do">## see unique values of stocks</span></span>
+<span id="cb4-94"><a href="#cb4-94" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> ram_bmsy_gf_final <span class="sc">%&gt;%</span></span>
+<span id="cb4-95"><a href="#cb4-95" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(stockid, gapfilled) <span class="sc">%&gt;%</span></span>
+<span id="cb4-96"><a href="#cb4-96" tabindex="-1"></a>  <span class="fu">unique</span>()</span>
+<span id="cb4-97"><a href="#cb4-97" tabindex="-1"></a></span>
+<span id="cb4-98"><a href="#cb4-98" tabindex="-1"></a><span class="do">## check out gapfilling stats</span></span>
+<span id="cb4-99"><a href="#cb4-99" tabindex="-1"></a><span class="fu">table</span>(tmp<span class="sc">$</span>gapfilled) <span class="co"># only 2 stocks use linear interpolation for some years. 418 are down/upfilled. 434 stocks are not gapfilled at all</span></span>
+<span id="cb4-100"><a href="#cb4-100" tabindex="-1"></a></span>
+<span id="cb4-101"><a href="#cb4-101" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">table</span>(tmp<span class="sc">$</span>gapfilled))  </span>
+<span id="cb4-102"><a href="#cb4-102" tabindex="-1"></a><span class="co"># 854 stocks have at least one year of bbmsy values after 2010</span></span>
+<span id="cb4-103"><a href="#cb4-103" tabindex="-1"></a></span>
+<span id="cb4-104"><a href="#cb4-104" tabindex="-1"></a><span class="co"># check that everything has been taken care of</span></span>
+<span id="cb4-105"><a href="#cb4-105" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(ram_bmsy_gf_final)) <span class="co"># no NAs for the gf column</span></span>
+<span id="cb4-106"><a href="#cb4-106" tabindex="-1"></a><span class="fu">sum</span>(ram_bmsy_gf_final<span class="sc">$</span>ram_bmsy_gf <span class="sc">&lt;</span> <span class="dv">0</span> )  <span class="co"># should be 0. 2025: 0</span></span>
+<span id="cb4-107"><a href="#cb4-107" tabindex="-1"></a><span class="fu">min</span>(ram_bmsy_gf_final<span class="sc">$</span>ram_bmsy_gf, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># v2025: 0.002531646</span></span>
+<span id="cb4-108"><a href="#cb4-108" tabindex="-1"></a></span>
+<span id="cb4-109"><a href="#cb4-109" tabindex="-1"></a><span class="do">## gapfilling record keeping</span></span>
+<span id="cb4-110"><a href="#cb4-110" tabindex="-1"></a>ram_bmsy_gf_final_fin <span class="ot">&lt;-</span> ram_bmsy_gf_final <span class="sc">%&gt;%</span></span>
+<span id="cb4-111"><a href="#cb4-111" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">method =</span> gapfilled) <span class="sc">%&gt;%</span></span>
+<span id="cb4-112"><a href="#cb4-112" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gapfilled =</span> <span class="fu">ifelse</span>(method <span class="sc">==</span> <span class="st">&quot;none&quot;</span>, <span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-113"><a href="#cb4-113" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(stockid, year, <span class="at">ram_bmsy =</span> ram_bmsy_gf, gapfilled, method) </span>
+<span id="cb4-114"><a href="#cb4-114" tabindex="-1"></a></span>
+<span id="cb4-115"><a href="#cb4-115" tabindex="-1"></a></span>
+<span id="cb4-116"><a href="#cb4-116" tabindex="-1"></a><span class="do">## directory for intermediate outputs</span></span>
+<span id="cb4-117"><a href="#cb4-117" tabindex="-1"></a>int_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>,<span class="st">&quot;fis&quot;</span>, version_year, <span class="st">&quot;int&quot;</span>)</span>
+<span id="cb4-118"><a href="#cb4-118" tabindex="-1"></a></span>
+<span id="cb4-119"><a href="#cb4-119" tabindex="-1"></a><span class="fu">write_csv</span>(ram_bmsy_gf_final_fin, <span class="fu">here</span>(int_dir, <span class="st">&quot;ram_stock_bmsy_gf.csv&quot;</span>))</span>
+<span id="cb4-120"><a href="#cb4-120" tabindex="-1"></a></span>
+<span id="cb4-121"><a href="#cb4-121" tabindex="-1"></a><span class="co"># Check the number of unique stocks over time</span></span>
+<span id="cb4-122"><a href="#cb4-122" tabindex="-1"></a>stocks_year <span class="ot">&lt;-</span> ram_bmsy_gf_final_fin <span class="sc">%&gt;%</span></span>
+<span id="cb4-123"><a href="#cb4-123" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">2001</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-124"><a href="#cb4-124" tabindex="-1"></a>  <span class="fu">distinct</span>(year, stockid) <span class="sc">%&gt;%</span></span>
+<span id="cb4-125"><a href="#cb4-125" tabindex="-1"></a>  <span class="fu">count</span>(year, <span class="at">name =</span> <span class="st">&quot;num_stocks&quot;</span>)</span>
+<span id="cb4-126"><a href="#cb4-126" tabindex="-1"></a></span>
+<span id="cb4-127"><a href="#cb4-127" tabindex="-1"></a><span class="fu">ggplot</span>(stocks_year, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> num_stocks)) <span class="sc">+</span></span>
+<span id="cb4-128"><a href="#cb4-128" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-129"><a href="#cb4-129" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb4-130"><a href="#cb4-130" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Number of stocks&quot;</span>,</span>
+<span id="cb4-131"><a href="#cb4-131" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Unique stocks over time&quot;</span>) <span class="sc">+</span></span>
+<span id="cb4-132"><a href="#cb4-132" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p>Get a general idea of how well the model predicts missing data based
 on observed and model predicted values. This model appears to do fairly
 well.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(ram_bmsy <span class="sc">~</span> ram_bmsy_gf, <span class="at">data=</span>ram_bmsy_gf_final)</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">summary</span>(mod)</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># Call:</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># lm(formula = ram_bmsy ~ ram_bmsy_gf, data = ram_bmsy_gf_final)</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co"># Residuals:</span></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#                  Min                   1Q               Median                   3Q                  Max </span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co"># -0.00000000000012957 -0.00000000000000081 -0.00000000000000037  0.00000000000000004  0.00000000000240348 </span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co"># Coefficients:</span></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#                            Estimate              Std. Error                t value             Pr(&gt;|t|)    </span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co"># (Intercept) 0.000000000000002819139 0.000000000000000376042                  7.497   0.0000000000000741 ***</span></span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co"># ram_bmsy_gf 0.999999999999999777955 0.000000000000000003205 312050693973460224.000 &lt; 0.0000000000000002 ***</span></span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co"># ---</span></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co"># Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="co"># Residual standard error: 0.00000000000003019 on 6503 degrees of freedom</span></span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co">#   (1646 observations deleted due to missingness)</span></span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a><span class="co"># Multiple R-squared:      1,   Adjusted R-squared:      1 </span></span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="co"># F-statistic: 9.738e+34 on 1 and 6503 DF,  p-value: &lt; 0.00000000000000022</span></span>
-<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a></span>
-<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a></span>
-<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a><span class="co"># v2023</span></span>
-<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a><span class="co"># Call:</span></span>
-<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a><span class="co"># lm(formula = ram_bmsy ~ ram_bmsy_gf, data = ram_bmsy_gf_final)</span></span>
-<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a><span class="co"># Residuals:</span></span>
-<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a><span class="co">#        Min         1Q     Median         3Q </span></span>
-<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a><span class="co"># -1.417e-15 -1.860e-17 -1.000e-18  1.460e-17 </span></span>
-<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a><span class="co">#        Max </span></span>
-<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a><span class="co">#  1.150e-14 </span></span>
-<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a><span class="co"># Coefficients:</span></span>
-<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a><span class="co">#              Estimate Std. Error   t value</span></span>
-<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a><span class="co"># (Intercept) 1.634e-16  2.446e-18 6.679e+01</span></span>
-<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a><span class="co"># ram_bmsy_gf 1.000e+00  1.353e-18 7.391e+17</span></span>
-<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a><span class="co">#             Pr(&gt;|t|)    </span></span>
-<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a><span class="co"># (Intercept)   &lt;2e-16 ***</span></span>
-<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a><span class="co"># ram_bmsy_gf   &lt;2e-16 ***</span></span>
-<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a><span class="co"># ---</span></span>
-<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a><span class="co"># Signif. codes:  </span></span>
-<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a><span class="co"># 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span></span>
-<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a><span class="co"># Residual standard error: 1.447e-16 on 7566 degrees of freedom</span></span>
-<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a><span class="co">#   (1001 observations deleted due to missingness)</span></span>
-<span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a><span class="co"># Multiple R-squared:      1,   Adjusted R-squared:      1 </span></span>
-<span id="cb5-48"><a href="#cb5-48" tabindex="-1"></a><span class="co"># F-statistic: 5.462e+35 on 1 and 7566 DF,  p-value: &lt; 2.2e-16</span></span>
-<span id="cb5-49"><a href="#cb5-49" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb5-50"><a href="#cb5-50" tabindex="-1"></a><span class="co"># Warning message:</span></span>
-<span id="cb5-51"><a href="#cb5-51" tabindex="-1"></a><span class="co"># In summary.lm(mod) : essentially perfect fit: summary may be unreliable</span></span>
-<span id="cb5-52"><a href="#cb5-52" tabindex="-1"></a></span>
-<span id="cb5-53"><a href="#cb5-53" tabindex="-1"></a><span class="co"># v2024</span></span>
-<span id="cb5-54"><a href="#cb5-54" tabindex="-1"></a><span class="co"># Call:</span></span>
-<span id="cb5-55"><a href="#cb5-55" tabindex="-1"></a><span class="co"># lm(formula = ram_bmsy ~ ram_bmsy_gf, data = ram_bmsy_gf_final)</span></span>
-<span id="cb5-56"><a href="#cb5-56" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb5-57"><a href="#cb5-57" tabindex="-1"></a><span class="co"># Residuals:</span></span>
-<span id="cb5-58"><a href="#cb5-58" tabindex="-1"></a><span class="co">#        Min         1Q     Median         3Q        Max </span></span>
-<span id="cb5-59"><a href="#cb5-59" tabindex="-1"></a><span class="co"># -8.881e-16 -1.710e-17 -4.000e-19  1.570e-17  5.538e-15 </span></span>
-<span id="cb5-60"><a href="#cb5-60" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb5-61"><a href="#cb5-61" tabindex="-1"></a><span class="co"># Coefficients:</span></span>
-<span id="cb5-62"><a href="#cb5-62" tabindex="-1"></a><span class="co">#               Estimate Std. Error    t value Pr(&gt;|t|)    </span></span>
-<span id="cb5-63"><a href="#cb5-63" tabindex="-1"></a><span class="co"># (Intercept) -3.331e-16  1.475e-18 -2.258e+02   &lt;2e-16 ***</span></span>
-<span id="cb5-64"><a href="#cb5-64" tabindex="-1"></a><span class="co"># ram_bmsy_gf  1.000e+00  8.618e-19  1.160e+18   &lt;2e-16 ***</span></span>
-<span id="cb5-65"><a href="#cb5-65" tabindex="-1"></a><span class="co"># ---</span></span>
-<span id="cb5-66"><a href="#cb5-66" tabindex="-1"></a><span class="co"># Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span></span>
-<span id="cb5-67"><a href="#cb5-67" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb5-68"><a href="#cb5-68" tabindex="-1"></a><span class="co"># Residual standard error: 8.141e-17 on 7277 degrees of freedom</span></span>
-<span id="cb5-69"><a href="#cb5-69" tabindex="-1"></a><span class="co">#   (910 observations deleted due to missingness)</span></span>
-<span id="cb5-70"><a href="#cb5-70" tabindex="-1"></a><span class="co"># Multiple R-squared:      1,   Adjusted R-squared:      1 </span></span>
-<span id="cb5-71"><a href="#cb5-71" tabindex="-1"></a><span class="co"># F-statistic: 1.346e+36 on 1 and 7277 DF,  p-value: &lt; 2.2e-16</span></span>
-<span id="cb5-72"><a href="#cb5-72" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb5-73"><a href="#cb5-73" tabindex="-1"></a><span class="co"># Warning message:</span></span>
-<span id="cb5-74"><a href="#cb5-74" tabindex="-1"></a><span class="co"># In summary.lm(mod) : essentially perfect fit: summary may be unreliable</span></span></code></pre></div>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># v2024</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># Call:</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co"># lm(formula = ram_bmsy ~ ram_bmsy_gf, data = ram_bmsy_gf_final)</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co"># Residuals:</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#        Min         1Q     Median         3Q        Max </span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co"># -8.881e-16 -1.710e-17 -4.000e-19  1.570e-17  5.538e-15 </span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co"># Coefficients:</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#               Estimate Std. Error    t value Pr(&gt;|t|)    </span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co"># (Intercept) -3.331e-16  1.475e-18 -2.258e+02   &lt;2e-16 ***</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co"># ram_bmsy_gf  1.000e+00  8.618e-19  1.160e+18   &lt;2e-16 ***</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co"># ---</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co"># Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co"># Residual standard error: 8.141e-17 on 7277 degrees of freedom</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a><span class="co">#   (910 observations deleted due to missingness)</span></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="co"># Multiple R-squared:      1,   Adjusted R-squared:      1 </span></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a><span class="co"># F-statistic: 1.346e+36 on 1 and 7277 DF,  p-value: &lt; 2.2e-16</span></span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a><span class="co"># Warning message:</span></span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a><span class="co"># In summary.lm(mod) : essentially perfect fit: summary may be unreliable</span></span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a><span class="co"># 2025</span></span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a><span class="co"># Call:</span></span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a><span class="co"># lm(formula = ram_bmsy ~ ram_bmsy_gf, data = ram_bmsy_gf_final)</span></span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a><span class="co"># Residuals:</span></span>
+<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a><span class="co">#        Min         1Q     Median </span></span>
+<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a><span class="co"># -6.602e-15 -1.560e-17  1.100e-18 </span></span>
+<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a><span class="co">#         3Q        Max </span></span>
+<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a><span class="co">#  1.700e-17  1.196e-15 </span></span>
+<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a><span class="co"># Coefficients:</span></span>
+<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a><span class="co">#               Estimate</span></span>
+<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a><span class="co"># (Intercept) -3.254e-16</span></span>
+<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a><span class="co"># ram_bmsy_gf  1.000e+00</span></span>
+<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a><span class="co">#             Std. Error</span></span>
+<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a><span class="co"># (Intercept)  1.621e-18</span></span>
+<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a><span class="co"># ram_bmsy_gf  9.500e-19</span></span>
+<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a><span class="co">#                t value Pr(&gt;|t|)</span></span>
+<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a><span class="co"># (Intercept) -2.008e+02   &lt;2e-16</span></span>
+<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a><span class="co"># ram_bmsy_gf  1.053e+18   &lt;2e-16</span></span>
+<span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a><span class="co">#                </span></span>
+<span id="cb5-48"><a href="#cb5-48" tabindex="-1"></a><span class="co"># (Intercept) ***</span></span>
+<span id="cb5-49"><a href="#cb5-49" tabindex="-1"></a><span class="co"># ram_bmsy_gf ***</span></span>
+<span id="cb5-50"><a href="#cb5-50" tabindex="-1"></a><span class="co"># ---</span></span>
+<span id="cb5-51"><a href="#cb5-51" tabindex="-1"></a><span class="co"># Signif. codes:  </span></span>
+<span id="cb5-52"><a href="#cb5-52" tabindex="-1"></a><span class="co">#   0 ‘***’ 0.001 ‘**’ 0.01 ‘*’</span></span>
+<span id="cb5-53"><a href="#cb5-53" tabindex="-1"></a><span class="co">#   0.05 ‘.’ 0.1 ‘ ’ 1</span></span>
+<span id="cb5-54"><a href="#cb5-54" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-55"><a href="#cb5-55" tabindex="-1"></a><span class="co"># Residual standard error: 9.08e-17 on 7628 degrees of freedom</span></span>
+<span id="cb5-56"><a href="#cb5-56" tabindex="-1"></a><span class="co">#   (2352 observations deleted due to missingness)</span></span>
+<span id="cb5-57"><a href="#cb5-57" tabindex="-1"></a><span class="co"># Multiple R-squared:      1,   Adjusted R-squared:      1 </span></span>
+<span id="cb5-58"><a href="#cb5-58" tabindex="-1"></a><span class="co"># F-statistic: 1.108e+36 on 1 and 7628 DF,  p-value: &lt; 2.2e-16</span></span>
+<span id="cb5-59"><a href="#cb5-59" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb5-60"><a href="#cb5-60" tabindex="-1"></a><span class="co"># Warning message:</span></span>
+<span id="cb5-61"><a href="#cb5-61" tabindex="-1"></a><span class="co"># In summary.lm(mod) : essentially perfect fit: summary may be unreliable</span></span></code></pre></div>
 </div>
 <div id="identify-fao-and-ohi-regions-for-ram-stocks" class="section level2">
 <h2>Identify FAO and OHI regions for RAM stocks</h2>
@@ -2116,6 +2162,9 @@ ohi regions are assigned to RAM Data in <a href="https://mazu.nceas.ucsb.edu/rst
 <strong>Run STEP4b_fao_ohi_rgns.Rmd now.</strong></p>
 <p>If there are many differences between RAM spatial file and RAM
 metadata, check the STEP4_fao_ohi_rgns.Rmd prep again.</p>
+<p><strong>Issue 2025</strong>: I cannot find this intermediate file. It
+looks like it gets made in the next step, so jumping there via the note
+above. Not sure why these are out of order…</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## Read in RAM spatial stocks file</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>ram_spatial <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(int_dir, <span class="st">&quot;RAM_fao_ohi_rgns_final.csv&quot;</span>))</span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
@@ -2124,11 +2173,11 @@ metadata, check the STEP4_fao_ohi_rgns.Rmd prep again.</p>
 <span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="fu">setdiff</span>(ram_spatial<span class="sc">$</span>stockid, ram_meta<span class="sc">$</span>stockid) <span class="co"># make sure all the spatial data has corresponding metadata (should be 0). It is not 0, probably because these are ones that have been removed from the RAM database since the 2017 assessment... delete these from the data frame below. </span></span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co"># v2024: </span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#  [1] &quot;HERR2529-33&quot;   &quot;HERR2529-34&quot;   &quot;HERR2529-35&quot;  </span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#  [4] &quot;HERR2529-36&quot;   &quot;HERR2529-37&quot;   &quot;HERR30-32&quot;    </span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#  [7] &quot;SOLEIIIa-2225&quot; &quot;SOLEIIIa-2226&quot; &quot;SOLEIIIa-2227&quot;</span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co"># [10] &quot;SOLEIIIa-2228&quot;</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co"># v2025:</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#  [1] &quot;TARAKNZ&quot;       &quot;HERR2529-33&quot;   &quot;HERR2529-34&quot;  </span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#  [4] &quot;HERR2529-35&quot;   &quot;HERR2529-36&quot;   &quot;HERR2529-37&quot;  </span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#  [7] &quot;HERR30-32&quot;     &quot;SOLEIIIa-2225&quot; &quot;SOLEIIIa-2226&quot;</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co"># [10] &quot;SOLEIIIa-2227&quot; &quot;SOLEIIIa-2228&quot;</span></span>
 <span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a></span>
 <span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co"># join with metadata to get scientific name</span></span>
 <span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>ram_spatial_meta <span class="ot">&lt;-</span> ram_spatial <span class="sc">%&gt;%</span></span>
@@ -2137,7 +2186,7 @@ metadata, check the STEP4_fao_ohi_rgns.Rmd prep again.</p>
 <span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">RAM_species =</span> scientificname) <span class="sc">%&gt;%</span></span>
 <span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(stocklong)) <span class="do">## filtering out ones that didn&#39;t match above</span></span>
 <span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="fu">setdiff</span>(ram_spatial_meta<span class="sc">$</span>stockid, ram_meta<span class="sc">$</span>stockid) <span class="co"># v2024: now it is 0, we can move on</span></span></code></pre></div>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="fu">setdiff</span>(ram_spatial_meta<span class="sc">$</span>stockid, ram_meta<span class="sc">$</span>stockid) <span class="co"># v2025: now it is 0, we can move on</span></span></code></pre></div>
 </div>
 <div id="standardize-species-names" class="section level2">
 <h2>Standardize species names</h2>
@@ -2167,64 +2216,69 @@ int/RAM_species_to_SAUP.csv).</p>
 <span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a></span>
 <span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a></span>
 <span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co"># compare names - what&#39;s in RAM that&#39;s not in SAUP</span></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">scientificname =</span> <span class="fu">sort</span>(<span class="fu">setdiff</span>(ram_sp<span class="sc">$</span>scientificname, SAUP_sp<span class="sc">$</span>SAUP_scientificname))) <span class="co"># 40 species names</span></span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a></span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="co"># compare names - what&#39;s in SAUP that&#39;s not in RAM</span></span>
-<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>tmp2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">scientificname =</span> <span class="fu">sort</span>(<span class="fu">setdiff</span>(SAUP_sp<span class="sc">$</span>SAUP_scientificname, ram_sp<span class="sc">$</span>scientificname))) <span class="co"># 2343 species names.. unfortunately a lot.</span></span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="fu">write_csv</span>(tmp, <span class="fu">here</span>(int_dir, <span class="st">&quot;unmatched_RAM_species.csv&quot;</span>))</span>
-<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="fu">write_csv</span>(tmp2, <span class="fu">here</span>(int_dir, <span class="st">&quot;SAUP_species_no_RAM.csv&quot;</span>))</span>
-<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a></span>
-<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a></span>
-<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a><span class="do">## join ram spatial with RAM species on scientific name. We can use this to help check whether questionable species names across the ram and SAUP data match by region and fao id...</span></span>
-<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a>ram_sp_fao_ohi <span class="ot">&lt;-</span> tmp <span class="sc">%&gt;%</span></span>
-<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a>  <span class="fu">left_join</span>(ram_spatial_meta, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;scientificname&quot;</span> <span class="ot">=</span> <span class="st">&quot;RAM_species&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>  <span class="fu">unique</span>() </span>
-<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a></span>
-<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a><span class="fu">write_csv</span>(ram_sp_fao_ohi, <span class="fu">here</span>(int_dir, <span class="st">&quot;new_ram_sp.csv&quot;</span>))  </span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">scientificname =</span> <span class="fu">sort</span>(<span class="fu">setdiff</span>(ram_sp<span class="sc">$</span>scientificname, SAUP_sp<span class="sc">$</span>SAUP_scientificname))) </span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>tmp <span class="co"># 40 species names</span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co"># compare names - what&#39;s in SAUP that&#39;s not in RAM</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a>tmp2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">scientificname =</span> <span class="fu">sort</span>(<span class="fu">setdiff</span>(SAUP_sp<span class="sc">$</span>SAUP_scientificname, ram_sp<span class="sc">$</span>scientificname))) </span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="fu">nrow</span>(tmp2) <span class="co"># 2341 species names.. unfortunately a lot.</span></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="fu">write_csv</span>(tmp, <span class="fu">here</span>(int_dir, <span class="st">&quot;unmatched_RAM_species.csv&quot;</span>))</span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="fu">write_csv</span>(tmp2, <span class="fu">here</span>(int_dir, <span class="st">&quot;SAUP_species_no_RAM.csv&quot;</span>))</span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a><span class="do">## join ram spatial with RAM species on scientific name. We can use this to help check whether questionable species names across the ram and SAUP data match by region and fao id...</span></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>ram_sp_fao_ohi <span class="ot">&lt;-</span> tmp <span class="sc">%&gt;%</span></span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a>  <span class="fu">left_join</span>(ram_spatial_meta, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;scientificname&quot;</span> <span class="ot">=</span> <span class="st">&quot;RAM_species&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>  <span class="fu">unique</span>() </span>
 <span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a></span>
-<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a><span class="do">## get SAUP fao_ohi regions</span></span>
-<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a>SAUP_sp_fao_ohi <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(dir_M, <span class="st">&quot;git-annex&quot;</span>,<span class="st">&quot;globalprep&quot;</span>,<span class="st">&quot;fis&quot;</span>,<span class="st">&quot;v2022&quot;</span>,<span class="st">&quot;int&quot;</span>, <span class="st">&quot;stock_catch_by_rgn_taxa.csv&quot;</span>)) <span class="sc">%&gt;%</span> <span class="co"># use most recent one available</span></span>
-<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">SAUP_scientificname =</span> TaxonName) <span class="sc">%&gt;%</span></span>
-<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">1979</span>) <span class="co"># %&gt;%</span></span>
-<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a>  <span class="co"># filter(str_detect(SAUP_scientificname, &quot;Mullus&quot;))</span></span>
-<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a></span>
-<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a><span class="co"># manually copy the below file from the previous year to the current version</span></span>
-<span id="cb7-42"><a href="#cb7-42" tabindex="-1"></a>RAM_species_to_SAUP <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(int_dir, <span class="st">&quot;RAM_species_to_SAUP.csv&quot;</span>))</span>
-<span id="cb7-43"><a href="#cb7-43" tabindex="-1"></a></span>
-<span id="cb7-44"><a href="#cb7-44" tabindex="-1"></a><span class="co"># Then I hand-looked up each of the missing ones from &quot;unmatched_RAM_species.csv&quot;, and added those new ones to &quot;RAM_species_to_SAUP.csv&quot; to generate this list - most still unmatched.</span></span>
-<span id="cb7-45"><a href="#cb7-45" tabindex="-1"></a></span>
-<span id="cb7-46"><a href="#cb7-46" tabindex="-1"></a><span class="fu">setdiff</span>(tmp<span class="sc">$</span>scientificname, RAM_species_to_SAUP<span class="sc">$</span>RAM_species) <span class="do">## these are the new species to add to &quot;RAM_species_to_SAUP.csv&quot;.</span></span>
-<span id="cb7-47"><a href="#cb7-47" tabindex="-1"></a><span class="co"># v2024: [1] &quot;Mullus barbatus&quot;: could not find </span></span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a><span class="fu">write_csv</span>(ram_sp_fao_ohi, <span class="fu">here</span>(int_dir, <span class="st">&quot;new_ram_sp.csv&quot;</span>))  </span>
+<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a><span class="do">## get SAUP fao_ohi regions</span></span>
+<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a>SAUP_sp_fao_ohi <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(dir_M, <span class="st">&quot;git-annex&quot;</span>,<span class="st">&quot;globalprep&quot;</span>,<span class="st">&quot;fis&quot;</span>,<span class="st">&quot;v2022&quot;</span>,<span class="st">&quot;int&quot;</span>, <span class="st">&quot;stock_catch_by_rgn_taxa.csv&quot;</span>)) <span class="sc">%&gt;%</span> <span class="co"># use most recent one available. v2025: still no new data here</span></span>
+<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">SAUP_scientificname =</span> TaxonName) <span class="sc">%&gt;%</span></span>
+<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">1979</span>) <span class="co"># %&gt;%</span></span>
+<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a>  <span class="co"># filter(str_detect(SAUP_scientificname, &quot;Mullus&quot;))</span></span>
+<span id="cb7-42"><a href="#cb7-42" tabindex="-1"></a></span>
+<span id="cb7-43"><a href="#cb7-43" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">!! </span></span>
+<span id="cb7-44"><a href="#cb7-44" tabindex="-1"></a><span class="co"># Manually copy the below file from the previous year to the current version !!</span></span>
+<span id="cb7-45"><a href="#cb7-45" tabindex="-1"></a>RAM_species_to_SAUP <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(int_dir, <span class="st">&quot;RAM_species_to_SAUP.csv&quot;</span>))</span>
+<span id="cb7-46"><a href="#cb7-46" tabindex="-1"></a></span>
+<span id="cb7-47"><a href="#cb7-47" tabindex="-1"></a><span class="co"># Then I hand-looked up each of the missing ones from &quot;unmatched_RAM_species.csv&quot;, and added those new ones to &quot;RAM_species_to_SAUP.csv&quot; to generate this list - most still unmatched.</span></span>
 <span id="cb7-48"><a href="#cb7-48" tabindex="-1"></a></span>
-<span id="cb7-49"><a href="#cb7-49" tabindex="-1"></a><span class="co"># v2024 adding new species (change to relevant species for current year):</span></span>
-<span id="cb7-50"><a href="#cb7-50" tabindex="-1"></a>species_to_add <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb7-51"><a href="#cb7-51" tabindex="-1"></a>  <span class="at">RAM_species =</span> <span class="fu">c</span>(<span class="st">&quot;Mullus barbatus&quot;</span>),</span>
-<span id="cb7-52"><a href="#cb7-52" tabindex="-1"></a>  <span class="at">SAUP_species =</span> <span class="fu">c</span>(<span class="st">&quot;Mullus barbatus barbatus&quot;</span>)</span>
-<span id="cb7-53"><a href="#cb7-53" tabindex="-1"></a>) </span>
-<span id="cb7-54"><a href="#cb7-54" tabindex="-1"></a></span>
-<span id="cb7-55"><a href="#cb7-55" tabindex="-1"></a>RAM_species_to_SAUP_updated <span class="ot">&lt;-</span> <span class="fu">rbind</span>(RAM_species_to_SAUP, species_to_add)</span>
-<span id="cb7-56"><a href="#cb7-56" tabindex="-1"></a></span>
-<span id="cb7-57"><a href="#cb7-57" tabindex="-1"></a><span class="fu">write_csv</span>(RAM_species_to_SAUP_updated, <span class="fu">here</span>(int_dir, <span class="st">&quot;RAM_species_to_SAUP.csv&quot;</span>)</span>
+<span id="cb7-49"><a href="#cb7-49" tabindex="-1"></a><span class="fu">setdiff</span>(tmp<span class="sc">$</span>scientificname, RAM_species_to_SAUP<span class="sc">$</span>RAM_species) <span class="do">## these are the new species to add to &quot;RAM_species_to_SAUP.csv&quot;.</span></span>
+<span id="cb7-50"><a href="#cb7-50" tabindex="-1"></a><span class="co"># v2025: [1] &quot;Mullus barbatus&quot;: could not find </span></span>
+<span id="cb7-51"><a href="#cb7-51" tabindex="-1"></a></span>
+<span id="cb7-52"><a href="#cb7-52" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" tabindex="-1"></a><span class="co"># v2025 adding new species (change to relevant species for current year):</span></span>
+<span id="cb7-54"><a href="#cb7-54" tabindex="-1"></a>species_to_add <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb7-55"><a href="#cb7-55" tabindex="-1"></a>  <span class="at">RAM_species =</span> <span class="fu">c</span>(<span class="st">&quot;Mullus barbatus&quot;</span>),</span>
+<span id="cb7-56"><a href="#cb7-56" tabindex="-1"></a>  <span class="at">SAUP_species =</span> <span class="fu">c</span>(<span class="st">&quot;Mullus barbatus barbatus&quot;</span>)</span>
+<span id="cb7-57"><a href="#cb7-57" tabindex="-1"></a>) </span>
 <span id="cb7-58"><a href="#cb7-58" tabindex="-1"></a></span>
-<span id="cb7-59"><a href="#cb7-59" tabindex="-1"></a>ram_name_corr <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(int_dir, <span class="st">&quot;RAM_species_to_SAUP.csv&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-60"><a href="#cb7-60" tabindex="-1"></a>   <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(SAUP_species))  <span class="co"># SAUP to RAM name conversion</span></span>
-<span id="cb7-61"><a href="#cb7-61" tabindex="-1"></a></span>
-<span id="cb7-62"><a href="#cb7-62" tabindex="-1"></a>ram_name_corr <span class="co"># matched species, unfortunately only 13</span></span></code></pre></div>
+<span id="cb7-59"><a href="#cb7-59" tabindex="-1"></a>RAM_species_to_SAUP_updated <span class="ot">&lt;-</span> <span class="fu">rbind</span>(RAM_species_to_SAUP, species_to_add)</span>
+<span id="cb7-60"><a href="#cb7-60" tabindex="-1"></a></span>
+<span id="cb7-61"><a href="#cb7-61" tabindex="-1"></a><span class="fu">write_csv</span>(RAM_species_to_SAUP_updated, <span class="fu">here</span>(int_dir, <span class="st">&quot;RAM_species_to_SAUP.csv&quot;</span>))</span></code></pre></div>
+<p><strong>Issue 2025</strong>: For line 507, not super sure what it
+means about hand-checking and adding the missing species to the
+RAM_species_to_SAUP.csv. The setdiff() in the line below seems to
+indicate that there is only one species that does not match between
+them?</p>
 <div id="final-formatting" class="section level3">
 <h3>Final formatting</h3>
 <p>Harmonize names between RAM and SAUP data.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># correct names in a few cases to match with SAUP names</span></span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>ram_name_corr <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(int_dir, <span class="st">&quot;RAM_species_to_SAUP.csv&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(SAUP_species)) <span class="co"># SAUP to RAM name conversion</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>ram_spatial <span class="ot">&lt;-</span> ram_spatial_meta <span class="sc">%&gt;%</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  <span class="fu">left_join</span>(ram_name_corr, <span class="at">by=</span><span class="st">&quot;RAM_species&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(SAUP_species), SAUP_species, RAM_species)) <span class="sc">%&gt;%</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, fao_id, stockid, stocklong, species, RAM_area_m2)</span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(ram_spatial<span class="sc">$</span>stockid)) <span class="co"># v2024: 498 RAM stocks with B/Bmsy data</span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(ram_spatial<span class="sc">$</span>species)) <span class="co"># v2024: 237</span></span></code></pre></div>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>ram_name_corr <span class="co"># matched species, unfortunately only 14</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>ram_spatial <span class="ot">&lt;-</span> ram_spatial_meta <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>  <span class="fu">left_join</span>(ram_name_corr, <span class="at">by=</span><span class="st">&quot;RAM_species&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(SAUP_species), SAUP_species, RAM_species)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, fao_id, stockid, stocklong, species, RAM_area_m2)</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(ram_spatial<span class="sc">$</span>stockid)) <span class="co"># v2025: 501 RAM stocks with B/Bmsy data</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(ram_spatial<span class="sc">$</span>species)) <span class="co"># v2025: 238</span></span></code></pre></div>
 <p>Re-name <code>stockid</code> column to <code>stockid_ram</code> and
 create new column <code>stockid</code> that matches with the
 <code>stockid</code> column in the CMSY data table prepared in <a href="https://cdn.rawgit.com/OHI-Science/ohiprep_v2021/master/globalprep/fis/v2021/STEP3_calculate_bbmsy.html">STEP3_calculate_bbmsy.Rmd</a>.</p>
@@ -2234,7 +2288,7 @@ create new column <code>stockid</code> that matches with the
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co"># check every stock has a location:</span></span>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="fu">setdiff</span>(ram_bmsy_gf<span class="sc">$</span>stockid, ram_spatial<span class="sc">$</span>stockid) <span class="co"># should be 0: every ram stock should have ohi/fao rgn</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co"># v2023 and v2024: for some reason SFMAKOSATL and HERR4RFA are not in ram_spatial. SFMAKOSATL was determined to be because the fishing/OHI region, the US, is not in the FAOs of the South Atlantic, so this one is ok. HERR4RFA seemed to also show up in v2023 and v2021, so it is uncertain why this one was not in ram_spatial, and it will be manually added in. Could not find RAM_area_m2 info for it so putting NA, which is consistent with HERR4RSP.</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co"># v2023 and v2024 and v2025: for some reason SFMAKOSATL and HERR4RFA are not in ram_spatial. SFMAKOSATL was determined to be because the fishing/OHI region, the US, is not in the FAOs of the South Atlantic, so this one is ok. HERR4RFA seemed to also show up in v2023 and v2021, so it is uncertain why this one was not in ram_spatial, and it will be manually added in. Could not find RAM_area_m2 info for it so putting NA, which is consistent with HERR4RSP.</span></span>
 <span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co"># stockid: HERR4RFA</span></span>
 <span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co"># stocklong: Herring NAFO division 4R (Fall spawners)</span></span>
 <span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co"># Below is copied from HERR4RSP (Spring spawner of the same fish)</span></span>
@@ -2258,76 +2312,76 @@ create new column <code>stockid</code> that matches with the
 <span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a></span>
 <span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a><span class="co"># check dropped stocks</span></span>
 <span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a><span class="fu">setdiff</span>(ram_spatial<span class="sc">$</span>stockid, ram_bmsy_gf<span class="sc">$</span>stockid) <span class="co"># these are stocks that were dropped due to insufficient years of data</span></span>
-<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a><span class="co"># v2024:</span></span>
-<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a><span class="co">#  [1] &quot;GEMFISHNZ&quot;                   </span></span>
-<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a><span class="co">#  [2] &quot;GEMFISHSE&quot;                   </span></span>
-<span id="cb9-34"><a href="#cb9-34" tabindex="-1"></a><span class="co">#  [3] &quot;NZLINGESE&quot;                   </span></span>
-<span id="cb9-35"><a href="#cb9-35" tabindex="-1"></a><span class="co">#  [4] &quot;NZLINGWSE&quot;                   </span></span>
-<span id="cb9-36"><a href="#cb9-36" tabindex="-1"></a><span class="co">#  [5] &quot;WAREHOUESE&quot;                  </span></span>
-<span id="cb9-37"><a href="#cb9-37" tabindex="-1"></a><span class="co">#  [6] &quot;WAREHOUWSE&quot;                  </span></span>
-<span id="cb9-38"><a href="#cb9-38" tabindex="-1"></a><span class="co">#  [7] &quot;STMARLINNEPAC&quot;               </span></span>
-<span id="cb9-39"><a href="#cb9-39" tabindex="-1"></a><span class="co">#  [8] &quot;WEAKFISHATLC&quot;                </span></span>
-<span id="cb9-40"><a href="#cb9-40" tabindex="-1"></a><span class="co">#  [9] &quot;BLACKGROUPERGMSATL&quot;          </span></span>
-<span id="cb9-41"><a href="#cb9-41" tabindex="-1"></a><span class="co"># [10] &quot;SNOSESHARATL&quot;                </span></span>
-<span id="cb9-42"><a href="#cb9-42" tabindex="-1"></a><span class="co"># [11] &quot;YEGROUPGM&quot;                   </span></span>
-<span id="cb9-43"><a href="#cb9-43" tabindex="-1"></a><span class="co"># [12] &quot;ESOLEPCOAST&quot;                 </span></span>
-<span id="cb9-44"><a href="#cb9-44" tabindex="-1"></a><span class="co"># [13] &quot;SNROCKPCOAST&quot;                </span></span>
-<span id="cb9-45"><a href="#cb9-45" tabindex="-1"></a><span class="co"># [14] &quot;GRNSTROCKPCOAST&quot;             </span></span>
-<span id="cb9-46"><a href="#cb9-46" tabindex="-1"></a><span class="co"># [15] &quot;BKCDLFENI&quot;                   </span></span>
-<span id="cb9-47"><a href="#cb9-47" tabindex="-1"></a><span class="co"># [16] &quot;BLACKOREOPR&quot;                 </span></span>
-<span id="cb9-48"><a href="#cb9-48" tabindex="-1"></a><span class="co"># [17] &quot;GSTRGZRSTA7&quot;                 </span></span>
-<span id="cb9-49"><a href="#cb9-49" tabindex="-1"></a><span class="co"># [18] &quot;SMOOTHOREOBP&quot;                </span></span>
-<span id="cb9-50"><a href="#cb9-50" tabindex="-1"></a><span class="co"># [19] &quot;SMOOTHOREOEPR&quot;               </span></span>
-<span id="cb9-51"><a href="#cb9-51" tabindex="-1"></a><span class="co"># [20] &quot;SMOOTHOREOSLD&quot;               </span></span>
-<span id="cb9-52"><a href="#cb9-52" tabindex="-1"></a><span class="co"># [21] &quot;SMOOTHOREOWECR&quot;              </span></span>
-<span id="cb9-53"><a href="#cb9-53" tabindex="-1"></a><span class="co"># [22] &quot;TARAKNZ&quot;                     </span></span>
-<span id="cb9-54"><a href="#cb9-54" tabindex="-1"></a><span class="co"># [23] &quot;BLACKOREOWECR&quot;               </span></span>
-<span id="cb9-55"><a href="#cb9-55" tabindex="-1"></a><span class="co"># [24] &quot;NZLINGLIN6b&quot;                 </span></span>
-<span id="cb9-56"><a href="#cb9-56" tabindex="-1"></a><span class="co"># [25] &quot;ATLCROAKMATLC&quot;               </span></span>
-<span id="cb9-57"><a href="#cb9-57" tabindex="-1"></a><span class="co"># [26] &quot;CUSK4X&quot;                      </span></span>
-<span id="cb9-58"><a href="#cb9-58" tabindex="-1"></a><span class="co"># [27] &quot;PORSHARATL&quot;                  </span></span>
-<span id="cb9-59"><a href="#cb9-59" tabindex="-1"></a><span class="co"># [28] &quot;ATHAL5YZ&quot;                    </span></span>
-<span id="cb9-60"><a href="#cb9-60" tabindex="-1"></a><span class="co"># [29] &quot;WINDOWGOMGB&quot;                 </span></span>
-<span id="cb9-61"><a href="#cb9-61" tabindex="-1"></a><span class="co"># [30] &quot;WINDOWSNEMATL&quot;               </span></span>
-<span id="cb9-62"><a href="#cb9-62" tabindex="-1"></a><span class="co"># [31] &quot;BNOSESHARATL&quot;                </span></span>
-<span id="cb9-63"><a href="#cb9-63" tabindex="-1"></a><span class="co"># [32] &quot;LISQUIDATLC&quot;                 </span></span>
-<span id="cb9-64"><a href="#cb9-64" tabindex="-1"></a><span class="co"># [33] &quot;BKINGCRABPI&quot;                 </span></span>
-<span id="cb9-65"><a href="#cb9-65" tabindex="-1"></a><span class="co"># [34] &quot;REYEROCKGA&quot;                  </span></span>
-<span id="cb9-66"><a href="#cb9-66" tabindex="-1"></a><span class="co"># [35] &quot;CROCKWCVANISOGQCI&quot;           </span></span>
-<span id="cb9-67"><a href="#cb9-67" tabindex="-1"></a><span class="co"># [36] &quot;BLUEROCKCAL&quot;                 </span></span>
-<span id="cb9-68"><a href="#cb9-68" tabindex="-1"></a><span class="co"># [37] &quot;CMACKPCOAST&quot;                 </span></span>
-<span id="cb9-69"><a href="#cb9-69" tabindex="-1"></a><span class="co"># [38] &quot;GOPHERSPCOAST&quot;               </span></span>
-<span id="cb9-70"><a href="#cb9-70" tabindex="-1"></a><span class="co"># [39] &quot;STFLOUNNPCOAST&quot;              </span></span>
-<span id="cb9-71"><a href="#cb9-71" tabindex="-1"></a><span class="co"># [40] &quot;STFLOUNSPCOAST&quot;              </span></span>
-<span id="cb9-72"><a href="#cb9-72" tabindex="-1"></a><span class="co"># [41] &quot;ATOOTHFISHRS&quot;                </span></span>
-<span id="cb9-73"><a href="#cb9-73" tabindex="-1"></a><span class="co"># [42] &quot;YELLGB&quot;                      </span></span>
-<span id="cb9-74"><a href="#cb9-74" tabindex="-1"></a><span class="co"># [43] &quot;ATHAL3NOPs4VWX5Zc&quot;           </span></span>
-<span id="cb9-75"><a href="#cb9-75" tabindex="-1"></a><span class="co"># [44] &quot;HAKENRTN&quot;                    </span></span>
-<span id="cb9-76"><a href="#cb9-76" tabindex="-1"></a><span class="co"># [45] &quot;MACKNEICES&quot;                  </span></span>
-<span id="cb9-77"><a href="#cb9-77" tabindex="-1"></a><span class="co"># [46] &quot;WHITNS-VIId&quot;                 </span></span>
-<span id="cb9-78"><a href="#cb9-78" tabindex="-1"></a><span class="co"># [47] &quot;HERRVIaVIIbc&quot;                </span></span>
-<span id="cb9-79"><a href="#cb9-79" tabindex="-1"></a><span class="co"># [48] &quot;CODFAPL&quot;                     </span></span>
-<span id="cb9-80"><a href="#cb9-80" tabindex="-1"></a><span class="co"># [49] &quot;HADFAPL&quot;                     </span></span>
-<span id="cb9-81"><a href="#cb9-81" tabindex="-1"></a><span class="co"># [50] &quot;POLLFAPL&quot;                    </span></span>
-<span id="cb9-82"><a href="#cb9-82" tabindex="-1"></a><span class="co"># [51] &quot;WHITVIa&quot;                     </span></span>
-<span id="cb9-83"><a href="#cb9-83" tabindex="-1"></a><span class="co"># [52] &quot;CODVIIek&quot;                    </span></span>
-<span id="cb9-84"><a href="#cb9-84" tabindex="-1"></a><span class="co"># [53] &quot;PLAICECHW&quot;                   </span></span>
-<span id="cb9-85"><a href="#cb9-85" tabindex="-1"></a><span class="co"># [54] &quot;HERRNIRS&quot;                    </span></span>
-<span id="cb9-86"><a href="#cb9-86" tabindex="-1"></a><span class="co"># [55] &quot;CODIS&quot;                       </span></span>
-<span id="cb9-87"><a href="#cb9-87" tabindex="-1"></a><span class="co"># [56] &quot;SOLEIS&quot;                      </span></span>
-<span id="cb9-88"><a href="#cb9-88" tabindex="-1"></a><span class="co"># [57] &quot;HADROCK&quot;                     </span></span>
-<span id="cb9-89"><a href="#cb9-89" tabindex="-1"></a><span class="co"># [58] &quot;COD3Ps&quot;                      </span></span>
-<span id="cb9-90"><a href="#cb9-90" tabindex="-1"></a><span class="co"># [59] &quot;BLINGVb-VI-VII&quot;              </span></span>
-<span id="cb9-91"><a href="#cb9-91" tabindex="-1"></a><span class="co"># [60] &quot;HADNS-IIIa-VIa&quot;              </span></span>
-<span id="cb9-92"><a href="#cb9-92" tabindex="-1"></a><span class="co"># [61] &quot;HMACKIIa-IVa-Vb-VIa-VII-VIII&quot;</span></span>
-<span id="cb9-93"><a href="#cb9-93" tabindex="-1"></a><span class="co"># [62] &quot;HMACKIXa&quot;                    </span></span>
-<span id="cb9-94"><a href="#cb9-94" tabindex="-1"></a><span class="co"># [63] &quot;NEPHFU14&quot;                    </span></span>
-<span id="cb9-95"><a href="#cb9-95" tabindex="-1"></a><span class="co"># [64] &quot;NEPHFU17&quot;                    </span></span>
-<span id="cb9-96"><a href="#cb9-96" tabindex="-1"></a><span class="co"># [65] &quot;NEPHFU7&quot;                     </span></span>
-<span id="cb9-97"><a href="#cb9-97" tabindex="-1"></a><span class="co"># [66] &quot;WHITVIIa&quot;                    </span></span>
-<span id="cb9-98"><a href="#cb9-98" tabindex="-1"></a><span class="co"># [67] &quot;SPURDNEATL&quot;                  </span></span>
-<span id="cb9-99"><a href="#cb9-99" tabindex="-1"></a><span class="co"># [68] &quot;REDDEEPI-II&quot;                 </span></span>
-<span id="cb9-100"><a href="#cb9-100" tabindex="-1"></a><span class="co"># [69] &quot;SARDVIIIabd&quot;</span></span>
+<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a><span class="co"># v2025:</span></span>
+<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a><span class="co">#  [1] &quot;GEMFISHSE&quot;                   </span></span>
+<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a><span class="co">#  [2] &quot;NZLINGESE&quot;                   </span></span>
+<span id="cb9-34"><a href="#cb9-34" tabindex="-1"></a><span class="co">#  [3] &quot;NZLINGWSE&quot;                   </span></span>
+<span id="cb9-35"><a href="#cb9-35" tabindex="-1"></a><span class="co">#  [4] &quot;WAREHOUESE&quot;                  </span></span>
+<span id="cb9-36"><a href="#cb9-36" tabindex="-1"></a><span class="co">#  [5] &quot;WAREHOUWSE&quot;                  </span></span>
+<span id="cb9-37"><a href="#cb9-37" tabindex="-1"></a><span class="co">#  [6] &quot;STMARLINNEPAC&quot;               </span></span>
+<span id="cb9-38"><a href="#cb9-38" tabindex="-1"></a><span class="co">#  [7] &quot;WEAKFISHATLC&quot;                </span></span>
+<span id="cb9-39"><a href="#cb9-39" tabindex="-1"></a><span class="co">#  [8] &quot;BLACKGROUPERGMSATL&quot;          </span></span>
+<span id="cb9-40"><a href="#cb9-40" tabindex="-1"></a><span class="co">#  [9] &quot;SNOSESHARATL&quot;                </span></span>
+<span id="cb9-41"><a href="#cb9-41" tabindex="-1"></a><span class="co"># [10] &quot;YEGROUPGM&quot;                   </span></span>
+<span id="cb9-42"><a href="#cb9-42" tabindex="-1"></a><span class="co"># [11] &quot;ESOLEPCOAST&quot;                 </span></span>
+<span id="cb9-43"><a href="#cb9-43" tabindex="-1"></a><span class="co"># [12] &quot;SNROCKPCOAST&quot;                </span></span>
+<span id="cb9-44"><a href="#cb9-44" tabindex="-1"></a><span class="co"># [13] &quot;GRNSTROCKPCOAST&quot;             </span></span>
+<span id="cb9-45"><a href="#cb9-45" tabindex="-1"></a><span class="co"># [14] &quot;BKCDLFENI&quot;                   </span></span>
+<span id="cb9-46"><a href="#cb9-46" tabindex="-1"></a><span class="co"># [15] &quot;BLACKOREOPR&quot;                 </span></span>
+<span id="cb9-47"><a href="#cb9-47" tabindex="-1"></a><span class="co"># [16] &quot;GSTRGZRSTA7&quot;                 </span></span>
+<span id="cb9-48"><a href="#cb9-48" tabindex="-1"></a><span class="co"># [17] &quot;SMOOTHOREOBP&quot;                </span></span>
+<span id="cb9-49"><a href="#cb9-49" tabindex="-1"></a><span class="co"># [18] &quot;SMOOTHOREOEPR&quot;               </span></span>
+<span id="cb9-50"><a href="#cb9-50" tabindex="-1"></a><span class="co"># [19] &quot;SMOOTHOREOSLD&quot;               </span></span>
+<span id="cb9-51"><a href="#cb9-51" tabindex="-1"></a><span class="co"># [20] &quot;SMOOTHOREOWECR&quot;              </span></span>
+<span id="cb9-52"><a href="#cb9-52" tabindex="-1"></a><span class="co"># [21] &quot;BLACKOREOWECR&quot;               </span></span>
+<span id="cb9-53"><a href="#cb9-53" tabindex="-1"></a><span class="co"># [22] &quot;NZLINGLIN6b&quot;                 </span></span>
+<span id="cb9-54"><a href="#cb9-54" tabindex="-1"></a><span class="co"># [23] &quot;ATLCROAKMATLC&quot;               </span></span>
+<span id="cb9-55"><a href="#cb9-55" tabindex="-1"></a><span class="co"># [24] &quot;CUSK4X&quot;                      </span></span>
+<span id="cb9-56"><a href="#cb9-56" tabindex="-1"></a><span class="co"># [25] &quot;PORSHARATL&quot;                  </span></span>
+<span id="cb9-57"><a href="#cb9-57" tabindex="-1"></a><span class="co"># [26] &quot;ATHAL5YZ&quot;                    </span></span>
+<span id="cb9-58"><a href="#cb9-58" tabindex="-1"></a><span class="co"># [27] &quot;WINDOWGOMGB&quot;                 </span></span>
+<span id="cb9-59"><a href="#cb9-59" tabindex="-1"></a><span class="co"># [28] &quot;WINDOWSNEMATL&quot;               </span></span>
+<span id="cb9-60"><a href="#cb9-60" tabindex="-1"></a><span class="co"># [29] &quot;BNOSESHARATL&quot;                </span></span>
+<span id="cb9-61"><a href="#cb9-61" tabindex="-1"></a><span class="co"># [30] &quot;LISQUIDATLC&quot;                 </span></span>
+<span id="cb9-62"><a href="#cb9-62" tabindex="-1"></a><span class="co"># [31] &quot;BKINGCRABPI&quot;                 </span></span>
+<span id="cb9-63"><a href="#cb9-63" tabindex="-1"></a><span class="co"># [32] &quot;REYEROCKGA&quot;                  </span></span>
+<span id="cb9-64"><a href="#cb9-64" tabindex="-1"></a><span class="co"># [33] &quot;CROCKWCVANISOGQCI&quot;           </span></span>
+<span id="cb9-65"><a href="#cb9-65" tabindex="-1"></a><span class="co"># [34] &quot;BLUEROCKCAL&quot;                 </span></span>
+<span id="cb9-66"><a href="#cb9-66" tabindex="-1"></a><span class="co"># [35] &quot;CMACKPCOAST&quot;                 </span></span>
+<span id="cb9-67"><a href="#cb9-67" tabindex="-1"></a><span class="co"># [36] &quot;GOPHERSPCOAST&quot;               </span></span>
+<span id="cb9-68"><a href="#cb9-68" tabindex="-1"></a><span class="co"># [37] &quot;STFLOUNNPCOAST&quot;              </span></span>
+<span id="cb9-69"><a href="#cb9-69" tabindex="-1"></a><span class="co"># [38] &quot;STFLOUNSPCOAST&quot;              </span></span>
+<span id="cb9-70"><a href="#cb9-70" tabindex="-1"></a><span class="co"># [39] &quot;ATOOTHFISHRS&quot;                </span></span>
+<span id="cb9-71"><a href="#cb9-71" tabindex="-1"></a><span class="co"># [40] &quot;YELLGB&quot;                      </span></span>
+<span id="cb9-72"><a href="#cb9-72" tabindex="-1"></a><span class="co"># [41] &quot;ATHAL3NOPs4VWX5Zc&quot;           </span></span>
+<span id="cb9-73"><a href="#cb9-73" tabindex="-1"></a><span class="co"># [42] &quot;COD2J3KL&quot;                    </span></span>
+<span id="cb9-74"><a href="#cb9-74" tabindex="-1"></a><span class="co"># [43] &quot;HAKENRTN&quot;                    </span></span>
+<span id="cb9-75"><a href="#cb9-75" tabindex="-1"></a><span class="co"># [44] &quot;MACKNEICES&quot;                  </span></span>
+<span id="cb9-76"><a href="#cb9-76" tabindex="-1"></a><span class="co"># [45] &quot;WHITNS-VIId&quot;                 </span></span>
+<span id="cb9-77"><a href="#cb9-77" tabindex="-1"></a><span class="co"># [46] &quot;HERRVIaVIIbc&quot;                </span></span>
+<span id="cb9-78"><a href="#cb9-78" tabindex="-1"></a><span class="co"># [47] &quot;CODFAPL&quot;                     </span></span>
+<span id="cb9-79"><a href="#cb9-79" tabindex="-1"></a><span class="co"># [48] &quot;HADFAPL&quot;                     </span></span>
+<span id="cb9-80"><a href="#cb9-80" tabindex="-1"></a><span class="co"># [49] &quot;POLLFAPL&quot;                    </span></span>
+<span id="cb9-81"><a href="#cb9-81" tabindex="-1"></a><span class="co"># [50] &quot;WHITVIa&quot;                     </span></span>
+<span id="cb9-82"><a href="#cb9-82" tabindex="-1"></a><span class="co"># [51] &quot;CODVIIek&quot;                    </span></span>
+<span id="cb9-83"><a href="#cb9-83" tabindex="-1"></a><span class="co"># [52] &quot;PLAICECHW&quot;                   </span></span>
+<span id="cb9-84"><a href="#cb9-84" tabindex="-1"></a><span class="co"># [53] &quot;HERRNIRS&quot;                    </span></span>
+<span id="cb9-85"><a href="#cb9-85" tabindex="-1"></a><span class="co"># [54] &quot;CODIS&quot;                       </span></span>
+<span id="cb9-86"><a href="#cb9-86" tabindex="-1"></a><span class="co"># [55] &quot;SOLEIS&quot;                      </span></span>
+<span id="cb9-87"><a href="#cb9-87" tabindex="-1"></a><span class="co"># [56] &quot;HADROCK&quot;                     </span></span>
+<span id="cb9-88"><a href="#cb9-88" tabindex="-1"></a><span class="co"># [57] &quot;COD3Ps&quot;                      </span></span>
+<span id="cb9-89"><a href="#cb9-89" tabindex="-1"></a><span class="co"># [58] &quot;BLINGVb-VI-VII&quot;              </span></span>
+<span id="cb9-90"><a href="#cb9-90" tabindex="-1"></a><span class="co"># [59] &quot;HADNS-IIIa-VIa&quot;              </span></span>
+<span id="cb9-91"><a href="#cb9-91" tabindex="-1"></a><span class="co"># [60] &quot;HMACKIIa-IVa-Vb-VIa-VII-VIII&quot;</span></span>
+<span id="cb9-92"><a href="#cb9-92" tabindex="-1"></a><span class="co"># [61] &quot;HMACKIXa&quot;                    </span></span>
+<span id="cb9-93"><a href="#cb9-93" tabindex="-1"></a><span class="co"># [62] &quot;NEPHFU14&quot;                    </span></span>
+<span id="cb9-94"><a href="#cb9-94" tabindex="-1"></a><span class="co"># [63] &quot;NEPHFU17&quot;                    </span></span>
+<span id="cb9-95"><a href="#cb9-95" tabindex="-1"></a><span class="co"># [64] &quot;NEPHFU7&quot;                     </span></span>
+<span id="cb9-96"><a href="#cb9-96" tabindex="-1"></a><span class="co"># [65] &quot;WHITVIIa&quot;                    </span></span>
+<span id="cb9-97"><a href="#cb9-97" tabindex="-1"></a><span class="co"># [66] &quot;SPURDNEATL&quot;                  </span></span>
+<span id="cb9-98"><a href="#cb9-98" tabindex="-1"></a><span class="co"># [67] &quot;REDDEEPI-II&quot;                 </span></span>
+<span id="cb9-99"><a href="#cb9-99" tabindex="-1"></a><span class="co"># [68] &quot;SARDVIIIabd&quot;                 </span></span>
+<span id="cb9-100"><a href="#cb9-100" tabindex="-1"></a><span class="co"># [69] &quot;TARAKSA&quot; </span></span>
 <span id="cb9-101"><a href="#cb9-101" tabindex="-1"></a></span>
 <span id="cb9-102"><a href="#cb9-102" tabindex="-1"></a>ram_data <span class="ot">&lt;-</span> ram_bmsy_gf <span class="sc">%&gt;%</span> </span>
 <span id="cb9-103"><a href="#cb9-103" tabindex="-1"></a>  <span class="fu">left_join</span>(ram_spatial, <span class="at">by =</span> <span class="st">&quot;stockid&quot;</span>, <span class="at">relationship =</span> <span class="st">&quot;many-to-many&quot;</span>) <span class="sc">%&gt;%</span></span>
@@ -2339,145 +2393,85 @@ create new column <code>stockid</code> that matches with the
 <span id="cb9-109"><a href="#cb9-109" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(rgn_id))</span>
 <span id="cb9-110"><a href="#cb9-110" tabindex="-1"></a></span>
 <span id="cb9-111"><a href="#cb9-111" tabindex="-1"></a><span class="fu">write_csv</span>(ram_data, <span class="fu">here</span>(int_dir, <span class="st">&quot;ram_bmsy.csv&quot;</span>))</span>
-<span id="cb9-112"><a href="#cb9-112" tabindex="-1"></a><span class="fu">summary</span>(ram_data)</span>
-<span id="cb9-113"><a href="#cb9-113" tabindex="-1"></a><span class="co"># v2024:</span></span>
-<span id="cb9-114"><a href="#cb9-114" tabindex="-1"></a> <span class="co">#     rgn_id         stockid         </span></span>
-<span id="cb9-115"><a href="#cb9-115" tabindex="-1"></a> <span class="co"># Min.   :     1   Length:77311      </span></span>
-<span id="cb9-116"><a href="#cb9-116" tabindex="-1"></a> <span class="co"># 1st Qu.:    98   Class :character  </span></span>
-<span id="cb9-117"><a href="#cb9-117" tabindex="-1"></a> <span class="co"># Median :   163   Mode  :character  </span></span>
-<span id="cb9-118"><a href="#cb9-118" tabindex="-1"></a> <span class="co"># Mean   :  9191                     </span></span>
-<span id="cb9-119"><a href="#cb9-119" tabindex="-1"></a> <span class="co"># 3rd Qu.:   218                     </span></span>
-<span id="cb9-120"><a href="#cb9-120" tabindex="-1"></a> <span class="co"># Max.   :288300                     </span></span>
-<span id="cb9-121"><a href="#cb9-121" tabindex="-1"></a> <span class="co">#                                    </span></span>
-<span id="cb9-122"><a href="#cb9-122" tabindex="-1"></a> <span class="co"># stockid_ram         stocklong        </span></span>
-<span id="cb9-123"><a href="#cb9-123" tabindex="-1"></a> <span class="co"># Length:77311       Length:77311      </span></span>
-<span id="cb9-124"><a href="#cb9-124" tabindex="-1"></a> <span class="co"># Class :character   Class :character  </span></span>
-<span id="cb9-125"><a href="#cb9-125" tabindex="-1"></a> <span class="co"># Mode  :character   Mode  :character  </span></span>
-<span id="cb9-126"><a href="#cb9-126" tabindex="-1"></a> <span class="co">#                                      </span></span>
-<span id="cb9-127"><a href="#cb9-127" tabindex="-1"></a> <span class="co">#                                      </span></span>
-<span id="cb9-128"><a href="#cb9-128" tabindex="-1"></a> <span class="co">#                                      </span></span>
-<span id="cb9-129"><a href="#cb9-129" tabindex="-1"></a> <span class="co">#                                      </span></span>
-<span id="cb9-130"><a href="#cb9-130" tabindex="-1"></a> <span class="co">#      year       RAM_area_m2       </span></span>
-<span id="cb9-131"><a href="#cb9-131" tabindex="-1"></a> <span class="co"># Min.   :2001   Min.   :0.000e+00  </span></span>
-<span id="cb9-132"><a href="#cb9-132" tabindex="-1"></a> <span class="co"># 1st Qu.:2005   1st Qu.:6.125e+09  </span></span>
-<span id="cb9-133"><a href="#cb9-133" tabindex="-1"></a> <span class="co"># Median :2010   Median :1.231e+11  </span></span>
-<span id="cb9-134"><a href="#cb9-134" tabindex="-1"></a> <span class="co"># Mean   :2010   Mean   :7.154e+11  </span></span>
-<span id="cb9-135"><a href="#cb9-135" tabindex="-1"></a> <span class="co"># 3rd Qu.:2015   3rd Qu.:4.412e+11  </span></span>
-<span id="cb9-136"><a href="#cb9-136" tabindex="-1"></a> <span class="co"># Max.   :2019   Max.   :3.044e+13  </span></span>
-<span id="cb9-137"><a href="#cb9-137" tabindex="-1"></a> <span class="co">#                NA&#39;s   :10982      </span></span>
-<span id="cb9-138"><a href="#cb9-138" tabindex="-1"></a> <span class="co">#    ram_bmsy           gapfilled     </span></span>
-<span id="cb9-139"><a href="#cb9-139" tabindex="-1"></a> <span class="co"># Min.   : 0.002532   Min.   :0.0000  </span></span>
-<span id="cb9-140"><a href="#cb9-140" tabindex="-1"></a> <span class="co"># 1st Qu.: 0.646000   1st Qu.:0.0000  </span></span>
-<span id="cb9-141"><a href="#cb9-141" tabindex="-1"></a> <span class="co"># Median : 1.020000   Median :0.0000  </span></span>
-<span id="cb9-142"><a href="#cb9-142" tabindex="-1"></a> <span class="co"># Mean   : 1.171864   Mean   :0.1206  </span></span>
-<span id="cb9-143"><a href="#cb9-143" tabindex="-1"></a> <span class="co"># 3rd Qu.: 1.580000   3rd Qu.:0.0000  </span></span>
-<span id="cb9-144"><a href="#cb9-144" tabindex="-1"></a> <span class="co"># Max.   :21.719476   Max.   :1.0000  </span></span>
-<span id="cb9-145"><a href="#cb9-145" tabindex="-1"></a> <span class="co">#                                     </span></span>
-<span id="cb9-146"><a href="#cb9-146" tabindex="-1"></a> <span class="co">#    method         </span></span>
-<span id="cb9-147"><a href="#cb9-147" tabindex="-1"></a> <span class="co"># Length:77311      </span></span>
-<span id="cb9-148"><a href="#cb9-148" tabindex="-1"></a> <span class="co"># Class :character  </span></span>
-<span id="cb9-149"><a href="#cb9-149" tabindex="-1"></a> <span class="co"># Mode  :character </span></span>
-<span id="cb9-150"><a href="#cb9-150" tabindex="-1"></a></span>
-<span id="cb9-151"><a href="#cb9-151" tabindex="-1"></a><span class="do">## check out Katsuwonus_pelamis-51 since this is one of the stocks that was problematic with the old gapfilling methods # v2024: it is present in `ram_data`!</span></span>
-<span id="cb9-152"><a href="#cb9-152" tabindex="-1"></a></span>
-<span id="cb9-153"><a href="#cb9-153" tabindex="-1"></a></span>
-<span id="cb9-154"><a href="#cb9-154" tabindex="-1"></a>ram_2023 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;fis&quot;</span>, <span class="st">&quot;v2023&quot;</span>,<span class="st">&quot;int&quot;</span>,<span class="st">&quot;ram_bmsy.csv&quot;</span>)) <span class="co">#%&gt;%</span></span>
-<span id="cb9-155"><a href="#cb9-155" tabindex="-1"></a>  <span class="co"># dplyr::mutate(stockid = substr(stockid, 1, nchar(stockid) - 3)) %&gt;%</span></span>
-<span id="cb9-156"><a href="#cb9-156" tabindex="-1"></a>  <span class="co"># drop_na(ram_bmsy)</span></span>
-<span id="cb9-157"><a href="#cb9-157" tabindex="-1"></a></span>
-<span id="cb9-158"><a href="#cb9-158" tabindex="-1"></a><span class="co">#ram_old_2022 &lt;- read_csv(&quot;archive/ram_bmsy.csv&quot;) # v2023: code didn&#39;t work</span></span>
-<span id="cb9-159"><a href="#cb9-159" tabindex="-1"></a></span>
-<span id="cb9-160"><a href="#cb9-160" tabindex="-1"></a>ram_2024 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(int_dir, <span class="st">&quot;ram_bmsy.csv&quot;</span>))</span>
-<span id="cb9-161"><a href="#cb9-161" tabindex="-1"></a></span>
-<span id="cb9-162"><a href="#cb9-162" tabindex="-1"></a>check <span class="ot">&lt;-</span> ram_2024 <span class="sc">%&gt;%</span></span>
-<span id="cb9-163"><a href="#cb9-163" tabindex="-1"></a>  <span class="fu">filter</span>(stockid <span class="sc">==</span> <span class="st">&quot;Katsuwonus_pelamis-51&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-164"><a href="#cb9-164" tabindex="-1"></a>  <span class="fu">arrange</span>(rgn_id, year) </span>
-<span id="cb9-165"><a href="#cb9-165" tabindex="-1"></a></span>
-<span id="cb9-166"><a href="#cb9-166" tabindex="-1"></a></span>
-<span id="cb9-167"><a href="#cb9-167" tabindex="-1"></a>check_2 <span class="ot">&lt;-</span> ram_2023 <span class="sc">%&gt;%</span></span>
-<span id="cb9-168"><a href="#cb9-168" tabindex="-1"></a>  <span class="fu">filter</span>(stockid <span class="sc">==</span> <span class="st">&quot;Katsuwonus_pelamis-51&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-169"><a href="#cb9-169" tabindex="-1"></a>  <span class="fu">arrange</span>(rgn_id, year) </span>
-<span id="cb9-170"><a href="#cb9-170" tabindex="-1"></a><span class="co"># exactly the same to v2024</span></span>
-<span id="cb9-171"><a href="#cb9-171" tabindex="-1"></a></span>
-<span id="cb9-172"><a href="#cb9-172" tabindex="-1"></a></span>
-<span id="cb9-173"><a href="#cb9-173" tabindex="-1"></a><span class="fu">plot</span>(check<span class="sc">$</span>ram_bmsy, check_2<span class="sc">$</span>ram_bmsy, </span>
-<span id="cb9-174"><a href="#cb9-174" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Check for Katsuwonus_pelamis-51&quot;</span>,</span>
-<span id="cb9-175"><a href="#cb9-175" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Current Version&quot;</span>,</span>
-<span id="cb9-176"><a href="#cb9-176" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Previous Version&quot;</span>) <span class="co"># makes sense!</span></span>
-<span id="cb9-177"><a href="#cb9-177" tabindex="-1"></a></span>
-<span id="cb9-178"><a href="#cb9-178" tabindex="-1"></a></span>
-<span id="cb9-179"><a href="#cb9-179" tabindex="-1"></a>compare <span class="ot">&lt;-</span> ram_2024 <span class="sc">%&gt;%</span></span>
-<span id="cb9-180"><a href="#cb9-180" tabindex="-1"></a>  <span class="fu">left_join</span>(ram_2023, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;rgn_id&quot;</span>, <span class="st">&quot;stockid&quot;</span>, <span class="st">&quot;stockid_ram&quot;</span>, <span class="st">&quot;stocklong&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;RAM_area_m2&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb9-181"><a href="#cb9-181" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> ram_bmsy.x <span class="sc">-</span> ram_bmsy.y) <span class="sc">%&gt;%</span></span>
-<span id="cb9-182"><a href="#cb9-182" tabindex="-1"></a>  <span class="fu">filter</span>(ram_bmsy.x <span class="sc">&lt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-183"><a href="#cb9-183" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2016</span><span class="sc">:</span><span class="dv">2019</span>))</span>
-<span id="cb9-184"><a href="#cb9-184" tabindex="-1"></a></span>
-<span id="cb9-185"><a href="#cb9-185" tabindex="-1"></a><span class="co"># v2024: points above the red line indicate an increase in B/Bmsy from 2023 to 2024, while points below indicate a decrease</span></span>
-<span id="cb9-186"><a href="#cb9-186" tabindex="-1"></a>comparison_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(compare, <span class="fu">aes</span>(<span class="at">x =</span> ram_bmsy.y, <span class="at">y =</span> ram_bmsy.x)) <span class="sc">+</span></span>
-<span id="cb9-187"><a href="#cb9-187" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb9-188"><a href="#cb9-188" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">color =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span>  <span class="co"># reference line</span></span>
-<span id="cb9-189"><a href="#cb9-189" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-190"><a href="#cb9-190" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;RAM data B/Bmsy Values: v2023 vs v2024&quot;</span>,</span>
-<span id="cb9-191"><a href="#cb9-191" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;v2023 B/Bmsy&quot;</span>,</span>
-<span id="cb9-192"><a href="#cb9-192" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;v2024 B/Bmsy&quot;</span></span>
-<span id="cb9-193"><a href="#cb9-193" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-194"><a href="#cb9-194" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb9-195"><a href="#cb9-195" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">ratio =</span> <span class="dv">1</span>)  <span class="sc">+</span></span>
-<span id="cb9-196"><a href="#cb9-196" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="co"># the trend is downward, so it looks like overall there were more decreases in B/Bmsy in 2024 compared to 2023.</span></span>
-<span id="cb9-197"><a href="#cb9-197" tabindex="-1"></a>comparison_plot</span>
-<span id="cb9-198"><a href="#cb9-198" tabindex="-1"></a></span>
-<span id="cb9-199"><a href="#cb9-199" tabindex="-1"></a><span class="co"># v2024: largest differences shown in a bubble plot</span></span>
-<span id="cb9-200"><a href="#cb9-200" tabindex="-1"></a>largest_diffs_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(compare, <span class="fu">aes</span>(<span class="at">x =</span> ram_bmsy.y, <span class="at">y =</span> ram_bmsy.x)) <span class="sc">+</span></span>
-<span id="cb9-201"><a href="#cb9-201" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> <span class="fu">abs</span>(diff), <span class="at">color =</span> diff <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb9-202"><a href="#cb9-202" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">name =</span> <span class="st">&quot;|Difference|&quot;</span>) <span class="sc">+</span></span>
-<span id="cb9-203"><a href="#cb9-203" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">&quot;B/Bmsy&quot;</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;darkred&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Decreased&quot;</span>, <span class="st">&quot;Increased&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb9-204"><a href="#cb9-204" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb9-205"><a href="#cb9-205" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;v2023 Bmsy data vs. v2024 Bmsy data&quot;</span>, <span class="at">x =</span> <span class="st">&quot;v2023 BMSY&quot;</span>, <span class="at">y =</span> <span class="st">&quot;v2024 BMSY&quot;</span>)</span>
-<span id="cb9-206"><a href="#cb9-206" tabindex="-1"></a>largest_diffs_plot</span>
-<span id="cb9-207"><a href="#cb9-207" tabindex="-1"></a></span>
-<span id="cb9-208"><a href="#cb9-208" tabindex="-1"></a></span>
-<span id="cb9-209"><a href="#cb9-209" tabindex="-1"></a><span class="do">## v2023: added this comparison since above graph wasn&#39;t showing the full picture</span></span>
-<span id="cb9-210"><a href="#cb9-210" tabindex="-1"></a>compare_drop_na_y <span class="ot">&lt;-</span> compare <span class="sc">%&gt;%</span></span>
-<span id="cb9-211"><a href="#cb9-211" tabindex="-1"></a>  <span class="fu">drop_na</span>(ram_bmsy.y)</span>
-<span id="cb9-212"><a href="#cb9-212" tabindex="-1"></a></span>
-<span id="cb9-213"><a href="#cb9-213" tabindex="-1"></a>y_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(compare, <span class="fu">aes</span>(<span class="at">x =</span> ram_bmsy.y)) <span class="sc">+</span></span>
-<span id="cb9-214"><a href="#cb9-214" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb9-215"><a href="#cb9-215" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb9-216"><a href="#cb9-216" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;RAM BMSY Old Data&quot;</span>,</span>
-<span id="cb9-217"><a href="#cb9-217" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>)</span>
-<span id="cb9-218"><a href="#cb9-218" tabindex="-1"></a></span>
-<span id="cb9-219"><a href="#cb9-219" tabindex="-1"></a>x_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(compare, <span class="fu">aes</span>(<span class="at">x =</span> ram_bmsy.x)) <span class="sc">+</span></span>
-<span id="cb9-220"><a href="#cb9-220" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb9-221"><a href="#cb9-221" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb9-222"><a href="#cb9-222" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;RAM BMSY New Data&quot;</span>,</span>
-<span id="cb9-223"><a href="#cb9-223" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>)</span>
-<span id="cb9-224"><a href="#cb9-224" tabindex="-1"></a></span>
-<span id="cb9-225"><a href="#cb9-225" tabindex="-1"></a>x_plot <span class="sc">+</span> y_plot </span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># v2024: added some aesthetics to graphs</span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co"># v2023 data histogram</span></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>y_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(compare, <span class="fu">aes</span>(<span class="at">x =</span> ram_bmsy.y)) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">&quot;#69b3a2&quot;</span>, <span class="at">color =</span> <span class="st">&quot;#e9ecef&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;RAM Bmsy (v2023)&quot;</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="co"># v2024 data histogram</span></span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>x_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(compare, <span class="fu">aes</span>(<span class="at">x =</span> ram_bmsy.x)) <span class="sc">+</span></span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">&quot;#404080&quot;</span>, <span class="at">color =</span> <span class="st">&quot;#e9ecef&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;RAM Bmsy (v2024)&quot;</span>,</span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot; &quot;</span>) <span class="sc">+</span></span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a></span>
-<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="co"># use patchwork to compare the histograms of v2023 and v2024 data side by side</span></span>
-<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>combined_plot <span class="ot">&lt;-</span> y_plot <span class="sc">+</span> x_plot <span class="sc">+</span></span>
-<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
-<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;RAM Bmsy Distributions: v2023 vs v2024&quot;</span></span>
-<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a>  )</span>
-<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a>combined_plot <span class="co"># histogram distributions look pretty similar</span></span></code></pre></div>
+<span id="cb9-112"><a href="#cb9-112" tabindex="-1"></a><span class="fu">summary</span>(ram_data)</span></code></pre></div>
 </div>
+</div>
+<div id="data-checking" class="section level2">
+<h2>Data checking</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Last year&#39;s data</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>ram_2024 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;fis&quot;</span>, <span class="st">&quot;v2024&quot;</span>,<span class="st">&quot;int&quot;</span>,<span class="st">&quot;ram_bmsy.csv&quot;</span>)) <span class="co">#%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  <span class="co"># dplyr::mutate(stockid = substr(stockid, 1, nchar(stockid) - 3)) %&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  <span class="co"># drop_na(ram_bmsy)</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co"># This year&#39;s data</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>ram_2025 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(int_dir, <span class="st">&quot;ram_bmsy.csv&quot;</span>))</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>compare <span class="ot">&lt;-</span> ram_2025 <span class="sc">%&gt;%</span></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>  <span class="fu">left_join</span>(ram_2024, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;rgn_id&quot;</span>, <span class="st">&quot;stockid&quot;</span>, <span class="st">&quot;stockid_ram&quot;</span>, <span class="st">&quot;stocklong&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;RAM_area_m2&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> ram_bmsy.x <span class="sc">-</span> ram_bmsy.y) <span class="sc">%&gt;%</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>  <span class="fu">filter</span>(ram_bmsy.x <span class="sc">&lt;</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2016</span><span class="sc">:</span><span class="dv">2023</span>))</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co"># v2024: points above the red line indicate an increase in B/Bmsy from 2023 to 2024, while points below indicate a decrease</span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>comparison_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(compare, <span class="fu">aes</span>(<span class="at">x =</span> ram_bmsy.y, <span class="at">y =</span> ram_bmsy.x)) <span class="sc">+</span></span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">color =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span>  <span class="co"># reference line</span></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;RAM data B/Bmsy Values: v2024 vs v2025&quot;</span>,</span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;v2024 B/Bmsy&quot;</span>,</span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;v2025 B/Bmsy&quot;</span></span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">ratio =</span> <span class="dv">1</span>)  <span class="sc">+</span></span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="co"># the trend is downward, so it looks like overall there were more decreases in B/Bmsy in 2024 compared to 2023.</span></span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a>comparison_plot</span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a></span>
+<span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a><span class="co"># v2024: largest differences shown in a bubble plot</span></span>
+<span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a>largest_diffs_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(compare, <span class="fu">aes</span>(<span class="at">x =</span> ram_bmsy.y, <span class="at">y =</span> ram_bmsy.x)) <span class="sc">+</span></span>
+<span id="cb10-31"><a href="#cb10-31" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> <span class="fu">abs</span>(diff), <span class="at">color =</span> diff <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb10-32"><a href="#cb10-32" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">name =</span> <span class="st">&quot;|Difference|&quot;</span>) <span class="sc">+</span></span>
+<span id="cb10-33"><a href="#cb10-33" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">name =</span> <span class="st">&quot;B/Bmsy&quot;</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;darkred&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Decreased&quot;</span>, <span class="st">&quot;Increased&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb10-34"><a href="#cb10-34" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-35"><a href="#cb10-35" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;v2024 Bmsy data vs. v2025 Bmsy data&quot;</span>, <span class="at">x =</span> <span class="st">&quot;v2024 BMSY&quot;</span>, <span class="at">y =</span> <span class="st">&quot;v2025 BMSY&quot;</span>)</span>
+<span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a>largest_diffs_plot</span></code></pre></div>
+<p>When it matches that well, making sure I’m actually pulling from the
+right files and such. Quick check that. theoretically, don’t think it’s
+a huge issue. One good through check, if it looks good we’ll assume it’s
+correct. Didn’t modify any of the 2019 data etc.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># v2024: added some aesthetics to graphs</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co"># v2024 data histogram</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>y_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(compare, <span class="fu">aes</span>(<span class="at">x =</span> ram_bmsy.y)) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">&quot;#69b3a2&quot;</span>, <span class="at">color =</span> <span class="st">&quot;#e9ecef&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;RAM Bmsy (v2024)&quot;</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co"># v2025 data histogram</span></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>x_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(compare, <span class="fu">aes</span>(<span class="at">x =</span> ram_bmsy.x)) <span class="sc">+</span></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">&quot;#404080&quot;</span>, <span class="at">color =</span> <span class="st">&quot;#e9ecef&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;RAM Bmsy (v2025)&quot;</span>,</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot; &quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="co"># use patchwork to compare the histograms of v2023 and v2024 data side by side</span></span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a>combined_plot <span class="ot">&lt;-</span> y_plot <span class="sc">+</span> x_plot <span class="sc">+</span></span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;RAM Bmsy Distributions: v2024 vs v2025&quot;</span></span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a>  )</span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a>combined_plot <span class="co"># histogram distributions look pretty similar</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># v2025 number of stocks over time plot</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">nrow</span>(ram_2025)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>ram_2025_stocks <span class="ot">&lt;-</span> ram_2025 <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>  <span class="fu">distinct</span>(year, stockid_ram, rgn_id) <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>  <span class="fu">count</span>(year, <span class="at">name =</span> <span class="st">&quot;num_stocks&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>  <span class="fu">view</span>()</span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="co"># 3167 for all years... hmm</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="co"># There are the same number of stocks for each year. Need to go back and see if this is a gapfilling thing or a mistake somewhere along the workflow. </span></span></code></pre></div>
 </div>
 </div>
 

@@ -1,5 +1,5 @@
 ---
-title: "OHI 2024: Food Provision/Fisheries, Preparing RAM B/Bmsy data"
+title: "OHI `r format(Sys.Date(), '%Y')`: Food Provision/Fisheries, Preparing RAM B/Bmsy data"
 author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
 output: 
   html_document:

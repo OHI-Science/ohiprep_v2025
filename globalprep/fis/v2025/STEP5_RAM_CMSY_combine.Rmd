@@ -1,5 +1,5 @@
 ---
-title: "OHI 2024: Food Provision, Combining RAM and CMSY B/Bmsy data"
+title: "OHI `r format(Sys.Date(), '%Y')`: Food Provision, Combining RAM and CMSY B/Bmsy data"
 author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
 output: 
   html_document:
@@ -25,8 +25,8 @@ This script prepares the final B/Bmsy data:
 2. Obtains a B/Bmsy value for each catch record (each FAO/OHI/year/species combination), prioritizing RAM data
 
 
-## Updates from previous assessment
-- New data (from steps 4a/4b) added in v2024
+### Updates from previous assessment
+- New data (from steps 4a/4b) added in v2025
 
 ***
 

@@ -1,5 +1,5 @@
 ---
-title: "OHI 2024: Food Provision, Preparing catch data for BBmsy calculations and mean catch (weights in FIS model) and FP weights"
+title: "OHI `r format(Sys.Date(), '%Y')`: Food Provision, Preparing catch data for BBmsy calculations and mean catch (weights in FIS model) and FP weights"
 author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
 output: 
   html_document:
@@ -32,8 +32,8 @@ An example of our aggregation process: New Zealand is located entirely in FAO re
 
 First, we need to match SAUP EEZ regions to OHI regions, and summarize per region, year, and species.
 
-## Updates from previous assessment
-- None. This script wasn't run in v2024. Associated data files within the repo were copied from v2023 to v2024.
+### Updates from previous assessment
+- None. This script wasn't run in v2025. Associated data files within the repo were copied from v2024 to v2025.
 
 ***
 

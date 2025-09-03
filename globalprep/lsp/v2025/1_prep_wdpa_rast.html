@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Wed Aug 28 17:12:56 2024 by dduncan" />
+<meta name="author" content="Compiled on Wed Sep 3 16:26:50 2025 by oyler" />
 
 
-<title>OHI 2024: LSP, Rasterize WDPA polygons</title>
+<title>OHI 2025: LSP, Rasterize WDPA polygons</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1645,9 +1645,9 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">OHI 2024: LSP, Rasterize WDPA polygons</h1>
-<h4 class="author"><em>Compiled on Wed Aug 28 17:12:56 2024 by
-dduncan</em></h4>
+<h1 class="title toc-ignore">OHI 2025: LSP, Rasterize WDPA polygons</h1>
+<h4 class="author"><em>Compiled on Wed Sep 3 16:26:50 2025 by
+oyler</em></h4>
 
 </div>
 
@@ -1728,13 +1728,9 @@ computing zonal statistics.</p>
 </div>
 <div id="updates-from-previous-assessment" class="section level1">
 <h1>Updates from previous assessment</h1>
-<p>Changed data source to 2023. The source data has now been split into
-3 different files, so we will need to merge all three shapefiles
-together, before we can work with the data.</p>
-<p>We updated the script to save 3 separate files for the reordering and
-transforming, for ease of use and reproducibility.</p>
-<p>Saving intermediates to
-<code>/home/shares/ohi/git-annex/globalprep/lsp/v2024/rast</code></p>
+<p>We checked the IUCN_CAT variable as a possible way to weight the
+score, but found that these are unranked categories. They represent
+styles or type of management.</p>
 <hr />
 </div>
 <div id="setup" class="section level1">
@@ -1746,9 +1742,9 @@ transforming, for ease of use and reproducibility.</p>
 <h2>Filter WDPA Shapefile</h2>
 <p>Read in the polygons from the WDPA dataset; filter as needed.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># create path objects for the 3 different zip files downloaded from source</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>shp_raw_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;WDPA_May2024_Public_shp_0&#39;</span>, <span class="st">&#39;WDPA_May2024_Public_shp-polygons&#39;</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>shp_raw_1 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;WDPA_May2024_Public_shp_1&#39;</span>, <span class="st">&#39;WDPA_May2024_Public_shp-polygons&#39;</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>shp_raw_2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;WDPA_May2024_Public_shp_2&#39;</span>, <span class="st">&#39;WDPA_May2024_Public_shp-polygons&#39;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>shp_raw_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;WDPA_Jun2025_Public_shp_0&#39;</span>, <span class="st">&#39;WDPA_Jun2025_Public_shp-polygons&#39;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>shp_raw_1 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;WDPA_Jun2025_Public_shp_1&#39;</span>, <span class="st">&#39;WDPA_Jun2025_Public_shp-polygons&#39;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>shp_raw_2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;WDPA_Jun2025_Public_shp_2&#39;</span>, <span class="st">&#39;WDPA_Jun2025_Public_shp-polygons&#39;</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co"># read shape files in as sf objects</span></span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>wdpa_poly_0 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="fu">dirname</span>(shp_raw_0), </span>
@@ -1765,8 +1761,11 @@ transforming, for ease of use and reproducibility.</p>
 <span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>                       <span class="at">layer =</span> <span class="fu">basename</span>(shp_raw_2),</span>
 <span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>                       <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="co"># put all shape files into a list</span></span>
-<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>wdpa_list <span class="ot">&lt;-</span> <span class="fu">list</span>(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)</span></code></pre></div>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="co"># plot(st_geometry(wdpa_poly_0))</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="co"># put all shape files into a list</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>wdpa_list <span class="ot">&lt;-</span> <span class="fu">list</span>(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)</span></code></pre></div>
 <p>Test and inspect the raw data to ensure quality</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># inspect status column to find unique values:</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co"># &quot;Designated&quot;   &quot;Inscribed&quot;    &quot;Proposed&quot;     &quot;Not Reported&quot; &quot;Established&quot;  &quot;Adopted&quot;   </span></span>
@@ -1795,69 +1794,117 @@ transforming, for ease of use and reproducibility.</p>
 <span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>  }</span>
 <span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>}</span>
 <span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="co"># remove unneeded objects</span></span>
-<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="fu">rm</span>(df_list, x_0, x_1, x_2)</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># create a function to run over list of sf objects</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>tidy_wdpa_data <span class="ot">&lt;-</span> <span class="cf">function</span>(wdpa_poly_object) {</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  </span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  DF <span class="ot">&lt;-</span> wdpa_poly_object <span class="sc">%&gt;%</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    <span class="fu">setNames</span>(<span class="fu">tolower</span>(<span class="fu">names</span>(.))) <span class="sc">%&gt;%</span> <span class="co">#improve? # everything()</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(wdpaid, name, orig_name, </span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>                  desig, desig_eng, desig_type,</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>                  iucn_cat, </span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>                  marine, no_take, no_tk_area, </span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>                  status, status_yr, </span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>                  mang_auth, mang_plan, verif,</span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>                  sub_loc, parent_iso, iso3) <span class="sc">%&gt;%</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">status_yr =</span> <span class="fu">as.integer</span>(status_yr))</span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>  </span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>  DF <span class="ot">&lt;-</span> DF[DF<span class="sc">$</span>status <span class="sc">==</span> <span class="st">&#39;Designated&#39;</span>, ]</span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>  DF <span class="ot">&lt;-</span> DF[<span class="sc">!</span><span class="fu">str_detect</span>(<span class="fu">tolower</span>(DF<span class="sc">$</span>mang_plan), <span class="st">&#39;non-mpa program&#39;</span>), ]</span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>  </span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>  <span class="fu">return</span>(DF)</span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>}  </span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Non-MPA Programs in x_0: &quot;</span>, <span class="fu">nrow</span>(x_0)))</span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Non-MPA Programs in x_1: &quot;</span>, <span class="fu">nrow</span>(x_1)))</span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Non-MPA Programs in x_2: &quot;</span>, <span class="fu">nrow</span>(x_2)))</span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a><span class="co"># remove unneeded objects</span></span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a><span class="fu">rm</span>(df_list, x_0, x_1, x_2)</span></code></pre></div>
+<p><strong>Issue:</strong> There are Non-MPA Programs present in the
+WDPA polygons. For now, I’ve gone ahead and dropped these rows because
+each had &lt;50 out of ~ 100K observations. These all seem to be in the
+U.S.</p>
+<p><strong>After discussion</strong>: These get filtered out on their
+own later on in the organize and clean code chunk.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Filter out non-mpa</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>wdpa_poly_0 <span class="ot">&lt;-</span> wdpa_poly_0 <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(<span class="fu">tolower</span>(MANG_PLAN), <span class="st">&#39;non-mpa program&#39;</span>)) </span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>wdpa_poly_1 <span class="ot">&lt;-</span> wdpa_poly_1 <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(<span class="fu">tolower</span>(MANG_PLAN), <span class="st">&#39;non-mpa program&#39;</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>wdpa_poly_2 <span class="ot">&lt;-</span> wdpa_poly_2 <span class="sc">%&gt;%</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(<span class="fu">tolower</span>(MANG_PLAN), <span class="st">&#39;non-mpa program&#39;</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co"># check for non-mpa program in management plan column, we want them to be empty</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>x_0 <span class="ot">&lt;-</span> wdpa_poly_0 <span class="sc">%&gt;%</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="fu">tolower</span>(MANG_PLAN), <span class="st">&#39;non-mpa program&#39;</span>)) </span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>x_1 <span class="ot">&lt;-</span> wdpa_poly_1 <span class="sc">%&gt;%</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="fu">tolower</span>(MANG_PLAN), <span class="st">&#39;non-mpa program&#39;</span>))</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>x_2 <span class="ot">&lt;-</span> wdpa_poly_2 <span class="sc">%&gt;%</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="fu">tolower</span>(MANG_PLAN), <span class="st">&#39;non-mpa program&#39;</span>))</span>
 <span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="co"># run function over the list</span></span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>wdpa_poly_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(wdpa_list, tidy_wdpa_data)</span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="co"># List of data frames</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>df_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x_0 =</span> x_0, <span class="at">x_1 =</span> x_1, <span class="at">x_2 =</span> x_2)</span>
 <span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="co"># check to see if it worked, we should have 19 columns and fewer observations</span></span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>test <span class="ot">&lt;-</span> wdpa_poly_list[[<span class="dv">1</span>]]</span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="co"># curious about the &quot;Not Reported&quot; in mang_plan</span></span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a></span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="co"># remove test for memory</span></span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="fu">rm</span>(test)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># now we need to unlist them, and write them to the appropriate folder</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>wdpa_poly_fix_0 <span class="ot">&lt;-</span> wdpa_poly_list[[<span class="dv">1</span>]]  </span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>wdpa_poly_fix_1 <span class="ot">&lt;-</span> wdpa_poly_list[[<span class="dv">2</span>]]  </span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>wdpa_poly_fix_2 <span class="ot">&lt;-</span> wdpa_poly_list[[<span class="dv">3</span>]]</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co"># created filepaths for the files, make sure their names aligned with your year&#39;s dates</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>shp_reorder_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_May2024_shp_ordered_0&#39;</span>) <span class="co"># replace month and year with the appropriate month and year</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>shp_reorder_1 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_May2024_shp_ordered_1&#39;</span>) <span class="co"># replace month and year with the appropriate month and year</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>shp_reorder_2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_May2024_shp_ordered_2&#39;</span>) <span class="co"># replace month and year with the appropriate month and year</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>  </span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co"># write the shapefile to the raw_data Mazu folder, warning suppressed, takes about 20 minutes.</span></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">st_write</span>(wdpa_poly_fix_0,</span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>                          <span class="at">dsn =</span> (shp_reorder_0), </span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_0),</span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>                          <span class="at">driver =</span> <span class="st">&#39;ESRI Shapefile&#39;</span>,</span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>                          <span class="at">append =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>  </span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">st_write</span>(wdpa_poly_fix_1,</span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>                          <span class="at">dsn =</span> (shp_reorder_1), </span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_1),</span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>                          <span class="at">driver =</span> <span class="st">&#39;ESRI Shapefile&#39;</span>))</span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>  </span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">st_write</span>(wdpa_poly_fix_2,</span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>                          <span class="at">dsn =</span> (shp_reorder_2), </span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_2),</span>
-<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>                          <span class="at">driver =</span> <span class="st">&#39;ESRI Shapefile&#39;</span>))</span>
-<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>  </span>
-<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a><span class="co">#clean up memory</span></span>
-<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a><span class="fu">rm</span>(<span class="st">&#39;wdpa_poly_list&#39;</span>, <span class="st">&quot;wdpa_list&quot;</span>, <span class="st">&quot;wdpa_poly_0&quot;</span>, <span class="st">&quot;wdpa_poly_1&quot;</span>, <span class="st">&quot;wdpa_poly_2&quot;</span>, <span class="st">&quot;wdpa_poly_fix_0&quot;</span>, <span class="st">&quot;wdpa_poly_fix_1&quot;</span>, <span class="st">&quot;wdpa_poly_fix_2&quot;</span>) </span>
-<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="co"># Iterate over the list of data frames</span></span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">names</span>(df_list)) {</span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>  <span class="co"># Check if the data frame is empty</span></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">nrow</span>(df_list[[i]]) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(i, <span class="st">&quot;is empty (good)&quot;</span>))</span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(i, <span class="st">&quot;is not empty (bad)&quot;</span>))</span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>  }</span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>}</span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a><span class="co"># remove unneeded objects</span></span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a><span class="fu">rm</span>(df_list, x_0, x_1, x_2)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># create a function to run over list of sf objects</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>tidy_wdpa_data <span class="ot">&lt;-</span> <span class="cf">function</span>(wdpa_poly_object) {</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  </span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  DF <span class="ot">&lt;-</span> wdpa_poly_object <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    <span class="fu">setNames</span>(<span class="fu">tolower</span>(<span class="fu">names</span>(.))) <span class="sc">%&gt;%</span> <span class="co">#improve? # everything()</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(wdpaid, name, orig_name, </span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>                  desig, desig_eng, desig_type,</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>                  iucn_cat, </span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>                  marine, no_take, no_tk_area, </span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>                  status, status_yr, </span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>                  mang_auth, mang_plan, verif,</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>                  sub_loc, parent_iso, iso3) <span class="sc">%&gt;%</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">status_yr =</span> <span class="fu">as.integer</span>(status_yr))</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>  </span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>  DF <span class="ot">&lt;-</span> DF[DF<span class="sc">$</span>status <span class="sc">==</span> <span class="st">&#39;Designated&#39;</span>, ]</span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>  DF <span class="ot">&lt;-</span> DF[<span class="sc">!</span><span class="fu">str_detect</span>(<span class="fu">tolower</span>(DF<span class="sc">$</span>mang_plan), <span class="st">&#39;non-mpa program&#39;</span>), ]</span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>  </span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>  <span class="fu">return</span>(DF)</span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>}  </span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co"># run function over the list</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>wdpa_poly_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(wdpa_list, tidy_wdpa_data)</span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co"># check to see if it worked, we should have 19 columns and fewer observations</span></span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>test <span class="ot">&lt;-</span> wdpa_poly_list[[<span class="dv">1</span>]]</span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="co"># curious about the &quot;Not Reported&quot; in mang_plan</span></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a><span class="co"># remove test for memory</span></span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a><span class="fu">rm</span>(test)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># now we need to unlist them, and write them to the appropriate folder</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>wdpa_poly_fix_0 <span class="ot">&lt;-</span> wdpa_poly_list[[<span class="dv">1</span>]]  </span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>wdpa_poly_fix_1 <span class="ot">&lt;-</span> wdpa_poly_list[[<span class="dv">2</span>]]  </span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>wdpa_poly_fix_2 <span class="ot">&lt;-</span> wdpa_poly_list[[<span class="dv">3</span>]]</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co"># created filepaths for the files, make sure their names aligned with your year&#39;s dates</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co"># Note 2025: Changed output directory from _raw_data to dir_goal_anx</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>shp_reorder_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_Jun2025_shp_ordered_0&#39;</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>shps_reorder_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">&#39;/home/shares/ohi/git-annex/globalprep/lsp/v2025/clean_shapes/WDPA_Jun2025_shp_ordered_0&#39;</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co"># replace month and year with the appropriate month and year</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>shp_reorder_1 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_Jun2025_shp_ordered_1&#39;</span>) <span class="co"># replace month and year with the appropriate month and year</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>shp_reorder_2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_Jun2025_shp_ordered_2&#39;</span>) <span class="co"># replace month and year with the appropriate month and year</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>  </span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co"># write the shapefile to the raw_data Mazu folder, warning suppressed, takes about 20 minutes.</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">st_write</span>(wdpa_poly_fix_0,</span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>                          <span class="at">dsn =</span> (shp_reorder_0), </span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_0),</span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>                          <span class="at">driver =</span> <span class="st">&#39;ESRI Shapefile&#39;</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>                          <span class="at">append =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>  </span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">st_write</span>(wdpa_poly_fix_1,</span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a>                          <span class="at">dsn =</span> (shp_reorder_1), </span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_1),</span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a>                          <span class="at">driver =</span> <span class="st">&#39;ESRI Shapefile&#39;</span>))</span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>  </span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a><span class="fu">suppressWarnings</span>(<span class="fu">st_write</span>(wdpa_poly_fix_2,</span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a>                          <span class="at">dsn =</span> (shp_reorder_2), </span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_2),</span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a>                          <span class="at">driver =</span> <span class="st">&#39;ESRI Shapefile&#39;</span>))</span>
+<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a>  </span>
+<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a><span class="co">#clean up memory</span></span>
+<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a><span class="fu">rm</span>(<span class="st">&#39;wdpa_poly_list&#39;</span>, <span class="st">&quot;wdpa_list&quot;</span>, <span class="st">&quot;wdpa_poly_0&quot;</span>, <span class="st">&quot;wdpa_poly_1&quot;</span>, <span class="st">&quot;wdpa_poly_2&quot;</span>, <span class="st">&quot;wdpa_poly_fix_0&quot;</span>, <span class="st">&quot;wdpa_poly_fix_1&quot;</span>, <span class="st">&quot;wdpa_poly_fix_2&quot;</span>) </span>
+<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a><span class="fu">gc</span>()</span></code></pre></div>
 </div>
 <div id="transform-to-mollweide-projection" class="section level2">
 <h2>Transform to Mollweide Projection</h2>
@@ -1866,72 +1913,72 @@ transforming, for ease of use and reproducibility.</p>
 shapefile would have their own appropriately named folder. Because of
 this, we had to remove the <code>dirname()</code> line within the
 <code>st_read(dsn = ...)</code> calls.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># file paths for shape files we just wrote to Mazu</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>shp_reorder_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_May2024_shp_ordered_0&#39;</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>shp_reorder_1 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_May2024_shp_ordered_1&#39;</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>shp_reorder_2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_May2024_shp_ordered_2&#39;</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co"># read in those shape files as sf objects to ensure they were written correctly and to use below</span></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>wdpa_poly_0 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> shp_reorder_0, </span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>                      <span class="co">#    layer = basename(shp_reorder_0),</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>wdpa_poly_1 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> shp_reorder_1, </span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_1),</span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>wdpa_poly_2 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> shp_reorder_2, </span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_2),</span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co"># put the sf objects in a list</span></span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>wdpa_list <span class="ot">&lt;-</span> <span class="fu">list</span>(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)    </span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a></span>
-<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a><span class="co"># create function to run over list and change the CRS to Mollweide</span></span>
-<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>change_crs <span class="ot">&lt;-</span> <span class="cf">function</span>(wdpa_poly_object) {</span>
-<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">&#39;Spatial transforming WDPA polygons to Mollweide&#39;</span>)</span>
-<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a></span>
-<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>  DF <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(wdpa_poly_object, </span>
-<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>        <span class="at">crs =</span> <span class="st">&#39;+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs&#39;</span>)</span>
-<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a>  </span>
-<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a><span class="fu">return</span>(DF)</span>
-<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a>}  </span>
-<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a></span>
-<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a><span class="co"># run function over list of sf objects</span></span>
-<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a>wdpa_poly_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(wdpa_list, change_crs)</span>
-<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a></span>
-<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a><span class="co"># unlist the items</span></span>
-<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a>wdpa_poly_fix_0 <span class="ot">&lt;-</span> wdpa_poly_list[[<span class="dv">1</span>]]</span>
-<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a>wdpa_poly_fix_1 <span class="ot">&lt;-</span> wdpa_poly_list[[<span class="dv">2</span>]]  </span>
-<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a>wdpa_poly_fix_2 <span class="ot">&lt;-</span> wdpa_poly_list[[<span class="dv">3</span>]]  </span>
-<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a></span>
-<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a><span class="co"># validate that the CRS has changed successfully</span></span>
-<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a><span class="fu">st_crs</span>(wdpa_poly_fix_0)</span>
-<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a></span>
-<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a><span class="co"># set file path for writing, be sure to change these to the correct titles for saving</span></span>
-<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a>shp_xformed_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_May2024_shp_xformed_0&#39;</span>) <span class="co"># replace month and year with the appropriate month and year</span></span>
-<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a>shp_xformed_1 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_May2024_shp_xformed_1&#39;</span>) <span class="co"># replace month and year with the appropriate month and year</span></span>
-<span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a>shp_xformed_2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_May2024_shp_xformed_2&#39;</span>) <span class="co"># replace month and year with the appropriate month and year</span></span>
-<span id="cb5-48"><a href="#cb5-48" tabindex="-1"></a></span>
-<span id="cb5-49"><a href="#cb5-49" tabindex="-1"></a><span class="co"># write the transformed files to Mazu, this will likely take ~7 mins per file, look at the file size on Mazu to check if it is done writing</span></span>
-<span id="cb5-50"><a href="#cb5-50" tabindex="-1"></a><span class="fu">st_write</span>(wdpa_poly_fix_0,</span>
-<span id="cb5-51"><a href="#cb5-51" tabindex="-1"></a>         <span class="at">dsn =</span> (shp_xformed_0),</span>
-<span id="cb5-52"><a href="#cb5-52" tabindex="-1"></a>         <span class="at">layer =</span> <span class="fu">basename</span>(shp_xformed_0),</span>
-<span id="cb5-53"><a href="#cb5-53" tabindex="-1"></a>         <span class="at">driver =</span> <span class="st">&#39;ESRI Shapefile&#39;</span>,</span>
-<span id="cb5-54"><a href="#cb5-54" tabindex="-1"></a>         <span class="at">update =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-55"><a href="#cb5-55" tabindex="-1"></a></span>
-<span id="cb5-56"><a href="#cb5-56" tabindex="-1"></a><span class="fu">st_write</span>(wdpa_poly_fix_1,</span>
-<span id="cb5-57"><a href="#cb5-57" tabindex="-1"></a>         <span class="at">dsn =</span> (shp_xformed_1),</span>
-<span id="cb5-58"><a href="#cb5-58" tabindex="-1"></a>         <span class="at">layer =</span> <span class="fu">basename</span>(shp_xformed_1),</span>
-<span id="cb5-59"><a href="#cb5-59" tabindex="-1"></a>         <span class="at">driver =</span> <span class="st">&#39;ESRI Shapefile&#39;</span>,</span>
-<span id="cb5-60"><a href="#cb5-60" tabindex="-1"></a>         <span class="at">update =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-61"><a href="#cb5-61" tabindex="-1"></a></span>
-<span id="cb5-62"><a href="#cb5-62" tabindex="-1"></a><span class="fu">st_write</span>(wdpa_poly_fix_2,</span>
-<span id="cb5-63"><a href="#cb5-63" tabindex="-1"></a>         <span class="at">dsn =</span> (shp_xformed_2),</span>
-<span id="cb5-64"><a href="#cb5-64" tabindex="-1"></a>         <span class="at">layer =</span> <span class="fu">basename</span>(shp_xformed_2),</span>
-<span id="cb5-65"><a href="#cb5-65" tabindex="-1"></a>         <span class="at">driver =</span> <span class="st">&#39;ESRI Shapefile&#39;</span>,</span>
-<span id="cb5-66"><a href="#cb5-66" tabindex="-1"></a>         <span class="at">update =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># file paths for shape files we just wrote to Mazu</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>shp_reorder_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_Jun2025_shp_ordered_0&#39;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>shp_reorder_1 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_Jun2025_shp_ordered_1&#39;</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>shp_reorder_2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_Jun2025_shp_ordered_2&#39;</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co"># read in those shape files as sf objects to ensure they were written correctly and to use below</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>wdpa_poly_0 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> shp_reorder_0, </span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_0),</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>wdpa_poly_1 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> shp_reorder_1, </span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_1),</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>wdpa_poly_2 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> shp_reorder_2, </span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_2),</span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co"># put the sf objects in a list</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>wdpa_list <span class="ot">&lt;-</span> <span class="fu">list</span>(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)    </span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co"># create function to run over list and change the CRS to Mollweide</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>change_crs <span class="ot">&lt;-</span> <span class="cf">function</span>(wdpa_poly_object) {</span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">&#39;Spatial transforming WDPA polygons to Mollweide&#39;</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>  DF <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(wdpa_poly_object, </span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>        <span class="at">crs =</span> <span class="st">&#39;+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs&#39;</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>  </span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a><span class="fu">return</span>(DF)</span>
+<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>}  </span>
+<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a><span class="co"># run function over list of sf objects</span></span>
+<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a>wdpa_poly_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(wdpa_list, change_crs)</span>
+<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a></span>
+<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a><span class="co"># unlist the items</span></span>
+<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a>wdpa_poly_fix_0 <span class="ot">&lt;-</span> wdpa_poly_list[[<span class="dv">1</span>]]</span>
+<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a>wdpa_poly_fix_1 <span class="ot">&lt;-</span> wdpa_poly_list[[<span class="dv">2</span>]]  </span>
+<span id="cb6-39"><a href="#cb6-39" tabindex="-1"></a>wdpa_poly_fix_2 <span class="ot">&lt;-</span> wdpa_poly_list[[<span class="dv">3</span>]]  </span>
+<span id="cb6-40"><a href="#cb6-40" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" tabindex="-1"></a><span class="co"># validate that the CRS has changed successfully</span></span>
+<span id="cb6-42"><a href="#cb6-42" tabindex="-1"></a><span class="fu">st_crs</span>(wdpa_poly_fix_0)</span>
+<span id="cb6-43"><a href="#cb6-43" tabindex="-1"></a></span>
+<span id="cb6-44"><a href="#cb6-44" tabindex="-1"></a><span class="co"># set file path for writing, be sure to change these to the correct titles for saving</span></span>
+<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a>shp_xformed_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_Jun2025_shp_xformed_0&#39;</span>) <span class="co"># replace month and year with the appropriate month and year</span></span>
+<span id="cb6-46"><a href="#cb6-46" tabindex="-1"></a>shp_xformed_1 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_Jun2025_shp_xformed_1&#39;</span>) <span class="co"># replace month and year with the appropriate month and year</span></span>
+<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a>shp_xformed_2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_Jun2025_shp_xformed_2&#39;</span>) <span class="co"># replace month and year with the appropriate month and year</span></span>
+<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" tabindex="-1"></a><span class="co"># write the transformed files to Mazu, this will likely take ~7 mins per file, look at the file size on Mazu to check if it is done writing</span></span>
+<span id="cb6-50"><a href="#cb6-50" tabindex="-1"></a><span class="fu">st_write</span>(wdpa_poly_fix_0,</span>
+<span id="cb6-51"><a href="#cb6-51" tabindex="-1"></a>         <span class="at">dsn =</span> (shp_xformed_0),</span>
+<span id="cb6-52"><a href="#cb6-52" tabindex="-1"></a>         <span class="at">layer =</span> <span class="fu">basename</span>(shp_xformed_0),</span>
+<span id="cb6-53"><a href="#cb6-53" tabindex="-1"></a>         <span class="at">driver =</span> <span class="st">&#39;ESRI Shapefile&#39;</span>,</span>
+<span id="cb6-54"><a href="#cb6-54" tabindex="-1"></a>         <span class="at">update =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-55"><a href="#cb6-55" tabindex="-1"></a></span>
+<span id="cb6-56"><a href="#cb6-56" tabindex="-1"></a><span class="fu">st_write</span>(wdpa_poly_fix_1,</span>
+<span id="cb6-57"><a href="#cb6-57" tabindex="-1"></a>         <span class="at">dsn =</span> (shp_xformed_1),</span>
+<span id="cb6-58"><a href="#cb6-58" tabindex="-1"></a>         <span class="at">layer =</span> <span class="fu">basename</span>(shp_xformed_1),</span>
+<span id="cb6-59"><a href="#cb6-59" tabindex="-1"></a>         <span class="at">driver =</span> <span class="st">&#39;ESRI Shapefile&#39;</span>,</span>
+<span id="cb6-60"><a href="#cb6-60" tabindex="-1"></a>         <span class="at">update =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-61"><a href="#cb6-61" tabindex="-1"></a></span>
+<span id="cb6-62"><a href="#cb6-62" tabindex="-1"></a><span class="fu">st_write</span>(wdpa_poly_fix_2,</span>
+<span id="cb6-63"><a href="#cb6-63" tabindex="-1"></a>         <span class="at">dsn =</span> (shp_xformed_2),</span>
+<span id="cb6-64"><a href="#cb6-64" tabindex="-1"></a>         <span class="at">layer =</span> <span class="fu">basename</span>(shp_xformed_2),</span>
+<span id="cb6-65"><a href="#cb6-65" tabindex="-1"></a>         <span class="at">driver =</span> <span class="st">&#39;ESRI Shapefile&#39;</span>,</span>
+<span id="cb6-66"><a href="#cb6-66" tabindex="-1"></a>         <span class="at">update =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="shapefile-to-raster-terrarasterize" class="section level2">
 <h2>Shapefile to Raster: <code>terra::rasterize()</code></h2>
@@ -1953,167 +2000,186 @@ ten minutes. However, saving the very large (18GB) resulting raster
 proved problematic. The <code>writeRasterBlocks()</code> function
 defined above helped get around that problem though still took over an
 hour to write the raster to disk.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># destination filepath for all the new raster file</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co"># reminder, dir_goal_anx is git-annex/globalprep/lsp/v2024</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>rast_wdpa_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx,</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>                            <span class="st">&#39;rast&#39;</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>                            <span class="st">&#39;wdpa_2024_moll_500m.tif&#39;</span>) </span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># function to create raster file or skip process if raster file is present</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(rast_wdpa_file)) {</span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>  </span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>  <span class="co"># file paths for vector data created earlier</span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>  <span class="co"># replace month and year with the appropriate month and year</span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>  shp_xformed_file_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>,</span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>                                  <span class="st">&#39;WDPA_May2024_shp_xformed_0&#39;</span>, <span class="co"># added this line because we created nested folders to house each shapefile earlier</span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>                                  <span class="st">&#39;WDPA_May2024_shp_xformed_0.shp&#39;</span>) </span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>  shp_xformed_file_1 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>,</span>
-<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>                                  <span class="st">&#39;WDPA_May2024_shp_xformed_1&#39;</span>,</span>
-<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>                                  <span class="st">&#39;WDPA_May2024_shp_xformed_1.shp&#39;</span>) </span>
-<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>  shp_xformed_file_2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>,</span>
-<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>                                  <span class="st">&#39;WDPA_May2024_shp_xformed_2&#39;</span>,</span>
-<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>                                  <span class="st">&#39;WDPA_May2024_shp_xformed_2.shp&#39;</span>) </span>
-<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>  <span class="co"># create time stamp</span></span>
-<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>  ptm <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
-<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>  <span class="co"># read in data as SpatVectors with terra</span></span>
-<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>  wdpa_poly_0 <span class="ot">&lt;-</span> <span class="fu">vect</span>(shp_xformed_file_0)</span>
-<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>  wdpa_poly_1 <span class="ot">&lt;-</span> <span class="fu">vect</span>(shp_xformed_file_1)</span>
-<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>  wdpa_poly_2 <span class="ot">&lt;-</span> <span class="fu">vect</span>(shp_xformed_file_2)</span>
-<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>  </span>
-<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a>  <span class="co"># bind them all together into one object</span></span>
-<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>  wdpa_poly_all <span class="ot">&lt;-</span> <span class="fu">rbind</span>(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)</span>
-<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a>  </span>
-<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a>  <span class="co"># report time: ~25s to read in each file</span></span>
-<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&#39;elapsed: &#39;</span>, (<span class="fu">proc.time</span>() <span class="sc">-</span> ptm)[<span class="dv">3</span>])</span>
-<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a>  </span>
-<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a>  <span class="co"># clear memory</span></span>
-<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a>  <span class="fu">rm</span>(<span class="st">&quot;wdpa_poly_0&quot;</span>, <span class="st">&quot;wdpa_poly_1&quot;</span>, <span class="st">&quot;wdpa_poly_2&quot;</span>)</span>
-<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a>  <span class="fu">gc</span>()</span>
-<span id="cb6-39"><a href="#cb6-39" tabindex="-1"></a></span>
-<span id="cb6-40"><a href="#cb6-40" tabindex="-1"></a>  <span class="co"># read in base raster file used in OHI</span></span>
-<span id="cb6-41"><a href="#cb6-41" tabindex="-1"></a>  rast_base <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="fu">file.path</span>(dir_M, <span class="st">&#39;git-annex/globalprep/spatial/d2014&#39;</span>,</span>
-<span id="cb6-42"><a href="#cb6-42" tabindex="-1"></a>                                <span class="st">&#39;data/rgn_mol_raster_500m&#39;</span>,</span>
-<span id="cb6-43"><a href="#cb6-43" tabindex="-1"></a>                                <span class="st">&#39;rgn_inland1km_mol_500mcell.tif&#39;</span>))</span>
-<span id="cb6-44"><a href="#cb6-44" tabindex="-1"></a>  </span>
-<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a>  <span class="co"># time stamp</span></span>
-<span id="cb6-46"><a href="#cb6-46" tabindex="-1"></a>  ptm <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
-<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a>  </span>
-<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a>  <span class="co"># convert vector object into raster object</span></span>
-<span id="cb6-49"><a href="#cb6-49" tabindex="-1"></a>  <span class="co"># for overlapping polygons, use the oldest (minimum) status year for that area: fun = &quot;min&quot;</span></span>
-<span id="cb6-50"><a href="#cb6-50" tabindex="-1"></a>  rast_wdpa <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rasterize</span>(wdpa_poly_all, </span>
-<span id="cb6-51"><a href="#cb6-51" tabindex="-1"></a>                                rast_base, </span>
-<span id="cb6-52"><a href="#cb6-52" tabindex="-1"></a>                                <span class="at">field =</span> <span class="st">&#39;status_yr&#39;</span>, </span>
-<span id="cb6-53"><a href="#cb6-53" tabindex="-1"></a>                                <span class="at">fun =</span> <span class="st">&#39;min&#39;</span>)</span>
-<span id="cb6-54"><a href="#cb6-54" tabindex="-1"></a>  </span>
-<span id="cb6-55"><a href="#cb6-55" tabindex="-1"></a>  <span class="co"># time stamp report</span></span>
-<span id="cb6-56"><a href="#cb6-56" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&#39;rasterize elapsed: &#39;</span>, (<span class="fu">proc.time</span>() <span class="sc">-</span> ptm)[<span class="dv">3</span>]) </span>
-<span id="cb6-57"><a href="#cb6-57" tabindex="-1"></a>  </span>
-<span id="cb6-58"><a href="#cb6-58" tabindex="-1"></a>  <span class="co"># 2021 fasterize: 45.006 seconds!</span></span>
-<span id="cb6-59"><a href="#cb6-59" tabindex="-1"></a>  <span class="co"># 2022 terra::rasterize: 876 seconds</span></span>
-<span id="cb6-60"><a href="#cb6-60" tabindex="-1"></a>  <span class="co"># 2023 terra::rasterize: 454 seconds</span></span>
-<span id="cb6-61"><a href="#cb6-61" tabindex="-1"></a></span>
-<span id="cb6-62"><a href="#cb6-62" tabindex="-1"></a>  <span class="co"># time stamp</span></span>
-<span id="cb6-63"><a href="#cb6-63" tabindex="-1"></a>  ptm <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
-<span id="cb6-64"><a href="#cb6-64" tabindex="-1"></a>  </span>
-<span id="cb6-65"><a href="#cb6-65" tabindex="-1"></a>  <span class="co"># must create new folder and rast subfolder at destination for this to work</span></span>
-<span id="cb6-66"><a href="#cb6-66" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">writeRaster</span>(rast_wdpa, rast_wdpa_file)</span>
-<span id="cb6-67"><a href="#cb6-67" tabindex="-1"></a>  </span>
-<span id="cb6-68"><a href="#cb6-68" tabindex="-1"></a>  <span class="co"># report time stamp: ~76 seconds</span></span>
-<span id="cb6-69"><a href="#cb6-69" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">&#39;writeRaster elapsed: &#39;</span>, (<span class="fu">proc.time</span>() <span class="sc">-</span> ptm)[<span class="dv">3</span>])</span>
-<span id="cb6-70"><a href="#cb6-70" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># you are encouraged to use this space to examing the raster created from the WDPA data </span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co"># read in this year and last year&#39;s data</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>check_current <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(rast_wdpa_file)</span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>check_past <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="fu">file.path</span>(<span class="st">&quot;/home/shares/ohi/git-annex/globalprep/lsp/v2023/rast/wdpa_2023_moll_500m.tif&quot;</span>))</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># destination filepath for all the new raster file</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co"># reminder, dir_goal_anx is git-annex/globalprep/lsp/v2025</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>rast_wdpa_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx,</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>                            <span class="st">&#39;rast&#39;</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>                            <span class="st">&#39;wdpa_2025_moll_500m.tif&#39;</span>) </span>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co"># visualize both rasters</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="fu">plot</span>(check_current, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="fu">plot</span>(check_past, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span></code></pre></div>
-<p>Noticing a new big blue blob a little ways off the coast of
-Madagascar (past the other aggregation of points/blob)</p>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co"># function to create raster file or skip process if raster file is present</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">file.exists</span>(rast_wdpa_file)) {</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>  </span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>  <span class="co"># file paths for vector data created earlier</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>  <span class="co"># replace month and year with the appropriate month and year</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>  shp_xformed_file_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>                                  <span class="st">&#39;WDPA_Jun2025_shp_xformed_0&#39;</span>, <span class="co"># added this line because we created nested folders to house each shapefile earlier</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>                                  <span class="st">&#39;WDPA_Jun2025_shp_xformed_0.shp&#39;</span>) </span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>  shp_xformed_file_1 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>                                  <span class="st">&#39;WDPA_Jun2025_shp_xformed_1&#39;</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>                                  <span class="st">&#39;WDPA_Jun2025_shp_xformed_1.shp&#39;</span>) </span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>  shp_xformed_file_2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>                                  <span class="st">&#39;WDPA_Jun2025_shp_xformed_2&#39;</span>,</span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>                                  <span class="st">&#39;WDPA_Jun2025_shp_xformed_2.shp&#39;</span>) </span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>  <span class="co"># create time stamp</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a>  ptm <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a>  <span class="co"># read in data as SpatVectors with terra</span></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a>  wdpa_poly_0 <span class="ot">&lt;-</span> <span class="fu">vect</span>(shp_xformed_file_0)</span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a>  wdpa_poly_1 <span class="ot">&lt;-</span> <span class="fu">vect</span>(shp_xformed_file_1)</span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a>  wdpa_poly_2 <span class="ot">&lt;-</span> <span class="fu">vect</span>(shp_xformed_file_2)</span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a>  </span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a>  <span class="co"># bind them all together into one object</span></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>  wdpa_poly_all <span class="ot">&lt;-</span> <span class="fu">rbind</span>(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)</span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a>  </span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>  <span class="co"># report time: ~25s to read in each file</span></span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&#39;elapsed: &#39;</span>, (<span class="fu">proc.time</span>() <span class="sc">-</span> ptm)[<span class="dv">3</span>])</span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a>  </span>
+<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a>  <span class="co"># clear memory</span></span>
+<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a>  <span class="fu">rm</span>(<span class="st">&quot;wdpa_poly_0&quot;</span>, <span class="st">&quot;wdpa_poly_1&quot;</span>, <span class="st">&quot;wdpa_poly_2&quot;</span>)</span>
+<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a>  <span class="fu">gc</span>()</span>
+<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a>  <span class="co"># read in base raster file used in OHI</span></span>
+<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a>  rast_base <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="fu">file.path</span>(dir_M, <span class="st">&#39;git-annex/globalprep/spatial/d2014&#39;</span>,</span>
+<span id="cb7-42"><a href="#cb7-42" tabindex="-1"></a>                                <span class="st">&#39;data/rgn_mol_raster_500m&#39;</span>,</span>
+<span id="cb7-43"><a href="#cb7-43" tabindex="-1"></a>                                <span class="st">&#39;rgn_inland1km_mol_500mcell.tif&#39;</span>))</span>
+<span id="cb7-44"><a href="#cb7-44" tabindex="-1"></a>  </span>
+<span id="cb7-45"><a href="#cb7-45" tabindex="-1"></a>  <span class="co"># time stamp</span></span>
+<span id="cb7-46"><a href="#cb7-46" tabindex="-1"></a>  ptm <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
+<span id="cb7-47"><a href="#cb7-47" tabindex="-1"></a>  </span>
+<span id="cb7-48"><a href="#cb7-48" tabindex="-1"></a>  <span class="co"># convert vector object into raster object</span></span>
+<span id="cb7-49"><a href="#cb7-49" tabindex="-1"></a>  <span class="co"># for overlapping polygons, use the oldest (minimum) status year for that area: fun = &quot;min&quot;</span></span>
+<span id="cb7-50"><a href="#cb7-50" tabindex="-1"></a>  rast_wdpa <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rasterize</span>(wdpa_poly_all, </span>
+<span id="cb7-51"><a href="#cb7-51" tabindex="-1"></a>                                rast_base, </span>
+<span id="cb7-52"><a href="#cb7-52" tabindex="-1"></a>                                <span class="at">field =</span> <span class="st">&#39;status_yr&#39;</span>, </span>
+<span id="cb7-53"><a href="#cb7-53" tabindex="-1"></a>                                <span class="at">fun =</span> <span class="st">&#39;min&#39;</span>)</span>
+<span id="cb7-54"><a href="#cb7-54" tabindex="-1"></a>  </span>
+<span id="cb7-55"><a href="#cb7-55" tabindex="-1"></a>  <span class="co"># time stamp report</span></span>
+<span id="cb7-56"><a href="#cb7-56" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&#39;rasterize elapsed: &#39;</span>, (<span class="fu">proc.time</span>() <span class="sc">-</span> ptm)[<span class="dv">3</span>]) </span>
+<span id="cb7-57"><a href="#cb7-57" tabindex="-1"></a>  </span>
+<span id="cb7-58"><a href="#cb7-58" tabindex="-1"></a>  <span class="co"># 2021 fasterize: 45.006 seconds!</span></span>
+<span id="cb7-59"><a href="#cb7-59" tabindex="-1"></a>  <span class="co"># 2022 terra::rasterize: 876 seconds</span></span>
+<span id="cb7-60"><a href="#cb7-60" tabindex="-1"></a>  <span class="co"># 2023 terra::rasterize: 454 seconds</span></span>
+<span id="cb7-61"><a href="#cb7-61" tabindex="-1"></a></span>
+<span id="cb7-62"><a href="#cb7-62" tabindex="-1"></a>  <span class="co"># time stamp</span></span>
+<span id="cb7-63"><a href="#cb7-63" tabindex="-1"></a>  ptm <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
+<span id="cb7-64"><a href="#cb7-64" tabindex="-1"></a>  </span>
+<span id="cb7-65"><a href="#cb7-65" tabindex="-1"></a>  <span class="co"># must create new folder and rast subfolder at destination for this to work</span></span>
+<span id="cb7-66"><a href="#cb7-66" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">writeRaster</span>(rast_wdpa, rast_wdpa_file)</span>
+<span id="cb7-67"><a href="#cb7-67" tabindex="-1"></a>  </span>
+<span id="cb7-68"><a href="#cb7-68" tabindex="-1"></a>  <span class="co"># report time stamp: ~76 seconds</span></span>
+<span id="cb7-69"><a href="#cb7-69" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">&#39;writeRaster elapsed: &#39;</span>, (<span class="fu">proc.time</span>() <span class="sc">-</span> ptm)[<span class="dv">3</span>])</span>
+<span id="cb7-70"><a href="#cb7-70" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># you are encouraged to use this space to examing the raster created from the WDPA data </span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co"># read in this year and last year&#39;s data</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>check_current <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(rast_wdpa_file)</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>check_past <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="fu">file.path</span>(<span class="st">&quot;/home/shares/ohi/git-annex/globalprep/lsp/v2024/rast/wdpa_2024_moll_500m.tif&quot;</span>))</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co"># visualize both rasters</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="fu">plot</span>(check_current, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="fu">plot</span>(check_past, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co"># Check the difference between the two years</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>check_current_abs <span class="ot">&lt;-</span> <span class="fu">ifel</span>(<span class="fu">is.na</span>(check_current), <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>check_past_abs <span class="ot">&lt;-</span> <span class="fu">ifel</span>(<span class="fu">is.na</span>(check_past), <span class="dv">0</span>, <span class="dv">1</span>) </span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>compare <span class="ot">&lt;-</span> check_past_abs <span class="sc">-</span> check_current_abs </span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="fu">plot</span>(compare, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p>2025: Some new large MPAs off the Northwestern coast of Australia.
+Various other smaller changes. On the whole, it looks like slightly more
+area this year compared to last year.</p>
 </div>
 <div id="data-checking" class="section level2">
 <h2>Data Checking</h2>
-<p>Compare shapefile from last year vs this year (2023 v 2024).</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># file paths for previous data as SF</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>shp_reorder_23_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">&#39;/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2023/WDPA_Jun2023_Public_shp/shps/WDPA_Jun2023_shp_ordered_0&#39;</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>shp_reorder_23_1 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">&#39;/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2023/WDPA_Jun2023_Public_shp/shps/WDPA_Jun2023_shp_ordered_0&#39;</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>shp_reorder_23_2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">&#39;/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2023/WDPA_Jun2023_Public_shp/shps/WDPA_Jun2023_shp_ordered_0&#39;</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co"># read in previous data</span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>wdpa_poly_23_0 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="fu">dirname</span>(shp_reorder_23_0), </span>
-<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_23_0),</span>
-<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>wdpa_poly_23_1 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="fu">dirname</span>(shp_reorder_23_1), </span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_23_1),</span>
-<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>wdpa_poly_23_2 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="fu">dirname</span>(shp_reorder_23_2), </span>
-<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_23_2),</span>
-<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a></span>
-<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co"># bind all into one</span></span>
-<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>wdpa_poly_all_previous <span class="ot">&lt;-</span> <span class="fu">rbind</span>(wdpa_poly_23_0, wdpa_poly_23_1, wdpa_poly_23_2)</span>
-<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a></span>
-<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a></span>
-<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="co"># file paths for current data as SF (this is the same exact code from the chunk: transform_poly)</span></span>
-<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a>shp_reorder_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_May2024_shp_ordered_0&#39;</span>) <span class="co"># we used May data in the 2024 update... sorry it&#39;s not as easy of a fix as the previous years where you could just change the last number!</span></span>
-<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>shp_reorder_1 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_May2024_shp_ordered_1&#39;</span>)</span>
-<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a>shp_reorder_2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_data, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_May2024_shp_ordered_2&#39;</span>)</span>
-<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a></span>
-<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a></span>
-<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a><span class="co"># read in current data (also the same as the earlier chunk)</span></span>
-<span id="cb8-32"><a href="#cb8-32" tabindex="-1"></a>wdpa_poly_0 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> shp_reorder_0, </span>
-<span id="cb8-33"><a href="#cb8-33" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_0),</span>
-<span id="cb8-34"><a href="#cb8-34" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-35"><a href="#cb8-35" tabindex="-1"></a>wdpa_poly_1 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> shp_reorder_1, </span>
-<span id="cb8-36"><a href="#cb8-36" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_1),</span>
-<span id="cb8-37"><a href="#cb8-37" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-38"><a href="#cb8-38" tabindex="-1"></a>wdpa_poly_2 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> shp_reorder_2, </span>
-<span id="cb8-39"><a href="#cb8-39" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_2),</span>
-<span id="cb8-40"><a href="#cb8-40" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb8-41"><a href="#cb8-41" tabindex="-1"></a></span>
-<span id="cb8-42"><a href="#cb8-42" tabindex="-1"></a><span class="co"># bind current data together (this is new! before, we just put them in a list)</span></span>
-<span id="cb8-43"><a href="#cb8-43" tabindex="-1"></a>wdpa_poly_all_current <span class="ot">&lt;-</span> <span class="fu">rbind</span>(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)</span>
-<span id="cb8-44"><a href="#cb8-44" tabindex="-1"></a></span>
-<span id="cb8-45"><a href="#cb8-45" tabindex="-1"></a><span class="co"># check colnames</span></span>
-<span id="cb8-46"><a href="#cb8-46" tabindex="-1"></a><span class="fu">colnames</span>(wdpa_poly_all_previous) <span class="sc">==</span> <span class="fu">colnames</span>(wdpa_poly_all_current)</span>
-<span id="cb8-47"><a href="#cb8-47" tabindex="-1"></a></span>
-<span id="cb8-48"><a href="#cb8-48" tabindex="-1"></a><span class="co"># check names</span></span>
-<span id="cb8-49"><a href="#cb8-49" tabindex="-1"></a><span class="fu">unique</span>(wdpa_poly_all_current<span class="sc">$</span>orig_name)</span>
-<span id="cb8-50"><a href="#cb8-50" tabindex="-1"></a><span class="fu">unique</span>(wdpa_poly_all_previous<span class="sc">$</span>orig_name)</span>
-<span id="cb8-51"><a href="#cb8-51" tabindex="-1"></a><span class="co"># unique(wdpa_poly_all_previous$parent_iso)</span></span>
-<span id="cb8-52"><a href="#cb8-52" tabindex="-1"></a></span>
-<span id="cb8-53"><a href="#cb8-53" tabindex="-1"></a></span>
-<span id="cb8-54"><a href="#cb8-54" tabindex="-1"></a><span class="co"># test area to see if things look right</span></span>
-<span id="cb8-55"><a href="#cb8-55" tabindex="-1"></a>test_area_current <span class="ot">&lt;-</span> wdpa_poly_all_current <span class="sc">%&gt;%</span></span>
-<span id="cb8-56"><a href="#cb8-56" tabindex="-1"></a>  <span class="fu">filter</span>(parent_iso <span class="sc">==</span> <span class="st">&quot;GBR&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-57"><a href="#cb8-57" tabindex="-1"></a>  <span class="fu">filter</span>(iso3 <span class="sc">==</span> <span class="st">&quot;PCN&quot;</span>)</span>
-<span id="cb8-58"><a href="#cb8-58" tabindex="-1"></a></span>
-<span id="cb8-59"><a href="#cb8-59" tabindex="-1"></a></span>
-<span id="cb8-60"><a href="#cb8-60" tabindex="-1"></a>test_area_previous <span class="ot">&lt;-</span> wdpa_poly_all_previous <span class="sc">%&gt;%</span></span>
-<span id="cb8-61"><a href="#cb8-61" tabindex="-1"></a>  <span class="fu">filter</span>(parent_iso <span class="sc">==</span> <span class="st">&quot;GBR&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb8-62"><a href="#cb8-62" tabindex="-1"></a>  <span class="fu">filter</span>(iso3 <span class="sc">==</span> <span class="st">&quot;PCN&quot;</span>)</span>
-<span id="cb8-63"><a href="#cb8-63" tabindex="-1"></a></span>
-<span id="cb8-64"><a href="#cb8-64" tabindex="-1"></a></span>
-<span id="cb8-65"><a href="#cb8-65" tabindex="-1"></a><span class="fu">mapview</span>(test_area_current)</span>
-<span id="cb8-66"><a href="#cb8-66" tabindex="-1"></a><span class="fu">mapview</span>(test_area_previous)</span>
-<span id="cb8-67"><a href="#cb8-67" tabindex="-1"></a><span class="co"># 2024 note: got an error saying &quot;test_area_previous does not contain data&quot;... the previous steps worked and the wdpa_poly_all_previous object does contain data, so that means that this area just doesn&#39;t have data...</span></span>
-<span id="cb8-68"><a href="#cb8-68" tabindex="-1"></a></span>
-<span id="cb8-69"><a href="#cb8-69" tabindex="-1"></a></span>
-<span id="cb8-70"><a href="#cb8-70" tabindex="-1"></a></span>
-<span id="cb8-71"><a href="#cb8-71" tabindex="-1"></a></span>
-<span id="cb8-72"><a href="#cb8-72" tabindex="-1"></a><span class="fu">st_area</span>(test_area_current) </span>
-<span id="cb8-73"><a href="#cb8-73" tabindex="-1"></a><span class="co"># 2021 836075862002 m2 </span></span>
-<span id="cb8-74"><a href="#cb8-74" tabindex="-1"></a><span class="co"># 2022 841909966909 m2</span></span></code></pre></div>
+<p>Compare shapefile from last year vs this year (2024 v 2025).</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># file paths for previous data as SF</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>shp_reorder_24_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">&#39;/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_0&#39;</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>shp_reorder_24_1 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">&#39;/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_1&#39;</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>shp_reorder_24_2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">&#39;/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_2&#39;</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co"># read in previous data</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co"># These lines did not run during the 2025 assessment! See below code chunk</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>wdpa_poly_24_0 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="fu">dirname</span>(shp_reorder_24_0), </span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_24_0),</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>wdpa_poly_24_1 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="fu">dirname</span>(shp_reorder_24_1), </span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_24_1),</span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>wdpa_poly_24_2 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="fu">dirname</span>(shp_reorder_24_2), </span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_24_2),</span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Had an error reading in the 2024 data. Decided to simplify it for troubleshooting</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>wdpa_poly_24_0 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_0/WDPA_May2024_shp_ordered_0.shp&quot;</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>wdpa_poly_24_1 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_1/WDPA_May2024_shp_ordered_1.shp&quot;</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>wdpa_poly_24_2 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;/home/shares/ohi/git-annex/globalprep/_raw_data/wdpa_mpa/d2024/WDPA_May2024_Public_shp/shps/WDPA_May2024_shp_ordered_2/WDPA_May2024_shp_ordered_2.shp&quot;</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co"># bind all into one</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>wdpa_poly_all_previous <span class="ot">&lt;-</span> <span class="fu">rbind</span>(wdpa_poly_24_0, wdpa_poly_24_1, wdpa_poly_24_2)</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="co"># file paths for current data as SF (this is the same exact code from the chunk: transform_poly)</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>shp_reorder_0 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_Jun2025_shp_ordered_0&#39;</span>) </span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>shp_reorder_1 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_Jun2025_shp_ordered_1&#39;</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>shp_reorder_2 <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_goal_anx, <span class="st">&#39;shps&#39;</span>, <span class="st">&#39;WDPA_Jun2025_shp_ordered_2&#39;</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a><span class="co"># read in current data (also the same as the earlier chunk)</span></span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>wdpa_poly_0 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> shp_reorder_0, </span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_0),</span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a>wdpa_poly_1 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> shp_reorder_1, </span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_1),</span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a>wdpa_poly_2 <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> shp_reorder_2, </span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a>                          <span class="at">layer =</span> <span class="fu">basename</span>(shp_reorder_2),</span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a><span class="co"># bind current data together (this is new! before, we just put them in a list)</span></span>
+<span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a>wdpa_poly_all_current <span class="ot">&lt;-</span> <span class="fu">rbind</span>(wdpa_poly_0, wdpa_poly_1, wdpa_poly_2)</span>
+<span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a></span>
+<span id="cb10-31"><a href="#cb10-31" tabindex="-1"></a><span class="co"># check colnames</span></span>
+<span id="cb10-32"><a href="#cb10-32" tabindex="-1"></a><span class="fu">colnames</span>(wdpa_poly_all_previous) <span class="sc">==</span> <span class="fu">colnames</span>(wdpa_poly_all_current)</span>
+<span id="cb10-33"><a href="#cb10-33" tabindex="-1"></a></span>
+<span id="cb10-34"><a href="#cb10-34" tabindex="-1"></a><span class="co"># check names</span></span>
+<span id="cb10-35"><a href="#cb10-35" tabindex="-1"></a><span class="fu">unique</span>(wdpa_poly_all_current<span class="sc">$</span>orig_name)</span>
+<span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a><span class="fu">unique</span>(wdpa_poly_all_previous<span class="sc">$</span>orig_name)</span>
+<span id="cb10-37"><a href="#cb10-37" tabindex="-1"></a><span class="co"># unique(wdpa_poly_all_previous$parent_iso)</span></span>
+<span id="cb10-38"><a href="#cb10-38" tabindex="-1"></a></span>
+<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="#cb10-40" tabindex="-1"></a><span class="co"># test area to see if things look right</span></span>
+<span id="cb10-41"><a href="#cb10-41" tabindex="-1"></a>test_area_current <span class="ot">&lt;-</span> wdpa_poly_all_current <span class="sc">%&gt;%</span></span>
+<span id="cb10-42"><a href="#cb10-42" tabindex="-1"></a>  <span class="fu">filter</span>(parent_iso <span class="sc">==</span> <span class="st">&quot;GBR&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-43"><a href="#cb10-43" tabindex="-1"></a>  <span class="fu">filter</span>(iso3 <span class="sc">==</span> <span class="st">&quot;PCN&quot;</span>)</span>
+<span id="cb10-44"><a href="#cb10-44" tabindex="-1"></a></span>
+<span id="cb10-45"><a href="#cb10-45" tabindex="-1"></a></span>
+<span id="cb10-46"><a href="#cb10-46" tabindex="-1"></a>test_area_previous <span class="ot">&lt;-</span> wdpa_poly_all_previous <span class="sc">%&gt;%</span></span>
+<span id="cb10-47"><a href="#cb10-47" tabindex="-1"></a>  <span class="fu">filter</span>(parent_iso <span class="sc">==</span> <span class="st">&quot;GBR&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-48"><a href="#cb10-48" tabindex="-1"></a>  <span class="fu">filter</span>(iso3 <span class="sc">==</span> <span class="st">&quot;PCN&quot;</span>)</span>
+<span id="cb10-49"><a href="#cb10-49" tabindex="-1"></a></span>
+<span id="cb10-50"><a href="#cb10-50" tabindex="-1"></a></span>
+<span id="cb10-51"><a href="#cb10-51" tabindex="-1"></a><span class="fu">mapview</span>(test_area_current)</span>
+<span id="cb10-52"><a href="#cb10-52" tabindex="-1"></a><span class="fu">mapview</span>(test_area_previous)</span>
+<span id="cb10-53"><a href="#cb10-53" tabindex="-1"></a><span class="co"># 2024 note: got an error saying &quot;test_area_previous does not contain data&quot;... the previous steps worked and the wdpa_poly_all_previous object does contain data, so that means that this area just doesn&#39;t have data...</span></span>
+<span id="cb10-54"><a href="#cb10-54" tabindex="-1"></a></span>
+<span id="cb10-55"><a href="#cb10-55" tabindex="-1"></a></span>
+<span id="cb10-56"><a href="#cb10-56" tabindex="-1"></a></span>
+<span id="cb10-57"><a href="#cb10-57" tabindex="-1"></a></span>
+<span id="cb10-58"><a href="#cb10-58" tabindex="-1"></a><span class="fu">st_area</span>(test_area_current) </span>
+<span id="cb10-59"><a href="#cb10-59" tabindex="-1"></a><span class="co"># 2021 836075862002 m2 </span></span>
+<span id="cb10-60"><a href="#cb10-60" tabindex="-1"></a><span class="co"># 2022 841909966909 m2</span></span>
+<span id="cb10-61"><a href="#cb10-61" tabindex="-1"></a><span class="co"># 2025 843725668865 m2</span></span></code></pre></div>
 <p>2024 Note: filtering to parent_iso == “GBR” and iso3 == “PCN”
 resulted in no data for the previous year’s lsp data.</p>
+<p>2025: Test areas look good! area: 843725668865 m^2 <strong>Check that
+area of 3 individual shapefiles matches the total raster
+area</strong></p>
 </div>
 </div>
 
