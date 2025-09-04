@@ -106,6 +106,9 @@ oecd_fao_dir <- here(raw_data_dir, "OECD_FAO_joint_collection", data_dir_version
 
 # output data dir for intermediate data products
 int_dir <- here(data_path, "int")
+
+# output data directory for final data products
+output_dir <- here::here(data_path, "output")
 ```
 
 ### Read in Data
@@ -272,5 +275,5 @@ length(unique(wage_final$rgn_id)) # 210 final regions
 wage_export <- wage_final %>% 
   select(rgn_id, year, quality = annual_income)
 
-write_csv(wage_export, here(int_dir, "liv_fis_quality.csv"))
+write_csv(wage_export, here(output_dir, "fis_quality.csv"))
 ```

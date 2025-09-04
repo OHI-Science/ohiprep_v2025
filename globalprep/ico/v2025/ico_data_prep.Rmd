@@ -15,6 +15,7 @@ output:
     toc: true
 editor_options: 
   chunk_output_type: console
+eval: FALSE
 ---
 
 [REFERENCE RMD FILE](http://ohi-science.org/ohiprep_v2022/globalprep/ico/v2022/ico_data_prep.Rmd)
@@ -80,7 +81,7 @@ The iconic species list was updated by adding species from [Reyes-García et al.
 
 ## Setup
 
-```{r setup, echo = FALSE, message = FALSE, warning = FALSE, eval=FALSE}
+```{r setup, echo = FALSE, message = FALSE, warning = FALSE}
 knitr::opts_chunk$set(message = FALSE, warning = FALSE, eval=FALSE)
 
 ### Load required libraries:
@@ -138,14 +139,14 @@ The list of Iconic Species is based upon the original ICO list generated in 2011
 
 2023 update: The iconic species list was updated by adding species from [Reyes-García et al. 2023](https://www.pnas.org/doi/10.1073/pnas.2217303120). The list should be read directly from the raw data folder. This file will be copied from year to year unless further updates are made to the list.
 
-```{r get_ico_spp_list, eval=FALSE}
+```{r get_ico_spp_list}
 # ico_list_raw_updated can be copied from previous year (v2023)
 # (if there are any changes to the main list then this needs to be updated)
 
 ico_list_raw <- read_csv(here("globalprep","ico", version_year, "raw","ico_list_raw_updated.csv"), show_col_types = FALSE)
 ```
 
-```{r, eval=F}
+```{r}
 DT::datatable(ico_list_raw, caption = 'Iconic Species List')
 ```
 
@@ -221,7 +222,7 @@ write_csv(spp_ico, file.path(dir_here, sprintf('raw/spp_list_from_api_ico_only.c
 
 Check for missing species.
 
-```{r combine_iucn_spp_info_with_ico_list, eval= F}
+```{r combine_iucn_spp_info_with_ico_list}
 
 # Filtering the IUCN list of species to just those that are in the list of iconic species
 spp_ico <- read_csv(here::here(dir_here, 'raw', 'spp_list_from_api_ico_only.csv'), show_col_types = FALSE)
@@ -314,7 +315,7 @@ For each of these species, use the IUCN API to gather a list of countries in whi
 
 **This takes a long time (and failed multiple times) so get started early or run overnight!**
 
-```{r get_country_list, eval= F}
+```{r get_country_list}
 
 # Get species of interest
 ico_list <- read_csv(file.path(dir_here, 'int', 'ico_list_prepped.csv'), show_col_types = FALSE)
@@ -388,7 +389,7 @@ readr::write_csv(spp_countries_df, here::here(dir_here, 'int', 'ico_spp_countrie
 
 Name to region function (in OHI core package) reports regions that don't have a match in OHI region list. Here we report certain reported regions at a higher spatial scale, based on the listed regions in the error message.
 
-```{r country_split, eval=FALSE}
+```{r country_split}
 # bring back in the reported regions associated with the iucn ids
 ico_spp_countries <- read_csv(here::here(dir_here, 'int', 'ico_spp_countries.csv'), show_col_types = FALSE)
 
@@ -486,7 +487,7 @@ readr::write_csv(ico_spp_rgn_raw, here::here(dir_here, 'raw', 'ico_spp_rgn_raw.c
 
 Filter for globally iconic species
 
-```{r attach_country_list_to_spp_info_list, eval=F}
+```{r attach_country_list_to_spp_info_list}
 
 ico_spp_rgn_raw <- read_csv(here::here(dir_here, 'raw', 'ico_spp_rgn_raw.csv'), show_col_types = FALSE)
 
@@ -510,7 +511,7 @@ ico_spp_rgn_prepped <- ico_spp_rgn_prepped %>%
 readr::write_csv(ico_spp_rgn_prepped, here::here(dir_here, 'int', 'ico_spp_rgn_prepped.csv'))
 ```
 
-```{r, eval=F}
+```{r}
 
 ico_spp_rgn_prepped <- read_csv(here::here(goal, version_year, 'int', 'ico_spp_rgn_prepped.csv'), col_types = "ddcccdcccldcc")
 # Explicitly designating col_types retains all data !
@@ -582,7 +583,7 @@ ico_assess_raw <- spp_assessments
 readr::write_csv(ico_assess_raw, here(dir_here, 'raw', 'ico_assessments_raw.csv'))
 ```
 
-```{r get_category_list, eval=F}
+```{r get_category_list}
 # get ready to access the extinction risk
 # ico_past_assess_url <- 'http://apiv3.iucnredlist.org/api/v3/species/history/id/%s?token=%s'
 # ico_list <- here::here(dir_here, 'int', 'ico_list_prepped.csv') %>% 
@@ -701,7 +702,7 @@ current <- ico_assess_raw %>%
 readr::write_csv(ico_assess_raw, here(dir_here, 'raw', 'ico_assessments_raw.csv'))
 ```
 
-```{r, eval=F}
+```{r}
 DT::datatable(ico_assess_raw, caption = 'ICO species and past IUCN assessments')
 ```
 
@@ -847,7 +848,7 @@ readr::write_csv(ico_assess, here::here(dir_here, 'int', 'ico_assess_clean.csv')
 
 Using `tidyr::complete()` and `tidyr::fill()`, we create a full time series for all species from the earliest assessment to the most recent year.
 
-```{r fill_out_category_time_series, eval= F}
+```{r fill_out_category_time_series}
 
 ico_assess <- read_csv(here::here(dir_here, 'int', 'ico_assess_clean.csv'), show_col_types = FALSE)
 ico_list <- read_csv(here::here(dir_here, 'int', 'ico_list_prepped.csv'), show_col_types = FALSE)
@@ -910,7 +911,7 @@ readr::write_csv(ico_spp_cat, here::here(dir_here, 'int', 'ico_spp_cat.csv'))
 
 Using `dplyr::full_join()` we combine the `ico_spp_rgn` dataframe (iconic species by OHI region) with the `ico_spp_cat` dataframe (iconic species by category and year, with species info, year, and category info).
 
-```{r combine_ico_spp_cat_with_countries, eval= F}
+```{r combine_ico_spp_cat_with_countries}
 
 ico_cat_ts_abbr <- here::here(dir_here, 'int', 'ico_spp_cat.csv') %>% 
   readr::read_csv() %>%
@@ -936,7 +937,7 @@ readr::write_csv(ico_spp_rgn_cat, here::here(dir_here, 'int', 'ico_spp_rgn_cat.c
 # csv retaining data in ico_rgn_id column, but not when it is re-imported
 ```
 
-```{r, eval=FALSE}
+```{r}
 knitr::kable(head(ico_spp_rgn_cat, 10))
 ```
 
@@ -948,7 +949,7 @@ The toolbox wants `rgn_id`, species `sciname`, and extinction risk `category` fo
 
 While the official calculations are performed in the toolbox, we perform the same basic calcs here to get a sense of the ICO status and trend ahead of time. Report and summarize estimate of regional iconic species status:
 
-```{r report_status_and_trend, eval= F}
+```{r report_status_and_trend}
 
 ico_spp_rgn_cat <- here::here(dir_here, 'int', 'ico_spp_rgn_cat.csv') %>% 
   readr::read_csv(col_types = "dcdcdddccldc")
@@ -1026,13 +1027,13 @@ table(ico_status_raw1_prev$category)
 
 ### Iconic Species full list
 
-```{r, eval=F}
+```{r}
 DT::datatable(filter(ico_status_raw, year == 2020))
 ```
 
 ### Iconic Species processed status and trend by region
 
-```{r, eval=FALSE}
+```{r}
 ico_status_calc %>% 
   dplyr::filter(year == 2024) %>%
   DT::datatable(caption = 'ICO status')
@@ -1049,7 +1050,7 @@ ico_trend %>%
 
 To examine results of the new methods (including API-based data scraping and trend based on time series), we plot the estimated status and trend over time.
 
-```{r fig.height = 4, fig.width = 6, fig.align = 'center', eval=FALSE}
+```{r fig.height = 4, fig.width = 6, fig.align = 'center'}
 status_ts_plot <- ggplot(
   ico_sum %>% filter(!is.na(rgn_id)),
   aes(x = year, y = ico_status, color = rgn_id, group = rgn_name)) +
@@ -1072,7 +1073,7 @@ ico_status_plotly <- ico_sum %>%
 ico_status_plotly
 ```
 
-```{r fig.height = 4, fig.width = 6, fig.align = 'center', eval=FALSE}
+```{r fig.height = 4, fig.width = 6, fig.align = 'center'}
 trend_ts_plot <- ggplot(
   ico_sum %>% filter(!is.na(rgn_id) &!is.na(ico_trend)),
   aes(x = year, y = ico_trend, color = rgn_id, group = rgn_name)) +
@@ -1102,7 +1103,7 @@ trend_ts_plotly
 Plot the estimated status and trends from assessments v2023 and v2024 to compare. 
 
 v2023 code:
-```{r eval=FALSE}
+```{r}
 ico_sum <- here::here(dir_here, 'summary', 'ico_summary.csv') %>% 
   readr::read_csv()
 
@@ -1133,7 +1134,7 @@ compare_status_plot <- ggplot(ico_compare) +
 plotly::ggplotly(compare_status_plot)
 ```
 
-```{r fig.height = 4, fig.width = 6, fig.align = 'center', eval=FALSE}
+```{r fig.height = 4, fig.width = 6, fig.align = 'center'}
 trend_compare_plot <- ggplot(ico_compare) +
   geom_point(
     aes(x = previous_trend, y = ico_trend, 
@@ -1154,9 +1155,9 @@ plotly::ggplotly(trend_compare_plot)
 
 v2021 *No need to run this section of the code; for data exploration purposes only*.
 
-Let's check rgn id 215
+Let's check rgn id 215.
 
-```{r outliers, include=FALSE, eval=F}
+```{r outliers, include=FALSE}
 ico_spp_rgn_prepped <- here::here(goal, version_year, 'int', 'ico_spp_rgn_prepped.csv') %>% 
   readr::read_csv(col_types = "ddcccccdcccldcc") %>% 
   dplyr::mutate(year = 2025)

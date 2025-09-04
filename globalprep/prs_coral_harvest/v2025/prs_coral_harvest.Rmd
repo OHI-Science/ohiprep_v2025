@@ -16,6 +16,7 @@ pdf_document:
   toc: true
 editor_options: 
   chunk_output_type: console
+eval: FALSE
 ---
 
 [REFERENCE RMD FILE: http://ohi-science.org/ohiprep_v2023/globalprep/prs_coral_harvest/v2023/prs_coral_harvest.html]

@@ -16,6 +16,7 @@ output:
     toc: true
 editor_options: 
   chunk_output_type: console
+eval: FALSE
 ---
 
 [REFERENCE RMD FILE](http://ohi-science.org/ohiprep_v2024/globalprep/prs_targetedharvest/v2024/targetharvest_dataprep.html)
@@ -62,7 +63,7 @@ https://www.fao.org/fishery/en/collection/capture
 
 ## Setup
 
-```{r, eval=FALSE}
+```{r}
 
 # load libraries, set directories
 library(ohicore)  #devtools::install_github('ohi-science/ohicore@dev')
@@ -85,7 +86,7 @@ Data must be downloaded from FishStatJ to obtain the correct formatting.
 
 This includes the FAO capture production data and a list of the "target" species.
 
-```{r, eval=FALSE}
+```{r}
 
 ## FAO capture production data - all columns being parsed as characters and producing error in one column, but not sure which? (read.csv might help avoid this error?)
 # The last row is not relevant to the data and is removed which is what the warning is referring to
@@ -105,7 +106,7 @@ sp2grp <- read_csv(here('globalprep', 'prs_targetedharvest', paste0('v', version
 
 ## Clean the FAO data
 
-```{r, eval=FALSE}
+```{r}
 
 # Rename columns and remove unit column
 fao_clean <- fis_fao_raw %>% 
@@ -137,7 +138,7 @@ fao_clean <- fao_clean %>%
 
 This analysis only includes target species. The warning messages need to be checked and, if necessary, changes should be made to the raw/species2group.csv
 
-```{r, eval=FALSE}
+```{r}
 
 # check for discrepancies in species list
 spgroups <-  sort(as.character(unique(fao_clean$species))) # species groups in FAO data 
@@ -204,7 +205,7 @@ unique(target_spp$species) #v2025: 70 species, v2024: 72 species
 
 ## Summarize data
 
-```{r, eval=FALSE}
+```{r}
 # pivot wider to expand years
 wide <- target_spp %>%
   tidyr::pivot_wider(names_from = year, values_from = value) %>%
@@ -237,7 +238,7 @@ sum <- long %>%
 
 ## Assign country names to OHI regions
 
-```{r, eval=FALSE}
+```{r}
 sum <- sum %>%
   ohicore::split_regions() %>%
   dplyr::mutate(country = as.character(country)) %>%
@@ -264,7 +265,7 @@ m_sum_rgn <- m_sum_rgn %>%
 
 Data is rescaled by dividing by the 95th quantile of values across all regions from 2011 to 2023 (most recent year of FAO data).
 
-```{r, eval=FALSE}
+```{r}
 
 target_harvest <- m_sum_rgn %>%
   dplyr::mutate(
@@ -324,7 +325,7 @@ The data from last year and this year should be the same unless there were chang
 
 In this case, all of the regions looked very similar.
 
-```{r, eval=FALSE}
+```{r}
 
 # pull just 2022 data from target_harvest df, since its the most recent year in common
 common_year <- 2022
@@ -341,8 +342,8 @@ old <- readr::read_csv(here("globalprep", "prs_targetedharvest", paste0('v', ver
 compare_plot <- ggplot(data = old, aes(x = pressure_score_old, y = pressure_score, label = rgn_id)) +
   geom_point() +
   geom_abline(color = "red") +
-  labs(y = paste0("Pressure Score ", scen_year),
-       x = paste0("Pressure score v", prev_scen_year)) +
+  labs(y = paste0("Pressure Score ", version_year),
+       x = paste0("Pressure score v", version_year-1)) +
   theme_minimal()
 
 plot(compare_plot)

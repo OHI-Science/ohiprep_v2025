@@ -18,6 +18,7 @@ editor_options:
   chunk_output_type: console
   markdown: 
     wrap: 72
+eval: FALSE
 ---
 
 # FIS Economies: USD Value of Marine (Commercial) Fishing per Country/Region per Year
@@ -118,7 +119,7 @@ source(here('workflow/R/fao_online_portal_clean.R')) # fxn for obtaining FAO dat
 current_year <- 2025 # Update this in the future!!
 version_year <- paste0("v",current_year)
 data_dir_version_year <- paste0("d", current_year)
-data_path <- here("globalprep", "le", version_year)
+data_path <- here("globalprep", "eco", version_year)
 
 # ---- data directories ----
 
@@ -145,6 +146,9 @@ ex_vess_dir <- here(raw_data_dir, "ex-vessel-price-database-updated")
 
 # output data dir for intermediate data products
 int_dir <- here(data_path, "int")
+
+# output data dir for final data products
+output_dir <- here(data_path, "output")
 ```
 
 # Methods
@@ -230,13 +234,11 @@ process_fao <- function(data) {
   
 }
 
-cvalue_processed <- process_fao(cvalue) 
-#%>%
- # select(reporting_country_name, commodity_name, year, value_usd = value)
+cvalue_processed <- process_fao(cvalue) %>%
+  select(reporting_country_name, commodity_name, year, value_usd = value)
 
-cquantity_processed <- process_fao(cquantity) 
-#%>%
- # select(reporting_country_name, commodity_name, year, quantity_tonnes = value) 
+cquantity_processed <- process_fao(cquantity) %>%
+  select(reporting_country_name, commodity_name, year, quantity_tonnes = value) 
 ```
 
 ### Process commodities
@@ -612,7 +614,7 @@ fishing_revenue <- fao_capture_price_final %>%
          data_source = "FAO capture production and ex-vessel prices")
 
 # save intermediate data!
-write_csv(fishing_revenue, here(data_path, "int/fis_revenue.csv"))
+write_csv(fishing_revenue, here(int_dir, "fis_revenue.csv"))
 ```
 
 ### Sanity check the revenue data
@@ -1035,14 +1037,14 @@ fis_multiplier <- heatmap_gf_df %>%
 ```{r}
 # columns should be: rgn_id, rgn_name, year, usd (previously value), unit, sector, usd_yr (in this case = year)
 
-fis_revenue_int <- fis_multiplier %>% 
+fis_revenue <- fis_multiplier %>% 
   mutate(usd = mult_value,
          unit = "USD (1)",
          sector = "fis") %>%
   rename(usd_yr = year) %>% 
   select(-c(mult_value, status))
 
-write_csv(fis_revenue_int, here(int_dir, "eco_fis_usd_pre.csv"))
+write_csv(fis_revenue, here(output_dir, "fis_revenue.csv"))
 ```
 
 

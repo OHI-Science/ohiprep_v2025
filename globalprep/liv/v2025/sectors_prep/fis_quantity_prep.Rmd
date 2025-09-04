@@ -107,6 +107,9 @@ ex_vess_dir <- here(raw_data_dir, "ex-vessel-price-database-updated")
 
 # output data dir for intermediate data products
 int_dir <- here(data_path, "int")
+
+# output data directory for final data products
+output_dir <- here::here(data_path, "output")
 ```
 
 Create country code --> iso3 function
@@ -574,7 +577,7 @@ jobs_final <- jobs_final %>%
 
 length(unique(jobs_final$rgn_name)) #91 countries!
 
-write_csv(jobs_final, file.path("/home/hoyt/OHI/ohiprep_v2025/globalprep/liv/v2025/int", "liv_fis_quantity.csv"))
+write_csv(jobs_final, file.path(output_dir, "fis_quantity.csv"))
 ```
 
 ```{r}
