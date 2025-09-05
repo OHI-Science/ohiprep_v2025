@@ -136,7 +136,7 @@ Argentina,172,ornamentals,1978,110.28765141253916,9
 Argentina,172,ornamentals,1979,107.72009781735142,9
 Argentina,172,ornamentals,1980,106.19456815426383,32
 Argentina,172,ornamentals,1981,102.53968523862204,8
-Argentina,172,ornamentals,1982,99.83621547837811,5
+Argentina,172,ornamentals,1982,99.83621547837812,5
 Argentina,172,ornamentals,1983,97.17805110648442,3
 Argentina,172,ornamentals,1984,0,0
 Argentina,172,ornamentals,1985,0,0
@@ -280,7 +280,7 @@ Aruba,250,seaweeds,2020,0,0
 Aruba,250,seaweeds,2021,0,0
 Aruba,250,seaweeds,2022,0,0
 Aruba,250,seaweeds,2023,0,0
-Ascension,85,ornamentals,2001,1.0530252770393957,0.17434620174346202
+Ascension,85,ornamentals,2001,1.0530252770393955,0.17434620174346202
 Ascension,85,ornamentals,2002,0,0
 Ascension,85,ornamentals,2003,0.9630811191989466,0.17434620174346202
 Ascension,85,ornamentals,2004,0.8956112634668472,0.0435865504358655
@@ -355,7 +355,7 @@ Australia,16,ornamentals,1989,52.362968037527594,357
 Australia,16,ornamentals,1990,45.494484305701064,304
 Australia,16,ornamentals,1991,65.91230727707318,469
 Australia,16,ornamentals,1992,77.94397176626944,567
-Australia,16,ornamentals,1993,118.51360840376509,893
+Australia,16,ornamentals,1993,118.51360840376508,893
 Australia,16,ornamentals,1994,166,1142
 Australia,16,ornamentals,1995,172,1480
 Australia,16,ornamentals,1996,377,3477
@@ -368,20 +368,20 @@ Australia,16,ornamentals,2002,80,955
 Australia,16,ornamentals,2003,124.0616439456906,1040
 Australia,16,ornamentals,2004,173.0941431721305,1425
 Australia,16,ornamentals,2005,125.67010988168816,1120
-Australia,16,ornamentals,2006,107.67457430300885,913
+Australia,16,ornamentals,2006,107.67457430300884,913
 Australia,16,ornamentals,2007,190.74232115939753,1554
 Australia,16,ornamentals,2008,286.73203520888745,2403
 Australia,16,ornamentals,2009,291.60096395079603,2448
 Australia,16,ornamentals,2010,278.7305933038141,2265
 Australia,16,ornamentals,2011,286.0488571465548,2308
 Australia,16,ornamentals,2012,128.92772620441303,2119
-Australia,16,ornamentals,2013,121.72816963352633,2001
+Australia,16,ornamentals,2013,121.72816963352632,2001
 Australia,16,ornamentals,2014,89.56423357158582,1473
 Australia,16,ornamentals,2015,68.66471264585252,1130
 Australia,16,ornamentals,2016,79.00111044916947,1300
 Australia,16,ornamentals,2017,85.62329569406137,1409
 Australia,16,ornamentals,2018,106.73699878985768,1756
-Australia,16,ornamentals,2019,95.00062291195043,1563.49
+Australia,16,ornamentals,2019,95.00062291195044,1563.49
 Australia,16,ornamentals,2020,50.19435974335744,827.86
 Australia,16,ornamentals,2021,65.78180166206096,1084.1
 Australia,16,ornamentals,2022,94.44022734989746,1555.01
@@ -415,7 +415,7 @@ Australia,16,seaweeds,2015,578,1570
 Australia,16,seaweeds,2016,875,1739
 Australia,16,seaweeds,2017,1013,2289
 Australia,16,seaweeds,2018,871,2483
-Australia,16,seaweeds,2019,1058.72,1893.7900000000002
+Australia,16,seaweeds,2019,1058.72,1893.79
 Australia,16,seaweeds,2020,625.5300000000001,1926.12
 Australia,16,seaweeds,2021,579,2059.83
 Australia,16,seaweeds,2022,797.29,2493.6099999999997
@@ -507,8 +507,8 @@ Bahrain,52,ornamentals,2022,0,0
 Bahrain,52,ornamentals,2023,4,1.73
 Bahrain,52,seaweeds,2018,7,45
 Bahrain,52,seaweeds,2019,7.07,57.06999999999999
-Bahrain,52,seaweeds,2020,5.140000000000001,40.519999999999996
-Bahrain,52,seaweeds,2021,5.07,27.220000000000002
+Bahrain,52,seaweeds,2020,5.140000000000001,40.52
+Bahrain,52,seaweeds,2021,5.07,27.22
 Bahrain,52,seaweeds,2022,3.71,19.6
 Bahrain,52,seaweeds,2023,6.37,56
 Bangladesh,204,fish_oil,2018,0.4,5
@@ -717,7 +717,7 @@ Belgium,59,fish_oil,2018,21419,36514
 Belgium,59,fish_oil,2019,20041.65,34513.380000000005
 Belgium,59,fish_oil,2020,21336.68,38048.12
 Belgium,59,fish_oil,2021,23883.929999999997,48628.04
-Belgium,59,fish_oil,2022,25905.690000000002,72199.14
+Belgium,59,fish_oil,2022,25905.69,72199.14
 Belgium,59,fish_oil,2023,30887.87,132559.41
 Belgium,59,ornamentals,1988,20,174
 Belgium,59,ornamentals,1989,7,82
@@ -755,7 +755,7 @@ Belgium,59,ornamentals,2020,10.47,304.79
 Belgium,59,ornamentals,2021,5.86,103.54
 Belgium,59,ornamentals,2022,5.89,109.23
 Belgium,59,ornamentals,2023,6.8,126.9
-Belgium,59,seaweeds,1976,29.104904602458646,0.1
+Belgium,59,seaweeds,1976,29.10490460245865,0.1
 Belgium,59,seaweeds,1977,1,0.1
 Belgium,59,seaweeds,1978,4,1
 Belgium,59,seaweeds,1979,3,1
@@ -800,22 +800,22 @@ Belgium,59,seaweeds,2017,499,5393
 Belgium,59,seaweeds,2018,527,6009
 Belgium,59,seaweeds,2019,577.5,5810.27
 Belgium,59,seaweeds,2020,775.57,4522.59
-Belgium,59,seaweeds,2021,505.46999999999997,4960.33
+Belgium,59,seaweeds,2021,505.47,4960.33
 Belgium,59,seaweeds,2022,495.08,4577.12
 Belgium,59,seaweeds,2023,288.12,4246.6
 Belize,164,ornamentals,1977,6.001881835419297,6
 Belize,164,ornamentals,1978,0,0
-Belize,164,ornamentals,1979,11.654759737085499,39
+Belize,164,ornamentals,1979,11.6547597370855,39
 Belize,164,ornamentals,1980,16.140293906663587,65
 Belize,164,ornamentals,1981,0,0
-Belize,164,ornamentals,1982,6.2500692327189284,9
+Belize,164,ornamentals,1982,6.250069232718928,9
 Belize,164,ornamentals,1983,5.845638547048651,7
 Belize,164,ornamentals,1984,5.965132667297837,8
 Belize,164,ornamentals,1985,7.656401205305443,18
 Belize,164,ornamentals,1986,7.950536927527764,20
 Belize,164,ornamentals,1987,5.625048620152782,7
 Belize,164,ornamentals,1988,7.316317158160373,17
-Belize,164,ornamentals,1989,11.627209725765297,42
+Belize,164,ornamentals,1989,11.627209725765296,42
 Belize,164,ornamentals,1990,7.031380592739282,16
 Belize,164,ornamentals,1991,9.071932334693187,28
 Belize,164,ornamentals,1992,9.366068056915523,30
@@ -888,7 +888,7 @@ Bonaire,245,ornamentals,2000,0.25426344364594833,6.356586091148708
 Bonaire,245,ornamentals,2001,0.12713172182297416,4.831005429273018
 Bonaire,245,ornamentals,2002,0.25426344364594833,4.831005429273018
 Bonaire,245,ornamentals,2003,0.25426344364594833,5.339532316564915
-Bonaire,245,ornamentals,2004,1.0412270329252777,0.8899220527608191
+Bonaire,245,ornamentals,2004,1.0412270329252775,0.8899220527608191
 Bonaire,245,ornamentals,2005,0.762790330937845,5.339532316564915
 Bonaire,245,ornamentals,2006,1.017053774583793,9.15348397125414
 Bonaire,245,ornamentals,2007,1.1441854964067677,8.772088805785216
@@ -1034,11 +1034,11 @@ Brazil,171,seaweeds,2016,131.1,444
 Brazil,171,seaweeds,2017,289,315
 Brazil,171,seaweeds,2018,903,719
 Brazil,171,seaweeds,2019,617.1700000000001,630.59
-Brazil,171,seaweeds,2020,8011.6900000000005,2110.16
+Brazil,171,seaweeds,2020,8011.69,2110.16
 Brazil,171,seaweeds,2021,10188.58,3128.29
 Brazil,171,seaweeds,2022,5116.280000000001,1736.47
 Brazil,171,seaweeds,2023,4133.57,964.84
-Brunei,247,ornamentals,1995,1.9810784207138425,4
+Brunei,247,ornamentals,1995,1.9810784207138423,4
 Brunei,247,ornamentals,1996,3.6566506065492206,14
 Brunei,247,ornamentals,1997,0,0
 Brunei,247,ornamentals,1998,0,0
@@ -1084,7 +1084,7 @@ Brunei,247,seaweeds,2016,3,174
 Brunei,247,seaweeds,2017,3.1,275.1
 Brunei,247,seaweeds,2018,0.1,3
 Brunei,247,seaweeds,2019,3.65,46.67
-Brunei,247,seaweeds,2020,19.84,486.27000000000004
+Brunei,247,seaweeds,2020,19.84,486.27
 Brunei,247,seaweeds,2021,14.17,961.73
 Brunei,247,seaweeds,2022,10.16,679.5500000000001
 Brunei,247,seaweeds,2023,5.39,381.08
@@ -1268,7 +1268,7 @@ Canada,218,fish_oil,2018,4105,21412
 Canada,218,fish_oil,2019,6677.86,24001.91
 Canada,218,fish_oil,2020,5957.73,24471.89
 Canada,218,fish_oil,2021,6232.57,25255.51
-Canada,218,fish_oil,2022,3389.28,23394.920000000002
+Canada,218,fish_oil,2022,3389.28,23394.92
 Canada,218,fish_oil,2023,5771.570000000001,25937.39
 Canada,218,ornamentals,1988,1,7
 Canada,218,ornamentals,1989,0,0
@@ -1309,7 +1309,7 @@ Canada,218,ornamentals,2023,0.17,2.98
 Canada,218,seaweeds,1990,964.8362087145142,6943
 Canada,218,seaweeds,1991,632.9640388187145,4419
 Canada,218,seaweeds,1992,528.3574762285716,3584
-Canada,218,seaweeds,1993,905.4625028357441,6329
+Canada,218,seaweeds,1993,905.462502835744,6329
 Canada,218,seaweeds,1994,1300.1,21576
 Canada,218,seaweeds,1995,700,5438
 Canada,218,seaweeds,1996,900,6895
@@ -1336,7 +1336,7 @@ Canada,218,seaweeds,2016,6071,17395
 Canada,218,seaweeds,2017,6401,18203
 Canada,218,seaweeds,2018,6327,14184
 Canada,218,seaweeds,2019,6130.79,17702.33
-Canada,218,seaweeds,2020,7404.0599999999995,18773.32
+Canada,218,seaweeds,2020,7404.06,18773.32
 Canada,218,seaweeds,2021,7084.240000000001,18542.48
 Canada,218,seaweeds,2022,5697.5599999999995,16959.32
 Canada,218,seaweeds,2023,4838.33,16414.02
@@ -1454,11 +1454,11 @@ Chile,224,seaweeds,2015,69987,149532
 Chile,224,seaweeds,2016,77480,146925
 Chile,224,seaweeds,2017,82441,167626
 Chile,224,seaweeds,2018,59478,135917
-Chile,224,seaweeds,2019,60951.48,115808.04000000001
+Chile,224,seaweeds,2019,60951.48,115808.04
 Chile,224,seaweeds,2020,69814.97,118354.73
 Chile,224,seaweeds,2021,67896.9,133504.34
 Chile,224,seaweeds,2022,70336.27,207211.83
-Chile,224,seaweeds,2023,62756.71,185417.12999999998
+Chile,224,seaweeds,2023,62756.71,185417.13
 China,209,fish_oil,1982,1,0.1
 China,209,fish_oil,1983,0,0
 China,209,fish_oil,1984,1,0.1
@@ -1497,14 +1497,14 @@ China,209,fish_oil,2016,45145,136692
 China,209,fish_oil,2017,30505,128696
 China,209,fish_oil,2018,24887,129694
 China,209,fish_oil,2019,27735.24,147677.13
-China,209,fish_oil,2020,27325.469999999998,153219.17
+China,209,fish_oil,2020,27325.47,153219.17
 China,209,fish_oil,2021,22759.42,203222.6
 China,209,fish_oil,2022,33106.869999999995,274623.62
 China,209,fish_oil,2023,69247.81999999999,457631.82
 China,209,ornamentals,1978,56.0868407895241,25
 China,209,ornamentals,1979,0,0
 China,209,ornamentals,1980,51.90044031929074,8
-China,209,ornamentals,1981,49.891734804239604,2
+China,209,ornamentals,1981,49.8917348042396,2
 China,209,ornamentals,1982,48.11961450537228,3
 China,209,ornamentals,1983,47.415089982557674,13
 China,209,ornamentals,1984,3,3
@@ -1537,7 +1537,7 @@ China,209,ornamentals,2010,530,4809
 China,209,ornamentals,2011,571,5287
 China,209,ornamentals,2012,1,64
 China,209,ornamentals,2013,0.1,25
-China,209,ornamentals,2014,0.10313601212181875,36
+China,209,ornamentals,2014,0.10313601212181876,36
 China,209,ornamentals,2015,0.1,25
 China,209,ornamentals,2016,0.10532851471088955,6
 China,209,ornamentals,2017,0.1,209
@@ -1546,11 +1546,11 @@ China,209,ornamentals,2019,0.07,412.04
 China,209,ornamentals,2020,0.08803259261990637,242.66
 China,209,ornamentals,2021,0.08375355840023653,301.21
 China,209,ornamentals,2022,0.07709127386624673,392.37
-China,209,ornamentals,2023,0.09182196792801707,190.81
+China,209,ornamentals,2023,0.09182196792801708,190.81
 China,209,seaweeds,1990,0,474
 China,209,seaweeds,1991,0,1485
 China,209,seaweeds,1992,0,2903
-China,209,seaweeds,1993,120.03302699391497,4197
+China,209,seaweeds,1993,120.03302699391496,4197
 China,209,seaweeds,1994,36162,63228
 China,209,seaweeds,1995,38331,86869
 China,209,seaweeds,1996,42817,93627
@@ -1577,7 +1577,7 @@ China,209,seaweeds,2016,14541,108904
 China,209,seaweeds,2017,13797,110823
 China,209,seaweeds,2018,14359.1,110978.1
 China,209,seaweeds,2019,13683.39,101349.72
-China,209,seaweeds,2020,11624.9,90658.56999999999
+China,209,seaweeds,2020,11624.9,90658.57
 China,209,seaweeds,2021,12699.82,106477.87
 China,209,seaweeds,2022,11210.42,120471.53
 China,209,seaweeds,2023,11891.32,110956.1
@@ -1701,8 +1701,8 @@ Colombia,132,seaweeds,2023,0,0
 Cook Islands,153,ornamentals,1992,13,111
 Cook Islands,153,ornamentals,1993,9,89
 Cook Islands,153,ornamentals,1994,16,157
-Cook Islands,153,ornamentals,1995,12.963185840151453,111
-Cook Islands,153,ornamentals,1996,12.353125757310423,105
+Cook Islands,153,ornamentals,1995,12.963185840151452,111
+Cook Islands,153,ornamentals,1996,12.353125757310425,105
 Cook Islands,153,ornamentals,1997,7.906117100354507,60
 Cook Islands,153,ornamentals,1998,14,115
 Cook Islands,153,ornamentals,1999,8,74
@@ -1715,10 +1715,10 @@ Cook Islands,153,ornamentals,2005,9.518934024589932,78
 Cook Islands,153,ornamentals,2006,10.876539877192428,92
 Cook Islands,153,ornamentals,2007,5.347314955742576,36
 Cook Islands,153,ornamentals,2008,15.95295070492967,144
-Cook Islands,153,ornamentals,2009,14.752590841455579,132
+Cook Islands,153,ornamentals,2009,14.75259084145558,132
 Cook Islands,153,ornamentals,2010,17.389179552096373,159
 Cook Islands,153,ornamentals,2011,13.237320785456994,117
-Cook Islands,153,ornamentals,2012,11.484270450987879,18
+Cook Islands,153,ornamentals,2012,11.48427045098788,18
 Cook Islands,153,ornamentals,2013,9.26141907529609,5
 Cook Islands,153,ornamentals,2014,10.895314081716151,38
 Cook Islands,153,ornamentals,2015,7.917881892132755,16
@@ -1737,7 +1737,7 @@ Costa Rica,130,fish_oil,1991,0,0
 Costa Rica,130,fish_oil,1992,0,0
 Costa Rica,130,fish_oil,1993,0,0
 Costa Rica,130,fish_oil,1994,0,0
-Costa Rica,130,fish_oil,1995,0.2,11.327193469236875
+Costa Rica,130,fish_oil,1995,0.2,11.327193469236876
 Costa Rica,130,fish_oil,1996,22,17
 Costa Rica,130,fish_oil,1997,0,0
 Costa Rica,130,fish_oil,1998,1,6
@@ -1871,7 +1871,7 @@ Croatia,187,fish_oil,2019,48.10828154217147,48.6
 Croatia,187,fish_oil,2020,0.03,0.47
 Croatia,187,fish_oil,2021,0.32999999999999996,4.25
 Croatia,187,fish_oil,2022,1.91,12.74
-Croatia,187,fish_oil,2023,1.1099999999999999,5.51
+Croatia,187,fish_oil,2023,1.11,5.51
 Croatia,187,seaweeds,1995,1,0
 Croatia,187,seaweeds,1996,3,17
 Croatia,187,seaweeds,1997,4,12
@@ -1899,7 +1899,7 @@ Croatia,187,seaweeds,2018,0.2,6
 Croatia,187,seaweeds,2019,0.55,16.61
 Croatia,187,seaweeds,2020,0.36,9.24
 Croatia,187,seaweeds,2021,0.8447090755689161,52.4
-Croatia,187,seaweeds,2022,0.82,22.009999999999998
+Croatia,187,seaweeds,2022,0.82,22.01
 Croatia,187,seaweeds,2023,1.33,66.9
 Cuba,112,ornamentals,1999,10,74
 Cuba,112,ornamentals,2000,14,83
@@ -2068,9 +2068,9 @@ Denmark,175,fish_oil,2017,147376,243963
 Denmark,175,fish_oil,2018,142816,245458
 Denmark,175,fish_oil,2019,146362.2,248694.73
 Denmark,175,fish_oil,2020,151572.37,304650.73
-Denmark,175,fish_oil,2021,127950.01000000001,261521.41999999998
+Denmark,175,fish_oil,2021,127950.01,261521.42
 Denmark,175,fish_oil,2022,113662.6,304046.66000000003
-Denmark,175,fish_oil,2023,90349.93000000001,367730.65
+Denmark,175,fish_oil,2023,90349.93,367730.65
 Denmark,175,ornamentals,1988,19,66
 Denmark,175,ornamentals,1989,0,0
 Denmark,175,ornamentals,1990,8,27
@@ -2144,8 +2144,8 @@ Denmark,175,seaweeds,2016,454,3461
 Denmark,175,seaweeds,2017,990,5037
 Denmark,175,seaweeds,2018,1276.1,6689
 Denmark,175,seaweeds,2019,1042.08,7114.41
-Denmark,175,seaweeds,2020,1151.28,7730.5199999999995
-Denmark,175,seaweeds,2021,1353.8600000000001,11597.4
+Denmark,175,seaweeds,2020,1151.28,7730.52
+Denmark,175,seaweeds,2021,1353.86,11597.4
 Denmark,175,seaweeds,2022,1217.75,8851.61
 Denmark,175,seaweeds,2023,1114.43,8260.800000000001
 Djibouti,46,ornamentals,2015,43.17455050567514,64
@@ -2242,8 +2242,8 @@ Dominican Republic,115,ornamentals,1988,0,0
 Dominican Republic,115,ornamentals,1989,0,0
 Dominican Republic,115,ornamentals,1990,0,0
 Dominican Republic,115,ornamentals,1991,0,2
-Dominican Republic,115,ornamentals,1992,10.537543774916685,48
-Dominican Republic,115,ornamentals,1993,0.9226878099609053,13
+Dominican Republic,115,ornamentals,1992,10.537543774916683,48
+Dominican Republic,115,ornamentals,1993,0.9226878099609052,13
 Dominican Republic,115,ornamentals,1994,38.948689001724944,150
 Dominican Republic,115,ornamentals,1995,62.29465862775558,234
 Dominican Republic,115,ornamentals,1996,5.315927233735323,28
@@ -2253,7 +2253,7 @@ Dominican Republic,115,ornamentals,1999,0,7
 Dominican Republic,115,ornamentals,2000,0.9252558755200084,11
 Dominican Republic,115,ornamentals,2001,2.3896690167781856,16
 Dominican Republic,115,ornamentals,2002,22.411857910944605,88
-Dominican Republic,115,ornamentals,2003,22.491362413925998,88
+Dominican Republic,115,ornamentals,2003,22.491362413926,88
 Dominican Republic,115,ornamentals,2004,11.76857953834886,49
 Dominican Republic,115,ornamentals,2005,141.7525143116884,518
 Dominican Republic,115,ornamentals,2006,12.204570271966986,50
@@ -2264,7 +2264,7 @@ Dominican Republic,115,ornamentals,2010,35.51207167928649,133
 Dominican Republic,115,ornamentals,2011,43.62404628427298,162
 Dominican Republic,115,ornamentals,2012,2.7703509024074364,17
 Dominican Republic,115,ornamentals,2013,0,0
-Dominican Republic,115,ornamentals,2014,0.018369905081480696,0.1
+Dominican Republic,115,ornamentals,2014,0.01836990508148069,0.1
 Dominican Republic,115,ornamentals,2015,0.1544917509217355,3
 Dominican Republic,115,ornamentals,2016,10.997300850610998,234
 Dominican Republic,115,ornamentals,2017,0.2,5.09
@@ -2306,7 +2306,7 @@ East Timor,231,seaweeds,2018,26,51.98
 East Timor,231,seaweeds,2019,223.27,206.99
 East Timor,231,seaweeds,2020,120,42.44
 East Timor,231,seaweeds,2021,122,77.24
-East Timor,231,seaweeds,2022,77.35,126.21000000000001
+East Timor,231,seaweeds,2022,77.35,126.21
 East Timor,231,seaweeds,2023,129.01999999999998,210.39
 Ecuador,137,fish_oil,1976,3853,924
 Ecuador,137,fish_oil,1977,4506,1870
@@ -2400,7 +2400,7 @@ Ecuador,137,ornamentals,2016,10,143
 Ecuador,137,ornamentals,2017,8,99
 Ecuador,137,ornamentals,2018,6,71
 Ecuador,137,ornamentals,2019,2,32.77
-Ecuador,137,ornamentals,2020,1.9901203819408586,16.14
+Ecuador,137,ornamentals,2020,1.9901203819408584,16.14
 Ecuador,137,ornamentals,2021,1.34,11.97
 Ecuador,137,ornamentals,2022,0,0
 Ecuador,137,ornamentals,2023,0,0
@@ -2430,8 +2430,8 @@ Ecuador,137,seaweeds,2018,40.1,1076
 Ecuador,137,seaweeds,2019,36.690000000000005,941.09
 Ecuador,137,seaweeds,2020,40,1147.72
 Ecuador,137,seaweeds,2021,28.44,883.12
-Ecuador,137,seaweeds,2022,32.36,962.2199999999999
-Ecuador,137,seaweeds,2023,40.56,1226.3999999999999
+Ecuador,137,seaweeds,2022,32.36,962.22
+Ecuador,137,seaweeds,2023,40.56,1226.4
 Egypt,214,fish_oil,2008,41,5
 Egypt,214,fish_oil,2009,73,91
 Egypt,214,fish_oil,2010,126,32
@@ -2633,7 +2633,7 @@ Equatorial Guinea,104,ornamentals,2020,0,0
 Equatorial Guinea,104,ornamentals,2021,0,0
 Equatorial Guinea,104,ornamentals,2022,0,0
 Equatorial Guinea,104,ornamentals,2023,0,0
-Eritrea,45,ornamentals,1995,11.583068388643369,53
+Eritrea,45,ornamentals,1995,11.583068388643367,53
 Eritrea,45,ornamentals,1996,1,119
 Eritrea,45,ornamentals,1997,2,98
 Eritrea,45,ornamentals,1998,7.138344819960025,14
@@ -2649,7 +2649,7 @@ Eritrea,45,ornamentals,2007,0,0
 Eritrea,45,ornamentals,2008,3,150
 Eritrea,45,ornamentals,2009,1,114
 Eritrea,45,ornamentals,2010,4.504740115087145,8
-Eritrea,45,ornamentals,2011,3.9318829663843076,4
+Eritrea,45,ornamentals,2011,3.931882966384307,4
 Eritrea,45,ornamentals,2012,0,0
 Eritrea,45,ornamentals,2013,0,0
 Eritrea,45,ornamentals,2014,0,0
@@ -2716,9 +2716,9 @@ Estonia,70,seaweeds,2016,2.1,49
 Estonia,70,seaweeds,2017,3.1,55.1
 Estonia,70,seaweeds,2018,2.1,66
 Estonia,70,seaweeds,2019,0.39,14.29
-Estonia,70,seaweeds,2020,1.1099999999999999,39.92
+Estonia,70,seaweeds,2020,1.11,39.92
 Estonia,70,seaweeds,2021,3.24,35.49
-Estonia,70,seaweeds,2022,0.9099999999999999,26.73
+Estonia,70,seaweeds,2022,0.91,26.73
 Estonia,70,seaweeds,2023,5.4,40.83
 Faeroe Islands,141,fish_oil,1976,6332,2175
 Faeroe Islands,141,fish_oil,1977,6003,2438
@@ -2824,7 +2824,7 @@ Fiji,18,fish_oil,2020,0,0
 Fiji,18,fish_oil,2021,0,0
 Fiji,18,fish_oil,2022,0,0
 Fiji,18,fish_oil,2023,19.2,40.84
-Fiji,18,ornamentals,1989,18.887981307129962,63
+Fiji,18,ornamentals,1989,18.88798130712996,63
 Fiji,18,ornamentals,1990,45.803760816821665,164
 Fiji,18,ornamentals,1991,60.14977684343489,218
 Fiji,18,ornamentals,1992,0,0
@@ -2835,7 +2835,7 @@ Fiji,18,ornamentals,1996,0,0
 Fiji,18,ornamentals,1997,0,0
 Fiji,18,ornamentals,1998,48.246343010728395,176
 Fiji,18,ornamentals,1999,48.685386673084565,178
-Fiji,18,ornamentals,2000,197.82205792249678,736
+Fiji,18,ornamentals,2000,197.8220579224968,736
 Fiji,18,ornamentals,2001,233,659
 Fiji,18,ornamentals,2002,253,556
 Fiji,18,ornamentals,2003,220,691
@@ -2919,7 +2919,7 @@ Finland,174,fish_oil,2015,1.1,45
 Finland,174,fish_oil,2016,9,50
 Finland,174,fish_oil,2017,111,188
 Finland,174,fish_oil,2018,1161,1820
-Finland,174,fish_oil,2019,1209.29,1828.8300000000002
+Finland,174,fish_oil,2019,1209.29,1828.83
 Finland,174,fish_oil,2020,1991.04,3144.69
 Finland,174,fish_oil,2021,1547.0700000000002,2648.86
 Finland,174,fish_oil,2022,2771.64,7260.56
@@ -2953,7 +2953,7 @@ Finland,174,seaweeds,2019,5.388715560377651,40.739999999999995
 Finland,174,seaweeds,2020,6.07,31.18
 Finland,174,seaweeds,2021,4.880000000000001,25.71
 Finland,174,seaweeds,2022,24.72,33.58
-Finland,174,seaweeds,2023,4.048760721708436,14.860000000000001
+Finland,174,seaweeds,2023,4.048760721708436,14.86
 France,179,fish_oil,1976,5345,1911
 France,179,fish_oil,1977,5375,2546
 France,179,fish_oil,1978,4973,2526
@@ -2977,7 +2977,7 @@ France,179,fish_oil,1995,21199.1,12320.1
 France,179,fish_oil,1996,15797.1,9553
 France,179,fish_oil,1997,17533,10947
 France,179,fish_oil,1998,10689.41026155424,9741
-France,179,fish_oil,1999,13979.517404402433,7822
+France,179,fish_oil,1999,13979.517404402432,7822
 France,179,fish_oil,2000,19655.1,8518
 France,179,fish_oil,2001,19680.1,9657
 France,179,fish_oil,2002,17953.1,12208
@@ -3083,8 +3083,8 @@ France,179,seaweeds,2017,5356,14182
 France,179,seaweeds,2018,6275,13487
 France,179,seaweeds,2019,8776.47,12148.15
 France,179,seaweeds,2020,9537.33,12047.6
-France,179,seaweeds,2021,10617.869999999999,14183.49
-France,179,seaweeds,2022,9306.69,14991.029999999999
+France,179,seaweeds,2021,10617.87,14183.49
+France,179,seaweeds,2022,9306.69,14991.03
 France,179,seaweeds,2023,8173.13,12572.43
 French Polynesia,147,ornamentals,1976,0.1,2
 French Polynesia,147,ornamentals,1977,1,6
@@ -3235,10 +3235,10 @@ Germany,176,fish_oil,2016,15390.1,36867.1
 Germany,176,fish_oil,2017,14244.1,33980.1
 Germany,176,fish_oil,2018,13021.1,49169.1
 Germany,176,fish_oil,2019,14346.86,36407.76
-Germany,176,fish_oil,2020,15911.17,38868.299999999996
-Germany,176,fish_oil,2021,20974.059999999998,56715.740000000005
-Germany,176,fish_oil,2022,15437.900000000001,57899.91
-Germany,176,fish_oil,2023,12799.349999999999,61507.41
+Germany,176,fish_oil,2020,15911.17,38868.3
+Germany,176,fish_oil,2021,20974.06,56715.740000000005
+Germany,176,fish_oil,2022,15437.9,57899.91
+Germany,176,fish_oil,2023,12799.35,61507.41
 Germany,176,ornamentals,1988,2,70
 Germany,176,ornamentals,1989,3,31
 Germany,176,ornamentals,1990,4,27
@@ -3351,7 +3351,7 @@ Ghana,106,fish_oil,2023,153.52,560.23
 Ghana,106,ornamentals,1986,0,1
 Ghana,106,ornamentals,1987,0.10111994955266113,3
 Ghana,106,ornamentals,1988,0.0674944849796617,2
-Ghana,106,ornamentals,1989,0.09708986737712877,2
+Ghana,106,ornamentals,1989,0.09708986737712876,2
 Ghana,106,ornamentals,1990,0.06346440280413645,1
 Ghana,106,ornamentals,1991,0.09305978520160352,1
 Ghana,106,ornamentals,1992,0.12265516759907769,1
@@ -3390,7 +3390,7 @@ Ghana,106,seaweeds,2016,0.1,0.1
 Ghana,106,seaweeds,2017,0.1,5
 Ghana,106,seaweeds,2018,0,0
 Ghana,106,seaweeds,2019,0.03,4.01
-Ghana,106,seaweeds,2020,0.45999999999999996,33.49
+Ghana,106,seaweeds,2020,0.46,33.49
 Ghana,106,seaweeds,2021,0.25,0.4
 Ghana,106,seaweeds,2022,0.13,0.22
 Ghana,106,seaweeds,2023,0.13,0.22
@@ -3423,9 +3423,9 @@ Greece,80,fish_oil,2017,74.1,454
 Greece,80,fish_oil,2018,125,558
 Greece,80,fish_oil,2019,534.93,773.05
 Greece,80,fish_oil,2020,335.09,515.4
-Greece,80,fish_oil,2021,13.53,480.97999999999996
+Greece,80,fish_oil,2021,13.53,480.98
 Greece,80,fish_oil,2022,36.970000000000006,287.90999999999997
-Greece,80,fish_oil,2023,15.719999999999999,842.5400000000001
+Greece,80,fish_oil,2023,15.72,842.5400000000001
 Greece,80,ornamentals,1991,0.1,1
 Greece,80,ornamentals,1992,0,0
 Greece,80,ornamentals,1993,43,177
@@ -3460,8 +3460,8 @@ Greece,80,ornamentals,2021,0,0
 Greece,80,ornamentals,2022,0,0
 Greece,80,ornamentals,2023,0,0
 Greece,80,seaweeds,1987,87.09268167546907,4
-Greece,80,seaweeds,1988,106.65745204041741,20
-Greece,80,seaweeds,1989,112.47120124963567,25
+Greece,80,seaweeds,1988,106.6574520404174,20
+Greece,80,seaweeds,1989,112.47120124963568,25
 Greece,80,seaweeds,1990,0.3,4.5
 Greece,80,seaweeds,1991,54,217
 Greece,80,seaweeds,1992,17,105
@@ -3492,9 +3492,9 @@ Greece,80,seaweeds,2016,3.1,88.1
 Greece,80,seaweeds,2017,4.1,131
 Greece,80,seaweeds,2018,8.1,164
 Greece,80,seaweeds,2019,9.91,185.15
-Greece,80,seaweeds,2020,10.729999999999999,193.12
+Greece,80,seaweeds,2020,10.73,193.12
 Greece,80,seaweeds,2021,23.14,222.03
-Greece,80,seaweeds,2022,21.509999999999998,483.04
+Greece,80,seaweeds,2022,21.51,483.04
 Greece,80,seaweeds,2023,18.25,456.37
 Greenland,145,fish_oil,1976,9,2
 Greenland,145,fish_oil,1977,0,0
@@ -3558,8 +3558,8 @@ Greenland,145,seaweeds,2022,0,0
 Greenland,145,seaweeds,2023,0.09,0.17
 Grenada,125,seaweeds,2020,0.14,1.34
 Grenada,125,seaweeds,2021,1.53,16.939999999999998
-Grenada,125,seaweeds,2022,3.2399999999999998,32.77
-Grenada,125,seaweeds,2023,3.0300000000000002,71.55999999999999
+Grenada,125,seaweeds,2022,3.24,32.77
+Grenada,125,seaweeds,2023,3.03,71.55999999999999
 Guadeloupe and Martinique,140,ornamentals,1988,1,43
 Guadeloupe and Martinique,140,ornamentals,1989,7,66
 Guadeloupe and Martinique,140,ornamentals,1990,6,63
@@ -3692,7 +3692,7 @@ Guatemala,136,seaweeds,2016,0.2,1.1
 Guatemala,136,seaweeds,2017,0.1,3
 Guatemala,136,seaweeds,2018,0.2,2.1
 Guatemala,136,seaweeds,2019,0.1925943029956271,0.29000000000000004
-Guatemala,136,seaweeds,2020,0.09999999999999999,0.7000000000000001
+Guatemala,136,seaweeds,2020,0.1,0.7000000000000001
 Guatemala,136,seaweeds,2021,0.05460610023567232,0.36
 Guatemala,136,seaweeds,2022,0.27,0.71
 Guatemala,136,seaweeds,2023,0.7677417684961924,1.76
@@ -3728,7 +3728,7 @@ Guinea Bissau,193,fish_oil,2020,539.23,603.96
 Guinea Bissau,193,fish_oil,2021,350.36,520.93
 Guinea Bissau,193,fish_oil,2022,199,583.94
 Guinea Bissau,193,fish_oil,2023,1169.93,3985.21
-Guinea Bissau,193,ornamentals,1995,0.21144131479148598,1
+Guinea Bissau,193,ornamentals,1995,0.211441314791486,1
 Guinea Bissau,193,ornamentals,1996,0,0
 Guinea Bissau,193,ornamentals,1997,0,0
 Guinea Bissau,193,ornamentals,1998,0,0
@@ -3743,7 +3743,7 @@ Guinea Bissau,193,ornamentals,2006,0,0
 Guinea Bissau,193,ornamentals,2007,0,0
 Guinea Bissau,193,ornamentals,2008,0.7226229798995405,3
 Guinea Bissau,193,ornamentals,2009,0.8786600562379547,5
-Guinea Bissau,193,ornamentals,2010,0.9714762856058883,6
+Guinea Bissau,193,ornamentals,2010,0.9714762856058884,6
 Guinea Bissau,193,ornamentals,2011,0,0
 Guinea Bissau,193,ornamentals,2012,0,0
 Guinea Bissau,193,ornamentals,2013,0,0
@@ -3758,8 +3758,8 @@ Guinea Bissau,193,ornamentals,2021,0,0
 Guinea Bissau,193,ornamentals,2022,0,0
 Guinea Bissau,193,ornamentals,2023,0,0
 Guyana,167,ornamentals,1988,96.43682182058092,270
-Guyana,167,ornamentals,1989,91.60399880778277,220
-Guyana,167,ornamentals,1990,91.98129545548727,285
+Guyana,167,ornamentals,1989,91.60399880778276,220
+Guyana,167,ornamentals,1990,91.98129545548728,285
 Guyana,167,ornamentals,1991,0,0
 Guyana,167,ornamentals,1992,0,0
 Guyana,167,ornamentals,1993,0,0
@@ -3807,7 +3807,7 @@ Haiti,114,ornamentals,2006,57.07561015213335,212
 Haiti,114,ornamentals,2007,83.46837878237281,307
 Haiti,114,ornamentals,2008,119.97794238139144,429
 Haiti,114,ornamentals,2009,155.08867352341534,565
-Haiti,114,ornamentals,2010,113.06695542278389,413
+Haiti,114,ornamentals,2010,113.06695542278388,413
 Haiti,114,ornamentals,2011,105.94493500672624,387
 Haiti,114,ornamentals,2012,1.5789437537655502,333
 Haiti,114,ornamentals,2013,0.14683314630246724,219
@@ -4010,10 +4010,10 @@ India,203,fish_oil,2016,7863.1,11869.1
 India,203,fish_oil,2017,27864,35246
 India,203,fish_oil,2018,9453,14142
 India,203,fish_oil,2019,2446.25,3239.39
-India,203,fish_oil,2020,1079.42,1861.4199999999998
+India,203,fish_oil,2020,1079.42,1861.42
 India,203,fish_oil,2021,816.68,2067.69
 India,203,fish_oil,2022,27777.78,75434.53
-India,203,fish_oil,2023,30142.859999999997,103971.28000000001
+India,203,fish_oil,2023,30142.859999999997,103971.28
 India,203,ornamentals,1976,3,5
 India,203,ornamentals,1977,2,3
 India,203,ornamentals,1978,0.1,1
@@ -4089,7 +4089,7 @@ India,203,seaweeds,2017,331,6285
 India,203,seaweeds,2018,387,6746
 India,203,seaweeds,2019,271.8,4275.25
 India,203,seaweeds,2020,176.21,2852.71
-India,203,seaweeds,2021,286.49,3706.9900000000002
+India,203,seaweeds,2021,286.49,3706.99
 India,203,seaweeds,2022,270.27,3654.96
 India,203,seaweeds,2023,299.83,5547.700000000001
 Indonesia,216,fish_oil,1976,23,12
@@ -4446,7 +4446,7 @@ Israel,79,fish_oil,2020,1,374
 Israel,79,fish_oil,2021,0.23,89
 Israel,79,fish_oil,2022,1.48,475
 Israel,79,fish_oil,2023,11.77,775
-Israel,79,ornamentals,1976,3.6579679422363682,20
+Israel,79,ornamentals,1976,3.657967942236368,20
 Israel,79,ornamentals,1977,5.286428872777378,29
 Israel,79,ornamentals,1978,0,0
 Israel,79,ornamentals,1979,5.538251274634092,30
@@ -4467,16 +4467,16 @@ Israel,79,ornamentals,1993,991.559466262138,5605
 Israel,79,ornamentals,1994,1265.7681252000586,7156
 Israel,79,ornamentals,1995,1483.0566649691232,8385
 Israel,79,ornamentals,1996,1457.1089190973612,8238
-Israel,79,ornamentals,1997,1480.3033879117543,8369
+Israel,79,ornamentals,1997,1480.3033879117545,8369
 Israel,79,ornamentals,1998,1253.5442899411707,7086
 Israel,79,ornamentals,1999,1076.280947769592,6083
-Israel,79,ornamentals,2000,955.4074130975949,5399
-Israel,79,ornamentals,2001,980.3695874762385,5540
+Israel,79,ornamentals,2000,955.4074130975948,5399
+Israel,79,ornamentals,2001,980.3695874762384,5540
 Israel,79,ornamentals,2002,991.5436584537306,5603
 Israel,79,ornamentals,2003,1508.1047502503527,8525
 Israel,79,ornamentals,2004,1908.5275864757368,10790
 Israel,79,ornamentals,2005,1941.267665337081,10975
-Israel,79,ornamentals,2006,2011.1295610476798,11370
+Israel,79,ornamentals,2006,2011.12956104768,11370
 Israel,79,ornamentals,2007,2404.1280339032132,13593
 Israel,79,ornamentals,2008,2817.101579634774,15929
 Israel,79,ornamentals,2009,2767.1130380892096,15646
@@ -4574,8 +4574,8 @@ Italy,184,fish_oil,2018,346,631
 Italy,184,fish_oil,2019,455.66,1146.84
 Italy,184,fish_oil,2020,759.14,1631.6
 Italy,184,fish_oil,2021,600.26,1677.03
-Italy,184,fish_oil,2022,225.20999999999998,993.17
-Italy,184,fish_oil,2023,148.26,477.15999999999997
+Italy,184,fish_oil,2022,225.21,993.17
+Italy,184,fish_oil,2023,148.26,477.16
 Italy,184,ornamentals,1988,56,286
 Italy,184,ornamentals,1989,5,175
 Italy,184,ornamentals,1990,19,108
@@ -4745,7 +4745,7 @@ Ivory Coast,195,seaweeds,2020,0,0
 Ivory Coast,195,seaweeds,2021,0,0
 Ivory Coast,195,seaweeds,2022,0.02,0.14
 Ivory Coast,195,seaweeds,2023,0.02,0.14
-Jamaica,166,ornamentals,1976,0.9560198975538015,18
+Jamaica,166,ornamentals,1976,0.9560198975538016,18
 Jamaica,166,ornamentals,1977,22.917080885307684,97
 Jamaica,166,ornamentals,1978,11.917316282075149,57
 Jamaica,166,ornamentals,1979,7.8420948702263615,42
@@ -4760,7 +4760,7 @@ Jamaica,166,ornamentals,1987,27.312888374641233,110
 Jamaica,166,ornamentals,1988,35.14788125197235,138
 Jamaica,166,ornamentals,1989,28.579824291225435,114
 Jamaica,166,ornamentals,1990,0,0
-Jamaica,166,ornamentals,1991,13.227856548488745,58
+Jamaica,166,ornamentals,1991,13.227856548488743,58
 Jamaica,166,ornamentals,1992,42.667424182937026,164
 Jamaica,166,ornamentals,1993,52.16430742620025,198
 Jamaica,166,ornamentals,1994,46.15021392076399,176
@@ -4778,7 +4778,7 @@ Jamaica,166,ornamentals,2005,0.1,1
 Jamaica,166,ornamentals,2006,3,9
 Jamaica,166,ornamentals,2007,0.1,1
 Jamaica,166,ornamentals,2008,0.1,1
-Jamaica,166,ornamentals,2009,0.1,9.409656023858133
+Jamaica,166,ornamentals,2009,0.1,9.409656023858131
 Jamaica,166,ornamentals,2010,0.1,1
 Jamaica,166,ornamentals,2011,0,0
 Jamaica,166,ornamentals,2012,0,0
@@ -4823,9 +4823,9 @@ Jamaica,166,seaweeds,2017,0.1,0.1
 Jamaica,166,seaweeds,2018,0,0
 Jamaica,166,seaweeds,2019,0.04,0.08
 Jamaica,166,seaweeds,2020,9.38,158.85
-Jamaica,166,seaweeds,2021,5.48,109.24000000000001
+Jamaica,166,seaweeds,2021,5.48,109.24
 Jamaica,166,seaweeds,2022,1.6800000000000002,19.25
-Jamaica,166,seaweeds,2023,2.71,14.950000000000001
+Jamaica,166,seaweeds,2023,2.71,14.95
 Japan,210,fish_oil,1976,72908,25958
 Japan,210,fish_oil,1977,106957,45100
 Japan,210,fish_oil,1978,210429,84793
@@ -4954,8 +4954,8 @@ Japan,210,seaweeds,2016,1294,20563
 Japan,210,seaweeds,2017,1463,22298
 Japan,210,seaweeds,2018,1395,21733
 Japan,210,seaweeds,2019,1434.88,22609.1
-Japan,210,seaweeds,2020,1303.8899999999999,20661.05
-Japan,210,seaweeds,2021,1569.4099999999999,22689.31
+Japan,210,seaweeds,2020,1303.89,20661.05
+Japan,210,seaweeds,2021,1569.41,22689.31
 Japan,210,seaweeds,2022,1707.81,23141.42
 Japan,210,seaweeds,2023,1443.0800000000002,24589.320000000003
 Jordan,215,ornamentals,2015,0.1,1
@@ -5065,22 +5065,22 @@ Kenya,43,seaweeds,2020,19.700000000000003,10.14
 Kenya,43,seaweeds,2021,39.5,15.51
 Kenya,43,seaweeds,2022,41.81,25.1
 Kenya,43,seaweeds,2023,1.28,2.24
-Kiribati,212,ornamentals,1991,46.092750539034796,262
+Kiribati,212,ornamentals,1991,46.0927505390348,262
 Kiribati,212,ornamentals,1992,32.24782632200606,190
 Kiribati,212,ornamentals,1993,63.6074335885113,362
 Kiribati,212,ornamentals,1994,70.69739485361106,403
 Kiribati,212,ornamentals,1995,107.80020079220446,606
 Kiribati,212,ornamentals,1996,46.898100358710394,280
 Kiribati,212,ornamentals,1997,90.670427335858,519
-Kiribati,212,ornamentals,1998,102.20673595999381,584
-Kiribati,212,ornamentals,1999,205.26369439095618,1143
+Kiribati,212,ornamentals,1998,102.2067359599938,584
+Kiribati,212,ornamentals,1999,205.26369439095615,1143
 Kiribati,212,ornamentals,2000,134.3573123996307,763
 Kiribati,212,ornamentals,2001,154.6010512685457,875
-Kiribati,212,ornamentals,2002,100.18320740031265,584
+Kiribati,212,ornamentals,2002,100.18320740031264,584
 Kiribati,212,ornamentals,2003,158.59142776762064,902
 Kiribati,212,ornamentals,2004,146.04335486364425,837
 Kiribati,212,ornamentals,2005,0,0
-Kiribati,212,ornamentals,2006,98.31976705968425,627
+Kiribati,212,ornamentals,2006,98.31976705968424,627
 Kiribati,212,ornamentals,2007,6,94
 Kiribati,212,ornamentals,2008,0,0
 Kiribati,212,ornamentals,2009,41,695
@@ -5211,8 +5211,8 @@ Latvia,69,fish_oil,2017,4426,5018
 Latvia,69,fish_oil,2018,3835,4360
 Latvia,69,fish_oil,2019,6173.26,6391.8
 Latvia,69,fish_oil,2020,8655.4,9131.3
-Latvia,69,fish_oil,2021,9942.06,12125.810000000001
-Latvia,69,fish_oil,2022,11305.810000000001,16626.79
+Latvia,69,fish_oil,2021,9942.06,12125.81
+Latvia,69,fish_oil,2022,11305.81,16626.79
 Latvia,69,fish_oil,2023,6187.72,17746.98
 Latvia,69,ornamentals,1994,83,25
 Latvia,69,ornamentals,1995,0.1,47.66928008443392
@@ -5342,12 +5342,12 @@ Lebanon,78,seaweeds,2017,1.2,32.1
 Lebanon,78,seaweeds,2018,1.2,34.1
 Lebanon,78,seaweeds,2019,0.5,16.41
 Lebanon,78,seaweeds,2020,0.1253125,3.06
-Lebanon,78,seaweeds,2021,1.6287500000000001,22.400000000000002
+Lebanon,78,seaweeds,2021,1.62875,22.4
 Lebanon,78,seaweeds,2022,2.3173958333333333,20.48
 Lebanon,78,seaweeds,2023,1.3973958333333334,5.53
 Liberia,97,ornamentals,2000,0.3594182267788355,1
 Liberia,97,ornamentals,2001,0,0
-Liberia,97,ornamentals,2002,1.3669216961308521,16
+Liberia,97,ornamentals,2002,1.366921696130852,16
 Liberia,97,ornamentals,2003,0.4482043739712438,1
 Liberia,97,ornamentals,2004,1,10
 Liberia,97,ornamentals,2005,0.6338368327071251,3
@@ -5428,7 +5428,7 @@ Lithuania,189,fish_oil,2015,497,835
 Lithuania,189,fish_oil,2016,290,743
 Lithuania,189,fish_oil,2017,557,1089
 Lithuania,189,fish_oil,2018,253,847
-Lithuania,189,fish_oil,2019,24.66,479.84000000000003
+Lithuania,189,fish_oil,2019,24.66,479.84
 Lithuania,189,fish_oil,2020,33.89,541.64
 Lithuania,189,fish_oil,2021,551.37,1738.5
 Lithuania,189,fish_oil,2022,221.28,1161.19
@@ -5615,12 +5615,12 @@ Malaysia,206,ornamentals,1976,17.460174170620746,89
 Malaysia,206,ornamentals,1977,20.856290621211713,109
 Malaysia,206,ornamentals,1978,19.43488313048701,101
 Malaysia,206,ornamentals,1979,19.389911051566784,101
-Malaysia,206,ornamentals,1980,19.000830119695422,99
+Malaysia,206,ornamentals,1980,19.000830119695426,99
 Malaysia,206,ornamentals,1981,19.816130173153,104
-Malaysia,206,ornamentals,1982,18.050613829477186,94
+Malaysia,206,ornamentals,1982,18.050613829477182,94
 Malaysia,206,ornamentals,1983,66.86909886961585,378
-Malaysia,206,ornamentals,1984,13.315200156796607,67
-Malaysia,206,ornamentals,1985,26.346364490018914,143
+Malaysia,206,ornamentals,1984,13.315200156796609,67
+Malaysia,206,ornamentals,1985,26.34636449001891,143
 Malaysia,206,ornamentals,1986,31.2909707788899,172
 Malaysia,206,ornamentals,1987,68.23770039221496,387
 Malaysia,206,ornamentals,1988,69.91327257805031,397
@@ -5632,11 +5632,11 @@ Malaysia,206,ornamentals,1993,699.5796675104725,4058
 Malaysia,206,ornamentals,1994,773.5180988160428,4488
 Malaysia,206,ornamentals,1995,1149.41204858622,6673
 Malaysia,206,ornamentals,1996,1693.4031730230188,9835
-Malaysia,206,ornamentals,1997,1518.5509036449303,8819
+Malaysia,206,ornamentals,1997,1518.5509036449305,8819
 Malaysia,206,ornamentals,1998,1126.5659480546856,6541
 Malaysia,206,ornamentals,1999,1337.8038116877524,7769
 Malaysia,206,ornamentals,2000,1415.183331522834,8219
-Malaysia,206,ornamentals,2001,1821.8750236321362,10583
+Malaysia,206,ornamentals,2001,1821.875023632136,10583
 Malaysia,206,ornamentals,2002,3022.081730646719,17559
 Malaysia,206,ornamentals,2003,2434.9870554331897,14147
 Malaysia,206,ornamentals,2004,2364.235703971924,13799
@@ -5653,7 +5653,7 @@ Malaysia,206,ornamentals,2014,97.07311899354056,1243
 Malaysia,206,ornamentals,2015,78.53560976647839,1006
 Malaysia,206,ornamentals,2016,153.0828422035234,1967
 Malaysia,206,ornamentals,2017,103.5429857945089,1331
-Malaysia,206,ornamentals,2018,112.58901854637665,1449
+Malaysia,206,ornamentals,2018,112.58901854637664,1449
 Malaysia,206,ornamentals,2019,67.63191511177715,871.98
 Malaysia,206,ornamentals,2020,49.56371459894797,641.02
 Malaysia,206,ornamentals,2021,55.72629596253938,721.91
@@ -5661,7 +5661,7 @@ Malaysia,206,ornamentals,2022,74.92928817211339,970.63
 Malaysia,206,ornamentals,2023,104.13228560052758,1348.05
 Malaysia,206,seaweeds,1990,522.1087254038648,160
 Malaysia,206,seaweeds,1991,527.3879579444765,220
-Malaysia,206,seaweeds,1992,503.14851091954915,205
+Malaysia,206,seaweeds,1992,503.1485109195491,205
 Malaysia,206,seaweeds,1993,486.7807117787743,210
 Malaysia,206,seaweeds,1994,2,481
 Malaysia,206,seaweeds,1995,4,374
@@ -5689,7 +5689,7 @@ Malaysia,206,seaweeds,2016,2268,1979
 Malaysia,206,seaweeds,2017,2693,3021
 Malaysia,206,seaweeds,2018,1120,2648
 Malaysia,206,seaweeds,2019,1524.91,4051.09
-Malaysia,206,seaweeds,2020,1602.72,3720.8700000000003
+Malaysia,206,seaweeds,2020,1602.72,3720.87
 Malaysia,206,seaweeds,2021,907.64,2572.43
 Malaysia,206,seaweeds,2022,398.37,1317.48
 Malaysia,206,seaweeds,2023,168,1338.77
@@ -5744,7 +5744,7 @@ Maldives,39,ornamentals,1983,556.3335515500585,52
 Maldives,39,ornamentals,1984,541.3912093135878,42
 Maldives,39,ornamentals,1985,529.1581211415105,78
 Maldives,39,ornamentals,1986,516.8661361419399,113
-Maldives,39,ornamentals,1987,501.68820659552875,99
+Maldives,39,ornamentals,1987,501.6882065955287,99
 Maldives,39,ornamentals,1988,492.1643724878304,181
 Maldives,39,ornamentals,1989,475.69071273671216,145
 Maldives,39,ornamentals,1990,460.57168001778336,132
@@ -5814,7 +5814,7 @@ Marshall Islands,11,ornamentals,1984,0,0
 Marshall Islands,11,ornamentals,1985,0,0
 Marshall Islands,11,ornamentals,1986,0,0
 Marshall Islands,11,ornamentals,1987,0,0
-Marshall Islands,11,ornamentals,1988,19.450197018233666,110
+Marshall Islands,11,ornamentals,1988,19.450197018233663,110
 Marshall Islands,11,ornamentals,1989,39.32340694056222,220
 Marshall Islands,11,ornamentals,1990,29.554301135983337,170
 Marshall Islands,11,ornamentals,1991,0,0
@@ -5832,7 +5832,7 @@ Marshall Islands,11,ornamentals,2002,10.144673379831374,98
 Marshall Islands,11,ornamentals,2003,10.37984913308378,102
 Marshall Islands,11,ornamentals,2004,23.977711918528698,174
 Marshall Islands,11,ornamentals,2005,35.86090453416671,245
-Marshall Islands,11,ornamentals,2006,63.492816844378524,407
+Marshall Islands,11,ornamentals,2006,63.49281684437853,407
 Marshall Islands,11,ornamentals,2007,65.06602449981649,439
 Marshall Islands,11,ornamentals,2008,92.92515452860364,611
 Marshall Islands,11,ornamentals,2009,141.6434551195359,889
@@ -5865,14 +5865,14 @@ Mauritania,64,fish_oil,2011,4315,1919
 Mauritania,64,fish_oil,2012,7164,5587
 Mauritania,64,fish_oil,2013,14342,14389
 Mauritania,64,fish_oil,2014,19752,17786
-Mauritania,64,fish_oil,2015,19503.260000000002,24074.08
+Mauritania,64,fish_oil,2015,19503.26,24074.08
 Mauritania,64,fish_oil,2016,19993,24517
 Mauritania,64,fish_oil,2017,34482,34479
-Mauritania,64,fish_oil,2018,40430.549999999996,45502.28
+Mauritania,64,fish_oil,2018,40430.55,45502.28
 Mauritania,64,fish_oil,2019,34535.17,40210.1
 Mauritania,64,fish_oil,2020,36760.77,36851.09
 Mauritania,64,fish_oil,2021,21549.35,23665.83
-Mauritania,64,fish_oil,2022,21883.11,25948.940000000002
+Mauritania,64,fish_oil,2022,21883.11,25948.94
 Mauritania,64,fish_oil,2023,17646.83,19821.04
 Mauritius,37,fish_oil,2000,0.1,0.1
 Mauritius,37,fish_oil,2001,0,0
@@ -5986,7 +5986,7 @@ Mayotte,29,ornamentals,2022,0,0
 Mayotte,29,ornamentals,2023,0,0
 Mexico,135,fish_oil,1982,351,211
 Mexico,135,fish_oil,1983,92,19
-Mexico,135,fish_oil,1984,3841.5935270253685,2
+Mexico,135,fish_oil,1984,3841.593527025369,2
 Mexico,135,fish_oil,1985,199,13
 Mexico,135,fish_oil,1986,499,94
 Mexico,135,fish_oil,1987,851,141
@@ -6047,14 +6047,14 @@ Mexico,135,ornamentals,1993,8,22
 Mexico,135,ornamentals,1994,1,1
 Mexico,135,ornamentals,1995,0.1,1
 Mexico,135,ornamentals,1996,4.604796478717603,4
-Mexico,135,ornamentals,1997,15.901353125248761,69
+Mexico,135,ornamentals,1997,15.90135312524876,69
 Mexico,135,ornamentals,1998,7.638050350786472,22
 Mexico,135,ornamentals,1999,7.233619665116194,20
 Mexico,135,ornamentals,2000,16.43447708796947,73
 Mexico,135,ornamentals,2001,7.82189110956088,24
 Mexico,135,ornamentals,2002,15.101690910709465,66
 Mexico,135,ornamentals,2003,8.75944575795188,30
-Mexico,135,ornamentals,2004,11.673205509771563,47
+Mexico,135,ornamentals,2004,11.673205509771565,47
 Mexico,135,ornamentals,2005,17.20658929118858,79
 Mexico,135,ornamentals,2006,13.48396816802834,58
 Mexico,135,ornamentals,2007,10.98383825868018,44
@@ -6064,15 +6064,15 @@ Mexico,135,ornamentals,2010,28.981122418716495,148
 Mexico,135,ornamentals,2011,22.114952460039447,109
 Mexico,135,ornamentals,2012,22.359887920588207,115
 Mexico,135,ornamentals,2013,13.529347648858163,80
-Mexico,135,ornamentals,2014,11.410485375911605,67
+Mexico,135,ornamentals,2014,11.410485375911604,67
 Mexico,135,ornamentals,2015,8.934624518625412,52
 Mexico,135,ornamentals,2016,10.921245965585229,62
 Mexico,135,ornamentals,2017,16.29935396377192,91
-Mexico,135,ornamentals,2018,7.2190192962016795,39
+Mexico,135,ornamentals,2018,7.21901929620168,39
 Mexico,135,ornamentals,2019,8.75046754812837,46.45
 Mexico,135,ornamentals,2020,22.082504005403223,120.01
 Mexico,135,ornamentals,2021,20.82400832071528,111.83
-Mexico,135,ornamentals,2022,113.18660638618695,628.14
+Mexico,135,ornamentals,2022,113.18660638618697,628.14
 Mexico,135,ornamentals,2023,0.01,4.49
 Mexico,135,seaweeds,1990,25194,1634
 Mexico,135,seaweeds,1991,28976,1549
@@ -6105,7 +6105,7 @@ Mexico,135,seaweeds,2017,467,3358
 Mexico,135,seaweeds,2018,752,3152
 Mexico,135,seaweeds,2019,809.9799999999999,3503.0299999999997
 Mexico,135,seaweeds,2020,694.48,3419.1299999999997
-Mexico,135,seaweeds,2021,560.78,3641.0099999999998
+Mexico,135,seaweeds,2021,560.78,3641.01
 Mexico,135,seaweeds,2022,524.13,3382.58
 Mexico,135,seaweeds,2023,369.63,3296.52
 Micronesia,9,ornamentals,1991,1.5215170806582208,40
@@ -6122,10 +6122,10 @@ Micronesia,9,ornamentals,2001,2,3
 Micronesia,9,ornamentals,2002,0.9838159680181988,2
 Micronesia,9,ornamentals,2003,1.2427102818659677,27
 Micronesia,9,ornamentals,2004,1.1662956643593247,21
-Micronesia,9,ornamentals,2005,0.9709004583075753,4
+Micronesia,9,ornamentals,2005,0.9709004583075752,4
 Micronesia,9,ornamentals,2006,0,0
 Micronesia,9,ornamentals,2007,0,0
-Micronesia,9,ornamentals,2008,0.9471685314564873,5
+Micronesia,9,ornamentals,2008,0.9471685314564872,5
 Micronesia,9,ornamentals,2009,0.989734502494958,10
 Micronesia,9,ornamentals,2010,1.0106676392524996,13
 Micronesia,9,ornamentals,2011,2.3403872500062626,137
@@ -6285,11 +6285,11 @@ Morocco,62,seaweeds,2015,3330,32999
 Morocco,62,seaweeds,2016,3443.1,36994
 Morocco,62,seaweeds,2017,2974.1,39633
 Morocco,62,seaweeds,2018,2763.1,42074
-Morocco,62,seaweeds,2019,3399.5099999999998,39380.08
-Morocco,62,seaweeds,2020,2528.06,32364.280000000002
+Morocco,62,seaweeds,2019,3399.51,39380.08
+Morocco,62,seaweeds,2020,2528.06,32364.28
 Morocco,62,seaweeds,2021,2570.09,29154.46
 Morocco,62,seaweeds,2022,2851.41,28453.92
-Morocco,62,seaweeds,2023,4025.2037264779556,37432.82
+Morocco,62,seaweeds,2023,4025.203726477955,37432.82
 Mozambique,41,fish_oil,1994,148,133
 Mozambique,41,fish_oil,1995,0,0
 Mozambique,41,fish_oil,1996,0,0
@@ -6360,7 +6360,7 @@ Myanmar,205,ornamentals,2021,0.29,2.38
 Myanmar,205,ornamentals,2022,0,0
 Myanmar,205,ornamentals,2023,0,0
 Myanmar,205,seaweeds,2018,32.53,65.34
-Myanmar,205,seaweeds,2019,447.01000000000005,589.4399999999999
+Myanmar,205,seaweeds,2019,447.0100000000001,589.4399999999999
 Myanmar,205,seaweeds,2020,1614.01,716.18
 Myanmar,205,seaweeds,2021,311.51,176.11
 Myanmar,205,seaweeds,2022,128.7,78.81
@@ -6441,7 +6441,7 @@ Namibia,101,seaweeds,2015,0,0
 Namibia,101,seaweeds,2016,0.2,0.2
 Namibia,101,seaweeds,2017,0,0
 Namibia,101,seaweeds,2018,0.1,0.1
-Namibia,101,seaweeds,2019,0.84,1.6400000000000001
+Namibia,101,seaweeds,2019,0.84,1.64
 Namibia,101,seaweeds,2020,0,0
 Namibia,101,seaweeds,2021,0.2,1.67
 Namibia,101,seaweeds,2022,0,0
@@ -6490,10 +6490,10 @@ Netherlands,177,fish_oil,2016,10654,39556
 Netherlands,177,fish_oil,2017,14262,51225
 Netherlands,177,fish_oil,2018,15652,57074
 Netherlands,177,fish_oil,2019,16100.87,56667.4
-Netherlands,177,fish_oil,2020,21806.059999999998,78471.1
+Netherlands,177,fish_oil,2020,21806.06,78471.1
 Netherlands,177,fish_oil,2021,30696.23,94332.48
 Netherlands,177,fish_oil,2022,17203.5,60450.89
-Netherlands,177,fish_oil,2023,16282.16,105245.68999999999
+Netherlands,177,fish_oil,2023,16282.16,105245.69
 Netherlands,177,ornamentals,1977,14,1180
 Netherlands,177,ornamentals,1978,12,1515
 Netherlands,177,ornamentals,1979,23,1932
@@ -6587,7 +6587,7 @@ Netherlands,177,seaweeds,2018,763,13220
 Netherlands,177,seaweeds,2019,686.0699999999999,12560.12
 Netherlands,177,seaweeds,2020,566.1899999999999,10625.59
 Netherlands,177,seaweeds,2021,666.75,12953.74
-Netherlands,177,seaweeds,2022,1292.64,14844.060000000001
+Netherlands,177,seaweeds,2022,1292.64,14844.06
 Netherlands,177,seaweeds,2023,1774.17,17252.690000000002
 New Caledonia,5,ornamentals,1984,3,23
 New Caledonia,5,ornamentals,1985,0,0
@@ -6707,7 +6707,7 @@ New Zealand,162,ornamentals,2022,0,0
 New Zealand,162,ornamentals,2023,0,0
 New Zealand,162,seaweeds,1990,793.7792214299552,20
 New Zealand,162,seaweeds,1991,798.9929909088241,49
-New Zealand,162,seaweeds,1992,909.4134455900057,152
+New Zealand,162,seaweeds,1992,909.4134455900056,152
 New Zealand,162,seaweeds,1993,731.2263719458861,52
 New Zealand,162,seaweeds,1994,655.2334562224278,659
 New Zealand,162,seaweeds,1995,624.1695625330321,577
@@ -6734,10 +6734,10 @@ New Zealand,162,seaweeds,2015,71,1120
 New Zealand,162,seaweeds,2016,88.1,1212.1
 New Zealand,162,seaweeds,2017,142.5,1910
 New Zealand,162,seaweeds,2018,26.01,1600
-New Zealand,162,seaweeds,2019,20.169999999999998,1180.44
+New Zealand,162,seaweeds,2019,20.17,1180.44
 New Zealand,162,seaweeds,2020,13.22,753.91
 New Zealand,162,seaweeds,2021,86.97999999999999,1081.3300000000002
-New Zealand,162,seaweeds,2022,12.729999999999999,350.71
+New Zealand,162,seaweeds,2022,12.73,350.71
 New Zealand,162,seaweeds,2023,4.3999999999999995,154.17999999999998
 Nicaragua,131,fish_oil,2014,48,128
 Nicaragua,131,fish_oil,2015,0,0
@@ -6783,7 +6783,7 @@ Nicaragua,131,ornamentals,2023,14.13,42.03
 Nigeria,196,ornamentals,1992,27,450
 Nigeria,196,ornamentals,1993,28,530
 Nigeria,196,ornamentals,1994,75,1207
-Nigeria,196,ornamentals,1995,119.12985446624853,1882
+Nigeria,196,ornamentals,1995,119.12985446624852,1882
 Nigeria,196,ornamentals,1996,4.666495985121962,71
 Nigeria,196,ornamentals,1997,80.11856180329204,1264
 Nigeria,196,ornamentals,1998,27.67485420019809,434
@@ -6849,7 +6849,7 @@ North Korea,21,seaweeds,2006,1375,1343
 North Korea,21,seaweeds,2007,371,245
 North Korea,21,seaweeds,2008,314,29
 North Korea,21,seaweeds,2009,337,72
-North Korea,21,seaweeds,2010,178.73633527488983,85
+North Korea,21,seaweeds,2010,178.73633527488985,85
 North Korea,21,seaweeds,2011,121.74462923991086,17
 North Korea,21,seaweeds,2012,96,70
 North Korea,21,seaweeds,2013,1033,868
@@ -6908,8 +6908,8 @@ Norway,223,fish_oil,2017,90755,125133
 Norway,223,fish_oil,2018,100072,151285
 Norway,223,fish_oil,2019,117137.19,159319.06
 Norway,223,fish_oil,2020,139320.02,206050.2
-Norway,223,fish_oil,2021,126470.87000000001,204619.43
-Norway,223,fish_oil,2022,118058.06999999999,231930.86000000002
+Norway,223,fish_oil,2021,126470.87,204619.43
+Norway,223,fish_oil,2022,118058.07,231930.86
 Norway,223,fish_oil,2023,112810.31,297831.95
 Norway,223,ornamentals,1980,2,1
 Norway,223,ornamentals,1981,6.4599324975865215,1
@@ -7028,11 +7028,11 @@ Oman,48,fish_oil,2016,2174,5903
 Oman,48,fish_oil,2017,5742,7392
 Oman,48,fish_oil,2018,11842.65,15887.75
 Oman,48,fish_oil,2019,6101.84,8138.11
-Oman,48,fish_oil,2020,21234.469999999998,36310.83
-Oman,48,fish_oil,2021,27740.1,44674.659999999996
+Oman,48,fish_oil,2020,21234.47,36310.83
+Oman,48,fish_oil,2021,27740.1,44674.66
 Oman,48,fish_oil,2022,25065.25,47188.76
 Oman,48,fish_oil,2023,18433.59,57633.6
-Oman,48,ornamentals,1995,0.1,10.205523832111567
+Oman,48,ornamentals,1995,0.1,10.205523832111568
 Oman,48,ornamentals,1996,0,0
 Oman,48,ornamentals,1997,3,8
 Oman,48,ornamentals,1998,2,28
@@ -7089,7 +7089,7 @@ Pakistan,53,fish_oil,2018,317,440
 Pakistan,53,fish_oil,2019,756.5,761.02
 Pakistan,53,fish_oil,2020,503.42,676.7
 Pakistan,53,fish_oil,2021,560.52,549.0899999999999
-Pakistan,53,fish_oil,2022,375.90999999999997,507.68999999999994
+Pakistan,53,fish_oil,2022,375.91,507.68999999999994
 Pakistan,53,fish_oil,2023,747.5,1617.3100000000002
 Pakistan,53,ornamentals,2002,1,1
 Pakistan,53,ornamentals,2003,0,0
@@ -7142,9 +7142,9 @@ Palau,8,ornamentals,1999,0,0
 Palau,8,ornamentals,2000,0,0
 Palau,8,ornamentals,2001,0,0
 Palau,8,ornamentals,2002,2.548829974811383,57
-Palau,8,ornamentals,2003,10.935642552963145,105
-Palau,8,ornamentals,2004,7.6507933136454085,90
-Palau,8,ornamentals,2005,1.9575059215162582,62
+Palau,8,ornamentals,2003,10.935642552963143,105
+Palau,8,ornamentals,2004,7.650793313645408,90
+Palau,8,ornamentals,2005,1.9575059215162585,62
 Palau,8,ornamentals,2006,2.007417201475505,65
 Palau,8,ornamentals,2007,1.6867995348484328,66
 Palau,8,ornamentals,2008,0,0
@@ -7306,7 +7306,7 @@ Papua New Guinea,17,ornamentals,2003,0,0
 Papua New Guinea,17,ornamentals,2004,0,0
 Papua New Guinea,17,ornamentals,2005,0,0
 Papua New Guinea,17,ornamentals,2006,0,0
-Papua New Guinea,17,ornamentals,2007,9.941935326691635,36
+Papua New Guinea,17,ornamentals,2007,9.941935326691636,36
 Papua New Guinea,17,ornamentals,2008,7.974003002926423,29
 Papua New Guinea,17,ornamentals,2009,0.1,36
 Papua New Guinea,17,ornamentals,2010,40.14277814721714,150
@@ -7460,10 +7460,10 @@ Peru,138,seaweeds,2016,21728.1,16163
 Peru,138,seaweeds,2017,28222,30963
 Peru,138,seaweeds,2018,31285,29066
 Peru,138,seaweeds,2019,35284.85,22055.54
-Peru,138,seaweeds,2020,29641.58,19927.829999999998
+Peru,138,seaweeds,2020,29641.58,19927.83
 Peru,138,seaweeds,2021,43734.18,39098.72
 Peru,138,seaweeds,2022,49253.53,72248.54
-Peru,138,seaweeds,2023,37486.69,47376.729999999996
+Peru,138,seaweeds,2023,37486.69,47376.73
 Philippines,15,fish_oil,1977,218,449
 Philippines,15,fish_oil,1978,213,479
 Philippines,15,fish_oil,1979,292,1040
@@ -7508,7 +7508,7 @@ Philippines,15,fish_oil,2017,439,2171
 Philippines,15,fish_oil,2018,1386,4223
 Philippines,15,fish_oil,2019,813.48,2376.04
 Philippines,15,fish_oil,2020,3654.77,7167.72
-Philippines,15,fish_oil,2021,2600.72,8065.6500000000005
+Philippines,15,fish_oil,2021,2600.72,8065.65
 Philippines,15,fish_oil,2022,1824.27,5644.0999999999995
 Philippines,15,fish_oil,2023,2797.7999999999997,6788.81
 Philippines,15,ornamentals,1991,4659,5530
@@ -7573,7 +7573,7 @@ Philippines,15,seaweeds,2016,11053,8540
 Philippines,15,seaweeds,2017,9121,12263
 Philippines,15,seaweeds,2018,8345,12570
 Philippines,15,seaweeds,2019,19730.7,38150.55
-Philippines,15,seaweeds,2020,16209.230000000001,27648.25
+Philippines,15,seaweeds,2020,16209.23,27648.25
 Philippines,15,seaweeds,2021,9795.23,14366.17
 Philippines,15,seaweeds,2022,16887.370000000003,28619.73
 Philippines,15,seaweeds,2023,9095.12,18283.01
@@ -7710,7 +7710,7 @@ Portugal,183,fish_oil,2017,425,772
 Portugal,183,fish_oil,2018,541,1335
 Portugal,183,fish_oil,2019,851.6600000000001,1173.14
 Portugal,183,fish_oil,2020,1030.27,1747.29
-Portugal,183,fish_oil,2021,1086.9299999999998,1976.0100000000002
+Portugal,183,fish_oil,2021,1086.9299999999998,1976.01
 Portugal,183,fish_oil,2022,905.45,2190.45
 Portugal,183,fish_oil,2023,803.5,2743.26
 Portugal,183,ornamentals,1988,1,11
@@ -7794,8 +7794,8 @@ Portugal,183,seaweeds,2017,1538,5286
 Portugal,183,seaweeds,2018,2885,11264
 Portugal,183,seaweeds,2019,1146.82,4845.61
 Portugal,183,seaweeds,2020,655.38,3913.67
-Portugal,183,seaweeds,2021,1229.37,7788.7699999999995
-Portugal,183,seaweeds,2022,404.90999999999997,3377.4399999999996
+Portugal,183,seaweeds,2021,1229.37,7788.77
+Portugal,183,seaweeds,2022,404.91,3377.4399999999996
 Portugal,183,seaweeds,2023,566.07,5001
 Republique du Congo,100,fish_oil,1982,12,37
 Republique du Congo,100,fish_oil,1983,0,0
@@ -7850,7 +7850,7 @@ Republique du Congo,100,ornamentals,2002,26.6332115029237,187
 Republique du Congo,100,ornamentals,2003,24.830478049951125,180
 Republique du Congo,100,ornamentals,2004,6.3539420005932925,83
 Republique du Congo,100,ornamentals,2005,0,0
-Republique du Congo,100,ornamentals,2006,14.234872438824823,131
+Republique du Congo,100,ornamentals,2006,14.234872438824825,131
 Republique du Congo,100,ornamentals,2007,0,0
 Republique du Congo,100,ornamentals,2008,0,0
 Republique du Congo,100,ornamentals,2009,0,0
@@ -7919,9 +7919,9 @@ Romania,72,seaweeds,2015,0.2,8
 Romania,72,seaweeds,2016,6.1,46.1
 Romania,72,seaweeds,2017,8.1,56.1
 Romania,72,seaweeds,2018,0.30000000000000004,36
-Romania,72,seaweeds,2019,0.33999999999999997,7.8100000000000005
-Romania,72,seaweeds,2020,0.21000000000000002,8.83
-Romania,72,seaweeds,2021,0.71,29.939999999999998
+Romania,72,seaweeds,2019,0.33999999999999997,7.81
+Romania,72,seaweeds,2020,0.21,8.83
+Romania,72,seaweeds,2021,0.71,29.94
 Romania,72,seaweeds,2022,0.81,17.46
 Romania,72,seaweeds,2023,1.9,28.04
 Russia,73,fish_oil,1992,3828,628
@@ -7954,8 +7954,8 @@ Russia,73,fish_oil,2018,180,220
 Russia,73,fish_oil,2019,312,661
 Russia,73,fish_oil,2020,3165,3742
 Russia,73,fish_oil,2021,3836,6228
-Russia,73,fish_oil,2022,2766.16,3802.5099999999998
-Russia,73,fish_oil,2023,8792.02,21880.309999999998
+Russia,73,fish_oil,2022,2766.16,3802.51
+Russia,73,fish_oil,2023,8792.02,21880.31
 Russia,73,seaweeds,1998,38,57
 Russia,73,seaweeds,1999,5,15
 Russia,73,seaweeds,2000,226,730
@@ -7990,7 +7990,7 @@ Saba,248,ornamentals,2000,0.25426344364594833,6.356586091148708
 Saba,248,ornamentals,2001,0.12713172182297416,4.831005429273018
 Saba,248,ornamentals,2002,0.25426344364594833,4.831005429273018
 Saba,248,ornamentals,2003,0.25426344364594833,5.339532316564915
-Saba,248,ornamentals,2004,1.0412270329252777,0.8899220527608191
+Saba,248,ornamentals,2004,1.0412270329252775,0.8899220527608191
 Saba,248,ornamentals,2005,0.762790330937845,5.339532316564915
 Saba,248,ornamentals,2006,1.017053774583793,9.15348397125414
 Saba,248,ornamentals,2007,1.1441854964067677,8.772088805785216
@@ -8072,11 +8072,11 @@ Saint Lucia,122,seaweeds,2016,17.1,5.1
 Saint Lucia,122,seaweeds,2017,0.2,7.1
 Saint Lucia,122,seaweeds,2018,1.44,21.88
 Saint Lucia,122,seaweeds,2019,7.85,142.79
-Saint Lucia,122,seaweeds,2020,110.95,1709.3700000000001
+Saint Lucia,122,seaweeds,2020,110.95,1709.37
 Saint Lucia,122,seaweeds,2021,88.96000000000001,1572.07
 Saint Lucia,122,seaweeds,2022,74.45,1150.01
-Saint Lucia,122,seaweeds,2023,93.52,1672.8700000000001
-Saint Vincent and the Grenadines,127,fish_oil,1976,0.49544308919095653,1
+Saint Lucia,122,seaweeds,2023,93.52,1672.87
+Saint Vincent and the Grenadines,127,fish_oil,1976,0.4954430891909566,1
 Saint Vincent and the Grenadines,127,fish_oil,1977,0,0
 Saint Vincent and the Grenadines,127,fish_oil,1978,0,0
 Saint Vincent and the Grenadines,127,fish_oil,1979,0,0
@@ -8435,7 +8435,7 @@ Singapore,208,fish_oil,2018,119,699
 Singapore,208,fish_oil,2019,52.92,432.86
 Singapore,208,fish_oil,2020,47.08,562.02
 Singapore,208,fish_oil,2021,13.05,831.6800000000001
-Singapore,208,fish_oil,2022,11.389999999999999,773.9200000000001
+Singapore,208,fish_oil,2022,11.39,773.9200000000001
 Singapore,208,fish_oil,2023,18.12,1137.01
 Singapore,208,ornamentals,1976,1274.1700919796494,76
 Singapore,208,ornamentals,1977,1249.8537615988316,92
@@ -8444,7 +8444,7 @@ Singapore,208,ornamentals,1979,1199.4861422468675,116
 Singapore,208,ornamentals,1980,1178.4228592229483,147
 Singapore,208,ornamentals,1981,1179.6971680496208,281
 Singapore,208,ornamentals,1982,1197.2367136607209,490
-Singapore,208,ornamentals,1983,1215.2099989193957,701
+Singapore,208,ornamentals,1983,1215.2099989193955,701
 Singapore,208,ornamentals,1984,1393.2332141367733,1650
 Singapore,208,ornamentals,1985,1127.1070302275766,551
 Singapore,208,ornamentals,1986,1169.5866055747829,875
@@ -8454,7 +8454,7 @@ Singapore,208,ornamentals,1989,1567.895741532957,3096
 Singapore,208,ornamentals,1990,1548.3505472755787,3134
 Singapore,208,ornamentals,1991,1531.1909210799058,3183
 Singapore,208,ornamentals,1992,1561.0920466471653,3449
-Singapore,208,ornamentals,1993,1581.6677697913547,3672
+Singapore,208,ornamentals,1993,1581.6677697913549,3672
 Singapore,208,ornamentals,1994,1605.496540292428,3910
 Singapore,208,ornamentals,1995,13614.202383025768,59411
 Singapore,208,ornamentals,1996,13404.89609295014,58574
@@ -8463,27 +8463,27 @@ Singapore,208,ornamentals,1998,10005.62465459793,43156
 Singapore,208,ornamentals,1999,9817.57160725395,42417
 Singapore,208,ornamentals,2000,10025.08911850708,43502
 Singapore,208,ornamentals,2001,9580.695939440644,41581
-Singapore,208,ornamentals,2002,9526.668443200295,41460
-Singapore,208,ornamentals,2003,9491.725491453653,41427
+Singapore,208,ornamentals,2002,9526.668443200297,41460
+Singapore,208,ornamentals,2003,9491.725491453652,41427
 Singapore,208,ornamentals,2004,11220.801686433348,49528
 Singapore,208,ornamentals,2005,12197.990202325243,54162
 Singapore,208,ornamentals,2006,13740.558348843602,61403
-Singapore,208,ornamentals,2007,14726.855397334773,66079
+Singapore,208,ornamentals,2007,14726.855397334772,66079
 Singapore,208,ornamentals,2008,15288.30446101688,68796
-Singapore,208,ornamentals,2009,13339.919053951045,59940
+Singapore,208,ornamentals,2009,13339.919053951044,59940
 Singapore,208,ornamentals,2010,1853.765626351269,3052
-Singapore,208,ornamentals,2011,1893.2396384002423,3206
+Singapore,208,ornamentals,2011,1893.2396384002425,3206
 Singapore,208,ornamentals,2012,1916.8105992943892,3105
 Singapore,208,ornamentals,2013,1867.8511739412352,1841
-Singapore,208,ornamentals,2014,1873.2739470469314,1449
-Singapore,208,ornamentals,2015,1888.6127402844722,1216
-Singapore,208,ornamentals,2016,1919.3556654249114,1230
+Singapore,208,ornamentals,2014,1873.2739470469312,1449
+Singapore,208,ornamentals,2015,1888.612740284472,1216
+Singapore,208,ornamentals,2016,1919.3556654249112,1230
 Singapore,208,ornamentals,2017,1944.0491946358743,1147
 Singapore,208,ornamentals,2018,1962.5062331978916,964
 Singapore,208,ornamentals,2019,1959.354455310342,434.51
-Singapore,208,ornamentals,2020,1974.2448448702198,194.32
+Singapore,208,ornamentals,2020,1974.24484487022,194.32
 Singapore,208,ornamentals,2021,2004.969060538715,208.02
-Singapore,208,ornamentals,2022,2027.3594537530225,88.09
+Singapore,208,ornamentals,2022,2027.3594537530223,88.09
 Singapore,208,ornamentals,2023,2056.103583640477,70.04
 Singapore,208,seaweeds,1994,5990,12818
 Singapore,208,seaweeds,1995,388,3504
@@ -8523,7 +8523,7 @@ Sint Eustatius,249,ornamentals,2000,0.25426344364594833,6.356586091148708
 Sint Eustatius,249,ornamentals,2001,0.12713172182297416,4.831005429273018
 Sint Eustatius,249,ornamentals,2002,0.25426344364594833,4.831005429273018
 Sint Eustatius,249,ornamentals,2003,0.25426344364594833,5.339532316564915
-Sint Eustatius,249,ornamentals,2004,1.0412270329252777,0.8899220527608191
+Sint Eustatius,249,ornamentals,2004,1.0412270329252775,0.8899220527608191
 Sint Eustatius,249,ornamentals,2005,0.762790330937845,5.339532316564915
 Sint Eustatius,249,ornamentals,2006,1.017053774583793,9.15348397125414
 Sint Eustatius,249,ornamentals,2007,1.1441854964067677,8.772088805785216
@@ -8551,7 +8551,7 @@ Sint Maarten,220,ornamentals,2000,0.25426344364594833,6.356586091148708
 Sint Maarten,220,ornamentals,2001,0.12713172182297416,4.831005429273018
 Sint Maarten,220,ornamentals,2002,0.25426344364594833,4.831005429273018
 Sint Maarten,220,ornamentals,2003,0.25426344364594833,5.339532316564915
-Sint Maarten,220,ornamentals,2004,1.0412270329252777,0.8899220527608191
+Sint Maarten,220,ornamentals,2004,1.0412270329252775,0.8899220527608191
 Sint Maarten,220,ornamentals,2005,0.762790330937845,5.339532316564915
 Sint Maarten,220,ornamentals,2006,1.017053774583793,9.15348397125414
 Sint Maarten,220,ornamentals,2007,1.1441854964067677,8.772088805785216
@@ -8598,7 +8598,7 @@ Slovenia,188,fish_oil,2015,0.2,2.1
 Slovenia,188,fish_oil,2016,0.2,4.1
 Slovenia,188,fish_oil,2017,24.1,102
 Slovenia,188,fish_oil,2018,22.1,32.1
-Slovenia,188,fish_oil,2019,0.12000000000000001,1.46
+Slovenia,188,fish_oil,2019,0.12,1.46
 Slovenia,188,fish_oil,2020,0.99,3.27
 Slovenia,188,fish_oil,2021,1.18,6.72
 Slovenia,188,fish_oil,2022,0.18,2.32
@@ -8644,10 +8644,10 @@ Slovenia,188,seaweeds,2015,5.1,188
 Slovenia,188,seaweeds,2016,4.1,115
 Slovenia,188,seaweeds,2017,1.2,34
 Slovenia,188,seaweeds,2018,3.1,40
-Slovenia,188,seaweeds,2019,10.590000000000002,205.79999999999998
+Slovenia,188,seaweeds,2019,10.590000000000002,205.8
 Slovenia,188,seaweeds,2020,3.3899999999999997,102.58
 Slovenia,188,seaweeds,2021,21.18,395.01
-Slovenia,188,seaweeds,2022,19.240000000000002,230.94000000000003
+Slovenia,188,seaweeds,2022,19.24,230.94000000000003
 Slovenia,188,seaweeds,2023,20.01,273.54
 Solomon Islands,7,fish_oil,2019,36.04,38.18
 Solomon Islands,7,fish_oil,2020,75.58,97.23
@@ -8657,7 +8657,7 @@ Solomon Islands,7,fish_oil,2023,96.88,261.2
 Solomon Islands,7,ornamentals,1996,14.740358985259093,50
 Solomon Islands,7,ornamentals,1997,7.156149360543935,22
 Solomon Islands,7,ornamentals,1998,10.80449433772867,36
-Solomon Islands,7,ornamentals,1999,14.185397538677705,49
+Solomon Islands,7,ornamentals,1999,14.185397538677703,49
 Solomon Islands,7,ornamentals,2000,1.7872359417197003,3
 Solomon Islands,7,ornamentals,2001,52.77277531262553,194
 Solomon Islands,7,ornamentals,2002,41,43
@@ -8718,7 +8718,7 @@ Somalia,44,ornamentals,2022,17.91,119
 Somalia,44,ornamentals,2023,18.03,240.5
 South Africa,102,fish_oil,1976,14200,5179
 South Africa,102,fish_oil,1977,500,204
-South Africa,102,fish_oil,1978,11621.789969120995,5012
+South Africa,102,fish_oil,1978,11621.789969120997,5012
 South Africa,102,fish_oil,1979,13300,5626
 South Africa,102,fish_oil,1980,700,277
 South Africa,102,fish_oil,1981,10800,4280
@@ -8772,14 +8772,14 @@ South Africa,102,ornamentals,1989,0,0
 South Africa,102,ornamentals,1990,153.42258076559455,227
 South Africa,102,ornamentals,1991,150.71176266907867,223
 South Africa,102,ornamentals,1992,208.61946545365697,309
-South Africa,102,ornamentals,1993,216.01173417065678,320
+South Africa,102,ornamentals,1993,216.0117341706568,320
 South Africa,102,ornamentals,1994,181.64457739179167,269
 South Africa,102,ornamentals,1995,201.16055028501032,298
 South Africa,102,ornamentals,1996,150.62845460452007,223
 South Africa,102,ornamentals,1997,170.81796661863976,253
 South Africa,102,ornamentals,1998,58.32027181525324,86
 South Africa,102,ornamentals,1999,31.36204536629966,46
-South Africa,102,ornamentals,2000,18.548140456268058,27
+South Africa,102,ornamentals,2000,18.548140456268055,27
 South Africa,102,ornamentals,2001,21.22563532696053,31
 South Africa,102,ornamentals,2002,4.370495691522642,6
 South Africa,102,ornamentals,2003,50.82803342078315,75
@@ -8824,7 +8824,7 @@ South Africa,102,seaweeds,2015,941,1401
 South Africa,102,seaweeds,2016,1434,2114
 South Africa,102,seaweeds,2017,1157,2217
 South Africa,102,seaweeds,2018,974,2521
-South Africa,102,seaweeds,2019,1059.11,2034.1399999999999
+South Africa,102,seaweeds,2019,1059.11,2034.14
 South Africa,102,seaweeds,2020,2365.25,3444.43
 South Africa,102,seaweeds,2021,3005.82,4431.7300000000005
 South Africa,102,seaweeds,2022,3464.41,7742.530000000001
@@ -8872,9 +8872,9 @@ South Korea,20,fish_oil,2015,2580,6581
 South Korea,20,fish_oil,2016,2220,4111
 South Korea,20,fish_oil,2017,1449,2603
 South Korea,20,fish_oil,2018,965,1828
-South Korea,20,fish_oil,2019,1489.8400000000001,2829.04
+South Korea,20,fish_oil,2019,1489.84,2829.04
 South Korea,20,fish_oil,2020,1660.17,2995.2799999999997
-South Korea,20,fish_oil,2021,1144.27,2509.4900000000002
+South Korea,20,fish_oil,2021,1144.27,2509.49
 South Korea,20,fish_oil,2022,761.89,1817.7
 South Korea,20,fish_oil,2023,584.77,3267.2799999999997
 South Korea,20,ornamentals,1977,237,1131
@@ -8908,9 +8908,9 @@ South Korea,20,ornamentals,2004,15.520768767260051,214
 South Korea,20,ornamentals,2005,16.89185205483591,308
 South Korea,20,ornamentals,2006,11.976528169525409,216
 South Korea,20,ornamentals,2007,16.524612931571482,404
-South Korea,20,ornamentals,2008,14.110332760204983,386
-South Korea,20,ornamentals,2009,11.797446252917325,371
-South Korea,20,ornamentals,2010,11.208252034969973,407
+South Korea,20,ornamentals,2008,14.110332760204985,386
+South Korea,20,ornamentals,2009,11.797446252917323,371
+South Korea,20,ornamentals,2010,11.208252034969972,407
 South Korea,20,ornamentals,2011,0,126
 South Korea,20,ornamentals,2012,0,7
 South Korea,20,ornamentals,2013,0,0
@@ -8964,8 +8964,8 @@ South Korea,20,seaweeds,2017,2411,25985
 South Korea,20,seaweeds,2018,2322.1,25881.1
 South Korea,20,seaweeds,2019,2265.85,27534.35
 South Korea,20,seaweeds,2020,1901.46,22530.69
-South Korea,20,seaweeds,2021,1764.34,22760.489999999998
-South Korea,20,seaweeds,2022,3800.9199999999996,24291.739999999998
+South Korea,20,seaweeds,2021,1764.34,22760.49
+South Korea,20,seaweeds,2022,3800.92,24291.74
 South Korea,20,seaweeds,2023,2207.15,21801.67
 Spain,182,fish_oil,1976,5992,2403
 Spain,182,fish_oil,1977,2686,1573
@@ -9010,11 +9010,11 @@ Spain,182,fish_oil,2015,7407,19830
 Spain,182,fish_oil,2016,8589,26089
 Spain,182,fish_oil,2017,8605,20758
 Spain,182,fish_oil,2018,8356,21920
-Spain,182,fish_oil,2019,10492.79,26884.059999999998
-Spain,182,fish_oil,2020,11765.650000000001,30227.36
-Spain,182,fish_oil,2021,14575.150000000001,38755.16
+Spain,182,fish_oil,2019,10492.79,26884.06
+Spain,182,fish_oil,2020,11765.65,30227.36
+Spain,182,fish_oil,2021,14575.15,38755.16
 Spain,182,fish_oil,2022,15646.15,51042.79
-Spain,182,fish_oil,2023,15540.869999999999,70471.9
+Spain,182,fish_oil,2023,15540.87,70471.9
 Spain,182,ornamentals,1977,30,51
 Spain,182,ornamentals,1978,1.241089849317337,2
 Spain,182,ornamentals,1979,0.6879875175050181,1
@@ -9027,7 +9027,7 @@ Spain,182,ornamentals,1985,0,0
 Spain,182,ornamentals,1986,0,0
 Spain,182,ornamentals,1987,1.1501183159293902,2
 Spain,182,ornamentals,1988,177.63304356851222,0.1
-Spain,182,ornamentals,1989,170.39044941986685,1
+Spain,182,ornamentals,1989,170.39044941986683,1
 Spain,182,ornamentals,1990,166.37328028036063,21
 Spain,182,ornamentals,1991,0.1,2
 Spain,182,ornamentals,1992,2,125
@@ -9208,7 +9208,7 @@ Sri Lanka,40,seaweeds,2017,71.1,55.1
 Sri Lanka,40,seaweeds,2018,54.1,82
 Sri Lanka,40,seaweeds,2019,57.83,90.07000000000001
 Sri Lanka,40,seaweeds,2020,124.22,84.31
-Sri Lanka,40,seaweeds,2021,150.15,119.33999999999999
+Sri Lanka,40,seaweeds,2021,150.15,119.34
 Sri Lanka,40,seaweeds,2022,204.62,140.07
 Sri Lanka,40,seaweeds,2023,586.59,295.2
 Sudan,49,ornamentals,1998,3,1
@@ -9311,7 +9311,7 @@ Sweden,222,fish_oil,2019,701.5642390106605,5182.09
 Sweden,222,fish_oil,2020,809.1999999999999,5070.18
 Sweden,222,fish_oil,2021,1222.6699999999998,6227.469999999999
 Sweden,222,fish_oil,2022,1162.26,6576.65
-Sweden,222,fish_oil,2023,505.40000000000003,6613.48
+Sweden,222,fish_oil,2023,505.4,6613.48
 Sweden,222,ornamentals,1976,10,86
 Sweden,222,ornamentals,1977,9,77
 Sweden,222,ornamentals,1978,11,72
@@ -9471,7 +9471,7 @@ Taiwan,14,fish_oil,2019,0.2,12.96
 Taiwan,14,fish_oil,2020,0.13,4.6899999999999995
 Taiwan,14,fish_oil,2021,4.3642377306838736,0.39
 Taiwan,14,fish_oil,2022,0.05,2.92
-Taiwan,14,fish_oil,2023,4.16,63.730000000000004
+Taiwan,14,fish_oil,2023,4.16,63.73
 Taiwan,14,ornamentals,1976,33,406
 Taiwan,14,ornamentals,1977,19,36
 Taiwan,14,ornamentals,1978,22,309
@@ -9563,11 +9563,11 @@ Taiwan,14,seaweeds,2015,523,5041
 Taiwan,14,seaweeds,2016,1211,6345
 Taiwan,14,seaweeds,2017,641,4241
 Taiwan,14,seaweeds,2018,827,5841
-Taiwan,14,seaweeds,2019,925.16,4038.3799999999997
+Taiwan,14,seaweeds,2019,925.16,4038.38
 Taiwan,14,seaweeds,2020,531.34,2509.34
 Taiwan,14,seaweeds,2021,596.72,2148.56
 Taiwan,14,seaweeds,2022,594.04,2262.12
-Taiwan,14,seaweeds,2023,486.8,1922.5500000000002
+Taiwan,14,seaweeds,2023,486.8,1922.55
 Tanzania,202,fish_oil,1997,55,5
 Tanzania,202,fish_oil,1998,66,6
 Tanzania,202,fish_oil,1999,0,0
@@ -9697,7 +9697,7 @@ Thailand,25,fish_oil,2018,4035,16973
 Thailand,25,fish_oil,2019,4191.53,19134.63
 Thailand,25,fish_oil,2020,5877.5,21252
 Thailand,25,fish_oil,2021,6929.92,22705.039999999997
-Thailand,25,fish_oil,2022,7671.8099999999995,24073.45
+Thailand,25,fish_oil,2022,7671.81,24073.45
 Thailand,25,fish_oil,2023,6772.83,27394.85
 Thailand,25,ornamentals,1976,127,492
 Thailand,25,ornamentals,1977,169,668
@@ -9746,7 +9746,7 @@ Thailand,25,ornamentals,2019,601.86,14258.05
 Thailand,25,ornamentals,2020,439.15,9467.96
 Thailand,25,ornamentals,2021,497.08,10415.68
 Thailand,25,ornamentals,2022,8.14,486.36
-Thailand,25,ornamentals,2023,437.56,9327.789999999999
+Thailand,25,ornamentals,2023,437.56,9327.79
 Thailand,25,seaweeds,1990,135,1327
 Thailand,25,seaweeds,1991,99,1249
 Thailand,25,seaweeds,1992,98,1222
@@ -9778,10 +9778,10 @@ Thailand,25,seaweeds,2017,563,5676
 Thailand,25,seaweeds,2018,575,6329
 Thailand,25,seaweeds,2019,351.9,4492.71
 Thailand,25,seaweeds,2020,345.81,3453.24
-Thailand,25,seaweeds,2021,374.32,3941.6400000000003
+Thailand,25,seaweeds,2021,374.32,3941.64
 Thailand,25,seaweeds,2022,350.57,5697.66
 Thailand,25,seaweeds,2023,344.34000000000003,5018.66
-Tonga,155,ornamentals,1999,3.9312646250515115,20
+Tonga,155,ornamentals,1999,3.931264625051511,20
 Tonga,155,ornamentals,2000,0,0
 Tonga,155,ornamentals,2001,0,0
 Tonga,155,ornamentals,2002,0,0
@@ -9800,7 +9800,7 @@ Tonga,155,ornamentals,2014,8.212360076768618,6
 Tonga,155,ornamentals,2015,6.827931827622706,3
 Tonga,155,ornamentals,2016,6.281926705023125,10
 Tonga,155,ornamentals,2017,6.57434470896942,27
-Tonga,155,ornamentals,2018,9.633559030517517,77
+Tonga,155,ornamentals,2018,9.633559030517516,77
 Tonga,155,ornamentals,2019,10.318359057686848,98.68
 Tonga,155,ornamentals,2020,6.176357145331622,62.79
 Tonga,155,ornamentals,2021,21.27951967971285,256.44
@@ -9888,7 +9888,7 @@ Trinidad and Tobago,126,ornamentals,1979,58.80673275881037,226
 Trinidad and Tobago,126,ornamentals,1980,65.53379872552011,250
 Trinidad and Tobago,126,ornamentals,1981,48.440436113869936,188
 Trinidad and Tobago,126,ornamentals,1982,15,185
-Trinidad and Tobago,126,ornamentals,1983,12.037857069326833,56
+Trinidad and Tobago,126,ornamentals,1983,12.037857069326831,56
 Trinidad and Tobago,126,ornamentals,1984,9,145
 Trinidad and Tobago,126,ornamentals,1985,8,83
 Trinidad and Tobago,126,ornamentals,1986,11,74
@@ -9952,14 +9952,14 @@ Trinidad and Tobago,126,seaweeds,2013,1.4340132356057946,3
 Trinidad and Tobago,126,seaweeds,2014,1.2717087390024162,3
 Trinidad and Tobago,126,seaweeds,2015,1,7
 Trinidad and Tobago,126,seaweeds,2016,3.2975343341907473,10.12
-Trinidad and Tobago,126,seaweeds,2017,2.5300000000000002,7.85
+Trinidad and Tobago,126,seaweeds,2017,2.53,7.85
 Trinidad and Tobago,126,seaweeds,2018,35.31,57.379999999999995
-Trinidad and Tobago,126,seaweeds,2019,47.97,118.55000000000001
+Trinidad and Tobago,126,seaweeds,2019,47.97,118.55
 Trinidad and Tobago,126,seaweeds,2020,63.34,142.74
 Trinidad and Tobago,126,seaweeds,2021,14.04,37.26
 Trinidad and Tobago,126,seaweeds,2022,5.739999999999999,24.11
-Trinidad and Tobago,126,seaweeds,2023,2.2199999999999998,9.53
-Tristan da Cunha,88,ornamentals,2001,1.0530252770393957,0.17434620174346202
+Trinidad and Tobago,126,seaweeds,2023,2.22,9.53
+Tristan da Cunha,88,ornamentals,2001,1.0530252770393955,0.17434620174346202
 Tristan da Cunha,88,ornamentals,2002,0,0
 Tristan da Cunha,88,ornamentals,2003,0.9630811191989466,0.17434620174346202
 Tristan da Cunha,88,ornamentals,2004,0.8956112634668472,0.0435865504358655
@@ -10181,7 +10181,7 @@ Ukraine,75,fish_oil,2015,0.1,2
 Ukraine,75,fish_oil,2016,0,0
 Ukraine,75,fish_oil,2017,0,0
 Ukraine,75,fish_oil,2018,0,0
-Ukraine,75,fish_oil,2019,3.96,9.969999999999999
+Ukraine,75,fish_oil,2019,3.96,9.97
 Ukraine,75,fish_oil,2020,0.09,0.73
 Ukraine,75,fish_oil,2021,0.49,1.89
 Ukraine,75,fish_oil,2022,1.52,7.26
@@ -10229,14 +10229,14 @@ United Arab Emirates,54,fish_oil,2016,759,1658
 United Arab Emirates,54,fish_oil,2017,431,2469
 United Arab Emirates,54,fish_oil,2018,717,2414
 United Arab Emirates,54,fish_oil,2019,1157.88,5407.38
-United Arab Emirates,54,fish_oil,2020,386.14,1675.1299999999999
+United Arab Emirates,54,fish_oil,2020,386.14,1675.13
 United Arab Emirates,54,fish_oil,2021,216.25,1360.67
-United Arab Emirates,54,fish_oil,2022,379.52000000000004,1459.85
-United Arab Emirates,54,fish_oil,2023,511.79999999999995,3157.69
+United Arab Emirates,54,fish_oil,2022,379.52,1459.85
+United Arab Emirates,54,fish_oil,2023,511.7999999999999,3157.69
 United Arab Emirates,54,ornamentals,1995,2.4264843531621665,9
 United Arab Emirates,54,ornamentals,1996,12.00962032282905,63
 United Arab Emirates,54,ornamentals,1997,1.6176834164687648,4
-United Arab Emirates,54,ornamentals,1998,3.5996854598598134,15
+United Arab Emirates,54,ornamentals,1998,3.599685459859814,15
 United Arab Emirates,54,ornamentals,1999,0,0
 United Arab Emirates,54,ornamentals,2000,0,0
 United Arab Emirates,54,ornamentals,2001,0,0
@@ -10244,7 +10244,7 @@ United Arab Emirates,54,ornamentals,2002,0,0
 United Arab Emirates,54,ornamentals,2003,0,0
 United Arab Emirates,54,ornamentals,2004,2.170616616563052,11
 United Arab Emirates,54,ornamentals,2005,0,0
-United Arab Emirates,54,ornamentals,2006,3.8998928415865635,15
+United Arab Emirates,54,ornamentals,2006,3.899892841586563,15
 United Arab Emirates,54,ornamentals,2007,0,0
 United Arab Emirates,54,ornamentals,2008,0,0
 United Arab Emirates,54,ornamentals,2009,16,10
@@ -10478,34 +10478,34 @@ United States,163,ornamentals,1988,1204.8736506686982,13071
 United States,163,ornamentals,1989,956.2287702861688,10365
 United States,163,ornamentals,1990,1153.2561834532592,12512
 United States,163,ornamentals,1991,1221.8991197230969,13261
-United States,163,ornamentals,1992,1412.4062912165787,15337
+United States,163,ornamentals,1992,1412.406291216579,15337
 United States,163,ornamentals,1993,1607.8725197575936,17467
 United States,163,ornamentals,1994,1767.1559987295686,19203
 United States,163,ornamentals,1995,1834.9724254914845,19943
 United States,163,ornamentals,1996,1428.8315666548858,15522
 United States,163,ornamentals,1997,1354.7638612234853,14717
-United States,163,ornamentals,1998,977.3671663846267,10609
+United States,163,ornamentals,1998,977.3671663846268,10609
 United States,163,ornamentals,1999,1013.7762318454973,11007
 United States,163,ornamentals,2000,764.0293387857381,8289
 United States,163,ornamentals,2001,649.6463362456866,7045
 United States,163,ornamentals,2002,772.1960593100073,8381
 United States,163,ornamentals,2003,788.5852278012062,8561
 United States,163,ornamentals,2004,797.9031482801815,8664
-United States,163,ornamentals,2005,901.4431526622909,9793
+United States,163,ornamentals,2005,901.4431526622908,9793
 United States,163,ornamentals,2006,540.1174760330312,5860
-United States,163,ornamentals,2007,1032.5761210874339,11224
+United States,163,ornamentals,2007,1032.576121087434,11224
 United States,163,ornamentals,2008,1218.9507450413046,13255
 United States,163,ornamentals,2009,1116.3225443917024,12139
 United States,163,ornamentals,2010,1215.6381668444317,13222
 United States,163,ornamentals,2011,1207.4157188775018,13134
 United States,163,ornamentals,2012,0.146559056343035,2956
-United States,163,ornamentals,2013,0.11373448108125395,3783
+United States,163,ornamentals,2013,0.11373448108125396,3783
 United States,163,ornamentals,2014,0.14128942161689828,3313
 United States,163,ornamentals,2015,0.14617294797108826,3330
 United States,163,ornamentals,2016,0.12777986838949396,3847
 United States,163,ornamentals,2017,0.03355160666911239,5993
 United States,163,ornamentals,2018,0.1,4591
-United States,163,ornamentals,2019,0.11461769655151421,4495.44
+United States,163,ornamentals,2019,0.1146176965515142,4495.44
 United States,163,ornamentals,2020,0.1935617966079466,2921.56
 United States,163,ornamentals,2021,0.2100668667737544,2688.92
 United States,163,ornamentals,2022,0.2275728309948004,2434.78
@@ -10541,8 +10541,8 @@ United States,163,seaweeds,2017,1560,20959
 United States,163,seaweeds,2018,1548,19717
 United States,163,seaweeds,2019,1628.77,20039.18
 United States,163,seaweeds,2020,1818.63,22411.86
-United States,163,seaweeds,2021,2130.4700000000003,27092.079999999998
-United States,163,seaweeds,2022,1762.05,22146.239999999998
+United States,163,seaweeds,2021,2130.4700000000003,27092.08
+United States,163,seaweeds,2022,1762.05,22146.24
 United States,163,seaweeds,2023,1306.3,17130.809999999998
 Uruguay,173,fish_oil,1980,22,9
 Uruguay,173,fish_oil,1981,70,20
@@ -10595,7 +10595,7 @@ Uruguay,173,seaweeds,2020,0.05,4.26
 Uruguay,173,seaweeds,2021,0.03,1.8
 Uruguay,173,seaweeds,2022,0,0
 Uruguay,173,seaweeds,2023,0,0
-Vanuatu,6,ornamentals,2003,98.58108104493755,366
+Vanuatu,6,ornamentals,2003,98.58108104493756,366
 Vanuatu,6,ornamentals,2004,134.49747045152412,475
 Vanuatu,6,ornamentals,2005,151.13571966792355,662
 Vanuatu,6,ornamentals,2006,0,0
@@ -10605,7 +10605,7 @@ Vanuatu,6,ornamentals,2009,0,0
 Vanuatu,6,ornamentals,2010,0,0
 Vanuatu,6,ornamentals,2011,0,0
 Vanuatu,6,ornamentals,2012,14.693659764167933,137
-Vanuatu,6,ornamentals,2013,21.449012408735598,208
+Vanuatu,6,ornamentals,2013,21.4490124087356,208
 Vanuatu,6,ornamentals,2014,50.62722558882524,480
 Vanuatu,6,ornamentals,2015,17.891570126055285,198
 Vanuatu,6,ornamentals,2016,6.240096957881178,105
@@ -10755,17 +10755,17 @@ Vietnam,207,ornamentals,2006,89,1209
 Vietnam,207,ornamentals,2007,74,1143
 Vietnam,207,ornamentals,2008,84,1259
 Vietnam,207,ornamentals,2009,121,2045
-Vietnam,207,ornamentals,2010,902.8414889958149,2720
+Vietnam,207,ornamentals,2010,902.8414889958148,2720
 Vietnam,207,ornamentals,2011,846.6452945175333,2589
 Vietnam,207,ornamentals,2012,1729.8406096388208,107
-Vietnam,207,ornamentals,2013,1755.2201528211663,35
+Vietnam,207,ornamentals,2013,1755.2201528211665,35
 Vietnam,207,ornamentals,2014,1797.8747751011106,240
-Vietnam,207,ornamentals,2015,1828.4306055220877,251
+Vietnam,207,ornamentals,2015,1828.4306055220875,251
 Vietnam,207,ornamentals,2016,1847.7607527749424,82
-Vietnam,207,ornamentals,2017,1874.8241484325117,37
+Vietnam,207,ornamentals,2017,1874.8241484325115,37
 Vietnam,207,ornamentals,2018,1956.768661800852,872
-Vietnam,207,ornamentals,2019,2006.7393112610735,1194.31
-Vietnam,207,ornamentals,2020,1970.2297921904246,129.94
+Vietnam,207,ornamentals,2019,2006.7393112610737,1194.31
+Vietnam,207,ornamentals,2020,1970.2297921904249,129.94
 Vietnam,207,ornamentals,2021,2007.128133601378,242.64
 Vietnam,207,ornamentals,2022,2022.5586032514548,11.11
 Vietnam,207,ornamentals,2023,0.49,5.39
@@ -10791,8 +10791,8 @@ Vietnam,207,seaweeds,2016,730,2820
 Vietnam,207,seaweeds,2017,1216,5734
 Vietnam,207,seaweeds,2018,1305,6077
 Vietnam,207,seaweeds,2019,3331.8,19047.78
-Vietnam,207,seaweeds,2020,9088.300000000001,18772.57
-Vietnam,207,seaweeds,2021,15257.6,24920.079999999998
+Vietnam,207,seaweeds,2020,9088.3,18772.57
+Vietnam,207,seaweeds,2021,15257.6,24920.08
 Vietnam,207,seaweeds,2022,12887.05,22013.91
 Vietnam,207,seaweeds,2023,8279.67,12788.95
 Yemen,47,fish_oil,1980,254,72
@@ -10835,7 +10835,7 @@ Yemen,47,fish_oil,2016,8,65
 Yemen,47,fish_oil,2017,95,515
 Yemen,47,fish_oil,2018,164,1221
 Yemen,47,fish_oil,2019,126,1008.09
-Yemen,47,fish_oil,2020,873.44,3615.1400000000003
+Yemen,47,fish_oil,2020,873.44,3615.14
 Yemen,47,fish_oil,2021,3084.05,5112.280000000001
 Yemen,47,fish_oil,2022,4712.200000000001,6365.360000000001
 Yemen,47,fish_oil,2023,1568.04,4984.74

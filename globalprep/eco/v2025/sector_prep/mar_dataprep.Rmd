@@ -91,12 +91,14 @@ librarian::shelf(
 # source common.R ----
 source(here::here("workflow/R/common.R"))
 
+source(here('workflow/R/fao_online_portal_clean.R')) # fxn for obtaining FAO data
+
 # set year and file path info ----
 current_year <- 2025 # Update this!!
 
 version_year <- paste0("v",current_year) # Assessment year
 data_dir_version_year <- paste0("d", current_year) # Data folder for assessment year
-data_path <- here::here("globalprep", "le", version_year) # Path to assessment folder (v202X) 
+data_path <- here::here("globalprep", "eco", version_year) # Path to assessment folder (v202X) 
 
 # Raw data directory (on Mazu) ---- 
 raw_data_dir <- here::here(dir_M, "git-annex", "globalprep", "_raw_data")
@@ -109,6 +111,9 @@ fao_dir <- here::here(raw_data_dir, "FAO_mariculture", data_dir_version_year)
 
 # output data directory for intermediate data products
 int_dir <- here::here(data_path, "int")
+
+# output data directory for final data products
+output_dir <- here::here(data_path, "output")
 ```
 
 ## Read in Data
@@ -125,6 +130,8 @@ aquaculture_value <- read_csv(file.path(fao_dir, "FAO_GlobalAquacultureProductio
 
 ## str to view file structure (it can be very messy)
 # str(aquaculture_value)
+
+region_data()
 ```
 
 ## Clean Aquaculture value data
@@ -206,7 +213,7 @@ m_CI <- mar_rev_rgn %>%
 mar_rev_rgn <- mar_rev_rgn %>%
   filter(country != 'Channel Islands') %>%
       bind_rows(m_CI)
-  arrange(country, fao, environment, species, year, value) 
+  #arrange(country, fao, environment, species, year, value) 
 
 # Using name_2_rgn function to populate values for rgn_id and rgn_name for each of the countries listed in the dataframe
 mar_rev_rgn_temp <- ohicore::name_2_rgn(df_in = mar_rev_rgn, 
@@ -289,40 +296,6 @@ joined_13 <- mar_rev_dupes_temp %>%
   relocate(country, .before = year) %>% 
   relocate(rgn_id, .before = rgn_name)
 
-# rgn_186 <- mar_rev_rgn_temp %>% 
-#   filter(rgn_id %in% c(186)) %>% 
-#   filter(country %in% "Serbia and Montenegro")
-# 
-# joined_186 <- mar_rev_dupes_temp %>% 
-#   filter(rgn_id %in% 186) %>% 
-#   mutate(country = rgn_186$country,
-#          unit = rgn_186$unit,
-#          sector = rgn_186$sector,
-#          data_source = rgn_186$data_source,
-#          Country = rgn_186$Country,
-#          rgn_name = rgn_186$rgn_name,
-#          rgn_id = as.numeric(rgn_id)
-#          ) %>% 
-#   relocate(country, .before = year) %>% 
-#   relocate(rgn_id, .before = rgn_name)
-
-# rgn_73 <- mar_rev_rgn_temp %>% 
-#   filter(rgn_id %in% c(73)) %>% 
-#   filter(country %in% "Un. Sov. Soc. Rep.")
-# 
-# joined_73 <- mar_rev_dupes_temp %>% 
-#   filter(rgn_id %in% 73) %>% 
-#   mutate(country = rgn_73$country,
-#          unit = rgn_73$unit,
-#          sector = rgn_73$sector,
-#          data_source = rgn_73$data_source,
-#          Country = rgn_73$Country,
-#          rgn_name = rgn_73$rgn_name,
-#          rgn_id = as.numeric(rgn_id)
-#          ) %>% 
-#   relocate(country, .before = year) %>% 
-#   relocate(rgn_id, .before = rgn_name)
-
 rgn_202 <- mar_rev_rgn_temp %>% 
   filter(rgn_id %in% c(202)) %>% 
   filter(country %in% "United Republic of Tanzania, Zanzibar")
@@ -377,7 +350,6 @@ heatmap <- ggplot(mar_heatmap, aes(x = year, y = rgn_name, fill = as.factor(stat
 heatmap
 
 # plotly::ggplotly(heatmap) # rgn_id 249, 244, 98, and 116 have missing data for almost all years, aside from that what's in there is pretty good and those countries likely are present from freshwater aquaculture data im assuming 
-
 total_na <- mar_heatmap %>% 
   group_by(rgn_name) %>% 
   dplyr::summarize(sum = sum(status))
@@ -386,7 +358,7 @@ total_na <- mar_heatmap %>%
 
 ## Checking how many unique countries are within the revenue data - 142 (2024 Assessment) (144 2025 assessment)
 duplicates <- eco_mar_usd_raw[duplicated(eco_mar_usd_raw[, c('rgn_id','year')]),  ]
-length(unique(eco_mar_usd_raw$rgn_id))
+length(unique(eco_mar_usd_raw$rgn_id)) #v2025: 144
 ```
 
 ## Find out which countries can be gapfilled versus the countries that cant be
@@ -530,6 +502,6 @@ eco_mar_usd_final <- eco_mar_usd_final %>%
 
 
 # Writing out csv FINALLY -----
-# write_csv(eco_mar_usd_final, here::here(data_path, "int", "eco_mar_usd_pre.csv"))
+write_csv(eco_mar_usd_final, here::here(output_dir, "mar_revenue.csv"))
 ```
 

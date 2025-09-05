@@ -1,5 +1,5 @@
 ---
-title: "OHI `r format(Sys.Date(), '%Y')` - Mariculture Livelihoods & Economies Data Preparation"
+title: "OHI `r format(Sys.Date(), '%Y')` - Mariculture Livelihoods Quantity Data Preparation"
 author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
 output: 
   html_document:
@@ -11,28 +11,40 @@ output:
     theme: cerulean
     highlight: haddock
     includes: 
-      in_header: '../../../workflow/templates/ohi_hdr.html'
+      in_header: '../../../../workflow/templates/ohi_hdr.html'
 pdf_document:
   toc: true
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
   markdown: 
     wrap: 72
 ---
 
-### As of July 2024, we are currently shelving Livelihoods portion of Livelihoods and Economies because it has proven difficult to find data on jobs for certain sectors (cough cough tourism) as well as find their wages to infer some reference point of quality compared to quantity. So This is as far as we got in the current dataprep for Mariculture Jobs before pivoting to focus only on updating economies.
-
-# Livelihoods: Proportion of Tourism Jobs per Country/Region per Year
+# MAR Livelihoods: Number of Mariculture Jobs per Country/Region per Year
 
 ### Mariculture Jobs Data
 
--   Partially obtained from [FAO Fisheries and Aquaculture Statistical Yearbook](https://openknowledge.fao.org/server/api/core/bitstreams/2be6c2fa-07b1-429d-91c5-80d3d1af46a6/content)
--   Also brought in OECD data from their online [OECD Data Explorer](https://data-explorer.oecd.org/vis?df%5Bds%5D=DisseminateFinalDMZ&df%5Bid%5D=DSD_SOE%40DF_SOE&df%5Bag%5D=OECD.ENV.EPI&dq=.A....&pd=1995%2C2024&to%5BTIME_PERIOD%5D=false&vw=tb)
+**OECD Sustainable Ocean Economy (downloaded August 11, 2025)** 
 
+- Time period: 2009 - 2022
+- Measure: Socio-economic context>Fisheries and aquaculture>People employed in aquaculture sector
+- Sex: Total
+
+[OECD Data Explorer](https://data-explorer.oecd.org/vis?df%5Bds%5D=DisseminateFinalDMZ&df%5Bid%5D=DSD_SOE%40DF_SOE&df%5Bag%5D=OECD.ENV.EPI&dq=.A....&pd=1995%2C2024&to%5BTIME_PERIOD%5D=false&vw=tb)
+
+**FAO Fishery and Aquaculture Statistics Yearbook 2021 (downloaded August 11, 2025)**
+
+- Table on page 170
+
+[FAO Fisheries and Aquaculture Statistical Yearbook](https://openknowledge.fao.org/server/api/core/bitstreams/2be6c2fa-07b1-429d-91c5-80d3d1af46a6/content)
+
+Table on page 28 [Scaling factors](https://static-content.springer.com/esm/art%3A10.1038%2Fnature11397/MediaObjects/41586_2012_BFnature11397_MOESM79_ESM.pdf)
+
+- scaling factors were averaged for developed and developing countries
 
 ### Setup
 
-```{r}
+```{r, setup}
 # load packages ---- 
 if (!require(librarian)){
   install.packages("librarian")
@@ -49,23 +61,21 @@ librarian::shelf(
   doParallel, # for using multiple cores
   priceR,
   pdftools,
-  threadr,
   tidyverse, 
   httr,
   plotly,
   zoo # for gapfilling
-  
 )
 
 # source common.R ----
 source(here::here("workflow/R/common.R"))
 
 # set year and file path info ----
-current_year <- 2024 # Update this!!
+current_year <- 2025 # Update this!!
 
 version_year <- paste0("v",current_year) # Assessment year
 data_dir_version_year <- paste0("d", current_year) # Data folder for assessment year
-data_path <- here::here("globalprep", "le", version_year) # Path to assessment folder (v202X) 
+data_path <- here::here("globalprep", "liv", version_year) # Path to assessment folder (v202X) 
 
 # Raw data directory (on Mazu) ---- 
 raw_data_dir <- here::here(dir_M, "git-annex", "globalprep", "_raw_data")
@@ -73,162 +83,252 @@ raw_data_dir <- here::here(dir_M, "git-annex", "globalprep", "_raw_data")
 # world bank raw data directory
 wb_dir <- here::here(raw_data_dir, "WorldBank", data_dir_version_year)
 
+# OECD raw data directory
+oecd_dir <- here(raw_data_dir, "OECD", data_dir_version_year)
+
 # FAO Mariculture raw data directory 
-fao_dir <- here::here(raw_data_dir, "FAO_mariculture", data_dir_version_year)
+fao_dir <- here::here(raw_data_dir, "FAO", data_dir_version_year)
 
 # output data directory for intermediate data products
 int_dir <- here::here(data_path, "int")
+
+# output data directory for final data products
+output_dir <- here::here(data_path, "output")
 ```
 
-## This was copied from Sophia's pdf processing she did for the fao yearbook
+## OECD Data
 
-```{r}
-#------cf FAO Yearbook Number of Fishers-------
-# turn the number of fishers table from the FAO yearbook into a data frame and clean.
+```{r,  eval = FALSE}
+#---------- fis OECD data---------------------------
+oecd_mar_job_raw <- read_csv(here(oecd_dir, "OECD_1995-2022_mar_employment.csv"), show_col_types = FALSE)
+
+# total number of people employed by aquaculture (1000s)
+
+# Check for NA values
+sum(is.na(oecd_mar_job_raw$OBS_VALUE))
+# v2025: none!
+
+# ============== mar OECD number of fish farmers data ============== 
+oecd_mar_jobs <- oecd_mar_job_raw %>% 
+  janitor::clean_names() %>% 
+  dplyr::select(ref_area, reference_area, time_period, obs_value, unit_multiplier) %>% 
+  mutate(year = as.numeric(time_period),
+         value = obs_value*1000,
+         unit = ("persons (1)"),
+         sector = "mar",
+         data_source = "oecd sustainable economies") %>% 
+  dplyr::select(-c(unit_multiplier, obs_value, time_period))
+
+unique(is.na(oecd_mar_jobs$value))
+# FALSE -- no NAs
+# v2025: NAs
+
+# ============== Run ohicore name_2_rgn ==================================
+
+# check names
+#china, taiwan province of or china (provice of china) should pick it up as taiwan
+# "Chinese Taipei", "China (People’s Republic of)", "Korea"
+
+oecd_mar_jobs_fix <- oecd_mar_jobs %>%
+  mutate(reference_area = case_when(
+    reference_area=="Chinese Taipei" ~ "Taiwan",
+    reference_area=="China (People’s Republic of)" ~ "China",
+    reference_area=="Korea" ~ "South Korea",
+    TRUE ~ reference_area # Everything else, leave it be
+  ))
+
+oecd_mar_jobs_rgn <- name_2_rgn(df_in = oecd_mar_jobs_fix, 
+                       fld_name='reference_area',
+                      flds_unique = c("year"))
+
+oecd_duplicates <- oecd_mar_jobs_rgn[duplicated(oecd_mar_jobs_rgn[, c("reference_area", "year")]),]
+# none
+
+length(unique(oecd_mar_jobs_rgn$reference_area)) 
+# v2025: 47
+length(unique(oecd_mar_jobs_rgn$rgn_name)) 
+# v2025: 47
+```
+
+Gapfill OECD Data
+
+```{r,  eval = FALSE}
+region_data()
+
+# Join with OHI regions
+jobs_region_join <- left_join(rgns_eez, oecd_mar_jobs_rgn, by = c("rgn_id", "rgn_name")) %>%
+  dplyr::select(-c(territory, admin_rgn_id, admin_country_name, 
+            Notes, eez_iso3))
+
+data_year <- max(jobs_region_join$year, na.rm = TRUE)
+
+# ---- Within country gapfilling ----
+mar_jobs_gf <- jobs_region_join %>% 
+   group_by(rgn_id, rgn_name) %>% 
+  complete(year = 2008:data_year) %>% # ensures that there is a row for every year for each region, to ensure there are no gaps
+  ungroup() %>%
+  # First, create gapfilled boolean and method columns
+  mutate(jb_gapfilled = ifelse(is.na(value), "1", NA_character_),
+         jb_gf_method = ifelse(is.na(value), "1", NA_character_)) %>%
+  # Regroup for gapfilling
+  group_by(rgn_id, rgn_name) %>% 
+  arrange(rgn_id, year) %>%   
+  # Linear interpolation
+  mutate(value = na.approx(value, x = year, na.rm = FALSE)) %>% 
+  mutate(jb_gapfilled = ifelse(jb_gapfilled == "1" & !is.na(value), 
+                               "gapfilled", jb_gapfilled),
+         jb_gf_method = ifelse(jb_gf_method == "1" & !is.na(value), 
+                               "Interpolation", jb_gf_method)) %>% 
+  # Upfilling and Downfiling
+  tidyr::fill(value, .direction = "updown") %>% 
+  mutate(jb_gapfilled = ifelse(jb_gapfilled == "1" & !is.na(value), 
+                               "gapfilled", jb_gapfilled),
+         jb_gf_method = ifelse(jb_gf_method == "1" & !is.na(value), 
+                               "Up/Downfilling", jb_gf_method))
+
+table(mar_jobs_gf$jb_gf_method)
+
+# Regions with no job data after all gapfilling
+mar_jobs_gf %>% 
+  filter(is.na(value)) %>% 
+  distinct(rgn_id, rgn_name) 
+
+# Narrow wage columns before joining
+jobs_final_oecd <- mar_jobs_gf %>% 
+  drop_na(value) %>% 
+  mutate(unit = "Persons (1)",
+         sector = "mar",
+         source = "OECD") %>% 
+  dplyr::select(rgn_id, rgn_name, year, number_jobs = value, unit, sector, source)
+
+colSums(is.na(jobs_final_oecd))
+length(unique(jobs_final_oecd$rgn_id)) # 47 regions
+```
+
+## FAO Yearbook Data
+
+```{r,  eval = FALSE}
+#------fis FAO Yearbook Number of Fish Farmers-------
+# turn the number of fish farmers table from the FAO yearbook into a data frame and clean.
 # note: world total includes countries and regions not within the table.  Unsure of where that data comes from; look for methodology.
 
-# Need To update the fao_dir from above with the pdf of the FAO Fisheries and Aquaculture Statistics Yearbook
-fao_dir <- here::here(raw_data_dir, "FAO", data_dir_version_year)
+fao_pdf <- pdf_text(here(fao_dir, "fao_statistics_yearbook_07_03_24.pdf"))
 
-## Loading the pdf in as an object 
-fao_pdf <- pdf_text(here::here(fao_dir, "fao_statistics_yearbook_07_03_24.pdf"))
+cat(fao_pdf[[170]])
+table <- strsplit(fao_pdf[[170]], "\n")[[1]]
+# Remove header and footer (may need to adjust with new tables)
+table_lines_keep <- table[11:(length(table) - 14)]
+# Convert to df
+mar_table <- table_lines_keep %>%
+  str_trim() %>%
+  # number of columns is n
+  str_split_fixed("\\s{2,}", n = 11) %>%
+  as.data.frame(stringsAsFactors = FALSE)
 
-## Selecting pdf table 
-fishers_table <- fao_pdf[[170]] %>% # page number of the pdf that the desired table is on 
-  as.data.frame()
+#specify columns 
+columns <- c("country", "1995", "2000", "2005", "2010", "2015", "2017", "2018", "2019", "2020", "2021")
 
-## Specify columns 
-columns <- c("country", "1995", "2000", "2005", "2010", "2015", "2017", "2018", "2019", "2020","2021")
+colnames(mar_table) <- columns
 
-## Setting the columns name because mutate wasn't picking up on the "." as a column name.
-colnames(fishers_table) = c("main_column")
-## Checking 
-# colnames(fishers_table)
-
-
-## Turn the pdf page into a clean dataframe
-fao_mar_jobs <- fishers_table %>%
-  separate_rows(main_column, sep = "\n") %>%  #separate rows based on line breaks
-  # rename(main_column = '.') %>%  ## Removed because of above mention of column name 
-  mutate(main_column = str_remove_all(main_column, "\\*")) %>% # Remove the * 
-  mutate(main_column = str_replace_all(main_column, "E(?!\\p{L})", " ")) %>% # Replace all the Es not followed by letters (used to indicate estimate)
-  slice(7:69) %>% #remove all rows not in the table
-  separate(main_column, into = columns, sep = " {2,}", extra = "merge") %>% #separate into columns based on double spaces
-  pivot_longer(cols = -c("country"), names_to = "year") %>% 
+fao_mar_jobs <- mar_table %>%
+  mutate(country = str_remove_all(country, "\\*")) %>%  # Remove asterisks
+  mutate(across(2:11, ~ str_remove_all(as.character(.), "E"))) %>%  # Remove "E", coerce to character first
+  pivot_longer(cols = 2:11, names_to = "year", values_to = "value") %>%
   mutate(value = str_squish(value)) %>% #remove extra spaces
   mutate(value = str_remove_all(value, " ")) %>% 
   mutate(value = if_else(value == "…" , NA, value)) %>% 
   mutate(value = as.numeric(value)) %>% 
   mutate(unit = "persons (1)",
-         sector = "mar/cf",
-         data_source = "FAO number of aquaculture jobs") %>% 
-  slice(-c(1:44))
+         sector = "cf",
+         data_source = "FAO number of mariculture jobs")
 
-## Final cleaning. Removing extraneous rows not necessary 
-fao_mar_jobs_clean <- fao_mar_jobs %>% 
-  dplyr::slice(-c(1:6, 327:516)) %>% # %>% view() # Add view() to check df to make sure its tidy after 
+length(unique(fao_mar_jobs$country)) 
+# v2025: 59
+
+# --------- run names_2_rgn to see how many OHI regions we have from this data -----
+fao_mar_jobs_rgn <- name_2_rgn(df_in = fao_mar_jobs, 
+                             fld_name='country',
+                             flds_unique = c("year"))
+
+#let's see how many OHI regions we have:
+length(unique(fao_mar_jobs_rgn$rgn_id)) 
+# v2025: 50 (Uganda dropped for being landlocked)
+```
+
+Gapfill FAO data
+
+```{r,  eval = FALSE}
+# Join with OHI regions
+jobs_region_join <- left_join(rgns_eez, fao_mar_jobs_rgn, by = c("rgn_id", "rgn_name")) %>%
+  dplyr::select(-c(territory, admin_rgn_id, admin_country_name, 
+            Notes, eez_iso3)) %>%
   mutate(year = as.numeric(year))
 
-########### OECD data on aquaculture employment ###########
+data_year <- max(jobs_region_join$year, na.rm = TRUE)
 
-oecd.fp <- file.path(dir_M, "git-annex/globalprep/_raw_data/OECD", data_dir_version_year, "OECD.ENV.EPI,DSD_SOE@DF_SOE,+.A.FISH_EMP_AQUACULTURE_TOT....csv")
+# ---- Within country gapfilling ----
+mar_jobs_gf <- jobs_region_join %>% 
+  group_by(rgn_id, rgn_name) %>% 
+  complete(year = 2008:data_year) %>% # ensures that there is a row for every year for each region, to ensure there are no gaps
+  ungroup() %>%
+  # First, create gapfilled boolean and method columns
+  mutate(jb_gapfilled = ifelse(is.na(value), "1", NA_character_),
+         jb_gf_method = ifelse(is.na(value), "1", NA_character_)) %>%
+  # Regroup for gapfilling
+  group_by(rgn_id, rgn_name) %>% 
+  arrange(rgn_id, year) %>%   
+  # Linear interpolation
+  mutate(value = na.approx(value, x = year, na.rm = FALSE)) %>% 
+  mutate(jb_gapfilled = ifelse(jb_gapfilled == "1" & !is.na(value), 
+                               "gapfilled", jb_gapfilled),
+         jb_gf_method = ifelse(jb_gf_method == "1" & !is.na(value), 
+                               "Interpolation", jb_gf_method)) %>% 
+  # Upfilling and Downfiling
+  tidyr::fill(value, .direction = "updown") %>% 
+  mutate(jb_gapfilled = ifelse(jb_gapfilled == "1" & !is.na(value), 
+                               "gapfilled", jb_gapfilled),
+         jb_gf_method = ifelse(jb_gf_method == "1" & !is.na(value), 
+                               "Up/Downfilling", jb_gf_method))
 
-#### BRING THIS JAWN IN #####
+table(mar_jobs_gf$jb_gf_method)
 
-oecd_mar_jobs <- read.csv(oecd.fp) %>% janitor::clean_names()
+# Regions with no job data after all gapfilling
+mar_jobs_gf %>% 
+  filter(is.na(value)) %>% 
+  distinct(rgn_id, rgn_name) 
 
-length(unique(oecd_mar_jobs$reference_area))
+# Narrow wage columns before joining
+jobs_final_fao <- mar_jobs_gf %>% 
+  drop_na(value) %>% 
+  mutate(unit = "Persons (1)",
+         sector = "fis",
+         source = "FAO Yrbk") %>% 
+  dplyr::select(rgn_id, rgn_name, year, number_jobs = value, unit, sector, source)
 
-oecd_mar_jobs_clean <- oecd_mar_jobs %>% 
-  ## Getting rid of all unnecessary columns 
-  select(-c(obs_status_2, observation_status_2, price_base, price_base_2, ref_year_price, price_reference_year, observation_value, time_period_2, iucn_management_categories, ret_period, freq, measure, structure, structure_id, action, measure_2, unit_measure, designation, return_periods, decimals, decimals_2, obs_status, observation_status, unit_mult, unit_multiplier)) %>% 
-  ## Moving columns to more intuitive order 
-  relocate(c(ref_area, reference_area, time_period, obs_value), .before = structure_name) %>% 
-  ## Multiplying obs_value by 1000 to obtain raw value of jobs per country 
-  mutate(value = obs_value*1000) %>% 
-  ## One more relocate
-  relocate(value, .after = obs_value) %>% 
-  ## Renaming structure_name to source
-  dplyr::rename(data_source = structure_name) %>% 
-  ## Removing redundant/unneeded columns 
-  select(-c(obs_value, frequency_of_observation)) %>% 
-  ## Renaming columns to join with other jobs data from FAO
-  dplyr::rename(year = time_period,
-                country = reference_area) %>% 
-  ## Relocating one last time 
-  relocate(unit_of_measure, .before=data_source)
-
-oecd_mar_jobs_join <- oecd_mar_jobs_clean %>% 
-  select(-c(unit_of_measure, ref_area)) %>% 
-  mutate(unit = "persons (1)",
-         sector = "mar") %>% 
-  relocate(c(unit, sector), .before=data_source)
-
-## With both datasets our total unique regions comes out to 82
-length(unique(fao_mar_jobs_clean$country)) + length(unique(oecd_mar_jobs_join$country))
-
-mar_jobs_tot <- rbind(fao_mar_jobs_final, oecd_mar_jobs_join)
-
-## Joined the unique country names comes out to 65
-length(unique(mar_jobs_tot$country))
-
-duplicates <- as.data.frame(mar_jobs_tot[duplicated(mar_jobs_tot[, c('country', 'year')]),  ])
-
-length(unique(duplicates$country))
-
+colSums(is.na(jobs_final_fao))
+length(unique(jobs_final_fao$rgn_id)) # 50 regions
 ```
 
-## This piece of code is for assigning countries to region id when there are dis-aggregated country names (i.e China, Hong Kong, Macao) that are considered one country for the OHI Regions
+Supplement the OECD data with FAO data
 
+```{r,  eval = FALSE}
+# Find which countries OECD is missing
+fao_supplemental_countries <- setdiff(unique(jobs_final_fao$rgn_name), unique(jobs_final_oecd$rgn_name))
 
-```{r}
-## Hard coding a few of the country names that are either synonyms of countries or difficult to identify with name_2_rgn() function
-mar_jobs_rgn <- fao_mar_jobs_clean %>%
-  filter(!country %in% "World total") %>% 
-  dplyr::rename(Country = country) %>% 
-  mutate(Country = case_when(
-   Country=="China,Taiwan" ~ "China",
-    Country=="Russian Fed" ~ "Russia",
-    Country=="Rep.of Korea" ~ "South Korea",
-    Country=="DPR Korea" ~ "North Korea",
-    Country=="Türkiye" ~ "Turkey",
-   Country=="USA" ~ "United States of America",
-    TRUE ~ Country # Everything else, leave it be
-    ))
+# Filter FAO to those countries
+fao_supplemental_jobs <- jobs_final_fao %>%
+  filter(rgn_name %in% fao_supplemental_countries)
 
-# Channel Islands are Jersey and Guernsey, but these are already in the data
+# Bind dataframes
+jobs_final <- jobs_final_oecd %>%
+  rbind(fao_supplemental_jobs) %>%
+  filter(year >= 2008 & year <= 2022) %>%
+  # multiply by average (of developing and developed) scaling factor
+  mutate(number_jobs = number_jobs * 2.34)
 
-mar_jobs_rgn_temp <- name_2_rgn(df_in = mar_jobs_rgn, 
-                       fld_name='Country',
-                      flds_unique = c("year"))
+length(unique(jobs_final$rgn_name)) #54 countries!
 
-## Received a warning for a duplicated country. Using the following code to display the portion of the dataframe that's duplicated 
-    ## Can see that in this case it was China, even though they actually didn't have any duplicated values. Interesting 
-mar_jobs_rgn_temp[duplicated(mar_jobs_rgn_temp[, c('Country','year')]),  ] 
-
-# Weight the following duplicates by population
-# China, Guadeloupe, Guam, Hong Kong, Macao, Martinique, Northern Mariana Islands, Puerto Rico, Virgin Islands (U.S.)... Populations taken from google
-
-# pop_weights <- data.frame(Country = c("China", "Hong Kong", "Macao",
-#                  "Guadeloupe", "Martinique",
-#                  "Guam", "Northern Mariana Islands",
-#                  "Puerto Rico", "Virgin Islands (U.S.)"),
-#                  pop = c(1452883897, 7632334, 669037,
-#                          400276, 367507,
-#                          172069, 49551,
-#                          3252407, 103910))
-
-# mar_jobs_rgn_final <- mar_jobs_rgn_temp %>%
-#   # left_join(pop_weights, by = "Country") %>%
-#   mutate(pop = ifelse(is.na(pop), 1, pop)) %>%
-#   group_by(rgn_id, rgn_name, year) %>%
-#   dplyr::summarize(score = weighted.mean(score, pop, na.rm=TRUE),
-#             method = paste(unique(method), collapse=" "),
-#             gapfill = weighted.mean(gapfill, pop, na.rm=TRUE))%>%
-#   ungroup() %>% 
-#   dplyr::mutate(year = as.numeric(year))
-
-## Only twenty nine countries with data 
-# length(unique(mar_jobs_rgn_temp$Country))
+write_csv(jobs_final, file.path(output_dir, "mar_quantity.csv"))
 ```
 
+**NOTE:** It's important to note that these jobs are for all of *aquaculture* (not just mariculture)

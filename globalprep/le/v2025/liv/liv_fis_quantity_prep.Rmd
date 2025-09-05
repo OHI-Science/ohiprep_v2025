@@ -568,11 +568,13 @@ ilostat_supplemental_jobs <- jobs_final_ilostat %>%
 # Bind dataframes
 jobs_final <- jobs_final %>%
   rbind(ilostat_supplemental_jobs) %>%
-  filter(year >= 2008 & year <= 2022)
+  filter(year >= 2008 & year <= 2022) %>%
+  # multiply by scaling factor
+  mutate(number_jobs = number_jobs*1.582)
 
 length(unique(jobs_final$rgn_name)) #91 countries!
 
-write_csv(jobs_final, file.path(int_dir, "liv_fis_quantity.csv"))
+write_csv(jobs_final, file.path("/home/hoyt/OHI/ohiprep_v2025/globalprep/liv/v2025/int", "liv_fis_quantity.csv"))
 ```
 
 ```{r}

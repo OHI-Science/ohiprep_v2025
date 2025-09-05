@@ -1,6 +1,76 @@
 ---
-title: "beaches_condition"
-author: "Maddy Enda"
-date: "2025-08-25"
-output: html_document
+title: 'OHI 2021: Beaches Condition'
+author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
+output: 
+  html_document:
+    code_folding: show
+    toc: true
+    toc_depth: 1
+    toc_float: yes
+    number_sections: false
+    theme: cerulean
+    highlight: haddock
+    includes: 
+      in_header: '../../../workflow/templates/ohi_hdr.html'
+pdf_document:
+  toc: true
+editor_options: 
+  chunk_output_type: console
 ---
+# Beach Health: Summary
+
+This document serves to calculate the condition of sandy beaches around the globe, by applying predicted rates of degredation from this [article](https://www.nature.com/articles/s41598-018-24630-6). This 2018 article review geospatial data from 1984 to 2016, and determined that 24% of all sandy coastline was eroding at a rate of 0.5m/yr. This is the second document that should be calculated in the hab_beaches folder. 
+
+This document applies a simple equation to the beaches_extent data, that calculates the predicted rate of loss, and applies it in relation to how many years have passed since the time of assessment (from 2016 to now) assuming a linear relationship and constant rate of change. If/when further information or updated information is compiled on coastal erosion, it should be applied here and the methods altered to reflect that. Condition is then scaled from 0-1.
+
+## Data Source 
+
+**Downloaded**: 09/01/2025
+
+**Description**:  
+Global Distribution of Beaches
+https://www.nature.com/articles/s41598-018-24630-6. 
+
+**Time range**: 2010-2020
+
+```{r}
+# Load in packages
+# Load relevant libraries
+library(readr) 
+library(raster)
+library(here)
+library(sf)
+library(fasterize)
+library(tidyverse)
+library(mapview)
+library(sp)
+library(terra)
+
+source(here::here('workflow', 'R', 'common.R'))
+goal <- 'globalprep/hab_beaches/v2025'
+dir_git  <- file.path('~/github/ohiprep_v2025', goal)
+```
+
+
+```{r}
+# Load in the extent data 
+beaches_extent <- read.csv(here(goal, "data", "hab_beaches_extent.csv"))
+
+# Apply linear equation to the values of extent
+beaches_health <- beaches_extent %>%
+  mutate(loss = 0.24 * 0.005 * km2)
+
+# Multipy this loss by number of years since approximation of rate of change
+beaches_health <- beaches_health %>%
+  mutate(total_loss = loss*9) # From 2016-2025 the difference is 9 years
+
+# Scale the total loss from 0-1
+beaches_health <- beaches_health %>%
+  mutate(health = (total_loss - min(total_loss)) / (max(total_loss) - min(total_loss)))
+```
+
+```{r}
+# Save the health data as a csv file
+write.csv(beaches_health, here(goal, "data", "hab_beaches_health.csv"), row.names = FALSE)
+```
+

@@ -118,22 +118,39 @@ write.csv(health, 'globalprep/hab_coral/v2025/data/habitat_health_coral_updated.
 Datacheck: compare to old health data
 
 ```{r, eval = FALSE}
+# Read in the data
 old_health <- read_csv(file.path(here("globalprep/hab_coral/v2021/data/habitat_health_coral_updated.csv")))
+health <- read_csv(file.path(here("globalprep/hab_coral/v2025/data/habitat_health_coral_updated.csv")))
 
-compare_habitat_health <- health %>%
+# Rename the dfs
+health_2021 <- old_health %>%
+  rename(health_2021 = health)
+
+health_2025 <- health %>%
+  rename(health_2025 = health)
+
+
+compare_habitat_health <- health_2025 %>%
   filter(rgn_id <= 250) %>%
-  left_join(old_health, by = "rgn_id") %>%
-  mutate(difference = health.x - health.y) %>%
+  left_join(health_2021, by = "rgn_id") %>%
+  mutate(difference = health_2021 - health_2025) %>%
   left_join(rgns_eez)
 
 test <- compare_habitat_health %>%
-  filter(is.na(health.y)) ## we gained 2 regions with health data
+  filter(is.na(health_2021)) ## we gained 2 regions with health data
 
-ggplot(compare_habitat_health, aes(x = health.y, y = health.x)) +
-  geom_point() +
-  geom_abline() +
-  labs(title = "mangrove Habitat version old (v2021) vs new (v2025)", x = "old health", y=  "new health") +
-  theme_bw()
+compare <- ggplot(compare_habitat_health, 
+                  aes(x = health_2021, 
+                      y = health_2025,
+                      text = paste("Region ID:", rgn_id))) + geom_point() + geom_abline() + 
+  labs(
+    title = "Compare Coral Health v2021 to v2025",
+    x = "Health 2021",
+    y = "Health 2025"
+  )
+
+# Convert ggplot to interactive plotly
+ggplotly(compare, tooltip = "text")
 
 ```
 

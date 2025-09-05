@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Thu Aug 29 19:13:06 2024 by dduncan" />
+<meta name="author" content="Compiled on Thu Sep 4 18:13:03 2025 by hoyt" />
 
 
-<title>OHI 2024 - Mariculture Economies Data Preparation</title>
+<title>OHI 2025 - Mariculture Economies Data Preparation</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1645,10 +1645,10 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">OHI 2024 - Mariculture Economies Data
+<h1 class="title toc-ignore">OHI 2025 - Mariculture Economies Data
 Preparation</h1>
-<h4 class="author"><em>Compiled on Thu Aug 29 19:13:06 2024 by
-dduncan</em></h4>
+<h4 class="author"><em>Compiled on Thu Sep 4 18:13:03 2025 by
+hoyt</em></h4>
 
 </div>
 
@@ -1724,178 +1724,72 @@ Data Explorer</a></li>
 <span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="co"># source common.R ----</span></span>
 <span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;workflow/R/common.R&quot;</span>))</span>
 <span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="co"># set year and file path info ----</span></span>
-<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>current_year <span class="ot">&lt;-</span> <span class="dv">2024</span> <span class="co"># Update this!!</span></span>
-<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>version_year <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>,current_year) <span class="co"># Assessment year</span></span>
-<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>data_dir_version_year <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;d&quot;</span>, current_year) <span class="co"># Data folder for assessment year</span></span>
-<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;le&quot;</span>, version_year) <span class="co"># Path to assessment folder (v202X) </span></span>
-<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a><span class="co"># Raw data directory (on Mazu) ---- </span></span>
-<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a>raw_data_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(dir_M, <span class="st">&quot;git-annex&quot;</span>, <span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;_raw_data&quot;</span>)</span>
-<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a><span class="co"># world bank raw data directory</span></span>
-<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a>wb_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(raw_data_dir, <span class="st">&quot;WorldBank&quot;</span>, data_dir_version_year)</span>
-<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a><span class="co"># FAO Mariculture raw data directory </span></span>
-<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a>fao_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(raw_data_dir, <span class="st">&quot;FAO_mariculture&quot;</span>, data_dir_version_year)</span>
-<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="co"># output data directory for intermediate data products</span></span>
-<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a>int_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(data_path, <span class="st">&quot;int&quot;</span>)</span></code></pre></div>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&#39;workflow/R/fao_online_portal_clean.R&#39;</span>)) <span class="co"># fxn for obtaining FAO data</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="co"># set year and file path info ----</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>current_year <span class="ot">&lt;-</span> <span class="dv">2025</span> <span class="co"># Update this!!</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>version_year <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>,current_year) <span class="co"># Assessment year</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>data_dir_version_year <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;d&quot;</span>, current_year) <span class="co"># Data folder for assessment year</span></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;eco&quot;</span>, version_year) <span class="co"># Path to assessment folder (v202X) </span></span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a><span class="co"># Raw data directory (on Mazu) ---- </span></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>raw_data_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(dir_M, <span class="st">&quot;git-annex&quot;</span>, <span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;_raw_data&quot;</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a><span class="co"># world bank raw data directory</span></span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a>wb_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(raw_data_dir, <span class="st">&quot;WorldBank&quot;</span>, data_dir_version_year)</span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a><span class="co"># FAO Mariculture raw data directory </span></span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a>fao_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(raw_data_dir, <span class="st">&quot;FAO_mariculture&quot;</span>, data_dir_version_year)</span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="co"># output data directory for intermediate data products</span></span>
+<span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a>int_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(data_path, <span class="st">&quot;int&quot;</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" tabindex="-1"></a><span class="co"># output data directory for final data products</span></span>
+<span id="cb1-50"><a href="#cb1-50" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(data_path, <span class="st">&quot;output&quot;</span>)</span></code></pre></div>
 </div>
 <div id="read-in-data" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Read in Data</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># OHI regions data ----</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="co"># read in OHI regions for joining</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>region_names <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/spatial/regions_list.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>region_names <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/spatial/regions_list.csv&quot;</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>notes)</span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># FAO Aquaculture data ----</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>aquaculture_value <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(fao_dir, <span class="st">&quot;/FAO_GlobalAquacultureProduction_Value_1984_2022.csv&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="do">## str to view file structure (it can be very messy)</span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co"># str(aquaculture_value)</span></span></code></pre></div>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>aquaculture_value <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(fao_dir, <span class="st">&quot;FAO_GlobalAquacultureProduction_Value_1984_2023.csv&quot;</span>))</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="do">## str to view file structure (it can be very messy)</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co"># str(aquaculture_value)</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="fu">region_data</span>()</span></code></pre></div>
 </div>
 <div id="clean-aquaculture-value-data" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Clean Aquaculture
 value data</h2>
-<div id="note-this-process-was-done-manually-because-instead-of-reading-in-the-data-with-flag-as-the-header-for-each-observations-symbol-2024s-year-was-read-in-with-symbol-as-the-header-for-each-observations-symbol" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Note: This process
-was done manually because instead of reading in the data with “flag” as
-the header for each observation’s symbol, 2024’s year was read in with
-“symbol” as the header for each observation’s symbol</h3>
-<ul>
-<li>As a result, the data cleaning function fao_online_portal_clean.R
-was not able to be run. So what I did was drag components of the
-cleaning function and manually cleaned the data. See v2023
-livelihoods_economies_dataprep.Rmd to see what they did.
-<ul>
-<li>With the data in the correct format (drawn from online FAO portal),
-this function should apply</li>
-</ul></li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">#clean the aquaculture value data ----</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#this will also be used in the mariculture jobs data section, so need to keep in all environments in the first step</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># Cleaning aquaculture value data</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>aquaculture_value_clean <span class="ot">&lt;-</span> aquaculture_value <span class="sc">%&gt;%</span> </span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>   dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">country =</span> country_name, <span class="co"># Assigning relevant column names </span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>                <span class="at">species =</span>  asfis_species_name, </span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>                <span class="at">area =</span> fao_major_fishing_area_name,</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>                <span class="at">environment =</span> environment_name) <span class="sc">%&gt;%</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(unit_name)) <span class="sc">%&gt;%</span> <span class="co">#clean data, note that we are still using a sub_n value of .1 (100 dollars) </span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">row_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(.))</span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co"># This section adjusts columns simultaneously so that you dont have to ---- </span></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co"># Check these! These are for the &quot;year&quot; columns</span></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>initial_data_year <span class="ot">=</span> <span class="dv">1984</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>last_data_year <span class="ot">=</span> <span class="dv">2022</span></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="co"># Testing to make sure the &quot;year&quot; specs follow the same naming format as the df</span></span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>test <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, initial_data_year<span class="sc">:</span>last_data_year)</span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a></span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="co"># Check these! These are for the &quot;symbol&quot; or &quot;flag&quot; columns (2024 they were in increments of 2)</span></span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>flag_start <span class="ot">=</span> <span class="dv">8</span></span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>flag_end <span class="ot">=</span> <span class="dv">84</span></span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="co"># Testing to make sure the symbol or flag specs are the same naming format as the df </span></span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>test <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;symbol_&quot;</span>, <span class="fu">seq</span>(flag_start, flag_end, <span class="at">by =</span> <span class="dv">2</span>))</span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a></span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="co"># Pivoting columns to tidy the data ---- </span></span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="co"># This creates a dataframe of just the values in the FAO data </span></span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>fao_values <span class="ot">&lt;-</span> aquaculture_value_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">&quot;symbol_&quot;</span>, <span class="fu">seq</span>(flag_start, flag_end, <span class="at">by =</span> <span class="dv">2</span>)))) <span class="sc">%&gt;%</span> <span class="co"># remove &quot;flag&quot; columns</span></span>
-<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, initial_data_year<span class="sc">:</span>last_data_year), </span>
-<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>,</span>
-<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># Pivot value colunns</span></span>
-<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">str_remove</span>(year, <span class="st">&quot;x&quot;</span>)) <span class="co"># clean_names() put an &#39;x&#39; in front of years. Removing the x</span></span>
-<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a></span>
-<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a><span class="co"># This is a little bit more messy than the values because my column headers contained symbol instead of flag </span></span>
-<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>fao_flags1 <span class="ot">&lt;-</span> aquaculture_value_clean <span class="sc">%&gt;%</span> </span>
-<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">&quot;x&quot;</span>, initial_data_year<span class="sc">:</span>last_data_year))) <span class="co"># select out year</span></span>
-<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a></span>
-<span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a><span class="do">### MAYBE MOVE THIS TO APPLY TO THE AQUACULTURE_VALUE_CLEAN DF RATHER THAN FAO_FLAGS1</span></span>
-<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a></span>
-<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a><span class="co"># Rename the columns in the Flag dataframe to actually have &quot;flag&quot; rather than symbol AND** getting the year for each flag so that we can rejoin the flags df with the values df </span></span>
-<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a><span class="fu">colnames</span>(fao_flags1) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;species&quot;</span>, <span class="st">&quot;area&quot;</span>, <span class="st">&quot;environment&quot;</span>, <span class="st">&quot;unit&quot;</span>, <span class="fu">paste0</span>(<span class="st">&quot;flag&quot;</span>, initial_data_year<span class="sc">:</span>last_data_year), <span class="st">&quot;row_id&quot;</span>)</span>
-<span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a></span>
-<span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a><span class="co"># Because values were already selected out, this line of code is just pivoting the flags df and cleaning</span></span>
-<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a>fao_flags <span class="ot">&lt;-</span> fao_flags1 <span class="sc">%&gt;%</span> </span>
-<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">paste0</span>(<span class="st">&quot;flag&quot;</span>, initial_data_year<span class="sc">:</span>last_data_year),</span>
-<span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;flag_year&quot;</span>,</span>
-<span id="cb3-52"><a href="#cb3-52" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;flag&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># Pivot longer </span></span>
-<span id="cb3-53"><a href="#cb3-53" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">str_remove</span>(flag_year, <span class="st">&quot;flag&quot;</span>)) <span class="sc">%&gt;%</span> <span class="co"># Remove the &quot;flag&quot; from flag year so that we can have year to join by in the final flag df</span></span>
-<span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, row_id, flag) <span class="co"># selecting relevant columns to join by </span></span>
-<span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a></span>
-<span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a><span class="co"># Creating final df ---- </span></span>
-<span id="cb3-57"><a href="#cb3-57" tabindex="-1"></a></span>
-<span id="cb3-58"><a href="#cb3-58" tabindex="-1"></a><span class="co"># Joining fao values dataframe with the fao flags dataframe so that we can account for &quot;N&quot; flag and assign a value to it </span></span>
-<span id="cb3-59"><a href="#cb3-59" tabindex="-1"></a>fao_new <span class="ot">&lt;-</span> fao_values <span class="sc">%&gt;%</span></span>
-<span id="cb3-60"><a href="#cb3-60" tabindex="-1"></a>  <span class="fu">left_join</span>(fao_flags, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;row_id&quot;</span>, <span class="st">&quot;year&quot;</span>)) <span class="co"># This is why we need year from each flag. If we just pivoted the values and then the flags in the aquaculture_values_clean df then it would double the values for each observation. </span></span>
-<span id="cb3-61"><a href="#cb3-61" tabindex="-1"></a></span>
-<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a><span class="co"># Assign value to substitute &quot;N&quot; flags for </span></span>
-<span id="cb3-63"><a href="#cb3-63" tabindex="-1"></a>sub_N <span class="ot">=</span> <span class="fl">0.1</span></span>
-<span id="cb3-64"><a href="#cb3-64" tabindex="-1"></a></span>
-<span id="cb3-65"><a href="#cb3-65" tabindex="-1"></a><span class="co"># Replace &quot;N&quot; flags </span></span>
-<span id="cb3-66"><a href="#cb3-66" tabindex="-1"></a>fao_new <span class="ot">&lt;-</span> fao_new <span class="sc">%&gt;%</span> </span>
-<span id="cb3-67"><a href="#cb3-67" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="fu">case_when</span>((<span class="fu">str_detect</span>(flag, <span class="st">&quot;N&quot;</span>) <span class="sc">&amp;</span> value <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">~</span> sub_N,</span>
-<span id="cb3-68"><a href="#cb3-68" tabindex="-1"></a>                           <span class="cn">TRUE</span> <span class="sc">~</span>value)) <span class="sc">%&gt;%</span> <span class="co">#replace values that are 0 and have the flag N with sub_N</span></span>
-<span id="cb3-69"><a href="#cb3-69" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(row_id, flag)) <span class="co"># Getting rid of temporary indexing row and flag row </span></span>
-<span id="cb3-70"><a href="#cb3-70" tabindex="-1"></a></span>
-<span id="cb3-71"><a href="#cb3-71" tabindex="-1"></a></span>
-<span id="cb3-72"><a href="#cb3-72" tabindex="-1"></a><span class="co"># Filter to only marine habitats</span></span>
-<span id="cb3-73"><a href="#cb3-73" tabindex="-1"></a> mariculture_revenue <span class="ot">&lt;-</span> fao_new <span class="sc">%&gt;%</span> </span>
-<span id="cb3-74"><a href="#cb3-74" tabindex="-1"></a>   <span class="fu">filter</span>(environment <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Brackishwater&quot;</span>, <span class="st">&quot;Marine&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-75"><a href="#cb3-75" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">case_when</span>(</span>
-<span id="cb3-76"><a href="#cb3-76" tabindex="-1"></a>     species <span class="sc">==</span> <span class="st">&quot;Mexican spiny loster&quot;</span> <span class="sc">~</span> <span class="st">&quot;Mexican spiny lobster&quot;</span>,</span>
-<span id="cb3-77"><a href="#cb3-77" tabindex="-1"></a>     <span class="cn">TRUE</span> <span class="sc">~</span> species</span>
-<span id="cb3-78"><a href="#cb3-78" tabindex="-1"></a>   ))</span>
-<span id="cb3-79"><a href="#cb3-79" tabindex="-1"></a> </span>
-<span id="cb3-80"><a href="#cb3-80" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb3-81"><a href="#cb3-81" tabindex="-1"></a><span class="co"># mar_sp &lt;- read.csv(here::here(&#39;globalprep/mar/v2023/raw/species_list.csv&#39;), stringsAsFactors=FALSE) %&gt;%</span></span>
-<span id="cb3-82"><a href="#cb3-82" tabindex="-1"></a><span class="co">#   select(FAO_name, exclude,Taxon_code, family, notes, notes_2)</span></span>
-<span id="cb3-83"><a href="#cb3-83" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb3-84"><a href="#cb3-84" tabindex="-1"></a><span class="co"># mar_sp_fix &lt;- read.csv(here::here(&#39;globalprep/mar/v2022/raw/species_list.csv&#39;), stringsAsFactors=FALSE)</span></span>
-<span id="cb3-85"><a href="#cb3-85" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb3-86"><a href="#cb3-86" tabindex="-1"></a><span class="co"># new.spp &lt;- setdiff(mariculture_revenue$species, mar_sp$FAO_name)</span></span>
-<span id="cb3-87"><a href="#cb3-87" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb3-88"><a href="#cb3-88" tabindex="-1"></a><span class="co"># new.spp # I suppose there are 17 new species in the 2024 data</span></span>
-<span id="cb3-89"><a href="#cb3-89" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb3-90"><a href="#cb3-90" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb3-91"><a href="#cb3-91" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb3-92"><a href="#cb3-92" tabindex="-1"></a><span class="co"># mariculture_revenue &lt;- mariculture_revenue %&gt;%</span></span>
-<span id="cb3-93"><a href="#cb3-93" tabindex="-1"></a><span class="co">#   dplyr::rename(FAO_name = species)</span></span>
-<span id="cb3-94"><a href="#cb3-94" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb3-95"><a href="#cb3-95" tabindex="-1"></a><span class="co"># mar_test &lt;- mariculture_revenue %&gt;% left_join(mar_sp, by=&quot;FAO_name&quot;)</span></span>
-<span id="cb3-96"><a href="#cb3-96" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb3-97"><a href="#cb3-97" tabindex="-1"></a><span class="co"># mar_test &lt;- mariculture_test %&gt;% dplyr::filter(exclude &lt; 1)</span></span>
-<span id="cb3-98"><a href="#cb3-98" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb3-99"><a href="#cb3-99" tabindex="-1"></a><span class="co"># mar_test &lt;- mar_test %&gt;%</span></span>
-<span id="cb3-100"><a href="#cb3-100" tabindex="-1"></a><span class="co">#   dplyr::mutate(include = 1 - exclude)</span></span>
-<span id="cb3-101"><a href="#cb3-101" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb3-102"><a href="#cb3-102" tabindex="-1"></a><span class="co"># mar_test &lt;- mar_test %&gt;%</span></span>
-<span id="cb3-103"><a href="#cb3-103" tabindex="-1"></a><span class="co">#   mutate(value_include = value*include)</span></span>
-<span id="cb3-104"><a href="#cb3-104" tabindex="-1"></a></span>
-<span id="cb3-105"><a href="#cb3-105" tabindex="-1"></a><span class="co"># Sum by region and year (we need total revenue)</span></span>
-<span id="cb3-106"><a href="#cb3-106" tabindex="-1"></a>total_mar_rev <span class="ot">&lt;-</span> mariculture_revenue <span class="sc">%&gt;%</span></span>
-<span id="cb3-107"><a href="#cb3-107" tabindex="-1"></a>  <span class="fu">group_by</span>(country, year) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-108"><a href="#cb3-108" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">value =</span> <span class="fu">sum</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-109"><a href="#cb3-109" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sector =</span> <span class="st">&quot;mar&quot;</span>, <span class="at">data_source =</span> <span class="st">&quot;FAO aquaculture value&quot;</span>, <span class="at">unit =</span> <span class="st">&quot;USD (1)&quot;</span>,</span>
-<span id="cb3-110"><a href="#cb3-110" tabindex="-1"></a>          <span class="at">value =</span> value <span class="sc">*</span><span class="dv">1000</span>) <span class="sc">%&gt;%</span> <span class="co"># Multiply value times 1000 to get dollars</span></span>
-<span id="cb3-111"><a href="#cb3-111" tabindex="-1"></a>  <span class="fu">select</span>(country, year, value, unit, sector, data_source) <span class="co"># Select relevant columns</span></span>
-<span id="cb3-112"><a href="#cb3-112" tabindex="-1"></a></span>
-<span id="cb3-113"><a href="#cb3-113" tabindex="-1"></a><span class="co"># Plotting to gut check ---- </span></span>
-<span id="cb3-114"><a href="#cb3-114" tabindex="-1"></a>total_mar_rev <span class="sc">%&gt;%</span> </span>
-<span id="cb3-115"><a href="#cb3-115" tabindex="-1"></a>  <span class="co"># filter(!country == &quot;China&quot;) %&gt;% # If needed, filter out China because it tends to squish the lower values </span></span>
-<span id="cb3-116"><a href="#cb3-116" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(year), <span class="at">y =</span> value, <span class="at">color =</span> country)) <span class="sc">+</span> </span>
-<span id="cb3-117"><a href="#cb3-117" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb3-118"><a href="#cb3-118" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb3-119"><a href="#cb3-119" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_dollar</span>(<span class="at">scale =</span> <span class="fl">0.000000001</span>, <span class="at">suffix =</span> <span class="st">&quot;B&quot;</span>))</span></code></pre></div>
-</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>aquaculture_value_cleaned <span class="ot">&lt;-</span> <span class="fu">fao_online_portal_clean</span>(aquaculture_value) <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>   <span class="fu">filter</span>(environment_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Brackishwater&quot;</span>, <span class="st">&quot;Marine&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">species =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>     asfis_species <span class="sc">==</span> <span class="st">&quot;Mexican spiny loster&quot;</span> <span class="sc">~</span> <span class="st">&quot;Mexican spiny lobster&quot;</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>     <span class="cn">TRUE</span> <span class="sc">~</span> asfis_species</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>   )) </span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>total_mar_rev <span class="ot">&lt;-</span> aquaculture_value_cleaned <span class="sc">%&gt;%</span> </span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  <span class="fu">group_by</span>(country, year) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">value =</span> <span class="fu">sum</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sector =</span> <span class="st">&quot;mar&quot;</span>, <span class="at">data_source =</span> <span class="st">&quot;FAO aquaculture value&quot;</span>, <span class="at">unit =</span> <span class="st">&quot;USD (1)&quot;</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>          <span class="at">value =</span> value <span class="sc">*</span> <span class="dv">1000</span>) <span class="sc">%&gt;%</span> <span class="co"># Multiply value times 1000 to get dollars</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>  <span class="fu">select</span>(country, year, value, unit, sector, data_source) <span class="co"># Select relevant columns</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="fu">unique</span>(<span class="fu">setdiff</span>(total_mar_rev<span class="sc">$</span>country, aquaculture_value_cleaned<span class="sc">$</span>country))</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>total_mar_rev <span class="sc">%&gt;%</span> </span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>country <span class="sc">==</span> <span class="st">&quot;China&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># If needed, filter out China because it tends to squish the lower values </span></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.numeric</span>(year), <span class="at">y =</span> value, <span class="at">color =</span> country)) <span class="sc">+</span> </span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_dollar</span>(<span class="at">scale =</span> <span class="fl">0.000000001</span>, <span class="at">suffix =</span> <span class="st">&quot;B&quot;</span>))</span></code></pre></div>
 </div>
 <div id="assigning-country-names-to-their-respective-regions-in-ohi" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Assigning country
@@ -1956,7 +1850,7 @@ load the OHI Region synonyms for review</li>
 <span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a>mar_rev_rgn <span class="ot">&lt;-</span> mar_rev_rgn <span class="sc">%&gt;%</span></span>
 <span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">!=</span> <span class="st">&#39;Channel Islands&#39;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a>      <span class="fu">bind_rows</span>(m_CI)</span>
-<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a>  <span class="fu">arrange</span>(country, fao, environment, species, year, value) </span>
+<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a>  <span class="co">#arrange(country, fao, environment, species, year, value) </span></span>
 <span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a></span>
 <span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a><span class="co"># Using name_2_rgn function to populate values for rgn_id and rgn_name for each of the countries listed in the dataframe</span></span>
 <span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a>mar_rev_rgn_temp <span class="ot">&lt;-</span> ohicore<span class="sc">::</span><span class="fu">name_2_rgn</span>(<span class="at">df_in =</span> mar_rev_rgn, </span>
@@ -2039,102 +1933,69 @@ load the OHI Region synonyms for review</li>
 <span id="cb4-122"><a href="#cb4-122" tabindex="-1"></a>  <span class="fu">relocate</span>(country, <span class="at">.before =</span> year) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-123"><a href="#cb4-123" tabindex="-1"></a>  <span class="fu">relocate</span>(rgn_id, <span class="at">.before =</span> rgn_name)</span>
 <span id="cb4-124"><a href="#cb4-124" tabindex="-1"></a></span>
-<span id="cb4-125"><a href="#cb4-125" tabindex="-1"></a>rgn_186 <span class="ot">&lt;-</span> mar_rev_rgn_temp <span class="sc">%&gt;%</span> </span>
-<span id="cb4-126"><a href="#cb4-126" tabindex="-1"></a>  <span class="fu">filter</span>(rgn_id <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">186</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-127"><a href="#cb4-127" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="st">&quot;Serbia and Montenegro&quot;</span>)</span>
+<span id="cb4-125"><a href="#cb4-125" tabindex="-1"></a>rgn_202 <span class="ot">&lt;-</span> mar_rev_rgn_temp <span class="sc">%&gt;%</span> </span>
+<span id="cb4-126"><a href="#cb4-126" tabindex="-1"></a>  <span class="fu">filter</span>(rgn_id <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">202</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-127"><a href="#cb4-127" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="st">&quot;United Republic of Tanzania, Zanzibar&quot;</span>)</span>
 <span id="cb4-128"><a href="#cb4-128" tabindex="-1"></a></span>
-<span id="cb4-129"><a href="#cb4-129" tabindex="-1"></a>joined_186 <span class="ot">&lt;-</span> mar_rev_dupes_temp <span class="sc">%&gt;%</span> </span>
-<span id="cb4-130"><a href="#cb4-130" tabindex="-1"></a>  <span class="fu">filter</span>(rgn_id <span class="sc">%in%</span> <span class="dv">186</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-131"><a href="#cb4-131" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">country =</span> rgn_186<span class="sc">$</span>country,</span>
-<span id="cb4-132"><a href="#cb4-132" tabindex="-1"></a>         <span class="at">unit =</span> rgn_186<span class="sc">$</span>unit,</span>
-<span id="cb4-133"><a href="#cb4-133" tabindex="-1"></a>         <span class="at">sector =</span> rgn_186<span class="sc">$</span>sector,</span>
-<span id="cb4-134"><a href="#cb4-134" tabindex="-1"></a>         <span class="at">data_source =</span> rgn_186<span class="sc">$</span>data_source,</span>
-<span id="cb4-135"><a href="#cb4-135" tabindex="-1"></a>         <span class="at">Country =</span> rgn_186<span class="sc">$</span>Country,</span>
-<span id="cb4-136"><a href="#cb4-136" tabindex="-1"></a>         <span class="at">rgn_name =</span> rgn_186<span class="sc">$</span>rgn_name,</span>
+<span id="cb4-129"><a href="#cb4-129" tabindex="-1"></a>joined_202 <span class="ot">&lt;-</span> mar_rev_dupes_temp <span class="sc">%&gt;%</span> </span>
+<span id="cb4-130"><a href="#cb4-130" tabindex="-1"></a>  <span class="fu">filter</span>(rgn_id <span class="sc">%in%</span> <span class="dv">202</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-131"><a href="#cb4-131" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">country =</span> rgn_202<span class="sc">$</span>country,</span>
+<span id="cb4-132"><a href="#cb4-132" tabindex="-1"></a>         <span class="at">unit =</span> rgn_202<span class="sc">$</span>unit,</span>
+<span id="cb4-133"><a href="#cb4-133" tabindex="-1"></a>         <span class="at">sector =</span> rgn_202<span class="sc">$</span>sector,</span>
+<span id="cb4-134"><a href="#cb4-134" tabindex="-1"></a>         <span class="at">data_source =</span> rgn_202<span class="sc">$</span>data_source,</span>
+<span id="cb4-135"><a href="#cb4-135" tabindex="-1"></a>         <span class="at">Country =</span> rgn_202<span class="sc">$</span>Country,</span>
+<span id="cb4-136"><a href="#cb4-136" tabindex="-1"></a>         <span class="at">rgn_name =</span> rgn_202<span class="sc">$</span>rgn_name,</span>
 <span id="cb4-137"><a href="#cb4-137" tabindex="-1"></a>         <span class="at">rgn_id =</span> <span class="fu">as.numeric</span>(rgn_id)</span>
 <span id="cb4-138"><a href="#cb4-138" tabindex="-1"></a>         ) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-139"><a href="#cb4-139" tabindex="-1"></a>  <span class="fu">relocate</span>(country, <span class="at">.before =</span> year) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-140"><a href="#cb4-140" tabindex="-1"></a>  <span class="fu">relocate</span>(rgn_id, <span class="at">.before =</span> rgn_name)</span>
 <span id="cb4-141"><a href="#cb4-141" tabindex="-1"></a></span>
-<span id="cb4-142"><a href="#cb4-142" tabindex="-1"></a>rgn_73 <span class="ot">&lt;-</span> mar_rev_rgn_temp <span class="sc">%&gt;%</span> </span>
-<span id="cb4-143"><a href="#cb4-143" tabindex="-1"></a>  <span class="fu">filter</span>(rgn_id <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">73</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-144"><a href="#cb4-144" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="st">&quot;Un. Sov. Soc. Rep.&quot;</span>)</span>
-<span id="cb4-145"><a href="#cb4-145" tabindex="-1"></a></span>
-<span id="cb4-146"><a href="#cb4-146" tabindex="-1"></a>joined_73 <span class="ot">&lt;-</span> mar_rev_dupes_temp <span class="sc">%&gt;%</span> </span>
-<span id="cb4-147"><a href="#cb4-147" tabindex="-1"></a>  <span class="fu">filter</span>(rgn_id <span class="sc">%in%</span> <span class="dv">73</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-148"><a href="#cb4-148" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">country =</span> rgn_73<span class="sc">$</span>country,</span>
-<span id="cb4-149"><a href="#cb4-149" tabindex="-1"></a>         <span class="at">unit =</span> rgn_73<span class="sc">$</span>unit,</span>
-<span id="cb4-150"><a href="#cb4-150" tabindex="-1"></a>         <span class="at">sector =</span> rgn_73<span class="sc">$</span>sector,</span>
-<span id="cb4-151"><a href="#cb4-151" tabindex="-1"></a>         <span class="at">data_source =</span> rgn_73<span class="sc">$</span>data_source,</span>
-<span id="cb4-152"><a href="#cb4-152" tabindex="-1"></a>         <span class="at">Country =</span> rgn_73<span class="sc">$</span>Country,</span>
-<span id="cb4-153"><a href="#cb4-153" tabindex="-1"></a>         <span class="at">rgn_name =</span> rgn_73<span class="sc">$</span>rgn_name,</span>
-<span id="cb4-154"><a href="#cb4-154" tabindex="-1"></a>         <span class="at">rgn_id =</span> <span class="fu">as.numeric</span>(rgn_id)</span>
-<span id="cb4-155"><a href="#cb4-155" tabindex="-1"></a>         ) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-156"><a href="#cb4-156" tabindex="-1"></a>  <span class="fu">relocate</span>(country, <span class="at">.before =</span> year) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-157"><a href="#cb4-157" tabindex="-1"></a>  <span class="fu">relocate</span>(rgn_id, <span class="at">.before =</span> rgn_name)</span>
-<span id="cb4-158"><a href="#cb4-158" tabindex="-1"></a></span>
-<span id="cb4-159"><a href="#cb4-159" tabindex="-1"></a>rgn_202 <span class="ot">&lt;-</span> mar_rev_rgn_temp <span class="sc">%&gt;%</span> </span>
-<span id="cb4-160"><a href="#cb4-160" tabindex="-1"></a>  <span class="fu">filter</span>(rgn_id <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">202</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-161"><a href="#cb4-161" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">%in%</span> <span class="st">&quot;United Republic of Tanzania, Zanzibar&quot;</span>)</span>
-<span id="cb4-162"><a href="#cb4-162" tabindex="-1"></a></span>
-<span id="cb4-163"><a href="#cb4-163" tabindex="-1"></a>joined_202 <span class="ot">&lt;-</span> mar_rev_dupes_temp <span class="sc">%&gt;%</span> </span>
-<span id="cb4-164"><a href="#cb4-164" tabindex="-1"></a>  <span class="fu">filter</span>(rgn_id <span class="sc">%in%</span> <span class="dv">202</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-165"><a href="#cb4-165" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">country =</span> rgn_202<span class="sc">$</span>country,</span>
-<span id="cb4-166"><a href="#cb4-166" tabindex="-1"></a>         <span class="at">unit =</span> rgn_202<span class="sc">$</span>unit,</span>
-<span id="cb4-167"><a href="#cb4-167" tabindex="-1"></a>         <span class="at">sector =</span> rgn_202<span class="sc">$</span>sector,</span>
-<span id="cb4-168"><a href="#cb4-168" tabindex="-1"></a>         <span class="at">data_source =</span> rgn_202<span class="sc">$</span>data_source,</span>
-<span id="cb4-169"><a href="#cb4-169" tabindex="-1"></a>         <span class="at">Country =</span> rgn_202<span class="sc">$</span>Country,</span>
-<span id="cb4-170"><a href="#cb4-170" tabindex="-1"></a>         <span class="at">rgn_name =</span> rgn_202<span class="sc">$</span>rgn_name,</span>
-<span id="cb4-171"><a href="#cb4-171" tabindex="-1"></a>         <span class="at">rgn_id =</span> <span class="fu">as.numeric</span>(rgn_id)</span>
-<span id="cb4-172"><a href="#cb4-172" tabindex="-1"></a>         ) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-173"><a href="#cb4-173" tabindex="-1"></a>  <span class="fu">relocate</span>(country, <span class="at">.before =</span> year) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-174"><a href="#cb4-174" tabindex="-1"></a>  <span class="fu">relocate</span>(rgn_id, <span class="at">.before =</span> rgn_name)</span>
+<span id="cb4-142"><a href="#cb4-142" tabindex="-1"></a><span class="co"># Now rejoining all of my un-duplicated data back into the df without duplicates </span></span>
+<span id="cb4-143"><a href="#cb4-143" tabindex="-1"></a>mar_rev_fixed <span class="ot">&lt;-</span> mar_rev_rgn_no_dupes <span class="sc">%&gt;%</span> </span>
+<span id="cb4-144"><a href="#cb4-144" tabindex="-1"></a>  <span class="fu">rbind</span>(., joined_13) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-145"><a href="#cb4-145" tabindex="-1"></a>  <span class="fu">rbind</span>(., joined_202) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-146"><a href="#cb4-146" tabindex="-1"></a>  <span class="fu">rbind</span>(., joined_209) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-147"><a href="#cb4-147" tabindex="-1"></a>  <span class="fu">rbind</span>(., joined_140) </span>
+<span id="cb4-148"><a href="#cb4-148" tabindex="-1"></a>  <span class="co">#rbind(., joined_186) %&gt;% </span></span>
+<span id="cb4-149"><a href="#cb4-149" tabindex="-1"></a>  <span class="co">#rbind(., joined_73)</span></span>
+<span id="cb4-150"><a href="#cb4-150" tabindex="-1"></a></span>
+<span id="cb4-151"><a href="#cb4-151" tabindex="-1"></a><span class="co"># Checking for duplicates one more times --&gt; No observations = no duplicates </span></span>
+<span id="cb4-152"><a href="#cb4-152" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> mar_rev_fixed[<span class="fu">duplicated</span>(mar_rev_fixed[, <span class="fu">c</span>(<span class="st">&#39;rgn_id&#39;</span>,<span class="st">&#39;year&#39;</span>)]),  ]</span>
+<span id="cb4-153"><a href="#cb4-153" tabindex="-1"></a></span>
+<span id="cb4-154"><a href="#cb4-154" tabindex="-1"></a><span class="co"># Binding duplicate data and ensuring dataframe is in the CORRECT format to write out to /int folder ----</span></span>
+<span id="cb4-155"><a href="#cb4-155" tabindex="-1"></a>eco_mar_usd_raw <span class="ot">&lt;-</span> mar_rev_fixed <span class="sc">%&gt;%</span> </span>
+<span id="cb4-156"><a href="#cb4-156" tabindex="-1"></a>  <span class="fu">relocate</span>(<span class="fu">c</span>(rgn_id, rgn_name), <span class="at">.before =</span> country) <span class="sc">%&gt;%</span> <span class="co"># Relocating columns in the order specified by README</span></span>
+<span id="cb4-157"><a href="#cb4-157" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="co"># Getting rid of any leftover groups </span></span>
+<span id="cb4-158"><a href="#cb4-158" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(country, sector, data_source, Country)) <span class="sc">%&gt;%</span> <span class="co"># Getting rid of extra columns</span></span>
+<span id="cb4-159"><a href="#cb4-159" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">usd =</span> value) <span class="sc">%&gt;%</span> <span class="co"># Renaming value to specified format name </span></span>
+<span id="cb4-160"><a href="#cb4-160" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sector =</span> <span class="st">&quot;mar&quot;</span>, <span class="co"># Adding sector</span></span>
+<span id="cb4-161"><a href="#cb4-161" tabindex="-1"></a>         <span class="at">usd_yr =</span> year, <span class="co"># UPDATE THIS BASED ON THE USD METRIC CONVERSION (should specify in metadata, but for the data for v2024 the data was just converted to that year&#39;s USD value, so the usd_yr is just year)</span></span>
+<span id="cb4-162"><a href="#cb4-162" tabindex="-1"></a>         <span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="co"># Making sure its numeric per file structure. Could check this with class()</span></span>
+<span id="cb4-163"><a href="#cb4-163" tabindex="-1"></a></span>
+<span id="cb4-164"><a href="#cb4-164" tabindex="-1"></a>mar_heatmap <span class="ot">&lt;-</span> eco_mar_usd_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb4-165"><a href="#cb4-165" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">status =</span> <span class="fu">case_when</span>(</span>
+<span id="cb4-166"><a href="#cb4-166" tabindex="-1"></a>    usd <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-167"><a href="#cb4-167" tabindex="-1"></a>    usd <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="cn">TRUE</span></span>
+<span id="cb4-168"><a href="#cb4-168" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-169"><a href="#cb4-169" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="dv">2009</span><span class="sc">:</span><span class="dv">2023</span>)</span>
+<span id="cb4-170"><a href="#cb4-170" tabindex="-1"></a></span>
+<span id="cb4-171"><a href="#cb4-171" tabindex="-1"></a>heatmap <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mar_heatmap, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> rgn_name, <span class="at">fill =</span> <span class="fu">as.factor</span>(status))) <span class="sc">+</span> </span>
+<span id="cb4-172"><a href="#cb4-172" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb4-173"><a href="#cb4-173" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;darkgrey&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb4-174"><a href="#cb4-174" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
 <span id="cb4-175"><a href="#cb4-175" tabindex="-1"></a></span>
-<span id="cb4-176"><a href="#cb4-176" tabindex="-1"></a><span class="co"># Now rejoining all of my un-duplicated data back into the df without duplicates </span></span>
-<span id="cb4-177"><a href="#cb4-177" tabindex="-1"></a>mar_rev_fixed <span class="ot">&lt;-</span> mar_rev_rgn_no_dupes <span class="sc">%&gt;%</span> </span>
-<span id="cb4-178"><a href="#cb4-178" tabindex="-1"></a>  <span class="fu">rbind</span>(., joined_13) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-179"><a href="#cb4-179" tabindex="-1"></a>  <span class="fu">rbind</span>(., joined_202) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-180"><a href="#cb4-180" tabindex="-1"></a>  <span class="fu">rbind</span>(., joined_209) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-181"><a href="#cb4-181" tabindex="-1"></a>  <span class="fu">rbind</span>(., joined_140) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-182"><a href="#cb4-182" tabindex="-1"></a>  <span class="fu">rbind</span>(., joined_186) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-183"><a href="#cb4-183" tabindex="-1"></a>  <span class="fu">rbind</span>(., joined_73)</span>
+<span id="cb4-176"><a href="#cb4-176" tabindex="-1"></a>heatmap</span>
+<span id="cb4-177"><a href="#cb4-177" tabindex="-1"></a></span>
+<span id="cb4-178"><a href="#cb4-178" tabindex="-1"></a><span class="co"># plotly::ggplotly(heatmap) # rgn_id 249, 244, 98, and 116 have missing data for almost all years, aside from that what&#39;s in there is pretty good and those countries likely are present from freshwater aquaculture data im assuming </span></span>
+<span id="cb4-179"><a href="#cb4-179" tabindex="-1"></a>total_na <span class="ot">&lt;-</span> mar_heatmap <span class="sc">%&gt;%</span> </span>
+<span id="cb4-180"><a href="#cb4-180" tabindex="-1"></a>  <span class="fu">group_by</span>(rgn_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-181"><a href="#cb4-181" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(status))</span>
+<span id="cb4-182"><a href="#cb4-182" tabindex="-1"></a></span>
+<span id="cb4-183"><a href="#cb4-183" tabindex="-1"></a><span class="co"># Check here if you need to update the years in your dataframe. If there are  </span></span>
 <span id="cb4-184"><a href="#cb4-184" tabindex="-1"></a></span>
-<span id="cb4-185"><a href="#cb4-185" tabindex="-1"></a><span class="co"># Checking for duplicates one more times --&gt; No observations = no duplicates </span></span>
-<span id="cb4-186"><a href="#cb4-186" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> mar_rev_fixed[<span class="fu">duplicated</span>(mar_rev_fixed[, <span class="fu">c</span>(<span class="st">&#39;rgn_id&#39;</span>,<span class="st">&#39;year&#39;</span>)]),  ]</span>
-<span id="cb4-187"><a href="#cb4-187" tabindex="-1"></a></span>
-<span id="cb4-188"><a href="#cb4-188" tabindex="-1"></a><span class="co"># Binding duplicate data and ensuring dataframe is in the CORRECT format to write out to /int folder ----</span></span>
-<span id="cb4-189"><a href="#cb4-189" tabindex="-1"></a>eco_mar_usd_raw <span class="ot">&lt;-</span> mar_rev_fixed <span class="sc">%&gt;%</span> </span>
-<span id="cb4-190"><a href="#cb4-190" tabindex="-1"></a>  <span class="fu">relocate</span>(<span class="fu">c</span>(rgn_id, rgn_name), <span class="at">.before =</span> country) <span class="sc">%&gt;%</span> <span class="co"># Relocating columns in the order specified by README</span></span>
-<span id="cb4-191"><a href="#cb4-191" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="co"># Getting rid of any leftover groups </span></span>
-<span id="cb4-192"><a href="#cb4-192" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(country, sector, data_source, Country)) <span class="sc">%&gt;%</span> <span class="co"># Getting rid of extra columns</span></span>
-<span id="cb4-193"><a href="#cb4-193" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">usd =</span> value) <span class="sc">%&gt;%</span> <span class="co"># Renaming value to specified format name </span></span>
-<span id="cb4-194"><a href="#cb4-194" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sector =</span> <span class="st">&quot;mar&quot;</span>, <span class="co"># Adding sector</span></span>
-<span id="cb4-195"><a href="#cb4-195" tabindex="-1"></a>         <span class="at">usd_yr =</span> year, <span class="co"># UPDATE THIS BASED ON THE USD METRIC CONVERSION (should specify in metadata, but for the data for v2024 the data was just converted to that year&#39;s USD value, so the usd_yr is just year)</span></span>
-<span id="cb4-196"><a href="#cb4-196" tabindex="-1"></a>         <span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="co"># Making sure its numeric per file structure. Could check this with class()</span></span>
-<span id="cb4-197"><a href="#cb4-197" tabindex="-1"></a></span>
-<span id="cb4-198"><a href="#cb4-198" tabindex="-1"></a>mar_heatmap <span class="ot">&lt;-</span> eco_mar_usd_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb4-199"><a href="#cb4-199" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">status =</span> <span class="fu">case_when</span>(</span>
-<span id="cb4-200"><a href="#cb4-200" tabindex="-1"></a>    usd <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="cn">FALSE</span>,</span>
-<span id="cb4-201"><a href="#cb4-201" tabindex="-1"></a>    usd <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="cn">TRUE</span></span>
-<span id="cb4-202"><a href="#cb4-202" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-203"><a href="#cb4-203" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="dv">2009</span><span class="sc">:</span><span class="dv">2019</span>)</span>
-<span id="cb4-204"><a href="#cb4-204" tabindex="-1"></a></span>
-<span id="cb4-205"><a href="#cb4-205" tabindex="-1"></a>heatmap <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mar_heatmap, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> rgn_name, <span class="at">fill =</span> <span class="fu">as.factor</span>(status))) <span class="sc">+</span> </span>
-<span id="cb4-206"><a href="#cb4-206" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb4-207"><a href="#cb4-207" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;darkgrey&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>)) <span class="sc">+</span> </span>
-<span id="cb4-208"><a href="#cb4-208" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb4-209"><a href="#cb4-209" tabindex="-1"></a>heatmap</span>
-<span id="cb4-210"><a href="#cb4-210" tabindex="-1"></a></span>
-<span id="cb4-211"><a href="#cb4-211" tabindex="-1"></a><span class="co"># plotly::ggplotly(heatmap) # rgn_id 249, 244, 98, and 116 have missing data for almost all years, aside from that what&#39;s in there is pretty good and those countries likely are present from freshwater aquaculture data im assuming </span></span>
-<span id="cb4-212"><a href="#cb4-212" tabindex="-1"></a></span>
-<span id="cb4-213"><a href="#cb4-213" tabindex="-1"></a>total_na <span class="ot">&lt;-</span> mar_heatmap <span class="sc">%&gt;%</span> </span>
-<span id="cb4-214"><a href="#cb4-214" tabindex="-1"></a>  <span class="fu">group_by</span>(rgn_name) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-215"><a href="#cb4-215" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">sum =</span> <span class="fu">sum</span>(status))</span>
-<span id="cb4-216"><a href="#cb4-216" tabindex="-1"></a></span>
-<span id="cb4-217"><a href="#cb4-217" tabindex="-1"></a><span class="co"># Check here if you need to update the years in your dataframe. If there are  </span></span>
-<span id="cb4-218"><a href="#cb4-218" tabindex="-1"></a></span>
-<span id="cb4-219"><a href="#cb4-219" tabindex="-1"></a><span class="do">## Checking how many unique countries are within the revenue data - 142 (2024 Assessment)</span></span>
-<span id="cb4-220"><a href="#cb4-220" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> eco_mar_usd_raw[<span class="fu">duplicated</span>(eco_mar_usd_raw[, <span class="fu">c</span>(<span class="st">&#39;rgn_id&#39;</span>,<span class="st">&#39;year&#39;</span>)]),  ]</span></code></pre></div>
+<span id="cb4-185"><a href="#cb4-185" tabindex="-1"></a><span class="do">## Checking how many unique countries are within the revenue data - 142 (2024 Assessment) (144 2025 assessment)</span></span>
+<span id="cb4-186"><a href="#cb4-186" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> eco_mar_usd_raw[<span class="fu">duplicated</span>(eco_mar_usd_raw[, <span class="fu">c</span>(<span class="st">&#39;rgn_id&#39;</span>,<span class="st">&#39;year&#39;</span>)]),  ]</span>
+<span id="cb4-187"><a href="#cb4-187" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(eco_mar_usd_raw<span class="sc">$</span>rgn_id)) <span class="co">#v2025: 144</span></span></code></pre></div>
 </div>
 <div id="find-out-which-countries-can-be-gapfilled-versus-the-countries-that-cant-be" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> Find out which
@@ -2149,13 +2010,14 @@ countries can be gapfilled versus the countries that cant be</h2>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>    usd <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="cn">FALSE</span>,</span>
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    usd <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="cn">TRUE</span></span>
 <span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="dv">2009</span><span class="sc">:</span><span class="dv">2019</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>heatmap <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mar_heatmap, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> rgn_name, <span class="at">fill =</span> <span class="fu">as.factor</span>(status))) <span class="sc">+</span> </span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;darkgrey&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>)) <span class="sc">+</span> </span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>heatmap</span></code></pre></div>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="dv">2009</span><span class="sc">:</span><span class="dv">2023</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>heatmap <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mar_heatmap, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> rgn_name, <span class="at">fill =</span> <span class="fu">as.factor</span>(status))) <span class="sc">+</span> </span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;darkgrey&quot;</span>, <span class="st">&quot;lightgreen&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>heatmap</span></code></pre></div>
 <div id="gapfilling" class="section level3" number="2.5.1">
 <h3><span class="header-section-number">2.5.1</span> Gapfilling</h3>
 <p>Here we’ll use <code>na.approx()</code> from {zoo} to interpolate
@@ -2281,7 +2143,7 @@ versus developed countries. For mariculture revenue, the multipliers are
 <span id="cb7-63"><a href="#cb7-63" tabindex="-1"></a></span>
 <span id="cb7-64"><a href="#cb7-64" tabindex="-1"></a></span>
 <span id="cb7-65"><a href="#cb7-65" tabindex="-1"></a><span class="co"># Writing out csv FINALLY -----</span></span>
-<span id="cb7-66"><a href="#cb7-66" tabindex="-1"></a><span class="co"># write_csv(eco_mar_usd_final, here::here(data_path, &quot;int&quot;, &quot;eco_mar_usd_pre.csv&quot;))</span></span></code></pre></div>
+<span id="cb7-66"><a href="#cb7-66" tabindex="-1"></a><span class="fu">write_csv</span>(eco_mar_usd_final, here<span class="sc">::</span><span class="fu">here</span>(output_dir, <span class="st">&quot;mar_revenue.csv&quot;</span>))</span></code></pre></div>
 </div>
 </div>
 

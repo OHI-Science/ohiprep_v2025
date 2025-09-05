@@ -20,22 +20,12 @@ editor_options:
 
 # Summary
 
-This analysis converts FAO commodities data into data layers used to calculate OHI `r format(Sys.time(), "%Y")` global natural products scores. We will conduct this data prep on the commodities seaweed, fish oil, and ornamentals, so that we can produce \$ values for weighting later on.
+This analysis converts FAO commodities data into data layers used to calculate OHI `r format(Sys.time(), "%Y")` global natural products scores. We will conduct this data prep on the commodities seaweed, fish oil, and ornamentals, so that we can produce \$ values per tonne that we can use to calculate scores and for weighting sectors.
 
 # Updates from previous assessment
 
 ### v2025
 - New year of FAO data(2023)
-
-### v2024
-*   Complete overhaul of methodology from previous years. Original data prep file: `STEP1a_np_ornamental_prep.Rmd`
-*   New year of FAO data (2022)\
-*   Updated links to datasets\
-*   Updated file paths to be more reproducible, enable cross-platform capability (not dependent on direction of directory separator)
-*   Updated data cleaning to follow tidyverse style, use of `janitor::clean_names()`
-*   Updated `read.csv` and `write.csv` to `read_csv` and `write_csv` 
-*   Updated `fao_fxn.R` to use `str_detect("...")` instead of `value == "..."` to properly replace FAO "missing value" codes with `NA`s. 
-*   Added extra `0 --> NA` correction for specific conditions where this is appropriate (before gapfilling). See section: [Add FAO-zero-correction]
 
 ------------------------------------------------------------------------
 
@@ -62,7 +52,7 @@ Files can be found on Mazu: `home/shares/ohi/git-annex/globalprep/_raw_data/FAO_
 
 STEP 1: Value data (used for weighting)
 
-FAO commodities data -- filter the ornamentals, non-food seaweeds (agar and nonfood), and fofm. Summarize to get one tonnes value and one USD value for each category. Gapfill missing data using the relationship between USD ~ tonnes (and vice versa). Save these data as `np_harvest_usd_tonnes_gf.csv` to the `int` folder. 
+FAO commodities data -- filter the ornamentals, non-food seaweeds (agar and nonfood), and fofm. Summarize to get one tonnes value and one USD value for each category. Gapfill missing data using the relationship between USD ~ tonnes (and vice versa). Save these data as `np_harvest_usd_tonnes.csv` to the `int` folder. 
 
 Then calculate for each country:
 
@@ -116,38 +106,27 @@ source(here::here(current_np_dir, "R", "np_fxn.R"))
 Simultaneously read and process FAO commodities value and quantity data.
 
 ```{r}
-## NOTE: This can be run as a loop, but the "value" and "quant" datasets need to be run individually to make sure
+## NOTE: This can be run as a loop, but the "value" and "quant" datasets need to first be run individually to make sure
 ##  there are no problems (after this check, they can be looped for efficiency)
 
 
-## list files included in d2020 folder (value and quant datasets)
+## list files included in current folder (value and quant datasets)
 dir_fao_data <- here::here(dir_M, "git-annex", "globalprep", "_raw_data", "FAO_commodities", data_dir_year)
 
-# raw_quant <- read_csv(here(dir_M, "git-annex", "globalprep", "_raw_data", "FAO_commodities", data_dir_year, "FAO_raw_commodities_quant_1976_2023.csv"))
-# view(raw_quant)
-
-files <- list.files(dir_fao_data, pattern = glob2rx('*.csv'), full.names = TRUE)
-
-## To compare to old data:
-dir_fao_data_old <- here::here(dir_M, "git-annex", "globalprep", "_raw_data", "FAO_commodities", prev_data_dir_year)
-
-files_old <- list.files(dir_fao_data_old, pattern = glob2rx('*.csv'), full.names = TRUE)
 
 # ===== loop ================
-# for (f in files) {
-  f <- files_old[2] # un-comment and update to test individual files # 1 = quant, 2 = usd
+ for (f in files) {
+  #f <- files[2] # un-comment and update to test individual files # 1 = quant, 2 = usd
   cat(sprintf('\n\n\n====\nfile: %s\n', basename(f)))
   
   # checks names syntactically, strips leading and trailing whitespace, prevents conversion of characters to factors 
-  d <- readr::read_csv(f) # makes this a tibble, not a dataframe (check with is_tibble(d))
-  # ignore the warning here -- it's just letting you know about an empty final row (happened quietly in previous read.csv code)
+  d <- readr::read_csv(f) 
   
   # Specifies that units are 'tonnes' if we are reading in the Commodities Quantity data csv, and 'usd' if we are reading in the Commodities Value data csv
   units <- c("tonnes", "usd")[str_detect(f, c("quant", "value"))] # detect unit name 
 
   # ---- Preliminary cleaning & tidying ----
   ## gather into long format and clean up FAO-specific data foibles
-  ## warning: attributes are not identical across measure variables; they will be dropped: this is fine (didn't get this warning in v2024 once code was updated)
   m <- d %>% 
     janitor::clean_names() %>% 
     dplyr::select(-c(unit_name)) %>% # "Tonnes – net product weight" == TPW
@@ -165,8 +144,7 @@ files_old <- list.files(dir_fao_data_old, pattern = glob2rx('*.csv'), full.names
   # ---- Run fao data cleaning function ----
   # cleans up flags, swaps out FAO-specific codes for analysis
   m <- m %>%
-    fao_clean_data_new() %>%  # swaps out FAO-specific codes. NOTE: optional 
-    # parameter 'sub_N' can be passed to control how an 'N' code is interpreted.
+    fao_clean_data_new() %>%  # swaps out FAO-specific codes.     
     dplyr::select(-c(trade, unit)) %>% # drop 'trade' and 'unit' columns
     arrange(country, commodity, is.na(value), year)
   # warning: NAs introduced by coercion
@@ -242,7 +220,6 @@ files_old <- list.files(dir_fao_data_old, pattern = glob2rx('*.csv'), full.names
   ## output to .csv - should create two csvs (tonnes.csv and usd.csv)
   harvest_out <- here::here(current_np_dir, "int", sprintf("%s.csv", units))
   readr::write_csv(m_rgn, harvest_out, na = '')
-# }
 ```
 
 ## Wrangle Data
@@ -252,7 +229,6 @@ Combining the quantity and value data and a bit of cleaning to remove data prior
 ```{r}
 # Read in quant dataset from intermediate folder
 h_tonnes <- read_csv(here(current_np_dir, "int", "tonnes.csv"))
-view(h_tonnes)
 
 
 # Read in value dataset from intermediate folder
@@ -267,10 +243,6 @@ h <- h_usd %>%
 
 # clip out years prior to first reporting year, for each commodity per region
 h <- h %>% np_harvest_preclip()
-
-
-# save a file to use in our methods document 
-readr::write_csv(h, here(current_np_dir, "int", "h_methods_sum.csv"))
 
 # ---- filter for our commodities of interest ----
 h <- h %>%
@@ -291,7 +263,7 @@ Before gap-filling, we need to replace zeros with NAs in two cases:
 # replace certain zeros with NA to flag for gapfilling
 h_zero_na <- h %>% 
   mutate(tonnes = ifelse(tonnes == 0 & !is.na(usd) & usd > 0, NA, tonnes)) %>% 
-  mutate(usd = ifelse(usd == 0 & !is.na(tonnes) & tonnes > 0, NA, usd))
+  mutate(usd = ifelse(usd ==0  & !is.na(tonnes) & tonnes > 0, NA, usd))
 
 
 check_start <- max(h$year) - 5
@@ -380,7 +352,7 @@ h_gap <- h %>%
   dplyr::select(rgn_id, commodity, product, year, gapfill)
 
 # save record of gapfilling methods
-readr::write_csv(h_gap, here(current_np_dir, "output", "np_ornamentals_harvest_tonnes_gf.csv"), na = '')
+readr::write_csv(h_gap, here(current_np_dir, "output", "np_gf.csv"), na = '')
 
 ```
 
@@ -402,19 +374,7 @@ stopifnot(sum(duplicated(h_prod[ , c("rgn_id", "product", "year")])) == 0)
 ### Output first primary Step 1 intermediate
 At this point, the `h_prod` dataframe contains `rgn_name`, `rgn_id`, `product`, `year`, `tonnes`, and `usd`. 
 
-To complete the first component of step 1 in Mel's new NP plan, we'll save these as `np_harvest_usd_tonnes_gf.csv` in the `int` folder. 
-
-
-```{r}
-# save data frame with gap-filled usd and tonnes for all products to int dir
-# v2025: I think this file name should have '_gf' at the end of it. I ran into an error in step 2 where the file 'np_harvest_usd_tonnes_gf.csv' was missing, and it looks like it should be this one
-# readr::write_csv(h_prod, here::here(current_np_dir, "int", "np_harvest_usd_tonnes.csv"))
-
-# Rewriting to adding the gapfill notation
-readr::write_csv(h_prod, here::here(current_np_dir, "int", "np_harvest_usd_tonnes_gf.csv"))
-
-```
-
+To complete the first component of step 1 in Mel's new NP plan, we'll save these as `np_harvest_usd_tonnes.csv` in the `int` folder. 
 
 ## Calculate USD per Tonne per product
 
@@ -546,4 +506,3 @@ usd_per_tonnes_plot <- ggplot(data = usd_per_tonne, aes(x = year, y = usd_per_to
 plotly::ggplotly(usd_per_tonnes_plot)
 
 ```
-
