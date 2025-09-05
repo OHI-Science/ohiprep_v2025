@@ -1,10 +1,30 @@
 ---
-title: "beaches_extent"
-author: "Maddy Enda"
-date: "2025-08-25"
-output: html_document
-echo: False
+title: 'OHI 2021: Beaches Extent'
+author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
+output: 
+  html_document:
+    code_folding: show
+    toc: true
+    toc_depth: 1
+    toc_float: yes
+    number_sections: false
+    theme: cerulean
+    highlight: haddock
+    includes: 
+      in_header: '../../../workflow/templates/ohi_hdr.html'
+pdf_document:
+  toc: true
+editor_options: 
+  chunk_output_type: console
 ---
+
+# Beach Extent: 
+
+This file utilizes beach extent data collected from 2010-2020 through the [Global Coastline Dataset (GCL_FCS30)](https://zenodo.org/records/13943679) published in 2024. This is the first file that should be calculated for hab_beaches.
+
+The data has multiple types of beaches/coastline reflected within, but only sandy (or class 2), was utilized in this process. It is encouraged that further resources on the degredation of other types of beaches/coastline be found, so that the additonal data can be used. At this time however, none were readily available.
+
+The geometry type of this data is multilinestrings, which must be rasterized using terra() and not the typical raster() functions. The data is filtered as aggregated between all years, multilinestrings are converted to rasters, and zonal statistics are calculated per each country's eez.
 
 ```{r}
 # Load relevant libraries
@@ -43,23 +63,26 @@ beaches_2020 <- st_read(file.path(dir_beaches, "GCL2020.shp"))
 ```{r}
 # Combine all of the beaches data into one object
 beaches_all <- bind_rows(beaches_2010, beaches_2015, beaches_2020)
+
+beaches_sandy <- beaches_all %>%
+  filter(class == 2) # Sandy beach has 91,168 observations in v2025
 ```
 
 ```{r}
 # Find the length of all coastline
 # vector of lengths for each feature
-lengths <- st_length(beaches_all)
+lengths <- st_length(beaches_sandy)
 
 # Total length of coastal data
 total_length <- sum(lengths)
 
 # Total length in km
-total_length_km <- units::set_units(total_length, "km")
+total_length_km <- units::set_units(total_length, "km") # total length is 997,921 km in v2025
 ```
 
 ```{r}
 # Confirm reprojection
-beaches_transform <- st_transform(beaches_all, crs= "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs")
+beaches_transform <- st_transform(beaches_sandy, crs= "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs")
 ```
 
 ## Rasterize the lines
@@ -95,9 +118,10 @@ plot(beaches_raster)
 I loaded in the raster from the server in order to save time, and decrease the GiB used by the environment. By loading it in using raster(), we also convert it back into a RasterLayer, which will allow us to continue in the raster package from here.
 
 ```{r}
-# Load in the beaches raster
+# Load in the beaches raster (so we can use zonal() on the data in typical OHI format)
 beaches_raster <- raster(file.path(dir_M, "git-annex/globalprep/hab_beaches/beaches_raster.tif"))
 ```
+
 
 ```{r}
 # Calculate zonal stats with zones raster and new coral. Convert to km^2 and save int/output files*
@@ -119,6 +143,6 @@ zonal_sums_km2 <- zonal_sums_df %>%
 print(sum(zonal_sums_km2$km2)) # v2025: 1,056,968 km2
 
 # Write the data frame to CSV locally (on Github). Be sure to check file path using here() 
-write.csv(zonal_sums_km2, here("int", "beaches_zonal.csv"), row.names = FALSE)
+write.csv(zonal_sums_km2, here("globalprep", "hab_beaches", "v2025", "data", "hab_beaches_extent.csv"), row.names = FALSE)
 ```
 
