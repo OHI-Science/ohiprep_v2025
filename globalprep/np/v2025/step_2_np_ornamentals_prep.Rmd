@@ -61,9 +61,7 @@ $$S_c = 1 - average(E_c + R_c)$$
 
 where $E_c$ is the exposure term and $R_c$ is the risk term for ornamentals.
 
-The exposure term, $E_c$, is the log-transformed intensity of harvest for ornamental fish calculated as tonnes of harvest per km2 of coral and rocky reef, relative to the global maximum. We log-transformed the harvest intensity scores because the distribution of values was highly skewed; because we do not know the true threshold of sustainable harvest, nearly all values would be considered highly sustainable without the log transformation. To estimate rocky reef extent area (km2) we used data from Halpern et al. (2008) ([Halpern et al. 2008](https://ohi-science.org/ohi-methods/goals/goal-models-data.html#ref-halpern2008global)), which assumes rocky reef habitat exists in all cells within 1 km of shore. Coral extent area (km2) are from UNEP-WCMC et al. (2018) ([UNEP-WCMC et al. 2018](https://ohi-science.org/ohi-methods/goals/goal-models-data.html#ref-unep-wcmc2018global)).
-
-
+The exposure term, $E_c$, is the intensity of harvest for ornamental fish calculated as tonnes of harvest per km2 of coral and rocky reef. This value is scaled by the global 95th quantile of the previous 10 yeas. We scale the harvest because the distribution of values is highly skewed; thus, because we do not know the true threshold of sustainable harvest, nearly all values would be considered highly sustainable otherwise. To estimate rocky reef extent area (km2) we used data from Halpern et al. (2008) ([Halpern et al. 2008](https://ohi-science.org/ohi-methods/goals/goal-models-data.html#ref-halpern2008global)), which assumes rocky reef habitat exists in all cells within 1 km of shore. Coral extent area (km2) are from UNEP-WCMC et al. (2018) ([UNEP-WCMC et al. 2018](https://ohi-science.org/ohi-methods/goals/goal-models-data.html#ref-unep-wcmc2018global)).
 
 The risk term, $R_c$, is based on whether ornamental fishing has unsustainable harvest practices. In specific, we used the intensity of cyanide and dynamite fishing as a proxy. Risk for ornamental fish was set based on assessments of cyanide or dynamite fishing by [Reefs at Risk Revisited](www.wri.org/publication/reefs-at-risk-revisited) under the assumption that most ornamental fishes are harvested from coral reefs.
 
@@ -178,8 +176,9 @@ Gapfill risk and exposure, everything.
 
 ## Calculate Exposure
 
-Calculate ornamentals exposure based on habitats
-
+Calculate ornamentals exposure based on habitats. 
+exposure: get tonnes / area, find global 95th quantile from past 10 years, 
+use 95th quantile value to rescale exposure from 0-1
 
 Returns the first input data frame with a new column for exposure:
 [`rgn_id` `year` `product` `exposure`]
