@@ -205,42 +205,6 @@ Create the overall region product data frame that contains the 5 years of intere
 
 > NOTE: future assessments will need to change the **year range for the FOFM** SAUP data because it peaks at 2019. This should still work for ornamentals and seaweeds, but a new methodology will need to be created for FOFM
 
-```{r}
-harvest_tonnes_usd <- read_csv(here(current_np_dir, "int", "np_harvest_usd_tonnes.csv"))
-harvest_tonnes_usd_old <- read_csv(here(previous_np_dir, "int", "np_harvest_tonnes_usd.csv"))
-
-colnames(harvest_tonnes_usd)
-colnames(harvest_tonnes_usd_old)
-
-harvest_tonnes_usd_old <- harvest_tonnes_usd_old %>% 
-  rename(old_tonnes = tonnes, old_usd = usd)
-
-
-check <- harvest_tonnes_usd %>%
-  select(!rgn_name) %>%
-  left_join(harvest_tonnes_usd_old, by = c("rgn_id", "product", "year")) %>%
-  # mutate(diff = new_weight - weight) %>%
-  left_join(rgns_eez) %>% 
-  select(!c(eez_iso3, territory, admin_rgn_id, admin_country_name, Notes)) %>% 
-  mutate(diff_tonnes = tonnes - old_tonnes,
-         diff_usd = usd - old_usd)
-  # filter(year == 2021) %>% 
-  # select(rgn_id, rgn_name, year, product, new_weight, weight, diff, tonnes.x, tonnes.y, usd_product.x, usd_product.y, overall_usd_value.x, overall_usd_value.y) 
-
-view(check)
-
-nrow(check) # 108
-nrow(filter(check, diff_tonnes == 0)) # 1512
-nrow(filter(check, diff_tonnes > 0)) # 3789
-nrow(filter(check, diff_tonnes < 0)) # 4819
-
-nrow(filter(check, diff_usd == 0)) # 1518
-nrow(filter(check, diff_usd > 0)) # 4278
-nrow(filter(check, diff_usd < 0)) # 4324
-
-
-```
-
 ```{r region-product}
 # All commodities is only used here to get the max year. It gets used later on for the ornamentals tonnes
 harvest_tonnes_usd <- read_csv(here(current_np_dir, "int", "np_harvest_usd_tonnes.csv"))
@@ -416,7 +380,6 @@ harvest_tonnes_usd_values_gf <- harvest_tonnes_usd_geo_rgn %>%
                             ifelse(is.na(usd_per_tonne) & georgn_usd_per_tonne == "NaN", 
                                    1, 0))) 
   
-# view(harvest_tonnes_usd_values_gf)
 nrow(harvest_tonnes_usd_values_gf) # 3300
 colnames(harvest_tonnes_usd_values_gf)
 colSums(is.na(harvest_tonnes_usd_values_gf))
@@ -437,7 +400,7 @@ nrow(weighting_usd_values_raw) # 3300
 readr::write_csv(weighting_usd_values_raw,
                  here(current_np_dir, "int", "harvest_weighting_values_raw.csv"))
 
-# OLD: Now calculate 5 year averages
+# Now calculate 5 year averages
 weighting_usd_values_avg <- harvest_tonnes_usd_values_gf %>%
   dplyr::select(rgn_id, product, year, usd_per_tonne) %>%
   group_by(rgn_id, product) %>%
@@ -465,19 +428,10 @@ sw_tonnes <- read_csv(here(current_np_dir, "int", 'sw_tonnes.csv'))
 fofm_tonnes <- read_csv(here(current_np_dir, "int", 'fofm_tonnes.csv')) %>% 
   select(!gapfilled)
 
-# view(orn_tonnes)
-# view(sw_tonnes)
-# view(fofm_tonnes)
-
 # Read in final usd/tonnes
 usd_tonnes_raw <- read_csv(here(current_np_dir, "int", "harvest_weighting_values.csv"))
 
-colnames(orn_tonnes)
-colnames(sw_tonnes)
-colnames(fofm_tonnes)
-colnames(usd_tonnes)
-colnames(usd_tonnes_raw)
-
+# Filter to selected columns
 usd_tonnes <- usd_tonnes_raw %>% 
   select(rgn_id, product, usd, year, usd_per_tonne, mean_usd_per_tonne, georgn_usd_per_tonne, global_usd_per_tonne)
 
@@ -492,6 +446,7 @@ colSums(is.na(np_tonnes))
 np_value <- np_tonnes %>% 
   left_join(usd_tonnes, by = join_by(year, product, rgn_id)) 
 
+# Gapfilling
 np_value_final <- np_value %>% 
   mutate(usd_product = case_when(
     product == "ornamentals" ~ georgn_usd_per_tonne * tonnes,
@@ -518,79 +473,11 @@ np_value_final <- np_value %>%
 # Check
 colSums(is.na(np_value_final)) # 0
 nrow(np_value_final) # 3300
-view(np_value_final)
-
-# write_csv(np_value, here(current_np_dir, "int", "all_commodities_value.csv"))
-
 
 readr::write_csv(np_value_final, here(current_np_dir, "output", "np_product_weights.csv"))
 
 ```
 
-
-## 5 Year Averages
-
-Import prepped FAO commodities data set and find 5 year average \$USD / Tonne average value per product per region. Gapfill these based on the UN geopolitical region/global values.
-
-```{r averages}
-# Read in the commodities value data
-np_value <- read_csv(here(current_np_dir, "int", "all_commodities_value.csv"))
-
-colnames(np_value)
-view(np_value)
-
-# Calculate 5 year averages
-# This gives an averages 
-np_averages <- np_value %>% 
-  group_by(rgn_id, product) %>% 
-  summarize(mean_tonnes = mean(tonnes),
-            mean_usd_per_tonne = mean(usd_per_tonne))
-
-np_comb <- np_value %>% 
-  left_join(np_averages, by = join_by(rgn_id, product)) %>% 
-  view()
-
-view(np_averages)
-colnames(np_comb)
-```
-
-## Weights per Product
-
-Now we will calculate the weights per each product. To do this we need to multiply our average \$ value for each product \* tonnes of each product, and then divide by the total per each region. We will also assign year = (YYYY, e.g., 2022) so that this can be read into OHI-global (YYYY corresponds to the year that these weights were calculated).
-
-```{r weights}
-np_value <- read_csv(here(current_np_dir, "int", "all_commodities_value.csv"))
-
-colnames(np_value)
-
-prod_weights <- np_value %>% 
-  mutate(usd_product = tonnes * mean_usd_per_tonne) %>% 
-  group_by(rgn_id, year) %>%
-  mutate(total_usd = sum(usd_product)) %>%
-  ungroup() %>%
-  # calculate weight: proportion that each product contributes to that region's NP
-  mutate(weight = usd_product/total_usd) %>%
-  # Some tonnes are 0 which leads to a total_usd of 0, which makes NAs
-  mutate(weight = ifelse(is.na(weight), 0, weight)) %>% 
-  # dplyr::select(-3, -4, -5, -6) %>%
-  # mutate(year = scen_year) %>%
-  # dplyr::select(rgn_id, year, product, weight) %>%
-  filter(rgn_id != 213)
-
-nrow(prod_weights)
-view(prod_weights)
-colSums(is.na(prod_weights))
-
-prod_weights %>% 
-  filter(rgn_id == 80) %>% 
-  view()
-
-colSums(is.na(np_comb))
-
-
-# readr::write_csv(prod_weights, here(current_np_dir, "output", "np_product_weights.csv"))
-
-```
 
 ## Datacheck
 
@@ -673,7 +560,6 @@ prod_weights <- read_csv(here(current_np_dir, "output", "np_product_weights.csv"
 # %>% 
 #   select(!c(georgn_id, level))
 
-view(prod_weights)
 colnames(prod_weights)
 colnames(old_prod_weights)
 
@@ -695,7 +581,6 @@ check <- prod_weights %>%
 # Read in current, previous, and 2 years previous data
 old_prod_weights <- read_csv(here("globalprep", "np", "v2024", "test", "np_product_weights.csv"))
 prod_weights <- read_csv(here("globalprep", "np", "v2025", "output", "np_product_weights.csv"))
-view(prod_weights)
 
 check <- prod_weights %>%
   rename("new_weight" = "weight") %>%
@@ -709,28 +594,7 @@ different <- check %>%
   filter(diff != 0) %>% 
   mutate(diff_tonnes = tonnes.x - tonnes.y,
          diff_usd = usd_product.x - usd_product.y,
-         diff_total = overall_usd_value.x - overall_usd_value.y) %>% 
-  view()
-
-# 385 entries with different tonnes
-diff_tonnes <- different %>% 
-  filter(diff_tonnes != 0) %>% 
-  view()
-
-# 903 entries with different tonnes
-diff_usd <- different %>% 
-  filter(diff_usd != 0) %>% 
-  view()
-
-# 903
-diff_total  <- different %>% 
-  filter(diff_total != 0) %>% 
-  view()
-
-
-different %>% 
-  filter(product == "ornamentals") %>% 
-  view()
+         diff_total = overall_usd_value.x - overall_usd_value.y)
 
 # 1737 rows where there is no difference in weight
 nrow(filter(check, diff == 0)) # 1737
@@ -739,8 +603,6 @@ nrow(check) # 3300
 # 27% different...
 
 ## It looks like most of the difference is coming from a difference in USD. 
-
-# view(check)
 
 # ======== Plot new NP weights data vs. previous year's data ==================
 

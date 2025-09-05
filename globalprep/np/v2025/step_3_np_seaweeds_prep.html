@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Mon Jul 21 18:16:01 2025 by oyler" />
+<meta name="author" content="Compiled on Thu Sep 4 16:56:16 2025 by oyler" />
 
 
 <title>OHI 2025: Natural Products: Seaweeds Data Prep</title>
@@ -1550,7 +1550,7 @@ border-radius: 0px;
 
 <h1 class="title toc-ignore">OHI 2025: Natural Products: Seaweeds Data
 Prep</h1>
-<h4 class="author"><em>Compiled on Mon Jul 21 18:16:01 2025 by
+<h4 class="author"><em>Compiled on Thu Sep 4 16:56:16 2025 by
 oyler</em></h4>
 
 </div>
@@ -1671,7 +1671,7 @@ to 0-1. There is only one value for seaweeds in the data… 0.67</p>
 <span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>data_years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1950&quot;</span>, <span class="st">&quot;2023&quot;</span>) <span class="co"># update to correct data years</span></span>
 <span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a></span>
 <span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co"># Natural Products directory on GitHub</span></span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>current_np_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;np&quot;</span>, <span class="fu">paste0</span>(v_scen_year, <span class="st">&quot;_new&quot;</span>)) <span class="co"># update this if name changes</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>current_np_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;np&quot;</span>, v_scen_year) </span>
 <span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>previous_np_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;np&quot;</span>, <span class="fu">paste0</span>(prev_v_scen_year, <span class="st">&quot;_new&quot;</span>)) <span class="co"># update this if name changes</span></span>
 <span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a></span>
 <span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a></span>
@@ -1713,9 +1713,7 @@ non-food seaweed.</p>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>mar_raw <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="fu">here</span>(</span>
 <span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  dir_M, <span class="st">&quot;git-annex&quot;</span>, <span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;_raw_data&quot;</span>, <span class="st">&quot;FAO_mariculture&quot;</span>, data_dir_year,</span>
 <span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">&quot;FAO_GlobalAquacultureProduction_Quantity_1950_&quot;</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>         data_years[<span class="dv">2</span>], <span class="st">&quot;.csv&quot;</span>)))</span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="fu">head</span>(mar_raw) </span></code></pre></div>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>         data_years[<span class="dv">2</span>], <span class="st">&quot;.csv&quot;</span>)))</span></code></pre></div>
 </div>
 </div>
 </div>

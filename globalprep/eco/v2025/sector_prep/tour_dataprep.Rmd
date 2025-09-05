@@ -323,10 +323,10 @@ colSums(is.na(tourism_spending)) # No NAs
 tour_spending_export <- tourism_spending %>% 
   select(rgn_id, rgn_name, year, total_spending, unit)
 
-write_csv(tour_spending_export, here(current_le_dir, "int", "eco_tour_spending.csv"))
+write_csv(tour_spending_export, here(current_le_dir, "int", "tour_spending.csv"))
 
 # Save gapfilling info
-write_csv(tourism_spending, here(current_le_dir, "int", "eco_tour_spending_gf.csv"))
+write_csv(tourism_spending, here(current_le_dir, "int", "tour_spending_gf.csv"))
 ```
 
 # Total GDP 
@@ -542,10 +542,10 @@ length(unique(total_gdp$rgn_id)) # 163 regions
 gdp_export <- total_gdp %>% 
   select(rgn_id, rgn_name, year, gdp, unit)
 
-write_csv(gdp_export, here(current_le_dir, "int", "eco_total_gdp.csv"))
+write_csv(gdp_export, here(current_le_dir, "int", "total_gdp.csv"))
 
 # Save gapfilling information
-write_csv(total_gdp, here(current_le_dir, "int", "eco_total_gdp_gf.csv"))
+write_csv(total_gdp, here(current_le_dir, "int", "total_gdp_gf.csv"))
 ```
 
 
@@ -560,8 +560,8 @@ Update these values as needed for different prices and years.
 
 ```{r}
 # Read in clean data
-total_gdp <- read_csv(here(current_le_dir, "int", "eco_total_gdp.csv"))
-tour_spending <- read_csv(here(current_le_dir, "int", "eco_tour_spending.csv"))
+total_gdp <- read_csv(here(current_le_dir, "int", "total_gdp.csv"))
+tour_spending <- read_csv(here(current_le_dir, "int", "tour_spending.csv"))
 
 # Need to fix units between total gdp and tourism spending
 # UPDATE AS NEEDED
@@ -603,6 +603,37 @@ eco_tourism <- eco_tourism %>%
 This dataset gets prepped in `liv_tour_dataprep.Rmd`, so I would encourage you to run that section first before this. The code needed to create the dataset is small, so you do not need to run the entire script to get this data file.
 
 ```{r}
+# -------  population data -----------
+# Coastal population
+coastal_pop_data <- read_csv(here("globalprep","mar_prs_population","v2025","output","mar_pop_25mi.csv")) ## read in coastal population data from other data layer
+
+# UN total population
+un_pop <- read_csv(here("globalprep", "mar_prs_population", version_year,
+                        "output", "UN_population.csv"))
+
+# Add region names
+coast_pop_rgn <- left_join(coastal_pop_data, rgns_eez_small, 
+                           by = join_by(rgn_id))
+un_pop_rgn <- left_join(un_pop, rgns_eez_small, by = join_by(rgn_id))
+
+
+# Calculate coastal proportion
+coastal_prop_df <- left_join(un_pop_rgn, coast_pop_rgn, 
+                             by = join_by(rgn_id, rgn_name, year)) %>% 
+  # mutate(year = as.numeric(year)) %>% 
+  filter(year %in% 2008:data_year) %>% 
+  mutate(coastal_prop = (popsum / population),
+         coastal_prop = ifelse(coastal_prop > 1, 1, coastal_prop))
+
+colSums(is.na(coastal_prop_df))
+length(unique(coastal_prop_df$rgn_id)) #183
+
+write_csv(coastal_prop_df, here(current_le_dir, "int", "coastal_pop_proportion.csv"))
+
+```
+
+
+```{r}
 # Read in coastal proportion data
 coast_prop <- read_csv(here(current_le_dir, "int", "coastal_pop_proportion.csv"))
 
@@ -622,7 +653,7 @@ eco_tourism_final <- eco_tour_coast %>%
   drop_na(tour_prop) %>% 
   select(rgn_id, year, revenue = tour_coast_rev) %>% view()
 
-write_csv(eco_tourism_final, here(current_le_dir, "output", "eco_tour_revenue.csv"))
+write_csv(eco_tourism_final, here(current_le_dir, "output", "tour_revenue.csv"))
 
 ```
 

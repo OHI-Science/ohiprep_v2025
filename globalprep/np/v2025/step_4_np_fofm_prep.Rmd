@@ -373,8 +373,6 @@ mean_raw_catch <- mean_catch %>%
   data.frame() 
 
 readr::write_csv(mean_raw_catch, here(current_np_dir, "int", "raw_mean_catch_FOFM.csv"))
-
-
 ```
 
 
@@ -524,31 +522,6 @@ score_data1 <- score_data %>%
   mutate(product = "fish_oil")
 
 summary(score_data1)
-
-readr::write_csv(score_data1, here(current_np_dir, "output", "np_fofm_scores_new.csv"))
-
-old <- read_csv(here(current_np_dir, "output", "np_fofm_scores.csv"))
-nrow(old)
-
-new <- read_csv(here(current_np_dir, "output", "np_fofm_scores_new.csv"))
-nrow(new)
-nrow(filter(new, !is.na(year))) # 3242 non-na values
-
-check <- new %>%
-  rename("new_score" = "score") %>%
-  left_join(old, by = c("rgn_id", "year")) %>%
-  left_join(rgns_all, by = "rgn_id") %>%
-  select(rgn_id, year, new_score, score, rgn_name) %>%
-  mutate(diff = new_score - score) %>%
-  filter(year == 2019)
-
-ab_scores <- ggplot() + 
-  geom_abline(slope = 1, intercept = 0, col = "red") +
-  geom_point(data = check, aes(x = score, y = new_score, text = paste("Region:", rgn_name), alpha = 0.7)) +
-  labs(x = "Old Score", 
-       y = "New Score",
-       title = "FOFM New score vs old score for 2019") +
-  theme_bw();ggplotly(ab_scores)
 ```
 
 ## Data Check

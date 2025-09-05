@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Thu Aug 7 16:07:12 2025 by oyler" />
+<meta name="author" content="Compiled on Wed Sep 3 16:38:58 2025 by oyler" />
 
 
 <title>OHI 2025 - Tourism and Recreation</title>
@@ -1646,7 +1646,7 @@ border-radius: 0px;
 
 
 <h1 class="title toc-ignore">OHI 2025 - Tourism and Recreation</h1>
-<h4 class="author"><em>Compiled on Thu Aug 7 16:07:12 2025 by
+<h4 class="author"><em>Compiled on Wed Sep 3 16:38:58 2025 by
 oyler</em></h4>
 
 </div>
@@ -1661,12 +1661,24 @@ recreation sustainability.</p>
 <ul>
 <li>Sr = (S-1)/5; Sustainability of tourism</li>
 </ul>
+<div id="updates" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Updates</h2>
+<p>v2025: - Split script into two separate pieces - Cleaned up the data
+sources and introduction because it was very unclear which files were
+needed previously - Changed gapfilling method #4 under raw gapfilling
+from a poorly-fit linear model to a linear interpolation using the
+<code>zoo</code> package</p>
+<blockquote>
+<p>This goal is still fairly messy and could use a lot of tightening up
+in future assessments. v2025 did an in-depth check of the gapfilling
+methods, the results of which can be found in <a href="https://github.com/OHI-Science/globalfellows-issues/issues/355">issue
+#355</a> for more details.</p>
+</blockquote>
+</div>
 </div>
 <div id="data-sources" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Data Sources</h1>
-<div id="new-data-sources" class="section level3" number="2.0.1">
-<h3><span class="header-section-number">2.0.1</span> New data
-sources</h3>
+<p><strong>New data sources</strong></p>
 <ul>
 <li>Tourism sustainability: World Economic Forum. The Travel &amp;
 Tourism Development Index 2024 (version May 2024). 2024. <a href="https://www3.weforum.org/docs/WEF_Travel_and_Tourism_Development_Index_2024.pdf">TTDI</a></li>
@@ -1676,10 +1688,7 @@ GDP. It is used to gapfill missing values in Tourism sustainability</li>
 in the World Bank data. (<a href="https://www.cia.gov/the-world-factbook/field/real-gdp-per-capita/country-comparison/" class="uri">https://www.cia.gov/the-world-factbook/field/real-gdp-per-capita/country-comparison/</a>)
 Click the download button on the website, top right hand corner.</li>
 </ul>
-</div>
-<div id="data-sources-from-other-goals" class="section level3" number="2.0.2">
-<h3><span class="header-section-number">2.0.2</span> Data sources from
-other goals</h3>
+<p><strong>Data sources from other goals</strong></p>
 <ul>
 <li><code>ao</code> World Bank GDP per capita purchasing power parity:
 <code>globalprep/ao/vYEAR/intermediate/gdppcppp_ohi.csv</code></li>
@@ -1699,7 +1708,6 @@ and substituted with <a href="https://www.cia.gov/the-world-factbook/field/real-
 GDP per capita ppp adj</a> is used to gapfill scores into previous years
 (2005 - 2022).</li>
 </ul>
-</div>
 </div>
 <div id="setup" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Setup</h1>
@@ -1737,10 +1745,10 @@ GDP per capita ppp adj</a> is used to gapfill scores into previous years
 <span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a>previous_year <span class="ot">&lt;-</span> <span class="dv">2024</span></span>
 <span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a></span>
 <span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>version_year <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>,current_year)</span>
-<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>previous_vyear <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>, current_year <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>previous_vyear <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>, previous_year)</span>
 <span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a></span>
 <span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a>current_data_dir <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;d&quot;</span>, current_year)</span>
-<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>previous_data_dir <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;d&quot;</span>, (current_year <span class="sc">-</span> <span class="dv">1</span>))</span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>previous_data_dir <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;d&quot;</span>, previous_year)</span>
 <span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a></span>
 <span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>data_years <span class="ot">&lt;-</span> <span class="dv">2005</span><span class="sc">:</span><span class="dv">2022</span> <span class="co"># update with latest data year (probably just add 1)</span></span>
 <span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a></span>

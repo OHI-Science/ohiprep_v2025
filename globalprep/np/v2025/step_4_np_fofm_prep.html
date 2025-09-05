@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Wed Sep 4 20:42:12 2024 by ramji" />
+<meta name="author" content="Compiled on Thu Sep 4 16:58:08 2025 by oyler" />
 
 
-<title>OHI 2024: Natural Products, Preparing catch and B/Bmsy data for forage fish species</title>
+<title>OHI 2025: Natural Products, Preparing catch and B/Bmsy data for forage fish species</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1645,22 +1645,85 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">OHI 2024: Natural Products, Preparing catch
+<h1 class="title toc-ignore">OHI 2025: Natural Products, Preparing catch
 and B/Bmsy data for forage fish species</h1>
-<h4 class="author"><em>Compiled on Wed Sep 4 20:42:12 2024 by
-ramji</em></h4>
+<h4 class="author"><em>Compiled on Thu Sep 4 16:58:08 2025 by
+oyler</em></h4>
 
 </div>
 
 
 <p>[REFERENCE RMD FILE: <a href="http://ohi-science.org/ohiprep_v2024/globalprep/np/v2024/STEP1c_np_fishfeed_prep.html" class="uri">http://ohi-science.org/ohiprep_v2024/globalprep/np/v2024/STEP1c_np_fishfeed_prep.html</a>]</p>
+<div id="summary" class="section level1">
+<h1>Summary</h1>
+<p>This script takes the SAUP 2023 catch data, a list of fish oil/fish
+meal (FOFM) species, and B/Bmsy estimates to calculate a score for FOFM
+species per OHI region. The FIS data prep must be completed prior to
+this step.</p>
+<div id="updates-from-previous-assessment" class="section level2">
+<h2>Updates from previous assessment</h2>
+<ul>
+<li>New RAM data v4.66</li>
+<li>Used the old NP FOFM Rmd to fill out this document under the new
+framework. See this <a href="https://docs.google.com/document/d/1ubCTW7ZrvvdckvY2zpBzCLHLgoIlCLW8kDMj-KWda9U/edit?tab=t.0">google
+doc</a> for reference.</li>
+<li>There were a few confusing errors from the previous years’
+calculations that were streamlined and simplified. Primarily, exporting
+an intermediate data of raw catch for step 5, correctly using mean catch
+(instead of raw catch) for the bbmsy weighting, and correcting the
+weighting process to use mean catch instead of sum catch.</li>
+</ul>
 <hr />
+</div>
+</div>
+<div id="data-source" class="section level1">
+<h1>Data Source</h1>
+<div id="sea-around-us" class="section level2">
+<h2>Sea Around us</h2>
+<p><strong>Reference</strong>: Pauly D., Zeller D., Palomares M.L.D.
+(Editors), 2020. Sea Around Us Concepts, Design and Data
+(seaaroundus.org).</p>
+<p><strong>Downloaded</strong>: September 27, 2022</p>
+<p><strong>Description</strong>: Tons per year and SAUP region with
+information on sector type, industry type, fishing entitity, reporting
+status and taxonomic information.</p>
+<p><strong>Time range</strong>: 1950 - 2019</p>
+<p><strong>Format</strong>: CSV</p>
+<p><strong>Additional Information</strong>: <a href="http://www.seaaroundus.org/sea-around-us-methods-index/">Methods</a></p>
+</div>
+<div id="avoiding-the-ecological-limits-of-forage-fish" class="section level2">
+<h2>Avoiding the ecological limits of forage fish</h2>
+<p><strong>Reference</strong>: Froehlich, H.E., Jacobsen, N.S.,
+Essington, T.E., Clavelle, T., and Halpern, B.S. (2018). Avoiding the
+ecological limits of forage fish for fed aquaculture. Nature
+Sustainability 1, 298.</p>
+<p><strong>Downloaded</strong>: July 7, 2020. Obtained from Melanie
+Frazier (NCEAS).</p>
+<p><strong>Description</strong>: List of FOFM species from Watson v3
+data.</p>
+<p><strong>Native data resolution</strong>:</p>
+<p><strong>Format</strong>: CSV format</p>
+</div>
+<div id="ram-legacy-data" class="section level2">
+<h2>RAM Legacy Data</h2>
+<p><strong>Reference</strong>: <a href="http://ramlegacy.org">RAM Legacy
+Stock Assessment Database</a> v4.66</p>
+<p><strong>Downloaded</strong>: 06/26/2025</p>
+<p><strong>Description</strong>: B/Bmsy value by stock and year (other
+data, which we do not use, are also available in the database)</p>
+<p><strong>Native data resolution</strong>: stock (fish stock, species
+and region specific)</p>
+<p><strong>Time range</strong>: 1800 - 2023</p>
+<p><strong>Format</strong>: CSV format</p>
+<p><strong>Additional Information</strong>: We use the finalized b/bmsy
+layer from OHI-global for this data prep. We do not actually read in the
+raw RAM data here.</p>
+<hr />
+</div>
+</div>
 <div id="methods" class="section level1">
 <h1>Methods</h1>
 <p>INCOMPLETE. See this folder’s <code>README.md</code> for details.</p>
-<ul>
-<li>copy over from original Step1C and adapt as necessary</li>
-</ul>
 <div id="setup" class="section level2">
 <h2>Setup</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">eval =</span> <span class="cn">FALSE</span>)</span>
@@ -1673,17 +1736,13 @@ ramji</em></h4>
 <pre><code>## Loading required package: librarian</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  ohicore, <span class="co">#devtools::install_github(&#39;ohi-science/ohicore@dev&#39;) #if relevant: restart session after reinstalling</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  dplyr,</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  stringr,</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  tidyr,</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  here,</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>  tidyverse,</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>  zoo,</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>  ggplot2,</span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  plotly,</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>  tictoc,</span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>  RColorBrewer</span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  here,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  tidyverse,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  zoo,</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  plotly,</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>  tictoc,</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>  RColorBrewer</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## 
 ##   The &#39;cran_repo&#39; argument in shelf() was not set, so it will use
 ##   cran_repo = &#39;https://cran.r-project.org&#39; by default.
@@ -1693,22 +1752,29 @@ ramji</em></h4>
 ##   &#39;quiet = TRUE&#39;.</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># ======= Set directories ===========</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># Update scenario year, set up programmatic scenario year updates</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>scen_year_number <span class="ot">&lt;-</span> <span class="dv">2024</span> <span class="co"># update this!!</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>scen_year <span class="ot">&lt;-</span> <span class="fu">as.character</span>(scen_year_number)</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>prev_scen_year <span class="ot">&lt;-</span> <span class="fu">as.character</span>(scen_year_number <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>data_dir_year <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;d&quot;</span>, scen_year)</span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>prev_data_dir_year <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;d&quot;</span>, prev_scen_year)</span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>v_scen_year <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>, scen_year)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>current_year <span class="ot">&lt;-</span> <span class="dv">2025</span> <span class="co"># update this!!!</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>previous_year <span class="ot">&lt;-</span> current_year <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co"># Directories</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;d&quot;</span>, current_year)</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>prev_data_dir <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;d&quot;</span>, previous_year)</span>
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>data_years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1950&quot;</span>, <span class="st">&quot;2022&quot;</span>) <span class="co"># update to correct data years</span></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co"># Natural Products directory on GitHub</span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>current_np_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;np&quot;</span>, <span class="fu">paste0</span>(v_scen_year, <span class="st">&quot;_new&quot;</span>)) <span class="co"># update this if name changes</span></span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co"># Mariculture directory on GitHub</span></span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>current_mar_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;mar&quot;</span>, v_scen_year)</span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co"># ======== Source functions ===========</span></span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;workflow&quot;</span>, <span class="st">&quot;R&quot;</span>, <span class="st">&quot;common.R&quot;</span>)) <span class="co"># directory locations</span></span></code></pre></div>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co"># Scenarios</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>scen_year <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>, current_year)</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>prev_scen_year <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;v&quot;</span>, previous_year)</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>data_years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1950&quot;</span>, <span class="st">&quot;2023&quot;</span>) <span class="co"># update to correct data years</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co"># Natural Products directory on GitHub</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>current_np_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;np&quot;</span>, scen_year) </span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>previous_np_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;np&quot;</span>, <span class="fu">paste0</span>(prev_scen_year, <span class="st">&quot;_new&quot;</span>)) <span class="co"># update this if name changes</span></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a><span class="co"># Fisheries directory on GitHub</span></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>current_fis_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;fis&quot;</span>, scen_year)</span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>previous_fis_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;fis&quot;</span>, prev_scen_year)</span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a><span class="co"># ======== Source functions ===========</span></span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;workflow&quot;</span>, <span class="st">&quot;R&quot;</span>, <span class="st">&quot;common.R&quot;</span>)) <span class="co"># directory locations</span></span></code></pre></div>
 <pre><code>## This file makes it easier to process data for the OHI global assessment
 ##  by creating the following objects:
 ## 
@@ -1725,7 +1791,428 @@ ramji</em></h4>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co"># function for handling FAO commodity data specific to NP</span></span>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(current_np_dir, <span class="st">&quot;R&quot;</span>, <span class="st">&quot;np_fxn.R&quot;</span>)) </span>
 <span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co"># functions specific to mariculture dealing with compound countries</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;mar&quot;</span>, v_scen_year, <span class="st">&quot;mar_fxs.R&quot;</span>))</span></code></pre></div>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;mar&quot;</span>, scen_year, <span class="st">&quot;mar_fxs.R&quot;</span>))</span></code></pre></div>
+<p><strong>v2025 updated steps</strong></p>
+<p>This year’s analysis cut steps 1 and 2 and started straight with step
+3. We are using the forage fish catch stocks from the previous years
+analysis (as the data has not been updated since 2019).</p>
+<ol style="list-style-type: decimal">
+<li>Join with the final B/Bmsy layer used in the FIS model</li>
+<li>Convert the B/Bmsy values to scores (this is done in
+functions.R)</li>
+<li>Apply the underharvest penalty</li>
+<li>Take a catch weighted average of B/Bmsy scores for each
+region/year.</li>
+</ol>
+<p><em>Old steps to this</em></p>
+<ol style="list-style-type: decimal">
+<li>Subset the forage fish catch stocks for each region/year (keep FAO
+and OHI rgn ids)</li>
+<li>Multiply by 0.70 to reflect the amount going to feed/oils</li>
+<li>Join with the final B/Bmsy layer used in the FIS model</li>
+<li>Convert the B/Bmsy values to scores (this is done in
+functions.R)</li>
+<li>Apply the underharvest penalty</li>
+<li>Take a catch weighted average of B/Bmsy scores for each
+region/year.</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## Read in Froehlich list of forage fish species</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>forage <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(current_np_dir, <span class="st">&quot;raw&quot;</span>, <span class="st">&quot;msleckman.61.1-CatchMSY_Nis_FAOAreas.csv&quot;</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">unique</span>(forage<span class="sc">$</span>Species)) <span class="co">#238 forage fish groups listed</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co"># This was not updated in v2023 so we continue to use the 2022 version.</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>saup_taxonkey <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="fu">here</span>(current_fis_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;taxon_key_v2022.csv&quot;</span>))</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>  </span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="do">## Combined list:</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>foragefish_list <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">forage_fish =</span> <span class="fu">sort</span>(<span class="fu">unique</span>(<span class="fu">c</span>(<span class="fu">unique</span>(forage<span class="sc">$</span>Species), saup_taxonkey<span class="sc">$</span>TaxonName[saup_taxonkey<span class="sc">$</span>forage_fish <span class="sc">%in%</span> <span class="dv">1</span>]))))</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>foragefish_list <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">forage_fish =</span> <span class="fu">sort</span>(<span class="fu">unique</span>(forage<span class="sc">$</span>Species)))</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co"># Update column names</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>foragefish_list <span class="ot">&lt;-</span> foragefish_list <span class="sc">%&gt;%</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">forage_fish =</span> <span class="fu">case_when</span>(</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>    forage_fish <span class="sc">==</span> <span class="st">&quot;Ammodytes spp&quot;</span> <span class="sc">~</span> <span class="st">&quot;Ammodytes&quot;</span>,</span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>    forage_fish <span class="sc">==</span> <span class="st">&quot;Clupea pallasii&quot;</span> <span class="sc">~</span> <span class="st">&quot;Clupea pallasii pallasii&quot;</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>    forage_fish <span class="sc">==</span> <span class="st">&quot;Clupeoidei&quot;</span> <span class="sc">~</span> <span class="st">&quot;Clupeoids&quot;</span>, </span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>    forage_fish <span class="sc">==</span> <span class="st">&quot;Decapterus spp&quot;</span> <span class="sc">~</span> <span class="st">&quot;Decapterus&quot;</span>, </span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>    forage_fish <span class="sc">==</span> <span class="st">&quot;Diplodus argenteus&quot;</span> <span class="sc">~</span> <span class="st">&quot;Diplodus argenteus argenteus&quot;</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a>    forage_fish <span class="sc">==</span> <span class="st">&quot;Etrumeus teres&quot;</span> <span class="sc">~</span> <span class="st">&quot;Etrumeus sadina&quot;</span>,</span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>    forage_fish <span class="sc">==</span> <span class="st">&quot;Gadiculus argenteus&quot;</span> <span class="sc">~</span> <span class="st">&quot;Gadiculus argenteus thori&quot;</span>,</span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a>    forage_fish <span class="sc">==</span> <span class="st">&quot;Gymnocephalus cernuus&quot;</span> <span class="sc">~</span> <span class="st">&quot;Gymnocephalus cernua&quot;</span>,</span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a>    forage_fish <span class="sc">==</span> <span class="st">&quot;Mullus barbatus&quot;</span> <span class="sc">~</span> <span class="st">&quot;Mullus barbatus barbatus&quot;</span>,</span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a>    forage_fish <span class="sc">==</span> <span class="st">&quot;Patagonotothen brevicauda&quot;</span> <span class="sc">~</span> <span class="st">&quot;Patagonotothen brevicauda brevicauda&quot;</span>,</span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a>    forage_fish <span class="sc">==</span> <span class="st">&quot;Rioraja agassizi&quot;</span> <span class="sc">~</span> <span class="st">&quot;Rioraja agassizii&quot;</span>,</span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>    forage_fish <span class="sc">==</span> <span class="st">&quot;Sardinella spp&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sardinella&quot;</span>, </span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a>    forage_fish <span class="sc">==</span> <span class="st">&quot;Trachurus spp&quot;</span> <span class="sc">~</span> <span class="st">&quot;Trachurus&quot;</span>,</span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> forage_fish</span>
+<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span> <span class="co"># fix some name issues in the forage fish list to match the names in SAUP </span></span>
+<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a>  <span class="fu">left_join</span>(saup_taxonkey, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;forage_fish&quot;</span> <span class="ot">=</span> <span class="st">&quot;TaxonName&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-32"><a href="#cb8-32" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">inSAUP =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(TaxonKey), <span class="cn">NA</span>, <span class="st">&quot;yes&quot;</span>)) <span class="do">## Now only 9 missing spp.. this is good enough! Note: some of the species that are listed as in the SAUP data, are actually not in the SAUP data. This is because this forage fish list was originally derived from the Watson data, and there are some Watson species which are not in the SAUP data. This is not a problem. </span></span>
+<span id="cb8-33"><a href="#cb8-33" tabindex="-1"></a><span class="co"># sum(is.na(foragefish_list$inSAUP))</span></span>
+<span id="cb8-34"><a href="#cb8-34" tabindex="-1"></a><span class="do">## 10 missing spp. in v2024 </span></span>
+<span id="cb8-35"><a href="#cb8-35" tabindex="-1"></a></span>
+<span id="cb8-36"><a href="#cb8-36" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(foragefish_list, <span class="fu">here</span>(current_np_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;master_taxa_list_SAUP.csv&quot;</span>))</span></code></pre></div>
+</div>
+<div id="read-in-v2022-catch-data" class="section level2">
+<h2>Read in (v2022) catch data</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># This was not updated in v2023 or 2024 so we call out to the v2022 year on Mazu</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_M, <span class="st">&#39;git-annex/globalprep/fis/v2022/int/stock_catch_by_rgn_taxa.csv&#39;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># read in Sea Around Us catch data</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>catch_raw <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(file) </span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co"># update column names</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>catch <span class="ot">&lt;-</span> catch_raw <span class="sc">%&gt;%</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">common =</span> CommonName, <span class="at">fao_id =</span> fao_rgn, <span class="at">species =</span> TaxonName)</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co"># view summary</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="fu">summary</span>(catch)</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="fu">colnames</span>(catch)</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="do">## filter out non ohi eez regions if there are any</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>catch <span class="ot">&lt;-</span> catch <span class="sc">%&gt;%</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(rgn_id)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(fao_id)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>  <span class="fu">filter</span>(rgn_id <span class="sc">&lt;=</span> <span class="dv">250</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>  <span class="fu">filter</span>(rgn_id <span class="sc">!=</span> <span class="dv">213</span>) <span class="co"># drop Antarctica</span></span></code></pre></div>
+</div>
+<div id="subset-the-v2022-catch-data-for-our-forage-fish-species" class="section level2">
+<h2>Subset the (v2022) catch data for our forage fish species</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="do">## need to get TaxonKey&#39;s for each species to join with catch</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co"># read in list we wrote out earlier</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>foragefish_list <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(current_np_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;master_taxa_list_SAUP.csv&quot;</span>))</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co"># find missing species </span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>missing_spp <span class="ot">&lt;-</span> foragefish_list <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(TaxonKey))</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>missing_spp<span class="sc">$</span>forage_fish</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="co"># v2025 missing species:</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="co">#  [1] &quot;Ariomma indica&quot;          &quot;Blicca bjoerkna&quot;         &quot;Centrolabrus exoletus&quot;  </span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="co">#  [4] &quot;Citharidae&quot;              &quot;Hemiramphus balao&quot;       &quot;Liza saliens&quot;           </span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="co">#  [7] &quot;Percarina demidoffi&quot;     &quot;Sardinops caeruleus&quot;     &quot;Sardinops melanostictus&quot;</span></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co"># [10] &quot;Sardinops ocellatus</span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a><span class="co"># test &lt;- catch %&gt;%</span></span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="co">#   filter(str_detect(paste(missing_spp$forage_fish, collapse = &quot;|&quot;), species)) # just make sure the NA species are actually not in the SAUP data</span></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="co"># sort(unique(test$species)) # no full matches..</span></span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a><span class="co"># # v2024: [1] &quot;Hemiramphus&quot; &quot;Liza&quot; </span></span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a><span class="co"># ---- Join forage fish species with catch data ----</span></span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a>forage_fish_taxa_list <span class="ot">&lt;-</span> foragefish_list <span class="sc">%&gt;%</span></span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a>  <span class="co"># subset to only keep catch data for which we have forage species data</span></span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a>  <span class="fu">left_join</span>(catch, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;forage_fish&quot;</span> <span class="ot">=</span> <span class="st">&quot;species&quot;</span>, <span class="st">&quot;TaxonKey&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(forage_fish, inSAUP, TaxonKey) <span class="sc">%&gt;%</span> <span class="co"># drop stock, common name, and extra catch df columns</span></span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="sc">%&gt;%</span> <span class="co"># return unique combinations of grouping variables in the data frame</span></span>
+<span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">inSAUP =</span> <span class="fu">ifelse</span>(</span>
+<span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a>    <span class="co"># if TaxonKey is NA, set inSAUP to NA</span></span>
+<span id="cb10-31"><a href="#cb10-31" tabindex="-1"></a>   <span class="fu">is.na</span>(TaxonKey), <span class="cn">NA</span>, inSAUP)) </span>
+<span id="cb10-32"><a href="#cb10-32" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" tabindex="-1"></a><span class="co"># save a list of species not in SAUP data for bookkeeping</span></span>
+<span id="cb10-34"><a href="#cb10-34" tabindex="-1"></a>forage_fish_no_saup <span class="ot">&lt;-</span> forage_fish_taxa_list <span class="sc">%&gt;%</span></span>
+<span id="cb10-35"><a href="#cb10-35" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(TaxonKey)) </span>
+<span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a></span>
+<span id="cb10-37"><a href="#cb10-37" tabindex="-1"></a><span class="co"># write out missing species list to int</span></span>
+<span id="cb10-38"><a href="#cb10-38" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(forage_fish_no_saup, <span class="fu">here</span>(current_np_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;forage_fish_not_in_SAUP.csv&quot;</span>))</span>
+<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="#cb10-40" tabindex="-1"></a></span>
+<span id="cb10-41"><a href="#cb10-41" tabindex="-1"></a><span class="co"># join catch data set with forage fish taxa list </span></span>
+<span id="cb10-42"><a href="#cb10-42" tabindex="-1"></a>catch_fishfeed <span class="ot">&lt;-</span> catch <span class="sc">%&gt;%</span></span>
+<span id="cb10-43"><a href="#cb10-43" tabindex="-1"></a>  <span class="fu">left_join</span>(forage_fish_taxa_list, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;TaxonKey&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-44"><a href="#cb10-44" tabindex="-1"></a>  <span class="co"># subset to only include forage fish species</span></span>
+<span id="cb10-45"><a href="#cb10-45" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(forage_fish))</span>
+<span id="cb10-46"><a href="#cb10-46" tabindex="-1"></a></span>
+<span id="cb10-47"><a href="#cb10-47" tabindex="-1"></a><span class="fu">nrow</span>(catch_fishfeed) <span class="co"># 600864 - v2025</span></span>
+<span id="cb10-48"><a href="#cb10-48" tabindex="-1"></a></span>
+<span id="cb10-49"><a href="#cb10-49" tabindex="-1"></a><span class="co"># write output to int folder in np/scenario year directory</span></span>
+<span id="cb10-50"><a href="#cb10-50" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(catch_fishfeed, here<span class="sc">::</span><span class="fu">here</span>(current_np_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;saup_catch_forage_fish.csv&quot;</span>))</span>
+<span id="cb10-51"><a href="#cb10-51" tabindex="-1"></a></span>
+<span id="cb10-52"><a href="#cb10-52" tabindex="-1"></a>test <span class="ot">&lt;-</span> catch_fishfeed <span class="sc">%&gt;%</span></span>
+<span id="cb10-53"><a href="#cb10-53" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb10-54"><a href="#cb10-54" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sum =</span> <span class="fu">sum</span>(tons)) </span>
+<span id="cb10-55"><a href="#cb10-55" tabindex="-1"></a></span>
+<span id="cb10-56"><a href="#cb10-56" tabindex="-1"></a><span class="fu">summary</span>(test)[<span class="dv">4</span>, <span class="dv">2</span>]</span>
+<span id="cb10-57"><a href="#cb10-57" tabindex="-1"></a><span class="do">## looks good.. ~30 million per year in v2023 and v2024 and v2025 </span></span></code></pre></div>
+</div>
+</div>
+<div id="step-2" class="section level1">
+<h1>Step 2</h1>
+<div id="multiply-by-0.90-to-reflect-the-amount-going-to-feedoils-and-not-the-amount-going-to-human-consumption-that-is-accounted-for-in-food-provision" class="section level2">
+<h2>Multiply by 0.90 to reflect the amount going to feed/oils, and not
+the amount going to human consumption (that is accounted for in food
+provision)</h2>
+<p>Justification from the <a href="https://www.nature.com/articles/s41893-018-0077-1#Sec11">Froelich
+et al. 2018</a>: “Currently, it is estimated about 10% of forage fish
+enter the human diet directly, but the notoriously tiny-boned fish are
+labour intensive (thus expensive) to process for human consumption, are
+the foundation of several industries and thus jobs (creating inertia to
+change) and are not the preferred fish type for most people.”</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># read in SAUP catch data subsetted to forage fish species </span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>catch_fishfeed <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(current_np_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;saup_catch_forage_fish.csv&quot;</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co"># Multiply by 0.90 to reflect the amount going to feed/oils, not human consumption</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>catch_non_human <span class="ot">&lt;-</span> catch_fishfeed <span class="sc">%&gt;%</span> </span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tons_non_human =</span> tons <span class="sc">*</span> <span class="fl">0.9</span>) </span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co"># for each region, FAO ID, Taxon Key, stock ID, and year, </span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co"># find sum of non-human-consumption fish harvest</span></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>catch_non_human <span class="ot">&lt;-</span> catch_non_human <span class="sc">%&gt;%</span></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, rgn_id, fao_id, stock_id, TaxonKey, tons_non_human) <span class="sc">%&gt;%</span></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>  <span class="fu">group_by</span>(rgn_id, fao_id, TaxonKey, stock_id, year) <span class="sc">%&gt;%</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">catch_non_human =</span> <span class="fu">sum</span>(tons_non_human)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>test <span class="ot">&lt;-</span> catch_non_human <span class="sc">%&gt;%</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sum =</span> <span class="fu">sum</span>(catch_non_human)) </span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="fu">summary</span>(test)[<span class="dv">4</span>, <span class="dv">2</span>]</span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a><span class="co"># ~ 26.6 mil per year -- v2024 and v2025</span></span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a><span class="co"># --------- Zero-fill -----------------------</span></span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a><span class="do">## these data have no zero catch values, so add years with no reported catch to data table:</span></span>
+<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a>catch_year_zeros <span class="ot">&lt;-</span> catch_non_human <span class="sc">%&gt;%</span></span>
+<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> year, <span class="at">values_from =</span> catch_non_human,</span>
+<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a>              <span class="at">names_prefix =</span> <span class="st">&quot;x_&quot;</span>,</span>
+<span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a>              <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;x_&quot;</span>),</span>
+<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>,</span>
+<span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;catch_non_human&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-33"><a href="#cb11-33" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;x_&quot;</span>, <span class="st">&quot;&quot;</span>, year))) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-34"><a href="#cb11-34" tabindex="-1"></a>  <span class="fu">arrange</span>(year)</span>
+<span id="cb11-35"><a href="#cb11-35" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" tabindex="-1"></a><span class="do">## this part eliminates the zero catch values prior to the first reported non-zero catch  </span></span>
+<span id="cb11-37"><a href="#cb11-37" tabindex="-1"></a>catch_year_zeros <span class="ot">&lt;-</span> catch_year_zeros <span class="sc">%&gt;%</span></span>
+<span id="cb11-38"><a href="#cb11-38" tabindex="-1"></a>  <span class="fu">group_by</span>(fao_id, TaxonKey, stock_id, rgn_id) <span class="sc">%&gt;%</span></span>
+<span id="cb11-39"><a href="#cb11-39" tabindex="-1"></a>  <span class="fu">arrange</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb11-40"><a href="#cb11-40" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cum_catch =</span> <span class="fu">cumsum</span>(catch_non_human)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-41"><a href="#cb11-41" tabindex="-1"></a>  <span class="fu">filter</span>(cum_catch <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-42"><a href="#cb11-42" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>cum_catch) <span class="sc">%&gt;%</span></span>
+<span id="cb11-43"><a href="#cb11-43" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb11-44"><a href="#cb11-44" tabindex="-1"></a></span>
+<span id="cb11-45"><a href="#cb11-45" tabindex="-1"></a><span class="co"># Calculate mean catch for ohi regions (using data from 1980 onward). These data are used to weight the RAM b/bmsy values </span></span>
+<span id="cb11-46"><a href="#cb11-46" tabindex="-1"></a><span class="co"># mean_catch &lt;- catch_year_zeros %&gt;%</span></span>
+<span id="cb11-47"><a href="#cb11-47" tabindex="-1"></a><span class="co">#   filter(year &gt;= 1980) %&gt;%</span></span>
+<span id="cb11-48"><a href="#cb11-48" tabindex="-1"></a><span class="co">#   group_by(rgn_id, fao_id, TaxonKey, stock_id) %&gt;%</span></span>
+<span id="cb11-49"><a href="#cb11-49" tabindex="-1"></a><span class="co">#   summarize(mean_catch_non_human = mean(catch_non_human, na.rm=TRUE)) %&gt;% # mean catch for each stock (in a specific ohi-fao region)</span></span>
+<span id="cb11-50"><a href="#cb11-50" tabindex="-1"></a><span class="co">#   filter(mean_catch_non_human != 0)  %&gt;% # some stocks have no reported catch for time period</span></span>
+<span id="cb11-51"><a href="#cb11-51" tabindex="-1"></a><span class="co">#   ungroup()</span></span>
+<span id="cb11-52"><a href="#cb11-52" tabindex="-1"></a></span>
+<span id="cb11-53"><a href="#cb11-53" tabindex="-1"></a>mean_catch <span class="ot">&lt;-</span> catch_year_zeros <span class="sc">%&gt;%</span></span>
+<span id="cb11-54"><a href="#cb11-54" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1980</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-55"><a href="#cb11-55" tabindex="-1"></a>  <span class="fu">group_by</span>(rgn_id, fao_id, TaxonKey, stock_id) <span class="sc">%&gt;%</span></span>
+<span id="cb11-56"><a href="#cb11-56" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_catch_non_human =</span> <span class="fu">mean</span>(catch_non_human, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> <span class="co"># mean catch for each stock (in a specific ohi-fao region)</span></span>
+<span id="cb11-57"><a href="#cb11-57" tabindex="-1"></a>  <span class="fu">filter</span>(mean_catch_non_human <span class="sc">!=</span> <span class="dv">0</span>)  <span class="sc">%&gt;%</span> <span class="co"># some stocks have no reported catch for time period</span></span>
+<span id="cb11-58"><a href="#cb11-58" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb11-59"><a href="#cb11-59" tabindex="-1"></a></span>
+<span id="cb11-60"><a href="#cb11-60" tabindex="-1"></a>mean_catch_dist <span class="ot">&lt;-</span> mean_catch <span class="sc">%&gt;%</span> </span>
+<span id="cb11-61"><a href="#cb11-61" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>catch_non_human) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-62"><a href="#cb11-62" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">distinct</span>(rgn_id, fao_id, year, TaxonKey, stock_id, mean_catch_non_human)</span>
+<span id="cb11-63"><a href="#cb11-63" tabindex="-1"></a></span>
+<span id="cb11-64"><a href="#cb11-64" tabindex="-1"></a></span>
+<span id="cb11-65"><a href="#cb11-65" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>) <span class="co"># to prevent taxonkey from turning into scientific notation</span></span>
+<span id="cb11-66"><a href="#cb11-66" tabindex="-1"></a></span>
+<span id="cb11-67"><a href="#cb11-67" tabindex="-1"></a>mean_catch_FOFM <span class="ot">&lt;-</span> mean_catch_dist <span class="sc">%&gt;%</span></span>
+<span id="cb11-68"><a href="#cb11-68" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stock_id_taxonkey =</span> <span class="fu">paste</span>(stock_id, TaxonKey, <span class="at">sep=</span><span class="st">&quot;_&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-69"><a href="#cb11-69" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, stock_id_taxonkey, mean_catch_non_human, year) <span class="sc">%&gt;%</span></span>
+<span id="cb11-70"><a href="#cb11-70" tabindex="-1"></a>  <span class="co"># filter(year &gt;= 2001) %&gt;%  # filter to include only analysis years</span></span>
+<span id="cb11-71"><a href="#cb11-71" tabindex="-1"></a>  <span class="fu">data.frame</span>() </span>
+<span id="cb11-72"><a href="#cb11-72" tabindex="-1"></a>  <span class="co"># rename(catch = mean_catch_non_human)</span></span>
+<span id="cb11-73"><a href="#cb11-73" tabindex="-1"></a></span>
+<span id="cb11-74"><a href="#cb11-74" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(mean_catch_FOFM, <span class="fu">here</span>(current_np_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;mean_catch_FOFM.csv&quot;</span>))</span>
+<span id="cb11-75"><a href="#cb11-75" tabindex="-1"></a></span>
+<span id="cb11-76"><a href="#cb11-76" tabindex="-1"></a><span class="do">## Separate file to save the raw data as well as the mean catch data. Used in step 5 weighting</span></span>
+<span id="cb11-77"><a href="#cb11-77" tabindex="-1"></a>mean_raw_catch <span class="ot">&lt;-</span> mean_catch <span class="sc">%&gt;%</span> </span>
+<span id="cb11-78"><a href="#cb11-78" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stock_id_taxonkey =</span> <span class="fu">paste</span>(stock_id, TaxonKey, <span class="at">sep=</span><span class="st">&quot;_&quot;</span>),</span>
+<span id="cb11-79"><a href="#cb11-79" tabindex="-1"></a>         <span class="at">product =</span> <span class="st">&quot;fish_oil&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-80"><a href="#cb11-80" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, stock_id_taxonkey, mean_catch_non_human, catch_non_human, year, product) <span class="sc">%&gt;%</span></span>
+<span id="cb11-81"><a href="#cb11-81" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">2001</span>) <span class="sc">%&gt;%</span>  <span class="co"># filter to include only analysis years</span></span>
+<span id="cb11-82"><a href="#cb11-82" tabindex="-1"></a>  <span class="fu">data.frame</span>() </span>
+<span id="cb11-83"><a href="#cb11-83" tabindex="-1"></a></span>
+<span id="cb11-84"><a href="#cb11-84" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(mean_raw_catch, <span class="fu">here</span>(current_np_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;raw_mean_catch_FOFM.csv&quot;</span>))</span></code></pre></div>
+</div>
+</div>
+<div id="steps-3456" class="section level1">
+<h1>Steps 3/4/5/6</h1>
+<p>Join with the final B/Bmsy layer from the fis model, convert the
+B/Bmsy values to scores (this is done in functions.R for FIS subgoal,
+but we do it in the dataprep for NP), apply the underharvest penalty,
+and take a catch weighted average of B/Bmsy scores for each
+region/year.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>fis_bbmsy <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(current_fis_dir, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;fis_bbmsy.csv&quot;</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>fis_bbmsy_gf <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(current_fis_dir, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;fis_bbmsy_gf.csv&quot;</span>))</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co"># This data comes from the previous year&#39;s analysis and has been copied over into the most recent scenario directory</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>catch_FOFM <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(current_np_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;mean_catch_FOFM.csv&quot;</span>))</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>b <span class="ot">&lt;-</span> fis_bbmsy <span class="sc">%&gt;%</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">bbmsy =</span> <span class="fu">ifelse</span>(bbmsy <span class="sc">&gt;</span> <span class="dv">1</span> , <span class="dv">1</span>, bbmsy)) <span class="co"># no underharvest penalty anymore! </span></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>c <span class="ot">&lt;-</span> catch_FOFM <span class="sc">%&gt;%</span></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">stock_id_taxonkey =</span> <span class="fu">as.character</span>(stock_id_taxonkey)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">taxon_key =</span> <span class="fu">sub</span>(<span class="st">&#39;.*_&#39;</span>, <span class="st">&#39;&#39;</span>, stock_id_taxonkey)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">stock_id =</span> <span class="fu">sub</span>(<span class="st">&#39;_[^_]*$&#39;</span>, <span class="st">&#39;&#39;</span>, stock_id_taxonkey)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">mean_catch_non_human =</span> <span class="fu">as.numeric</span>(mean_catch_non_human)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(year))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">region_id =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(rgn_id))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">taxon_key =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(taxon_key))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(region_id, stock_id, taxon_key, mean_catch_non_human, year)</span>
+<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a>b <span class="ot">&lt;-</span> b <span class="sc">%&gt;%</span></span>
+<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">bbmsy =</span> <span class="fu">as.numeric</span>(bbmsy),</span>
+<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a>                <span class="at">region_id =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(rgn_id)),</span>
+<span id="cb12-25"><a href="#cb12-25" tabindex="-1"></a>                <span class="at">year =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(year)),</span>
+<span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a>                <span class="at">stock_id =</span> <span class="fu">as.character</span>(stock_id))</span>
+<span id="cb12-27"><a href="#cb12-27" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="#cb12-28" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" tabindex="-1"></a><span class="do">####</span></span>
+<span id="cb12-30"><a href="#cb12-30" tabindex="-1"></a><span class="co"># ==== Calculate scores for Bbmsy values ==== ####</span></span>
+<span id="cb12-31"><a href="#cb12-31" tabindex="-1"></a><span class="co">#  *************</span><span class="al">NOTE</span><span class="co"> *****************************</span></span>
+<span id="cb12-32"><a href="#cb12-32" tabindex="-1"></a><span class="co">#  These values can be altered</span></span>
+<span id="cb12-33"><a href="#cb12-33" tabindex="-1"></a><span class="co">#  ***********************************************</span></span>
+<span id="cb12-34"><a href="#cb12-34" tabindex="-1"></a></span>
+<span id="cb12-35"><a href="#cb12-35" tabindex="-1"></a><span class="do">## The upper limit can be deleted, since we already cap pedscores at 1 anyways. We still want to keep the lower buffer.</span></span>
+<span id="cb12-36"><a href="#cb12-36" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb12-38"><a href="#cb12-38" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">0.25</span></span>
+<span id="cb12-39"><a href="#cb12-39" tabindex="-1"></a>lowerBuffer <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
+<span id="cb12-40"><a href="#cb12-40" tabindex="-1"></a>upperBuffer <span class="ot">&lt;-</span> <span class="fl">1.05</span></span>
+<span id="cb12-41"><a href="#cb12-41" tabindex="-1"></a></span>
+<span id="cb12-42"><a href="#cb12-42" tabindex="-1"></a><span class="co"># Rename to stock score</span></span>
+<span id="cb12-43"><a href="#cb12-43" tabindex="-1"></a></span>
+<span id="cb12-44"><a href="#cb12-44" tabindex="-1"></a>b<span class="sc">$</span>stock_score <span class="ot">=</span> <span class="fu">ifelse</span>(</span>
+<span id="cb12-45"><a href="#cb12-45" tabindex="-1"></a>  b<span class="sc">$</span>bbmsy <span class="sc">&lt;</span> lowerBuffer,</span>
+<span id="cb12-46"><a href="#cb12-46" tabindex="-1"></a>  b<span class="sc">$</span>bbmsy,</span>
+<span id="cb12-47"><a href="#cb12-47" tabindex="-1"></a>  <span class="fu">ifelse</span> (b<span class="sc">$</span>bbmsy <span class="sc">&gt;=</span> lowerBuffer <span class="sc">&amp;</span></span>
+<span id="cb12-48"><a href="#cb12-48" tabindex="-1"></a>            b<span class="sc">$</span>bbmsy <span class="sc">&lt;=</span> upperBuffer, <span class="dv">1</span>, <span class="cn">NA</span>)</span>
+<span id="cb12-49"><a href="#cb12-49" tabindex="-1"></a>)</span>
+<span id="cb12-50"><a href="#cb12-50" tabindex="-1"></a>b<span class="sc">$</span>stock_score <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(b<span class="sc">$</span>stock_score),</span>
+<span id="cb12-51"><a href="#cb12-51" tabindex="-1"></a>                 b<span class="sc">$</span>stock_score,</span>
+<span id="cb12-52"><a href="#cb12-52" tabindex="-1"></a>                 <span class="fu">ifelse</span>(</span>
+<span id="cb12-53"><a href="#cb12-53" tabindex="-1"></a>                   <span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">*</span> (b<span class="sc">$</span>bbmsy <span class="sc">-</span> upperBuffer) <span class="sc">&gt;</span> beta,</span>
+<span id="cb12-54"><a href="#cb12-54" tabindex="-1"></a>                   <span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">*</span> (b<span class="sc">$</span>bbmsy <span class="sc">-</span> upperBuffer),</span>
+<span id="cb12-55"><a href="#cb12-55" tabindex="-1"></a>                   beta</span>
+<span id="cb12-56"><a href="#cb12-56" tabindex="-1"></a>                 ))</span>
+<span id="cb12-57"><a href="#cb12-57" tabindex="-1"></a></span>
+<span id="cb12-58"><a href="#cb12-58" tabindex="-1"></a><span class="co"># ISSUE: Conceptual check. The score here is representative of sustainability?</span></span>
+<span id="cb12-59"><a href="#cb12-59" tabindex="-1"></a><span class="fu">colnames</span>(c)</span>
+<span id="cb12-60"><a href="#cb12-60" tabindex="-1"></a><span class="do">####</span></span>
+<span id="cb12-61"><a href="#cb12-61" tabindex="-1"></a><span class="co"># Merge the b/bmsy data with catch data ------------------------------</span></span>
+<span id="cb12-62"><a href="#cb12-62" tabindex="-1"></a><span class="do">####</span></span>
+<span id="cb12-63"><a href="#cb12-63" tabindex="-1"></a>data_fis <span class="ot">&lt;-</span> c <span class="sc">%&gt;%</span></span>
+<span id="cb12-64"><a href="#cb12-64" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(b, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&#39;region_id&#39;</span> <span class="ot">=</span> <span class="st">&#39;rgn_id&#39;</span>, <span class="st">&#39;stock_id&#39;</span>, <span class="st">&#39;year&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-65"><a href="#cb12-65" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="at">rgn_id =</span> region_id, stock_id, year, taxon_key, mean_catch_non_human, bbmsy, stock_score)</span>
+<span id="cb12-66"><a href="#cb12-66" tabindex="-1"></a></span>
+<span id="cb12-67"><a href="#cb12-67" tabindex="-1"></a><span class="do">###</span></span>
+<span id="cb12-68"><a href="#cb12-68" tabindex="-1"></a><span class="co">#  Estimate scores for taxa without b/bmsy values --------------------</span></span>
+<span id="cb12-69"><a href="#cb12-69" tabindex="-1"></a><span class="co"># Mean score of other fish in the region is the starting point</span></span>
+<span id="cb12-70"><a href="#cb12-70" tabindex="-1"></a><span class="co"># Then a penalty is applied based on the level the taxa are reported at</span></span>
+<span id="cb12-71"><a href="#cb12-71" tabindex="-1"></a><span class="do">###</span></span>
+<span id="cb12-72"><a href="#cb12-72" tabindex="-1"></a></span>
+<span id="cb12-73"><a href="#cb12-73" tabindex="-1"></a>data_fis <span class="ot">&lt;-</span> data_fis <span class="sc">%&gt;%</span> </span>
+<span id="cb12-74"><a href="#cb12-74" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">2000</span>)</span>
+<span id="cb12-75"><a href="#cb12-75" tabindex="-1"></a></span>
+<span id="cb12-76"><a href="#cb12-76" tabindex="-1"></a><span class="do">## this takes the mean score within each region and year</span></span>
+<span id="cb12-77"><a href="#cb12-77" tabindex="-1"></a>data_fis_gf <span class="ot">&lt;-</span> data_fis <span class="sc">%&gt;%</span></span>
+<span id="cb12-78"><a href="#cb12-78" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(rgn_id, year) <span class="sc">%&gt;%</span></span>
+<span id="cb12-79"><a href="#cb12-79" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">mean_score =</span> <span class="fu">mean</span>(stock_score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-80"><a href="#cb12-80" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>()</span>
+<span id="cb12-81"><a href="#cb12-81" tabindex="-1"></a></span>
+<span id="cb12-82"><a href="#cb12-82" tabindex="-1"></a><span class="do">## this takes the mean score across all regions within a year</span></span>
+<span id="cb12-83"><a href="#cb12-83" tabindex="-1"></a><span class="co"># (when no stocks have scores within a region)</span></span>
+<span id="cb12-84"><a href="#cb12-84" tabindex="-1"></a>data_fis_gf <span class="ot">&lt;-</span> data_fis_gf <span class="sc">%&gt;%</span></span>
+<span id="cb12-85"><a href="#cb12-85" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb12-86"><a href="#cb12-86" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">mean_score_global =</span> <span class="fu">mean</span>(stock_score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-87"><a href="#cb12-87" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb12-88"><a href="#cb12-88" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">mean_score =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(mean_score), mean_score_global, mean_score)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-89"><a href="#cb12-89" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>mean_score_global)</span>
+<span id="cb12-90"><a href="#cb12-90" tabindex="-1"></a></span>
+<span id="cb12-91"><a href="#cb12-91" tabindex="-1"></a><span class="co">#  *************</span><span class="al">NOTE</span><span class="co"> *****************************</span></span>
+<span id="cb12-92"><a href="#cb12-92" tabindex="-1"></a><span class="co">#  In some cases, it may make sense to alter the</span></span>
+<span id="cb12-93"><a href="#cb12-93" tabindex="-1"></a><span class="co">#  penalty for not identifying fisheries catch data to</span></span>
+<span id="cb12-94"><a href="#cb12-94" tabindex="-1"></a><span class="co">#  species level.</span></span>
+<span id="cb12-95"><a href="#cb12-95" tabindex="-1"></a><span class="co">#  ***********************************************</span></span>
+<span id="cb12-96"><a href="#cb12-96" tabindex="-1"></a></span>
+<span id="cb12-97"><a href="#cb12-97" tabindex="-1"></a>penaltyTable <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">TaxonPenaltyCode =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb12-98"><a href="#cb12-98" tabindex="-1"></a>                           <span class="at">penalty =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>, <span class="dv">1</span>))</span>
+<span id="cb12-99"><a href="#cb12-99" tabindex="-1"></a></span>
+<span id="cb12-100"><a href="#cb12-100" tabindex="-1"></a>data_fis_gf <span class="ot">&lt;-</span> data_fis_gf <span class="sc">%&gt;%</span></span>
+<span id="cb12-101"><a href="#cb12-101" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">TaxonPenaltyCode =</span> <span class="fu">as.numeric</span>(<span class="fu">substring</span>(taxon_key, <span class="dv">1</span>, <span class="dv">1</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-102"><a href="#cb12-102" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(penaltyTable, <span class="at">by =</span> <span class="st">&#39;TaxonPenaltyCode&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-103"><a href="#cb12-103" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">stock_score_gf =</span> mean_score <span class="sc">*</span> penalty) <span class="sc">%&gt;%</span></span>
+<span id="cb12-104"><a href="#cb12-104" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">method =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(stock_score), <span class="st">&quot;Mean gapfilled&quot;</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-105"><a href="#cb12-105" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">gapfilled =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(stock_score), <span class="dv">1</span>, <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-106"><a href="#cb12-106" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">stock_score =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(stock_score), stock_score_gf, stock_score))</span>
+<span id="cb12-107"><a href="#cb12-107" tabindex="-1"></a></span>
+<span id="cb12-108"><a href="#cb12-108" tabindex="-1"></a></span>
+<span id="cb12-109"><a href="#cb12-109" tabindex="-1"></a>gap_fill_data <span class="ot">&lt;-</span> data_fis_gf <span class="sc">%&gt;%</span></span>
+<span id="cb12-110"><a href="#cb12-110" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id,</span>
+<span id="cb12-111"><a href="#cb12-111" tabindex="-1"></a>         stock_id,</span>
+<span id="cb12-112"><a href="#cb12-112" tabindex="-1"></a>         taxon_key,</span>
+<span id="cb12-113"><a href="#cb12-113" tabindex="-1"></a>         year,</span>
+<span id="cb12-114"><a href="#cb12-114" tabindex="-1"></a>         mean_catch_non_human,</span>
+<span id="cb12-115"><a href="#cb12-115" tabindex="-1"></a>         stock_score,</span>
+<span id="cb12-116"><a href="#cb12-116" tabindex="-1"></a>         gapfilled,</span>
+<span id="cb12-117"><a href="#cb12-117" tabindex="-1"></a>         method) </span>
+<span id="cb12-118"><a href="#cb12-118" tabindex="-1"></a></span>
+<span id="cb12-119"><a href="#cb12-119" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(gap_fill_data, here<span class="sc">::</span><span class="fu">here</span>(current_np_dir, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;NP_bbmsy_summary_gf.csv&quot;</span>))</span>
+<span id="cb12-120"><a href="#cb12-120" tabindex="-1"></a></span>
+<span id="cb12-121"><a href="#cb12-121" tabindex="-1"></a>score_data <span class="ot">&lt;-</span> data_fis_gf <span class="sc">%&gt;%</span></span>
+<span id="cb12-122"><a href="#cb12-122" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, stock_id, year, mean_catch_non_human, stock_score)</span>
+<span id="cb12-123"><a href="#cb12-123" tabindex="-1"></a></span>
+<span id="cb12-124"><a href="#cb12-124" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(score_data)) <span class="co"># 2723</span></span>
+<span id="cb12-125"><a href="#cb12-125" tabindex="-1"></a><span class="fu">nrow</span>(score_data) <span class="co"># 24923</span></span>
+<span id="cb12-126"><a href="#cb12-126" tabindex="-1"></a><span class="co"># ~ 10% NA where we have SAUP catch data but no FAO BBMSY data</span></span>
+<span id="cb12-127"><a href="#cb12-127" tabindex="-1"></a></span>
+<span id="cb12-128"><a href="#cb12-128" tabindex="-1"></a> <span class="do">###</span></span>
+<span id="cb12-129"><a href="#cb12-129" tabindex="-1"></a><span class="co"># Calculate status for each region</span></span>
+<span id="cb12-130"><a href="#cb12-130" tabindex="-1"></a><span class="do">###</span></span>
+<span id="cb12-131"><a href="#cb12-131" tabindex="-1"></a></span>
+<span id="cb12-132"><a href="#cb12-132" tabindex="-1"></a><span class="do">## Take a catch weighted average of B/Bmsy scores for each region/year.</span></span>
+<span id="cb12-133"><a href="#cb12-133" tabindex="-1"></a></span>
+<span id="cb12-134"><a href="#cb12-134" tabindex="-1"></a></span>
+<span id="cb12-135"><a href="#cb12-135" tabindex="-1"></a>score_data1 <span class="ot">&lt;-</span> score_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-136"><a href="#cb12-136" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(rgn_id, year) <span class="sc">%&gt;%</span></span>
+<span id="cb12-137"><a href="#cb12-137" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">score =</span> <span class="fu">weighted.mean</span>(stock_score, mean_catch_non_human)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-138"><a href="#cb12-138" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb12-139"><a href="#cb12-139" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">product =</span> <span class="st">&quot;fish_oil&quot;</span>)</span>
+<span id="cb12-140"><a href="#cb12-140" tabindex="-1"></a></span>
+<span id="cb12-141"><a href="#cb12-141" tabindex="-1"></a><span class="fu">summary</span>(score_data1)</span></code></pre></div>
+<div id="data-check" class="section level2">
+<h2>Data Check</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Read in the old data</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>old <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;np&quot;</span>, prev_scen_year, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;np_fofm_scores.csv&quot;</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="fu">summary</span>(old)</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co"># Read in the new data</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>new <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(current_np_dir, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;np_fofm_scores.csv&quot;</span>))</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="fu">summary</span>(new)</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="co"># load ohi regions</span></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="fu">region_data</span>()</span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="co"># Investigating changes in data for same year in different data/scenario years</span></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>check <span class="ot">&lt;-</span> new <span class="sc">%&gt;%</span></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">&quot;new_score&quot;</span> <span class="ot">=</span> <span class="st">&quot;score&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>  <span class="fu">left_join</span>(old, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;rgn_id&quot;</span>, <span class="st">&quot;year&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a>  <span class="fu">left_join</span>(rgns_all, <span class="at">by =</span> <span class="st">&quot;rgn_id&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a>  <span class="fu">select</span>(rgn_id, year, new_score, score, rgn_name) <span class="sc">%&gt;%</span></span>
+<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> new_score <span class="sc">-</span> score) <span class="sc">%&gt;%</span></span>
+<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2019</span>)</span>
+<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a>ab_scores <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> check, <span class="fu">aes</span>(<span class="at">x =</span> score, <span class="at">y =</span> new_score, <span class="at">text =</span> <span class="fu">paste</span>(<span class="st">&quot;Region:&quot;</span>, rgn_name), <span class="at">alpha =</span> <span class="fl">0.7</span>)) <span class="sc">+</span></span>
+<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Old Score&quot;</span>, </span>
+<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;New Score&quot;</span>,</span>
+<span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;FOFM New score vs old score for 2019&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a>  <span class="fu">theme_bw</span>();<span class="fu">ggplotly</span>(ab_scores)</span></code></pre></div>
 </div>
 </div>
 
