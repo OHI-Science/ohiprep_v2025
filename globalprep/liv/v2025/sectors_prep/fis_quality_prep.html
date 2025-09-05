@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Fri Aug 29 18:51:29 2025 by oyler" />
+<meta name="author" content="Compiled on Thu Sep 4 17:12:18 2025 by hoyt" />
 
 
 <title>OHI 2025 - FIS LIV Quality Preparation</title>
@@ -1646,8 +1646,8 @@ border-radius: 0px;
 
 
 <h1 class="title toc-ignore">OHI 2025 - FIS LIV Quality Preparation</h1>
-<h4 class="author"><em>Compiled on Fri Aug 29 18:51:29 2025 by
-oyler</em></h4>
+<h4 class="author"><em>Compiled on Thu Sep 4 17:12:18 2025 by
+hoyt</em></h4>
 
 </div>
 
@@ -1748,7 +1748,10 @@ Quality of Tourism Jobs per Country/Region per Year</h1>
 <span id="cb9-34"><a href="#cb9-34" tabindex="-1"></a>oecd_fao_dir <span class="ot">&lt;-</span> <span class="fu">here</span>(raw_data_dir, <span class="st">&quot;OECD_FAO_joint_collection&quot;</span>, data_dir_version_year)</span>
 <span id="cb9-35"><a href="#cb9-35" tabindex="-1"></a></span>
 <span id="cb9-36"><a href="#cb9-36" tabindex="-1"></a><span class="co"># output data dir for intermediate data products</span></span>
-<span id="cb9-37"><a href="#cb9-37" tabindex="-1"></a>int_dir <span class="ot">&lt;-</span> <span class="fu">here</span>(data_path, <span class="st">&quot;int&quot;</span>)</span></code></pre></div>
+<span id="cb9-37"><a href="#cb9-37" tabindex="-1"></a>int_dir <span class="ot">&lt;-</span> <span class="fu">here</span>(data_path, <span class="st">&quot;int&quot;</span>)</span>
+<span id="cb9-38"><a href="#cb9-38" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" tabindex="-1"></a><span class="co"># output data directory for final data products</span></span>
+<span id="cb9-40"><a href="#cb9-40" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(data_path, <span class="st">&quot;output&quot;</span>)</span></code></pre></div>
 </div>
 <div id="read-in-data" class="section level3" number="1.1.2">
 <h3><span class="header-section-number">1.1.2</span> Read in Data</h3>
@@ -1906,7 +1909,7 @@ GDP adjustments come from OECD</li>
 <span id="cb13-63"><a href="#cb13-63" tabindex="-1"></a>wage_export <span class="ot">&lt;-</span> wage_final <span class="sc">%&gt;%</span> </span>
 <span id="cb13-64"><a href="#cb13-64" tabindex="-1"></a>  <span class="fu">select</span>(rgn_id, year, <span class="at">quality =</span> annual_income)</span>
 <span id="cb13-65"><a href="#cb13-65" tabindex="-1"></a></span>
-<span id="cb13-66"><a href="#cb13-66" tabindex="-1"></a><span class="fu">write_csv</span>(wage_export, <span class="fu">here</span>(int_dir, <span class="st">&quot;liv_fis_quality.csv&quot;</span>))</span></code></pre></div>
+<span id="cb13-66"><a href="#cb13-66" tabindex="-1"></a><span class="fu">write_csv</span>(wage_export, <span class="fu">here</span>(output_dir, <span class="st">&quot;fis_quality.csv&quot;</span>))</span></code></pre></div>
 </div>
 
 

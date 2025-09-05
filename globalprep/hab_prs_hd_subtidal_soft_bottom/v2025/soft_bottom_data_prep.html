@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Thu Aug 7 16:13:24 2025 by hoyt" />
+<meta name="author" content="Compiled on Wed Sep 3 16:11:31 2025 by hoyt" />
 
 
 <title>Softbottom Habitat Destruction</title>
@@ -1646,7 +1646,7 @@ border-radius: 0px;
 
 
 <h1 class="title toc-ignore">Softbottom Habitat Destruction</h1>
-<h4 class="author"><em>Compiled on Thu Aug 7 16:13:24 2025 by
+<h4 class="author"><em>Compiled on Wed Sep 3 16:11:31 2025 by
 hoyt</em></h4>
 
 </div>
@@ -1698,18 +1698,19 @@ constraints. The resulting dataset offers a 1 degree resolution.</p>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#source(&#39;https://raw.githubusercontent.com/oharac/src/master/R/common.R&#39;)</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&#39;workflow/R/common.R&#39;</span>))</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>goal     <span class="ot">&lt;-</span> <span class="st">&#39;hab_prs_hd_subtidal_soft_bottom&#39;</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>scenario <span class="ot">&lt;-</span> <span class="st">&#39;v2025&#39;</span></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>dir_goal <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">&#39;globalprep&#39;</span>, goal, scenario)</span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="do">### goal specific folders and info</span></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>dir_anx  <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_M, <span class="st">&#39;git-annex/globalprep&#39;</span>)</span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>dir_goal_anx <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_anx, goal, scenario, <span class="st">&#39;spp_risk_dists&#39;</span>)</span></code></pre></div>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="fu">library</span>(ohicore)</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#source(&#39;https://raw.githubusercontent.com/oharac/src/master/R/common.R&#39;)</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&#39;workflow/R/common.R&#39;</span>))</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>goal     <span class="ot">&lt;-</span> <span class="st">&#39;hab_prs_hd_subtidal_soft_bottom&#39;</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>scenario <span class="ot">&lt;-</span> <span class="st">&#39;v2025&#39;</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>dir_goal <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">&#39;globalprep&#39;</span>, goal, scenario)</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="do">### goal specific folders and info</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>dir_anx  <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_M, <span class="st">&#39;git-annex/globalprep&#39;</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>dir_goal_anx <span class="ot">&lt;-</span> <span class="fu">file.path</span>(dir_anx, goal, scenario, <span class="st">&#39;spp_risk_dists&#39;</span>)</span></code></pre></div>
 <div id="find-the-reference-point" class="section level3" number="3.0.1">
 <h3><span class="header-section-number">3.0.1</span> Find the reference
 point:</h3>
@@ -1892,43 +1893,154 @@ EEZ. Make sure to fill all NA values with 0.</p>
 <div id="check-with-v2017" class="section level3" number="3.0.4">
 <h3><span class="header-section-number">3.0.4</span> Check with
 v2017</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Import old data</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>hd_sb_subtidal_2017 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&#39;globalprep&#39;</span>, goal, <span class="st">&quot;v2017&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;hd_sb_subtidal.csv&quot;</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) </span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Combine data</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>hd_sb_subtidal_compare <span class="ot">&lt;-</span> total_fishing_pressure <span class="sc">%&gt;%</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">pressure_v2025 =</span> pressure_score) <span class="sc">%&gt;%</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>  <span class="fu">left_join</span>(hd_sb_subtidal_2017, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;rgn_id&quot;</span>, <span class="st">&quot;year&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">pressure_v2017 =</span> pressure_score) <span class="sc">%&gt;%</span></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>  <span class="fu">left_join</span>(rgns_eez, <span class="at">by =</span> <span class="st">&quot;rgn_id&quot;</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co"># Static plot</span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="fu">ggplot</span>(hd_sb_subtidal_compare, <span class="fu">aes</span>(pressure_v2017, pressure_v2025)) <span class="sc">+</span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co"># Interactive plot</span></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hd_sb_subtidal_compare, <span class="fu">aes</span>(<span class="at">x =</span> pressure_v2017, <span class="at">y =</span> pressure_v2025, <span class="at">group =</span> rgn_name)) <span class="sc">+</span> <span class="co">#color = factor(rgn_name)</span></span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Region ID&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Pressure v2017&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Pressure v2025&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Years: 2010-2014&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a>  <span class="co">#scale_color_viridis_d() +</span></span>
-<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&#39;none&#39;</span>)</span>
-<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a></span>
-<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="fu">ggplotly</span>(p)</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>total_fishing_pressure <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">file.path</span>(dir_goal, <span class="st">&#39;output&#39;</span>, <span class="st">&#39;hd_sb_subtidal.csv&#39;</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co"># Import old data</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>hd_sb_subtidal_2017 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&#39;globalprep&#39;</span>, goal, <span class="st">&quot;v2017&quot;</span>, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;hd_sb_subtidal.csv&quot;</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co"># Combine data</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>hd_sb_subtidal_compare <span class="ot">&lt;-</span> total_fishing_pressure <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">pressure_v2025 =</span> pressure_score) <span class="sc">%&gt;%</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>  <span class="fu">left_join</span>(hd_sb_subtidal_2017, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;rgn_id&quot;</span>, <span class="st">&quot;year&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">pressure_v2017 =</span> pressure_score) <span class="sc">%&gt;%</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>  <span class="fu">left_join</span>(rgns_eez, <span class="at">by =</span> <span class="st">&quot;rgn_id&quot;</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co"># Static plot</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="fu">ggplot</span>(hd_sb_subtidal_compare, <span class="fu">aes</span>(pressure_v2017, pressure_v2025)) <span class="sc">+</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co"># Interactive plot</span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hd_sb_subtidal_compare, <span class="fu">aes</span>(<span class="at">x =</span> pressure_v2017, <span class="at">y =</span> pressure_v2025, <span class="at">group =</span> rgn_name)) <span class="sc">+</span> <span class="co">#color = factor(rgn_name)</span></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">&quot;Region ID&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Pressure v2017&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Pressure v2025&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Years: 2010-2014&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a>  <span class="co">#scale_color_viridis_d() +</span></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&#39;none&#39;</span>)</span>
 <span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a></span>
-<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="co"># Compare 2010 and 2017 from v2025</span></span>
-<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a>total_fishing_pressure <span class="sc">%&gt;%</span></span>
-<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2010</span>,<span class="dv">2017</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">&quot;year&quot;</span>, <span class="at">values_from =</span> <span class="st">&quot;pressure_score&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="st">`</span><span class="at">2010</span><span class="st">`</span>, <span class="st">`</span><span class="at">2017</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year: 2010&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Year: 2017&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="fu">ggplotly</span>(p)</span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a><span class="co"># Compare 2010 and 2017 from v2025</span></span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a>total_fishing_pressure <span class="sc">%&gt;%</span></span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2010</span>,<span class="dv">2017</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">&quot;year&quot;</span>, <span class="at">values_from =</span> <span class="st">&quot;pressure_score&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="st">`</span><span class="at">2010</span><span class="st">`</span>, <span class="st">`</span><span class="at">2017</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year: 2010&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Year: 2017&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+</div>
+<div id="calculate-health-and-pressure-scores" class="section level3" number="3.0.5">
+<h3><span class="header-section-number">3.0.5</span> Calculate health
+and pressure scores</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>total_fishing_health <span class="ot">&lt;-</span> total_fishing_pressure <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">habitat =</span> <span class="st">&quot;soft_bottom&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">health =</span> (<span class="dv">1</span> <span class="sc">-</span> pressure_score)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, year, habitat, health)</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co"># Save output layer</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="fu">write_csv</span>(total_fishing_health, <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;output&#39;</span>, <span class="st">&#39;habitat_health_softbottom.csv&#39;</span>))</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>health_pressure <span class="ot">&lt;-</span> total_fishing_pressure <span class="sc">%&gt;%</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>  <span class="fu">left_join</span>(total_fishing_health, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;rgn_id&quot;</span>, <span class="st">&quot;year&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">pressure =</span> pressure_score) <span class="sc">%&gt;%</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year))</span></code></pre></div>
+</div>
+<div id="calculate-and-save-trend" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Calculate and save
+trend</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="do">## Get habitat trends</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>stop_year <span class="ot">&lt;-</span> <span class="fu">max</span>(health_pressure<span class="sc">$</span>year)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>trend <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co"># Run trend calculation on last 5 years of data</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="cf">for</span> (status_year <span class="cf">in</span> (stop_year<span class="dv">-3</span>)<span class="sc">:</span>stop_year){ </span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>  trend_years <span class="ot">&lt;-</span> status_year<span class="sc">:</span>(status_year <span class="sc">-</span> <span class="dv">4</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>  first_trend_year <span class="ot">&lt;-</span> <span class="fu">min</span>(trend_years)</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>  </span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>  trend_new <span class="ot">&lt;-</span> health_pressure <span class="sc">%&gt;%</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>    <span class="co"># subset health &amp; pressure scores to just trend years</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">%in%</span> trend_years) <span class="sc">%&gt;%</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>    <span class="fu">group_by</span>(rgn_id) <span class="sc">%&gt;%</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>    <span class="co"># create linear model of habitat health over 5 years</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>    <span class="fu">do</span>(<span class="at">mdl =</span> <span class="fu">lm</span>(health <span class="sc">~</span> year, <span class="at">data =</span> .),</span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>       <span class="co"># starting point for the health trend is derived from the health values within the first year of the trend, this serves as a kind of reference point</span></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>       <span class="at">adjust_trend =</span> .<span class="sc">$</span>health[.<span class="sc">$</span>year <span class="sc">==</span> first_trend_year]) <span class="sc">%&gt;%</span></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">rgn_id =</span> rgn_id,</span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>              <span class="co"># create trend by dividing the year coefficient by the health in the first year of the trend, then multiplying that slope by the number of years in the trend</span></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>              <span class="at">trend =</span> <span class="fu">round</span>(<span class="fu">coef</span>(mdl)[<span class="st">&#39;year&#39;</span>]<span class="sc">/</span>adjust_trend <span class="sc">*</span> <span class="dv">5</span>, <span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>    <span class="co"># cap the trend at 1 and -1</span></span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">trend =</span> <span class="fu">ifelse</span>(trend <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="dv">1</span>, trend)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">trend =</span> <span class="fu">ifelse</span>(trend <span class="sc">&lt;</span> (<span class="sc">-</span><span class="dv">1</span>), (<span class="sc">-</span><span class="dv">1</span>), trend))</span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>  </span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>  trend_test <span class="ot">&lt;-</span> health_pressure <span class="sc">%&gt;%</span></span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a>    <span class="fu">do</span>(<span class="at">adjust_trend =</span> .<span class="sc">$</span>health[.<span class="sc">$</span>year <span class="sc">==</span> first_trend_year])</span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>  </span>
+<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a>  test <span class="ot">&lt;-</span> health_pressure <span class="sc">%&gt;%</span></span>
+<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">%in%</span> trend_years)</span>
+<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a>  </span>
+<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a>  trend_new <span class="ot">&lt;-</span> trend_new <span class="sc">%&gt;%</span></span>
+<span id="cb9-34"><a href="#cb9-34" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">habitat =</span> <span class="st">&quot;soft_bottom&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-35"><a href="#cb9-35" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">year =</span> status_year) <span class="sc">%&gt;%</span></span>
+<span id="cb9-36"><a href="#cb9-36" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, year, habitat, trend)</span>
+<span id="cb9-37"><a href="#cb9-37" tabindex="-1"></a>  </span>
+<span id="cb9-38"><a href="#cb9-38" tabindex="-1"></a>  trend <span class="ot">&lt;-</span> <span class="fu">rbind</span>(trend, trend_new)</span>
+<span id="cb9-39"><a href="#cb9-39" tabindex="-1"></a>}</span>
+<span id="cb9-40"><a href="#cb9-40" tabindex="-1"></a>  </span>
+<span id="cb9-41"><a href="#cb9-41" tabindex="-1"></a><span class="fu">write.csv</span>(trend, <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;output&#39;</span>, <span class="st">&#39;habitat_trend_softbottom.csv&#39;</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div id="compare-trend-values-to-2017-assessment" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Compare trend
+values to 2017 assessment</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># trend</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>old_trend_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/hab_prs_hd_subtidal_soft_bottom/v2017/output/habitat_trend_softbottom.csv&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2014</span>) <span class="sc">%&gt;%</span> <span class="co"># plot the last year that 2025 and 2017 assessment years have in common: 2014</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, <span class="at">old_trend =</span> trend)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>compare_trend <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/hab_prs_hd_subtidal_soft_bottom/v2025/output/habitat_trend_softbottom.csv&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2014</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, <span class="at">new_trend =</span> trend) <span class="sc">%&gt;%</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>  <span class="fu">left_join</span>(old_trend_data)</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="co"># check range of health scores:</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="fu">plot</span>(new_trend <span class="sc">~</span> old_trend, <span class="at">data =</span> compare_trend, </span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Soft Bottom Habitat Trend 2014:</span><span class="sc">\n</span><span class="st">Comparison between 2017 Assessment and 2025 Assessment&quot;</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;2017 Assessment&quot;</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;2025 Assessment&quot;</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="gapfill-record-keeping" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Gapfill record
+keeping</h2>
+<p>There was no gapfilling for these data, so we create gapfill files
+with values of 0. Every data layer has to have a corresponding gapfill
+file. If there is no gapfilling the gapfill column is filled in with 0
+as done below.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># health</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>hab_health_sb_gf <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/hab_prs_hd_subtidal_soft_bottom/v2025/output/habitat_health_softbottom.csv&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gapfilled =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, year, gapfilled)</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="fu">write.csv</span>(hab_health_sb_gf, <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;output&#39;</span>, <span class="st">&#39;habitat_health_softbottom_gf.csv&#39;</span>), <span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co"># trend</span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>hab_trend_sb_gf <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/hab_prs_hd_subtidal_soft_bottom/v2025/output/habitat_trend_softbottom.csv&quot;</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gapfilled =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, year, gapfilled)</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="fu">write.csv</span>(hab_health_sb_gf, <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;output&#39;</span>, <span class="st">&#39;habitat_trend_softbottom_gf.csv&#39;</span>), <span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co"># pressure</span></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>hd_sb_subtidal_gf <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep/hab_prs_hd_subtidal_soft_bottom/v2025/output/hd_sb_subtidal.csv&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gapfilled =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(rgn_id, year, gapfilled)</span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="fu">write.csv</span>(hab_health_sb_gf, <span class="fu">file.path</span>(dir_goal, <span class="st">&#39;output&#39;</span>, <span class="st">&#39;hd_sb_subtidal_gf.csv&#39;</span>), <span class="at">row.names=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 </div>
 </div>
 

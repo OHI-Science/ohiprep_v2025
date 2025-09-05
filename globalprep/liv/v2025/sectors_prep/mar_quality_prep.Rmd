@@ -1,0 +1,111 @@
+---
+title: "OHI `r format(Sys.Date(), '%Y')` - Mariculture Livelihoods Quality Data Preparation"
+author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
+output: 
+  html_document:
+    code_folding: show
+    toc: true
+    toc_depth: 1
+    toc_float: yes
+    number_sections: true
+    theme: cerulean
+    highlight: haddock
+    includes: 
+      in_header: '../../../../workflow/templates/ohi_hdr.html'
+  pdf_document:
+    toc: true
+editor_options: 
+  chunk_output_type: console
+---
+
+# MAR Livelihoods: Quality of Mariculture Jobs per Country/Region per Year
+
+## Overview
+
+**Data:**
+Need to find data. A placeholder of 1 has been added. 
+
+### Setup
+
+```{r setup}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, eval=FALSE)
+
+# load packages
+if (!require(librarian)){
+  install.packages("librarian")
+  library(librarian)
+}
+librarian::shelf(
+  here,
+  ohicore,
+  janitor,
+  terra,
+  readxl,
+  RColorBrewer,
+  foreach,
+  doParallel, # for using multiple cores
+  tidyverse, 
+  httr,
+  plotly,
+  zoo, # for gapfilling
+  pdftools
+)
+
+
+# source 
+source(here("workflow/R/common.R"))
+
+source(here('workflow/R/fao_fxn.R')) # function for cleaning old version of FAO data 
+
+source(here('workflow/R/fao_online_portal_clean.R'))
+
+# set year and file path info
+current_year <- 2025 # Update this!!
+
+version_year <- paste0("v",current_year)
+data_dir_version_year <- paste0("d", current_year)
+data_path <- here("globalprep", "liv", version_year)
+
+# Raw data directory (on Mazu)
+raw_data_dir <- here::here(dir_M, "git-annex", "globalprep", "_raw_data")
+
+# world bank raw data directory
+wb_dir <- here(raw_data_dir, "WorldBank", data_dir_version_year)
+
+# ILO raw data directory
+ilo_dir <- here(raw_data_dir, "ILOSTAT", data_dir_version_year)
+
+# FAO raw data directory
+fao_dir <- here(raw_data_dir, "FAO", data_dir_version_year)
+
+# OECD raw data directory
+oecd_dir <- here(raw_data_dir, "OECD", data_dir_version_year)
+
+# FAO capture raw data directory
+fao_capture_dir <- here(raw_data_dir, "FAO_capture", data_dir_version_year)
+
+# Ex-vessel raw data directory
+ex_vess_dir <- here(raw_data_dir, "ex-vessel-price-database-updated")
+
+# OECD and FAO joint collection raw data directory
+oecd_fao_dir <- here(raw_data_dir, "OECD_FAO_joint_collection", data_dir_version_year)
+
+# output data dir for intermediate data products
+int_dir <- here(data_path, "int")
+
+# output data directory for final data products
+output_dir <- here::here(data_path, "output")
+```
+
+Create a placeholder df (quality = 1) until data can be added.
+
+```{r}
+mar_quality <- read_csv(file.path(output_dir, "fis_quality.csv"), show_col_types = FALSE)
+
+# Placeholder df (modify fis quality)
+mar_quality <- mar_quality %>%
+  mutate(quality = 1)
+
+write_csv(mar_quality, file.path(output_dir, "mar_quality.csv"))
+```
+

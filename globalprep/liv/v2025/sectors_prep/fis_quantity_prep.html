@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Fri Aug 29 18:51:52 2025 by oyler" />
+<meta name="author" content="Compiled on Thu Sep 4 17:12:02 2025 by hoyt" />
 
 
 <title>OHI 2025 - FIS Livelihoods Job Preparation</title>
@@ -1647,8 +1647,8 @@ border-radius: 0px;
 
 <h1 class="title toc-ignore">OHI 2025 - FIS Livelihoods Job
 Preparation</h1>
-<h4 class="author"><em>Compiled on Fri Aug 29 18:51:52 2025 by
-oyler</em></h4>
+<h4 class="author"><em>Compiled on Thu Sep 4 17:12:02 2025 by
+hoyt</em></h4>
 
 </div>
 
@@ -1764,7 +1764,10 @@ needed</p>
 <span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a>ex_vess_dir <span class="ot">&lt;-</span> <span class="fu">here</span>(raw_data_dir, <span class="st">&quot;ex-vessel-price-database-updated&quot;</span>)</span>
 <span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a></span>
 <span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a><span class="co"># output data dir for intermediate data products</span></span>
-<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a>int_dir <span class="ot">&lt;-</span> <span class="fu">here</span>(data_path, <span class="st">&quot;int&quot;</span>)</span></code></pre></div>
+<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a>int_dir <span class="ot">&lt;-</span> <span class="fu">here</span>(data_path, <span class="st">&quot;int&quot;</span>)</span>
+<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a><span class="co"># output data directory for final data products</span></span>
+<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(data_path, <span class="st">&quot;output&quot;</span>)</span></code></pre></div>
 <p>Create country code –&gt; iso3 function</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">library</span>(countrycode)</span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
@@ -2192,7 +2195,7 @@ sector (fis)</p>
 <span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a></span>
 <span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(jobs_final<span class="sc">$</span>rgn_name)) <span class="co">#91 countries!</span></span>
 <span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a></span>
-<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a><span class="fu">write_csv</span>(jobs_final, <span class="fu">file.path</span>(<span class="st">&quot;/home/hoyt/OHI/ohiprep_v2025/globalprep/liv/v2025/int&quot;</span>, <span class="st">&quot;liv_fis_quantity.csv&quot;</span>))</span></code></pre></div>
+<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a><span class="fu">write_csv</span>(jobs_final, <span class="fu">file.path</span>(output_dir, <span class="st">&quot;fis_quantity.csv&quot;</span>))</span></code></pre></div>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># preliminary plot</span></span>
 <span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>prelim_plot <span class="ot">&lt;-</span> plotly<span class="sc">::</span><span class="fu">plot_ly</span>(jobs_final, <span class="at">x =</span> <span class="sc">~</span>year, <span class="at">y =</span> <span class="sc">~</span>number_jobs, <span class="at">color =</span> <span class="sc">~</span>rgn_name, <span class="at">type =</span> <span class="st">&quot;scatter&quot;</span>, <span class="at">mode =</span> <span class="st">&quot;lines&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">&quot;All Regions: Marine Fishing Employment&quot;</span>, </span>
