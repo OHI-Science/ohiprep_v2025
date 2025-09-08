@@ -311,6 +311,13 @@ mean_raw_catch <- mean_catch %>%
 
 readr::write_csv(mean_raw_catch, here(current_np_dir, "int", "raw_mean_catch_FOFM.csv"))
 
+## add in 2020 - 2023 (using the last value for year 2019)
+copies_2020_2023 <- purrr::map_dfr(2020:2023, ~ filter(catch, year==2019) %>% mutate(year = .x))
+
+# If you want 2019 + the copies together:
+catch <- bind_rows(catch, copies_2020_2023) %>%
+  arrange(rgn_id, stock_id, year)
+
 ```
 
 
@@ -367,6 +374,7 @@ b$stock_score = ifelse(!is.na(b$stock_score),
 # Merge B/Bmsy and catch data
 
 ```{r}
+
 data_fis <- catch %>%
   dplyr::left_join(b, by = c('stock_id', 'year', 'rgn_id')) 
 
@@ -406,7 +414,7 @@ data_fis_gf <- data_fis_gf %>%
 ## get tonnes per region for weighting
 tonnes <- data_fis_gf %>%
   group_by(year, rgn_id) %>%
-  summarize(tonnes = sum(tonnes, na.rm=TRUE))
+  summarize(tonnes = sum(tonnes, na.rm=TRUE)) %>%
   mutate(product = "fish_oil")
 write_csv(tonnes, here(current_np_dir, "int", "tonnes_fofm.csv"))
 ```
