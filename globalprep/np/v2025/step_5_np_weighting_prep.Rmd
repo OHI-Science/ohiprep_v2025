@@ -125,7 +125,7 @@ orns <- total_usd %>%
   filter(product == "ornamentals") %>%
   filter(year %in% 2010:2023)
 
-write_csv(fish, here("globalprep/np/v2025/output/np_fish_weights.csv"))
+write_csv(fish, here("globalprep/np/v2025/output/np_fofm_weights.csv"))
 write_csv(sw, here("globalprep/np/v2025/output/np_seaweed_weights.csv"))
 write_csv(orns, here("globalprep/np/v2025/output/np_ornamentals_weights.csv"))
 
