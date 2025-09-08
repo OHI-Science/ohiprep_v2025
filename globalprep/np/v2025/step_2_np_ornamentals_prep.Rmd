@@ -22,15 +22,6 @@ editor_options:
 
 This analysis calculates the score for ornamentals per region based on FAO commodities data. This calculation process includes creating a sustainability layer based off of risk and exposure for ornamental fishing.
 
-# Updates from previous assessment
-
-### v2025
-- New year of FAO data(2023)
-
-### v2024
-*   Complete overhaul of methodology from previous years. Original data prep file: `STEP1a_np_ornamental_prep.Rmd`
-*   New year of FAO data (2022)
-
 
 ------------------------------------------------------------------------
 
@@ -61,7 +52,9 @@ $$S_c = 1 - average(E_c + R_c)$$
 
 where $E_c$ is the exposure term and $R_c$ is the risk term for ornamentals.
 
-The exposure term, $E_c$, is the intensity of harvest for ornamental fish calculated as tonnes of harvest per km2 of coral and rocky reef. This value is scaled by the global 95th quantile of the previous 10 yeas. We scale the harvest because the distribution of values is highly skewed; thus, because we do not know the true threshold of sustainable harvest, nearly all values would be considered highly sustainable otherwise. To estimate rocky reef extent area (km2) we used data from Halpern et al. (2008) ([Halpern et al. 2008](https://ohi-science.org/ohi-methods/goals/goal-models-data.html#ref-halpern2008global)), which assumes rocky reef habitat exists in all cells within 1 km of shore. Coral extent area (km2) are from UNEP-WCMC et al. (2018) ([UNEP-WCMC et al. 2018](https://ohi-science.org/ohi-methods/goals/goal-models-data.html#ref-unep-wcmc2018global)).
+The exposure term, $E_c$, is the log-transformed intensity of harvest for ornamental fish calculated as tonnes of harvest per km2 of coral and rocky reef, relative to the global maximum. We log-transformed the harvest intensity scores because the distribution of values was highly skewed; because we do not know the true threshold of sustainable harvest, nearly all values would be considered highly sustainable without the log transformation. To estimate rocky reef extent area (km2) we used data from Halpern et al. (2008) ([Halpern et al. 2008](https://ohi-science.org/ohi-methods/goals/goal-models-data.html#ref-halpern2008global)), which assumes rocky reef habitat exists in all cells within 1 km of shore. Coral extent area (km2) are from UNEP-WCMC et al. (2018) ([UNEP-WCMC et al. 2018](https://ohi-science.org/ohi-methods/goals/goal-models-data.html#ref-unep-wcmc2018global)).
+
+
 
 The risk term, $R_c$, is based on whether ornamental fishing has unsustainable harvest practices. In specific, we used the intensity of cyanide and dynamite fishing as a proxy. Risk for ornamental fish was set based on assessments of cyanide or dynamite fishing by [Reefs at Risk Revisited](www.wri.org/publication/reefs-at-risk-revisited) under the assumption that most ornamental fishes are harvested from coral reefs.
 
@@ -149,26 +142,6 @@ table(np_ornamentals_base$product)
 # 4142 -- v2025
 
 # ---- tonnes only ----
-# select relevant columns
-np_harvest_orn <- np_ornamentals_base %>%
-  dplyr::select(rgn_id, rgn_name, year, product, tonnes) %>% 
-  # hard-coded year cutoff point to ensure just enough years of data for rolling average calculations
-  dplyr::filter(year >= 2004) %>% 
-  arrange(rgn_id)
-
-# write out tonnes subset to int
-readr::write_csv(np_harvest_orn, here(current_np_dir, "int", "np_harvest_ornamentals_tonnes.csv"))
-
-# ---- usd and tonnes ----
-# select relevant columns (including usd this time)
-np_harvest_orn_full <- np_ornamentals_base %>%
-  dplyr::select(rgn_id, rgn_name, year, product, tonnes, usd) %>% 
-  # hard-coded year cutoff point to ensure just enough years of data for rolling average calculations
-  dplyr::filter(year >= 2004) %>% 
-  arrange(rgn_id)
-
-# write out tonnes subset to int
-readr::write_csv(np_harvest_orn_full, here(current_np_dir, "int", "np_harvest_ornamentals_tonnes_usd.csv"))
 
 ```
 
@@ -176,9 +149,8 @@ Gapfill risk and exposure, everything.
 
 ## Calculate Exposure
 
-Calculate ornamentals exposure based on habitats. 
-exposure: get tonnes / area, find global 95th quantile from past 10 years, 
-use 95th quantile value to rescale exposure from 0-1
+Calculate ornamentals exposure based on habitats
+
 
 Returns the first input data frame with a new column for exposure:
 [`rgn_id` `year` `product` `exposure`]
@@ -279,78 +251,6 @@ ggplot(data = np_exposure_new) +
 
 ```
 
-# Gapfilling
-
-**UPDATE**: The 2025 data has no NAs, so this process was halted. The code will be kept for future assessments in case gapfilling is needed. 
-
-The 2024 assessment only gapfilled with the global mean score. For the 2025 assessment, this method will be slightly improved to also include gapfilling by region first, before gapfilling by global mean. 
-
-1. Group by region and fill with the mean exposure score
-2. Group by georegion and fill with the mean exposure score
-3. Fill with the global mean exposure score
-
-```{r save-exposure, eval=FALSE}
-# ======== Save intermediate data products ==========
-# Create gapfilling record keeping columns to use later
-np_exp_gf <- np_exposure_new %>%
-  dplyr::mutate(gapfilled = ifelse(is.na(exposure), 1, 0)) 
-  
-# Add georegion column for gapfilling
-np_exposure_rgn <- np_exp_gf %>%
-  add_georegion_id() %>%
-  dplyr::select(-level)
-
-# add exposure for countries with (habitat extent == NA)
-np_exp_orn <- np_exposure_rgn %>% 
-  # Gapfill by region
-  dplyr::group_by(rgn_id, product) %>% 
-  dplyr::mutate(rgn_exp = mean(exposure, na.rm = TRUE)) %>% 
-  dplyr::mutate(exposure = ifelse(is.na(exposure), rgn_exp, exposure)) %>% 
-  mutate(method = ifelse(gapfilled == 1 & exposure == rgn_exp, "region_avg", NA)) %>%
-  dplyr::ungroup() %>% 
-  # Gapfill by georegion
-  dplyr::group_by(georgn_id, product) %>% 
-  dplyr::mutate(georgn_exp = mean(exposure, na.rm = TRUE)) %>% 
-  dplyr::mutate(exposure = ifelse(is.na(exposure), georgn_exp, exposure)) %>% 
-  mutate(method = ifelse(gapfilled == 1 & exposure == georgn_exp, "georegion_avg", NA)) %>%
-  dplyr::ungroup() %>% 
-  # Gapfill with global mean
-  dplyr::group_by(product) %>% 
-  dplyr::mutate(mean_exp = mean(exposure, na.rm = TRUE)) %>%
-  dplyr::mutate(exposure = ifelse(is.na(exposure), mean_exp, exposure)) %>%
-  mutate(method = ifelse(gapfilled == 1 & exposure == mean_exp, "global_avg", NA)) %>%
-  dplyr::ungroup() %>%
-  # coerce data type
-  dplyr::mutate(product = as.character(product))
-
-np_exp_orn_final <- np_exp_orn %>% 
-  # select relevant columns
-  dplyr::select(rgn_id, year, product, exposure)
-
-# save ornamentals exposure to int 
-readr::write_csv(np_exp_orn_final, here(current_np_dir,
-                                  "int",
-                                  "np_exposure_ornamentals.csv"))
-
-# Gapfilling record keeping
-np_exp_gf <- np_exp_orn %>%
-  dplyr::select(rgn_id, product, year, gapfilled, method)
-
-# write out to int folder
-readr::write_csv(np_exp_gf, here(current_np_dir, 
-                                 "int",
-                                 "np_exposure_ornamentals_gf.csv"))
-```
-
-```{r}
-# datacheck:
-library(RColorBrewer)
-np_orn_exposure_plot <- ggplot(data = np_exp_orn, aes(x = year, y = exposure)) +
-  geom_line(aes(color = rgn_name)) +
-  theme_bw()
-
-plotly::ggplotly(np_orn_exposure_plot)
-```
 
 
 ## Calculate Risk
@@ -439,6 +339,14 @@ exposure <- readr::read_csv(here(current_np_dir, "int", "np_exposure.csv"))
 # read in risk
 risk <- readr::read_csv(here(current_np_dir, "int", "np_risk_ornamentals.csv"))
 
+exposure %>% 
+  filter(rgn_id == 78) %>% 
+  view()
+
+risk %>% 
+  filter(rgn_id == 78) %>% 
+  view()
+
 # ---- calculate sustainability ----
 
 # join dataframes
@@ -452,6 +360,10 @@ orn_sust <- orn_exposure_risk %>%
   mutate(sustainability = 1 - mean(c(exposure, risk), na.rm = TRUE)) %>% 
   ungroup() %>%
   select(rgn_id, year, exposure, risk, sustainability)
+
+orn_sust %>% 
+  filter(rgn_id == 78 & year >= 2012) 
+
 
 ```
 

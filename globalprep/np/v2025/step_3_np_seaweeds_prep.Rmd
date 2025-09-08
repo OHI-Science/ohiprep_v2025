@@ -144,6 +144,9 @@ mar_raw <- readr::read_csv(here(
   dir_M, "git-annex", "globalprep", "_raw_data", "FAO_mariculture", data_dir_year,
   paste0("FAO_GlobalAquacultureProduction_Quantity_1950_",
          data_years[2], ".csv")))
+
+head(mar_raw) 
+length(table(mar_raw$`Country Name En`))
 ```
 
 

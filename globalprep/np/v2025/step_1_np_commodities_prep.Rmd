@@ -26,6 +26,7 @@ This analysis converts FAO commodities data into data layers used to calculate O
 
 ### v2025
 - New year of FAO data(2023)
+- 
 
 ------------------------------------------------------------------------
 
@@ -220,6 +221,11 @@ dir_fao_data <- here::here(dir_M, "git-annex", "globalprep", "_raw_data", "FAO_c
   ## output to .csv - should create two csvs (tonnes.csv and usd.csv)
   harvest_out <- here::here(current_np_dir, "int", sprintf("%s.csv", units))
   readr::write_csv(m_rgn, harvest_out, na = '')
+ }
+  
+tonnes <- read_csv(here("globalprep/np/v2025/int/tonnes.csv"))
+usd <- read_csv(here("globalprep/np/v2025/int/usd.csv"))
+filter(usd, rgn_id==135 & year == 2020:2023) %>% data.frame()
 ```
 
 ## Wrangle Data
@@ -393,116 +399,5 @@ usd_per_tonne <- h_prod %>%
 
 # save data to int dir
 readr::write_csv(usd_per_tonne, here(current_np_dir, "int", "np_usd_per_tonne.csv"))
-
-```
-
-## Data check
-
-```{r}
-usd_per_tonne <- read_csv(here(current_np_dir, "int", "np_usd_per_tonne.csv"))
-usd_per_tonne_old <- read_csv(here("globalprep", "np", "v2024", "int", "np_usd_per_tonne.csv"))
-
-usd_comb <- usd_per_tonne %>% 
-  rename(new_usd = usd, new_tonnes = tonnes, new_usd_per_tonne = usd_per_tonne) %>% 
-  left_join(usd_per_tonne_old, by = join_by(rgn_id, rgn_name, product, year)) %>% 
-  mutate(diff_per = new_usd_per_tonne - usd_per_tonne,
-         diff_tonnes = new_tonnes - tonnes,
-         diff_usd = new_usd - usd) 
-
-# Plot sustainable tonnes
-comp_plot_1 <- ggplot() + 
-  geom_jitter(data = usd_comb, aes(x = usd_per_tonne, y = new_usd_per_tonne, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
-  # labs(x = paste("Previous Value", previous_data_year),
-  #      y = paste("Current Value", latest_data_year),
-  #      title = paste0("Sustainable tonnes: ", scen_year_number, " Assessment (",latest_data_year, " data) vs. ", prev_scen_year, " Assessment (",previous_data_year, " data)", " All Countries")) +
-  geom_abline(slope = 1, intercept = 0, col = "red") +
-  theme_bw(); ggplotly(comp_plot_1)
-
-```
-
-
-## Datacheck
-
-Very rough/rudimentary plots to quickly visualize data
-
-```{r}
-library(ggplot2)
-library(plotly)
-library(RColorBrewer)
-library(scales)
-
-options(scipen = 99)
-
-# ungroup to prep for plotting
-usd_tonnes_df <- h_prod %>% ungroup() 
-
-# ======== USD Plot ========
-# create ggplot object
-usd_plot <- ggplot(data = usd_tonnes_df, aes(x = year, y = usd,
-                                      fill = rgn_name, color = rgn_name)) +
-  geom_line() +
-  facet_wrap(~product, nrow = 3, scales = "free_y") +
-  scale_y_continuous(labels = scales::dollar_format(scale = .001,
-                                                    suffix = "M"
-                                                    )) +
-  theme_bw() +
-  labs(
-    title = "USD by Product (per Region per Year)",
-    y = "USD",
-    x = "Year"
-  ) +
-  theme(legend.position = "none",
-        axis.title.y = element_text(margin = margin(r = 0.8, unit = "cm")),
-        axis.title.x = element_text(margin = margin(t = 0.5, unit = "cm")),
-        plot.margin = unit(c(1, 1, 1, 1.2), "cm"),
-        strip.background = element_rect(fill = "white"))
-        # panel.spacing = unit(2, "lines"))
-
-# make interactive with ggplotly
-plotly::ggplotly(usd_plot)
-
-
-# ======== Tonnes Plot ========
-# create ggplot object
-tonnes_plot <- ggplot(data = usd_tonnes_df, aes(x = year, y = tonnes,
-                                      fill = rgn_name, color = rgn_name)) +
-  geom_line() +
-  facet_wrap(~product, nrow = 3, scales = "free") +
-  theme_bw() +
-  labs(
-    title = "Tonnes by Product (per Region per Year)",
-    y = "Tonnes",
-    x = "Year"
-  ) +
-  theme(legend.position = "none",
-        axis.title.y = element_text(margin = margin(r = 0.8, unit = "cm")),
-        axis.title.x = element_text(margin = margin(t = 0.5, unit = "cm")),
-        plot.margin = unit(c(1, 1, 1, 1.2), "cm"),
-        strip.background = element_rect(fill = "white"))
-
-# make interactive with ggplotly
-plotly::ggplotly(tonnes_plot)
-
-
-# ======== USD per Tonne Plot ========
-# create ggplot object
-usd_per_tonnes_plot <- ggplot(data = usd_per_tonne, aes(x = year, y = usd_per_tonne,
-                                      fill = rgn_name, color = rgn_name)) +
-  geom_line() +
-  facet_wrap(~product, nrow = 3, scales = "free") +
-  theme_bw() +
-  labs(
-    title = "USD per Tonne Plot by product (per Region per Year)",
-    y = "USD / Tonne",
-    x = "Year"
-  ) +
-  theme(legend.position = "none",
-        axis.title.y = element_text(margin = margin(r = 1, unit = "cm")),
-        axis.title.x = element_text(margin = margin(t = 0.5, unit = "cm")),
-        plot.margin = unit(c(1, 1, 1.5, 1.5), "cm"),
-        strip.background = element_rect(fill = "white"))
-
-# make interactive with ggplotly
-plotly::ggplotly(usd_per_tonnes_plot)
 
 ```
