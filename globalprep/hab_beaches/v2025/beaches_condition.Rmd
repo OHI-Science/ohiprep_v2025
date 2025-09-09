@@ -1,5 +1,5 @@
 ---
-title: 'OHI 2021: Beaches Condition'
+title: 'OHI 2025: Beaches Condition'
 author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
 output: 
   html_document:
@@ -17,19 +17,19 @@ pdf_document:
 editor_options: 
   chunk_output_type: console
 ---
+
 # Beach Health: Summary
 
-This document serves to calculate the condition of sandy beaches around the globe, by applying predicted rates of degredation from this [article](https://www.nature.com/articles/s41598-018-24630-6). This 2018 article review geospatial data from 1984 to 2016, and determined that 24% of all sandy coastline was eroding at a rate of 0.5m/yr. This is the second document that should be calculated in the hab_beaches folder. 
+This document serves to calculate the condition of sandy beaches around the globe, by applying predicted rates of degredation from this [article](https://www.nature.com/articles/s41598-018-24630-6). This 2018 article review geospatial data from 1984 to 2016, and determined that 24% of all sandy coastline was eroding at a rate of 0.5m/yr. This is the second document that should be calculated in the hab_beaches folder.
 
 This document applies a simple equation to the beaches_extent data, that calculates the predicted rate of loss, and applies it in relation to how many years have passed since the time of assessment (from 2016 to now) assuming a linear relationship and constant rate of change. If/when further information or updated information is compiled on coastal erosion, it should be applied here and the methods altered to reflect that. Condition is then scaled from 0-1.
 
-## Data Source 
+## Data Source
 
 **Downloaded**: 09/01/2025
 
-**Description**:  
-Global Distribution of Beaches
-https://www.nature.com/articles/s41598-018-24630-6. 
+**Description**:\
+Global Distribution of Beaches <https://www.nature.com/articles/s41598-018-24630-6>.
 
 **Time range**: 2010-2020
 
@@ -50,7 +50,6 @@ source(here::here('workflow', 'R', 'common.R'))
 goal <- 'globalprep/hab_beaches/v2025'
 dir_git  <- file.path('~/github/ohiprep_v2025', goal)
 ```
-
 
 ```{r}
 # Load in the extent data 
@@ -73,4 +72,3 @@ beaches_health <- beaches_health %>%
 # Save the health data as a csv file
 write.csv(beaches_health, here(goal, "data", "hab_beaches_health.csv"), row.names = FALSE)
 ```
-

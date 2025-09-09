@@ -28,7 +28,7 @@ This script takes the SAUP 2022 catch data and creates 1 data layer:
 
 ## Updates from previous assessment
 
-The SAUP data was not updated in v2023 or v2024, so this script uses the 2019 SAUP data for catch. Raw and intermediate data stored on Mazu is pulled from v2022.
+The SAUP data was not updated in v2023, v2024, or v2025, so this script uses the 2019 SAUP data for catch. Raw and intermediate data stored on Mazu is pulled from v2022.
 
 ***
 
@@ -53,7 +53,7 @@ The SAUP data was not updated in v2023 or v2024, so this script uses the 2019 SA
 Note: the same data was used to prepare fisheries subgoal scores. We will be using the prepped annual catch csv file prepared in the mazu fis/ folder. This means that fis will need to be run before this. 
 
 
-``` {r setup, message = FALSE, warning = FALSE}
+``` {r setup, message = FALSE, warning = FALSE, eval= FALSE}
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.path = 'figs/',message = FALSE, warning = FALSE, echo = TRUE, eval=FALSE)
 ```
 
@@ -163,7 +163,7 @@ unique(df$year)
 
 Mean catch data is used to weight the B/Bmsy values in the fishery subgoal.
 
-```{r mean catch, eval=F}
+```{r mean catch, eval= FALSE}
 
 file <- here::here(dir_M,'git-annex', 'globalprep', 'ao','v2025','int','ao_stock_catch_by_rgn_taxa.csv')
 

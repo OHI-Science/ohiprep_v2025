@@ -1,8 +1,21 @@
 ---
-title: "coral_extent_allen_atlas_2020"
-author: "Maddy Enda"
-date: "2025-08-12"
-output: html_document
+title: 'OHI 2025: Coral Extent'
+author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
+output: 
+  html_document:
+    code_folding: show
+    toc: true
+    toc_depth: 1
+    toc_float: yes
+    number_sections: false
+    theme: cerulean
+    highlight: haddock
+    includes: 
+      in_header: '../../../workflow/templates/ohi_hdr.html'
+pdf_document:
+  toc: true
+editor_options: 
+  chunk_output_type: console
 ---
 
 # Allen Coral Atlas
@@ -13,7 +26,7 @@ There is a separate .Rmd file in this folder that contains the code for using a 
 
 Here we will download all of the new coral reef extent data from the Allen Coral Atlas project, using Google Earth Engine. The package that we will use in R to do so is called "rgee" from the r-spatial package.
 
-```{r}
+```{r, eval= FALSE}
 # Read in packages
 library(readr)      # for read_csv()
 library(raster)
@@ -38,7 +51,7 @@ dir_aca <- file.path(file.path(dir_M, 'git-annex/globalprep/_raw_data/allen_cora
 # Load the data in from the server
 
 Depending on which option you are using, select code from below. 
-```{r}
+```{r, eval= FALSE}
 # Manually Downloaded----------------------------------------------------------------
 # Get all reefextent_.gpkg files
 aca_files <- list.files(
@@ -71,7 +84,7 @@ st_write(reef_all, file.path(dir_aca_manual, "global_reefextent.gpkg"))
 ```
 
 
-```{r}
+```{r, eval= FALSE}
 # Downloaded Via API ----------------------------------------------------------------
 ## read in polygon data
 aca_py <- st_read(file.path(dir_aca, "d2025/global_reefextent.geojson"))
@@ -79,7 +92,7 @@ aca_py <- st_read(file.path(dir_aca, "d2025/global_reefextent.geojson"))
 
 ## Prep Polygon Data for ACA
 
-```{r}
+```{r, eval= FALSE}
 ## read in polygon data
 aca_py <- st_read(file.path(dir_aca_manual, "global_reefextent.gpkg"))
 
@@ -99,7 +112,7 @@ aca_polygons <- aca_moll[st_geometry_type(aca_moll) %in% c("POLYGON", "MULTIPOLY
 
 
 ## Rasterize the polygon extent
-```{r}
+```{r, eval= FALSE}
 # Take the land rasters from OHI
 land_ocean <- raster("/home/shares/ohi/git-annex/globalprep/spatial/v2017/regions_land_ocean.tif")
 
@@ -121,7 +134,7 @@ writeRaster(fasterize_aca, filename = file.path(dir_M, "/git-annex/globalprep/ha
 ```
 
 
-```{r}
+```{r, eval= FALSE}
 # Calculate zonal stats with zones raster and new coral. Convert to km^2 and save int/output files*
 zonal_sums_combined <- raster::zonal(fasterize_aca,
                                      land_ocean,
@@ -150,7 +163,7 @@ Since the point data, converted to polygons, only adds around 132 km2, this woul
 With the ACA data containing roughly 4 times the polygons, and the area is around 391,765 km2, we will be going forward with only ACA data. However, in case there is not data for a certain country using our new data that we know has coral, we can gapfill with previous year's data.
 
 
-```{r}
+```{r, eval= FALSE}
 # Comparing with the final 2021 data to see gaps. I loaded in the habitat_extent_coral_updated.csv from v2021 to compare to the aca results thus far
 zonal_sums_km2 <- as.data.frame(zonal_sums_km2)
 habitat_extent_coral_updated <- as.data.frame(habitat_extent_coral_updated)
@@ -174,7 +187,7 @@ NOTE: I ran the check all the way at the bottom of the script to ascertain where
 
 ## Gapfilling
 
-```{r}
+```{r, eval= FALSE}
 # Join 2025 area and 2021 area by region_id and update km2 column conditionally
 filled_zonal_sums <- zonal_sums_km2 %>%
   mutate(km2 = case_when(
@@ -194,7 +207,7 @@ df_compare_check <- filled_zonal_sums %>%
 
 ## Write the final product
 
-```{r}
+```{r, eval= FALSE}
 # Write the zonal sums to the "habitat_extent_coral_updated.csv"
 write.csv(filled_zonal_sums, here("data","habitat_extent_coral_updated.csv"), row.names = FALSE)
 
@@ -250,7 +263,7 @@ sum(habitat_extent_coral_updated$km2)
 
 ## Find overlap with country EEZ boundaries
 
-```{r}
+```{r, eval= FALSE}
 # Run the ohi function to get eez data
 region_data()
 regions_shape()
@@ -268,7 +281,7 @@ eez <- eez %>%
   st_make_valid()
 ```
 
-```{r}
+```{r, eval= FALSE}
 # make sure CRS matches
 eez_transform <- st_transform(eez, st_crs(aca_polygons))
 
@@ -303,7 +316,7 @@ for (i in seq_len(nrow(eez))) {
 ```
 
 # Check a specific file
-```{r}
+```{r, eval= FALSE}
 eez_Guatemala <- st_read(file.path("/home/shares/ohi/git-annex/globalprep/hab_coral/v2025//eez_Guatemala.gpkg"))
 ```
 

@@ -46,7 +46,7 @@ Colorado USA. NASA National Snow and Ice Data Center Distributed Active
 Archive Center. <https://doi.org/10.5067/MPYG15WAA4WX> Date Accessed
 06-05-2023.
 
-**Downloaded**: July 12, 2024
+**Downloaded**: July 12, 2025
 
 **Description**: Monthly sea ice extent data.
 
@@ -213,7 +213,7 @@ CIRES, 449 UCB University of Colorado Boulder, CO USA 80309-0449 Phone:
 +1 303-492-6199 Fax: +1 303-492-2468 E-mail:
 [nsidc\@nsidc.org](mailto:nsidc@nsidc.org){.email}
 
-**Time range**: 1979-2023
+**Time range**: 1979-2024
 
 ------------------------------------------------------------------------
 
@@ -244,7 +244,7 @@ assess_year <- paste0("v", current_year) # assessment year for file paths
 previous_year <- paste0("v", last_year)  # previous assessment year
 ```
 
-```{r source common and spatial_common}
+```{r, eval= FALSE}
 source(here::here("workflow/R/common.R"))
 ```
 
@@ -412,8 +412,8 @@ write.csv(extent, "globalprep/hab_seaice/v2025/output/hab_ice_extent_eez.csv", r
 2.  Pair with region names for sanity check.
 
 
-```{r}
-## Health comparison -----------------------------------------------------------------------------
+```{r, eval= FALSE}
+## Health comparison -------------------------------------------------------------
 
 # 1. Compare between scenario years (v20__)
 
@@ -502,7 +502,7 @@ plotly::ggplotly(year_trend_change_plot, tooltip = "text")
 ```
 
 
-```{r}
+```{r, eval= FALSE}
 ## Extent comparison -----------------------------------------------------------------------------
 
 # Read in the extent from current scenario year
@@ -607,7 +607,7 @@ Testing
 hab_ice_health_eez_2025 <- hab_ice_health_eez
 ```
 
-```{r}
+```{r, eval= FALSE}
 hab_ice_health_eez_2024 <- hab_ice_health_eez
 ```
 

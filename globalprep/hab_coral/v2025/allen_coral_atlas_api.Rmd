@@ -1,15 +1,28 @@
 ---
-title: "allen_coral_atlas_api"
-author: "Maddy Enda"
-date: "2025-08-12"
-output: html_document
+title: 'OHI 2025: Allen Coral Atlas API'
+author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
+output: 
+  html_document:
+    code_folding: show
+    toc: true
+    toc_depth: 1
+    toc_float: yes
+    number_sections: false
+    theme: cerulean
+    highlight: haddock
+    includes: 
+      in_header: '../../../workflow/templates/ohi_hdr.html'
+pdf_document:
+  toc: true
+editor_options: 
+  chunk_output_type: console
 ---
 
 # How to load in the data
 This file shows how to download the reef extent data from the Allen Coral Atlas using their api.
 More information on the reef extent criteria can be found at this link: This script uses Google Earth Engine backend to access the data, which will require you to make an account at this [link](https://console.cloud.google.com/earth-engine/welcome?pli=1).
 
-```{r}
+```{r, eval= FALSE}
 # Install packages
 install.packages("remotes")
 remotes::install_github("r-spatial/rgee")
@@ -20,14 +33,14 @@ library(tidyverse)
 ```
 
 After opening the r interface with GEE with ee_Initialize(), a browser window will open asking you to sign in to your Google account and grant Earth Engine permissions. After successful authentication, you can start querying GEE.
-```{r}
+```{r, eval= FALSE}
 # Authenticate to Google Earth Engine
 ee_Initialize()
 ```
 
 Next, we will access the data. You will have to make a project in the Earth Engine Code Editor to do so, and this is how you R will get permissions to access this data.
 
-```{r}
+```{r, eval= FALSE}
 # Load the reef habitat image
 reef_extent <- ee$Image("ACA/reef_habitat/v2_0")
 

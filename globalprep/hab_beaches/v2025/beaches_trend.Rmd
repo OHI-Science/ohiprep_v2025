@@ -1,5 +1,5 @@
 ---
-title: 'OHI 2021: Beaches Extent'
+title: 'OHI 2025: Beaches Extent'
 author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
 output: 
   html_document:
@@ -18,7 +18,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r}
+```{r, eval= FALSE}
 # Load relevant libraries
 library(readr) 
 library(raster)
@@ -42,7 +42,7 @@ ohi_rasters() # call the region zones raster
 ```
 
 
-```{r}
+```{r, eval= FALSE}
 # Load in the beaches shapefiles
 # Get all reefextent_.gpkg files
 beaches_2010 <- st_read(file.path(dir_beaches, "GCL2010.shp"))
@@ -52,7 +52,7 @@ beaches_2015 <- st_read(file.path(dir_beaches, "GCL2015.shp"))
 beaches_2020 <- st_read(file.path(dir_beaches, "GCL2020.shp"))
 ```
 
-```{r}
+```{r, eval= FALSE}
 # Filter to only sandy beach observations 
 beaches_2010_sandy <- beaches_2010 %>%
   filter(class == 2) # Sandy beach has 30,520 observations in v2025
@@ -64,7 +64,7 @@ beaches_2020_sandy <- beaches_2020 %>%
   filter(class == 2) # Sandy beach has 32,725 observations in v2025
 ```
 
-```{r}
+```{r, eval= FALSE}
 # Project the data
 beaches_2010_transform <- st_transform(beaches_2010_sandy, crs= "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs")
 
@@ -73,7 +73,7 @@ beaches_2015_transform <- st_transform(beaches_2015_sandy, crs= "+proj=moll +lon
 beaches_2020_transform <- st_transform(beaches_2020_sandy, crs= "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs")
 ```
 
-```{r}
+```{r, eval= FALSE}
 # Take the land rasters from OHI
 land_ocean <- raster("/home/shares/ohi/git-annex/globalprep/spatial/v2017/regions_land_ocean.tif")
 
@@ -114,14 +114,14 @@ writeRaster(beaches_2015_raster, filename = file.path(dir_M, "git-annex/globalpr
 writeRaster(beaches_2020_raster, filename = file.path(dir_M, "git-annex/globalprep/hab_beaches/beaches_2020_raster.tif"), overwrite=TRUE)
 ```
 
-```{r}
+```{r, eval= FALSE}
 # Load in the data again as RasterLayer for ease of comparison to typical OHI methodology for zonal statistics
 beaches_2010_raster <- raster(file.path(dir_M, "git-annex/globalprep/hab_beaches/beaches_2010_raster.tif"))
 beaches_2015_raster <- raster(file.path(dir_M, "git-annex/globalprep/hab_beaches/beaches_2015_raster.tif"))
 beaches_2020_raster <- raster(file.path(dir_M, "git-annex/globalprep/hab_beaches/beaches_2020_raster.tif"))
 ```
 
-```{r}
+```{r, eval= FALSE}
 # Calculate zonal stats with zones raster and new coral. Convert to km^2 and save int/output files
 zonal_sums_2010 <- terra::zonal(beaches_2010_raster,
                                      land_ocean,
@@ -176,7 +176,7 @@ beach_sums_2020 <- zonal_2020_df %>%
 ```
 
 
-```{r}
+```{r, eval= FALSE}
 # Join the files together
 beach_sums_2010 <- beach_sums_2010 %>%
   rename(km2_2010 = km2)
@@ -196,7 +196,7 @@ beaches_total <- beach_sums_2010 %>%
 write.csv(beaches_total, here("globalprep", "hab_beaches", "v2025", "int", "beaches_total.csv"), row.names = FALSE)
 ```
 
-```{r}
+```{r, eval= FALSE}
 # Calculate the differences over time for rates of change
 beaches_total <- beaches_total %>%
   mutate(diff_10_15 = km2_2015 - km2_2010,

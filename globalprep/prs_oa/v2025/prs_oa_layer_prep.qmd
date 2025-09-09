@@ -1,5 +1,5 @@
 ---
-title: 'OHI 2024: Ocean Acidification Data Prep'
+title: 'OHI 2025: Ocean Acidification Data Prep'
 author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
 format:
   html:
@@ -59,11 +59,8 @@ The [**lower**]{.underline} the saturation level, the [**more difficult**]{.unde
 
 Aragonite saturation has only been measured at selected locations during the last few decades, but it can be calculated reliably for different times and locations based on the relationships scientists have observed among aragonite saturation, pH, dissolved carbon, water temperature, concentrations of carbon dioxide in the atmosphere, and other factors that can be measured.
 
-### Updates from 2024 assessment
-
-Copernicus Marine Service's Global Ocean Surface Carbon product was found by Melanie Frazier, which has been an excellent resource.
-This layer is a revamped version of previous years', and can be updated in future years now.
-In the future, I would finish updating the script by changing certain `raster::calc` and `raster::stack` functions (etc) to the `terra` package.
+### Notes from 2025 assessment
+There were no major changes from the 2024 methodology, aside from one new data year (2023). As was the case in v2024, Copernicus Marine Service's Global Ocean Surface Carbon product is still an excellent resource.
 
 # Data Source
 
@@ -139,7 +136,7 @@ v2025: Changed to MULTIOBS_GLO_BIO_CARBON_SURFACE_MYNRT_015_008
 
 # Setup
 
-```{r setup, message = FALSE, warning = FALSE, verbose = FALSE}
+```{r setup, message = FALSE, warning = FALSE, verbose = FALSE, eval= FALSE}
 
 #set options for all chunks in code
 knitr::opts_chunk$set(message = FALSE, warning = FALSE, eval=FALSE)
@@ -212,7 +209,7 @@ zones <- terra::rast(here::here(dir_M, "git-annex", "globalprep","spatial","v201
 
 For the next two chunks, we will be using a Python Library API (Application Programming Interface) to automate the download of the data.
 
-```{python}
+```{python, eval= FALSE}
 # first, we need to install the CMS tool using python!
 
 # these are "modules", much like packages in R
@@ -256,7 +253,7 @@ Here are the steps to download the data properly:
 1.  Login to CMS: go to their website and make your username and password. It is quick and should be usable immediately after the credentials have been made.
 2.  Go to <https://data.marine.copernicus.eu/product/MULTIOBS_GLO_BIO_CARBON_SURFACE_REP_015_008/description> This is the link to the "Global Ocean Surface Carbon" product. Ensure that you read the overview and check for any changes from the previous year (references, characteristics, etc).
 
--   v2025: Link to data layer is <https://data.marine.copernicus.eu/product/MULTIOBS_GLO_BIO_CARBON_SURFACE_MYNRT_015_008/download>
+-   v2025: The link from previous years has been depricated. Link to data layer is now: <https://data.marine.copernicus.eu/product/MULTIOBS_GLO_BIO_CARBON_SURFACE_MYNRT_015_008/download>
 
 3.  Click the "Download data" button. FYI: the button itself does not have words on it, it is just an arrow pointing downwards. It is in the upper right hand corner of the page, next to the star and map icons.
 4.  This will bring you to their graphical tool download page. For the [**Variables**]{.underline}, "Clear all" and select only "Aragonite saturation state in sea water: *omega_ar \[-\]*". Scroll to the bottom of the page, and under **Date Range**, specify 2010-01-01 at a time of 00:00:00 to your current year, 20xx-12-01 at a time of 00:00:00, to ensure you are obtaining the full year.
@@ -264,7 +261,7 @@ Here are the steps to download the data properly:
 
 [![](python_api_code_ex.png){fig-align="center"}](https://data.marine.copernicus.eu/product/MULTIOBS_GLO_BIO_CARBON_SURFACE_REP_015_008/download)
 
-```{python}
+```{python, eval= FALSE}
 # This layer lags by 2 years, since we need a full year of data. 
 
 # v2024: username <- slecuona; password <- OceanHealth2024
@@ -316,7 +313,7 @@ The mean of the historical data (1985 - 2000) from CMS will be used.
 The download process is the same as for the new yearly data, however it has a different **Date Range** (1985-01-01T00:00:00 - 2000-12-01T00:00:00).
 Each year, the only thing that should change is the "current_year" object, unless there has been a reevaluation and the dates used for the historical reference point is changed.
 
-```{python}
+```{python, eval= FALSE}
 import os
 import copernicusmarine
 
@@ -356,14 +353,14 @@ print(f"Data downloaded to: {os.path.join(cms_dir, 'historical_1985_2000_aragoni
 The rest of the code in the script does not use the manually downloaded data, but if it is necessary you can read it in using this method and proceed.
 However, keep in mind that automation is more reproducible.
 
-```{r}
+```{r, eval= FALSE}
 # open the NetCDF file
 # file_path <- here::here(raw_data_dir, "CMS", "d2024_manual", "dataset-carbon-rep-monthly_1722109120120.nc") # file path to the manually downloaded raw data
 ```
 
 # Split into monthly rasters
 
-```{r}
+```{r, eval= FALSE}
 # ---- create directory for storing the monthly individual rasters ----
 int_monthly_dir <- here::here(int_dir, "oa_monthly_rasters")
 dir.create(int_monthly_dir, showWarnings = TRUE) # to create the directory in case it has not already been made in Mazu
@@ -391,7 +388,7 @@ print(time_attribute)
 
 ## Run through the list and create individual rasters
 
-```{r}
+```{r, eval= FALSE}
 # Create a list to store individual rasters
 individual_rasters <- list()
 
@@ -432,7 +429,7 @@ crs(rast_2010_02_01) # v2024: GEOGCRS[\"WGS 84\",\n. Once again, will have to re
 
 The historical mean of Aragonite Saturation from 1985 - 2000 will be used for comparison, to calculate the pressure scores.
 
-```{r hist_mean}
+```{r, eval= FALSE}
 # read in NetCDF file we downloaded using the API
 oa_hist_multilayer_nc <- terra::rast(here::here(cms_dir, "historical_1985_2000_aragonite_saturation_raw.nc")) 
 
@@ -444,7 +441,7 @@ res(oa_hist_multilayer_nc) == res(rast_2010_02_01) # TRUE TRUE, great!
 
 Calculate the local average (not global, see [documentation](https://www.rdocumentation.org/packages/terra/versions/0.8-6/topics/local)).
 
-```{r}
+```{r, eval= FALSE}
 # since it already multilayer and we plan on averaging across all years, we can make it a RasterBrick. It is similar to a RasterStack (that can be created with `stack()`), but processing time should be shorter when using a RasterBrick (from documentation)
 oa_hist_moll_brick <- brick(oa_hist_multilayer_nc)
 
@@ -465,7 +462,7 @@ terra::writeRaster(oa_historical_average,
 
 Annual mean aragonite saturation rasters calculated from the monthly data.
 
-```{r msla_monthly_to_annual, eval = F}
+```{r, eval = FALSE}
 # ---- create directory for storing the monthly individual rasters ----
 oa_annual_mean_dir <- here::here(int_dir, "oa_annual_mean")
 dir.create(oa_annual_mean_dir, showWarnings = TRUE) # to create the directory in case it has not already been made in Mazu
@@ -539,7 +536,7 @@ The `oaRescale` function rescales each of the annual rasters accordingly.
 
 ## Re-worked (v2024) Function for Rescaling
 
-```{r}
+```{r, eval= FALSE}
 annual_avg_rescaled_dir <- here::here(oa_dir, "int","annual_avg_rescaled") 
 # dir.create(annual_avg_rescaled_dir) # create Mazu directory for rescaled rasters if not already created
 
@@ -586,7 +583,7 @@ lapply(oa_annual_files, oaRescale_updated)
 
 Now, visualize the rescaled rasters and check that rescaling worked correctly.
 
-```{r}
+```{r, eval= FALSE}
 # plot the rescaled rasters to ensure it looks correct.  
 ff <- list.files(path = here::here(annual_avg_rescaled_dir), pattern = '.tif$',
                  full.names = TRUE) 
@@ -609,7 +606,7 @@ res(zones) # 934.4789 934.4789, lower cell size = higher resolution
 
 Now, let's reproject the rescaled rasters to `zones`, for OHI consistency
 
-```{r}
+```{r, eval= FALSE}
  #tic()
  #oa_rescaled_moll <- terra::project(oa_rescaled, zones) # using terra::project, which inherently resamples using bilinear interpolation
  #toc() 
@@ -654,7 +651,7 @@ toc() # v2024: 1047.173 sec elapsed
 
 Now, visualize the reprojected rasters to ensure it looks correct.
 
-```{r}
+```{r, eval= FALSE}
 # plot the rescaled rasters to ensure it looks correct.  
 reproj_annual_rasts <- list.files(path = here::here(annual_avg_rescaled_moll_dir), pattern = '.tif$',
                  full.names = TRUE) 
@@ -670,7 +667,7 @@ crs(oa_reprojected) == crs(zones) # v2025: TRUE
 
 ## Calculate Zonal Statistics
 
-```{r}
+```{r, eval= FALSE}
 # remember: `zones` from setup chunk
 # zones is from `/home/shares/ohi/git-annex/globalprep/spatial/v2017`
 # regions_eez_with_fao_ant.tif: This includes all the ocean regions (eez/fao/antarctica), but the raster cell values correspond to the rgn_ant_id in regions_2017_update.  This file is most often used to extract pressure values for each region.
@@ -717,7 +714,7 @@ regions_stats_join <- left_join(regions_stats_clean, rgn_data, by = "rgn_id") %>
 
 Visualize the final scores!
 
-```{r}
+```{r, eval= FALSE}
 pressure_oa_plot <- regions_stats_join %>%
   plot_ly(x = ~year, y = ~pressure_score, color = ~rgn_name, 
           type = "scatter", mode = "lines") %>%
@@ -732,7 +729,7 @@ pressure_oa_plot
 
 Save output files in `output_dir`, refer back to the setup chunk.
 
-```{r plot_final}
+```{r, eval= FALSE}
 # ----- save all data (commented out in case someone runs the whole script) ---------
 write_csv(regions_stats_join, "prs_oa_all_yrs.csv")
 
@@ -758,13 +755,13 @@ write_csv_by_year <- function(data, year) {
 map2(yearly_data, years, write_csv_by_year)
 ```
 
-# Create 4-year rolling average for scores: 
+# v2025: Create 4-year rolling average for scores 
 
 - To reduce some of the variation we see, and to get a better idea of annual trends, we will be implementing a 4-year rolling average to the oa scores using the rollaply() function from the 'zoo' package.
 
 - This will be used as a check in the future for region trends
 
-```{r}
+```{r, eval= FALSE}
 # Convert the pressure scores to integers
 regions_stats_join$pressure_score <- as.numeric(regions_stats_join$pressure_score)
 
@@ -774,7 +771,7 @@ four_year_average <- regions_stats_join %>%
   mutate(mean_scores = rollmean(pressure_score, 4, NA, "right"))
 ```
 
-```{r}
+```{r, eval= FALSE}
 # Plot the 4-year rolling average scores
 pressure_oa_plot <- four_year_average %>%
   plot_ly(x = ~year, y = ~mean_scores, color = ~rgn_name, 

@@ -23,13 +23,12 @@ Different data sources were investigated and compiled in v2025, and information 
 
 Source: https://www.ncei.noaa.gov/products/microplastics
 
-There is microplastics data from NOAA's National Center for Environmental Information 'NCEI Marine Microplastics product'. The data is available as a csv, shapefiles, GeoJSON, JSON, FGDB, or KML. The data on microplastic concentrations contains measurements in pieces/cubic meter,and were ranked on a scale of 'Very Low', 'Low', 'Medium', and 'High'. 
+Our microplastics data is from NOAA's National Center for Environmental Information 'NCEI Marine Microplastics product'. The data is available as a csv, shapefiles, GeoJSON, JSON, FGDB, or KML. The data on microplastic concentrations contains measurements in pieces/cubic meter,and were ranked on a scale of 'Very Low', 'Low', 'Medium', and 'High'. 
 
 Observations were not specified at the country level, but merely grouped by ocean, or in some cases subregion. However, the point observations could be rasterized and grouped into the eez boundaries of each country. The concentration values could be rescaled for a 0-1 range. 
 
 
-
-```{r setup, message = FALSE, warning = FALSE, verbose = FALSE}
+```{r setup, message = FALSE, warning = FALSE, verbose = FALSE, eval= FALSE}
 #set options for all chunks in code
 knitr::opts_chunk$set(message = FALSE, warning = FALSE, eval=FALSE)
 
@@ -93,13 +92,13 @@ cols = rev(colorRampPalette(brewer.pal(9, 'Spectral'))(255)) # rainbow color sch
 
 # Method 1: Use vector data and intersect for each region
 
-```{r}
+```{r, eval= FALSE}
 # Load in the microplastics data from the Mazu server
 microplastics_data <- st_read(here::here(raw_data_dir , "NOAA_NEI_Marine_Microplastics", "Microplastic_Data_MasterList_GISTeam_XYTableToPoint.shp"))
 ```
 # Rescale the microplastics data on a 0-1 scale
 
-```{r}
+```{r, eval= FALSE}
 # Check the microplastics columns
 colnames(microplastics_data)
 
@@ -113,7 +112,7 @@ unique(microplastics_data$Symbology)
 ```
 
 
-```{r}
+```{r, eval= FALSE}
 # Again, we will be rescaling by sampling method, each of which had different units 
 # Create data frames for each sample setting
 ocean_subsurface <- microplastics_data %>%
@@ -132,7 +131,7 @@ nurdle_patrol <- microplastics_data %>%
   filter(str_detect(microplastics_data$Symbology, "Nurdle Patrol"))
 ```
 
-```{r}
+```{r, eval= FALSE}
 # Create function to rescale each df separately based on their 95th percentile value
 rescale_95 <- function(x) {
   x_min <- min(x)
@@ -176,7 +175,7 @@ microplastics_rescaled <- rbind(ocean_subsurface,
 
 # Rasterize the Microplastics observations for masking
 
-```{r}
+```{r, eval= FALSE}
 # Rasterize the microplastic observations:
 # Isolate points from the data set
 points <- st_as_sf(microplastics_rescaled, coords = c("Longitude_", "Latitude_"), remove = FALSE, crs = 4326) 
@@ -196,14 +195,14 @@ rast_template <- rast(extent = microplastics_bbox,
 microplastics_rast <- rasterize(points, rast_template, field = "concentration_rescaled", fun = mean)
 ```
 
-```{r}
+```{r, eval= FALSE}
 # Plot the raster
 plot(microplastics_rast)
 ```
 
 # Run an Inverse-Distance Weighted Correlation to gapfill our data
 
-```{r}
+```{r, eval= FALSE}
 # Get cell coordinates
 coords <- as.data.frame(xyFromCell(microplastics_rast, 1:ncell(microplastics_rast)))
 coords$value <- values(microplastics_rast)
@@ -235,15 +234,15 @@ plot(filled_r)
 
 # Load in the land mass rasters
 
-```{r}
+```{r, eval= FALSE}
 # Load in the land mass data from the Mazu server
 landmasses <- terra::rast("/home/shares/ohi/git-annex/globalprep/_raw_data/landmass_raster/landmasses.tif")
 ```
 
-```{r}
+```{r, eval= FALSE}
 plot(landmasses)
 ```
-```{r}
+```{r, eval= FALSE}
 # Check the total number of layers in the raster and their names
 nlyr(landmasses) 
 names(landmasses)
@@ -257,7 +256,7 @@ plot(landmasses_single)
 
 # Mask out the oceans and seas
 
-```{r}
+```{r, eval= FALSE}
 # Set values higher than 250 to NA
 landmasses_single[landmasses_single <= 250] <- NA # This radiance level was selected based on the third raster layer values. This may have to be updated if the rasters change
 
@@ -268,20 +267,20 @@ microplastics_re <- resample(filled_r, landmasses_single, method = "near")
 masked_microplastics <- mask(microplastics_re, landmasses_single)
 ```
 
-```{r}
+```{r, eval= FALSE}
 # Plot the newly masked microplastics data to check if it worked correctly
 plot(masked_microplastics)
 ```
 
 # Get the eez regions for each country in OHI
 
-```{r}
+```{r, eval= FALSE}
 # Grab regional data from OHI:
 # Get the region boundaries for all countries we will calculate scores for
 ohi_rasters()
 ```
 
-```{r}
+```{r, eval= FALSE}
 # Check to see if crs are matched
 # Match the crs of the data
 microplastics_rast <- terra::project(masked_microplastics, crs(zones))
@@ -297,16 +296,16 @@ res(microplastics_rast) == res(zones_aligned) # v2025: TRUE
 
 # Find observations that overlap with eez regions
 
-```{r}
+```{r, eval= FALSE}
 # Use zonal to compute mean of point values per zone
 zonal_stats <- zonal(microplastics_rast, zones_aligned, fun = "mean", na.rm = TRUE)
 ```
 
-```{r}
+```{r, eval= FALSE}
 region_data()
 ```
 
-```{r}
+```{r, eval= FALSE}
 # Check for NAs
 sum(is.na(zonal_stats$mean))
 
@@ -318,7 +317,7 @@ missing_countries <- zonal_stats %>%
 
 # Potential Gapfilling: 
 
-```{r}
+```{r, eval= FALSE}
 # Rename the columns for ease of use
 zonal_stats_clean <- zonal_stats %>% 
   rename_at('mean', ~'avg_concentration') %>%
@@ -342,7 +341,7 @@ microplastics_eez <- left_join(rgns_all, zonal_stats_filled, by= c("rgn_ant_id" 
 
 # Plot the results
 
-```{r}
+```{r, eval= FALSE}
 # Find missing values in the zonal_statistics
 plot <- ggplot(microplastics_eez, aes(x= avg_concentration, y = rgn_id, colour = rgn_name)) +
   geom_point() +
@@ -355,7 +354,7 @@ ggplotly(plot)
 
 # Save the data as a csv
 
-```{r}
+```{r, eval= FALSE}
 # Filter and rename the microplastics_eez data
 microplastics_save <- microplastics_eez %>%
   mutate(year = 2025) %>%
@@ -363,7 +362,7 @@ microplastics_save <- microplastics_eez %>%
   select(rgn_id, year, pressure_score)
 ```
 
-```{r}
+```{r, eval= FALSE}
 # Create file name for csv
 file_name <- paste0("trash_pressure.csv")
 
@@ -377,7 +376,7 @@ write.csv(microplastics_save, file = output_path, row.names = FALSE)
 
 # Plotting our results
 
-```{r}
+```{r, eval= FALSE}
 # Rename the 2025 scores
 trash_pressure <- trash_pressure %>%
   rename(pressure_score_2025 = pressure_score)
@@ -399,7 +398,7 @@ trash_compare <- full_join(trash_compare, region_names, by= "rgn_id")
 
 # Plot the scores between 2025 and 2015 (different metrics of recording trash pressure)
 
-```{r}
+```{r, eval= FALSE}
 plot <- ggplot(trash_compare, aes(x= pressure_score_2015, y= pressure_score_2025, color= as.factor(rgn_name))) + 
 geom_point() +
   geom_smooth() +
@@ -412,12 +411,12 @@ ggplotly(plot)
 
 # Find the difference between scores and plot
 
-```{r}
+```{r, eval= FALSE}
 trash_compare <- trash_compare %>%
   mutate(diff = pressure_score_2025 - pressure_score_2015)
 ```
 
-```{r}
+```{r, eval= FALSE}
 plot <- ggplot(trash_compare, aes(x= diff, y= rgn_name, color= as.factor(rgn_name))) + 
 geom_col() +
   labs(color= "Region Name",

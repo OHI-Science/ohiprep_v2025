@@ -230,16 +230,13 @@ halibut_data <- c %>%
 
 ```
 
-```{r}
+```{r, eval= FALSE}
 # Let's try finding our result without adding new species
 gapfill_no_na <- gapfill_missing %>%
   filter(is.na(mean_catch) == FALSE)
 ```
 
-
-
-
-```{r}
+```{r, eval= FALSE}
 fix_bouvet <- fis_mean_catch %>%
   filter(rgn_id == 105) %>%
   dplyr::select(rgn_id, stock_id, year, taxon_key, mean_catch = catch) %>%

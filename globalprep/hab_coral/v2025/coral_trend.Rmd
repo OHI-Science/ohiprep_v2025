@@ -1,5 +1,5 @@
 ---
-title: 'OHI 2021: Coral trend'
+title: 'OHI 2025: Coral trend'
 author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
 output: 
   html_document:
@@ -28,7 +28,7 @@ Using a new dataset for the global distribution of coral reefs for the extent, s
 
 
 ## Setup
-``` {r setup, echo = FALSE, message = FALSE, warning = FALSE}
+``` {r setup, echo = FALSE, message = FALSE, warning = FALSE, eval= FALSE}
 library(readr)      # for read_csv()
 library(raster)
 library(here)

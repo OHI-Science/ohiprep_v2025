@@ -50,7 +50,7 @@ Link: <https://www.fao.org/sustainable-development-goals/indicators/14b1/en/>
 
 ## Setup
 
-```{r setup, message = FALSE, warning = FALSE, eval=F}
+```{r setup, message = FALSE, warning = FALSE, eval= FALSE}
 
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.path = 'figs/', message = FALSE, warning = FALSE)
 if (!require(ohicore)){
@@ -80,7 +80,7 @@ version_year <- "v2025"
 
 API query builder: <https://unstats.un.org/SDGAPI/swagger/>
 
-```{r}
+```{r, eval= FALSE}
 ## Query the API for new data (released every 2 years, i.e. 2018, 2020, 2022)
 ## page size arbitrarily large in order to ensure all data is downloaded in a single page
 
@@ -99,7 +99,7 @@ clean_data <- api_get_indicator_data$data %>%
 
 Clean the downloaded UN data.
 
-```{r}
+```{r, eval= FALSE}
 
 ## getting rid of non-useful columns (to see better what is going on)
 un_data <- read_csv(here::here("globalprep", "ao", version_year, "raw", "raw_sdg_14_data.csv")) %>%
@@ -139,7 +139,7 @@ un_data <- un_data %>% select(rgn_name_standard, year, score)
 ## Load in the OHI rgns_eez data from common.R
 Clean
 
-```{r}
+```{r, eval= FALSE}
 ## Load in the rgns_eez data from common.R
 rgns_eez <- region_data()
 
@@ -191,7 +191,7 @@ setdiff(rgns_eez$r2_label, un_georegions$geo_area_name) # the southern islands a
 STEP 1: Gapfill within the un_data
 This gapfills countries with some (but not all years of data) with nearest value                          
       
-```{r}
+```{r, eval= FALSE}
 
 un_data_gf <- un_data %>%
   dplyr::group_by(rgn_name_standard) %>%
@@ -203,7 +203,7 @@ un_data_gf <- un_data %>%
 
 STEP 2: Gapfill across regions using the UN's summarized data.
 
-```{r}
+```{r, eval= FALSE}
 
 # make the full grid for regions
 full_grid <- expand.grid(rgn_id = rgns_eez$rgn_id, year=c(2018,2020, 2022, 2024))
@@ -238,7 +238,7 @@ filter(rgns_eez_gf2, is.na(score)) # Antarctica and Southern Islands (all essent
 ```
 
 # make uninhabited regions NA 
-```{r}
+```{r, eval= FALSE}
 low_pop <- low_pop()
 
 rgns_eez_gf3 <- rgns_eez_gf2 %>%
@@ -247,7 +247,7 @@ rgns_eez_gf3 <- rgns_eez_gf2 %>%
 
 
 # final formatting and save
-```{r, eval = F}
+```{r, eval = FALSE}
 ## save gapfilling flag dataset
 final_gf_flags <- rgns_eez_gf3 %>%
   dplyr::select(rgn_id, year, gapfilled = gf) %>%
@@ -268,7 +268,7 @@ final_data <- rgns_eez_gf3 %>%
 
 Lets compare to last years AO data.
 
-```{r, eval = F}
+```{r, eval= FALSE}
 ## This section is checking if we get the same values as last years assesment 
 ## This is primarily to see how the gapfilling changed the data that matches 
 ## from this assessment to last years assessment 
