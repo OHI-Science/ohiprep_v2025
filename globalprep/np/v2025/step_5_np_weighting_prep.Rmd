@@ -155,6 +155,18 @@ total_usd <- rates %>%
   mutate(usd_weight = ifelse(usd>est_usd, usd, est_usd)) %>%
   select(rgn_id, year, usd_weight, product)
 
+
+## need to figure this out differently for next year...stupid to have another file
+## But this is used to weight pressures on the products.
+weighting_file <- total_usd %>%
+  group_by(rgn_id, year) %>%
+  mutate(total_usd = sum(usd_weight, na.rm=TRUE)) %>%
+  ungroup() %>%
+  mutate(weight = usd_weight/total_usd) %>%
+  mutate(weight = ifelse(is.na(weight), 0, weight)) %>%
+  select(region_id=rgn_id, year, product, weight)
+write_csv(weighting_file, here("globalprep/np/v2025/output/np_harvest_product_weight.csv"))
+
 fish <- total_usd %>%
   filter(product == "fish_oil") %>%
   filter(year %in% 1990:2023)
