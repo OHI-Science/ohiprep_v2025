@@ -130,6 +130,7 @@ source(here::here("workflow", "R", "fao_fxn.R")) # function for cleaning FAO fil
 source(here::here(current_np_dir, "R", "np_fxn.R")) 
 # functions specific to mariculture dealing with compound countries
 source(here("globalprep", "mar", v_scen_year, "mar_fxs.R"))
+
 ```
 
 
@@ -147,6 +148,7 @@ mar_raw <- readr::read_csv(here(
 
 head(mar_raw) 
 length(table(mar_raw$`Country Name En`))
+
 ```
 
 
@@ -401,8 +403,7 @@ seaweed_st_rolling <- mar_rgn_gf %>%
       sust_tonnes_rollmean = zoo::rollapply(tonnes_sustainable, width = 4,
                                             FUN = mean, align = 'right',
                                             partial = TRUE, na.rm = TRUE)) %>%
-  dplyr::mutate(sust_tonnes = ifelse(!is.na(sust_tonnes_rollmean), sust_tonnes_rollmean, sust_tonnes_orig)) %>%
-  dplyr::select(rgn_id, year, tonnes, sustainability, sust_tonnes, sust_tonnes_orig)
+  dplyr::select(rgn_id, year, tonnes_sustainable, sust_tonnes_rollmean)
 
 
 summary(seaweed_st_rolling)

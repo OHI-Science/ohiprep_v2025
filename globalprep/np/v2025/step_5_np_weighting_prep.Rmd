@@ -127,6 +127,7 @@ t_usd <- left_join(rgns_products, datax, by=c("rgn_id", "product", "year")) %>%
     ungroup() %>%
     mutate(avg_usd_per_tonne = ifelse(is.na(avg_usd_per_tonne), global_avg_usd_per_tonne, avg_usd_per_tonne)) %>%
     select(rgn_name, rgn_id, product, year, usd, avg_usd_per_tonne) 
+
 ```
 
 
@@ -137,8 +138,9 @@ The data above only include the tonnes of product that is globally traded. Howev
 fofm <- read_csv(here(sprintf("globalprep/np/v%s/int/tonnes_fofm.csv", current_year))) %>%
   mutate(product = "fish_oil") %>%
   select(product, rgn_id, year, tonnes)
+
 seaweed <- read_csv(here(sprintf("globalprep/np/v%s/int/np_relative_sust_tonnes_seaweeds_full.csv", current_year))) %>%
-  mutate(tonnes = tonnes_sustainable*1/0.79) %>% #want total tonnes, not just sustainable tonnes
+  mutate(tonnes = sust_tonnes_rollmean*1/0.79) %>% #want total tonnes, not just sustainable tonnes
   select(product, rgn_id, year, tonnes)
 
 tonnes <- rbind(fofm, seaweed) # for ornamentals the FAO trade data alone is used to estimate USD
