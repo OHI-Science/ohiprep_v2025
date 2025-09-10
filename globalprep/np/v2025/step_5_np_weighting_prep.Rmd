@@ -135,6 +135,7 @@ t_usd <- left_join(rgns_products, datax, by=c("rgn_id", "product", "year")) %>%
 The data above only include the tonnes of product that is globally traded. However, much of the product may be consumed in the country. For that reason we use the sea around us catch data and mariculture data for fofm and seaweed.
 
 ```{r}
+
 fofm <- read_csv(here(sprintf("globalprep/np/v%s/int/tonnes_fofm.csv", current_year))) %>%
   mutate(product = "fish_oil") %>%
   select(product, rgn_id, year, tonnes)
