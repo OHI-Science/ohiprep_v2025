@@ -70,6 +70,42 @@ librarian::shelf(
 # ======= Set directories ===========
 # Update scenario year, set up programmatic scenario year updates
 current_year <- 2025 # update this!!!
+
+
+# ======= Set directories ===========
+# Update scenario year, set up programmatic scenario year updates
+scen_year_number <- 2025
+scen_year <- as.character(scen_year_number)
+prev_scen_year <- as.character(scen_year_number - 1)
+data_dir_year <- paste0("d", scen_year)
+prev_data_dir_year <- paste0("d", prev_scen_year)
+v_scen_year <- paste0("v", scen_year)
+
+current_np_dir <- here::here("globalprep", "np", v_scen_year) 
+
+# ======== Source functions ===========
+source(here::here("workflow", "R", "common.R")) # directory locations
+# Load FAO-specific user-defined functions
+source(here::here("workflow", "R", "fao_fxn.R")) # function for cleaning FAO files
+# function for handling FAO commodity data specific to NP
+source(here::here(current_np_dir, "R", "np_fxn.R")) 
+
+region_data()
+rgns_eez <- rgns_eez %>%
+  select(rgn_id, rgn_name)
+
+rgns_products <- merge(
+  rgns_eez,
+  data.frame(product = c("ornamentals", "fish_oil", "seaweeds")),
+  by = NULL
+)
+
+rgns_products <- merge(
+  rgns_products,
+  data.frame(year = 1976:2023),
+  by = NULL
+)
+
 ```
 
 ## Tonnes per Product data
@@ -79,14 +115,18 @@ Create the overall region product data frame that contains the 5 years of intere
 
 ```{r}
 
-
 # get USD per tonne averaged across georegion for each product and year
-t_usd <- read_csv(here(sprintf("globalprep/np/v%s/int/np_usd_per_tonne.csv", current_year))) %>%
+datax <- select(read_csv(here(sprintf("globalprep/np/v%s/int/np_usd_per_tonne.csv", current_year))), -rgn_name)
+
+t_usd <- left_join(rgns_products, datax, by=c("rgn_id", "product", "year")) %>%
     add_georegion_id() %>%
     group_by(product, georgn_id, year) %>%
     mutate(avg_usd_per_tonne = mean(usd_per_tonne, na.rm=TRUE)) %>%
-    select(rgn_name, rgn_id, product, year, georgn_id, usd, avg_usd_per_tonne) %>%
-  ungroup()
+    group_by(product, year) %>%
+    mutate(global_avg_usd_per_tonne = mean(usd_per_tonne, na.rm=TRUE)) %>%
+    ungroup() %>%
+    mutate(avg_usd_per_tonne = ifelse(is.na(avg_usd_per_tonne), global_avg_usd_per_tonne, avg_usd_per_tonne)) %>%
+    select(rgn_name, rgn_id, product, year, usd, avg_usd_per_tonne) 
 
 ```
 
@@ -95,11 +135,13 @@ t_usd <- read_csv(here(sprintf("globalprep/np/v%s/int/np_usd_per_tonne.csv", cur
 The data above only include the tonnes of product that is globally traded. However, much of the product may be consumed in the country. For that reason we use the sea around us catch data and mariculture data for fofm and seaweed.
 
 ```{r}
+
 fofm <- read_csv(here(sprintf("globalprep/np/v%s/int/tonnes_fofm.csv", current_year))) %>%
   mutate(product = "fish_oil") %>%
   select(product, rgn_id, year, tonnes)
+
 seaweed <- read_csv(here(sprintf("globalprep/np/v%s/int/np_relative_sust_tonnes_seaweeds_full.csv", current_year))) %>%
-  mutate(tonnes = tonnes_sustainable*1/0.79) %>% #want total tonnes, not just sustainable tonnes
+  mutate(tonnes = sust_tonnes_rollmean*1/0.79) %>% #want total tonnes, not just sustainable tonnes
   select(product, rgn_id, year, tonnes)
 
 tonnes <- rbind(fofm, seaweed) # for ornamentals the FAO trade data alone is used to estimate USD
@@ -110,20 +152,33 @@ rates <- left_join(t_usd, tonnes, by=c("rgn_id", "product", "year")) %>%
 
 total_usd <- rates %>%
   mutate(est_usd = avg_usd_per_tonne*tonnes) %>%
+  mutate(usd = ifelse(is.na(usd), 0, usd)) %>%
   mutate(usd_weight = ifelse(usd>est_usd, usd, est_usd)) %>%
-  select(rgn_id, year, usd, product)
+  select(rgn_id, year, usd_weight, product)
+
+
+## need to figure this out differently for next year...stupid to have another file
+## But this is used to weight pressures on the products.
+weighting_file <- total_usd %>%
+  group_by(rgn_id, year) %>%
+  mutate(total_usd = sum(usd_weight, na.rm=TRUE)) %>%
+  ungroup() %>%
+  mutate(weight = usd_weight/total_usd) %>%
+  mutate(weight = ifelse(is.na(weight), 0, weight)) %>%
+  select(region_id=rgn_id, year, product, weight)
+write_csv(weighting_file, here("globalprep/np/v2025/output/np_harvest_product_weight.csv"))
 
 fish <- total_usd %>%
   filter(product == "fish_oil") %>%
-  filter(year %in% 1990:2019)
+  filter(year %in% 1990:2023)
 
 sw <- total_usd %>%
   filter(product == "seaweeds") %>%
-  filter(year %in% 2010:2023)
+  filter(year %in% 1990:2023)
 
 orns <- total_usd %>%
   filter(product == "ornamentals") %>%
-  filter(year %in% 2010:2023)
+  filter(year %in% 1990:2023)
 
 write_csv(fish, here("globalprep/np/v2025/output/np_fofm_weights.csv"))
 write_csv(sw, here("globalprep/np/v2025/output/np_seaweed_weights.csv"))
