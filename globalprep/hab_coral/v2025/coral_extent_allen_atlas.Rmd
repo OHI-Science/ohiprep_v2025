@@ -208,10 +208,6 @@ df_compare_check <- filled_zonal_sums %>%
 ## Write the final product
 
 ```{r, eval= FALSE}
-# Rename coral column so that coral will not be read in as a color in perpetuity ('coral' -> 'corals'!)
-coral_habitat_extent <- df_compare_check %>%
-  mutate(habitat = 'corals')
-
 # Write the zonal sums to the "habitat_extent_coral_updated.csv"
 write.csv(coral_habitat_extent, here("globalprep/hab_coral/v2025/data/habitat_extent_coral_updated.csv"), row.names = FALSE)
 

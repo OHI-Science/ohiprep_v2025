@@ -240,10 +240,6 @@ health <- regions_health %>%
   dplyr::select(rgn_id, habitat, health) %>%
   mutate(year = 2025)
 
-# Change the habitat column from 'coral' to 'corals' so that the functions.R in ohi-global can read it!
-health <- health %>%
-  mutate(habitat = 'corals')
-
 write.csv(health, 'globalprep/hab_coral/v2025/data/habitat_health_coral_updated.csv', row.names=FALSE)
 ```
 
@@ -252,7 +248,7 @@ Datacheck: compare to old health data
 
 ```{r, eval = FALSE}
 # Read in previous assessment 
-old_health <- read_csv(file.path(here("globalprep/hab_coral/v2021/data/habitat_health_coral_updated.csv")))
+old_health <- read.csv(file.path(here("globalprep/hab_coral/v2021/data/habitat_health_coral_updated.csv")))
 
 # Rename columns for ease of comparison
 old_health <- old_health %>%
