@@ -201,6 +201,14 @@ regions_health <- regions_health %>%
     TRUE ~ NA_real_  # default if none of the conditions match
   ))
 
+# Use average of health for any NA values left
+avg_health <- mean(regions_health$health, na.rm = TRUE)
+
+regions_health <- regions_health %>%
+   mutate(health = case_when(
+    is.na(health) ~ avg_health,  # replace NA with average
+    TRUE ~ health           # keep existing values
+  ))
 ```
 
 ```{r, eval= FALSE}
@@ -231,6 +239,11 @@ regions_health <- regions_health %>%
 health <- regions_health %>%
   dplyr::select(rgn_id, habitat, health) %>%
   mutate(year = 2025)
+
+# Change the habitat column from 'coral' to 'corals' so that the functions.R in ohi-global can read it!
+health <- health %>%
+  mutate(habitat = 'corals')
+
 write.csv(health, 'globalprep/hab_coral/v2025/data/habitat_health_coral_updated.csv', row.names=FALSE)
 ```
 

@@ -208,8 +208,12 @@ df_compare_check <- filled_zonal_sums %>%
 ## Write the final product
 
 ```{r, eval= FALSE}
+# Rename coral column so that coral will not be read in as a color in perpetuity ('coral' -> 'corals'!)
+coral_habitat_extent <- df_compare_check %>%
+  mutate(habitat = 'corals')
+
 # Write the zonal sums to the "habitat_extent_coral_updated.csv"
-write.csv(filled_zonal_sums, here("data","habitat_extent_coral_updated.csv"), row.names = FALSE)
+write.csv(coral_habitat_extent, here("globalprep/hab_coral/v2025/data/habitat_extent_coral_updated.csv"), row.names = FALSE)
 
 # lets make a gapfilling file
 region_data()
@@ -229,8 +233,8 @@ write.csv(coral_area_final_gf, here"globalprep/hab_coral/v2025/data/extent_coral
 
 ```{r, eval = FALSE}
 # Load in this year's and last year's data
-coral_area_2025 <- read_csv(here("globalprep/hab_coral/v2025/data/habitat_extent_coral_updated.csv"))
-coral_area_2021 <- read_csv(here("globalprep/hab_coral/v2021/data/habitat_extent_coral_updated.csv"))
+coral_area_2025 <- read.csv(here("globalprep/hab_coral/v2025/data/habitat_extent_coral_updated.csv"))
+coral_area_2021 <- read.csv(here("globalprep/hab_coral/v2021/data/habitat_extent_coral_updated.csv"))
 
 # Create an area column for each 
 coral_area_2025 <- coral_area_2025 %>%
