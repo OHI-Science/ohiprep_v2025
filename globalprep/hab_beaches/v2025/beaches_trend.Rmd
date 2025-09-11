@@ -197,6 +197,9 @@ write.csv(beaches_total, here("globalprep", "hab_beaches", "v2025", "int", "beac
 ```
 
 ```{r, eval= FALSE}
+# Read in csv if needed
+beaches_total <- read.csv(here("globalprep", "hab_beaches", "v2025", "int", "beaches_total.csv"))
+
 # Calculate the differences over time for rates of change
 beaches_total <- beaches_total %>%
   mutate(diff_10_15 = km2_2015 - km2_2010,
@@ -205,11 +208,12 @@ beaches_total <- beaches_total %>%
 
 # Scale trend from 0-1
 beaches_trend <- beaches_total %>%
-  mutate(trend = (trend - min(trend)) / (max(trend) - min(trend)))
+  mutate(trend = (trend - min(trend)) / (ma# Add a year column x(trend) - min(trend))) %>%
+  mutate(year = 2025) # Add a year column 
 
 # Select columns
 beaches_trend <- beaches_trend %>%
-  select(rgn_id, habitat, trend)
+  select(rgn_id, habitat, year, trend)
 
 # Select columns and save
 write.csv(beaches_trend, here(goal, "data", "hab_beaches_trend.csv"), row.names = FALSE)

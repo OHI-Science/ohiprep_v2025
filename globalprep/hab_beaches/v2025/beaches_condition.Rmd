@@ -69,6 +69,10 @@ beaches_health <- beaches_health %>%
 ```
 
 ```{r}
+# Save only relevent columns for the final csv
+final_beaches_health <- beaches_health %>%
+  select(rgn_id, habitat, year, health)
+
 # Save the health data as a csv file
-write.csv(beaches_health, here(goal, "data", "hab_beaches_health.csv"), row.names = FALSE)
+write.csv(final_beaches_health, here(goal, "data", "hab_beaches_health.csv"), row.names = FALSE)
 ```
