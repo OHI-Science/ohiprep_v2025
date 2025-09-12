@@ -97,7 +97,7 @@ raw_data_dir <- here::here(dir_M, "git-annex", "globalprep", "_raw_data")
 current_wb_dir <- here(raw_data_dir, "WorldBank", current_data_dir)
 
 # Livelihoods and Economies directory
-current_le_dir <- here("globalprep", "le", version_year)
+current_liv_dir <- here("globalprep", "liv", version_year)
 previous_le_dir <- here("globalprep", "le", previous_vyear)
 ```
 
@@ -366,13 +366,13 @@ labor_export <- total_labor_force %>%
          sector = "liv") %>% 
   select(rgn_id, rgn_name, year, labor_force, unit, sector, source)
 
-write_csv(labor_export, here(current_le_dir, "int", "liv_labor_force.csv"))
+write_csv(labor_export, here(current_liv_dir, "output", "labor_force.csv"))
 
 # Save gapfilling information
 labor_gf <- total_labor_force %>% 
   select(rgn_id, rgn_name, year, lf_gapfilled, lf_gf_method, source)
 
-write_csv(labor_gf, here(current_le_dir, "int", "liv_labor_force_gf.csv"))
+write_csv(labor_gf, here(current_liv_dir, "int", "liv_labor_force_gf.csv"))
 
 ```
 
@@ -380,7 +380,7 @@ write_csv(labor_gf, here(current_le_dir, "int", "liv_labor_force_gf.csv"))
 
 ```{r}
 # Read in data
-new_le <- read_csv(here(current_le_dir, "int", "liv_labor_force.csv"))
+new_le <- read_csv(here(current_liv_dir, "output", "labor_force.csv"))
 old_le <- read_csv(here(previous_le_dir, "int", "liv_labor_force.csv"))
 
 # Get max data years for plotting

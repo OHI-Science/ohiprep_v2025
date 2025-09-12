@@ -109,8 +109,8 @@ previous_data_dir <- paste0("d", previous_year)
 raw_data_dir <- here::here(dir_M, "git-annex", "globalprep", "_raw_data")
 
 # Livelihoods and Economies directory
-current_le_dir <- here("globalprep", "le", version_year)
-previous_le_dir <- here("globalprep", "le", previous_vyear)
+current_le_dir <- here("globalprep", "liv", version_year)
+previous_le_dir <- here("globalprep", "liv", previous_vyear)
 
 # Create country code --> iso3 function
 country_regex_to_iso3c <- function(country_string) {
@@ -215,6 +215,9 @@ coastal_pop_data <- read_csv(here("globalprep","mar_prs_population","v2025","out
 un_pop <- read_csv(here("globalprep", "mar_prs_population", version_year,
                         "output", "UN_population.csv"))
 
+rgns_eez_small <- rgns_eez %>%
+  select(rgn_id, rgn_name)
+
 # Add region names
 coast_pop_rgn <- left_join(coastal_pop_data, rgns_eez_small, 
                            by = join_by(rgn_id))
@@ -262,7 +265,7 @@ wttc_coastal_jobs %>%
 
 ```{r}
 # Read in total labor force data. Prepped in `liv_labor_force_dataprep.Rmd`
-labor_force <- read_csv(here(current_le_dir, "int", "liv_labor_force.csv"))
+labor_force <- read_csv(here(current_le_dir, "int", "labor_force.csv"))
 
 # Select columns of interest
 labor_force <- labor_force %>% 
@@ -310,8 +313,9 @@ tour_jobs_prop %>%
 
 # 34 countries with no data for jobs or labor force, we'll end up dropping these for now
 tour_jobs_final <- tour_jobs_prop %>% 
-  drop_na(jobs_coast_prop) %>% 
-  select(rgn_id, year, quantity = jobs_coast_prop)
+  #drop_na(jobs_coast_prop) %>% 
+  # Save number of jobs (instead of prop, calculate prop in ohi-global)
+  select(rgn_id, year, quantity = jobs_coast)
 
 length(unique(tour_jobs_final$rgn_id)) # 140 final regions
 colSums(is.na(tour_jobs_final))
@@ -436,8 +440,6 @@ nrow(wage_gf) # 3641
 # ---- Georegion gapfilling ----
 
 # Gapfill with regional means for wage data
-rgns_eez_small <- rgns_eez %>%
-  select(rgn_id, rgn_name)
 
 georegions <- ohicore::georegions %>% 
   left_join(rgns_eez_small, by = "rgn_id")
