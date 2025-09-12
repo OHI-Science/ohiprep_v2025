@@ -165,6 +165,8 @@ fis_wage_ppp_cleaned <- name_2_rgn(df_in = fis_wage_2021ppp,
 Gapfill wage data
 
 ```{r}
+region_data()
+
 # join with OHI regions
 wage_region_join <- left_join(rgns_eez, fis_wage_ppp_cleaned, by = c("rgn_name", "rgn_id")) %>%
   select(-c(territory, admin_rgn_id, admin_country_name, 
@@ -222,6 +224,11 @@ georegions <- ohicore::georegions %>%
 # Find avg wage by georegion
 wage_georgn <- wage_gf %>% 
   left_join(georegions, by = c("rgn_id", "rgn_name")) %>%
+  # Add US and Canada to Europe
+  mutate(r2 = case_when(
+      rgn_id == 163 ~ 39, #Europe
+      rgn_id == 218 ~ 39, #Europe
+      TRUE ~ r2)) %>%
   # Get average for georgn and year
   group_by(r2, year) %>%
   mutate(mean_wage_r2 = mean(obs_value, na.rm = TRUE),
