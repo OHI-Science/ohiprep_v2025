@@ -76,16 +76,19 @@ source(here::here("workflow", "R", "common.R"))
 source(here::here("workflow", "R", "inflation_adjustment.R"))
 
 # ---- set year and file path info ----
-current_year <- 2024 # Update this!!
+current_year <- 2025 # Update this!!
 
 # create version name for GitHub filepaths
 version_year <- paste0("v", current_year) 
 
 # set current LE filepath
-data_path <- here::here("globalprep", "le", version_year) 
+data_path <- here::here("globalprep", "eco", version_year) 
 
 # output data dir for intermediate data products
 int_dir <- here::here(data_path, "int")
+
+# output data dir for final data products
+output_dir <- here::here(data_path, "output")
 
 ```
 
@@ -93,7 +96,7 @@ int_dir <- here::here(data_path, "int")
 
 ```{r read-int-data, message=FALSE}
 # sector 1: Fishing (cf)
-cf_df_pre <- readr::read_csv(here(int_dir, "eco_cf_usd_pre.csv")
+fis_df_pre <- readr::read_csv(here(output_dir, "fis_revenue.csv")
                              #, show_col_types = FALSE     # include if you want to quiet messages. left in to assess data joining compatibility
                              )
 
@@ -317,7 +320,7 @@ eco_usd_adj <- eco_usd_rgn_full %>%
   ))
 
 # write data frame to int
-#write_csv(eco_usd_adj, here(int_dir, "eco_usd_adj.csv"))
+write_csv(eco_usd_adj, here(int_dir, "eco_usd_adj.csv"))
 ```
 
 

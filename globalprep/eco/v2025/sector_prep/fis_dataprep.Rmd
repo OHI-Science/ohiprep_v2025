@@ -1005,7 +1005,7 @@ heatmap_gf <- ggplot(data = heatmap_gf_df) +
        color = " ") +
   theme_bw()
 interactive_heatmap_gf <- plotly::ggplotly(heatmap_gf)
-interactive_heatmap_gf
+#interactive_heatmap_gf
 
 # YAY! it worked the way we wanted it to.  The heatmap is a solid color; there are only TRUEs, which indicates that there is a value present for every observation.
 ```
@@ -1039,8 +1039,7 @@ fis_revenue <- fis_multiplier %>%
   mutate(usd = mult_value,
          unit = "USD (1)",
          sector = "fis") %>%
-  rename(usd_yr = year) %>% 
-  select(-c(mult_value, status))
+  select(rgn_id, year, revenue = usd)
 
 write_csv(fis_revenue, here(output_dir, "fis_revenue.csv"))
 ```

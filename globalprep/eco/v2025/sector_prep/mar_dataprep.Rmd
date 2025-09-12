@@ -458,7 +458,7 @@ eco_mar_usd_final <- eco_mar_usd_class %>%
 # Tidying up data for export to the 'int' folder 
 eco_mar_usd_final <- eco_mar_usd_final %>% 
   mutate(usd = usd_weighted) %>% 
-  select(-c(usd_weighted, developed_developing_regions))
+  select(rgn_id, year, revenue = usd)
 
 #One last ggplot to gut check that the weighting did what we wanted it to do 
 # plot <- ggplot(eco_mar_usd_final, aes(x = as.numeric(year), y = usd, color = rgn_name)) +
