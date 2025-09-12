@@ -123,16 +123,6 @@ source(here("globalprep", "mar", scen_year, "mar_fxs.R"))
 
 ```
 
-**v2025 updated steps**
-
-We are using the forage fish catch stocks from the previous years analysis (as the data has not been updated since 2019).
-
-1. Join with the final B/Bmsy layer used in the FIS model
-2. Convert the B/Bmsy values to scores (this is done in functions.R)
-4. Take a catch weighted average of B/Bmsy scores for each region/year.
-
-
-
 # STEP 1
 
 Identify catch tonnes used for B/Bmsy. We use the catch average catch since 1990 to weight the yearly B/Bmsy scores for these taxa. We use the SAUP designations of whether catch is used for fishoil fishmeal.
@@ -158,13 +148,37 @@ catch <- catch %>%
 ## add in 2020 - 2023 (using the last value for year 2019)
 copies_2020_2023 <- purrr::map_dfr(2020:2023, ~ filter(catch, year==2019) %>% mutate(year = .x))
 
-# If you want 2019 + the copies together:
 catch <- bind_rows(catch, copies_2020_2023) %>%
   arrange(rgn_id, stock_id, year)
 
 
 ```
 
+Gapfill with trade data if no evidence of fishoil fishmeal catch in SAUP data.
+
+```{r}
+
+catch_rgns <- catch %>%
+  group_by(rgn_id, year) %>%
+  summarize(stocks = sum(tonnes)) %>%
+  mutate(rgn_year = paste(rgn_id, year, sep="_"))
+
+fao <- read_csv(here(sprintf("globalprep/np/v%s/int/np_usd_per_tonne.csv", current_year))) %>%
+  filter(product == "fish_oil") %>%
+  mutate(rgn_year = paste(rgn_id, year, sep="_"))
+
+
+missing_catch_id <- setdiff(fao$rgn_year, catch_rgns$rgn_year)
+
+missing_catch <- fao %>%
+  filter(rgn_year %in% missing_catch_id) %>%
+  mutate(stock_id = "Marine fishes not identified") %>%
+  select(rgn_id, year, stock_id, tonnes)
+
+
+catch <- rbind(catch, missing_catch)
+
+```
 
 
 # B/Bmsy

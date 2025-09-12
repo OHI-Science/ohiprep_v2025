@@ -140,6 +140,7 @@ source(here("globalprep", "mar", v_scen_year, "mar_fxs.R"))
 Mariculture production in tonnes. Ultimately used to find tonnes of non-food seaweed.
 
 ```{r}
+
 # Read in mariculture data
 mar_raw <- readr::read_csv(here(
   dir_M, "git-annex", "globalprep", "_raw_data", "FAO_mariculture", data_dir_year,
@@ -282,8 +283,6 @@ seaweed_np <- seaweeds_sp %>%
   filter(!is.na(value)) %>%
   rename(species = FAO_name)
 
-
-
 ```
 
 
@@ -338,9 +337,35 @@ mar_rgn <- mar_rgn %>%
 mar_rgn2 <- mar_rgn %>%
   mutate(tonnes_nonfood = include * value) %>%
   group_by(rgn_id, year) %>%
-  summarize(tonnes = sum(tonnes_nonfood))
+  summarize(tonnes = sum(tonnes_nonfood))  %>%
+  mutate(year = as.numeric(year))
 
 ```
+
+
+Gapfill with trade data if no evidence of fishoil fishmeal catch in SAUP data.
+
+```{r}
+
+mar_ids <- mar_rgn2 %>%
+  mutate(rgn_year = paste(rgn_id, year, sep="_"))
+
+fao <- read_csv(here(sprintf("globalprep/np/v%s/int/np_usd_per_tonne.csv", current_year))) %>%
+  filter(product == "seaweeds") %>%
+  mutate(rgn_year = paste(rgn_id, year, sep="_"))
+
+missing_mar_id <- setdiff(fao$rgn_year, mar_ids$rgn_year)
+
+missing_mar <- fao %>%
+  filter(rgn_year %in% missing_mar_id) %>%
+  select(rgn_id, year, tonnes)
+
+
+mar_rgn2 <- rbind(mar_rgn2, missing_mar)
+
+```
+
+
 
 # Add in sustainability
 
@@ -365,7 +390,7 @@ mar_rgn_wide <- mar_rgn2 %>%
   pivot_wider(names_from = year, values_from = tonnes_sustainable)
 
 dim(mar_rgn_wide)
-# 143  81
+# 114  75
 
 # Turn data frame back into long format
 mar_rgn_gf <- mar_rgn_wide %>% 

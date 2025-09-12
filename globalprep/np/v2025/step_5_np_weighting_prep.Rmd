@@ -165,7 +165,9 @@ weighting_file <- total_usd %>%
   ungroup() %>%
   mutate(weight = usd_weight/total_usd) %>%
   mutate(weight = ifelse(is.na(weight), 0, weight)) %>%
-  select(region_id=rgn_id, year, product, weight)
+  select(rgn_id, year, product, weight) %>%
+  filter(year==2023) %>%
+  mutate(year=2025)
 write_csv(weighting_file, here("globalprep/np/v2025/output/np_harvest_product_weight.csv"))
 
 fish <- total_usd %>%
