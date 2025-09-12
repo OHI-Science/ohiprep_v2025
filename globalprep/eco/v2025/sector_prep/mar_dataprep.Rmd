@@ -153,13 +153,6 @@ total_mar_rev <- aquaculture_value_cleaned %>%
   select(country, year, value, unit, sector, data_source) # Select relevant columns
 
 unique(setdiff(total_mar_rev$country, aquaculture_value_cleaned$country))
-
-total_mar_rev %>% 
-  filter(!country == "China") %>% # If needed, filter out China because it tends to squish the lower values 
-  ggplot(aes(x = as.numeric(year), y = value, color = country)) + 
-  geom_line() + 
-  theme(legend.position = "none") + 
-  scale_y_continuous(labels = scales::label_dollar(scale = 0.000000001, suffix = "B"))
 ```
 
 ## Assigning country names to their respective regions in OHI
@@ -167,7 +160,7 @@ total_mar_rev %>%
 -   **NOTE**: This year used the names_2_rgn function to find out which
     country names needed to be hard-coded to align with the reference
     regions.
-    - Run the names_2_rgn function on your data, and the output should tell you any countries that    were removed for not having a match in the look-up table 
+    - Run the names_2_rgn function on your data, and the output should tell you any countries that were removed for not having a match in the look-up table 
     - Depending on which regions show up as not having a match, you may be required to hard-code the names to those of synonyms using case_when() (see chunk below for an example)
     - call 'rgn_synonyms <- ohicore::rgn_synonyms' in a code chunk to load the OHI Region synonyms for review 
 
@@ -196,33 +189,10 @@ mar_rev_rgn <- total_mar_rev %>%
     TRUE ~ country
   ))
 
-## Need to split the Channel Islands into Jersey and Guernsey 
-m_CI <- mar_rev_rgn %>%
-  filter(country == 'Channel Islands') %>%
-  mutate(
-    value            = value/2,
-    'Guernsey'        = value,
-    'Jersey'           = value) %>%
-  ungroup() %>% 
-  dplyr::select(-c(value, Country)) %>% 
-  pivot_longer(cols = c(Guernsey, Jersey), values_to = "value", names_to = "Country") %>% 
-  mutate(Country = as.character(Country),
-         country = Country) %>% 
-    dplyr::relocate(value, .before = unit)
-
-mar_rev_rgn <- mar_rev_rgn %>%
-  filter(country != 'Channel Islands') %>%
-      bind_rows(m_CI)
-  #arrange(country, fao, environment, species, year, value) 
-
 # Using name_2_rgn function to populate values for rgn_id and rgn_name for each of the countries listed in the dataframe
 mar_rev_rgn_temp <- ohicore::name_2_rgn(df_in = mar_rev_rgn, 
                        fld_name='Country', # Check to make sure that the case matches
                       flds_unique = c("year"))
-
-
-## Received a warning for a duplicated country. Using the following code to display the portion of the dataframe that's duplicated 
-    ## Can see that in this case the duplicated country is China, with both a "China" and "China, Hong Kong SAR" both being considered china 
 
 ########## Left off here, I will need to do some aggregation on the duplicated rgn_id's, add the values together and then bring them back into the actual dataframe ###################
 duplicates <- mar_rev_rgn_temp[duplicated(mar_rev_rgn_temp[, c('rgn_id','year')]),  ]
@@ -318,12 +288,10 @@ mar_rev_fixed <- mar_rev_rgn_no_dupes %>%
   rbind(., joined_13) %>% 
   rbind(., joined_202) %>% 
   rbind(., joined_209) %>% 
-  rbind(., joined_140) 
-  #rbind(., joined_186) %>% 
-  #rbind(., joined_73)
+  rbind(., joined_140)
 
 # Checking for duplicates one more times --> No observations = no duplicates 
-duplicates <- mar_rev_fixed[duplicated(mar_rev_fixed[, c('rgn_id','year')]),  ]
+duplicates <- mar_rev_fixed[duplicated(mar_rev_fixed[, c('rgn_id','year')]),  ] #none!
 
 # Binding duplicate data and ensuring dataframe is in the CORRECT format to write out to /int folder ----
 eco_mar_usd_raw <- mar_rev_fixed %>% 
@@ -349,16 +317,15 @@ heatmap <- ggplot(mar_heatmap, aes(x = year, y = rgn_name, fill = as.factor(stat
 
 heatmap
 
-# plotly::ggplotly(heatmap) # rgn_id 249, 244, 98, and 116 have missing data for almost all years, aside from that what's in there is pretty good and those countries likely are present from freshwater aquaculture data im assuming 
+plotly::ggplotly(heatmap) # rgn_id 249, 244, 98, and 116 have missing data for almost all years, aside from that what's in there is pretty good and those countries likely are present from freshwater aquaculture data im assuming 
 total_na <- mar_heatmap %>% 
   group_by(rgn_name) %>% 
   dplyr::summarize(sum = sum(status))
 
-# Check here if you need to update the years in your dataframe. If there are  
-
-## Checking how many unique countries are within the revenue data - 142 (2024 Assessment) (144 2025 assessment)
-duplicates <- eco_mar_usd_raw[duplicated(eco_mar_usd_raw[, c('rgn_id','year')]),  ]
-length(unique(eco_mar_usd_raw$rgn_id)) #v2025: 144
+## Checking how many unique countries are within the revenue data 
+length(unique(eco_mar_usd_raw$rgn_id)) 
+#v2025: 144
+#v2024: 142
 ```
 
 ## Find out which countries can be gapfilled versus the countries that cant be
@@ -470,7 +437,7 @@ duplicates <- class_temp[duplicated(class_temp$rgn_id), ]
 
 # Removing countries with duplicated rgn_id by using their iso2 code 
 class_temp <- class_temp %>% 
-  dplyr::filter(!iso_alpha2_code %in% c("HK", "MO", "AX", "MP", "VI", "MQ")) %>% 
+  dplyr::filter(!iso_alpha2_code %in% c("HK", "MO", "FI", "MP", "VI", "MQ")) %>% 
   dplyr::select(rgn_id, rgn_name, developed_developing_regions)
 
 # Left joining the new developed/developing country classes to their respective rgn_id
@@ -494,12 +461,12 @@ eco_mar_usd_final <- eco_mar_usd_final %>%
   select(-c(usd_weighted, developed_developing_regions))
 
 #One last ggplot to gut check that the weighting did what we wanted it to do 
-
-# ggplot(eco_mar_usd_final, aes(x = as.numeric(year), y = usd, color = rgn_name)) +
+# plot <- ggplot(eco_mar_usd_final, aes(x = as.numeric(year), y = usd, color = rgn_name)) +
 #   geom_line() +
 #   theme(legend.position = "none") +
 #   scale_y_continuous(labels = scales::label_dollar(scale = 0.000000001, suffix = "B"))
-
+# 
+# plotly::ggplotly(plot)
 
 # Writing out csv FINALLY -----
 write_csv(eco_mar_usd_final, here::here(output_dir, "mar_revenue.csv"))

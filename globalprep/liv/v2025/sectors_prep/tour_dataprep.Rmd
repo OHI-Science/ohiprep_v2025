@@ -317,7 +317,7 @@ length(unique(tour_jobs_final$rgn_id)) # 140 final regions
 colSums(is.na(tour_jobs_final))
 
 # Export quantity data
-write_csv(tour_jobs_final, here(current_le_dir, "output", "liv_tour_quantity.csv"))
+write_csv(tour_jobs_final, here(current_le_dir, "output", "tour_quantity.csv"))
 
 ```
 
@@ -498,7 +498,7 @@ length(unique(wage_final$rgn_id)) # 213 final regions
 wage_export <- wage_final %>% 
   select(rgn_id, year, quality = annual_income)
 
-write_csv(wage_export, here(current_le_dir, "output", "liv_tour_quality.csv"))
+write_csv(wage_export, here(current_le_dir, "output", "tour_quality.csv"))
 
 ```
 
@@ -506,8 +506,8 @@ write_csv(wage_export, here(current_le_dir, "output", "liv_tour_quality.csv"))
 
 ```{r}
 # Read in cleaned data
-jobs <- read_csv(here(current_le_dir, "output", "liv_tour_quantity.csv")) 
-wages <- read_csv(here(current_le_dir, "output", "liv_tour_quality.csv")) 
+jobs <- read_csv(here(current_le_dir, "output", "tour_quantity.csv")) 
+wages <- read_csv(here(current_le_dir, "output", "tour_quality.csv")) 
 
 # Join quantity and quality data
 # Jobs is the limiting factor here so we'll left join wages into jobs

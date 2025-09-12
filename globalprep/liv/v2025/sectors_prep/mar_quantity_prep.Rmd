@@ -318,13 +318,59 @@ fao_supplemental_countries <- setdiff(unique(jobs_final_fao$rgn_name), unique(jo
 # Filter FAO to those countries
 fao_supplemental_jobs <- jobs_final_fao %>%
   filter(rgn_name %in% fao_supplemental_countries)
+```
 
+Prep to use scaling factor:
+
+```{r}
+# Finally: Applying the multiplier to mariculture for developed versus developing countries ----
+# Setting filepath to unsd data on developing versus developed countries 
+fp_unsd <- file.path(dir_M,"git-annex/globalprep/_raw_data/UNSD/d2024/historical-classification-of-developed-and-developing-regions.xlsx")
+
+# Reading in unsd data 
+unsd_class <- read_excel(fp_unsd,col_names=TRUE, sheet = "Distinction as of May 2022") %>% 
+  janitor::clean_names()
+
+# Reading in OHI Regions data for gut checks/individual country checks 
+ohi_regions <- readr::read_csv("https://raw.githubusercontent.com/OHI-Science/ohi-global/draft/eez/spatial/regions_list.csv") %>% 
+  janitor::clean_names() %>% 
+  dplyr::select(-notes)
+
+# Fixing a couple of the countries that are present under different synonyms in the unsd dataset OR Duplicated. Do this AFTER running name_2_rgn!!! 
+unsd_class_fix <- unsd_class %>% 
+  mutate(country_or_area = case_when(
+  country_or_area == "Bonaire, Sint Eustatius and Saba" ~ "Sint Eustasius",
+  country_or_area == "China, Hong Kong Special Administrative Region" ~ "China",
+  country_or_area == "China, Macao Special Administrative Region" ~ "China",
+  country_or_area == "Åland Islands" ~ "Finland",
+  TRUE ~ country_or_area
+  ))
+
+# Using name to rgn function to assign rgn_id to country names 
+class_temp <- ohicore::name_2_rgn(df_in = unsd_class_fix, 
+                       fld_name='country_or_area')
+
+# Identifying duplicates  
+duplicates <- class_temp[duplicated(class_temp$rgn_id), ]
+
+# Removing countries with duplicated rgn_id by using their iso2 code 
+class_temp <- class_temp %>% 
+  dplyr::filter(!iso_alpha2_code %in% c("HK", "MO", "FI", "MP", "VI", "MQ")) %>% 
+  dplyr::select(rgn_id, rgn_name, developed_developing_regions)
+```
+
+Set up final df:
+
+```{r}
 # Bind dataframes
 jobs_final <- jobs_final_oecd %>%
   rbind(fao_supplemental_jobs) %>%
-  filter(year >= 2008 & year <= 2022) %>%
-  # multiply by average (of developing and developed) scaling factor
-  mutate(number_jobs = number_jobs * 2.34)
+  filter(year >= 2008 & year <= 2022)%>% 
+  left_join(y = class_temp, by = c("rgn_id")) %>%
+  dplyr::select(-c(rgn_name.y)) %>% 
+  dplyr::rename(rgn_name = rgn_name.x) %>%
+  # Multiply by scaling factor
+  mutate(number_jobs = ifelse(developed_developing_regions == "Developing", number_jobs*1.973, number_jobs*2.7))
 
 length(unique(jobs_final$rgn_name)) #54 countries!
 

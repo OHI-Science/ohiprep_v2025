@@ -226,6 +226,8 @@ oecd_fis_jobs_rgn_agg <- oecd_fisher_jobs_rgn %>%
 Gapfill OECD data
 
 ```{r}
+region_data()
+
 # Join with OHI regions
 jobs_region_join <- left_join(rgns_eez, oecd_fis_jobs_rgn_agg, by = c("rgn_id", "rgn_name")) %>%
   select(-c(territory, admin_rgn_id, admin_country_name, 
@@ -573,7 +575,8 @@ jobs_final <- jobs_final %>%
   rbind(ilostat_supplemental_jobs) %>%
   filter(year >= 2008 & year <= 2022) %>%
   # multiply by scaling factor
-  mutate(number_jobs = number_jobs*1.582)
+  mutate(quantity = number_jobs*1.582) %>%
+  select(-number_jobs)
 
 length(unique(jobs_final$rgn_name)) #91 countries!
 

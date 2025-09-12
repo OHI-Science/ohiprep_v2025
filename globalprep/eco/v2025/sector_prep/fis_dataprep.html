@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Thu Sep 4 17:59:37 2025 by hoyt" />
+<meta name="author" content="Compiled on Fri Sep 5 16:00:48 2025 by hoyt" />
 
 
-<title>OHI 2025 - FIS ECO Revenue Preparation</title>
+<title>OHI 2025 - FIS Revenue Preparation</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1645,8 +1645,8 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">OHI 2025 - FIS ECO Revenue Preparation</h1>
-<h4 class="author"><em>Compiled on Thu Sep 4 17:59:37 2025 by
+<h1 class="title toc-ignore">OHI 2025 - FIS Revenue Preparation</h1>
+<h4 class="author"><em>Compiled on Fri Sep 5 16:00:48 2025 by
 hoyt</em></h4>
 
 </div>
@@ -1733,11 +1733,8 @@ rather than just commercial fishing.</p>
 ##   To avoid this message, set the &#39;cran_repo&#39; argument to a CRAN
 ##   mirror URL (see https://cran.r-project.org/mirrors.html) or set
 ##   &#39;quiet = TRUE&#39;.</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">#remotes::install_github(&quot;skgrange/threadr&quot;) # for na_extrapolate</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#library(threadr) # for gapfilling, if necessary</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># ---- sources! ----</span></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&quot;workflow/R/common.R&quot;</span>)) <span class="co"># file creates objects to process data</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># ---- sources! ----</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">&quot;workflow/R/common.R&quot;</span>)) <span class="co"># file creates objects to process data</span></span></code></pre></div>
 <pre><code>## This file makes it easier to process data for the OHI global assessment
 ##  by creating the following objects:
 ## 
@@ -2618,9 +2615,9 @@ developing countries.</p>
 <span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mult_value =</span> appx_value <span class="sc">*</span> <span class="fl">1.568</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>appx_value)</span></code></pre></div>
 </div>
-<div id="saving-intermediate-data" class="section level2" number="2.10">
-<h2><span class="header-section-number">2.10</span> Saving intermediate
-data</h2>
+<div id="saving-final-output" class="section level2" number="2.10">
+<h2><span class="header-section-number">2.10</span> Saving final
+output</h2>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="co"># columns should be: rgn_id, rgn_name, year, usd (previously value), unit, sector, usd_yr (in this case = year)</span></span>
 <span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a>fis_revenue <span class="ot">&lt;-</span> fis_multiplier <span class="sc">%&gt;%</span> </span>
@@ -2631,6 +2628,10 @@ data</h2>
 <span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(mult_value, status))</span>
 <span id="cb32-9"><a href="#cb32-9" tabindex="-1"></a></span>
 <span id="cb32-10"><a href="#cb32-10" tabindex="-1"></a><span class="fu">write_csv</span>(fis_revenue, <span class="fu">here</span>(output_dir, <span class="st">&quot;fis_revenue.csv&quot;</span>))</span></code></pre></div>
+</div>
+<div id="calculating-proportion" class="section level2" number="2.11">
+<h2><span class="header-section-number">2.11</span> Calculating
+proportion</h2>
 </div>
 </div>
 
