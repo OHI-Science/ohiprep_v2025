@@ -26,6 +26,16 @@ This document describes the steps for calculating tourism and recreation sustain
 
 -   Sr = (S-1)/5; Sustainability of tourism
 
+## Updates
+
+v2025: 
+- Split script into two separate pieces
+- Cleaned up the data sources and introduction because it was very unclear which files were needed previously
+- Changed gapfilling method #4 under raw gapfilling from a poorly-fit linear model to a linear interpolation using the `zoo` package
+
+> This goal is still fairly messy and could use a lot of tightening up in future assessments. v2025 did an in-depth check of the gapfilling methods, the results of which can be found in [issue #355](https://github.com/OHI-Science/globalfellows-issues/issues/355) for more details. 
+
+
 # Data Sources
 
 **New data sources**

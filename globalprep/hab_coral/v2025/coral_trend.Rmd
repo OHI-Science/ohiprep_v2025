@@ -1,5 +1,5 @@
 ---
-title: 'OHI 2021: Coral trend'
+title: 'OHI 2025: Coral trend'
 author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
 output: 
   html_document:
@@ -28,7 +28,7 @@ Using a new dataset for the global distribution of coral reefs for the extent, s
 
 
 ## Setup
-``` {r setup, echo = FALSE, message = FALSE, warning = FALSE}
+``` {r setup, echo = FALSE, message = FALSE, warning = FALSE, eval= FALSE}
 library(readr)      # for read_csv()
 library(raster)
 library(here)
@@ -39,7 +39,7 @@ library(mapview)
 library(sp)
 #library(rgeos)
 
-source(file.path(here('workflow/R/common.R'))
+source(file.path(here('workflow/R/common.R')))
 region_data()
 goal  <- 'globalprep/hab_coral/v2025'
 dir_git  <- file.path('~/github/ohiprep_v2025', goal)
@@ -127,16 +127,16 @@ write.csv(trend_gaps, 'globalprep/hab_coral/v2025/data/trend_coral_gf.csv', row.
 trend <- tmp %>%
   dplyr::select(rgn_id, habitat, trend) %>%
   mutate(year = 2025)
-write.csv(trend, 'globalprep/hab_coral/v2025/data/habitat_trend_coral_updated.csv', row.names=FALSE)
 
+write.csv(trend, 'globalprep/hab_coral/v2025/data/habitat_trend_coral_updated.csv', row.names=FALSE)
 ```
 
 Datacheck: compare to old health data
 
 ```{r, eval = FALSE}
 # Read in the data
-old_trend <- read_csv(file.path(here("globalprep/hab_coral/v2021/data/habitat_trend_coral_updated.csv")))
-trend <- read_csv(file.path(here("globalprep/hab_coral/v2025/data/habitat_trend_coral_updated.csv")))
+old_trend <- read.csv(file.path(here("globalprep/hab_coral/v2021/data/habitat_trend_coral_updated.csv")))
+trend <- read.csv(file.path(here("globalprep/hab_coral/v2025/data/habitat_trend_coral_updated.csv")))
 
 # Rename the dfs
 trend_2021 <- old_trend %>%

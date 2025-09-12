@@ -1,5 +1,5 @@
 ---
-title: "OHI `r format(Sys.Date(), '%Y')` - Livelilihoods Data Preparation"
+title: "OHI `r format(Sys.Date(), '%Y')` - Livelihoods Data Preparation"
 author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
 output: 
   html_document:

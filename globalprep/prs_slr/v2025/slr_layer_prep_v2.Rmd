@@ -30,11 +30,14 @@ This layer preparation script does the following for newly available SLR data.
 
 This process is completed entirely within this script. The raw data is downloaded externally and held on a server at NCEAS. Although the raw data is not provided, this script can be used on the data downloaded from Aviso [here](https://www.aviso.altimetry.fr/en/data/products/sea-surface-height-products/global/gridded-sea-level-anomalies-mean-and-climatology.html#c10358). You will need to register with Aviso in order to get a username and password for data access.
 
-# Updates from previous assessment
+# Updates from 2024 assessment
 
 - One additional year of data, 2022, was added.
 - Added new comparative plots, along with a .csv of the 2024 major pressure score changes between v2024 (2022 data) and v2023 (2021 data).
+- For v2025, the full data year for 2023 was not included at the time of assessment, and therefore the data remains the same from v2024. Just to be sure, the data was downloaded again and the prs_slr recalculated.
 
+# Update from 2025 assessment:
+While there was new data added by v2025, there was not a full data year present, and thus slr for 2023 could not be calculated. To ensure previous data years had no been edited, this layer was recalculated using the following script.
 ***
 
 # Data
@@ -42,7 +45,7 @@ This process is completed entirely within this script. The raw data is downloade
 The source data are monthly mean sea level anomalies, in meters. These anomalies are calculated by subtracting the current absolute sea level for each month from the average sea level for that month calculated from 1993 - 2015.
 
 **Reference**: The altimeter products were produced and distributed by Aviso (http://www.aviso.altimetry.fr/), as part of the Ssalto ground processing segment. [AVISO MSLA heights, monthly means](https://www.aviso.altimetry.fr/en/data/products/sea-surface-height-products/global/gridded-sea-level-anomalies-mean-and-climatology.html#c10358)  
-**Downloaded**: June 14, 2024  
+**Downloaded**: June 14, 2025  
 **Description**: Monthly mean sea level anomaly (meters above mean sea level) (msla_h)
 **Native data resolution**: 0.25 degree grid cells   
 **Time range**: January 1993 - December 2022
@@ -56,7 +59,7 @@ The source data are monthly mean sea level anomalies, in meters. These anomalies
 
 # Setup
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, eval= FALSE}
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.path = 'figs/', message = FALSE, warning = FALSE)
 ```
 
@@ -133,7 +136,7 @@ userpasswd <- readline("Type AVISO username and password, separated by colon no 
 
 Define file paths for data download:
 ```{r download_data, eval=FALSE}
-year <- 2022 # data year to download; lags by 2 years. 2023 goes to May as of now, and we need a full year's worth of data for v2024
+year <- 2022 # data year to download; lags by 2 years. 2023 goes to May as of now, and we need a full year's worth of data for v2025
 months <- str_pad(1:12, 2, pad = "0") #if they upload the rest just change the numbers here to reflect rest of months
 
 ## download data from FTP and collect each month/year in raster stack
@@ -176,7 +179,7 @@ Unzip the files you've just downloaded, if the data is prior to 2020:
 
 # Retrieve data
 
-```{r}
+```{r, eval= FALSE}
 # Define the new username and password. NOTE: The username and password of the last year will not be saved here, but replace it with your own each version year
 h <- new_handle()
 handle_setopt(h, username = "", password = "")
@@ -276,7 +279,7 @@ toc()
 
 Annual mean sea level anomaly rasters are calculated from the monthly data. 
 
-```{r msla_monthly_to_annual, eval = F}
+```{r msla_monthly_to_annual, eval= FALSE}
 ## create 'msla_annual_mean' folder in 'int'
 folder_path_prs_slr_int_msla_annual_mean <- file.path(folder_path_prs_slr_int, "msla_annual_mean")
 dir.create(folder_path_prs_slr_int_msla_annual_mean)
@@ -505,7 +508,7 @@ for (i in seq_along(coastal_rasts)) {
 }
 
 toc()
-# v2024 - 4259.81 sec elapsed
+# v2025 - 4259.81 sec elapsed
 ```
 
 # Results
@@ -537,9 +540,9 @@ r_new_old_terra <- terra::rast(sprintf("%s/output/slr_%s.tif", dir_prs_slr, scen
 # get previous scenario year most recent year of data IN COMMON (ie. will likely be one more year back)
 r_old_terra <- terra::rast(sprintf("%s/git-annex/globalprep/prs_slr/v%s/output/slr_%s.tif", dir_M, scen_year - 1, scen_year - 3))
 
-terra::hist(r_new_terra, main = sprintf("Sea Level Pressure %s current version (v%s) data", scen_year - 2, scen_year), breaks = 70) # v2024 - plots v2024 2022 data
-terra::hist(r_new_old_terra, main = sprintf("Sea Level Pressure %s current version (v%s) data", scen_year - 3, scen_year), breaks = 70) # v2024 - plots v2024 2021 data
-terra::hist(r_old_terra, main = sprintf("Sea Level Pressure %s previous version (v%s) data", scen_year - 3, scen_year - 1), breaks = 70) # v2024 - plots v2023 2021 data
+terra::hist(r_new_terra, main = sprintf("Sea Level Pressure %s current version (v%s) data", scen_year - 2, scen_year), breaks = 70) # v2025 - plots v2025 2022 data
+terra::hist(r_new_old_terra, main = sprintf("Sea Level Pressure %s current version (v%s) data", scen_year - 3, scen_year), breaks = 70) # v2025 - plots v2024 2022 data
+terra::hist(r_old_terra, main = sprintf("Sea Level Pressure %s previous version (v%s) data", scen_year - 3, scen_year - 1), breaks = 70) # v2025 - plots v2023 2021 data
 ```
 
 ```{r extract regions, eval=FALSE}
@@ -576,9 +579,9 @@ regions_stats_clean <- regions_stats %>%
   mutate(year = 1993 + year - 1) # convert from numbers to actual years
 
 # 2024 note: updated to use here() for reproducibility
-write.csv(regions_stats_clean, here("globalprep", "prs_slr", "v2024", "output", "slr.csv"), row.names = FALSE)
+write.csv(regions_stats_clean, here("globalprep", "prs_slr", "v2025", "output", "slr.csv"), row.names = FALSE)
 
-regions_stats_clean <- read_csv(here("globalprep", "prs_slr", "v2024", "output", "slr.csv"))
+regions_stats_clean <- read_csv(here("globalprep", "prs_slr", "v2025", "output", "slr.csv"))
 
 ## visualize data
 plotData <- regions_stats_clean %>%
@@ -606,7 +609,7 @@ htmlwidgets::saveWidget(line_plot, file = "slr.html")
 ```
 
 ```{r compare, eval=FALSE}
-new_data <- read_csv(here("globalprep", "prs_slr", "v2024", "output", "slr.csv")) %>%
+new_data <- read_csv(here("globalprep", "prs_slr", "v2025", "output", "slr.csv")) %>%
   dplyr::select(rgn_id, year, new_pressure_score = pressure_score)
 
 # define higher level prs_slr file path 
@@ -641,10 +644,13 @@ mjr_score_change <- slr_new_old %>%
   mutate(abs_diff = abs(diff))
 
 # save major score changes to output folder as csv
-write.csv(mjr_score_change, here("globalprep", "prs_slr", "v2024", "output", "major_changes_2024.csv"))
+write.csv(mjr_score_change, here("globalprep", "prs_slr", "v2025", "output", "major_changes_2025.csv"))
 ```
 
 ```{r score_change_plots, eval=FALSE}
+# NOTE: This does not need to change to 2025, as we have seen that the data is the same. In subsequent years, when full 2023 data is added, this should be changed
+
+
 slr_status_plot <- ggplot(slr_new_old, 
                         aes(x = pressure_score, y = new_pressure_score, key = rgn_id)) +
   geom_point(alpha = .6) +
@@ -664,7 +670,7 @@ bar_plot_mjr_change <- ggplot(mjr_score_change, aes(x = factor(rgn_id), y = diff
   geom_bar(stat = 'identity', fill = 'cornflowerblue', alpha = 0.8) +
   labs(x = 'Region ID',
        y = 'Difference in Pressure Score',
-       title = 'Major Score changes between New (v2024) and Old (v2023) Pressure Scores') +
+       title = 'Major Score changes between New (v2025) and Old (v2024) Pressure Scores') +
   theme_minimal(base_size = 8) +
   theme(axis.text.x = element_text(angle = 90, size = 5, margin = margin(t = 0, r = -3, b = 0, l = -3)),
         plot.title = element_text(hjust = 0.5, face = "bold"),
@@ -678,7 +684,7 @@ bar_plot_all_change <- ggplot(all_score_changes, aes(x = factor(rgn_id), y = dif
   geom_bar(stat = 'identity', fill = 'cornflowerblue', alpha = 0.8) +
   labs(x = 'Region ID',
        y = 'Difference in Pressure Score',
-       title = 'Major Score changes between New (v2024) and Old (v2023) Pressure Scores') +
+       title = 'Major Score changes between New (v2025) and Old (v2024) Pressure Scores') +
   theme_minimal(base_size = 8) +
   theme(axis.text.x = element_text(angle = 90, size = 5, margin = margin(t = 0, r = -3, b = 0, l = -3)),
         plot.title = element_text(hjust = 0.5, face = "bold"),
@@ -699,8 +705,8 @@ boxplot_diff
 
 # Visual representation of the difference between this year and last year's rasters
 
-```{r}
-# refer back to line 503 for the rasterized output for current year and last year. v2024 update
+```{r, eval= FALSE}
+# refer back to line 503 for the rasterized output for current year and last year. v2025 update
 
 raster_diff <- r_new_terra - r_new_old_terra
 plot(raster_diff)
@@ -715,11 +721,11 @@ table(values(raster_diff))
 There was no gapfilling for these data. Created gapfill files with values of 0.
 
 ```{r, eval=FALSE}
-slr_gf <- read.csv(here("globalprep", "prs_slr", "v2024", "output", "slr.csv"))%>%
+slr_gf <- read.csv(here("globalprep", "prs_slr", "v2025", "output", "slr.csv"))%>%
   mutate(pressure_score = 0) %>% 
   rename(gapfilled = pressure_score)
 
-write.csv(slr_gf, here("globalprep", "prs_slr", "v2024", "output", "slr_gf.csv"), row.names=FALSE)
+write.csv(slr_gf, here("globalprep", "prs_slr", "v2025", "output", "slr_gf.csv"), row.names=FALSE)
 ```
 
 

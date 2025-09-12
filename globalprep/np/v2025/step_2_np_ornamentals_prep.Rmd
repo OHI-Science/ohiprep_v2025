@@ -22,11 +22,6 @@ editor_options:
 
 This analysis calculates the score for ornamentals per region based on FAO commodities data. This calculation process includes creating a sustainability layer based off of risk and exposure for ornamental fishing.
 
-# Updates from previous assessment
-
-### v2024
-*   Complete overhaul of methodology from previous years. Original data prep file: `STEP1a_np_ornamental_prep.Rmd`
-*   New year of FAO data (2022)
 
 ------------------------------------------------------------------------
 
@@ -49,7 +44,6 @@ Files can be found on Mazu: `home/shares/ohi/git-annex/globalprep/_raw_data/FAO_
 ------------------------------------------------------------------------
 
 # Methods
-
 
 
 Although we do not know actual sustainable levels of harvest for ornamentals, $S_p$, in each region, we estimated it based on exposure and risk components:
@@ -136,7 +130,7 @@ Then, in final data, save `rgn_id`, `product`, `year`, `rel_sust_tonnes`
 # ---- Subset np harvest ornamentals ----
 
 # read in FAO commodities usd tonnes int data
-np_harvest_usd_tonnes <- read_csv(here(current_np_dir, "int", "np_harvest_usd_tonnes_gf.csv"))
+np_harvest_usd_tonnes <- read_csv(here(current_np_dir, "int", "np_harvest_usd_tonnes.csv"))
 
 # filter FAO commodities int data to ornamentals
 np_ornamentals_base <- np_harvest_usd_tonnes %>% 
@@ -148,52 +142,6 @@ table(np_ornamentals_base$product)
 # 4142 -- v2025
 
 # ---- tonnes only ----
-# select relevant columns
-np_harvest_orn <- np_ornamentals_base %>%
-  dplyr::select(rgn_id, rgn_name, year, product, tonnes) %>% 
-  # hard-coded year cutoff point to ensure just enough years of data for rolling average calculations
-  dplyr::filter(year >= 2004) %>% 
-  arrange(rgn_id)
-
-# write out tonnes subset to int
-readr::write_csv(np_harvest_orn, here(current_np_dir, "int", "np_harvest_ornamentals_tonnes.csv"))
-
-# ---- usd and tonnes ----
-# select relevant columns (including usd this time)
-np_harvest_orn_full <- np_ornamentals_base %>%
-  dplyr::select(rgn_id, rgn_name, year, product, tonnes, usd) %>% 
-  # hard-coded year cutoff point to ensure just enough years of data for rolling average calculations
-  dplyr::filter(year >= 2004) %>% 
-  arrange(rgn_id)
-
-# write out tonnes subset to int
-readr::write_csv(np_harvest_orn_full, here(current_np_dir, "int", "np_harvest_ornamentals_tonnes_usd.csv"))
-
-orn_old <- read_csv(here(prev_np_dir, "int", "np_harvest_ornamentals_tonnes_usd.csv"))
-view(orn_old)
-
-leb_new <- np_ornamentals_base %>% 
-  filter(rgn_id == 78) 
-view(leb_new)
-
-leb_old <- orn_old %>% 
-  filter(rgn_id == 78) %>% 
-  rename(old_tonnes = tonnes,
-         old_usd = usd)
-
-total <- leb_new %>% 
-  full_join(leb_old, by = c("rgn_id", "product", "rgn_name", "year")) %>% 
-  relocate(old_tonnes, .after = tonnes) %>% 
-  filter(year >= 2012)
-view(total)
-# Plot sustainable tonnes
-comp_plot_1 <- ggplot() + 
-  geom_jitter(data = total, aes(x = old_tonnes, y = tonnes, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
-  # labs(x = paste("Previous Value", previous_data_year),
-  #      y = paste("Current Value", latest_data_year),
-  #      title = paste0("Sustainable tonnes: ", scen_year_number, " Assessment (",latest_data_year, " data) vs. ", prev_scen_year, " Assessment (",previous_data_year, " data)", " All Countries")) +
-  geom_abline(slope = 1, intercept = 0, col = "red") +
-  theme_bw(); ggplotly(comp_plot_1)
 
 ```
 
@@ -210,19 +158,20 @@ Returns the first input data frame with a new column for exposure:
 ```{r}
 # ====== Determine Habitat Areas for Exposure ========
 # rocky reef habitat area
-hab_rocky <- readr::read_csv(here::here("globalprep", "hab_rockyreef", "v2012", # hasn't been updated since 2012
+hab_rocky <- readr::read_csv(here::here("globalprep", "hab_rockyreef", "v2012", 
                            "data", "habitat_extent_rocky_reef_updated.csv")) %>%
   dplyr::select(rgn_id, km2) %>%
   dplyr::filter(km2 > 0)
 
 # coral habitat area
-hab_coral <- readr::read_csv(here::here("globalprep", "hab_coral", "v2021", # hasn't been updated since 2021
+hab_coral <- readr::read_csv(here::here("globalprep", "hab_coral", "v2021", 
                            "data", "habitat_extent_coral_updated.csv")) %>%
   dplyr::select(rgn_id, km2) %>%
   dplyr::filter(km2 > 0)
 
 # find total area in coral and rocky reef habitats
-area_dual_hab <- np_harvest_orn %>%
+area_dual_hab <- np_ornamentals_base %>%
+  select(rgn_name, rgn_id, product, year, tonnes) %>%
   dplyr::left_join(hab_coral %>%
                      dplyr::rename(coral_km2 = km2),
                    by = c('rgn_id')) %>%
@@ -245,13 +194,12 @@ np_exp_raw <- area_dual_hab %>%
   # find regions and years with harvest in rocky reef and coral habitat
   dplyr::mutate(expos_raw = ifelse(tonnes > 0 & km2 > 0,
                                    (tonnes / km2), # raw exposure: harvest tonnes / habitat area
-                                   0)) %>% # 0 exposure if no harvest or no special habitat
-  dplyr::group_by(product) 
- 
+                                   0))  # 0 exposure if no harvest or no special habitat
+  
 
 # define most recent 10 year range ----
 max_exp_year <- max(np_exp_raw$year)
-exp_decade_range <- seq((max_exp_year - 10), max_exp_year, 1)
+exp_decade_range <- seq((max_exp_year - 9), max_exp_year, 1)
 
 
 # ---- find 95th quantile of the past 10 years ----
@@ -262,8 +210,8 @@ np_exp_recent_decade <- np_exp_raw %>%
 
 global_95th_quantile <- stats::quantile(np_exp_recent_decade$expos_raw, probs = c(0.95))
 global_95th_quantile
-# v2024: 95th is 0.1511856; 99th is 45.90351 
-# v2025: 95th is 0.1334472; 99th is 40.86775 
+# v2024: 95th is 0.151; 99th is 45.90351 
+# v2025: 95th is 0.136; 99th is 40.86775 
 
 
 # ---- calculate rescaled exposure ----
@@ -284,13 +232,10 @@ np_exposure_new <- np_exp_raw %>%
 colSums(is.na(np_exposure_new))
 
 summary(np_exposure_new$exposure)
-# v2024:
-#     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-# 0.000000 0.000000 0.009503 0.128015 0.082771 1.000000
 
-# v2025
-#     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-# 0.000000 0.000000 0.003133 0.116068 0.065836 1.000000 
+# write out exposure status
+readr::write_csv(np_exposure_new, here(current_np_dir, "int", "np_exposure.csv"))
+
 ```
 
 
@@ -305,88 +250,6 @@ ggplot(data = np_exposure_new) +
   theme_bw()
 
 ```
-
-# Gapfilling
-
-**UPDATE**: The 2025 data has no NAs, so this process was halted. The code will be kept for future assessments in case gapfilling is needed. 
-
-The 2024 assessment only gapfilled with the global mean score. For the 2025 assessment, this method will be slightly improved to also include gapfilling by region first, before gapfilling by global mean. 
-
-1. Group by region and fill with the mean exposure score
-2. Group by georegion and fill with the mean exposure score
-3. Fill with the global mean exposure score
-
-```{r save-exposure, eval=FALSE}
-# ======== Save intermediate data products ==========
-# Create gapfilling record keeping columns to use later
-np_exp_gf <- np_exposure_new %>%
-  dplyr::mutate(gapfilled = ifelse(is.na(exposure), 1, 0)) 
-  
-# Add georegion column for gapfilling
-np_exposure_rgn <- np_exp_gf %>%
-  add_georegion_id() %>%
-  dplyr::select(-level)
-
-# add exposure for countries with (habitat extent == NA)
-np_exp_orn <- np_exposure_rgn %>% 
-  # Gapfill by region
-  dplyr::group_by(rgn_id, product) %>% 
-  dplyr::mutate(rgn_exp = mean(exposure, na.rm = TRUE)) %>% 
-  dplyr::mutate(exposure = ifelse(is.na(exposure), rgn_exp, exposure)) %>% 
-  mutate(method = ifelse(gapfilled == 1 & exposure == rgn_exp, "region_avg", NA)) %>%
-  dplyr::ungroup() %>% 
-  # Gapfill by georegion
-  dplyr::group_by(georgn_id, product) %>% 
-  dplyr::mutate(georgn_exp = mean(exposure, na.rm = TRUE)) %>% 
-  dplyr::mutate(exposure = ifelse(is.na(exposure), georgn_exp, exposure)) %>% 
-  mutate(method = ifelse(gapfilled == 1 & exposure == georgn_exp, "georegion_avg", NA)) %>%
-  dplyr::ungroup() %>% 
-  # Gapfill with global mean
-  dplyr::group_by(product) %>% 
-  dplyr::mutate(mean_exp = mean(exposure, na.rm = TRUE)) %>%
-  dplyr::mutate(exposure = ifelse(is.na(exposure), mean_exp, exposure)) %>%
-  mutate(method = ifelse(gapfilled == 1 & exposure == mean_exp, "global_avg", NA)) %>%
-  dplyr::ungroup() %>%
-  # coerce data type
-  dplyr::mutate(product = as.character(product))
-
-np_exp_orn_final <- np_exp_orn %>% 
-  # select relevant columns
-  dplyr::select(rgn_id, year, product, exposure)
-
-# save ornamentals exposure to int 
-readr::write_csv(np_exp_orn_final, here(current_np_dir,
-                                  "int",
-                                  "np_exposure_ornamentals.csv"))
-
-# Gapfilling record keeping
-np_exp_gf <- np_exp_orn %>%
-  dplyr::select(rgn_id, product, year, gapfilled, method)
-
-# write out to int folder
-readr::write_csv(np_exp_gf, here(current_np_dir, 
-                                 "int",
-                                 "np_exposure_ornamentals_gf.csv"))
-```
-
-```{r}
-# datacheck:
-library(RColorBrewer)
-np_orn_exposure_plot <- ggplot(data = np_exp_orn, aes(x = year, y = exposure)) +
-  geom_line(aes(color = rgn_name)) +
-  theme_bw()
-
-plotly::ggplotly(np_orn_exposure_plot)
-```
-
-
-
-```{r}
-ggplot(data = np_exp_orn %>% filter(rgn_id == 78), aes(x = year, y = exposure)) + 
-  geom_line() +
-  theme_bw()
-```
-
 
 
 
@@ -438,8 +301,8 @@ risk_orn <- r_cyanide %>%
 np_risk_orn <-
   # create a dataframe from all combinations of rgn ID and year
   expand.grid(
-    rgn_id  = unique(np_harvest_orn$rgn_id),
-    year = unique(np_harvest_orn$year)
+    rgn_id  = unique(np_ornamentals_base$rgn_id),
+    year = unique(np_ornamentals_base$year)
   ) %>%
   # join with ornamentals
   left_join(risk_orn, by = c("rgn_id"))  %>%
@@ -471,7 +334,7 @@ readr::write_csv(np_risk_orn, here(current_np_dir, "int", "np_risk_ornamentals.c
 
 ```{r}
 # read in exposure
-exposure <- readr::read_csv(here(current_np_dir, "int", "np_exposure_ornamentals.csv"))
+exposure <- readr::read_csv(here(current_np_dir, "int", "np_exposure.csv"))
 
 # read in risk
 risk <- readr::read_csv(here(current_np_dir, "int", "np_risk_ornamentals.csv"))
@@ -483,7 +346,6 @@ exposure %>%
 risk %>% 
   filter(rgn_id == 78) %>% 
   view()
-view(exposure)
 
 # ---- calculate sustainability ----
 
@@ -494,29 +356,22 @@ orn_exposure_risk <- exposure %>%
 # calculate sustainability
 orn_sust <- orn_exposure_risk %>% 
   ungroup() %>% 
-  group_by(rgn_id, year, product) %>% 
+  group_by(rgn_id, year) %>% 
   mutate(sustainability = 1 - mean(c(exposure, risk), na.rm = TRUE)) %>% 
-  ungroup()
+  ungroup() %>%
+  select(rgn_id, year, exposure, risk, sustainability)
 
 orn_sust %>% 
-  filter(rgn_id == 78 & year >= 2012) %>% 
-  view()
+  filter(rgn_id == 78 & year >= 2012) 
 
-# exploratory data viz / data check
-check_orn_sust_plot <- ggplot(data = orn_sust, aes(x = year, y = sustainability)) +
-  geom_line(aes(color = as.character(rgn_id))) +
-  theme_bw()
 
-plotly::ggplotly(check_orn_sust_plot)
 ```
-
-
 
 
 ## Calculate Sustainable Harvest
 
-`tonnes * sustainability`
-
+`usd * sustainability`
+This is going to be based on USD. The tonnes data seems pretty suspect in many cases and the USD data is better. And, in this case, since the USD and tonnes data are the same source they should be equivalent (vs. fishoil/fishmeal and seaweed).
 
 ```{r}
 # read in ornamentals harvest (same as earlier chunk)
@@ -524,7 +379,7 @@ np_harvest_ornamentals <- readr::read_csv(here(current_np_dir, "int", "np_harves
 
 # join sustainability and tonnes
 sust_harvest_join <- np_harvest_ornamentals %>% 
-  full_join(orn_sust, by = join_by("rgn_id", "year", "product")) %>% 
+  full_join(orn_sust, by = join_by("rgn_id", "year")) %>% 
   filter(year >= 2004) # ensure that proper start year is set
 
 # check summary
@@ -535,35 +390,32 @@ summary(sust_harvest_join)
 
 # calculate sustainable harvest
 sust_harvest_orn <- sust_harvest_join %>% 
-  mutate(sust_tonnes = tonnes * sustainability)
+  mutate(sust_usd = usd * sustainability) %>%
+  filter(!is.na(sust_usd))
 
 
 # check
 summary(sust_harvest_orn)
-# only 95 NAs in sust_harvest ~~ v2024
+
 ```
 
 
 
 ## Rolling Average of Sustainable Tonnes
 
-
-
 ```{r}
 # Find max year in the summarized data table
 year_max <- max(sust_harvest_orn$year)
 
 # for each region and year, calculate rolling mean in a 5 year window (year + 4 years, right-aligned (year, look at the 4 years previous))
-sust_tonnes_rolling <- sust_harvest_orn %>%
+sust_usd_rolling <- sust_harvest_orn %>%
   arrange(rgn_id, product, year) %>%
   group_by(rgn_id, product) %>%
   mutate(
-      sust_tonnes_rollmean = zoo::rollapply(sust_tonnes, width = 4,
+      sust_usd_rollmean = zoo::rollapply(sust_usd, width = 4,
                                             FUN = mean, align = 'right',
                                             partial = TRUE, na.rm = FALSE)) %>%
-  rename(sust_tonnes_orig = sust_tonnes) %>% 
-  mutate(sust_tonnes = ifelse(!is.na(sust_tonnes_rollmean), sust_tonnes_rollmean, sust_tonnes_orig)) %>%
-  dplyr::select(rgn_id, rgn_name, year, product, tonnes, sustainability, sust_tonnes, sust_tonnes_orig)
+  dplyr::select(rgn_id, rgn_name, year, product, tonnes, usd, sustainability, sust_usd, sust_usd_rollmean)
 
 
 ```
@@ -577,133 +429,48 @@ Find the maximum sustainable tonnes per region within the past 10 years.
 # subset to past 10 years, find max sustainable tonnes 
 
 # define 10 year range
-sust_tonnes_decade <- c((year_max - 10):year_max)
+sust_decade <- c((year_max - 10):year_max)
 
 # find peak sustainable tonnes 
-max_sust_tonnes <- sust_tonnes_rolling %>% 
-  filter(year %in% c(sust_tonnes_decade)) %>% 
+max_sust_usd <- sust_usd_rolling %>% 
+  filter(year %in% c(sust_decade)) %>% 
   ungroup() %>% 
-  group_by(rgn_id, product) %>% 
-  mutate(peak_sust_tonnes = max(sust_tonnes, na.rm = TRUE)) %>% 
-  ungroup() %>% 
-  # keep first value for each 
-  # (it's copied a few times otherwise which causes issues down the line)
-  dplyr::distinct(rgn_id, peak_sust_tonnes) %>% 
-  dplyr::select(rgn_id, peak_sust_tonnes)
+  group_by(rgn_id) %>% 
+  summarize(peak_usd = max(sust_usd_rollmean, na.rm = TRUE))
   
 
 ```
 
 
-## Relative Sustainable Tonnes
+## Relative Sustainable Harvest
 
-Bring max sustainable tonnes value back into sustainable tonnes full dataframe. Use this value to calculate relative sustainable tonnes: if `sust_tonnes >= peak_sust_tonnes`, then set to 1. Else, `tonnes_rollmean / peak_sust_tonnes`.  
+Will evaluate this in USD. Idea is that sustainable dollar value does not decrease relative to historical harvest value. 
 
 ```{r}
-# ---- Determine relative sustainable tonnes ----
-orn_relative_sust_tonnes <- 
+# ---- Determine relative sustainable usd value ----
+orn_relative_sust_usd <- 
   # join peak sustainable tonnes with full sustainable tonnes df
-  sust_tonnes_rolling %>% 
+  sust_usd_rolling %>% 
   ungroup() %>% 
   ## filling in peak value per region ID across full year range
-  full_join(max_sust_tonnes, by = join_by("rgn_id")) %>% 
+  full_join(max_sust_usd, by = join_by("rgn_id")) %>% 
   # rescale to find relative sustainable tonnes
-  mutate(rel_sust_tonnes = ifelse(sust_tonnes > peak_sust_tonnes, 1,
-                             sust_tonnes / peak_sust_tonnes))
+  mutate(rel_sust_usd = ifelse(sust_usd_rollmean > peak_usd, 1,
+                             sust_usd_rollmean / peak_usd)) %>%
+  filter(!is.na(rel_sust_usd))
  
 # check
-summary(orn_relative_sust_tonnes)
+summary(orn_relative_sust_usd)
 
 
 # save full df to int folder
-readr::write_csv(orn_relative_sust_tonnes, here(current_np_dir, "int", "np_relative_sust_tonnes_ornamentals_full.csv"))
+readr::write_csv(orn_relative_sust_usd, here(current_np_dir, "int", "np_ornamentals_full.csv"))
 
 
 # save selected columns to output folder
-final_orn_relative_sust_tonnes <- orn_relative_sust_tonnes %>% 
-  dplyr::select(rgn_id, product, year, rel_sust_tonnes)
+final_orn_relative_sust_usd <- orn_relative_sust_usd %>% 
+  dplyr::select(rgn_id, product, year, score= rel_sust_usd)
 
-readr::write_csv(final_orn_relative_sust_tonnes, here(current_np_dir, "output", "np_relative_sust_tonnes_ornamentals.csv"))
+readr::write_csv(final_orn_relative_sust_usd, here(current_np_dir, "output", "np_ornamentals.csv"))
 ```
-
-# Data check
-
-Compare ornamental sustainability from previous years
-
-```{r}
-# Read in previous assessment data
-old_orn <- read_csv(here("globalprep", "np", prev_v_scen_year, "int", "np_relative_sust_tonnes_ornamentals_full.csv"))
-
-# Read in current assessment data
-new_orn <- read_csv(here("globalprep", "np", v_scen_year, "int", "np_relative_sust_tonnes_ornamentals_full.csv"))
-
-previous_data_year <- 2022
-latest_data_year <- 2023
-
-# ---- Compare ornamental sust data for all countries: ----
-# previous data year (2022) vs. current data year (2023) 
-old_orn_1 <- old_orn %>% 
-  filter(year == previous_data_year) %>% 
-  dplyr::select(rgn_id, product, rgn_name, old_sust_tonnes = sust_tonnes, old_tonnes = tonnes, old_sust = sustainability, old_rel_sust = rel_sust_tonnes, old_peak = peak_sust_tonnes, old_orig = sust_tonnes_orig)
-
-new_orn_1 <- new_orn %>% 
-  filter(year == latest_data_year) %>% 
-  dplyr::select(rgn_id, product, rgn_name, sust_tonnes, tonnes, sustainability, rel_sust_tonnes, peak_sust_tonnes, sust_tonnes_orig)
-
-
-total <- old_orn_1 %>% 
-  full_join(new_orn_1, by = c("rgn_id", "product", "rgn_name"))
-
-# Plot sustainable tonnes
-comp_plot_1 <- ggplot() + 
-  geom_jitter(data = total, aes(x = old_sust_tonnes, y = sust_tonnes, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
-  labs(x = paste("Previous Value", previous_data_year),
-       y = paste("Current Value", latest_data_year),
-       title = paste0("Sustainable tonnes: ", scen_year_number, " Assessment (",latest_data_year, " data) vs. ", prev_scen_year, " Assessment (",previous_data_year, " data)", " All Countries")) +
-  geom_abline(slope = 1, intercept = 0, col = "red") +
-  theme_bw(); ggplotly(comp_plot_1)
-
-# Plot sustainability
-comp_plot_2 <- ggplot() + 
-  geom_jitter(data = total, aes(x = old_sust, y = sustainability, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
-  labs(x = paste("Previous Value", previous_data_year),
-       y = paste("Current Value", latest_data_year),
-       title = paste0("Sustainability: ", scen_year_number, " Assessment (",latest_data_year, " data) vs. ", prev_scen_year, " Assessment (",previous_data_year, " data)", " All Countries")) +
-  geom_abline(slope = 1, intercept = 0, col = "red") +
-  theme_bw(); ggplotly(comp_plot_2)
-
-
-# ---- Compare ornamental sust data for all countries: ----
-# previous data year (2022) 
-old_orn_2 <- old_orn %>% 
-  filter(year == previous_data_year) %>% 
-  dplyr::select(rgn_id, product, rgn_name, old_sust_tonnes = sust_tonnes, old_tonnes = tonnes, old_sust = sustainability, old_rel_sust = rel_sust_tonnes, old_peak = peak_sust_tonnes, old_orig = sust_tonnes_orig)
-
-new_orn_2 <- new_orn %>% 
-  filter(year == previous_data_year) %>% 
-  dplyr::select(rgn_id, product, rgn_name, sust_tonnes, tonnes, sustainability, rel_sust_tonnes, peak_sust_tonnes, sust_tonnes_orig)
-
-
-total_2 <- old_orn_2 %>% 
-  full_join(new_orn_2, by = c("rgn_id", "product", "rgn_name"))
-
-comp_plot_3 <- ggplot() + 
-  geom_jitter(data = total_2, aes(x = old_sust_tonnes, y = sust_tonnes, text = paste("Product:", product, "<br>Region:", rgn_name)), alpha = 0.7) +
-  labs(x = paste("Previous Value", previous_data_year), 
-       y = paste("Current Value", previous_data_year),
-       title = paste("Sustainable tonnes:", previous_data_year, "Data", prev_scen_year, "Assessment vs.", previous_data_year, "Data", scen_year_number, "assessment")) +
-  geom_abline(slope = 1, intercept = 0, col = "red") +
-  theme_bw();ggplotly(comp_plot_3)
-
-
-# Plot sustainability
-comp_plot_4 <- ggplot() + 
-  geom_jitter(data = total_2, aes(x = old_sust, y = sustainability, text = paste("product:", product, "<br>region:", rgn_name)), alpha = 0.7) +
-  labs(x = paste("Previous Value", previous_data_year),
-       y = paste("Current Value", previous_data_year),
-       title = paste("Sustainability:", previous_data_year, "Data", prev_scen_year, "Assessment vs.", previous_data_year, "Data", scen_year_number, "assessment")) +
-  geom_abline(slope = 1, intercept = 0, col = "red") +
-  theme_bw(); ggplotly(comp_plot_4)
-```
-
 

@@ -1,0 +1,222 @@
+---
+title: 'OHI 2025: Beaches Extent'
+author: "*Compiled on `r date()` by `r Sys.info()['user']`*"
+output: 
+  html_document:
+    code_folding: show
+    toc: true
+    toc_depth: 1
+    toc_float: yes
+    number_sections: false
+    theme: cerulean
+    highlight: haddock
+    includes: 
+      in_header: '../../../workflow/templates/ohi_hdr.html'
+pdf_document:
+  toc: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, eval= FALSE}
+# Load relevant libraries
+library(readr) 
+library(raster)
+library(here)
+library(sf)
+library(fasterize)
+library(tidyverse)
+library(mapview)
+library(sp)
+library(terra)
+
+source(here::here('workflow', 'R', 'common.R'))
+
+goal <- 'globalprep/hab_beaches/v2025'
+
+dir_git  <- file.path('~/github/ohiprep_v2025', goal)
+
+dir_beaches<- file.path(file.path(dir_M, 'git-annex/globalprep/_raw_data/Global_Coastline_Data/v2025')) #note: folder should be made for each year of new data, and changed
+
+ohi_rasters() # call the region zones raster
+```
+
+
+```{r, eval= FALSE}
+# Load in the beaches shapefiles
+# Get all reefextent_.gpkg files
+beaches_2010 <- st_read(file.path(dir_beaches, "GCL2010.shp"))
+
+beaches_2015 <- st_read(file.path(dir_beaches, "GCL2015.shp"))
+
+beaches_2020 <- st_read(file.path(dir_beaches, "GCL2020.shp"))
+```
+
+```{r, eval= FALSE}
+# Filter to only sandy beach observations 
+beaches_2010_sandy <- beaches_2010 %>%
+  filter(class == 2) # Sandy beach has 30,520 observations in v2025
+
+beaches_2015_sandy <- beaches_2015 %>%
+  filter(class == 2) # Sandy beach has 27,923 observations in v2025
+
+beaches_2020_sandy <- beaches_2020 %>%
+  filter(class == 2) # Sandy beach has 32,725 observations in v2025
+```
+
+```{r, eval= FALSE}
+# Project the data
+beaches_2010_transform <- st_transform(beaches_2010_sandy, crs= "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs")
+
+beaches_2015_transform <- st_transform(beaches_2015_sandy, crs= "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs")
+
+beaches_2020_transform <- st_transform(beaches_2020_sandy, crs= "+proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs")
+```
+
+```{r, eval= FALSE}
+# Take the land rasters from OHI
+land_ocean <- raster("/home/shares/ohi/git-annex/globalprep/spatial/v2017/regions_land_ocean.tif")
+
+# Convert raster to a Terra() package type raster (SpatRaster). This is because lines can only be rasterized through the terra package. In order to stick with OHI convention, we will be converting this back to a RasterLayer. 
+eez_raster <- rast(land_ocean)
+
+# Make valid 2010, Vectorize the lines
+beaches_2010_transform <- st_make_valid(beaches_2010_transform)
+beaches_2010_transform <- beaches_2010_transform[!st_is_empty(beaches_2010_transform), ]# remove empty geometries
+
+# Make valid 2015, Vectorize the lines
+beaches_2015_transform <- st_make_valid(beaches_2015_transform)
+beaches_2015_transform <- beaches_2015_transform[!st_is_empty(beaches_2015_transform), ]# remove empty geometries
+
+# Make valid 2020, Vectorize the lines
+beaches_2020_transform <- st_make_valid(beaches_2020_transform)
+beaches_2020_transform <- beaches_2020_transform[!st_is_empty(beaches_2020_transform), ]# remove empty geometries
+
+# Vectorize the lines (a terra specific package)
+lines_2010_vect <- vect(beaches_2010_transform)
+
+lines_2015_vect <- vect(beaches_2015_transform)
+
+lines_2020_vect <- vect(beaches_2020_transform)
+
+# Rasterize lines to the same grid as zones
+beaches_2010_raster <- rasterize(lines_2010_vect, eez_raster, field = 1, background = 0)
+
+beaches_2015_raster <- rasterize(lines_2015_vect, eez_raster, field = 1, background = 0)
+
+beaches_2020_raster <- rasterize(lines_2020_vect, eez_raster, field = 1, background = 0)
+
+# Write to mazu
+writeRaster(beaches_2010_raster, filename = file.path(dir_M, "git-annex/globalprep/hab_beaches/beaches_2010_raster.tif"), overwrite=TRUE)
+
+writeRaster(beaches_2015_raster, filename = file.path(dir_M, "git-annex/globalprep/hab_beaches/beaches_2015_raster.tif"), overwrite=TRUE)
+
+writeRaster(beaches_2020_raster, filename = file.path(dir_M, "git-annex/globalprep/hab_beaches/beaches_2020_raster.tif"), overwrite=TRUE)
+```
+
+```{r, eval= FALSE}
+# Load in the data again as RasterLayer for ease of comparison to typical OHI methodology for zonal statistics
+beaches_2010_raster <- raster(file.path(dir_M, "git-annex/globalprep/hab_beaches/beaches_2010_raster.tif"))
+beaches_2015_raster <- raster(file.path(dir_M, "git-annex/globalprep/hab_beaches/beaches_2015_raster.tif"))
+beaches_2020_raster <- raster(file.path(dir_M, "git-annex/globalprep/hab_beaches/beaches_2020_raster.tif"))
+```
+
+```{r, eval= FALSE}
+# Calculate zonal stats with zones raster and new coral. Convert to km^2 and save int/output files
+zonal_sums_2010 <- terra::zonal(beaches_2010_raster,
+                                     land_ocean,
+                                     fun = "sum",
+                                     na.rm = TRUE,
+                                     progress="text") #sum all coral cells for each ohi zone
+
+zonal_sums_2015 <- terra::zonal(beaches_2015_raster,
+                                     land_ocean,
+                                     fun = "sum",
+                                     na.rm = TRUE,
+                                     progress="text") #sum all coral cells for each ohi zone
+
+zonal_sums_2020 <- terra::zonal(beaches_2020_raster,
+                                     land_ocean,
+                                     fun = "sum",
+                                     na.rm = TRUE,
+                                     progress="text") #sum all coral cells for each ohi zone
+------------------------------------------------------------
+# Create a zonal_sums dataframe
+zonal_2010_df <- data.frame(zonal_sums_2010)
+
+# Find the length of beaches for each extent
+beach_sums_2010 <- zonal_2010_df %>%
+  mutate(year = 2010, habitat = "beaches",
+         km2 = (0.934478877011218970**2*sum)) %>% #one cell is equal to ~0.93 km
+  rename("rgn_id" = "zone") %>%
+  dplyr::select(-sum) %>%
+  filter(rgn_id <= 250)
+-----------------------------------------------------------
+# Create a zonal_sums dataframe
+zonal_2015_df <- data.frame(zonal_sums_2015)
+
+# Find the length of beaches for each extent
+beach_sums_2015<- zonal_2015_df %>%
+  mutate(year = 2015, habitat = "beaches",
+         km2 = (0.934478877011218970**2*sum)) %>% #one cell is equal to ~0.93 km
+  rename("rgn_id" = "zone") %>%
+  dplyr::select(-sum) %>%
+  filter(rgn_id <= 250)
+-----------------------------------------------------------
+# Create a zonal_sums dataframe
+zonal_2020_df <- data.frame(zonal_sums_2020)
+
+# Find the length of beaches for each extent
+beach_sums_2020 <- zonal_2020_df %>%
+  mutate(year = 2020, habitat = "beaches",
+         km2 = (0.934478877011218970**2*sum)) %>% #one cell is equal to ~0.93 km
+  rename("rgn_id" = "zone") %>%
+  dplyr::select(-sum) %>%
+  filter(rgn_id <= 250)
+```
+
+
+```{r, eval= FALSE}
+# Join the files together
+beach_sums_2010 <- beach_sums_2010 %>%
+  rename(km2_2010 = km2)
+
+beach_sums_2015 <- beach_sums_2015 %>%
+  rename(km2_2015 = km2)
+
+beach_sums_2020 <- beach_sums_2020 %>%
+  rename(km2_2020 = km2)
+
+# Join the datasets
+beaches_total <- beach_sums_2010 %>%
+  full_join(beach_sums_2015, by = "rgn_id") %>%
+  full_join(beach_sums_2020, by = "rgn_id")
+
+# Save as a intermediate product
+write.csv(beaches_total, here("globalprep", "hab_beaches", "v2025", "int", "beaches_total.csv"), row.names = FALSE)
+```
+
+```{r, eval= FALSE}
+# Read in csv if needed
+beaches_total <- read.csv(here("globalprep", "hab_beaches", "v2025", "int", "beaches_total.csv"))
+
+# Calculate the differences over time for rates of change
+beaches_total <- beaches_total %>%
+  mutate(diff_10_15 = km2_2015 - km2_2010,
+         diff_15_20 = km2_2020 - km2_2015,
+         trend = ((diff_10_15 + diff_15_20)/2)/10)
+
+# Scale trend from 0-1
+beaches_trend <- beaches_total %>%
+  mutate(trend = (trend - min(trend)) / (ma# Add a year column x(trend) - min(trend))) %>%
+  mutate(year = 2025) # Add a year column 
+
+# Select columns
+beaches_trend <- beaches_trend %>%
+  select(rgn_id, habitat, year, trend)
+
+# Select columns and save
+write.csv(beaches_trend, here(goal, "data", "hab_beaches_trend.csv"), row.names = FALSE)
+```
+
+

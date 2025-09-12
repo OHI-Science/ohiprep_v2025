@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Compiled on Thu Aug 28 16:10:12 2025 by oyler" />
+<meta name="author" content="Compiled on Fri Sep 5 21:52:09 2025 by oyler" />
 
 
 <title>OHI 2025 - Economies Tourism Dataprep</title>
@@ -1646,7 +1646,7 @@ border-radius: 0px;
 
 
 <h1 class="title toc-ignore">OHI 2025 - Economies Tourism Dataprep</h1>
-<h4 class="author"><em>Compiled on Thu Aug 28 16:10:12 2025 by
+<h4 class="author"><em>Compiled on Fri Sep 5 21:52:09 2025 by
 oyler</em></h4>
 
 </div>
@@ -1975,10 +1975,10 @@ right side of the page - Select “Data on this page”</p>
 <span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>tour_spending_export <span class="ot">&lt;-</span> tourism_spending <span class="sc">%&gt;%</span> </span>
 <span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>  <span class="fu">select</span>(rgn_id, rgn_name, year, total_spending, unit)</span>
 <span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="fu">write_csv</span>(tour_spending_export, <span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;eco_tour_spending.csv&quot;</span>))</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="fu">write_csv</span>(tour_spending_export, <span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;tour_spending.csv&quot;</span>))</span>
 <span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a></span>
 <span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="co"># Save gapfilling info</span></span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="fu">write_csv</span>(tourism_spending, <span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;eco_tour_spending_gf.csv&quot;</span>))</span></code></pre></div>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="fu">write_csv</span>(tourism_spending, <span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;tour_spending_gf.csv&quot;</span>))</span></code></pre></div>
 </div>
 </div>
 <div id="total-gdp" class="section level1">
@@ -2187,10 +2187,10 @@ our data</p>
 <span id="cb13-36"><a href="#cb13-36" tabindex="-1"></a>gdp_export <span class="ot">&lt;-</span> total_gdp <span class="sc">%&gt;%</span> </span>
 <span id="cb13-37"><a href="#cb13-37" tabindex="-1"></a>  <span class="fu">select</span>(rgn_id, rgn_name, year, gdp, unit)</span>
 <span id="cb13-38"><a href="#cb13-38" tabindex="-1"></a></span>
-<span id="cb13-39"><a href="#cb13-39" tabindex="-1"></a><span class="fu">write_csv</span>(gdp_export, <span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;eco_total_gdp.csv&quot;</span>))</span>
+<span id="cb13-39"><a href="#cb13-39" tabindex="-1"></a><span class="fu">write_csv</span>(gdp_export, <span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;total_gdp.csv&quot;</span>))</span>
 <span id="cb13-40"><a href="#cb13-40" tabindex="-1"></a></span>
 <span id="cb13-41"><a href="#cb13-41" tabindex="-1"></a><span class="co"># Save gapfilling information</span></span>
-<span id="cb13-42"><a href="#cb13-42" tabindex="-1"></a><span class="fu">write_csv</span>(total_gdp, <span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;eco_total_gdp_gf.csv&quot;</span>))</span></code></pre></div>
+<span id="cb13-42"><a href="#cb13-42" tabindex="-1"></a><span class="fu">write_csv</span>(total_gdp, <span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;total_gdp_gf.csv&quot;</span>))</span></code></pre></div>
 </div>
 </div>
 <div id="combine-gdp-with-tourism-revenue" class="section level1">
@@ -2203,8 +2203,8 @@ comes from <a href="https://fred.stlouisfed.org/data/A191RD3A086NBEA">FRED</a>. 
 GDP Deflator 2015: 97.316 and GDP Deflator 2024: 125.230</p>
 <p>Update these values as needed for different prices and years.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Read in clean data</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>total_gdp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;eco_total_gdp.csv&quot;</span>))</span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>tour_spending <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;eco_tour_spending.csv&quot;</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>total_gdp <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;total_gdp.csv&quot;</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>tour_spending <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;tour_spending.csv&quot;</span>))</span>
 <span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
 <span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co"># Need to fix units between total gdp and tourism spending</span></span>
 <span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co"># UPDATE AS NEEDED</span></span>
@@ -2245,70 +2245,96 @@ GDP Deflator 2015: 97.316 and GDP Deflator 2024: 125.230</p>
 would encourage you to run that section first before this. The code
 needed to create the dataset is small, so you do not need to run the
 entire script to get this data file.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># Read in coastal proportion data</span></span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>coast_prop <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;coastal_pop_proportion.csv&quot;</span>))</span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># Join coastal prop and tourism revenue</span></span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>eco_tour_coast <span class="ot">&lt;-</span> <span class="fu">left_join</span>(eco_tourism, coast_prop,</span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>                            <span class="at">by =</span> <span class="fu">join_by</span>(rgn_id, rgn_name, year)) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tour_coast_rev =</span> tour_prop <span class="sc">*</span> coastal_prop)</span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># -------  population data -----------</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="co"># Coastal population</span></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>coastal_pop_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>,<span class="st">&quot;mar_prs_population&quot;</span>,<span class="st">&quot;v2025&quot;</span>,<span class="st">&quot;output&quot;</span>,<span class="st">&quot;mar_pop_25mi.csv&quot;</span>)) <span class="do">## read in coastal population data from other data layer</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co"># UN total population</span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>un_pop <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;globalprep&quot;</span>, <span class="st">&quot;mar_prs_population&quot;</span>, version_year,</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>                        <span class="st">&quot;output&quot;</span>, <span class="st">&quot;UN_population.csv&quot;</span>))</span>
 <span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="co"># Check NAs</span></span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>eco_tour_coast <span class="sc">%&gt;%</span> </span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(tour_coast_rev)) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>  <span class="fu">distinct</span>(rgn_id, rgn_name)</span>
-<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a><span class="co"># 1 region with no data</span></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="co"># Add region names</span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>coast_pop_rgn <span class="ot">&lt;-</span> <span class="fu">left_join</span>(coastal_pop_data, rgns_eez_small, </span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>                           <span class="at">by =</span> <span class="fu">join_by</span>(rgn_id))</span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>un_pop_rgn <span class="ot">&lt;-</span> <span class="fu">left_join</span>(un_pop, rgns_eez_small, <span class="at">by =</span> <span class="fu">join_by</span>(rgn_id))</span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a></span>
 <span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a></span>
-<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="co"># Drop NAs</span></span>
-<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a>eco_tourism_final <span class="ot">&lt;-</span> eco_tour_coast <span class="sc">%&gt;%</span> </span>
-<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a>  <span class="fu">drop_na</span>(tour_prop) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a>  <span class="fu">select</span>(rgn_id, year, <span class="at">revenue =</span> tour_coast_rev) <span class="sc">%&gt;%</span> <span class="fu">view</span>()</span>
-<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a></span>
-<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a><span class="fu">write_csv</span>(eco_tourism_final, <span class="fu">here</span>(current_le_dir, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;eco_tour_revenue.csv&quot;</span>))</span></code></pre></div>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="co"># Calculate coastal proportion</span></span>
+<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a>coastal_prop_df <span class="ot">&lt;-</span> <span class="fu">left_join</span>(un_pop_rgn, coast_pop_rgn, </span>
+<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a>                             <span class="at">by =</span> <span class="fu">join_by</span>(rgn_id, rgn_name, year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a>  <span class="co"># mutate(year = as.numeric(year)) %&gt;% </span></span>
+<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="dv">2008</span><span class="sc">:</span>data_year) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">coastal_prop =</span> (popsum <span class="sc">/</span> population),</span>
+<span id="cb15-21"><a href="#cb15-21" tabindex="-1"></a>         <span class="at">coastal_prop =</span> <span class="fu">ifelse</span>(coastal_prop <span class="sc">&gt;</span> <span class="dv">1</span>, <span class="dv">1</span>, coastal_prop))</span>
+<span id="cb15-22"><a href="#cb15-22" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(coastal_prop_df))</span>
+<span id="cb15-24"><a href="#cb15-24" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(coastal_prop_df<span class="sc">$</span>rgn_id)) <span class="co">#183</span></span>
+<span id="cb15-25"><a href="#cb15-25" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" tabindex="-1"></a><span class="fu">write_csv</span>(coastal_prop_df, <span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;coastal_pop_proportion.csv&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Read in coastal proportion data</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>coast_prop <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(current_le_dir, <span class="st">&quot;int&quot;</span>, <span class="st">&quot;coastal_pop_proportion.csv&quot;</span>))</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co"># Join coastal prop and tourism revenue</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>eco_tour_coast <span class="ot">&lt;-</span> <span class="fu">left_join</span>(eco_tourism, coast_prop,</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>                            <span class="at">by =</span> <span class="fu">join_by</span>(rgn_id, rgn_name, year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tour_coast_rev =</span> tour_prop <span class="sc">*</span> coastal_prop)</span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="co"># Check NAs</span></span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>eco_tour_coast <span class="sc">%&gt;%</span> </span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(tour_coast_rev)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a>  <span class="fu">distinct</span>(rgn_id, rgn_name)</span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a><span class="co"># 1 region with no data</span></span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a><span class="co"># Drop NAs</span></span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a>eco_tourism_final <span class="ot">&lt;-</span> eco_tour_coast <span class="sc">%&gt;%</span> </span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a>  <span class="fu">drop_na</span>(tour_prop) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a>  <span class="fu">select</span>(rgn_id, year, <span class="at">revenue =</span> tour_coast_rev) <span class="sc">%&gt;%</span> <span class="fu">view</span>()</span>
+<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a><span class="fu">write_csv</span>(eco_tourism_final, <span class="fu">here</span>(current_le_dir, <span class="st">&quot;output&quot;</span>, <span class="st">&quot;tour_revenue.csv&quot;</span>))</span></code></pre></div>
 </div>
 </div>
 <div id="data-check" class="section level1">
 <h1>Data check</h1>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>eco_tour_plot <span class="ot">&lt;-</span> eco_tourism <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>  <span class="fu">plot_ly</span>(<span class="at">x =</span> <span class="sc">~</span>year, <span class="at">y =</span> <span class="sc">~</span>tour_prop, <span class="at">color =</span> <span class="sc">~</span>rgn_name,</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">&quot;scatter&quot;</span>, <span class="at">mode =</span> <span class="st">&quot;lines&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">&quot;Economies: Tourism Proportion&quot;</span>,</span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>         <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">&quot;Year&quot;</span>),</span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>         <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">&quot;Tourism revenue proportion&quot;</span>))</span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>eco_tour_plot</span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="co"># hist_max &lt;- ggplot() +</span></span>
-<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="co">#   geom_histogram(data = liv_rescaled_final, aes(x = liv_norm),</span></span>
-<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="co">#                  color = &quot;grey10&quot;, fill = &quot;indianred&quot;)+</span></span>
-<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a><span class="co">#   labs(title = &quot;Distribution of rescaled livelihood: Maximum&quot;,</span></span>
-<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a><span class="co">#        x = &quot;Livelihood proportion: Max rescale&quot;,</span></span>
-<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a><span class="co">#        y = &quot;Count&quot;) +</span></span>
-<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a><span class="co">#   theme_bw();ggplotly(hist_max)</span></span>
-<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a></span>
-<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a><span class="co"># htmlwidgets::saveWidget(liv_final_plot, here::here(current_tr_dir, &quot;figs&quot;, &quot;ap_rescaled.html&quot;)) # save plot</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Get max data years for plotting</span></span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="co"># current_data_year &lt;- max(new_tr$year)</span></span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="co"># current_data_year</span></span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co"># previous_data_year &lt;- max(old_tr$year)</span></span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="co"># previous_data_year</span></span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="co"># Combine data frames</span></span>
-<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co"># comb_tr &lt;- new_tr %&gt;% </span></span>
-<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="co">#   rename(new_Ap = Ap) %&gt;% </span></span>
-<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="co">#   left_join(old_tr, by = join_by(rgn_id, year))</span></span>
-<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a></span>
-<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a><span class="co"># comp_plot1 &lt;- ggplot() + </span></span>
-<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a><span class="co">#   geom_jitter(data = filter(comb_tr, year == previous_data_year),</span></span>
-<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a><span class="co">#               aes(x = Ap, y = new_Ap, </span></span>
-<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a><span class="co">#                   text = paste(&quot;Year:&quot;, year, &quot;&lt;br&gt;Region:&quot;, rgn_name)),</span></span>
-<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a><span class="co">#               alpha = 0.7) +</span></span>
-<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a><span class="co">#   labs(x = paste(&quot;Previous Value&quot;, previous_data_year),</span></span>
-<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a><span class="co">#        y = paste(&quot;Current Value&quot;, previous_data_year),</span></span>
-<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a><span class="co">#        title = paste(&quot;Sustainable tourism and recreation&quot;, previous_data_year, &quot;Data&quot;, previous_year, &quot;Assessment vs.&quot;, previous_data_year, &quot;Data&quot;, current_year, &quot;assessment&quot;)) +</span></span>
-<span id="cb17-21"><a href="#cb17-21" tabindex="-1"></a><span class="co">#   geom_abline(slope = 1, intercept = 0, col = &quot;red&quot;) +</span></span>
-<span id="cb17-22"><a href="#cb17-22" tabindex="-1"></a><span class="co">#   theme_bw();ggplotly(comp_plot1)</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>eco_tour_plot <span class="ot">&lt;-</span> eco_tourism <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>  <span class="fu">plot_ly</span>(<span class="at">x =</span> <span class="sc">~</span>year, <span class="at">y =</span> <span class="sc">~</span>tour_prop, <span class="at">color =</span> <span class="sc">~</span>rgn_name,</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">&quot;scatter&quot;</span>, <span class="at">mode =</span> <span class="st">&quot;lines&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">&quot;Economies: Tourism Proportion&quot;</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>         <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">&quot;Year&quot;</span>),</span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>         <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">&quot;Tourism revenue proportion&quot;</span>))</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>eco_tour_plot</span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="co"># hist_max &lt;- ggplot() +</span></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="co">#   geom_histogram(data = liv_rescaled_final, aes(x = liv_norm),</span></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="co">#                  color = &quot;grey10&quot;, fill = &quot;indianred&quot;)+</span></span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a><span class="co">#   labs(title = &quot;Distribution of rescaled livelihood: Maximum&quot;,</span></span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a><span class="co">#        x = &quot;Livelihood proportion: Max rescale&quot;,</span></span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a><span class="co">#        y = &quot;Count&quot;) +</span></span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a><span class="co">#   theme_bw();ggplotly(hist_max)</span></span>
+<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a><span class="co"># htmlwidgets::saveWidget(liv_final_plot, here::here(current_tr_dir, &quot;figs&quot;, &quot;ap_rescaled.html&quot;)) # save plot</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Get max data years for plotting</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="co"># current_data_year &lt;- max(new_tr$year)</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="co"># current_data_year</span></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co"># previous_data_year &lt;- max(old_tr$year)</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co"># previous_data_year</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co"># Combine data frames</span></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="co"># comb_tr &lt;- new_tr %&gt;% </span></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="co">#   rename(new_Ap = Ap) %&gt;% </span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="co">#   left_join(old_tr, by = join_by(rgn_id, year))</span></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="co"># comp_plot1 &lt;- ggplot() + </span></span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a><span class="co">#   geom_jitter(data = filter(comb_tr, year == previous_data_year),</span></span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a><span class="co">#               aes(x = Ap, y = new_Ap, </span></span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a><span class="co">#                   text = paste(&quot;Year:&quot;, year, &quot;&lt;br&gt;Region:&quot;, rgn_name)),</span></span>
+<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a><span class="co">#               alpha = 0.7) +</span></span>
+<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a><span class="co">#   labs(x = paste(&quot;Previous Value&quot;, previous_data_year),</span></span>
+<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a><span class="co">#        y = paste(&quot;Current Value&quot;, previous_data_year),</span></span>
+<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a><span class="co">#        title = paste(&quot;Sustainable tourism and recreation&quot;, previous_data_year, &quot;Data&quot;, previous_year, &quot;Assessment vs.&quot;, previous_data_year, &quot;Data&quot;, current_year, &quot;assessment&quot;)) +</span></span>
+<span id="cb18-21"><a href="#cb18-21" tabindex="-1"></a><span class="co">#   geom_abline(slope = 1, intercept = 0, col = &quot;red&quot;) +</span></span>
+<span id="cb18-22"><a href="#cb18-22" tabindex="-1"></a><span class="co">#   theme_bw();ggplotly(comp_plot1)</span></span></code></pre></div>
 </div>
 
 

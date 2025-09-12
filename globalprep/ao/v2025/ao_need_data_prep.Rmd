@@ -28,6 +28,8 @@ One more year of data.
 Updated so that pop_weights data is also read in through the WDI package, and saved as annual data instead of only the most recent year. 
 v2024
 One more year of data
+v2025
+There was not a full year of data available to add at this time (no full 2024 data)
 # Data Source 
 
 **Downloaded**: 2025-06-23
@@ -49,7 +51,7 @@ Data is available directly to R through the WDI package.
 
 ## Setup
 
-``` {r setup, message = FALSE, warning = FALSE, eval=F}
+``` {r setup, message = FALSE, warning = FALSE, eval= FALSE}
 knitr::opts_chunk$set(fig.width = 6, fig.height = 4, fig.path = 'figs/', message = FALSE, warning = FALSE)
 if (!require(ohicore)){
   devtools::install_github('ohi-science/ohicore@dev')
@@ -83,7 +85,7 @@ version_dir = here::here("globalprep", "ao", version_year)
 
 **Skip if you have already downloaded data.**
 
-```{r load_data, eval=F}
+```{r load_data, eval=FALSE}
 ### check website to see what years are available
 yr_start = 1990
 yr_end   = 2023
@@ -180,7 +182,7 @@ ggplotly(plot)
 
 For the countries where there is only one year of data, use this value for all years. This is not ideal, but likely better than other forms of gapfilling
 
-```{r, eval=F}
+```{r, eval= FALSE}
 ### Reorganize to create cells for countries that have missing values for some years
 gdppcppp_clean <- here::here(version_dir, "raw", paste0('raw_gdppcppp_', new_saved_date,'.csv')) %>% #date here should also to match filename above 
   readr::read_csv()%>% 
@@ -211,7 +213,7 @@ summary(gdppcppp_gf_1) # 42 NAs v2024. 33 NAs v2025
 
 When a country has more than one value (but not a complete series), a within-country regression model is used to predict the missing values.
 
-```{r eval=F}
+```{r, eval= FALSE}
 ### Predict values using a linear regression with 'year' as an independent variable 
 ### Create new column with these predicted values
 ### Fill in the remaining NA values using the predicted values
@@ -246,7 +248,7 @@ summary(gdppcppp_gf_2) # no more NAs because everything has been gap-filled.
 
 This is performed by taking the natural log of each value and then dividing by the 95th quantile of values across all years (from 2005 to current data year). 
 
-```{r, eval=F}
+```{r, eval= FALSE}
 ##
 ### Values at the 95th Quantile or greater are given a rescaled score of '1' (the highest value)
 gdppcppp_rescale <- gdppcppp_gf_2 %>%
@@ -276,7 +278,7 @@ ggplotly(rescale_vis)
 
 ## Convert country names to ohi regions
 
-```{r, eval=F}
+```{r, eval= FALSE}
 #manually change names as needed 
 
 gdppcpp_rename <- gdppcppp_rescale
@@ -367,7 +369,7 @@ readr::write_csv(gdppcppp_data, here::here(version_dir, "intermediate", "gdppcpp
 
 In this case, we gapfill regions with no data using means based on UN-designated geopolitical levels.
 
-```{r, eval=F}
+```{r, eval= FALSE}
 ### how is this different from Mel's georegion function in ohicore? 
 UNgeorgn() 
 head(UNgeorgn)
@@ -430,7 +432,7 @@ d_stand_gf_test <- d_stand_gf %>%
 summary(d_stand_gf_test)
 ```
 
-```{r}
+```{r, eval= FALSE}
 ### Check number of NAs in score column 
 sum(is.na(d_stand_gf_test$score))
 
@@ -449,7 +451,7 @@ length(unique(low_pop$rgn_id))
 
 ## Save the data
 
-```{r, eval=F}
+```{r, eval= FALSE}
 # Save dataframe with adjusted, gapfilled, and rescaled score information
 final <- d_stand_gf %>%
   dplyr::select(rgn_id, year, value = score)
@@ -468,7 +470,7 @@ readr::write_csv(final_gf, here::here(version_dir, "output", "wb_gdppcppp_rescal
 
 Use most recent data year shared by current and previous assessment.
 
-```{r, eval=F}
+```{r, eval= FALSE}
 
 comparison_year <- current_year - 2
 
@@ -504,7 +506,7 @@ ggplotly(p1)
 ```
 
 ## Compare changes from this year to last year 
-```{r,eval=F}
+```{r,eval= FALSE}
 old_gdppcppp <-  here::here("globalprep", "ao", paste0("v", current_year), "output", "wb_gdppcppp_rescaled.csv")  %>% 
   readr::read_csv() %>% 
   dplyr::rename(old_value=value) %>% 
