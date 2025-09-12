@@ -337,7 +337,7 @@ mar_rgn <- mar_rgn %>%
 mar_rgn2 <- mar_rgn %>%
   mutate(tonnes_nonfood = include * value) %>%
   group_by(rgn_id, year) %>%
-  summarize(tonnes = sum(tonnes_nonfood))  %>%
+  summarize(tonnes_mar = sum(tonnes_nonfood))  %>%
   mutate(year = as.numeric(year))
 
 ```
@@ -347,21 +347,20 @@ Gapfill with trade data if no evidence of fishoil fishmeal catch in SAUP data.
 
 ```{r}
 
-mar_ids <- mar_rgn2 %>%
-  mutate(rgn_year = paste(rgn_id, year, sep="_"))
-
 fao <- read_csv(here(sprintf("globalprep/np/v%s/int/np_usd_per_tonne.csv", current_year))) %>%
   filter(product == "seaweeds") %>%
-  mutate(rgn_year = paste(rgn_id, year, sep="_"))
+  rename(trade_tonnes = tonnes)
 
-missing_mar_id <- setdiff(fao$rgn_year, mar_ids$rgn_year)
+full_data <- full_join(mar_rgn2, fao, by=c("rgn_id", "year")) %>%
+  mutate(
+    tonnes = pmax(tonnes_mar, trade_tonnes, na.rm = TRUE),
+    tonnes = replace(tonnes, is.infinite(tonnes), NA_real_)) 
 
-missing_mar <- fao %>%
-  filter(rgn_year %in% missing_mar_id) %>%
+plot(log(full_data$trade_tonnes+1), log(full_data$tonnes_mar+1))
+abline(0,1, col="red")
+
+mar_rgn2 <- full_data %>%
   select(rgn_id, year, tonnes)
-
-
-mar_rgn2 <- rbind(mar_rgn2, missing_mar)
 
 ```
 
