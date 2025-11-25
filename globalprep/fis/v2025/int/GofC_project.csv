@@ -1,0 +1,223 @@
+stockid,stocklong,year,ram_bmsy
+BLACKROCKCAL,Black rockfish California,1980,0.548235294117647
+BLACKROCKCAL,Black rockfish California,1981,0.555294117647059
+BLACKROCKCAL,Black rockfish California,1982,0.595294117647059
+BLACKROCKCAL,Black rockfish California,1983,0.607058823529412
+BLACKROCKCAL,Black rockfish California,1984,0.614117647058824
+BLACKROCKCAL,Black rockfish California,1985,0.665882352941176
+BLACKROCKCAL,Black rockfish California,1986,0.618823529411765
+BLACKROCKCAL,Black rockfish California,1987,0.574117647058824
+BLACKROCKCAL,Black rockfish California,1988,0.482352941176471
+BLACKROCKCAL,Black rockfish California,1989,0.432941176470588
+BLACKROCKCAL,Black rockfish California,1990,0.364705882352941
+BLACKROCKCAL,Black rockfish California,1991,0.322352941176471
+BLACKROCKCAL,Black rockfish California,1992,0.284705882352941
+BLACKROCKCAL,Black rockfish California,1993,0.223529411764706
+BLACKROCKCAL,Black rockfish California,1994,0.204235294117647
+BLACKROCKCAL,Black rockfish California,1995,0.192235294117647
+BLACKROCKCAL,Black rockfish California,1996,0.184
+BLACKROCKCAL,Black rockfish California,1997,0.196235294117647
+BLACKROCKCAL,Black rockfish California,1998,0.221882352941176
+BLACKROCKCAL,Black rockfish California,1999,0.261176470588235
+BLACKROCKCAL,Black rockfish California,2000,0.312941176470588
+BLACKROCKCAL,Black rockfish California,2001,0.385882352941176
+BLACKROCKCAL,Black rockfish California,2002,0.430588235294118
+BLACKROCKCAL,Black rockfish California,2003,0.48
+BLACKROCKCAL,Black rockfish California,2004,0.505882352941176
+BLACKROCKCAL,Black rockfish California,2005,0.531764705882353
+BLACKROCKCAL,Black rockfish California,2006,0.536470588235294
+BLACKROCKCAL,Black rockfish California,2007,0.543529411764706
+BLACKROCKCAL,Black rockfish California,2008,0.567058823529412
+BLACKROCKCAL,Black rockfish California,2009,0.604705882352941
+BLACKROCKCAL,Black rockfish California,2010,0.630588235294118
+BLACKROCKCAL,Black rockfish California,2011,0.670588235294118
+BLACKROCKCAL,Black rockfish California,2012,0.717647058823529
+BLACKROCKCAL,Black rockfish California,2013,0.757647058823529
+BLACKROCKCAL,Black rockfish California,2014,0.774117647058824
+BLACKROCKCAL,Black rockfish California,2015,0.830588235294118
+BLUEROCKCAL,Blue rockfish California,1980,1.10469314079422
+BLUEROCKCAL,Blue rockfish California,1981,0.993983152827918
+BLUEROCKCAL,Blue rockfish California,1982,0.809867629362214
+BLUEROCKCAL,Blue rockfish California,1983,0.648616125150421
+BLUEROCKCAL,Blue rockfish California,1984,0.500601684717208
+BLUEROCKCAL,Blue rockfish California,1985,0.410348977135981
+BLUEROCKCAL,Blue rockfish California,1986,0.333333333333333
+BLUEROCKCAL,Blue rockfish California,1987,0.333333333333333
+BLUEROCKCAL,Blue rockfish California,1988,0.322503008423586
+BLUEROCKCAL,Blue rockfish California,1989,0.309265944645006
+BLUEROCKCAL,Blue rockfish California,1990,0.30806257521059
+BLUEROCKCAL,Blue rockfish California,1991,0.316486161251504
+BLUEROCKCAL,Blue rockfish California,1992,0.330926594464501
+BLUEROCKCAL,Blue rockfish California,1993,0.274368231046931
+BLUEROCKCAL,Blue rockfish California,1994,0.246690734055355
+BLUEROCKCAL,Blue rockfish California,1995,0.246690734055355
+BLUEROCKCAL,Blue rockfish California,1996,0.274368231046931
+BLUEROCKCAL,Blue rockfish California,1997,0.316486161251504
+BLUEROCKCAL,Blue rockfish California,1998,0.34777376654633
+BLUEROCKCAL,Blue rockfish California,1999,0.388688327316486
+BLUEROCKCAL,Blue rockfish California,2000,0.432009626955475
+BLUEROCKCAL,Blue rockfish California,2001,0.482551143200963
+BLUEROCKCAL,Blue rockfish California,2002,0.537906137184116
+BLUEROCKCAL,Blue rockfish California,2003,0.595667870036101
+BLUEROCKCAL,Blue rockfish California,2004,0.646209386281588
+BLUEROCKCAL,Blue rockfish California,2005,0.701564380264741
+BLUEROCKCAL,Blue rockfish California,2006,0.743682310469314
+BLUEROCKCAL,Blue rockfish California,2007,0.74849578820698
+CABEZNCAL,Cabezon Northern California,1980,1.49620253164557
+CABEZNCAL,Cabezon Northern California,1981,1.31898734177215
+CABEZNCAL,Cabezon Northern California,1982,1.23037974683544
+CABEZNCAL,Cabezon Northern California,1983,1.15949367088608
+CABEZNCAL,Cabezon Northern California,1984,1.12405063291139
+CABEZNCAL,Cabezon Northern California,1985,1.06329113924051
+CABEZNCAL,Cabezon Northern California,1986,1.04303797468354
+CABEZNCAL,Cabezon Northern California,1987,0.959493670886076
+CABEZNCAL,Cabezon Northern California,1988,0.924050632911392
+CABEZNCAL,Cabezon Northern California,1989,0.906329113924051
+CABEZNCAL,Cabezon Northern California,1990,0.906329113924051
+CABEZNCAL,Cabezon Northern California,1991,0.951898734177215
+CABEZNCAL,Cabezon Northern California,1992,1
+CABEZNCAL,Cabezon Northern California,1993,0.974683544303797
+CABEZNCAL,Cabezon Northern California,1994,1.0126582278481
+CABEZNCAL,Cabezon Northern California,1995,1.06329113924051
+CABEZNCAL,Cabezon Northern California,1996,1.03037974683544
+CABEZNCAL,Cabezon Northern California,1997,0.989873417721519
+CABEZNCAL,Cabezon Northern California,1998,0.946835443037975
+CABEZNCAL,Cabezon Northern California,1999,0.774683544303797
+CABEZNCAL,Cabezon Northern California,2000,0.693670886075949
+CABEZNCAL,Cabezon Northern California,2001,0.653164556962025
+CABEZNCAL,Cabezon Northern California,2002,0.681012658227848
+CABEZNCAL,Cabezon Northern California,2003,0.739240506329114
+CABEZNCAL,Cabezon Northern California,2004,0.706329113924051
+CABEZNCAL,Cabezon Northern California,2005,0.686075949367089
+CABEZNCAL,Cabezon Northern California,2006,0.678481012658228
+CABEZNCAL,Cabezon Northern California,2007,0.711392405063291
+CABEZNCAL,Cabezon Northern California,2008,0.784810126582278
+CABEZNCAL,Cabezon Northern California,2009,0.926582278481013
+CABEZNCAL,Cabezon Northern California,2010,1.09620253164557
+CABEZNCAL,Cabezon Northern California,2011,1.24303797468354
+CABEZNCAL,Cabezon Northern California,2012,1.29620253164557
+CABEZNCAL,Cabezon Northern California,2013,1.32658227848101
+CABEZNCAL,Cabezon Northern California,2014,1.39493670886076
+CABEZNCAL,Cabezon Northern California,2015,1.46582278481013
+CABEZNCAL,Cabezon Northern California,2016,1.53164556962025
+CABEZNCAL,Cabezon Northern California,2017,1.58987341772152
+CABEZNCAL,Cabezon Northern California,2018,1.62784810126582
+CABEZNCAL,Cabezon Northern California,2019,1.62784810126582
+CABEZSCAL,Cabezon Southern California,1980,6.76499999999999
+CABEZSCAL,Cabezon Southern California,1981,6.10499999999999
+CABEZSCAL,Cabezon Southern California,1982,5.66499999999999
+CABEZSCAL,Cabezon Southern California,1983,5.20299999999999
+CABEZSCAL,Cabezon Southern California,1984,4.99949999999999
+CABEZSCAL,Cabezon Southern California,1985,4.78499999999999
+CABEZSCAL,Cabezon Southern California,1986,4.64749999999999
+CABEZSCAL,Cabezon Southern California,1987,4.202
+CABEZSCAL,Cabezon Southern California,1988,3.872
+CABEZSCAL,Cabezon Southern California,1989,3.663
+CABEZSCAL,Cabezon Southern California,1990,3.509
+CABEZSCAL,Cabezon Southern California,1991,3.4595
+CABEZSCAL,Cabezon Southern California,1992,3.4045
+CABEZSCAL,Cabezon Southern California,1993,3.1625
+CABEZSCAL,Cabezon Southern California,1994,3.256
+CABEZSCAL,Cabezon Southern California,1995,3.432
+CABEZSCAL,Cabezon Southern California,1996,3.4265
+CABEZSCAL,Cabezon Southern California,1997,3.4155
+CABEZSCAL,Cabezon Southern California,1998,3.487
+CABEZSCAL,Cabezon Southern California,1999,3.3385
+CABEZSCAL,Cabezon Southern California,2000,3.4155
+CABEZSCAL,Cabezon Southern California,2001,3.63
+CABEZSCAL,Cabezon Southern California,2002,3.9765
+CABEZSCAL,Cabezon Southern California,2003,4.279
+CABEZSCAL,Cabezon Southern California,2004,4.202
+CABEZSCAL,Cabezon Southern California,2005,4.136
+CABEZSCAL,Cabezon Southern California,2006,4.048
+CABEZSCAL,Cabezon Southern California,2007,4.0865
+CABEZSCAL,Cabezon Southern California,2008,4.169
+CABEZSCAL,Cabezon Southern California,2009,4.3395
+CABEZSCAL,Cabezon Southern California,2010,0.965770171149144
+CABEZSCAL,Cabezon Southern California,2011,1.02689486552567
+CABEZSCAL,Cabezon Southern California,2012,1.05134474327628
+CABEZSCAL,Cabezon Southern California,2013,1.03911980440098
+CABEZSCAL,Cabezon Southern California,2014,1.00244498777506
+CABEZSCAL,Cabezon Southern California,2015,0.965770171149144
+CABEZSCAL,Cabezon Southern California,2016,1.01466992665037
+CABEZSCAL,Cabezon Southern California,2017,1.02689486552567
+CABEZSCAL,Cabezon Southern California,2018,1.10024449877751
+CABEZSCAL,Cabezon Southern California,2019,1.23471882640587
+CALSCORPSCAL,California scorpionfish Southern California,1980,2.0151893268472
+CALSCORPSCAL,California scorpionfish Southern California,1981,2.07537707805417
+CALSCORPSCAL,California scorpionfish Southern California,1982,2.00393971136975
+CALSCORPSCAL,California scorpionfish Southern California,1983,1.84816870198162
+CALSCORPSCAL,California scorpionfish Southern California,1984,1.71894432282413
+CALSCORPSCAL,California scorpionfish Southern California,1985,1.61631274194985
+CALSCORPSCAL,California scorpionfish Southern California,1986,1.64401357349487
+CALSCORPSCAL,California scorpionfish Southern California,1987,1.94513700174003
+CALSCORPSCAL,California scorpionfish Southern California,1988,2.32380736896037
+CALSCORPSCAL,California scorpionfish Southern California,1989,2.35086184776934
+CALSCORPSCAL,California scorpionfish Southern California,1990,2.2402739725013
+CALSCORPSCAL,California scorpionfish Southern California,1991,1.98233306276464
+CALSCORPSCAL,California scorpionfish Southern California,1992,1.68755004707312
+CALSCORPSCAL,California scorpionfish Southern California,1993,1.59719916818379
+CALSCORPSCAL,California scorpionfish Southern California,1994,1.71865192515782
+CALSCORPSCAL,California scorpionfish Southern California,1995,1.82551181102362
+CALSCORPSCAL,California scorpionfish Southern California,1996,2.04102362204725
+CALSCORPSCAL,California scorpionfish Southern California,1997,2.14244094488189
+CALSCORPSCAL,California scorpionfish Southern California,1998,2.15511811023622
+CALSCORPSCAL,California scorpionfish Southern California,1999,2.14244094488189
+CALSCORPSCAL,California scorpionfish Southern California,2000,2.07905511811024
+CALSCORPSCAL,California scorpionfish Southern California,2001,2.20582677165354
+CALSCORPSCAL,California scorpionfish Southern California,2002,2.28188976377953
+CALSCORPSCAL,California scorpionfish Southern California,2003,2.34527559055118
+CALSCORPSCAL,California scorpionfish Southern California,2004,2.35795275590551
+CALSCORPSCAL,California scorpionfish Southern California,2005,2.37062992125984
+CALSCORPSCAL,California scorpionfish Southern California,2006,2.04532167582783
+CALSCORPSCAL,California scorpionfish Southern California,2007,1.86706682483567
+CALSCORPSCAL,California scorpionfish Southern California,2008,1.76131120573714
+CALSCORPSCAL,California scorpionfish Southern California,2009,1.67817793240039
+CALSCORPSCAL,California scorpionfish Southern California,2010,1.58407205190163
+CALSCORPSCAL,California scorpionfish Southern California,2011,1.50835644567859
+CALSCORPSCAL,California scorpionfish Southern California,2012,1.45206989491421
+CALSCORPSCAL,California scorpionfish Southern California,2013,1.36978149693957
+CALSCORPSCAL,California scorpionfish Southern California,2014,1.24688060204977
+CALSCORPSCAL,California scorpionfish Southern California,2015,1.14839491229673
+CALSCORPSCAL,California scorpionfish Southern California,2016,1.19238691066039
+CALSCORPSCAL,California scorpionfish Southern California,2017,1.35804403903992
+COWCODSCAL,Cowcod Southern California,1980,0.821014492753626
+COWCODSCAL,Cowcod Southern California,1981,0.726159420289858
+COWCODSCAL,Cowcod Southern California,1982,0.64485507246377
+COWCODSCAL,Cowcod Southern California,1983,0.478260869565219
+COWCODSCAL,Cowcod Southern California,1984,0.4368115942029
+COWCODSCAL,Cowcod Southern California,1985,0.353913043478262
+COWCODSCAL,Cowcod Southern California,1986,0.290144927536233
+COWCODSCAL,Cowcod Southern California,1987,0.235144927536233
+COWCODSCAL,Cowcod Southern California,1988,0.249492753623189
+COWCODSCAL,Cowcod Southern California,1989,0.262246376811595
+COWCODSCAL,Cowcod Southern California,1990,0.318840579710146
+COWCODSCAL,Cowcod Southern California,1991,0.369855072463769
+COWCODSCAL,Cowcod Southern California,1992,0.416086956521741
+COWCODSCAL,Cowcod Southern California,1993,0.443985507246378
+COWCODSCAL,Cowcod Southern California,1994,0.464710144927538
+COWCODSCAL,Cowcod Southern California,1995,0.467898550724639
+COWCODSCAL,Cowcod Southern California,1996,0.475072463768118
+COWCODSCAL,Cowcod Southern California,1997,0.467101449275364
+COWCODSCAL,Cowcod Southern California,1998,0.46949275362319
+COWCODSCAL,Cowcod Southern California,1999,0.47985507246377
+COWCODSCAL,Cowcod Southern California,2000,0.488623188405799
+COWCODSCAL,Cowcod Southern California,2001,0.506956521739132
+COWCODSCAL,Cowcod Southern California,2002,0.534057971014495
+COWCODSCAL,Cowcod Southern California,2003,0.566739130434785
+COWCODSCAL,Cowcod Southern California,2004,0.597028985507249
+COWCODSCAL,Cowcod Southern California,2005,0.630507246376814
+COWCODSCAL,Cowcod Southern California,2006,0.660797101449278
+COWCODSCAL,Cowcod Southern California,2007,0.691086956521742
+COWCODSCAL,Cowcod Southern California,2008,0.713405797101452
+COWCODSCAL,Cowcod Southern California,2009,0.738913043478264
+COWCODSCAL,Cowcod Southern California,2010,0.7636231884058
+COWCODSCAL,Cowcod Southern California,2011,0.789130434782612
+COWCODSCAL,Cowcod Southern California,2012,0.813043478260873
+COWCODSCAL,Cowcod Southern California,2013,0.836956521739133
+COWCODSCAL,Cowcod Southern California,2014,0.860869565217394
+COWCODSCAL,Cowcod Southern California,2015,0.892753623188409
+COWCODSCAL,Cowcod Southern California,2016,2.59649122807018
+COWCODSCAL,Cowcod Southern California,2017,2.68421052631579
+COWCODSCAL,Cowcod Southern California,2018,2.7719298245614
+COWCODSCAL,Cowcod Southern California,2019,2.85087719298246

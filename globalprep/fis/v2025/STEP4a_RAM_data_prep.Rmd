@@ -194,6 +194,15 @@ ram_bmsy_new <- timeseries_values_views %>%
   filter(!is.na(ram_bmsy)) %>%
   dplyr::select(stockid, stocklong, year, ram_bmsy)
 
+gofc <- ram_bmsy_new %>% 
+  filter(str_detect(coalesce(stocklong, ""), regex("\\bCalifornia\\b", ignore_case = TRUE)))
+write_csv(gofc, here("globalprep/fis/v2025/int/GofC_project.csv"))
+
+pacific <- ram_bmsy_new %>% 
+  filter(str_detect(coalesce(stocklong, ""), regex("\\bCalifornia\\b", ignore_case = TRUE)))
+
+write_csv(gofc, here("globalprep/fis/v2025/int/GofC_project.csv"))
+
 test <- ram_bmsy_new %>%
   # v2025: update max year to 2023
   filter(year >= 2001, year <= 2023) %>%

@@ -1,0 +1,36 @@
+---
+title: "Untitled"
+output: html_document
+date: "2025-11-25"
+---
+Creating a sector weight file. This is used by the pressure matrix to determine which pressures to include in the LIV model.
+
+Basically, if the sector is within a country it gets a value of 1.
+```{r setup, include=FALSE}
+library(tidyverse)
+library(here)
+```
+
+```{r}
+
+fis <- read_csv(here("globalprep/liv/v2025/output/fis_quantity.csv")) %>%
+  filter(year==max(year)) %>%
+  mutate(sector = "cf") %>%
+  mutate(weight = ifelse(quantity>0, 1, NA)) %>%
+  select(rgn_id, sector, weight)
+mar <- read_csv(here("globalprep/liv/v2025/output/mar_quantity.csv")) %>%    
+  filter(year==max(year)) %>%
+  mutate(sector = "mar") %>%
+  mutate(weight = ifelse(quantity>0, 1, NA)) %>%
+  select(rgn_id, sector, weight)
+tour <- read_csv(here("globalprep/liv/v2025/output/tour_quantity.csv")) %>%    
+  filter(year==max(year)) %>%
+  mutate(sector = "tour") %>%
+  mutate(weight = ifelse(quantity>0, 1, NA)) %>%
+  select(rgn_id, sector, weight)
+
+sector_weight <- rbind(fis, mar, tour)
+
+write_csv(sector_weight, here("globalprep/liv/v2025/output/le_sector_weights.csv"))
+
+```
